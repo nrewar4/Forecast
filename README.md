@@ -6,37 +6,45 @@ analytics, makes the data easy to scan, visualises everything, and surfaces
 possible clients and suppliers. It is designed so more databases can be plugged
 in over time.
 
-Built as a visual web app in Lovable, styled in the APAC brand colours, orange
-and white. Clean, professional, not cluttered. No em dash is used anywhere in the
-product copy.
+Styled in the APAC brand colours, orange and white. Clean, professional, not
+cluttered. No em dash is used anywhere in the product copy.
 
-## Live app
+## Run the app
 
-- Preview: https://id-preview--26f36d35-b868-470e-9cc7-16a880f73d51.lovable.app
-- Editor: https://lovable.dev/projects/26f36d35-b868-470e-9cc7-16a880f73d51
+This repository contains the complete app as a Vite, React, TypeScript, Tailwind,
+and Recharts project.
 
-## What is built and live
+```
+npm install
+npm run dev      # local dev server
+npm run build    # production build to dist
+npm run preview  # serve the production build
+```
+
+## Pages, all eight built
 
 - Dashboard. KPI cards, top import and export products, top buyers and top
-  manufacturers. Visual at a glance.
+  manufacturers.
 - Trade Analytics. Imports and exports toggle, filters, monthly trend area chart,
   trade by country, transport mix donut, and a sortable shipment table.
 - Demand Forecast. Product and model selectors, a forecast line with a confidence
   band, and a colour coded growth ranking with buy, hold, and watch signals.
-
-## What is specified and ready to build
-
-These pages have full data and ready to paste prompts in
-`docs/remaining_page_prompts.md`. They were paused only because the Lovable
-workspace ran out of credits mid build. Add credits, then paste the prompts.
-
 - Product Knowledge Base. Manufacturing route, cost drivers, end use industries,
   pricing, and key manufacturers per product.
-- Clients (Buyers). Prospect list of Indian importers.
-- Suppliers (Manufacturers). Manufacturers only, grouped by product, with
-  certifications.
-- Documents. PDF and Excel upload area.
-- Integrations. Catalog of databases to connect, with room to add more.
+- Clients (Buyers). Searchable, filterable directory of Indian importers.
+- Suppliers (Manufacturers). Manufacturers only, grouped by product, filterable
+  by certification.
+- Documents. PDF and Excel upload area with a recent documents list.
+- Integrations. Catalog of databases to connect, grouped by category.
+
+## Lovable version
+
+The first three pages were also built in Lovable. The remaining pages were then
+finished here in code because the Lovable workspace ran out of credits. Matching
+build prompts are kept in `docs/remaining_page_prompts.md`.
+
+- Preview: https://id-preview--26f36d35-b868-470e-9cc7-16a880f73d51.lovable.app
+- Editor: https://lovable.dev/projects/26f36d35-b868-470e-9cc7-16a880f73d51
 
 ## Analytics added beyond the original document
 
