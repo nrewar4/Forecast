@@ -35,9 +35,18 @@ public final class App {
                         + "auto-reschedule={}, then notify.",
                 baseIntervalSec / 60, jitterSec, cfg.getBool("search.autoBook", true));
 
+        boolean dryRun = cfg.getBool("app.dryRun", false)
+                || java.util.Arrays.stream(args).anyMatch(a -> a.contains("dry"));
+
         try (VisaPortalClient portal = new VisaPortalClient(cfg, captcha)) {
             portal.start();
             BookingService booking = new BookingService(cfg, portal, notifier);
+
+            if (dryRun) {
+                booking.dryRun();
+                log.info("Dry run complete — exiting (no booking performed).");
+                return;
+            }
 
             // Graceful shutdown.
             Runtime.getRuntime().addShutdownHook(new Thread(() -> log.info("Shutting down...")));

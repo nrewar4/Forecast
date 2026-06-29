@@ -79,7 +79,18 @@ If your portal's availability endpoints are shaped differently than the usvisa-i
 defaults, adjust `daysJsonUrl()` / `timesJsonUrl()` in
 `src/main/java/com/visabooker/portal/PortalConfig.java`.
 
-### 5. Run
+### 5. Dry-run self-test first (recommended)
+Before trusting it with `autoBook`, verify it can log in and actually *see* slots:
+```bash
+./dry-run.sh
+# or: mvn -q exec:java -Dexec.args="dry-run"   (or set app.dryRun=true)
+```
+It logs in, prints your current appointment date, lists how many slots each consulate
+shows (and the earliest), reports **what it would book** — and **books nothing**. If it
+says "WOULD BOOK: nothing" when you expect slots, fix your selectors / window /
+`appointment.currentDate` before going live.
+
+### 6. Run
 ```bash
 ./run.sh
 # or:

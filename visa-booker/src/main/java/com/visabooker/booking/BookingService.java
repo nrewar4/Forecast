@@ -46,6 +46,73 @@ public final class BookingService {
     /** @return true once the loop should stop (a reschedule succeeded and keepChasing=false). */
     public boolean isBooked() { return done; }
 
+    /**
+     * Diagnostic run: logs in, reports the current appointment date and every slot it
+     * can see per consulate, and which ones WOULD be booked — without booking anything.
+     * Use this to verify your selectors/config before trusting search.autoBook=true.
+     */
+    public void dryRun() {
+        log.info("==================== DRY RUN (no booking) ====================");
+        if (!portal.isLoggedIn()) {
+            log.info("Session not authenticated, logging in...");
+            portal.login();
+        }
+        log.info("Login OK.");
+
+        LocalDate current = criteria.currentAppointmentDate();
+        if (!bookMode) {
+            if (current == null) current = portal.fetchCurrentAppointmentDate();
+            log.info("Mode=RESCHEDULE. Current appointment date: {}",
+                    current != null ? current : "UNKNOWN (set appointment.currentDate)");
+            if (current != null) criteria.setCurrentAppointmentDate(current);
+        } else {
+            log.info("Mode=BOOK (no appointment yet). Looking for the earliest available slot.");
+        }
+        log.info("Window: from {}{}. Auto-book WOULD be: {}", criteria.earliest(),
+                criteria.latest() != null ? " to " + criteria.latest() : " (no upper cap)",
+                criteria.autoBook());
+
+        List<String> ids = criteria.preferredFacilityIds().isEmpty()
+                ? List.copyOf(facilities.keySet())
+                : criteria.preferredFacilityIds();
+        if (ids.isEmpty()) {
+            log.warn("No consulates configured (portal.facilities). Nothing to check.");
+        }
+
+        AppointmentSlot best = null;
+        int totalSeen = 0;
+        for (String facilityId : ids) {
+            String name = facilities.getOrDefault(facilityId, facilityId);
+            List<AppointmentSlot> days = portal.fetchAvailableDays(facilityId, name);
+            totalSeen += days.size();
+            LocalDate first = days.stream().map(AppointmentSlot::date)
+                    .min(LocalDate::compareTo).orElse(null);
+            long matching = days.stream().filter(criteria::matches).count();
+            log.info("  {} (id={}): {} day(s) available, earliest={}, {} match your criteria",
+                    name, facilityId, days.size(), first, matching);
+            for (AppointmentSlot day : days) {
+                if (criteria.matches(day) && (best == null || day.date().isBefore(best.date()))) {
+                    best = day;
+                }
+            }
+        }
+
+        log.info("-------------------------------------------------------------");
+        log.info("Total days seen across consulates: {}", totalSeen);
+        if (best != null) {
+            List<LocalTime> times = portal.fetchAvailableTimes(best.facilityId(), best.date());
+            log.info("WOULD BOOK: {}{}", best,
+                    times.isEmpty() ? " (no times returned — check timesJsonUrl)"
+                                    : " at " + times.get(0) + " (" + times.size() + " time(s) available)");
+            log.info("=> Looks good. Set search.autoBook=true (and remove app.dryRun) to go live.");
+        } else {
+            log.info("WOULD BOOK: nothing — no slot currently matches your criteria.");
+            log.info("=> If you expected matches, re-check appointment.currentDate / search window / "
+                    + "selectors / endpoint shape (see PortalConfig).");
+        }
+        log.info("==================== END DRY RUN ====================");
+    }
+
     public void runOnce() {
         if (done) return;
 
