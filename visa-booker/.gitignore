@@ -1,0 +1,11 @@
+# Secrets & session — never commit
+config.properties
+storage-state.json
+
+# Build & logs
+target/
+logs/
+*.log
+
+# Playwright
+.playwright/
