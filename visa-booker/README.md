@@ -103,7 +103,8 @@ All keys live in `config.properties` (or as `UPPER_SNAKE_CASE` env vars). See
 | `search.earliest` / `search.latest` | Acceptable date window |
 | `search.autoBook` | `false` = alert only, `true` = book automatically |
 | `poll.intervalSeconds` | Base poll interval (default 180) |
-| `captcha.apiKey` | 2Captcha key (needed when the portal shows reCAPTCHA) |
+| `captcha.mode` | `manual` (free, solve in browser) / `2captcha` (paid) / `none` |
+| `captcha.apiKey` | 2Captcha key — only when `captcha.mode=2captcha` |
 | `email.smtp.*` / `email.to` | Email alerts (Gmail App Password) |
 | `twilio.*` | SMS alerts |
 
@@ -113,7 +114,11 @@ All keys live in `config.properties` (or as `UPPER_SNAKE_CASE` env vars). See
 
 1. **Portal account** — email + password (you said you have an account, not yet booked ✅).
 2. **Your scheduleId + consulate IDs** — copied from the portal once logged in.
-3. **2Captcha account + API key** — ~$1–3 per 1000 captchas (only if your portal shows reCAPTCHA).
+3. **Captcha solving** — **free by default** (`captcha.mode=manual`): when a reCAPTCHA
+   appears, the app rings the terminal bell, brings the browser to the front, and waits
+   for you to tick it once; it auto-detects the solved token and continues. Since the
+   login session is cached, this is infrequent. Only switch to paid 2Captcha
+   (`captcha.mode=2captcha`) if you need fully unattended 24/7 operation.
 4. **Gmail App Password** — for email alerts (`myaccount.google.com/apppasswords`).
 5. **Twilio account** — SID, auth token, a Twilio number — for SMS alerts.
 

@@ -29,28 +29,44 @@ public final class CaptchaSolver {
     private static final Logger log = LoggerFactory.getLogger(CaptchaSolver.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
+    /** "manual" = free, you solve it in the visible browser; "2captcha" = paid API; "none". */
+    public enum Mode { MANUAL, TWOCAPTCHA, NONE }
+
     private final String apiKey;
-    private final boolean enabled;
+    private final Mode mode;
+    private final int manualTimeoutSec;
     private final HttpClient http = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(20)).build();
 
     public CaptchaSolver(Config cfg) {
         this.apiKey = cfg.get("captcha.apiKey");
-        this.enabled = apiKey != null && !apiKey.isBlank();
-        if (!enabled) {
-            log.warn("Captcha solver disabled (no captcha.apiKey). "
-                    + "Booking will fail if the portal presents a reCAPTCHA.");
+        this.manualTimeoutSec = cfg.getInt("captcha.manualTimeoutSeconds", 300);
+        // Default: free manual mode unless a 2captcha key is supplied.
+        String configured = cfg.get("captcha.mode",
+                (apiKey != null && !apiKey.isBlank()) ? "2captcha" : "manual");
+        this.mode = switch (configured.trim().toLowerCase()) {
+            case "2captcha", "twocaptcha" -> Mode.TWOCAPTCHA;
+            case "none", "off" -> Mode.NONE;
+            default -> Mode.MANUAL;
+        };
+        if (mode == Mode.TWOCAPTCHA && (apiKey == null || apiKey.isBlank())) {
+            log.warn("captcha.mode=2captcha but no captcha.apiKey set — falling back to none.");
         }
+        log.info("Captcha mode: {}", mode);
     }
 
-    public boolean isEnabled() { return enabled; }
+    public Mode mode() { return mode; }
+    public int manualTimeoutSec() { return manualTimeoutSec; }
+
+    /** True only for the paid API path (manual solving needs no remote service). */
+    public boolean isEnabled() { return mode == Mode.TWOCAPTCHA && apiKey != null && !apiKey.isBlank(); }
 
     /**
      * Submits the captcha to 2Captcha and polls until solved.
      * @return the reCAPTCHA token, or null on failure.
      */
     public String solveRecaptchaV2(String siteKey, String pageUrl) {
-        if (!enabled) return null;
+        if (!isEnabled()) return null;
         try {
             // 1. Submit the task.
             String submitUrl = "https://2captcha.com/in.php?key=" + apiKey

@@ -204,9 +204,22 @@ public final class VisaPortalClient implements AutoCloseable {
                 siteKey = rc.getAttribute("data-sitekey");
             }
         }
-        if (siteKey == null || siteKey.isBlank()) return; // no captcha on this page
+        boolean present = (siteKey != null && !siteKey.isBlank())
+                || page.locator(".g-recaptcha, iframe[src*='recaptcha']").count() > 0;
+        if (!present) return; // no captcha on this page
 
-        if (!captcha.isEnabled()) {
+        // ---- FREE manual mode: you solve it in the visible browser window ----
+        if (captcha.mode() == CaptchaSolver.Mode.MANUAL) {
+            if (headless) {
+                log.error("reCAPTCHA present but browser is headless and captcha.mode=manual. "
+                        + "Set browser.headless=false so you can solve it, or use a solver.");
+                return;
+            }
+            waitForManualCaptcha(captcha.manualTimeoutSec());
+            return;
+        }
+
+        if (captcha.mode() == CaptchaSolver.Mode.NONE || !captcha.isEnabled()) {
             log.warn("reCAPTCHA present but no solver configured — submission will likely fail.");
             return;
         }
@@ -221,6 +234,39 @@ public final class VisaPortalClient implements AutoCloseable {
                     + " el.value = tok;"
                     + "}", token);
         }
+    }
+
+    /**
+     * Free captcha handling: alert the user (console bell + log) and wait until they
+     * tick the reCAPTCHA in the visible browser. We detect completion by polling the
+     * hidden g-recaptcha-response field that Google populates once solved.
+     * @return true if solved within the timeout.
+     */
+    private boolean waitForManualCaptcha(int timeoutSec) {
+        System.out.print(''); // terminal bell to get your attention
+        log.warn("============================================================");
+        log.warn("  ACTION NEEDED: please solve the reCAPTCHA in the browser");
+        log.warn("  window now. Waiting up to {}s...", timeoutSec);
+        log.warn("============================================================");
+        try { page.bringToFront(); } catch (Exception ignore) {}
+
+        long deadline = System.currentTimeMillis() + timeoutSec * 1000L;
+        while (System.currentTimeMillis() < deadline) {
+            try {
+                Object val = page.evaluate(
+                        "() => { const el = document.getElementById('g-recaptcha-response');"
+                                + " return el ? el.value : ''; }");
+                if (val != null && !val.toString().isBlank()) {
+                    log.info("reCAPTCHA solved — continuing.");
+                    return true;
+                }
+            } catch (Exception ignore) {
+                // page may be navigating; keep polling
+            }
+            page.waitForTimeout(2000);
+        }
+        log.error("reCAPTCHA not solved within {}s — giving up this cycle.", timeoutSec);
+        return false;
     }
 
     private void saveSession() {
