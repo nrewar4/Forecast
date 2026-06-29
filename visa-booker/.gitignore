@@ -9,3 +9,7 @@ logs/
 
 # Playwright
 .playwright/
+
+# Cloned third-party captcha solver (fetched by setup-captcha.sh)
+python-captcha/GoogleRecaptchaBypass/
+__pycache__/

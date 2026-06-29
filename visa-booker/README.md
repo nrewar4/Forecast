@@ -103,7 +103,7 @@ All keys live in `config.properties` (or as `UPPER_SNAKE_CASE` env vars). See
 | `search.earliest` / `search.latest` | Acceptable date window |
 | `search.autoBook` | `false` = alert only, `true` = book automatically |
 | `poll.intervalSeconds` | Base poll interval (default 180) |
-| `captcha.mode` | `manual` (free, solve in browser) / `2captcha` (paid) / `none` |
+| `captcha.mode` | `manual` (free) / `audio` (free, automated) / `2captcha` (paid) / `none` |
 | `captcha.apiKey` | 2Captcha key — only when `captcha.mode=2captcha` |
 | `email.smtp.*` / `email.to` | Email alerts (Gmail App Password) |
 | `twilio.*` | SMS alerts |
@@ -114,11 +114,20 @@ All keys live in `config.properties` (or as `UPPER_SNAKE_CASE` env vars). See
 
 1. **Portal account** — email + password (you said you have an account, not yet booked ✅).
 2. **Your scheduleId + consulate IDs** — copied from the portal once logged in.
-3. **Captcha solving** — **free by default** (`captcha.mode=manual`): when a reCAPTCHA
-   appears, the app rings the terminal bell, brings the browser to the front, and waits
-   for you to tick it once; it auto-detects the solved token and continues. Since the
-   login session is cached, this is infrequent. Only switch to paid 2Captcha
-   (`captcha.mode=2captcha`) if you need fully unattended 24/7 operation.
+3. **Captcha solving** — three free/paid options:
+   - **`audio`** (free, automated): uses [sarperavci/GoogleRecaptchaBypass](https://github.com/sarperavci/GoogleRecaptchaBypass)
+     to solve the reCAPTCHA *audio* challenge with speech-to-text. The app launches
+     Chromium with a CDP debug port and a small Python sidecar
+     (`python-captcha/solve.py`) **attaches to that same browser** to solve the captcha
+     inside your authenticated session. One-time setup: `./setup-captcha.sh`
+     (needs `python3` + `ffmpeg`). If a solve fails it falls back to manual.
+   - **`manual`** (free): app pauses, rings the terminal bell, brings the browser to
+     front; you tick the box once and it continues. Good for occasional/attended use.
+   - **`2captcha`** (paid): fully unattended via the 2Captcha API key.
+
+   > Note: Google may rate-limit/block an IP that solves many audio captchas quickly.
+   > Combined with cached sessions (captchas are infrequent) this is usually fine for
+   > personal use, but if `audio` starts failing, fall back to `manual`.
 4. **Gmail App Password** — for email alerts (`myaccount.google.com/apppasswords`).
 5. **Twilio account** — SID, auth token, a Twilio number — for SMS alerts.
 

@@ -29,8 +29,13 @@ public final class CaptchaSolver {
     private static final Logger log = LoggerFactory.getLogger(CaptchaSolver.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    /** "manual" = free, you solve it in the visible browser; "2captcha" = paid API; "none". */
-    public enum Mode { MANUAL, TWOCAPTCHA, NONE }
+    /**
+     * manual    = free, you solve it in the visible browser.
+     * audio     = free, automated via GoogleRecaptchaBypass (audio challenge + STT).
+     * 2captcha  = paid API, automated.
+     * none      = do nothing.
+     */
+    public enum Mode { MANUAL, AUDIO, TWOCAPTCHA, NONE }
 
     private final String apiKey;
     private final Mode mode;
@@ -46,6 +51,7 @@ public final class CaptchaSolver {
                 (apiKey != null && !apiKey.isBlank()) ? "2captcha" : "manual");
         this.mode = switch (configured.trim().toLowerCase()) {
             case "2captcha", "twocaptcha" -> Mode.TWOCAPTCHA;
+            case "audio", "bypass" -> Mode.AUDIO;
             case "none", "off" -> Mode.NONE;
             default -> Mode.MANUAL;
         };

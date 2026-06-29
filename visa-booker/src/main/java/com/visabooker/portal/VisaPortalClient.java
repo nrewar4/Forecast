@@ -10,12 +10,16 @@ import com.visabooker.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Drives the visa portal with a real browser (Playwright/Chromium).
@@ -40,6 +44,7 @@ public final class VisaPortalClient implements AutoCloseable {
     private final PortalConfig portal;
     private final CaptchaSolver captcha;
     private final boolean headless;
+    private final int debugPort;
 
     private Playwright playwright;
     private Browser browser;
@@ -51,13 +56,21 @@ public final class VisaPortalClient implements AutoCloseable {
         this.portal = new PortalConfig(cfg);
         this.captcha = captcha;
         this.headless = cfg.getBool("browser.headless", false);
+        this.debugPort = cfg.getInt("browser.debugPort", 9222);
     }
 
     /** Launch the browser and restore a saved session if one exists. */
     public void start() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions().setHeadless(headless).setSlowMo(headless ? 0 : 80));
+        BrowserType.LaunchOptions launch = new BrowserType.LaunchOptions()
+                .setHeadless(headless)
+                .setSlowMo(headless ? 0 : 80);
+        // Expose a stable CDP port so the audio-bypass solver can attach to THIS
+        // browser (and thus our authenticated session) when captcha.mode=audio.
+        if (captcha.mode() == CaptchaSolver.Mode.AUDIO) {
+            launch.setArgs(List.of("--remote-debugging-port=" + debugPort));
+        }
+        browser = playwright.chromium().launch(launch);
 
         Browser.NewContextOptions ctxOpts = new Browser.NewContextOptions()
                 .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -208,6 +221,16 @@ public final class VisaPortalClient implements AutoCloseable {
                 || page.locator(".g-recaptcha, iframe[src*='recaptcha']").count() > 0;
         if (!present) return; // no captcha on this page
 
+        // ---- FREE automated mode: GoogleRecaptchaBypass audio solver ----
+        if (captcha.mode() == CaptchaSolver.Mode.AUDIO) {
+            boolean ok = solveWithAudioBypass();
+            if (!ok && !headless) {
+                log.warn("Audio solver failed — falling back to manual solve.");
+                waitForManualCaptcha(captcha.manualTimeoutSec());
+            }
+            return;
+        }
+
         // ---- FREE manual mode: you solve it in the visible browser window ----
         if (captcha.mode() == CaptchaSolver.Mode.MANUAL) {
             if (headless) {
@@ -233,6 +256,62 @@ public final class VisaPortalClient implements AutoCloseable {
                     + "   el.style.display='none'; document.body.appendChild(el); }"
                     + " el.value = tok;"
                     + "}", token);
+        }
+    }
+
+    /**
+     * Free automated captcha solving via sarperavci/GoogleRecaptchaBypass.
+     * Runs the Python sidecar (python-captcha/solve.py), which attaches to THIS
+     * Chromium over its remote-debugging port and solves the audio challenge inside
+     * our authenticated session. Requires `./setup-captcha.sh` to have been run.
+     * @return true if the sidecar reports the captcha solved.
+     */
+    private boolean solveWithAudioBypass() {
+        String python = cfg.get("captcha.pythonCommand", "python3");
+        String script = cfg.get("captcha.solverScript", "python-captcha/solve.py");
+        int timeoutSec = cfg.getInt("captcha.audioTimeoutSeconds", 150);
+        String address = "127.0.0.1:" + debugPort;
+
+        log.info("Running audio-bypass solver: {} {} {}", python, script, address);
+        try {
+            try { page.bringToFront(); } catch (Exception ignore) {}
+
+            ProcessBuilder pb = new ProcessBuilder(python, script, address);
+            pb.redirectErrorStream(true);
+            Process proc = pb.start();
+
+            // Surface the sidecar's progress in our logs.
+            Thread pump = new Thread(() -> {
+                try (BufferedReader r = new BufferedReader(
+                        new InputStreamReader(proc.getInputStream(), StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = r.readLine()) != null) log.info("[solver] {}", line);
+                } catch (Exception ignore) { /* process ended */ }
+            });
+            pump.setDaemon(true);
+            pump.start();
+
+            boolean finished = proc.waitFor(timeoutSec, TimeUnit.SECONDS);
+            if (!finished) {
+                proc.destroyForcibly();
+                log.error("Audio solver timed out after {}s.", timeoutSec);
+                return false;
+            }
+            int exit = proc.exitValue();
+            if (exit == 0) {
+                log.info("Audio solver reported success.");
+                return true;
+            }
+            if (exit == 3) {
+                log.error("Audio solver not set up. Run ./setup-captcha.sh "
+                        + "(needs ffmpeg + the cloned GoogleRecaptchaBypass repo).");
+            } else {
+                log.warn("Audio solver exited with code {} (captcha not solved).", exit);
+            }
+            return false;
+        } catch (Exception e) {
+            log.error("Failed to run audio solver", e);
+            return false;
         }
     }
 
