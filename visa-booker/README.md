@@ -1,10 +1,13 @@
 # US Visa Earlier-Appointment Watcher (India · B2)
 
-**Every 30 minutes**, this logs in to your US visa appointment page, checks whether
-any slot is available **earlier than your current appointment**, and — if one is —
-**automatically reschedules to it and notifies you** (email + SMS). After a successful
-reschedule it keeps watching for an even earlier date (configurable). You can also run
-it in notify-only mode. Built in **Java 21 + Maven**, using **Playwright** to
+**Every 30 minutes**, this logs in to your US visa appointment page and either:
+- **`book` mode** — you have *no appointment yet*: grabs the **first available slot**,
+  then automatically switches to chasing earlier dates; or
+- **`reschedule` mode** — you *already hold an appointment*: grabs any slot
+  **earlier than your current date**.
+
+When it books/reschedules, it **notifies you** (email + SMS) and (configurably) keeps
+watching for an even earlier date. A notify-only mode is also available. Built in **Java 21 + Maven**, using **Playwright** to
 drive a real browser, **2Captcha** for reCAPTCHA, **Twilio** for SMS and **SMTP**
 for email.
 
@@ -102,7 +105,8 @@ All keys live in `config.properties` (or as `UPPER_SNAKE_CASE` env vars). See
 | `portal.baseUrl` | Your portal domain (verify!) |
 | `portal.scheduleId` | Your existing appointment/schedule id (from the URL) |
 | `portal.facilities` | `id=Name,id=Name` consulate map |
-| `appointment.currentDate` | Your current appointment date — only earlier slots are booked (auto-detected if blank) |
+| `appointment.mode` | `book` (no appointment yet → grab first slot) / `reschedule` (beat your current date) |
+| `appointment.currentDate` | Reschedule mode only — your current date; only earlier slots are booked (auto-detected if blank) |
 | `search.earliest` / `search.latest` | Lower bound (default today) / optional upper cap |
 | `search.autoBook` | `true` = auto-reschedule (default), `false` = alert only |
 | `search.keepChasing` | `true` = keep hunting even-earlier dates after a reschedule |

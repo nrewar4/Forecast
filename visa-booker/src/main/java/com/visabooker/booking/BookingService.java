@@ -28,6 +28,7 @@ public final class BookingService {
     private final Map<String, String> facilities; // id -> human name
 
     private final boolean keepChasing;     // after rescheduling, keep hunting even-earlier dates
+    private boolean bookMode;              // true = initial booking (no appointment yet)
     private String lastAlertedSlotKey = null;
     private volatile boolean done = false;  // stop the loop (only when keepChasing=false)
 
@@ -37,6 +38,9 @@ public final class BookingService {
         this.criteria = BookingCriteria.fromConfig(cfg);
         this.facilities = parseFacilities(cfg);
         this.keepChasing = cfg.getBool("search.keepChasing", true);
+        // mode: "book" = grab the first available slot (you have no appointment yet);
+        //       "reschedule" = only grab slots earlier than your current appointment.
+        this.bookMode = "book".equalsIgnoreCase(cfg.get("appointment.mode", "reschedule").trim());
     }
 
     /** @return true once the loop should stop (a reschedule succeeded and keepChasing=false). */
@@ -50,21 +54,27 @@ public final class BookingService {
             portal.login();
         }
 
-        // Establish the date we're trying to beat. Config value wins; else auto-detect.
-        if (criteria.currentAppointmentDate() == null) {
+        // In RESCHEDULE mode we need the current appointment date (the date to beat).
+        // In BOOK mode there is none yet — we grab the first slot in the window.
+        if (!bookMode && criteria.currentAppointmentDate() == null) {
             LocalDate detected = portal.fetchCurrentAppointmentDate();
             if (detected != null) {
                 criteria.setCurrentAppointmentDate(detected);
                 log.info("Current appointment date detected: {}", detected);
             } else {
-                log.warn("Current appointment date unknown — set appointment.currentDate in config "
-                        + "so the app only books slots EARLIER than it. Skipping this cycle.");
+                log.warn("Current appointment date unknown — set appointment.currentDate, or use "
+                        + "appointment.mode=book if you have no appointment yet. Skipping this cycle.");
                 return;
             }
         }
-        LocalDate current = criteria.currentAppointmentDate();
-        log.info("Looking for any slot earlier than {} (window from {}{})", current,
-                criteria.earliest(), criteria.latest() != null ? " to " + criteria.latest() : "");
+        LocalDate current = criteria.currentAppointmentDate(); // null in book mode
+        if (bookMode) {
+            log.info("BOOK mode: looking for the earliest available slot (window from {}{}).",
+                    criteria.earliest(), criteria.latest() != null ? " to " + criteria.latest() : "");
+        } else {
+            log.info("RESCHEDULE mode: looking for any slot earlier than {} (window from {}{}).", current,
+                    criteria.earliest(), criteria.latest() != null ? " to " + criteria.latest() : "");
+        }
 
         // Which facilities to check: explicit preferences, else all known ones.
         List<String> ids = criteria.preferredFacilityIds().isEmpty()
@@ -84,7 +94,8 @@ public final class BookingService {
         }
 
         if (best == null) {
-            log.info("No earlier slot this cycle (still {}).", current);
+            log.info(bookMode ? "No available slot this cycle."
+                              : "No earlier slot this cycle (still " + current + ").");
             return;
         }
 
@@ -100,29 +111,43 @@ public final class BookingService {
     private void handleMatch(AppointmentSlot slot, LocalDate previous) {
         String key = slot.facilityId() + "|" + slot.date() + "|" + slot.time();
 
+        boolean initial = (previous == null); // book mode with no appointment yet
+
         if (criteria.autoBook()) {
-            log.info("Earlier slot found ({} < {}). Attempting reschedule...", slot.date(), previous);
+            log.info(initial ? "Available slot found ({}). Attempting to book..."
+                             : "Earlier slot found ({} < " + previous + "). Attempting reschedule...",
+                    slot.date());
             boolean ok = portal.book(slot);
             if (ok) {
-                // Move the goalpost to the new (earlier) date and keep chasing if enabled.
+                // Now we hold this date. Switch to reschedule mode so future cycles
+                // chase even-earlier dates, and move the goalpost.
                 criteria.setCurrentAppointmentDate(slot.date());
-                notifier.notifyAll("✅ Visa appointment RESCHEDULED EARLIER",
-                        "Moved from " + previous + " to " + slot + ". "
-                                + (keepChasing ? "Still watching for an even earlier date."
-                                               : "Watcher stopping. Log in to confirm/pay if required."));
+                bookMode = false;
+                if (initial) {
+                    notifier.notifyAll("✅ Visa appointment BOOKED",
+                            "Booked " + slot + ". "
+                                    + (keepChasing ? "Now watching for an EARLIER date automatically."
+                                                   : "Watcher stopping. Log in to confirm/pay if required."));
+                } else {
+                    notifier.notifyAll("✅ Visa appointment RESCHEDULED EARLIER",
+                            "Moved from " + previous + " to " + slot + ". "
+                                    + (keepChasing ? "Still watching for an even earlier date."
+                                                   : "Watcher stopping. Log in to confirm/pay if required."));
+                }
                 if (!keepChasing) done = true;
             } else {
-                notifier.notifyAll("⚠️ Reschedule attempt failed",
-                        "Found " + slot + " (earlier than " + previous + ") but the reschedule did not "
-                                + "confirm — it may have been taken. Will keep trying.");
+                notifier.notifyAll(initial ? "⚠️ Booking attempt failed" : "⚠️ Reschedule attempt failed",
+                        "Found " + slot + (initial ? "" : " (earlier than " + previous + ")")
+                                + " but it did not confirm — it may have been taken. Will keep trying.");
             }
         } else {
             // Notify-only mode: alert once per distinct slot.
             if (!key.equals(lastAlertedSlotKey)) {
                 lastAlertedSlotKey = key;
-                notifier.notifyAll("Earlier visa slot available",
-                        "Open slot " + slot + " is earlier than your " + previous + " appointment. "
-                                + "Set search.autoBook=true to grab it automatically, or reschedule yourself.");
+                notifier.notifyAll(initial ? "Visa slot available" : "Earlier visa slot available",
+                        "Open slot " + slot
+                                + (initial ? "" : " is earlier than your " + previous + " appointment")
+                                + ". Set search.autoBook=true to grab it automatically, or book it yourself.");
             }
         }
     }
