@@ -93,6 +93,50 @@ public final class VisaPortalClient implements AutoCloseable {
         }
     }
 
+    /**
+     * Best-effort read of your CURRENT appointment date from the portal, so the
+     * app knows what "earlier" means. Returns null if it can't find/parse it —
+     * in that case set appointment.currentDate in config. Tune sel.currentAppointment
+     * to a selector wrapping the date text on your dashboard.
+     */
+    public LocalDate fetchCurrentAppointmentDate() {
+        String selector = cfg.get("sel.currentAppointment",
+                ".consular-appt, .appointment-summary, p:has-text('Consular Appointment')");
+        try {
+            page.navigate(portal.appointmentUrl(), new Page.NavigateOptions().setTimeout(30000));
+            Locator loc = page.locator(selector).first();
+            if (loc.count() == 0) return null;
+            String text = loc.innerText();
+            return parseFirstDate(text);
+        } catch (Exception e) {
+            log.warn("Could not auto-detect current appointment date: {}", e.getMessage());
+            return null;
+        }
+    }
+
+    /** Pull the first date out of free text. Tries a few common portal formats. */
+    static LocalDate parseFirstDate(String text) {
+        if (text == null) return null;
+        // ISO first: 2026-11-23
+        var iso = java.util.regex.Pattern.compile("(\\d{4}-\\d{2}-\\d{2})").matcher(text);
+        if (iso.find()) {
+            try { return LocalDate.parse(iso.group(1)); } catch (Exception ignore) {}
+        }
+        // "23 November, 2026" / "23 November 2026"
+        var dmy = java.util.regex.Pattern.compile(
+                "(\\d{1,2})\\s+([A-Za-z]+),?\\s+(\\d{4})").matcher(text);
+        if (dmy.find()) {
+            for (var fmt : new String[]{"d MMMM yyyy", "d MMM yyyy"}) {
+                try {
+                    return LocalDate.parse(
+                            dmy.group(1) + " " + dmy.group(2) + " " + dmy.group(3),
+                            java.time.format.DateTimeFormatter.ofPattern(fmt, java.util.Locale.ENGLISH));
+                } catch (Exception ignore) {}
+            }
+        }
+        return null;
+    }
+
     /** Log in with credentials from config; solves captcha if present; saves the session. */
     public void login() {
         String email = cfg.require("portal.email");

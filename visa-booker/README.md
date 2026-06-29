@@ -1,8 +1,10 @@
-# US Visa Appointment Watcher (India · B2)
+# US Visa Earlier-Appointment Watcher (India · B2)
 
-Automatically watches the US visa appointment portal for open slots and either
-**alerts you** (email + SMS) or **auto-books** the first slot that matches your
-date/consulate criteria. Built in **Java 21 + Maven**, using **Playwright** to
+**Every 30 minutes**, this logs in to your US visa appointment page, checks whether
+any slot is available **earlier than your current appointment**, and — if one is —
+**automatically reschedules to it and notifies you** (email + SMS). After a successful
+reschedule it keeps watching for an even earlier date (configurable). You can also run
+it in notify-only mode. Built in **Java 21 + Maven**, using **Playwright** to
 drive a real browser, **2Captcha** for reCAPTCHA, **Twilio** for SMS and **SMTP**
 for email.
 
@@ -100,9 +102,11 @@ All keys live in `config.properties` (or as `UPPER_SNAKE_CASE` env vars). See
 | `portal.baseUrl` | Your portal domain (verify!) |
 | `portal.scheduleId` | Your existing appointment/schedule id (from the URL) |
 | `portal.facilities` | `id=Name,id=Name` consulate map |
-| `search.earliest` / `search.latest` | Acceptable date window |
-| `search.autoBook` | `false` = alert only, `true` = book automatically |
-| `poll.intervalSeconds` | Base poll interval (default 180) |
+| `appointment.currentDate` | Your current appointment date — only earlier slots are booked (auto-detected if blank) |
+| `search.earliest` / `search.latest` | Lower bound (default today) / optional upper cap |
+| `search.autoBook` | `true` = auto-reschedule (default), `false` = alert only |
+| `search.keepChasing` | `true` = keep hunting even-earlier dates after a reschedule |
+| `poll.intervalSeconds` | Base poll interval (default 1800 = 30 min) |
 | `captcha.mode` | `manual` (free) / `audio` (free, automated) / `2captcha` (paid) / `none` |
 | `captcha.apiKey` | 2Captcha key — only when `captcha.mode=2captcha` |
 | `email.smtp.*` / `email.to` | Email alerts (Gmail App Password) |

@@ -24,15 +24,16 @@ public final class App {
     public static void main(String[] args) {
         Config cfg = Config.load();
 
-        int baseIntervalSec = cfg.getInt("poll.intervalSeconds", 180); // 3 min default
-        int jitterSec = cfg.getInt("poll.jitterSeconds", 60);          // +0..60s random
+        int baseIntervalSec = cfg.getInt("poll.intervalSeconds", 1800); // 30 min default
+        int jitterSec = cfg.getInt("poll.jitterSeconds", 120);          // +0..120s random
 
         CaptchaSolver captcha = new CaptchaSolver(cfg);
         NotificationService notifier = new NotificationService(cfg);
 
-        log.info("===== US Visa (India B2) appointment watcher starting =====");
-        log.info("Poll interval ~{}s (+ up to {}s jitter). Auto-book={}",
-                baseIntervalSec, jitterSec, cfg.getBool("search.autoBook", false));
+        log.info("===== US Visa (India B2) earlier-appointment watcher starting =====");
+        log.info("Every ~{}min (+ up to {}s jitter): log in, check for an earlier slot, "
+                        + "auto-reschedule={}, then notify.",
+                baseIntervalSec / 60, jitterSec, cfg.getBool("search.autoBook", true));
 
         try (VisaPortalClient portal = new VisaPortalClient(cfg, captcha)) {
             portal.start();
