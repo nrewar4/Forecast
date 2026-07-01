@@ -2,11 +2,41 @@ import { ACCENT, INK, INK2, INK3, LINE, PANEL, Rule, Panel, Slide } from "../com
 import { PILLARS, ALL_INDICATORS, WEIGHTING_METHODS } from "../data/framework";
 import { topDistricts } from "../data/districts";
 
+export function AnnexFrameworks({ n, total }: { n: number; total: number }) {
+  const rows = [
+    ["GE-McKinsey nine-box", "Strategy", "The MAI is the market-attractiveness axis, computed objectively so districts can be placed in invest / build / harvest / exit boxes."],
+    ["Porter's Five Forces", "Strategy", "Rivalry (sales saturation), buyer and supplier power and substitutes shape the Whitespace pillar."],
+    ["PESTEL", "Macro scan", "Political, economic, social, technological, environmental and legal drivers define which indicators enter the Demand and Growth pillars."],
+    ["MCDA / composite indicators", "Method", "OECD/JRC ten-step method governs selection, normalization, weighting and aggregation into one index."],
+    ["AHP (Saaty)", "Weighting", "Expert pairwise judgement sets part of the cross-pillar weights, with a consistency ratio below 0.1."],
+    ["PCA + Shannon entropy", "Weighting", "Objective, data-driven weights from variance loadings and information dispersion, reconciled with AHP."],
+    ["BCG growth-share", "Portfolio", "Tiers map to Stars, Cash Cows, Question Marks and Dogs to set the play per district group."],
+    ["Ansoff matrix", "Growth", "Penetration, market development, product development and diversification guide portfolio moves by tier."],
+    ["STP", "Targeting", "Segment districts by MAI and pillar profile, target Tier 1-2 and whitespace, position portfolio to the dominant need."],
+    ["Bass diffusion", "Forecasting", "Models adoption of a new launch; MAI targeting raises the innovation (p) and imitation (q) coefficients."],
+    ["Pareto principle", "Prioritisation", "Confirms opportunity concentration, the top districts hold a disproportionate share of the prize."],
+  ];
+  return (
+    <Slide n={n} total={total} section="Annexure A1" kicker="Annexure A1 · MBA frameworks applied" title="Every framework used, and exactly where it enters the model." source="Framework mapping">
+      <div className="grid grid-cols-[190px_92px_1fr] gap-x-4 border-b pb-1 font-mono text-[9px] uppercase" style={{ color: INK3, borderColor: INK }}>
+        <span>Framework</span><span>Role</span><span>How it is used</span>
+      </div>
+      {rows.map(([f, r, u], i) => (
+        <div key={i} className="grid grid-cols-[190px_92px_1fr] items-start gap-x-4 border-b py-[6.5px]" style={{ borderColor: LINE }}>
+          <span className="text-[11px] font-semibold" style={{ color: INK }}>{f}</span>
+          <span className="font-mono text-[9px]" style={{ color: ACCENT }}>{r}</span>
+          <span className="text-[10.5px] leading-snug" style={{ color: INK2 }}>{u}</span>
+        </div>
+      ))}
+    </Slide>
+  );
+}
+
 export function AnnexIndicators({ n, total }: { n: number; total: number }) {
   const half = Math.ceil(ALL_INDICATORS.length / 2);
   const cols = [ALL_INDICATORS.slice(0, half), ALL_INDICATORS.slice(half)];
   return (
-    <Slide n={n} total={total} section="Annexure A1" kicker="Annexure A1 · Indicator dictionary" title="All indicators, direction and within-pillar weight." source="Framework definition">
+    <Slide n={n} total={total} section="Annexure A2" kicker="Annexure A2 · Indicator dictionary" title="All indicators, direction and within-pillar weight." source="Framework definition">
       <div className="grid h-full grid-cols-2 gap-x-8">
         {cols.map((list, ci) => (
           <div key={ci}>
@@ -30,7 +60,7 @@ export function AnnexIndicators({ n, total }: { n: number; total: number }) {
 
 export function AnnexSources({ n, total }: { n: number; total: number }) {
   return (
-    <Slide n={n} total={total} section="Annexure A2" kicker="Annexure A2 · Data source master" title="Real public datasets behind each pillar, with vintage and granularity." source="Public data catalogue">
+    <Slide n={n} total={total} section="Annexure A3" kicker="Annexure A3 · Data source master" title="Real public datasets behind each pillar, with vintage and granularity." source="Public data catalogue">
       <div className="grid h-full grid-cols-2 gap-x-8 gap-y-1">
         {PILLARS.map((p) => (
           <div key={p.id} className="mb-1">
@@ -50,7 +80,7 @@ export function AnnexSources({ n, total }: { n: number; total: number }) {
 
 export function AnnexMethod({ n, total }: { n: number; total: number }) {
   return (
-    <Slide n={n} total={total} section="Annexure A3" kicker="Annexure A3 · Methodology detail" title="The formulae behind normalization, weighting and aggregation." source="Composite-indicator methodology">
+    <Slide n={n} total={total} section="Annexure A4" kicker="Annexure A4 · Methodology detail" title="The formulae behind normalization, weighting and aggregation." source="Composite-indicator methodology">
       <div className="grid h-full grid-cols-2 gap-6">
         <div className="flex flex-col gap-4">
           <Panel tint>
@@ -96,7 +126,7 @@ export function AnnexMethod({ n, total }: { n: number; total: number }) {
 export function AnnexWorked({ n, total }: { n: number; total: number }) {
   const d = topDistricts(2)[0];
   return (
-    <Slide n={n} total={total} section="Annexure A4" kicker="Annexure A4 · Worked example" title={`How ${d.name} reaches its composite score.`} source="Model output (illustrative)">
+    <Slide n={n} total={total} section="Annexure A5" kicker="Annexure A5 · Worked example" title={`How ${d.name} reaches its composite score.`} source="Model output (illustrative)">
       <div className="grid h-full grid-cols-12 gap-6">
         <div className="col-span-7">
           <div className="grid grid-cols-[1fr_60px_50px_60px] gap-x-3 border-b pb-1 font-mono text-[9px] uppercase" style={{ color: INK3, borderColor: INK }}>
@@ -147,7 +177,7 @@ export function AnnexReferences({ n, total }: { n: number; total: number }) {
     "Saaty, T. The Analytic Hierarchy Process. 1980.",
   ];
   return (
-    <Slide n={n} total={total} section="Annexure A5" kicker="Annexure A5 · References" title="Methodology and data sources." source="">
+    <Slide n={n} total={total} section="Annexure A6" kicker="Annexure A6 · References" title="Methodology and data sources." source="">
       <div className="grid h-full grid-cols-2 gap-x-10">
         <div>
           {refs.slice(0, 5).map((r, i) => (

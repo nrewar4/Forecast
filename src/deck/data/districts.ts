@@ -134,7 +134,9 @@ function buildDistricts(): District[] {
       const name = i < named.length ? named[i] : `${spec.state.split(" ")[0]} District ${i + 1}`;
       // saturation correlates with core but with real whitespace pockets
       const saturation = clamp(core * 0.52 + 20 + gauss() * 24);
-      const pop = Math.round((0.4 + rand() * 4.6) * 10) / 10;
+      // population correlates with attractiveness (metros are both large and strong),
+      // so market opportunity concentrates the way it does in reality (Pareto).
+      const pop = Math.max(0.4, Math.round((0.3 + Math.pow(core / 100, 3) * 16 + gauss() * 0.6) * 10) / 10);
       out.push({
         id: id++,
         name,

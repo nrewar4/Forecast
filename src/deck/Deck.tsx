@@ -1,34 +1,22 @@
-import { Cover, Divider, ExecSummary } from "./slides/intro";
-import { Problem, Approach, Framework, Indicators, DataEngineering, StatModel, Tiering } from "./slides/methodology";
-import { National, Leaderboard, Validation, Dashboard } from "./slides/results";
-import { UseCases, DeepDive, Roadmap, Impact, Risks, Closing } from "./slides/activation";
-import { AnnexIndicators, AnnexSources, AnnexMethod, AnnexWorked, AnnexReferences } from "./slides/annexure";
+import { Cover, ExecSummary } from "./slides/intro";
+import { Context, Framework, Model } from "./slides/methodology";
+import { Results } from "./slides/results";
+import { Strategy, Application, Roadmap, Closing } from "./slides/activation";
+import { AnnexFrameworks, AnnexIndicators, AnnexSources, AnnexMethod, AnnexWorked, AnnexReferences } from "./slides/annexure";
 
-// Ordered slide list. `total` is injected so every footer shows the right count.
+// Eight dense content slides (2-9) plus cover, closing and a six-part annexure.
 const SLIDES: ((p: { n: number; total: number }) => JSX.Element)[] = [
   Cover,
-  ExecSummary,
-  (p) => <Divider {...p} index="01" label="Context" title="Why districts, not states" sub="India's pharma growth has moved into the districts, but commercial planning has not. The index closes that gap." />,
-  Problem,
-  (p) => <Divider {...p} index="02" label="Methodology" title="The model and framework" sub="A ten-step composite-indicator pipeline: six pillars, real public data, a reconciled statistical weighting, one score." />,
-  Approach,
-  Framework,
-  Indicators,
-  DataEngineering,
-  StatModel,
-  Tiering,
-  (p) => <Divider {...p} index="03" label="Results" title="What the index reveals" sub="Scores, tiers, a national map, whitespace, validation and the dashboard that ships it to decision-makers." />,
-  National,
-  Leaderboard,
-  Validation,
-  Dashboard,
-  (p) => <Divider {...p} index="04" label="Activation" title="Turning scores into decisions" sub="Four commercial use cases, a worked launch, a roadmap, the business case, and how we govern the model's limits." />,
-  UseCases,
-  DeepDive,
-  Roadmap,
-  Impact,
-  Risks,
+  ExecSummary, // 1
+  Context, // 2
+  Framework, // 3
+  Model, // 4
+  Results, // 5
+  Strategy, // 6
+  Application, // 7
+  Roadmap, // 8
   Closing,
+  AnnexFrameworks,
   AnnexIndicators,
   AnnexSources,
   AnnexMethod,

@@ -23,14 +23,23 @@ npm run preview  # serve the production build
 
 ## Case-study deck: District Market Attractiveness Index
 
-A separate 28-slide case-study solution lives at the `/deck` route. It presents a
-statistical model and framework that scores 730+ Indian districts on a single 0 to 100
-Market Attractiveness Index for the pharmaceutical industry (six weighted pillars,
-around 28 indicators from real public sources, a PCA + entropy + AHP weighting, and a
-geometric-mean composite), then tiers, maps, validates, and activates the scores.
+A case-study solution lives at the `/deck` route: a title, eight dense content slides,
+a closing, and a six-part annexure. It presents a statistical model and framework that
+scores 730+ Indian districts on a single 0 to 100 Market Attractiveness Index for the
+pharmaceutical industry (six weighted pillars, 26 indicators from real public sources, a
+PCA + entropy + AHP weighting, and a geometric-mean composite), then tiers, maps,
+validates, and activates the scores.
+
+The eight content slides are: executive summary, market context (PESTEL), the framework,
+the statistical model and validation, national results, segmentation and activation,
+an illustrative launch, and the roadmap. MBA frameworks are woven through and catalogued
+in Annexure A1: GE-McKinsey (the index is the market-attractiveness axis), Porter's Five
+Forces (Whitespace pillar), PESTEL, MCDA/AHP/PCA/entropy (weighting), BCG and Ansoff and
+STP (activation), Bass diffusion (launch adoption), and Pareto (concentration).
 
 The deck is a fixed 16:9 slide system built in the same React and Recharts stack, in a
-restrained editorial style. It renders to a print-perfect PDF, one slide per page.
+restrained editorial (Geist-style) design. It renders to a print-perfect PDF, one slide
+per page.
 
 ```
 npm run build            # build the app (includes /deck)
