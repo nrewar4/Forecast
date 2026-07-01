@@ -21,6 +21,29 @@ npm run build    # production build to dist
 npm run preview  # serve the production build
 ```
 
+## Case-study deck: District Market Attractiveness Index
+
+A separate 28-slide case-study solution lives at the `/deck` route. It presents a
+statistical model and framework that scores 730+ Indian districts on a single 0 to 100
+Market Attractiveness Index for the pharmaceutical industry (six weighted pillars,
+around 28 indicators from real public sources, a PCA + entropy + AHP weighting, and a
+geometric-mean composite), then tiers, maps, validates, and activates the scores.
+
+The deck is a fixed 16:9 slide system built in the same React and Recharts stack, in a
+restrained editorial style. It renders to a print-perfect PDF, one slide per page.
+
+```
+npm run build            # build the app (includes /deck)
+npm run preview           # serve at http://localhost:4173
+npm run export:deck       # write Pharma_District_MAI_Deck.pdf from /deck
+```
+
+The export script uses the bundled Chromium via puppeteer; set
+`PUPPETEER_EXECUTABLE_PATH` to point at another Chrome or Chromium binary if needed.
+District scores in the deck are illustrative (seeded, deterministic) to demonstrate the
+model's outputs. The named data sources are real and district-resolvable. Deck code is
+under `src/deck`, the exporter under `scripts/export-deck.mjs`.
+
 ## Pages, all eight built
 
 - Dashboard. KPI cards, top import and export products, top buyers and top

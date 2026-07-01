@@ -7,10 +7,12 @@ import Clients from "./pages/Clients";
 import Suppliers from "./pages/Suppliers";
 import Documents from "./pages/Documents";
 import Integrations from "./pages/Integrations";
+import Deck from "./deck/Deck";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/deck" element={<Deck />} />
       <Route path="/" element={<Dashboard />} />
       <Route path="/trade-analytics" element={<TradeAnalytics />} />
       <Route path="/demand-forecast" element={<DemandForecast />} />

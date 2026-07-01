@@ -22,3 +22,53 @@
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
+
+/* Deck design tokens (Geist-grade editorial system) */
+:root {
+  --ink: #0a0a0a;
+  --ink-2: #666666;
+  --ink-3: #999999;
+  --line: #eaeaea;
+  --line-dark: #1f1f1f;
+  --accent: #f47920;
+  --paper: #ffffff;
+  --panel: #fafafa;
+}
+
+.font-mono {
+  font-family: ui-monospace, "Geist Mono", "SF Mono", "JetBrains Mono", Menlo,
+    monospace;
+}
+
+.deck-kicker {
+  font-family: ui-monospace, "Geist Mono", "SF Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+.tracking-tightish {
+  letter-spacing: -0.02em;
+}
+.tracking-tighter2 {
+  letter-spacing: -0.03em;
+}
+
+/* Each slide is an exact 16:9 frame; one slide per printed page */
+.slide {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+@media print {
+  .slide {
+    page-break-after: always;
+    break-after: page;
+  }
+}
