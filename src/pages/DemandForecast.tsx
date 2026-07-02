@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Area,
   CartesianGrid,
@@ -13,15 +13,21 @@ import { Activity, ArrowUpRight, Gauge, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Badge, Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui";
 import { KpiChip } from "@/components/Kpi";
-import { cn, num } from "@/lib/utils";
-import { growthRanking, paraxyleneForecast, type Signal } from "@/data/forecast";
+import { cn, num, slug } from "@/lib/utils";
+import { useTradeData } from "@/context/TradeData";
+import {
+  deriveGrowthRanking,
+  forecastProduct,
+  modelBlurb,
+  modelLabels,
+  type ModelKey,
+  type Signal,
+} from "@/lib/forecast";
 
-const products = [
-  { value: "29024300", label: "Paraxylene (HS 29024300)" },
-  { value: "28092010", label: "Phosphoric acid (HS 28092010)" },
-  { value: "29331999", label: "Heterocyclic compounds (HS 29331999)" },
-  { value: "29051100", label: "Methanol (HS 29051100)" },
-  { value: "29022000", label: "Benzene (HS 29022000)" },
+const modelOptions: { value: ModelKey; label: string }[] = [
+  { value: "prophet", label: "Prophet" },
+  { value: "sarima", label: "SARIMA" },
+  { value: "xgboost", label: "XGBoost" },
 ];
 
 function signalTone(s: Signal): "green" | "gray" | "amber" {
@@ -31,10 +37,43 @@ function signalTone(s: Signal): "green" | "gray" | "amber" {
 }
 
 export default function DemandForecast() {
-  const [product, setProduct] = useState("29024300");
-  const [model, setModel] = useState("prophet");
-  const selected = products.find((p) => p.value === product)?.label ?? "";
-  const shortName = selected.split(" (")[0];
+  const { shipments } = useTradeData();
+  const [product, setProduct] = useState("");
+  const [model, setModel] = useState<ModelKey>("prophet");
+
+  const ranking = useMemo(() => deriveGrowthRanking(shipments, model), [shipments, model]);
+  // Selector lists every product alphabetically; the table below ranks by growth.
+  const options = useMemo(
+    () =>
+      [...ranking]
+        .sort((a, b) => a.product.localeCompare(b.product))
+        .map((r) => ({ value: slug(r.product), label: `${r.product} (HS ${r.hsCode})` })),
+    [ranking],
+  );
+
+  const selectedId = product || (ranking[0] ? slug(ranking[0].product) : "");
+  const row = ranking.find((r) => slug(r.product) === selectedId) ?? ranking[0];
+  const shortName = row ? row.product : "";
+
+  // Fit the selected model to the selected product on the live database.
+  const result = useMemo(() => {
+    if (!row) return null;
+    return forecastProduct(shipments, row.product, row.hsCode, model);
+  }, [row, shipments, model]);
+
+  const series = result?.points ?? [];
+  const mapeLabel = result && Number.isFinite(result.mapePct) ? `${result.mapePct.toFixed(1)}%` : "n/a";
+
+  // Boundary months so the chart caption reflects the real data window and how
+  // far the forecast now runs (extended to reach past today).
+  const lastActualMonth = useMemo(
+    () => [...series].reverse().find((p) => p.actual != null)?.month,
+    [series],
+  );
+  const lastForecastMonth = series.length ? series[series.length - 1].month : undefined;
+
+  const highGrowthCount = ranking.filter((r) => r.growth >= 10).length;
+  const distinctProducts = ranking.length;
 
   const selectClass =
     "h-9 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-primary";
@@ -42,31 +81,42 @@ export default function DemandForecast() {
   return (
     <AppShell
       title="Demand Forecast"
-      subtitle="Predictive demand signals powered by trade history and seasonality."
+      subtitle="Predictive demand signals, with each model's backtested error."
     >
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-        <select className={cn(selectClass, "lg:w-[300px]")} value={product} onChange={(e) => setProduct(e.target.value)}>
-          {products.map((p) => (
+        <select className={cn(selectClass, "lg:w-[300px]")} value={selectedId} onChange={(e) => setProduct(e.target.value)}>
+          {options.map((p) => (
             <option key={p.value} value={p.value}>
               {p.label}
             </option>
           ))}
         </select>
-        <select className={cn(selectClass, "lg:w-[180px]")} value={model} onChange={(e) => setModel(e.target.value)}>
-          <option value="prophet">Prophet</option>
-          <option value="sarima">SARIMA</option>
-          <option value="xgboost">XGBoost</option>
+        <select
+          className={cn(selectClass, "lg:w-[180px]")}
+          value={model}
+          onChange={(e) => setModel(e.target.value as ModelKey)}
+        >
+          {modelOptions.map((m) => (
+            <option key={m.value} value={m.value}>
+              {m.label}
+            </option>
+          ))}
         </select>
         <p className="text-xs text-muted-foreground lg:ml-2">
-          Models retrain monthly. Prophet recommended for 36 month history.
+          {modelLabels[model]}. {modelBlurb[model]}
         </p>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <KpiChip icon={Sparkles} label="Products Forecasted" value="612" trend="+24" />
-        <KpiChip icon={Gauge} label="Avg Forecast Error" value="8.4%" sub="MAPE" trend="-0.6 pp" />
-        <KpiChip icon={ArrowUpRight} label="High Growth Products" value="12" trend="+3" />
-        <KpiChip icon={Activity} label="Forecast Horizon" value="12" sub="months" trend="rolling" />
+        <KpiChip icon={Sparkles} label="Products Forecasted" value={num(distinctProducts)} sub="with real demand history" />
+        <KpiChip icon={Gauge} label="Backtested Error" value={mapeLabel} sub={`MAPE, ${modelLabels[model]}`} />
+        <KpiChip icon={ArrowUpRight} label="High Growth Products" value={String(highGrowthCount)} sub="double digit" />
+        <KpiChip
+          icon={Activity}
+          label="Six Month Growth"
+          value={row ? `${row.growth >= 0 ? "+" : ""}${row.growth}%` : "n/a"}
+          sub={shortName}
+        />
       </div>
 
       <Card className="mt-6">
@@ -74,7 +124,9 @@ export default function DemandForecast() {
           <div>
             <CardTitle>Demand Forecast, {shortName} (tonnes per month)</CardTitle>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              12 month actuals, 6 month forecast with confidence band
+              Actuals through {lastActualMonth ?? "latest snapshot"}, forecast to{" "}
+              {lastForecastMonth ?? "horizon"} with confidence band. The projection runs from the last
+              reported trade month up to six months past today.
             </p>
           </div>
           <div className="hidden items-center gap-3 text-[11px] text-muted-foreground sm:flex">
@@ -95,7 +147,7 @@ export default function DemandForecast() {
         </CardHeader>
         <CardContent className="pt-2">
           <ResponsiveContainer width="100%" height={340}>
-            <ComposedChart data={paraxyleneForecast} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+            <ComposedChart data={series} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="bandFill" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#F47920" stopOpacity={0.22} />
@@ -117,6 +169,19 @@ export default function DemandForecast() {
               <Line type="monotone" dataKey="forecast" stroke="#F47920" strokeWidth={2.5} strokeDasharray="6 4" dot={{ r: 3, fill: "#ffffff", stroke: "#F47920", strokeWidth: 2 }} name="Forecast" connectNulls={false} isAnimationActive={false} />
             </ComposedChart>
           </ResponsiveContainer>
+          {row && result ? (
+            <p className="mt-2 border-t border-border pt-2 text-xs text-muted-foreground">
+              {shortName} is forecast to move {row.growth >= 0 ? "up" : "down"} {Math.abs(row.growth)}% over six
+              months under {modelLabels[model]}, signal {row.signal}. Backtested error {mapeLabel} MAPE.
+              {!result.syntheticHistory
+                ? " Fitted on " + result.monthsOfHistory + " months of real per month tonnage."
+                : result.monthsOfHistory === 0
+                  ? " This product has no trade records yet, so the series is an indicative baseline from its global capacity and sector trend. Upload a Datamyne extract that contains it to forecast on observed trade."
+                  : " History is reconstructed from the aggregate monthly trade index because the database holds only " +
+                    result.monthsOfHistory +
+                    " month of this product. Upload more monthly extracts to forecast on real per month tonnage."}
+            </p>
+          ) : null}
         </CardContent>
       </Card>
 
@@ -124,7 +189,7 @@ export default function DemandForecast() {
         <CardHeader className="pb-3">
           <CardTitle>Growth Ranking</CardTitle>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            Six month forecasted change versus current monthly run rate
+            Six month forecasted change versus current monthly run rate, under {modelLabels[model]}
           </p>
         </CardHeader>
         <CardContent className="pt-0">
@@ -142,9 +207,9 @@ export default function DemandForecast() {
                 </tr>
               </thead>
               <tbody>
-                {growthRanking.map((r) => (
-                  <tr key={r.rank} className="border-t border-border">
-                    <td className="px-3 py-2.5 font-semibold text-muted-foreground">{r.rank}</td>
+                {ranking.slice(0, 40).map((r, i) => (
+                  <tr key={slug(r.product)} className="border-t border-border">
+                    <td className="px-3 py-2.5 font-semibold text-muted-foreground">{i + 1}</td>
                     <td className="px-3 py-2.5 font-medium">{r.product}</td>
                     <td className="px-3 py-2.5 font-mono text-xs text-muted-foreground">{r.hsCode}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{num(r.current)}</td>
@@ -162,8 +227,10 @@ export default function DemandForecast() {
             </table>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
-            Forecasts shown are illustrative. Connect the full three year Datamyne history for
-            production grade accuracy.
+            Showing the top {Math.min(40, ranking.length)} movers of {ranking.length} products. Only
+            products with real trade across two or more months are listed, since a single snapshot month
+            cannot produce a genuine forecast. A product appears here once an uploaded extract gives it
+            enough monthly history, and models retrain on every upload.
           </p>
         </CardContent>
       </Card>

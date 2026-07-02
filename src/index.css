@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  }
   * {
     border-color: #e2e8f0;
   }
@@ -13,12 +17,56 @@
   }
   body {
     background-color: #ffffff;
-    color: #1e293b;
+    color: #0f172a;
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Visible, consistent keyboard focus across the app (a11y). */
+  :focus-visible {
+    outline: 2px solid #f47920;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* Mouse users don't get the ring; keyboard users do. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  ::selection {
+    background-color: #fde6d3;
+    color: #b44e0e;
   }
 }
 
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Stagger helper: set --stagger on children for cascading entrances. */
+  .stagger > * {
+    opacity: 0;
+    animation: fade-up 0.5s var(--ease-out-expo) both;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  /* Subtle press feedback for any pressable element (Emil: scale 0.97). */
+  .press {
+    transition: transform 160ms var(--ease-out-expo);
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Reduced motion: keep opacity/colour, drop movement (a11y). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -21,21 +21,66 @@ npm run build    # production build to dist
 npm run preview  # serve the production build
 ```
 
-## Pages, all eight built
+## Pages, all nine built
 
-- Dashboard. KPI cards, top import and export products, top buyers and top
-  manufacturers.
-- Trade Analytics. Imports and exports toggle, filters, monthly trend area chart,
-  trade by country, transport mix donut, and a sortable shipment table.
-- Demand Forecast. Product and model selectors, a forecast line with a confidence
-  band, and a colour coded growth ranking with buy, hold, and watch signals.
-- Product Knowledge Base. Manufacturing route, cost drivers, end use industries,
-  pricing, and key manufacturers per product.
-- Clients (Buyers). Searchable, filterable directory of Indian importers.
-- Suppliers (Manufacturers). Manufacturers only, grouped by product, filterable
-  by certification.
-- Documents. PDF and Excel upload area with a recent documents list.
-- Integrations. Catalog of databases to connect, grouped by category.
+- Dashboard. Live KPI cards and top products, buyers, and manufacturers, all
+  derived from the trade database and refreshed whenever you upload, each chart
+  with a short takeaway.
+- Trade Analytics. Imports and exports toggle, working HS, country, sector, and
+  transport filters, monthly trend, trade by country, transport mix, and a
+  sortable shipment table. Charts and KPIs derive from the live database.
+- Demand Forecast. Product and model selectors that fit a real model to the
+  product demand series and redraw the forecast line and confidence band, with a
+  growth ranking built live from the database. The three models are genuine
+  algorithms: Holt damped trend smoothing (Prophet slot), a differenced least
+  squares autoregression (SARIMA slot), and gradient boosted regression trees
+  (XGBoost slot). Each reports its own walk forward backtested error.
+- Product Knowledge Base. Searchable, scrollable list of 200 products with
+  manufacturing route, cost drivers, end use industries, pricing, and makers.
+- Product Research. Comprehensive per product research for 200 products with
+  global capacity, feedstock, industrial route shares, a full step by step
+  process with operating conditions, and a country by country table of which
+  method each region prefers.
+- Clients (Buyers). Buyer directory built live from import activity, enriched
+  with curated sector and status when known.
+- Suppliers (Manufacturers). Supplier directory built live from trade activity,
+  enriched with certifications when known, searchable and filterable.
+- Documents. Upload Datamyne Excel extracts that are parsed in the browser and
+  appended to the trade database, with assumed pricing, a recent documents log,
+  and a template.
+- Integrations. Catalog of databases to connect plus the live application
+  database status.
+
+## Uploading trade data
+
+The Documents page accepts Datamyne style Excel files. Rows are parsed with
+SheetJS, mapped by column header, and appended to the trade database, which then
+flows into Trade Analytics. Choose Imports or Exports before uploading, and use
+the Template button to get the exact column layout. Uploaded rows persist in the
+browser and can be cleared with Reset uploads. Every section, the Dashboard,
+Trade Analytics, Clients, Suppliers, and Demand Forecast, updates from this same
+live database. The parser also reads real Datamyne export manifests, including
+files where the HS code and chemical name sit inside a free text container
+description. It pulls the HS code from HTS, NCM, Schedule B, and Harmonized
+labels, maps common chemicals to clean names, and infers the sector from the HS
+chapter. There are 200 products covered across the data set.
+
+## Shared database, optional
+
+The app runs out of the box with browser storage. To share uploads across users,
+connect a free Supabase project. The app reads VITE_SUPABASE_URL and
+VITE_SUPABASE_ANON_KEY at build time. When they are present it uses the shared
+cloud database, otherwise it falls back to browser storage automatically. Step by
+step instructions and the table schema are in SUPABASE_SETUP.md. The Integrations
+page shows the active backend.
+
+## Integrate with your live website
+
+The app can run standalone, embed into your existing site with the mount helper
+in `src/embed.tsx`, sit in an iframe, or you can reuse just the data layer. To
+point it at your own backend, reimplement the three functions in
+`src/lib/tradeStore.ts`. Full guidance, the data model, and scaling notes are in
+INTEGRATION.md.
 
 ## Lovable version
 
