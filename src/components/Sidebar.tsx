@@ -7,6 +7,7 @@ import {
   FlaskConical,
   Handshake,
   FileText,
+  Newspaper,
   ChevronLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,7 @@ const items = [
   { title: "Synthesis Routes", url: "/synthesis-routes", icon: FlaskConical },
   { title: "Trade Partners", url: "/partners", icon: Handshake },
   { title: "Documents", url: "/documents", icon: FileText },
+  { title: "Publications Studio", url: "/studio", icon: Newspaper },
 ];
 
 export function Sidebar() {

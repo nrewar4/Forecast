@@ -6,11 +6,13 @@ import {
   BadgeCheck,
   BookOpen,
   FlaskConical,
+  Newspaper,
   ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/Logo";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 type Option = {
   key: string;
@@ -21,7 +23,6 @@ type Option = {
   description: string;
   icon: LucideIcon;
   bullets: string[];
-  live?: boolean;
   featured?: boolean;
 };
 
@@ -35,19 +36,28 @@ const OPTIONS: Option[] = [
     description:
       "Source bulk chemicals and APIs from vetted, certified manufacturers on the APAC Supply Chain storefront.",
     icon: ShoppingCart,
-    bullets: ["Vetted manufacturer shortlist", "Live catalog & pricing", "Request a quote"],
+    bullets: ["Vetted manufacturer shortlist", "Catalog and pricing", "Request a quote"],
   },
   {
     key: "knowledge",
     to: "/dashboard",
-    eyebrow: "Live platform",
+    eyebrow: "Workspace",
     title: "Knowledge",
     description:
-      "Our sourcing-intelligence workspace — product knowledge base, trade analytics, demand forecasting, and ML-assisted synthesis routes.",
+      "Our sourcing intelligence workspace: product knowledge base, trade analytics, demand forecasting, and ML-assisted synthesis routes.",
     icon: BookOpen,
-    bullets: ["Synthesis routes + CDMO intelligence", "Trade analytics & forecasts", "FDA Orange/Purple Book"],
-    live: true,
+    bullets: ["Synthesis routes and CDMO intelligence", "Trade analytics and forecasts", "FDA Orange and Purple Book"],
     featured: true,
+  },
+  {
+    key: "publications",
+    to: "/publications",
+    eyebrow: "Fortnightly briefings",
+    title: "Publications",
+    description:
+      "Asia Source and Insight, our fortnightly reads on chemical sourcing. Every issue is source backed and free to follow by email.",
+    icon: Newspaper,
+    bullets: ["Asia Source sourcing brief", "Insight feature articles", "Free email subscription"],
   },
   {
     key: "custom-synthesis",
@@ -55,9 +65,9 @@ const OPTIONS: Option[] = [
     eyebrow: "CDMO services",
     title: "Custom Synthesis",
     description:
-      "Contract development and manufacturing — route scouting, process optimization, and scale-up from gram to tonne.",
+      "Contract development and manufacturing: route scouting, process optimization, and scale-up from gram to tonne.",
     icon: FlaskConical,
-    bullets: ["Route scouting & FTO signals", "Process optimization", "Pilot to commercial scale"],
+    bullets: ["Route scouting and FTO signals", "Process optimization", "Pilot to commercial scale"],
   },
 ];
 
@@ -80,7 +90,7 @@ function OptionCard({ option, index }: { option: Option; index: number }) {
         target="_blank"
         rel="noreferrer noopener"
         style={{ "--i": index } as CSSProperties}
-        aria-label={`${option.title} — ${option.description} (opens apacss.com in a new tab)`}
+        aria-label={`${option.title}. ${option.description} (opens apacss.com in a new tab)`}
         className={cardClass}
       >
         {inner}
@@ -92,7 +102,7 @@ function OptionCard({ option, index }: { option: Option; index: number }) {
     <Link
       to={option.to}
       style={{ "--i": index } as CSSProperties}
-      aria-label={`${option.title} — ${option.description}`}
+      aria-label={`${option.title}. ${option.description}`}
       className={cardClass}
     >
       {inner}
@@ -104,16 +114,6 @@ function OptionCardBody({ option }: { option: Option }) {
   const Icon = option.icon;
   return (
     <>
-      {option.live ? (
-        <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
-          Live
-        </span>
-      ) : null}
-
       <div
         className={cn(
           "grid h-12 w-12 place-items-center rounded-xl transition-colors duration-200",
@@ -198,19 +198,38 @@ export default function Landing() {
           </h1>
           <p className="mx-auto mt-5 max-w-xl animate-fade-up text-base leading-relaxed text-muted-foreground [animation-delay:60ms]">
             From buying bulk chemicals to ML-assisted route design and CDMO
-            production intelligence — pick where you want to start.
+            production intelligence. Pick where you want to start.
           </p>
         </div>
 
-        {/* Three options */}
-        <div className="stagger mt-14 grid gap-5 md:grid-cols-3">
+        {/* Entry options */}
+        <div className="stagger mt-14 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {OPTIONS.map((o, i) => (
             <OptionCard key={o.key} option={o} index={i} />
           ))}
         </div>
 
+        {/* Subscribe strip */}
+        <div className="mx-auto mt-14 max-w-3xl animate-fade-up rounded-2xl border border-border bg-card p-6 shadow-card sm:p-8">
+          <div className="flex flex-col gap-1 text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+              Free fortnightly
+            </p>
+            <h2 className="text-xl font-semibold tracking-tight text-ink">
+              Get Asia Source and Insight in your inbox
+            </h2>
+            <p className="mx-auto max-w-md text-sm text-muted-foreground">
+              A concise, source-backed read on chemical sourcing every two weeks.
+              No spam, unsubscribe anytime.
+            </p>
+          </div>
+          <div className="mx-auto mt-5 max-w-lg">
+            <SubscribeForm />
+          </div>
+        </div>
+
         <p className="mt-10 text-center text-xs text-muted-foreground">
-          Trusted by procurement, R&amp;D and CDMO teams · Data from PubChem, openFDA, OpenAlex &amp; live trade records
+          Trusted by procurement, R&amp;D and CDMO teams. Data from PubChem, openFDA, OpenAlex and trade records.
         </p>
       </main>
     </div>

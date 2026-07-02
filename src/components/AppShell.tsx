@@ -213,6 +213,12 @@ export function AppShell({
 }) {
   return (
     <div className="flex min-h-screen w-full bg-muted/40">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/80 px-4 backdrop-blur md:px-8">
@@ -234,7 +240,7 @@ export function AppShell({
             </div>
           </div>
         </header>
-        <main className="flex-1 px-4 py-6 md:px-8 md:py-8">
+        <main id="main-content" className="flex-1 px-4 py-6 md:px-8 md:py-8">
           <div className="mb-6 animate-fade-up">
             <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
               {title}

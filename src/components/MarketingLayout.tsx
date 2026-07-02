@@ -6,12 +6,19 @@ import { Logo } from "@/components/Logo";
 
 const NAV = [
   { label: "Knowledge", to: "/dashboard" },
+  { label: "Publications", to: "/publications" },
   { label: "Custom Synthesis", to: "/custom-synthesis" },
 ];
 
 export function MarketingLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" aria-label="APAC — Supply Chain | CDMO home" className="press inline-block">
@@ -46,7 +53,7 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
 
       <footer className="border-t border-border bg-muted/40">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-xs text-muted-foreground sm:flex-row">

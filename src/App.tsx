@@ -21,6 +21,9 @@ const KnowledgeBase = lazy(() => import("./pages/KnowledgeBase"));
 const TradePartners = lazy(() => import("./pages/TradePartners"));
 const Documents = lazy(() => import("./pages/Documents"));
 const SynthesisRoutes = lazy(() => import("./pages/SynthesisRoutes"));
+const Publications = lazy(() => import("./pages/Publications"));
+const PublicationIssue = lazy(() => import("./pages/PublicationIssue"));
+const Studio = lazy(() => import("./pages/Studio"));
 
 function RouteFallback() {
   return (
@@ -53,6 +56,10 @@ export default function App() {
         <Route path="/suppliers" element={<RedirectWithQuery to="/partners" />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/synthesis-routes" element={<SynthesisRoutes />} />
+        {/* Publications: public reader + the editor Studio. */}
+        <Route path="/publications" element={<Publications />} />
+        <Route path="/publications/:pub/:issue" element={<PublicationIssue />} />
+        <Route path="/studio" element={<Studio />} />
         {/* Stale links (e.g. the removed Integrations page) fall back to home. */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
