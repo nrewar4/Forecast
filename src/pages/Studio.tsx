@@ -242,6 +242,16 @@ function IssuesWorkspace({ pub }: { pub: PublicationSlug }) {
 
   // Detail view: an issue is open.
   if (selected) {
+    const storedIdeas: StoryIdea[] =
+      selected.issue.kind === "ideas"
+        ? selected.items.map((it) => ({
+            headline: it.headline,
+            angle: it.body,
+            sourceName: it.sourceName,
+            sourceUrl: it.sourceUrl,
+            sourceDate: it.sourceDate,
+          }))
+        : [];
     return (
       <div>
         <button
@@ -252,8 +262,23 @@ function IssuesWorkspace({ pub }: { pub: PublicationSlug }) {
           <ArrowRight className="h-4 w-4 rotate-180" />
           Back to {PUBLICATION_LABELS[pub]} issues
         </button>
+        {error ? (
+          <p className="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+            {error}
+          </p>
+        ) : null}
         {selected.issue.kind === "article" ? (
           <ArticleEditor initialIssue={selected.issue} initialSources={selected.items} onSaved={refresh} />
+        ) : selected.issue.kind === "ideas" ? (
+          <div>
+            <h3 className="mb-1 text-sm font-semibold text-ink">
+              Scheduled ideas · {periodLabel(selected.issue.periodStart, selected.issue.periodEnd)}
+            </h3>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Pick one story to develop into a feature. Developing creates a new article draft.
+            </p>
+            <IdeasGrid ideas={storedIdeas} expandingIdx={expandingIdx} onDevelop={developIdea} />
+          </div>
         ) : (
           <IssueEditor initialIssue={selected.issue} initialItems={selected.items} onSaved={refresh} />
         )}
@@ -296,38 +321,11 @@ function IssuesWorkspace({ pub }: { pub: PublicationSlug }) {
         </button>
       </div>
 
-      {/* Insight ideas */}
+      {/* Insight ideas (freshly generated in-session) */}
       {ideas ? (
         <div>
           <h3 className="mb-3 text-sm font-semibold text-ink">Pick a story to develop</h3>
-          <div className="grid gap-3 md:grid-cols-2">
-            {ideas.map((idea, i) => (
-              <div key={i} className="flex flex-col rounded-2xl border border-border bg-card p-4 shadow-card">
-                <h4 className="text-sm font-semibold text-ink">{idea.headline}</h4>
-                <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{idea.angle}</p>
-                {idea.sourceName ? (
-                  <a
-                    href={idea.sourceUrl || undefined}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="mt-2 text-xs font-medium text-primary hover:underline"
-                  >
-                    {idea.sourceName}
-                    {idea.sourceDate ? `, ${idea.sourceDate}` : ""}
-                  </a>
-                ) : null}
-                <button
-                  type="button"
-                  onClick={() => developIdea(idea, i)}
-                  disabled={expandingIdx !== null}
-                  className="press mt-3 inline-flex items-center justify-center gap-2 rounded-lg border border-primary/40 bg-accent px-3 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/70 disabled:opacity-60"
-                >
-                  {expandingIdx === i ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                  {expandingIdx === i ? "Writing..." : "Develop this story"}
-                </button>
-              </div>
-            ))}
-          </div>
+          <IdeasGrid ideas={ideas} expandingIdx={expandingIdx} onDevelop={developIdea} />
         </div>
       ) : null}
 
@@ -378,6 +376,47 @@ function IssuesWorkspace({ pub }: { pub: PublicationSlug }) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+function IdeasGrid({
+  ideas,
+  expandingIdx,
+  onDevelop,
+}: {
+  ideas: StoryIdea[];
+  expandingIdx: number | null;
+  onDevelop: (idea: StoryIdea, idx: number) => void;
+}) {
+  return (
+    <div className="grid gap-3 md:grid-cols-2">
+      {ideas.map((idea, i) => (
+        <div key={i} className="flex flex-col rounded-2xl border border-border bg-card p-4 shadow-card">
+          <h4 className="text-sm font-semibold text-ink">{idea.headline}</h4>
+          <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{idea.angle}</p>
+          {idea.sourceName ? (
+            <a
+              href={idea.sourceUrl || undefined}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-2 text-xs font-medium text-primary hover:underline"
+            >
+              {idea.sourceName}
+              {idea.sourceDate ? `, ${idea.sourceDate}` : ""}
+            </a>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => onDevelop(idea, i)}
+            disabled={expandingIdx !== null}
+            className="press mt-3 inline-flex items-center justify-center gap-2 rounded-lg border border-primary/40 bg-accent px-3 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/70 disabled:opacity-60"
+          >
+            {expandingIdx === i ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+            {expandingIdx === i ? "Writing..." : "Develop this story"}
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
