@@ -1,0 +1,326 @@
+{
+  "title": "CDMO Competitor Capability Database",
+  "description": "A structured, verified reference for three major Indian CDMO players tracked by APAC Sourcing Intelligence: Divi's Laboratories, Sai Life Sciences, and Cohance Lifesciences. Built for a sourcing and procurement company that needs to know, per competitor, what they can make, the chemistries and technology platforms they run, the products and intermediates they supply, and the hard metrics that qualify them. Everything is categorised broad to narrow: Company then Business Segment then Capability Domain then Chemistry or Capability then Product or Intermediate.",
+  "purpose": "Vendor intelligence and sourcing shortlist support. Use to match a molecule or chemistry need to the right partner, benchmark scale and regulatory footprint, and spot white space.",
+  "lastUpdated": "2026-07-02",
+  "currency": "INR crore unless stated. 1 crore = 10 million. USD figures are approximate at roughly 83 INR per USD.",
+  "methodology": "Compiled from company websites, investor filings and annual reports, exchange disclosures, PharmaCompass, and reputable trade and financial press. Figures carry an 'asOf' where the source dates them. Verify DMF counts, certifications, and capacity against the latest filings before contractual use.",
+  "taxonomy": {
+    "levels": [
+      { "level": 1, "name": "Company", "note": "The legal entity and its overall profile and scale metrics." },
+      { "level": 2, "name": "Business Segment", "note": "Broad lines of business, for example CDMO custom synthesis, generic APIs, specialty chemicals, nutraceuticals, discovery services." },
+      { "level": 3, "name": "Capability Domain", "note": "Families of capability that cut across segments, defined in capabilityDomains below." },
+      { "level": 4, "name": "Chemistry or Capability", "note": "The specific reaction class, technology platform, or unit operation." },
+      { "level": 5, "name": "Product or Intermediate", "note": "Named molecules, APIs, intermediates, or product families." }
+    ]
+  },
+  "capabilityDomains": [
+    { "id": "tech-platforms", "name": "Technology Platforms", "note": "Enabling process technologies: continuous flow, biocatalysis, photochemistry, high pressure, solid phase peptide synthesis, bioconjugation." },
+    { "id": "chemistry-toolbox", "name": "Chemistry and Reaction Toolbox", "note": "Core synthetic reaction classes the site is equipped and experienced to run at scale." },
+    { "id": "containment-hpapi", "name": "Containment and High Potency", "note": "High potency API handling, occupational exposure band capability, dedicated containment suites." },
+    { "id": "particle-solid-state", "name": "Particle Engineering and Solid State", "note": "Milling, micronization, polymorph and crystallisation control, particle size distribution." },
+    { "id": "modalities", "name": "Modalities", "note": "The molecule classes served: small molecules, peptides, oligonucleotides, antibody drug conjugates and their payloads." },
+    { "id": "analytical-regulatory", "name": "Analytical and Regulatory", "note": "Analytical infrastructure, regulatory filings such as DMFs and CoS, and inspection track record." },
+    { "id": "services", "name": "Service Scope", "note": "Where along discovery to commercial the company plays: discovery, process development and CMC, and commercial manufacturing." }
+  ],
+  "companies": [
+    {
+      "id": "divis",
+      "name": "Divi's Laboratories Limited",
+      "aka": ["Divis Labs"],
+      "tickers": { "nse": "DIVISLAB", "bse": "532488" },
+      "headquarters": "Hyderabad, Telangana, India",
+      "founded": "Incorporated 1990; first plant operational 1995",
+      "listed": "Publicly listed on NSE and BSE (2003)",
+      "ownership": "Public; promoter family led by Dr. Murali K. Divi",
+      "positioning": "One of the world's largest merchant API and custom synthesis manufacturers, focused on high barrier to entry chemistry with deep backward integration and cost leadership.",
+      "businessModel": "Merchant API manufacturer plus CDMO custom synthesis for innovators, plus a nutraceutical carotenoid business. Not a full discovery CRDMO.",
+      "metrics": {
+        "revenue": { "value": "9712", "unit": "INR crore total income", "fy": "FY25", "usdApprox": "~1.15 billion", "asOf": "FY ended Mar 2025" },
+        "profitAfterTax": { "value": "2191", "unit": "INR crore", "fy": "FY25" },
+        "employees": "17,000+",
+        "scientists": "700+",
+        "phds": "400+",
+        "rdCenters": 4,
+        "countriesServed": "95+",
+        "combinedReactorVolume": "18,600+ m3 across the manufacturing units"
+      },
+      "segments": [
+        { "name": "Generic APIs", "note": "Large scale, backward integrated generic active ingredients where Divi's holds dominant global share in select molecules." },
+        { "name": "Custom Synthesis (CDMO)", "note": "Contract manufacture of intermediates and APIs for global innovators, including late stage and commercial." },
+        { "name": "Nutraceuticals", "note": "Carotenoids for food, feed, and dietary supplement markets." }
+      ],
+      "sites": [
+        { "name": "Unit I", "location": "Choutuppal, Telangana", "country": "India", "role": "API and custom synthesis manufacturing", "commissioned": "1995" },
+        { "name": "Unit II", "location": "Chippada, near Visakhapatnam, Andhra Pradesh", "country": "India", "role": "API and custom synthesis manufacturing, includes export oriented SEZ (DCV / DC SEZ) units", "commissioned": "2002" },
+        { "name": "Unit III (Kakinada)", "location": "Near Kakinada, Andhra Pradesh", "country": "India", "role": "New brownfield capacity for APIs and custom synthesis", "commissioned": "January 2025" }
+      ],
+      "regulatory": {
+        "usFdaDMFs": 41,
+        "healthCanadaDMFs": 25,
+        "edqmCoS": 26,
+        "pmdaDMFs": 7,
+        "asOf": "31 March 2024",
+        "certifications": ["cGMP", "ISO 9001", "ISO 14001"],
+        "note": "Facilities inspected by US FDA and other major regulators; strong compliance record."
+      },
+      "capabilities": {
+        "tech-platforms": [
+          { "name": "Continuous flow chemistry", "maturity": "In use at lab and pilot scale, scaling toward commercial", "note": "Green chemistry and safer handling of hazardous steps." },
+          { "name": "Biocatalysis", "maturity": "Established", "note": "Enzymatic steps for selectivity and greener routes." },
+          { "name": "Photochemistry", "maturity": "Established" },
+          { "name": "High pressure reactions", "maturity": "Established" },
+          { "name": "Solid phase peptide synthesis (SPPS)", "maturity": "Investing and scaling", "note": "Multiple 500 litre reactors installed for peptides, further expansion underway." }
+        ],
+        "chemistry-toolbox": [
+          { "name": "Halogenation" },
+          { "name": "Hydrogenation" },
+          { "name": "Chiral and asymmetric synthesis" },
+          { "name": "Organometallic chemistry (for example Grignard)" },
+          { "name": "Ozonolysis" },
+          { "name": "Peptide coupling" },
+          { "name": "Iodination", "note": "Underpins iodinated X-ray contrast media intermediates." },
+          { "name": "Multi step complex synthesis" }
+        ],
+        "containment-hpapi": [
+          { "name": "High potency API handling", "oebLevels": ["OEB-4 (OEL >1 to <10 ug/m3)", "OEB-5 (OEL >0.1 to <1 ug/m3)"], "note": "Purpose built containment suites for highly potent compounds." }
+        ],
+        "particle-solid-state": [
+          { "name": "Milling and micronization" },
+          { "name": "Particle size distribution control" },
+          { "name": "Polymorph generation and control" }
+        ],
+        "modalities": [
+          { "name": "Small molecules", "note": "Core." },
+          { "name": "Peptides", "note": "GLP-1 class peptides and intermediates a strategic growth area." },
+          { "name": "Contrast media", "note": "Iodinated contrast media intermediates." }
+        ],
+        "services": [
+          { "name": "Custom synthesis of intermediates and APIs" },
+          { "name": "Process research and optimisation" },
+          { "name": "Commercial scale manufacturing" }
+        ]
+      },
+      "products": {
+        "genericAPIs": [
+          { "name": "Naproxen", "note": "Estimated 65 to 85 percent global share." },
+          { "name": "Dextromethorphan", "note": "Estimated 65 to 85 percent global share." },
+          { "name": "Gabapentin" },
+          { "name": "Levetiracetam" },
+          { "name": "Valsartan" },
+          { "name": "Pregabalin" },
+          { "name": "Orlistat" }
+        ],
+        "intermediates": [
+          { "name": "GLP-1 peptide intermediates" },
+          { "name": "Iodinated contrast media intermediates" }
+        ],
+        "nutraceuticals": [
+          { "name": "Carotenoids (full range)", "note": "Widely documented range includes beta carotene, lycopene, lutein, astaxanthin, canthaxanthin, and apo ester, for food, feed, and supplements. Confirm exact grades with the company." }
+        ]
+      },
+      "therapeuticFocus": ["CNS", "Cardiovascular", "Anti inflammatory", "Anti obesity and metabolic (GLP-1)", "Diagnostics (contrast media)", "Nutrition"],
+      "sourcingAngle": "Best fit for large volume, high barrier generic APIs and complex custom synthesis where scale, cost, and reliability matter. Dominant single source risk in a few molecules (naproxen, dextromethorphan). Rising option for GLP-1 peptide intermediates and contrast media intermediates. Less of a fit for early discovery or biologics.",
+      "sources": [
+        "https://www.divislabs.com/",
+        "https://en.wikipedia.org/wiki/Divi's_Laboratories",
+        "https://www.pharmacompass.com/us-drug-master-files-dmfs/divis-laboratories",
+        "https://indiacsr.in/divis-laboratories-fy25-results-rs-9712-cr-revenue-up-19-rs-2191-cr-profit-up-37/"
+      ]
+    },
+    {
+      "id": "sailife",
+      "name": "Sai Life Sciences Limited",
+      "aka": ["Sai Life", "SAILIFE"],
+      "tickers": { "nse": "SAILIFE" },
+      "headquarters": "Hyderabad, Telangana, India",
+      "founded": "1999",
+      "listed": "IPO and listing on NSE and BSE, December 2024",
+      "ownership": "Public; earlier backed by TPG and other investors",
+      "positioning": "Integrated CRDMO for small molecule new chemical entities, taking innovator programs from discovery through development to commercial manufacturing.",
+      "businessModel": "Full service Contract Research, Development and Manufacturing Organisation (CRDMO) on a hub and spoke model: low cost high scale execution in India with front end discovery and development labs in the UK and USA.",
+      "metrics": {
+        "revenue": { "value": "1695", "unit": "INR crore", "fy": "FY25", "usdApprox": "~200 million", "growth": "~16% year on year", "asOf": "FY ended Mar 2025" },
+        "profitNote": "Profit after tax up ~105% in FY25",
+        "scientistsAndProfessionals": "3,400+",
+        "pipeline": { "totalMolecules": "170+", "lateStage": 38, "commercial": 7 },
+        "reactorCapacityBidar": "~700 KL total installed after Block 11 Phase II (Q1 FY26)"
+      },
+      "segments": [
+        { "name": "Discovery Services (CRO)", "note": "Integrated medicinal chemistry, biology, DMPK, and toxicology, concept to clinic." },
+        { "name": "Development and CMC", "note": "Process development, scale up, analytical development, and early phase supplies." },
+        { "name": "Manufacturing (CDMO)", "note": "cGMP manufacture of advanced intermediates and APIs from clinical to commercial." }
+      ],
+      "sites": [
+        { "name": "Bidar manufacturing site", "location": "Bidar, Karnataka", "country": "India", "role": "Flagship commercial and clinical cGMP API and intermediate manufacturing", "reactorCapacity": "~700 KL", "approvals": "US FDA and PMDA (Japan) inspected" },
+        { "name": "Integrated R&D campus", "location": "Hyderabad, Telangana", "country": "India", "role": "Discovery and process R&D" },
+        { "name": "Manchester R&D center", "location": "Manchester, UK", "country": "United Kingdom", "role": "Front end research, bridge between discovery and manufacturing", "opened": "2020" },
+        { "name": "Watertown discovery site", "location": "Watertown, Greater Boston, Massachusetts", "country": "United States", "role": "Discovery chemistry and biology near innovation clusters", "opened": "2020" }
+      ],
+      "regulatory": {
+        "certifications": ["cGMP", "ISO 9001"],
+        "inspections": ["US FDA", "PMDA (Japan)"],
+        "note": "Bidar site inspected by US FDA and PMDA. Confirm current DMF and CEP filings with the company."
+      },
+      "capabilities": {
+        "tech-platforms": [
+          { "name": "Flow chemistry", "maturity": "Invested niche capability" },
+          { "name": "Biocatalysis", "maturity": "Invested niche capability" }
+        ],
+        "chemistry-toolbox": [
+          { "name": "Complex multi step small molecule synthesis" },
+          { "name": "Chiral synthesis" },
+          { "name": "Hazardous and specialised reactions handled via flow" }
+        ],
+        "containment-hpapi": [
+          { "name": "High potency API (HPAPI) capability", "note": "Invested niche area for potent compounds. Confirm OEB banding with the company." }
+        ],
+        "particle-solid-state": [
+          { "name": "Process and analytical development supporting solid form selection", "note": "Confirm micronization and polymorph services with the company." }
+        ],
+        "modalities": [
+          { "name": "Small molecule new chemical entities", "note": "Core focus." }
+        ],
+        "analytical-regulatory": [
+          { "name": "Integrated analytical development and QC supporting CMC filings" }
+        ],
+        "services": [
+          { "name": "Drug discovery (MedChem, Biology, DMPK, Toxicology)" },
+          { "name": "Process development and scale up (CMC)" },
+          { "name": "Clinical to commercial cGMP manufacturing" }
+        ]
+      },
+      "products": {
+        "note": "Sai Life works on confidential innovator NCE programs rather than a public catalog of generic APIs. Output is client owned advanced intermediates and APIs across a 170+ molecule pipeline (38 late stage, 7 commercial).",
+        "programTypes": ["Advanced intermediates", "Clinical stage APIs", "Commercial APIs for innovators"]
+      },
+      "therapeuticFocus": ["Innovator small molecule NCEs across oncology, CNS, metabolic, and other areas (client driven)"],
+      "sourcingAngle": "Best fit when you need an integrated partner to move a novel small molecule from discovery through to commercial supply with a single tech transfer, especially for programs that value UK and US front end research proximity. Less suited to off the shelf generic API sourcing.",
+      "sources": [
+        "https://www.sailife.com/",
+        "https://pharmasource.global/directory/sai-life-sciences/",
+        "https://www.globenewswire.com/news-release/2025/08/28/3140620/0/en/Sai-Life-Sciences-completes-Phase-II-of-Production-Block-11-at-Bidar-site-India-expands-capacity-to-700-KL.html",
+        "https://secondsource.substack.com/p/sai-life-sciences-where-global-pharma"
+      ]
+    },
+    {
+      "id": "cohance",
+      "name": "Cohance Lifesciences Limited",
+      "aka": ["Cohance", "formerly aligned with Suven Pharmaceuticals"],
+      "tickers": { "nse": "COHANCE" },
+      "headquarters": "Hyderabad, Telangana, India",
+      "founded": "Formed as an integrated platform by Advent International through acquisitions; merged with Suven Pharmaceuticals in 2025",
+      "listed": "Listed on NSE and BSE (post merger, under Cohance Lifesciences)",
+      "ownership": "Advent International backed",
+      "positioning": "Integrated CRDMO and API platform with multi modality capability spanning small molecules, high potency APIs, antibody drug conjugates, oligonucleotides, and specialty chemicals.",
+      "businessModel": "Built by combining several businesses (ZCL Chemicals, Avra Laboratories, Suven Pharmaceuticals, Sapala Organics, and NJ Bio) into one platform covering Pharma CDMO, Specialty Chemicals CDMO, and APIs, with next generation ADC and oligonucleotide capability.",
+      "mergerNote": "Suven Pharmaceuticals and Cohance merged in 2025 to create a roughly one billion dollar scale CDMO; the merged entity operates as Cohance Lifesciences Limited.",
+      "metrics": {
+        "revenue": { "value": "2392", "unit": "INR crore combined", "fy": "FY24", "note": "Combined revenue of the merging entities in FY24; management target of ~6,000 crore by FY29.", "asOf": "FY ended Mar 2024" },
+        "facilities": "20+ across India and the United States",
+        "manufacturingUnits": { "total": 8, "usFdaApproved": 5 },
+        "rdUnits": 2,
+        "dmfsGlobal": "200+",
+        "adcCapacity": "cGMP bioconjugation suite up to ~2 kg ADC, sufficient for clinical needs up to Phase 2b"
+      },
+      "segments": [
+        { "name": "Pharma CDMO (small molecule)", "note": "Development and commercial manufacture of intermediates and APIs for innovators." },
+        { "name": "Specialty Chemicals CDMO", "note": "Contract manufacture of specialty and fine chemicals." },
+        { "name": "APIs", "note": "Generic and complex active pharmaceutical ingredients; 200+ DMFs filed globally." },
+        { "name": "ADCs and Oligonucleotides", "note": "Next generation modalities via NJ Bio and nucleic acid chemistry." },
+        { "name": "Formulations", "note": "Finished dosage capability within the group." }
+      ],
+      "sites": [
+        { "name": "API and CDMO units", "location": "Jaggayyapeta and Atchutapuram, Andhra Pradesh; plus units in the Hyderabad, Telangana area", "country": "India", "role": "API, specialty chemicals, and CDMO manufacturing", "note": "8 manufacturing units, 5 of them US FDA approved." },
+        { "name": "Genome Valley R&D", "location": "Genome Valley, Hyderabad, Telangana", "country": "India", "role": "R&D center; 400 MHz NMR, HPLC, flow chemistry reactors" },
+        { "name": "Sapala Organics", "location": "Hyderabad, Telangana", "country": "India", "role": "Oligonucleotide and nucleic acid chemistry R&D and manufacturing" },
+        { "name": "NJ Bio", "location": "Princeton, New Jersey", "country": "United States", "role": "ADC discovery to CRDMO partner; cytotoxic payloads, linkers, and conjugation" }
+      ],
+      "regulatory": {
+        "usFdaApprovedUnits": 5,
+        "dmfsGlobal": "200+",
+        "certifications": ["cGMP", "ISO 9001"],
+        "note": "5 of 8 manufacturing units US FDA approved. Confirm CoS and PMDA filings by molecule."
+      },
+      "capabilities": {
+        "tech-platforms": [
+          { "name": "Flow chemistry", "maturity": "Established" },
+          { "name": "High pressure reactions", "maturity": "Established" },
+          { "name": "Cryogenic reactions", "maturity": "Established" },
+          { "name": "Bioconjugation", "maturity": "Established for ADCs", "note": "GMP suite up to ~2 kg ADC." }
+        ],
+        "chemistry-toolbox": [
+          { "name": "Chiral synthesis" },
+          { "name": "Complex multi step synthesis" },
+          { "name": "Nucleic acid / oligonucleotide chemistry" },
+          { "name": "Camptothecin (CPT) derivative chemistry", "note": "Global position in CPT payloads; proprietary S-Trione technology." }
+        ],
+        "containment-hpapi": [
+          { "name": "High potency API and payload handling", "note": "High containment facilities purpose built for potent cytotoxic payloads and conjugates. Confirm OEB banding by suite." }
+        ],
+        "particle-solid-state": [
+          { "name": "Process development supporting solid form and isolation", "note": "Confirm micronization and polymorph services with the company." }
+        ],
+        "modalities": [
+          { "name": "Small molecules", "note": "Core CDMO and API." },
+          { "name": "High potency APIs" },
+          { "name": "Antibody drug conjugates (ADCs)", "note": "Payloads, linkers, and conjugation via NJ Bio; CPT derivatives and S-Trione." },
+          { "name": "Oligonucleotides", "note": "Nucleic acid chemistry via Sapala Organics." }
+        ],
+        "analytical-regulatory": [
+          { "name": "Analytical infrastructure including 400 MHz NMR and HPLC" }
+        ],
+        "services": [
+          { "name": "Discovery to commercialization CRDMO across modalities" },
+          { "name": "Specialty chemicals contract manufacturing" },
+          { "name": "API development and commercial supply" },
+          { "name": "ADC payload, linker, and conjugation services" }
+        ]
+      },
+      "products": {
+        "note": "A broad API and intermediate catalog (200+ DMFs) plus specialty chemicals and confidential CDMO programs. Distinctive named platform is Camptothecin derived ADC payloads and proprietary S-Trione linker payload technology.",
+        "platformProducts": ["Camptothecin (CPT) derivative payloads", "S-Trione linker payload technology", "Oligonucleotides / nucleic acid building blocks"],
+        "categories": ["Generic and complex APIs", "Advanced intermediates", "Specialty and fine chemicals", "ADC payloads and conjugates"]
+      },
+      "therapeuticFocus": ["Oncology (ADCs, HPAPI, CPT payloads)", "Broad small molecule therapeutic areas", "Specialty chemicals end markets"],
+      "sourcingAngle": "The most modality diverse of the three: the go to option for ADC payloads and conjugation, oligonucleotides, HPAPI, and specialty chemicals CDMO alongside conventional small molecule APIs. Newly merged, so confirm which specific unit and legacy business (Suven, ZCL, Avra, Sapala, NJ Bio) holds a given capability or filing.",
+      "sources": [
+        "https://www.cohance.com/",
+        "https://www.pharmacompass.com/pharma-services/api-fdf-drug-development/cohance-lifesciences",
+        "https://www.cohance.com/antibody-drug-conjugates/",
+        "https://njbio.com/2025/06/cohance-lifesciences-and-suven-pharmaceuticals-announce-strategic-merger-to-expand-cdmo-capabilities/"
+      ]
+    }
+  ],
+  "comparison": {
+    "note": "Quick scan across the three. Yes means a clearly stated capability; Emerging means invested or scaling; Limited or blank means not a stated strength or not confirmed.",
+    "dimensions": [
+      { "dimension": "Full CRDMO (discovery to commercial)", "divis": "No (custom synthesis and APIs, no discovery)", "sailife": "Yes", "cohance": "Yes" },
+      { "dimension": "Generic API catalog scale", "divis": "Very high", "sailife": "Low (innovator focused)", "cohance": "High (200+ DMFs)" },
+      { "dimension": "Peptides / GLP-1", "divis": "Emerging (SPPS, 500 L reactors)", "sailife": "Confirm", "cohance": "Confirm" },
+      { "dimension": "High potency APIs (HPAPI)", "divis": "Yes (OEB-4/5)", "sailife": "Emerging", "cohance": "Yes" },
+      { "dimension": "ADCs", "divis": "No", "sailife": "No", "cohance": "Yes (NJ Bio, CPT, S-Trione)" },
+      { "dimension": "Oligonucleotides", "divis": "No", "sailife": "No", "cohance": "Yes (Sapala Organics)" },
+      { "dimension": "Contrast media intermediates", "divis": "Yes", "sailife": "No", "cohance": "Confirm" },
+      { "dimension": "Continuous flow chemistry", "divis": "Yes (scaling)", "sailife": "Yes", "cohance": "Yes" },
+      { "dimension": "Biocatalysis", "divis": "Yes", "sailife": "Yes", "cohance": "Confirm" },
+      { "dimension": "Specialty chemicals CDMO", "divis": "Limited", "sailife": "No", "cohance": "Yes" },
+      { "dimension": "Nutraceuticals (carotenoids)", "divis": "Yes", "sailife": "No", "cohance": "No" },
+      { "dimension": "US and UK front end research", "divis": "No", "sailife": "Yes (US, UK)", "cohance": "Yes (US, NJ Bio)" },
+      { "dimension": "Approx revenue scale (latest)", "divis": "~9,712 cr (FY25)", "sailife": "~1,695 cr (FY25)", "cohance": "~2,392 cr combined (FY24)" }
+    ]
+  },
+  "sources": [
+    "https://www.divislabs.com/",
+    "https://en.wikipedia.org/wiki/Divi's_Laboratories",
+    "https://www.pharmacompass.com/us-drug-master-files-dmfs/divis-laboratories",
+    "https://indiacsr.in/divis-laboratories-fy25-results-rs-9712-cr-revenue-up-19-rs-2191-cr-profit-up-37/",
+    "https://www.sailife.com/",
+    "https://pharmasource.global/directory/sai-life-sciences/",
+    "https://www.globenewswire.com/news-release/2025/08/28/3140620/0/en/Sai-Life-Sciences-completes-Phase-II-of-Production-Block-11-at-Bidar-site-India-expands-capacity-to-700-KL.html",
+    "https://www.cohance.com/",
+    "https://www.pharmacompass.com/pharma-services/api-fdf-drug-development/cohance-lifesciences",
+    "https://www.cohance.com/antibody-drug-conjugates/",
+    "https://njbio.com/2025/06/cohance-lifesciences-and-suven-pharmaceuticals-announce-strategic-merger-to-expand-cdmo-capabilities/"
+  ]
+}

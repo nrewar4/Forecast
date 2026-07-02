@@ -5,6 +5,7 @@ import DemandForecast from "./pages/DemandForecast";
 import KnowledgeBase from "./pages/KnowledgeBase";
 import Clients from "./pages/Clients";
 import Suppliers from "./pages/Suppliers";
+import CdmoCapabilities from "./pages/CdmoCapabilities";
 import Documents from "./pages/Documents";
 import Integrations from "./pages/Integrations";
 import Deck from "./deck/Deck";
@@ -19,6 +20,7 @@ export default function App() {
       <Route path="/knowledge-base" element={<KnowledgeBase />} />
       <Route path="/clients" element={<Clients />} />
       <Route path="/suppliers" element={<Suppliers />} />
+      <Route path="/cdmo-capabilities" element={<CdmoCapabilities />} />
       <Route path="/documents" element={<Documents />} />
       <Route path="/integrations" element={<Integrations />} />
     </Routes>

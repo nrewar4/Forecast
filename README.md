@@ -66,6 +66,10 @@ under `src/deck`, the exporter under `scripts/export-deck.mjs`.
 - Clients (Buyers). Searchable, filterable directory of Indian importers.
 - Suppliers (Manufacturers). Manufacturers only, grouped by product, filterable
   by certification.
+- CDMO Capabilities. Competitor capability database for major CDMO players,
+  categorised broad to narrow: company, segment, capability domain, chemistry,
+  product. Covers Divi's Laboratories, Sai Life Sciences, and Cohance
+  Lifesciences, with a head to head comparison matrix.
 - Documents. PDF and Excel upload area with a recent documents list.
 - Integrations. Catalog of databases to connect, grouped by category.
 
@@ -96,6 +100,10 @@ database without rework.
 - `suppliers_manufacturers.json`. Possible suppliers, manufacturers only.
 - `products_knowledge.json`. Routes, cost drivers, industries, pricing, producers.
 - `integrations_catalog.json`. Databases and APIs to connect.
+- `cdmo_capabilities.json`. Verified CDMO competitor capability database
+  (technical capabilities, chemistries, products, intermediates, and metrics),
+  categorised broad to narrow. A human readable version lives at
+  `docs/cdmo_capability_database.md`.
 
 Source of the trade figures is the Descartes Datamyne import and export sample
 for February 2026. Replace with the full three year history for production

@@ -6,6 +6,7 @@ import {
   BookOpen,
   Users,
   Factory,
+  FlaskConical,
   FileText,
   Plug,
 } from "lucide-react";
@@ -18,6 +19,7 @@ const items = [
   { title: "Product Knowledge Base", url: "/knowledge-base", icon: BookOpen },
   { title: "Clients (Buyers)", url: "/clients", icon: Users },
   { title: "Suppliers (Manufacturers)", url: "/suppliers", icon: Factory },
+  { title: "CDMO Capabilities", url: "/cdmo-capabilities", icon: FlaskConical },
   { title: "Documents", url: "/documents", icon: FileText },
   { title: "Integrations", url: "/integrations", icon: Plug },
 ];
