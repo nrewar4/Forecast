@@ -1,6 +1,6 @@
 // Accurate chemical-identity resolution for the AI Search bar, backed by PubChem
 // (free, CORS-enabled, no key). Resolves a CAS Registry Number OR a chemical
-// name to a canonical identity — common name, formula, SMILES, PubChem CID, and
+// name to a canonical identity, common name, formula, SMILES, PubChem CID, and
 // the validated CAS RN(s). This makes a bare CAS like "50-78-2" search as
 // "aspirin (C9H8O4)" and shows the authoritative CAS for a name query.
 //
@@ -35,7 +35,7 @@ function cleanQuery(query: string): string {
   return query.trim().replace(/^cas[:\s]*/i, "").trim();
 }
 
-// Database/registry codes that masquerade as synonyms — never use as a name.
+// Database/registry codes that masquerade as synonyms, never use as a name.
 const CODE_RE =
   /(:|SCHEMBL|CHEMBL|DTXSID|DTXCID|AKOS|MFCD|EINECS|UNII|RefChem|^NSC\d|^DB\d|^CID\b|^EC\s|Tox21|BDBM|STK\d|ZINC)/i;
 
@@ -115,7 +115,7 @@ export async function resolveIdentity(
         synonyms = synJson?.InformationList?.Information?.[0]?.Synonym ?? [];
       }
     } catch {
-      // synonyms are optional — identity still resolves without them
+      // synonyms are optional, identity still resolves without them
     }
 
     const casList = Array.from(new Set(synonyms.filter((s) => CAS_RE.test(s))));

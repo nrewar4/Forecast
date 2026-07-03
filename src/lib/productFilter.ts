@@ -11,14 +11,14 @@
 // view (Overview KPIs, Trade Analytics product list and charts). It errs toward
 // precision: when a real compound is recognisably buried in a dirty string we
 // still drop it if the string is dominated by boilerplate, because the name is
-// unusable as a clean catalogue entry — there is almost always a clean
+// unusable as a clean catalogue entry, there is almost always a clean
 // duplicate of the same compound elsewhere in the data.
 //
 // This was tuned against the full set of ~1,090 distinct product strings in the
 // seed data (432 flagged as junk, 659 kept). It also runs on uploaded data so
 // future extracts are cleaned the same way.
 
-// Invoice / regulatory / shipping boilerplate — never a product name.
+// Invoice / regulatory / shipping boilerplate, never a product name.
 const BOILER: string[] = [
   "as per inv", "as per pkg", "as perinv", "details as per", "as per cust", "asper cust",
   "as per customer", "customer purchase", "intend to claim", "we intend", "claim rewards",

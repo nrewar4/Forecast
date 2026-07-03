@@ -18,10 +18,10 @@ import {
   Scale,
   TrendingUp,
 } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui";
-import { KpiCard } from "@/components/Kpi";
-import { MarketNews } from "@/components/MarketNews";
+import { AppShell } from "@/components/layout/AppShell";
+import { Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui/primitives";
+import { KpiCard } from "@/components/ui/Kpi";
+import { MarketNews } from "@/components/knowledge/MarketNews";
 import { useTradeData } from "@/context/TradeData";
 import { useCurrency } from "@/context/Currency";
 import type { Shipment } from "@/data/trade";
@@ -173,7 +173,7 @@ export default function Dashboard() {
               Trade Momentum
             </CardTitle>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Monthly trade value ({currency}) — imports vs exports across the recorded months
+              Monthly trade value ({currency}), imports vs exports across the recorded months
             </p>
           </CardHeader>
           <CardContent className="pt-2">
@@ -221,7 +221,7 @@ export default function Dashboard() {
       {/* India & US market breakdown */}
       <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
         <MarketBreakdown
-          title="India — Market Breakdown"
+          title="India, Market Breakdown"
           subtitle="The full set of recorded chemical trade"
           flag="🇮🇳"
           importValue={india.importValue}
@@ -234,7 +234,7 @@ export default function Dashboard() {
           money={money}
         />
         <MarketBreakdown
-          title="United States — Trade with India"
+          title="United States, Trade with India"
           subtitle={`US accounts for ${us.importShare.toFixed(1)}% of India's import value`}
           flag="🇺🇸"
           importValue={us.importValue}

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Building2, Factory, IndianRupee, Search } from "lucide-react";
-import { Sidebar } from "./Sidebar";
+import { Sidebar, type SidebarNav } from "./Sidebar";
 import { products } from "@/data/products";
 import { clients } from "@/data/clients";
 import { supplierGroups } from "@/data/suppliers";
@@ -205,10 +205,12 @@ function CurrencyToggle() {
 export function AppShell({
   title,
   subtitle,
+  nav,
   children,
 }: {
   title: string;
   subtitle?: string;
+  nav?: SidebarNav;
   children: ReactNode;
 }) {
   return (
@@ -219,7 +221,7 @@ export function AppShell({
       >
         Skip to content
       </a>
-      <Sidebar />
+      <Sidebar nav={nav} />
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/80 px-4 backdrop-blur md:px-8">
           <GlobalSearch />

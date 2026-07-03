@@ -70,14 +70,14 @@ const ROUTE_SCHEMA = `[
     "patents": {
       "status": "e.g. Off-patent | Process patents active | Patented",
       "assignees": ["company holding a route/process patent, if any"],
-      "note": "One line patent / freedom-to-operate signal — not legal advice."
+      "note": "One line patent / freedom-to-operate signal, not legal advice."
     }
   }
 ]`;
 
 // Heuristic: a molecule with no carbon backbone is an inorganic / industrial
 // product (salt, mineral acid, oxide, simple gas). Its production is
-// electrochemical / disproportionation / neutralisation / precipitation — NOT
+// electrochemical / disproportionation / neutralisation / precipitation, NOT
 // organic named reactions. Carbon present = "C" followed by an uppercase letter,
 // a digit, or end-of-string (so "Ca", "Cl", "Cu" don't count as carbon).
 function isInorganicFormula(formula: string | null): boolean {
@@ -94,7 +94,7 @@ function buildAskcosContext(
   const lines: string[] = [
     "ASKCOS ML retrosynthesis data (use this to inform your route steps):",
     `Target SMILES: ${targetSmiles}`,
-    "Layer 1 — one step back from target:",
+    "Layer 1, one step back from target:",
     ...layer1.slice(0, 3).map(
       (s, i) =>
         `  Option ${i + 1}: reactants=[${s.smiles.join(", ")}]  confidence=${s.score.toFixed(3)}`,
@@ -102,7 +102,7 @@ function buildAskcosContext(
   ];
   if (layer2.length) {
     lines.push(
-      `Layer 2 — one step back from best precursor (${layer1[0]?.smiles[0] ?? ""}):`,
+      `Layer 2, one step back from best precursor (${layer1[0]?.smiles[0] ?? ""}):`,
       ...layer2.slice(0, 3).map(
         (s, i) =>
           `  Option ${i + 1}: reactants=[${s.smiles.join(", ")}]  confidence=${s.score.toFixed(3)}`,
@@ -116,17 +116,17 @@ function parseRoutes(raw: string, source: "askcos+claude" | "claude"): RouteResu
   const cleaned = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
   const start = cleaned.indexOf("[");
   const end = cleaned.lastIndexOf("]");
-  if (start < 0 || end <= start) throw new Error("Route generation failed — retry");
+  if (start < 0 || end <= start) throw new Error("Route generation failed, retry");
 
   let parsed: RouteResult[];
   try {
     parsed = JSON.parse(cleaned.slice(start, end + 1)) as RouteResult[];
   } catch {
-    throw new Error("Route generation failed — retry");
+    throw new Error("Route generation failed, retry");
   }
 
   if (!Array.isArray(parsed) || parsed.length === 0) {
-    throw new Error("Route generation failed — retry");
+    throw new Error("Route generation failed, retry");
   }
 
   return parsed.map((r, i) => ({
@@ -209,7 +209,7 @@ export async function findRoutes(
     layer1.length > 0 ? "askcos+claude" : "claude";
   const askcosContext = buildAskcosContext(targetSmiles, layer1, layer2);
 
-  // 3. Claude route assembly — branch persona for inorganic/industrial products,
+  // 3. Claude route assembly, branch persona for inorganic/industrial products,
   //    which are NOT made by organic named reactions (ASKCOS also can't help).
   const inorganic = isInorganicFormula(molecule.formula);
   const systemLines = [
@@ -229,11 +229,11 @@ export async function findRoutes(
     `- Set the source field to "${source}" for every route`,
     "- novelty.classification MUST be one of: \"Commercial\" (route is currently used in",
     "  industrial production), \"Literature\" (published/tried but not confirmed commercial),",
-    "  or \"Novel\" (you are proposing it; not known to be in use). Be honest — do not label a",
+    "  or \"Novel\" (you are proposing it; not known to be in use). Be honest, do not label a",
     "  speculative route Commercial.",
     "- novelty.used_by: name real companies or named processes that run this route when you",
     "  know them (e.g. \"BASF (BHC green process)\"). Leave empty rather than guessing.",
-    "- patents: give a realistic freedom-to-operate signal — whether the route is off-patent",
+    "- patents: give a realistic freedom-to-operate signal, whether the route is off-patent",
     "  or has active process patents, and likely assignees. Use web search. This is a signal,",
     "  not legal advice.",
     "- Prefer well-established commercial routes as the top-ranked routes; clearly flag any",

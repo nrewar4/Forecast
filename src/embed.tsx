@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { AuthProvider } from "./context/Auth";
 import { TradeDataProvider } from "./context/TradeData";
 import { CurrencyProvider } from "./context/Currency";
 import "./index.css";
@@ -25,11 +26,13 @@ export function mountApacApp(el: HTMLElement, opts: MountOptions = {}): () => vo
   root.render(
     <StrictMode>
       <BrowserRouter basename={opts.basename}>
+        <AuthProvider>
         <CurrencyProvider>
           <TradeDataProvider>
             <App />
           </TradeDataProvider>
         </CurrencyProvider>
+      </AuthProvider>
       </BrowserRouter>
     </StrictMode>,
   );

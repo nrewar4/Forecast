@@ -70,7 +70,7 @@ export async function getRetroSteps(
       return { precursor_sets: raw.map(normaliseSet) };
     } catch (err) {
       if (signal?.aborted) throw err;
-      // Network/CORS error — try next endpoint, then fall through to empty result
+      // Network/CORS error, try next endpoint, then fall through to empty result
     }
   }
   return { precursor_sets: [] };

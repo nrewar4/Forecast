@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  Atom,
   FlaskConical,
   Gauge,
   Microscope,
   Scale,
   TrendingUp,
 } from "lucide-react";
-import { MarketingLayout } from "@/components/MarketingLayout";
+import { MarketingLayout } from "@/components/layout/MarketingLayout";
 
 const SERVICES = [
   {
@@ -23,19 +22,19 @@ const SERVICES = [
   },
   {
     icon: Scale,
-    title: "Cost & FTO analysis",
+    title: "Cost and FTO analysis",
     body: "Cost-driver breakdowns and patent-landscape signals before you commit capital.",
   },
   {
     icon: TrendingUp,
     title: "Scale-up",
-    body: "Gram to multi-tonne — pilot campaigns, tech transfer, and commercial manufacturing.",
+    body: "Gram to multi-tonne: pilot campaigns, tech transfer, and commercial manufacturing.",
   },
 ];
 
 const SCALES = [
-  { stage: "Discovery", detail: "mg – g", note: "Route feasibility & samples" },
-  { stage: "Pilot", detail: "kg – 100 kg", note: "Process validation" },
+  { stage: "Discovery", detail: "mg to g", note: "Route feasibility & samples" },
+  { stage: "Pilot", detail: "kg to 100 kg", note: "Process validation" },
   { stage: "Commercial", detail: "tonne+", note: "Continuous supply" },
 ];
 
@@ -49,16 +48,12 @@ export default function CustomSynthesis() {
           className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(244,121,32,0.06),transparent_70%)]"
         />
         <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-card">
-            <Atom className="h-3.5 w-3.5 text-primary" />
-            CDMO services
-          </span>
-          <h1 className="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-ink md:text-5xl">
+          <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-ink md:text-5xl">
             Custom synthesis, from first route to commercial scale.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
             A contract development and manufacturing partner that pairs synthetic
-            craft with sourcing intelligence — so the molecule you need gets made
+            craft with sourcing intelligence, so the molecule you need gets made
             efficiently and economically.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -128,7 +123,7 @@ export default function CustomSynthesis() {
             <p className="text-sm text-foreground/90">
               Already know your target molecule?{" "}
               <Link to="/synthesis-routes" className="font-semibold text-primary hover:underline">
-                Generate candidate routes & a CDMO production analysis
+                Generate candidate routes and a CDMO production analysis
               </Link>{" "}
               in the platform.
             </p>

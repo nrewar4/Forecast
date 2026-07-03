@@ -57,6 +57,18 @@
   .press:active {
     transform: scale(0.97);
   }
+
+  /* Animated shipping routes on the landing About map. */
+  .route-flow {
+    stroke-dasharray: 2 6;
+    animation: route-flow 1.4s linear infinite;
+  }
+}
+
+@keyframes route-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
 }
 
 /* Reduced motion: keep opacity/colour, drop movement (a11y). */

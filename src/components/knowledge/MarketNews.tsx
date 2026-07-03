@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, Newspaper, RefreshCw } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/primitives";
 import { fallbackTopics, fetchMarketNews, type NewsItem } from "@/lib/news";
 
 function timeAgo(iso: string): string {

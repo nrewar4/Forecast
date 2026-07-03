@@ -1,5 +1,4 @@
-// Drives the built app with a headless browser to capture the new Publications
-// surfaces and assert the landing changes. Run against a running preview server:
+// Headless-browser smoke test + screenshots. Run against a preview server:
 //   npm run build && npm run preview -- --port 4173 &
 //   node scripts/screenshots.mjs http://localhost:4173
 import puppeteer from "puppeteer";
@@ -18,85 +17,98 @@ async function main() {
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const results = [];
+  const check = (name, pass) => results.push([name, pass]);
+
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 900 });
 
-    async function shot(path, name, opts = {}) {
+    async function go(path, waitMs = 700) {
       await page.goto(base + path, { waitUntil: "networkidle0", timeout: 30000 });
-      await new Promise((r) => setTimeout(r, 700));
-      await page.screenshot({ path: `${outDir}/${name}.png`, fullPage: opts.full !== false });
-      return page;
+      await new Promise((r) => setTimeout(r, waitMs));
     }
+    // Scroll through the page so IntersectionObserver-driven reveals fire, then
+    // return to the top for a clean full-page capture.
+    async function warmReveals() {
+      await page.evaluate(async () => {
+        const step = window.innerHeight / 2;
+        for (let y = 0; y < document.body.scrollHeight; y += step) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 90));
+        }
+        window.scrollTo(0, 0);
+      });
+      await new Promise((r) => setTimeout(r, 900));
+    }
+    async function shot(name) {
+      await page.screenshot({ path: `${outDir}/${name}.png`, fullPage: true });
+    }
+    const text = () => page.evaluate(() => document.body.innerText);
 
-    // Landing: assert the Live badge is gone and there are 4 option cards.
-    await shot("/", "01-landing");
-    const landing = await page.evaluate(() => {
-      const cards = document.querySelectorAll('main a[aria-label], main [class*="rounded-2xl"] h2');
-      const hasLive = /\bLive\b/.test(document.querySelector("main")?.innerText || "");
-      const hasPublications = /Publications/.test(document.body.innerText);
-      const hasSubscribe = !!document.querySelector('input[type="email"]');
-      return { hasLive, hasPublications, hasSubscribe, cardText: document.querySelector("main")?.innerText?.slice(0, 0) };
-    });
-    results.push(["landing: Publications card present", landing.hasPublications]);
-    results.push(["landing: no 'Live' badge text", !landing.hasLive]);
-    results.push(["landing: subscribe form present", landing.hasSubscribe]);
+    // ---- Landing ----
+    await go("/", 1200);
+    await warmReveals(); // fire scroll reveals + settle count-ups
+    await shot("01-landing");
+    const t1 = await text();
+    check("landing: stat line 8,927", /8,927/.test(t1));
+    check("landing: stat line 3,241", /3,241/.test(t1));
+    check("landing: About 'One network'", /One network/i.test(t1));
+    check("landing: CDMO process", /CDMO process/i.test(t1));
+    check("landing: no Publications", !/Publications/.test(t1));
+    check("landing: no 'Live' badge", !/\bLive\b/.test(t1));
+    check("landing: no em dash", !t1.includes("—"));
+    const tiles = await page.evaluate(
+      () => [...document.querySelectorAll("main a")].filter((a) => /^(Buy|Knowledge|Custom Synthesis)$/.test(a.innerText.trim().split("\n")[0])).length,
+    );
+    check("landing: 3 minimal entry tiles", tiles === 3);
 
-    // Publications index.
-    await shot("/publications", "02-publications-index");
-    const idx = await page.evaluate(() => ({
-      hasAsiaSource: /Asia Source/.test(document.body.innerText),
-      hasInsight: /Insight/.test(document.body.innerText),
-      hasIssue01: /Issue 0?1/i.test(document.body.innerText),
-    }));
-    results.push(["index: Asia Source section", idx.hasAsiaSource]);
-    results.push(["index: Insight section", idx.hasInsight]);
-    results.push(["index: seeded Issue 01 listed", idx.hasIssue01]);
+    // ---- Anonymous: admin pages redirect to login ----
+    await go("/trade-analytics");
+    check("guard: /trade-analytics redirects to /login", page.url().includes("/login"));
+    await go("/documents");
+    check("guard: /documents redirects to /login", page.url().includes("/login"));
 
-    // Reader: the seeded Issue 01.
-    await shot("/publications/asia-source/1", "03-issue-reader");
-    const reader = await page.evaluate(() => {
-      const text = document.body.innerText;
-      return {
-        hasMasthead: /ASIA SOURCE/.test(text),
-        hasFocus: /Fortnight in Focus/i.test(text),
-        hasBuyerAction: /Buyer Action/i.test(text),
-        itemCount: (text.match(/Source:/g) || []).length,
-        linkedin: document.querySelector('a[href*="linkedin.com/sharing"]')?.getAttribute("href") || "",
-        tweet: document.querySelector('a[href*="twitter.com/intent/tweet"]')?.getAttribute("href") || "",
-      };
-    });
-    results.push(["reader: masthead", reader.hasMasthead]);
-    results.push(["reader: Fortnight in Focus", reader.hasFocus]);
-    results.push(["reader: Buyer Action", reader.hasBuyerAction]);
-    results.push(["reader: >=16 source lines", reader.itemCount >= 16]);
-    results.push(["reader: LinkedIn intent url", reader.linkedin.includes("share-offsite")]);
-    results.push(["reader: X intent url", reader.tweet.includes("intent/tweet")]);
+    // ---- Knowledge sidebar hides admin items when anonymous ----
+    await go("/dashboard");
+    const t2 = await text();
+    check("sidebar: no Trade Analytics for anonymous", !/Trade Analytics/.test(t2));
+    check("sidebar: no Documents for anonymous", !/Documents/.test(t2));
+    check("sidebar: has Admin sign in", /Admin sign in/i.test(t2));
+    await shot("02-knowledge-anonymous");
 
-    // Print emulation shot.
-    await page.emulateMediaType("print");
-    await page.screenshot({ path: `${outDir}/04-issue-print.png`, fullPage: true });
-    await page.emulateMediaType("screen");
+    // ---- Synthesis workspace ----
+    await go("/synthesis-routes");
+    const t3 = await text();
+    check("synthesis: workspace title", /Custom Synthesis Routes/.test(t3));
+    check("synthesis: own sidebar section", /Custom Synthesis\n/.test(t3));
+    await shot("03-synthesis-workspace");
 
-    // Studio.
-    await shot("/studio", "05-studio-asia-source");
-    const studio = await page.evaluate(() => ({
-      hasStudio: /Publications Studio/.test(document.body.innerText),
-      hasGenerate: /Generate draft/.test(document.body.innerText),
-      hasKeyNotice: /OpenRouter API key/.test(document.body.innerText),
-    }));
-    results.push(["studio: title", studio.hasStudio]);
-    results.push(["studio: generate control", studio.hasGenerate]);
+    // ---- Login flow ----
+    await go("/login");
+    await shot("04-login");
+    await page.type('input[placeholder="admin"]', "admin");
+    await page.type('input[type="password"]', "apac-admin");
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: "networkidle0", timeout: 15000 }).catch(() => {}),
+      page.click('button[type="submit"]'),
+    ]);
+    await new Promise((r) => setTimeout(r, 900));
+    check("login: lands on /admin", page.url().includes("/admin"));
+    const t4 = await text();
+    check("admin: dashboard title", /Admin Dashboard/.test(t4));
+    check("admin: platform data", /Platform data/i.test(t4));
+    await shot("05-admin-dashboard");
 
-    // Studio master prompt tab.
-    await page.evaluate(() => {
-      const btn = [...document.querySelectorAll("button")].find((b) => b.textContent?.trim() === "Master prompt");
-      btn?.click();
-    });
-    await new Promise((r) => setTimeout(r, 500));
-    await page.screenshot({ path: `${outDir}/06-studio-prompt.png`, fullPage: true });
+    // ---- Admin sees gated pages ----
+    await go("/trade-analytics");
+    check("admin: trade analytics reachable", !page.url().includes("/login"));
+    await go("/dashboard");
+    const t5 = await text();
+    check("sidebar: Trade Analytics visible for admin", /Trade Analytics/.test(t5));
+    check("sidebar: Sign out visible", /Sign out/.test(t5));
+    await shot("06-knowledge-admin");
 
-    // Report
+    // ---- Report ----
     let ok = true;
     console.log("\nChecks:");
     for (const [name, pass] of results) {

@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { AlertCircle, CheckCircle2, Database, Download, FileSpreadsheet, FileText, Plus, RotateCcw, Trash2, UploadCloud } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { Badge, Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
-import { KpiChip } from "@/components/Kpi";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge, Card, CardContent, CardHeader, CardTitle } from "@/components/ui/primitives";
+import { KpiChip } from "@/components/ui/Kpi";
 import { cn, num } from "@/lib/utils";
 import { useTradeData } from "@/context/TradeData";
 import { downloadTemplate, parseTradeFile } from "@/lib/parseTrade";

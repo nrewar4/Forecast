@@ -1,18 +1,18 @@
 # APAC Sourcing Intelligence
 
-A data and analytics platform for APAC Supply Chain (a CDMO and chemical sourcing
-company). It builds on the Forecasting and Data Integration concept, adds more
-analytics, makes the data easy to scan, visualises everything, and surfaces
-possible clients and suppliers. It is designed so more databases can be plugged
-in over time.
+The data and analytics platform for APAC Supply Chain (apacss.com), a chemical
+sourcing and CDMO company. It carries a public knowledge platform (product
+knowledge base, trade partners, market overview), a custom synthesis workspace
+(ML-assisted route exploration), and an admin area (trade analytics, demand
+forecasting, document uploads, website analytics).
 
-Styled in the APAC brand colours, orange and white. Clean, professional, not
-cluttered. No em dash is used anywhere in the product copy.
+Styled in the APAC brand colours, orange and white. Clean and professional. No
+em dash is used anywhere in the product copy; use a comma, a colon, or the word
+"to" instead.
 
 ## Run the app
 
-This repository contains the complete app as a Vite, React, TypeScript, Tailwind,
-and Recharts project.
+Vite + React 18 + TypeScript + Tailwind + Recharts.
 
 ```
 npm install
@@ -21,110 +21,100 @@ npm run build    # production build to dist
 npm run preview  # serve the production build
 ```
 
-## Pages, all nine built
+Everything works with zero configuration: data falls back to browser storage and
+bundled datasets. `.env` values (see `.env.example`) switch on the shared
+Supabase database and the AI research assistant.
 
-- Dashboard. Live KPI cards and top products, buyers, and manufacturers, all
-  derived from the trade database and refreshed whenever you upload, each chart
-  with a short takeaway.
-- Trade Analytics. Imports and exports toggle, working HS, country, sector, and
-  transport filters, monthly trend, trade by country, transport mix, and a
-  sortable shipment table. Charts and KPIs derive from the live database.
-- Demand Forecast. Product and model selectors that fit a real model to the
-  product demand series and redraw the forecast line and confidence band, with a
-  growth ranking built live from the database. The three models are genuine
-  algorithms: Holt damped trend smoothing (Prophet slot), a differenced least
-  squares autoregression (SARIMA slot), and gradient boosted regression trees
-  (XGBoost slot). Each reports its own walk forward backtested error.
-- Product Knowledge Base. Searchable, scrollable list of 200 products with
-  manufacturing route, cost drivers, end use industries, pricing, and makers.
-- Product Research. Comprehensive per product research for 200 products with
-  global capacity, feedstock, industrial route shares, a full step by step
-  process with operating conditions, and a country by country table of which
-  method each region prefers.
-- Clients (Buyers). Buyer directory built live from import activity, enriched
-  with curated sector and status when known.
-- Suppliers (Manufacturers). Supplier directory built live from trade activity,
-  enriched with certifications when known, searchable and filterable.
-- Documents. Upload Datamyne Excel extracts that are parsed in the browser and
-  appended to the trade database, with assumed pricing, a recent documents log,
-  and a template.
-- Integrations. Catalog of databases to connect plus the live application
-  database status.
+## Admin login
 
-## Uploading trade data
+The admin area is at `/login` (also linked from the landing footer and the
+workspace sidebar).
 
-The Documents page accepts Datamyne style Excel files. Rows are parsed with
-SheetJS, mapped by column header, and appended to the trade database, which then
-flows into Trade Analytics. Choose Imports or Exports before uploading, and use
-the Template button to get the exact column layout. Uploaded rows persist in the
-browser and can be cleared with Reset uploads. Every section, the Dashboard,
-Trade Analytics, Clients, Suppliers, and Demand Forecast, updates from this same
-live database. The parser also reads real Datamyne export manifests, including
-files where the HS code and chemical name sit inside a free text container
-description. It pulls the HS code from HTS, NCM, Schedule B, and Harmonized
-labels, maps common chemicals to clean names, and infers the sector from the HS
-chapter. There are 200 products covered across the data set.
+- Username: `admin`
+- Default password: `apac-admin`
 
-## Shared database, optional
+Change it by setting `VITE_ADMIN_PASSWORD_HASH` in `.env` to the SHA-256 hex of
+your password (`echo -n "yourpassword" | shasum -a 256`). Sessions last 12 hours.
+This is a client-side gate that controls what the browser shows; it keeps
+internal tooling out of casual view but is not a substitute for server-side
+auth. Move to Supabase Auth when real account security is needed.
 
-The app runs out of the box with browser storage. To share uploads across users,
-connect a free Supabase project. The app reads VITE_SUPABASE_URL and
-VITE_SUPABASE_ANON_KEY at build time. When they are present it uses the shared
-cloud database, otherwise it falls back to browser storage automatically. Step by
-step instructions and the table schema are in SUPABASE_SETUP.md. The Integrations
-page shows the active backend.
+Admin-only pages: `/admin` (website analytics), `/trade-analytics`,
+`/demand-forecast`, `/documents`.
 
-## Integrate with your live website
+## Project structure
 
-The app can run standalone, embed into your existing site with the mount helper
-in `src/embed.tsx`, sit in an iframe, or you can reuse just the data layer. To
-point it at your own backend, reimplement the three functions in
-`src/lib/tradeStore.ts`. Full guidance, the data model, and scaling notes are in
-INTEGRATION.md.
+```
+src/
+  App.tsx                 Routes (public, workspace, admin) + page-view tracking
+  main.tsx                Entry: router + providers (Auth, Currency, TradeData)
+  embed.tsx               Mount helper for embedding the app in another site
+  index.css               Tailwind layers, motion utilities, print styles
 
-## Lovable version
+  pages/                  One file per routed page
+    Landing.tsx           Public homepage (hero, entry tiles, animated About)
+    CustomSynthesis.tsx   CDMO marketing page
+    SynthesisRoutes.tsx   Custom synthesis workspace (route explorer)
+    Dashboard.tsx         Knowledge workspace: market overview
+    KnowledgeBase.tsx     Knowledge workspace: 200-product knowledge base
+    TradePartners.tsx     Knowledge workspace: buyers and manufacturers
+    TradeAnalytics.tsx    Admin: shipment analytics
+    DemandForecast.tsx    Admin: forecasting models
+    Documents.tsx         Admin: Datamyne Excel uploads
+    AdminDashboard.tsx    Admin: website analytics + platform data
+    Login.tsx             Admin sign in
 
-The first three pages were also built in Lovable. The remaining pages were then
-finished here in code because the Lovable workspace ran out of credits. Matching
-build prompts are kept in `docs/remaining_page_prompts.md`.
+  components/
+    layout/               App chrome: AppShell (workspace frame + global search),
+                          Sidebar (workspace navs, admin filtering), MarketingLayout, Logo
+    ui/                   Reusable primitives: Card/Badge/Chip (primitives.tsx),
+                          KpiCard, EmptyState, Reveal (scroll animation), CountUp
+    knowledge/            Domain components for the knowledge/synthesis pages
+                          (AI search and profiles, CDMO intelligence, regulatory panel,
+                          market news, route step cards)
 
-- Preview: https://id-preview--26f36d35-b868-470e-9cc7-16a880f73d51.lovable.app
-- Editor: https://lovable.dev/projects/26f36d35-b868-470e-9cc7-16a880f73d51
+  context/                React contexts: Auth (admin session), Currency (USD/INR),
+                          TradeData (shared shipment store)
 
-## Analytics added beyond the original document
+  lib/                    Framework-free logic
+    auth.ts               Admin credential check + session storage
+    analytics.ts          Page-view/event recorder for the Admin Dashboard
+    tradeStore.ts         Shipments: Supabase when configured, else localStorage
+    openrouter.ts         OpenRouter chat client (model fallback, web grounding)
+    aiConfig.ts           AI key/model resolution (localStorage + env)
+    retrosynthesis.ts     Route generation orchestrator (PubChem + ASKCOS + AI)
+    ...                   pubchem, openfda, openalex, cas resolution, forecasting,
+                          parsing, caching, derivations
 
-- Top buyers and top manufacturers ranked by value.
-- Trade by country of origin and transport mode mix.
-- Monthly trade value trend with seasonality.
-- Forecast confidence bands and a growth ranking with action signals.
-- Average unit price, trade balance, and fastest rising HS code.
-- Cost driver and end use industry breakdowns per product.
+  data/                   Bundled datasets (products, research, buyers, suppliers,
+                          verified sources, FDA Orange Book extract)
 
-## Data
+scripts/screenshots.mjs   Headless-browser smoke test + screenshot capture
+```
 
-All seed data lives in `/data` as JSON so it can move into the app or a real
-database without rework.
+Conventions:
 
-- `clients_buyers.json`. Possible clients, Indian buyers.
-- `suppliers_manufacturers.json`. Possible suppliers, manufacturers only.
-- `products_knowledge.json`. Routes, cost drivers, industries, pricing, producers.
-- `integrations_catalog.json`. Databases and APIs to connect.
+- Pages own routing concerns; components stay route-agnostic.
+- Anything that talks to storage or an API lives in `lib/`, is dependency-light,
+  and degrades gracefully (Supabase failures fall back to localStorage).
+- Imports use the `@/` alias (`@/components/...`, `@/lib/...`).
+- Motion: reuse `animate-fade-up`, `stagger`, `press`, `Reveal`, and `CountUp`.
+  Respect reduced-motion (the global CSS override handles it).
 
-Source of the trade figures is the Descartes Datamyne import and export sample
-for February 2026. Replace with the full three year history for production
-forecasts.
+## Website analytics
 
-## Room for more databases
+`src/lib/analytics.ts` records page views and named events into localStorage
+(capped, anonymous session ids, no personal data). The Admin Dashboard charts
+views over time, views by page, devices, referrers, and interactions, alongside
+platform data counts. Because storage is per browser, numbers cover each device;
+pointing the same recorder at a Supabase table later would make it site-wide.
 
-The platform is built to ingest more sources over time. See
-`integrations_catalog.json`. Candidates include PubChem and ChemSpider for
-chemical identity, ICIS and Platts for pricing, ISO, REACH, and FDA directories
-for certifications, DGFT IEC for company data, and energy and macro feeds for
-forecast drivers.
+## Shared database and AI (optional)
 
-## Design
-
-- Colours. Orange #F47920 as the accent, white background, slate text.
-- Components. shadcn ui, recharts for charts, Inter font.
-- Principle. Short crisp labels, KPI cards, charts, and compact tables. No long
-  paragraphs. No em dash anywhere.
+- `SUPABASE_SETUP.md` switches the trade database from browser storage to a
+  shared Supabase project.
+- `VITE_OPENROUTER_API_KEY` powers the Product Research Assistant, AI product
+  search, and synthesis route generation. A build-time key is readable by anyone
+  who can load the app, so use a limited key.
+- `INTEGRATION.md` covers hosting the app standalone, under a sub-path, or
+  embedded in another site via `src/embed.tsx`.

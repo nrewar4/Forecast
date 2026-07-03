@@ -26,14 +26,14 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { Badge, Card, CardContent, CardHeader, CardTitle, Chip, tooltipStyle } from "@/components/ui";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge, Card, CardContent, CardHeader, CardTitle, Chip, tooltipStyle } from "@/components/ui/primitives";
 import { cn, slug } from "@/lib/utils";
 import { products } from "@/data/products";
 import { research } from "@/data/research";
 import { verifiedFor } from "@/data/verified";
-import { AiProductSearch } from "@/components/AiProductSearch";
-import { AiProductProfile } from "@/components/AiProductProfile";
+import { AiProductSearch } from "@/components/knowledge/AiProductSearch";
+import { AiProductProfile } from "@/components/knowledge/AiProductProfile";
 import type { AiProfile } from "@/lib/aiResearch";
 import { searchLiterature, type Paper } from "@/lib/openalex";
 import { chatComplete } from "@/lib/openrouter";
@@ -114,7 +114,7 @@ export default function KnowledgeBase() {
       );
       setLitSummary(summary.trim());
     } catch {
-      // summary is optional — if it fails just show papers
+      // summary is optional, if it fails just show papers
     } finally {
       if (litAbortRef.current === controller) setSummaryLoading(false);
     }
@@ -311,7 +311,7 @@ export default function KnowledgeBase() {
                 </ul>
                 <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
-                    Predominant process — {ver.mainProcess.name}
+                    Predominant process, {ver.mainProcess.name}
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-foreground">{ver.mainProcess.detail}</p>
                 </div>
@@ -541,13 +541,13 @@ export default function KnowledgeBase() {
             </div>
           ) : null}
 
-          {/* Manufacturers — web-verified hyperlinks when available */}
+          {/* Manufacturers, web-verified hyperlinks when available */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle>Major Manufacturers</CardTitle>
               {ver ? (
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  Leading global producers from web research — links open each company&apos;s official site
+                  Leading global producers from web research, links open each company&apos;s official site
                 </p>
               ) : null}
             </CardHeader>
@@ -687,7 +687,7 @@ export default function KnowledgeBase() {
 
             {!litLoading && papers.length === 0 && !litSummary ? (
               <p className="text-sm text-muted-foreground">
-                No literature found for <strong>{product.name}</strong> — try the AI Search above for a broader research profile.
+                No literature found for <strong>{product.name}</strong>, try the AI Search above for a broader research profile.
               </p>
             ) : null}
 

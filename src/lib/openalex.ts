@@ -1,5 +1,5 @@
 // Searches OpenAlex for scientific papers about a chemical name.
-// Returns empty array on any error — the UI shows a "no results" message.
+// Returns empty array on any error, the UI shows a "no results" message.
 
 export type Paper = {
   id: string;

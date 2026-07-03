@@ -13,12 +13,13 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { RouteStepCard } from "@/components/RouteStepCard";
-import { CdmoIntelligence } from "@/components/CdmoIntelligence";
-import { RegulatoryPanel } from "@/components/RegulatoryPanel";
+import { AppShell } from "@/components/layout/AppShell";
+import { SYNTHESIS_NAV } from "@/components/layout/Sidebar";
+import { RouteStepCard } from "@/components/knowledge/RouteStepCard";
+import { CdmoIntelligence } from "@/components/knowledge/CdmoIntelligence";
+import { RegulatoryPanel } from "@/components/knowledge/RegulatoryPanel";
 import { lookupFda, type FdaLookup } from "@/lib/openfda";
-import { KpiChip } from "@/components/Kpi";
+import { KpiChip } from "@/components/ui/Kpi";
 import {
   Badge,
   Card,
@@ -26,7 +27,7 @@ import {
   CardHeader,
   CardTitle,
   Chip,
-} from "@/components/ui";
+} from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 import { loadAiConfig, hasApiKey } from "@/lib/aiConfig";
 import {
@@ -117,7 +118,7 @@ export default function SynthesisRoutes() {
       setSelected(res.routes[0] ?? null);
 
       // Live FDA regulatory lookup (best-effort, shares this request's signal).
-      // Use the typed query — usually the common drug name, which openFDA indexes
+      // Use the typed query, usually the common drug name, which openFDA indexes
       // far better than PubChem's IUPAC name.
       setFdaLoading(true);
       lookupFda(target, controller.signal)
@@ -131,7 +132,7 @@ export default function SynthesisRoutes() {
           ? e.message
           : e instanceof Error
             ? e.message
-            : "Route generation failed — retry",
+            : "Route generation failed, retry",
       );
     } finally {
       if (abortRef.current === controller) setLoading(false);
@@ -158,8 +159,9 @@ export default function SynthesisRoutes() {
 
   return (
     <AppShell
-      title="Synthesis Routes"
-      subtitle="ML-assisted retrosynthesis powered by ASKCOS and Claude. Enter a chemical name, CAS number, or SMILES."
+      nav={SYNTHESIS_NAV}
+      title="Custom Synthesis Routes"
+      subtitle="ML-assisted retrosynthesis. Enter a chemical name, CAS number, or SMILES."
     >
       {/* Search bar */}
       <Card>
@@ -249,7 +251,7 @@ export default function SynthesisRoutes() {
               value={
                 result.routes.length
                   ? `${Math.max(...result.routes.map((r) => r.feasibility_score))}`
-                  : "—"
+                  : ", "
               }
               sub="0 to 100"
             />
@@ -257,7 +259,7 @@ export default function SynthesisRoutes() {
               icon={ScrollText}
               label="PubChem CID"
               value={
-                result.molecule.cid ? String(result.molecule.cid) : "—"
+                result.molecule.cid ? String(result.molecule.cid) : ", "
               }
               sub={result.molecule.mw ? `MW ${result.molecule.mw}` : "identity"}
             />
@@ -487,7 +489,7 @@ export default function SynthesisRoutes() {
 
           <p className="mt-6 rounded-md border border-border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
             Routes are computational suggestions for a qualified chemist to
-            validate — not lab-ready procedures. Patent flags are signals only
+            validate, not lab-ready procedures. Patent flags are signals only
             and are not a Freedom-to-Operate opinion. Confirm safety and
             compliance before any laboratory work.
           </p>
