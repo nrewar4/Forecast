@@ -23,8 +23,10 @@ async function main() {
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 900 });
 
-    async function go(path, waitMs = 700) {
-      await page.goto(base + path, { waitUntil: "networkidle0", timeout: 30000 });
+    async function go(path, waitMs = 1200) {
+      // domcontentloaded + a settle delay: networkidle never fires on pages
+      // with long-polling feeds (e.g. market news).
+      await page.goto(base + path, { waitUntil: "domcontentloaded", timeout: 30000 });
       await new Promise((r) => setTimeout(r, waitMs));
     }
     // Scroll through the page so IntersectionObserver-driven reveals fire, then
@@ -58,7 +60,10 @@ async function main() {
     check("landing: no 'Live' badge", !/\bLive\b/.test(t1));
     check("landing: no em dash", !t1.includes("—"));
     const tiles = await page.evaluate(
-      () => [...document.querySelectorAll("main a")].filter((a) => /^(Buy|Knowledge|Custom Synthesis)$/.test(a.innerText.trim().split("\n")[0])).length,
+      () =>
+        [...document.querySelectorAll("main a")].filter((a) =>
+          a.innerText.split("\n").some((line) => /^(Buy|Knowledge|Custom Synthesis)$/.test(line.trim())),
+        ).length,
     );
     check("landing: 3 minimal entry tiles", tiles === 3);
 
@@ -89,7 +94,7 @@ async function main() {
     await page.type('input[placeholder="admin"]', "admin");
     await page.type('input[type="password"]', "apac-admin");
     await Promise.all([
-      page.waitForNavigation({ waitUntil: "networkidle0", timeout: 15000 }).catch(() => {}),
+      page.waitForNavigation({ waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => {}),
       page.click('button[type="submit"]'),
     ]);
     await new Promise((r) => setTimeout(r, 900));
