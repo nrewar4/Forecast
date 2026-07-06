@@ -1,6 +1,6 @@
 // Live FDA lookups via openFDA (api.fda.gov). CORS-enabled, free, no key needed
 // (rate-limited). Used to ground the regulatory panel with real approved-product
-// and applicant data — the Orange Book "product + sponsor" layer — and to detect
+// and applicant data, the Orange Book "product + sponsor" layer, and to detect
 // biologics (Purple Book signal) via BLA application numbers.
 
 export type FdaProduct = {

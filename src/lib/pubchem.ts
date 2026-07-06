@@ -9,7 +9,7 @@ export type PubchemResult = {
 
 export class MoleculeNotFoundError extends Error {
   constructor(query: string) {
-    super(`Could not resolve "${query}" — try a CAS number or SMILES`);
+    super(`Could not resolve "${query}", try a CAS number or SMILES`);
     this.name = "MoleculeNotFoundError";
   }
 }

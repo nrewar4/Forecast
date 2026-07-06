@@ -7,7 +7,7 @@ const STORAGE_KEY = "apac.ai.config.v1";
 const ENV_KEY = import.meta.env.VITE_OPENROUTER_API_KEY as string | undefined;
 const ENV_MODEL = import.meta.env.VITE_OPENROUTER_MODEL as string | undefined;
 
-// Default model. "openrouter/auto" is OpenRouter's Auto Router — it lets
+// Default model. "openrouter/auto" is OpenRouter's Auto Router, it lets
 // OpenRouter pick any available model for the request, so you never hit a
 // "model not found" error. You can pin a specific model in .env or settings.
 export const DEFAULT_MODEL = "openrouter/auto";

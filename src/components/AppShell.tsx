@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
-import { Box, Building2, Factory, IndianRupee, Search } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Box, Building2, Factory, IndianRupee, LogOut, Search, UserRound } from "lucide-react";
 import { Sidebar } from "./Sidebar";
 import { products } from "@/data/products";
 import { clients } from "@/data/clients";
 import { supplierGroups } from "@/data/suppliers";
 import { matchesCas } from "@/lib/cas";
 import { useCurrency } from "@/context/Currency";
+import { useAuth } from "@/context/Auth";
+import { trackSearch } from "@/lib/analytics";
 
 type Result = {
   kind: "Product" | "Buyer" | "Manufacturer";
@@ -102,6 +104,7 @@ function GlobalSearch() {
   }, []);
 
   function go(r: Result) {
+    trackSearch(query, "global search");
     navigate(r.to);
     setQuery("");
     setOpen(false);
@@ -202,6 +205,49 @@ function CurrencyToggle() {
   );
 }
 
+// Shows who is signed in. Admins get their name and a sign out control;
+// everyone else gets a quiet link to the admin login.
+function AccountArea() {
+  const { isAdmin, session, logout } = useAuth();
+
+  if (!isAdmin) {
+    return (
+      <Link
+        to="/login"
+        className="press inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+      >
+        <UserRound className="h-3.5 w-3.5" />
+        Admin sign in
+      </Link>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-2.5 py-1.5">
+        <div className="grid h-7 w-7 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+          {(session?.username ?? "A").slice(0, 1).toUpperCase()}
+        </div>
+        <div className="hidden text-left md:block">
+          <div className="text-xs font-semibold leading-tight capitalize">
+            {session?.username ?? "Admin"}
+          </div>
+          <div className="text-[11px] leading-tight text-muted-foreground">Administrator</div>
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={logout}
+        title="Sign out"
+        aria-label="Sign out"
+        className="press grid h-8 w-8 place-items-center rounded-lg border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+      >
+        <LogOut className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
+}
+
 export function AppShell({
   title,
   subtitle,
@@ -225,19 +271,7 @@ export function AppShell({
           <GlobalSearch />
           <div className="ml-auto flex items-center gap-3">
             <CurrencyToggle />
-            <div className="press flex items-center gap-2 rounded-lg border border-border bg-background px-2.5 py-1.5">
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                AS
-              </div>
-              <div className="hidden text-left md:block">
-                <div className="text-xs font-semibold leading-tight">
-                  APAC Sourcing
-                </div>
-                <div className="text-[11px] leading-tight text-muted-foreground">
-                  Analyst
-                </div>
-              </div>
-            </div>
+            <AccountArea />
           </div>
         </header>
         <main id="main-content" className="flex-1 px-4 py-6 md:px-8 md:py-8">

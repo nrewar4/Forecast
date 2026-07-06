@@ -114,7 +114,7 @@ export function AiProductSearch({
       {
         role: "system",
         content: [
-          "You are a product finder for a chemical sourcing catalog. The user gives a natural-language query — a chemical name, synonym, abbreviation, CAS number, HS code, chemical family, or an application/use-case.",
+          "You are a product finder for a chemical sourcing catalog. The user gives a natural-language query, a chemical name, synonym, abbreviation, CAS number, HS code, chemical family, or an application/use-case.",
           "From the CATALOG below, choose the products that best match. Interpret synonyms, trade names, abbreviations, chemical families and end-uses.",
           "When a resolved identity (name/formula/CAS) is provided, trust it as the authoritative compound identification.",
           "Return ONLY a JSON array (no prose, no markdown, no code fences) of up to 6 objects, best match first:",
@@ -198,7 +198,7 @@ export function AiProductSearch({
           <button
             type="button"
             onClick={() => setShowKey((v) => !v)}
-            title={keySet ? "API key detected — click to change" : "Add your OpenRouter API key"}
+            title={keySet ? "API key detected, click to change" : "Add your OpenRouter API key"}
             className={cn(
               "relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border bg-background transition hover:border-primary",
               keySet ? "border-border text-muted-foreground hover:text-foreground" : "border-amber-300 text-amber-600",
@@ -286,7 +286,7 @@ export function AiProductSearch({
         {researching ? (
           <p className="mt-3 flex items-center gap-2 rounded-md border border-primary/30 bg-accent/40 px-3 py-2 text-xs text-foreground">
             <Globe className="h-3.5 w-3.5 shrink-0 animate-pulse text-primary" />
-            &quot;{lastQuery}&quot; isn&apos;t in the catalog — researching it from verified web sources. This can take ~20–40s.
+            &quot;{lastQuery}&quot; isn&apos;t in the catalog, researching it from verified web sources. This can take ~20-40s.
           </p>
         ) : null}
 
@@ -333,7 +333,7 @@ export function AiProductSearch({
         {results && results.length > 0 ? (
           <div className="mt-3 space-y-1.5">
             <p className="pl-9 text-[11px] text-muted-foreground">
-              {results.length} catalog match{results.length === 1 ? "" : "es"} — click to open
+              {results.length} catalog match{results.length === 1 ? "" : "es"}, click to open
             </p>
             {results.map((r) => {
               const verified = Boolean(verifiedFor(slug(r.name)));

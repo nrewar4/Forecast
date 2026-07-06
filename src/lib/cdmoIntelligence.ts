@@ -32,7 +32,7 @@ export type OptimizationLever = {
 export type CostLever = {
   category: string;       // Raw material / Solvent & process / Energy & labor / Yield
   action: string;         // the concrete cost move
-  roughImpactPct: string; // e.g. "5-10%" — rough COGS impact, flagged as estimate
+  roughImpactPct: string; // e.g. "5-10%", rough COGS impact, flagged as estimate
   basis: string;          // why this number / what it ties to
 };
 
@@ -52,7 +52,7 @@ export type CdmoAnalysis = {
 };
 
 // ---------------------------------------------------------------------------
-// Grounding helpers — match the molecule against the app's real data sets.
+// Grounding helpers, match the molecule against the app's real data sets.
 // ---------------------------------------------------------------------------
 
 function norm(s: string): string {
@@ -119,7 +119,7 @@ function buildGrounding(
   if (product) {
     groundedFrom.push(`Verified product data: ${product.name}`);
     lines.push(
-      "VERIFIED PRODUCT DATA (real — anchor your manufacturer routes and cost split to this):",
+      "VERIFIED PRODUCT DATA (real, anchor your manufacturer routes and cost split to this):",
       `  Name: ${product.name} (CAS ${product.cas}, HS ${product.hsCode})`,
       `  Plant type: ${product.plantType}`,
       `  Indicative price: ${product.priceIndicative}`,
@@ -132,12 +132,12 @@ function buildGrounding(
   if (suppliers.length) {
     groundedFrom.push(`${suppliers.length} vetted suppliers`);
     lines.push(
-      "VETTED MANUFACTURERS (real shortlist — use these as primary manufacturer entries):",
+      "VETTED MANUFACTURERS (real shortlist, use these as primary manufacturer entries):",
       ...suppliers
         .slice(0, 6)
         .map(
           (s) =>
-            `  ${s.company} (${s.country}) — ${s.type}; ${s.capacityNote}; certs: ${s.certifications.join(", ")}`,
+            `  ${s.company} (${s.country}), ${s.type}; ${s.capacityNote}; certs: ${s.certifications.join(", ")}`,
         ),
     );
   }
@@ -169,13 +169,13 @@ function parseAnalysis(raw: string): Omit<CdmoAnalysis, "citations" | "groundedF
   const cleaned = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
-  if (start < 0 || end <= start) throw new Error("CDMO analysis failed — retry");
+  if (start < 0 || end <= start) throw new Error("CDMO analysis failed. Retry.");
 
   let parsed: Record<string, unknown>;
   try {
     parsed = JSON.parse(cleaned.slice(start, end + 1)) as Record<string, unknown>;
   } catch {
-    throw new Error("CDMO analysis failed — retry");
+    throw new Error("CDMO analysis failed. Retry.");
   }
 
   const arr = <T>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);
@@ -263,13 +263,13 @@ export async function analyzeCdmo(
     "- processOptimization: name real techniques (continuous-flow, catalyst recycle,",
     "  telescoping, solvent recovery, biocatalysis, crystallization control) with honest",
     "  maturity (Proven/Emerging/Pilot). No miracle yields.",
-    "- cdmoOpportunity: realistic for a mid-size CDMO — capacity gaps, regulatory/geographic",
+    "- cdmoOpportunity: realistic for a mid-size CDMO, capacity gaps, regulatory/geographic",
     "  arbitrage, niche scale, speed. Not 'disrupt the market'.",
     "- Cover all four cost categories where they apply: Raw material, Solvent & process,",
     "  Energy & labor, Yield & throughput.",
   ];
   const bioRules = [
-    "This target is a BIOLOGIC (Purple Book / BLA) — it is produced by BIOPROCESS, not chemical",
+    "This target is a BIOLOGIC (Purple Book / BLA), it is produced by BIOPROCESS, not chemical",
     "synthesis. Reframe every field for biomanufacturing:",
     "- manufacturerProcesses: real biologics makers / CDMOs and their PLATFORM (expression system",
     "  e.g. CHO, E. coli, microbial; route field = cell line/platform; technology = upstream",
@@ -277,7 +277,7 @@ export async function analyzeCdmo(
     "  Prefer real BLA holders and biologics CDMOs (Lonza, Samsung Biologics, WuXi Biologics,",
     "  Boehringer Ingelheim, Catalent). Never invent capacities.",
     "- processOptimization: titer improvement, perfusion/intensified seed, single-use adoption,",
-    "  continuous downstream, Protein A resin reuse, media/feed optimization — with honest maturity.",
+    "  continuous downstream, Protein A resin reuse, media/feed optimization, with honest maturity.",
     "- costReduction categories become: Raw material (media, feeds, Protein A resin),",
     "  Solvent & process (buffers, consumables, single-use), Energy & labor (cleanroom, QC,",
     "  batch release), Yield & throughput (titer g/L, recovery, campaign length).",
@@ -289,7 +289,7 @@ export async function analyzeCdmo(
   const system = [
     "You are a senior CDMO (Contract Development & Manufacturing Organization) process and",
     "cost analyst. You advise a CDMO on how a product is made at industrial scale and how",
-    "to win business making it. Be concrete, commercial, and REALISTIC — no hand-waving.",
+    "to win business making it. Be concrete, commercial, and REALISTIC, no hand-waving.",
     "",
     block,
     "",

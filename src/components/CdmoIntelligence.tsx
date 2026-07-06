@@ -89,7 +89,7 @@ export function CdmoIntelligence({
       setData(res);
     } catch (e) {
       if (controller.signal.aborted) return;
-      setError(e instanceof Error ? e.message : "CDMO analysis failed — retry");
+      setError(e instanceof Error ? e.message : "CDMO analysis failed. Retry.");
     } finally {
       if (abortRef.current === controller) setLoading(false);
     }
@@ -101,7 +101,7 @@ export function CdmoIntelligence({
         <div>
           <CardTitle>CDMO Production Intelligence</CardTitle>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            How this molecule is made at scale, and where you can win as a CDMO —
+            How this molecule is made at scale, and where you can win as a CDMO , 
             grounded in verified product data, vetted suppliers, literature, and live web.
           </p>
         </div>
@@ -220,7 +220,7 @@ export function CdmoIntelligence({
                     Positioning
                   </p>
                   <p className="mt-0.5 text-sm text-foreground">
-                    {data.cdmoOpportunity.positioning || "—"}
+                    {data.cdmoOpportunity.positioning || "N/A"}
                   </p>
                 </div>
                 <div>
@@ -228,7 +228,7 @@ export function CdmoIntelligence({
                     Capacity / supply gap
                   </p>
                   <p className="mt-0.5 text-sm text-foreground">
-                    {data.cdmoOpportunity.capacityGap || "—"}
+                    {data.cdmoOpportunity.capacityGap || "N/A"}
                   </p>
                 </div>
                 <div>
@@ -236,7 +236,7 @@ export function CdmoIntelligence({
                     Target segment
                   </p>
                   <p className="mt-0.5 text-sm text-foreground">
-                    {data.cdmoOpportunity.targetSegment || "—"}
+                    {data.cdmoOpportunity.targetSegment || "N/A"}
                   </p>
                 </div>
                 <div>
@@ -249,7 +249,7 @@ export function CdmoIntelligence({
                         <Chip key={d}>{d}</Chip>
                       ))
                     ) : (
-                      <span className="text-sm text-foreground">—</span>
+                      <span className="text-sm text-foreground">, </span>
                     )}
                   </div>
                 </div>
@@ -362,7 +362,7 @@ export function CdmoIntelligence({
             {/* Disclaimer */}
             <p className="rounded-md border border-amber-200 bg-amber-50/60 p-3 text-xs leading-relaxed text-amber-800">
               Percentages are AI estimates grounded in the cited literature, vetted supplier
-              data, and the app's verified cost-driver splits — not audited figures. Validate
+              data, and the app's verified cost-driver splits, not audited figures. Validate
               with a process engineer and your own quotes before any commercial or capital
               decision.
             </p>

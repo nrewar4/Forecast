@@ -49,7 +49,7 @@ export function RegulatoryPanel({
     <Card className="mt-4">
       <CardHeader className="pb-2">
         <div className="flex items-center gap-2">
-          <CardTitle>FDA Regulatory — Orange &amp; Purple Book</CardTitle>
+          <CardTitle>FDA Regulatory: Orange and Purple Book</CardTitle>
           {isBiologic ? (
             <Badge tone="softOrange">
               <Dna className="h-3 w-3" /> Biologic (Purple Book)
@@ -69,7 +69,7 @@ export function RegulatoryPanel({
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
                 <BookText className="h-4 w-4 text-primary" />
-                Orange Book patent status — {ob.ingredient}
+                Orange Book patent status: {ob.ingredient}
               </h3>
               <Badge tone={ob.status.startsWith("Off") ? "green" : "amber"}>
                 {ob.status}
@@ -155,14 +155,14 @@ export function RegulatoryPanel({
                   {fda!.products.slice(0, 12).map((p, i) => (
                     <tr key={`${p.applicationNumber}-${i}`} className="border-t border-border">
                       <td className="px-3 py-2 align-top font-medium text-foreground">
-                        {p.brandName || "—"}
+                        {p.brandName || "N/A"}
                       </td>
                       <td className="px-3 py-2 align-top text-muted-foreground">{p.sponsor}</td>
                       <td className="px-3 py-2 align-top">
                         <Badge tone={appTypeTone(p.appType)}>{p.appType}</Badge>
                       </td>
                       <td className="px-3 py-2 align-top text-muted-foreground">
-                        {[p.dosageForm, p.route].filter(Boolean).join(" · ") || "—"}
+                        {[p.dosageForm, p.route].filter(Boolean).join(" · ") || "N/A"}
                       </td>
                       <td className="px-3 py-2 align-top text-muted-foreground">
                         {p.marketingStatus}
@@ -181,7 +181,7 @@ export function RegulatoryPanel({
             <Dna className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
             <div>
               <p className="text-sm font-medium text-foreground">
-                Biologic — licensed under a BLA (Purple Book)
+                Biologic: licensed under a BLA (Purple Book)
               </p>
               <p className="mt-0.5 text-xs text-muted-foreground">
                 Biologics are produced by bioprocess, not chemical synthesis. The CDMO analysis
@@ -204,7 +204,7 @@ export function RegulatoryPanel({
           <p className="flex items-start gap-2 text-sm text-muted-foreground">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" />
             No FDA-approved drug product found for{" "}
-            <span className="font-medium text-foreground">{name}</span> — likely an
+            <span className="font-medium text-foreground">{name}</span>, likely an
             intermediate, reagent, or non-pharma chemical rather than a finished API.
           </p>
         ) : null}

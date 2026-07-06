@@ -41,7 +41,7 @@ export function cacheSet<T>(key: string, value: T, ttlMs: number = DAY): void {
   try {
     localStorage.setItem(k, JSON.stringify(entry));
   } catch {
-    // storage full / private mode — in-memory cache still applies this session
+    // storage full / private mode, in-memory cache still applies this session
   }
 }
 

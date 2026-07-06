@@ -8925,7 +8925,7 @@ export const products: Product[] = [
     priceRange: "USD 2,500 to 4,000 per tonne",
     priceIndicative: "USD 3,200 per tonne",
     route: [
-      "Schotten–Baumann acylation of N-methyltaurine with coconut fatty acid chloride",
+      "Schotten-Baumann acylation of N-methyltaurine with coconut fatty acid chloride",
       "Direct condensation of coconut fatty acid with N-methyltaurine (boric-acid catalysed)",
     ],
     costDrivers: [

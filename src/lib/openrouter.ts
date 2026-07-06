@@ -71,7 +71,7 @@ async function toError(res: Response): Promise<OpenRouterError> {
 }
 
 // Try the configured model first, then fall back through other models. This
-// makes the app resilient when a model id is deprecated or has no endpoints —
+// makes the app resilient when a model id is deprecated or has no endpoints , 
 // it self-heals down to OpenRouter's "openrouter/auto" router, which lets
 // OpenRouter pick any available model.
 function modelChain(primary?: string): string[] {
@@ -90,7 +90,7 @@ function isModelUnavailable(message: string): boolean {
   );
 }
 
-// 402 / insufficient-credit — the account can't pay for this model (or the web
+// 402 / insufficient-credit, the account can't pay for this model (or the web
 // plugin). Treat like "unavailable" so we fall through to the next model, which
 // includes the free tier. When credit returns, the preferred model is retried
 // first on the next call, so the app auto-upgrades with no state to reset.
@@ -108,7 +108,7 @@ function shouldFallThrough(message: string): boolean {
 }
 
 // Free models (":free" or the free auto-router) cost nothing, but the web-search
-// plugin is billed separately — so we never attach web to a free model.
+// plugin is billed separately, so we never attach web to a free model.
 function isFreeModel(model?: string): boolean {
   return !!model && (model.includes(":free") || model === "openrouter/free");
 }
@@ -186,13 +186,13 @@ async function streamOnce(
         const delta: string | undefined = json?.choices?.[0]?.delta?.content;
         if (delta) onToken(delta);
       } catch {
-        // partial/non-JSON keep-alive frame — ignore
+        // partial/non-JSON keep-alive frame, ignore
       }
     }
   }
 }
 
-// Non-streaming completion — returns the full assistant message. Used for the
+// Non-streaming completion, returns the full assistant message. Used for the
 // AI product search and online research. Same fallback-through-models behaviour.
 // opts.web enables OpenRouter's web-search plugin so the answer is grounded in
 // real, citable sources.

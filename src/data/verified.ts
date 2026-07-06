@@ -1,6 +1,6 @@
 // Web-verified manufacturing routes, predominant-process explanations, and major
 // manufacturers (with official websites) for the most-traded products in the
-// database. Researched from public sources in June 2026 — see `sources` on each
+// database. Researched from public sources in June 2026, see `sources` on each
 // entry. Keyed by slug(productName) so the Knowledge Base can attach them to the
 // matching catalog product. Manufacturer links point to official corporate
 // sites; verify standing before any commercial engagement.
@@ -18,7 +18,7 @@ export const verified: Record<string, VerifiedProduct> = {
   paraxylene: {
     routes: [
       "Catalytic reforming of naphtha to a mixed C8 aromatics (xylenes) stream",
-      "Selective adsorption separation — UOP Parex / IFP Eluxyl simulated moving bed (dominant)",
+      "Selective adsorption separation, UOP Parex / IFP Eluxyl simulated moving bed (dominant)",
       "Low-temperature crystallisation separation of p-xylene",
       "Xylene isomerisation (UOP Isomar) to re-equilibrate o-/m-xylene back to p-xylene",
       "Toluene disproportionation and transalkylation to make more xylenes",
@@ -26,7 +26,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Catalytic reforming + UOP Parex adsorptive separation",
       detail:
-        "Petroleum naphtha is catalytically reformed over a platinum catalyst at about 500 °C to a reformate rich in C8 aromatics — the three xylene isomers plus ethylbenzene, which boil too closely to split by ordinary distillation. The mixed-xylene cut is fed to a simulated-moving-bed adsorption unit (UOP Parex or IFP Eluxyl), where a zeolitic adsorbent selectively captures p-xylene and a desorbent displaces it, recovering over 97% of the p-xylene at 99.9% purity in a single pass. The raffinate (o-/m-xylene and ethylbenzene) goes to a UOP Isomar isomerisation reactor that shifts the isomers back toward p-xylene, and the stream is recycled to extinction. Toluene disproportionation/transalkylation units feed extra xylenes into the loop.",
+        "Petroleum naphtha is catalytically reformed over a platinum catalyst at about 500 °C to a reformate rich in C8 aromatics, the three xylene isomers plus ethylbenzene, which boil too closely to split by ordinary distillation. The mixed-xylene cut is fed to a simulated-moving-bed adsorption unit (UOP Parex or IFP Eluxyl), where a zeolitic adsorbent selectively captures p-xylene and a desorbent displaces it, recovering over 97% of the p-xylene at 99.9% purity in a single pass. The raffinate (o-/m-xylene and ethylbenzene) goes to a UOP Isomar isomerisation reactor that shifts the isomers back toward p-xylene, and the stream is recycled to extinction. Toluene disproportionation/transalkylation units feed extra xylenes into the loop.",
     },
     manufacturers: [
       { name: "Reliance Industries (world's largest PX producer)", url: "https://www.ril.com" },
@@ -37,23 +37,23 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Lotte Chemical", url: "https://www.lottechem.com" },
     ],
     sources: [
-      { name: "CPMA — Para-xylene", url: "https://cpmaindia.com/knowledge-centre/product-group/-fibre-intermediates/px" },
-      { name: "Honeywell UOP — Benzene/Para-xylene production", url: "https://honeywell-uop.azurewebsites.net/processing-solutions/petrochemicals/benzene-para-xylene-production/" },
-      { name: "ChemAnalyst — Paraxylene production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-a-deep-dive-into-the-paraxylene-production-process-38883" },
+      { name: "CPMA: Para-xylene", url: "https://cpmaindia.com/knowledge-centre/product-group/-fibre-intermediates/px" },
+      { name: "Honeywell UOP: Benzene/Para-xylene production", url: "https://honeywell-uop.azurewebsites.net/processing-solutions/petrochemicals/benzene-para-xylene-production/" },
+      { name: "ChemAnalyst: Paraxylene production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-a-deep-dive-into-the-paraxylene-production-process-38883" },
     ],
   },
 
   "phosphoric-acid-fertiliser-grade": {
     routes: [
-      "Wet process — sulfuric-acid digestion of phosphate rock (dihydrate/hemihydrate); ~90% of output",
-      "Thermal process — burning elemental phosphorus for high-purity acid",
+      "Wet process, sulfuric-acid digestion of phosphate rock (dihydrate/hemihydrate); ~90% of output",
+      "Thermal process, burning elemental phosphorus for high-purity acid",
       "Wet process with nitric or hydrochloric acid (less common)",
       "Solvent-extraction purification to technical/food grade",
     ],
     mainProcess: {
       name: "Wet process (sulfuric-acid dihydrate route)",
       detail:
-        "Ground phosphate rock (apatite) is reacted with sulfuric acid in a train of agitated reactors. The acid releases phosphoric acid and precipitates calcium sulfate (gypsum): Ca5F(PO4)3 + 5 H2SO4 + 10 H2O → 3 H3PO4 + 5 CaSO4·2H2O + HF. The slurry is held near 70–80 °C with a controlled sulfate level so the gypsum grows into filterable crystals, then filtered on large tilting-pan or belt filters and washed counter-currently to recover P2O5. The dilute acid (~28–32% P2O5) is concentrated by vacuum evaporation to the 40–54% P2O5 fertiliser grade, while evolved fluorine (SiF4/HF) is scrubbed. Roughly 90% of world phosphoric acid is made this way.",
+        "Ground phosphate rock (apatite) is reacted with sulfuric acid in a train of agitated reactors. The acid releases phosphoric acid and precipitates calcium sulfate (gypsum): Ca5F(PO4)3 + 5 H2SO4 + 10 H2O → 3 H3PO4 + 5 CaSO4·2H2O + HF. The slurry is held near 70-80 °C with a controlled sulfate level so the gypsum grows into filterable crystals, then filtered on large tilting-pan or belt filters and washed counter-currently to recover P2O5. The dilute acid (~28-32% P2O5) is concentrated by vacuum evaporation to the 40-54% P2O5 fertiliser grade, while evolved fluorine (SiF4/HF) is scrubbed. Roughly 90% of world phosphoric acid is made this way.",
     },
     manufacturers: [
       { name: "OCP Group (world's largest complex)", url: "https://www.ocpgroup.ma" },
@@ -64,9 +64,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "EuroChem Group", url: "https://www.eurochemgroup.com" },
     ],
     sources: [
-      { name: "US EPA — Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
-      { name: "ChemAnalyst — Production process of phosphoric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-phosphoric-acid-16" },
-      { name: "FerTech Inform — Phosphoric acid production", url: "https://fertechinform.org/knowledgebase/phosphoric-acid-production-introduction/" },
+      { name: "US EPA: Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
+      { name: "ChemAnalyst: Production process of phosphoric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-phosphoric-acid-16" },
+      { name: "FerTech Inform: Phosphoric acid production", url: "https://fertechinform.org/knowledgebase/phosphoric-acid-production-introduction/" },
     ],
   },
 
@@ -80,7 +80,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Distillation + double hydrogenation of light naphtha",
       detail:
-        "n-Hexane is isolated from the C6 fraction of light straight-run naphtha or natural gasoline. The feed is hydrotreated to remove sulfur and then hydrogenated ('double hydrogenation') to saturate olefins and cut benzene below food-grade limits, since hexane is widely used for edible-oil extraction. The treated stream is fractionated in high-efficiency columns boiling around 60–70 °C to take the hexane cut, with further superfractionation to remove the close-boiling isomers (2- and 3-methylpentane) and reach commercial n-hexane purity. Grades are tailored for oil-seed extraction and as a polymerisation solvent.",
+        "n-Hexane is isolated from the C6 fraction of light straight-run naphtha or natural gasoline. The feed is hydrotreated to remove sulfur and then hydrogenated ('double hydrogenation') to saturate olefins and cut benzene below food-grade limits, since hexane is widely used for edible-oil extraction. The treated stream is fractionated in high-efficiency columns boiling around 60-70 °C to take the hexane cut, with further superfractionation to remove the close-boiling isomers (2- and 3-methylpentane) and reach commercial n-hexane purity. Grades are tailored for oil-seed extraction and as a polymerisation solvent.",
     },
     manufacturers: [
       { name: "ExxonMobil Chemical", url: "https://www.exxonmobilchemical.com" },
@@ -90,9 +90,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SK geo centric", url: "https://www.skgeocentric.com" },
     ],
     sources: [
-      { name: "Shell — Hexane solvent grades", url: "https://www.shell.com/business-customers/chemicals/our-products/solvents-hydrocarbon/special-boiling-point-solvents/hexane.html" },
-      { name: "Junyuan Petroleum Group — n-Hexane supply chain", url: "https://junyuanpetroleumgroup.com/hexane/n-hexane-global-supply-chain-leader/" },
-      { name: "Google Patents — High-purity hexane process", url: "https://patents.google.com/patent/US20170203231A1/en" },
+      { name: "Shell: Hexane solvent grades", url: "https://www.shell.com/business-customers/chemicals/our-products/solvents-hydrocarbon/special-boiling-point-solvents/hexane.html" },
+      { name: "Junyuan Petroleum Group: n-Hexane supply chain", url: "https://junyuanpetroleumgroup.com/hexane/n-hexane-global-supply-chain-leader/" },
+      { name: "Google Patents: High-purity hexane process", url: "https://patents.google.com/patent/US20170203231A1/en" },
     ],
   },
 
@@ -105,7 +105,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ethylbenzene dehydrogenation (steam route)",
       detail:
-        "Benzene is first alkylated with ethylene over an acidic zeolite catalyst to ethylbenzene. The ethylbenzene is vaporised, mixed with a large excess of superheated steam, and passed adiabatically over a potassium-promoted iron-oxide (Fe2O3/K2CO3) catalyst at 600–650 °C through reactor beds in series. The endothermic reaction removes hydrogen to form styrene; the steam supplies heat, lowers the ethylbenzene partial pressure to push the equilibrium toward styrene, and keeps the catalyst clean via the water-gas reaction. Per-pass conversion is held near 60–70% to limit by-products, and the effluent is separated by vacuum distillation (to avoid thermal polymerisation) with an added inhibitor, recycling unconverted ethylbenzene.",
+        "Benzene is first alkylated with ethylene over an acidic zeolite catalyst to ethylbenzene. The ethylbenzene is vaporised, mixed with a large excess of superheated steam, and passed adiabatically over a potassium-promoted iron-oxide (Fe2O3/K2CO3) catalyst at 600-650 °C through reactor beds in series. The endothermic reaction removes hydrogen to form styrene; the steam supplies heat, lowers the ethylbenzene partial pressure to push the equilibrium toward styrene, and keeps the catalyst clean via the water-gas reaction. Per-pass conversion is held near 60-70% to limit by-products, and the effluent is separated by vacuum distillation (to avoid thermal polymerisation) with an added inhibitor, recycling unconverted ethylbenzene.",
     },
     manufacturers: [
       { name: "Chevron Phillips Chemical", url: "https://www.cpchem.com" },
@@ -116,9 +116,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dow", url: "https://www.dow.com" },
     ],
     sources: [
-      { name: "Chevron Phillips Chemical — Styrene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/styrene" },
+      { name: "Chevron Phillips Chemical: Styrene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/styrene" },
       { name: "Styrene production from ethylbenzene (technical PDF)", url: "https://michiganfoam.com/wp-content/uploads/2019/03/styrene_production_from_ethylbenzene.pdf" },
-      { name: "NCBI — Styrene production and use", url: "https://www.ncbi.nlm.nih.gov/books/NBK601961/" },
+      { name: "NCBI: Styrene production and use", url: "https://www.ncbi.nlm.nih.gov/books/NBK601961/" },
     ],
   },
 
@@ -142,9 +142,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sinopec", url: "https://www.sinopec.com" },
     ],
     sources: [
-      { name: "Wikipedia — Catalytic reforming", url: "https://en.wikipedia.org/wiki/Catalytic_reforming" },
-      { name: "US DOE — The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
-      { name: "thyssenkrupp — Aromatics extraction (PDF)", url: "https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAIS/assets.files/products___services/chemical_plants___processes/tkis_aromatics.pdf" },
+      { name: "Wikipedia: Catalytic reforming", url: "https://en.wikipedia.org/wiki/Catalytic_reforming" },
+      { name: "US DOE: The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
+      { name: "thyssenkrupp: Aromatics extraction (PDF)", url: "https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAIS/assets.files/products___services/chemical_plants___processes/tkis_aromatics.pdf" },
     ],
   },
 
@@ -152,12 +152,12 @@ export const verified: Record<string, VerifiedProduct> = {
     routes: [
       "Haber-Bosch synthesis from N2 + H2 with steam-methane-reforming hydrogen (dominant)",
       "Coal-gasification route to syngas, then synthesis (common in China)",
-      "Green ammonia — electrolytic H2 + Haber-Bosch (emerging)",
+      "Green ammonia, electrolytic H2 + Haber-Bosch (emerging)",
     ],
     mainProcess: {
       name: "Haber-Bosch process (SMR hydrogen)",
       detail:
-        "Hydrogen is generated by steam-methane reforming of natural gas, followed by water-gas shift, CO2 removal and methanation to leave a pure H2 stream; nitrogen is drawn from air in the secondary reformer. The 3:1 H2:N2 synthesis gas is compressed to ~150–300 bar and passed over a promoted magnetite (iron) catalyst at 400–500 °C, where N2 + 3 H2 ⇌ 2 NH3. Because single-pass conversion is only ~15–20%, ammonia is condensed out and the unreacted gas is recycled in a high-pressure loop. The product is refrigerated and stored as anhydrous liquid ammonia. Over 70% of ammonia uses natural-gas hydrogen; Chinese plants often use coal gasification.",
+        "Hydrogen is generated by steam-methane reforming of natural gas, followed by water-gas shift, CO2 removal and methanation to leave a pure H2 stream; nitrogen is drawn from air in the secondary reformer. The 3:1 H2:N2 synthesis gas is compressed to ~150-300 bar and passed over a promoted magnetite (iron) catalyst at 400-500 °C, where N2 + 3 H2 ⇌ 2 NH3. Because single-pass conversion is only ~15-20%, ammonia is condensed out and the unreacted gas is recycled in a high-pressure loop. The product is refrigerated and stored as anhydrous liquid ammonia. Over 70% of ammonia uses natural-gas hydrogen; Chinese plants often use coal gasification.",
     },
     manufacturers: [
       { name: "Yara International", url: "https://www.yara.com" },
@@ -168,9 +168,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFFCO", url: "https://www.iffco.in" },
     ],
     sources: [
-      { name: "Wikipedia — Haber process", url: "https://en.wikipedia.org/wiki/Haber_process" },
-      { name: "HY2GEN — Haber-Bosch process", url: "https://www.hy2gen.com/haber-bosch-process" },
-      { name: "C&EN — Ammonia as a fuel of the future", url: "https://cen.acs.org/business/petrochemicals/ammonia-fuel-future/99/i8" },
+      { name: "Wikipedia: Haber process", url: "https://en.wikipedia.org/wiki/Haber_process" },
+      { name: "HY2GEN: Haber-Bosch process", url: "https://www.hy2gen.com/haber-bosch-process" },
+      { name: "C&EN: Ammonia as a fuel of the future", url: "https://cen.acs.org/business/petrochemicals/ammonia-fuel-future/99/i8" },
     ],
   },
 
@@ -184,7 +184,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Natural-gas steam reforming + low-pressure synthesis",
       detail:
-        "Natural gas is desulfurised and reformed with steam at ~800–900 °C over a nickel catalyst to make synthesis gas (CO, CO2, H2). The conditioned syngas is compressed and converted over a copper-zinc-alumina (Cu/ZnO/Al2O3) catalyst at ~50–100 bar and 200–300 °C: CO + 2 H2 → CH3OH and CO2 + 3 H2 → CH3OH + H2O. The reaction is exothermic and equilibrium-limited, so per-pass conversion is modest and unreacted gas is recycled; crude methanol is condensed and purified by distillation to strip water and light/heavy ends. Steam reforming accounts for roughly 60% of global methanol, while coal gasification dominates in China.",
+        "Natural gas is desulfurised and reformed with steam at ~800-900 °C over a nickel catalyst to make synthesis gas (CO, CO2, H2). The conditioned syngas is compressed and converted over a copper-zinc-alumina (Cu/ZnO/Al2O3) catalyst at ~50-100 bar and 200-300 °C: CO + 2 H2 → CH3OH and CO2 + 3 H2 → CH3OH + H2O. The reaction is exothermic and equilibrium-limited, so per-pass conversion is modest and unreacted gas is recycled; crude methanol is condensed and purified by distillation to strip water and light/heavy ends. Steam reforming accounts for roughly 60% of global methanol, while coal gasification dominates in China.",
     },
     manufacturers: [
       { name: "Methanex Corporation (world's largest)", url: "https://www.methanex.com" },
@@ -195,9 +195,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Yankuang / Zagros (regional)", url: "https://www.methanex.com" },
     ],
     sources: [
-      { name: "HYCO1 — Methanol pathways and benchmarks", url: "https://hyco1.com/methanols-moment-part-1/" },
-      { name: "IndexBox — Industrial production of methanol", url: "https://www.indexbox.io/search/industrial-production-of-methanol/" },
-      { name: "Google Patents — Methanol from steam reforming", url: "https://patents.google.com/patent/EP2116295A1/en" },
+      { name: "HYCO1: Methanol pathways and benchmarks", url: "https://hyco1.com/methanols-moment-part-1/" },
+      { name: "IndexBox: Industrial production of methanol", url: "https://www.indexbox.io/search/industrial-production-of-methanol/" },
+      { name: "Google Patents: Methanol from steam reforming", url: "https://patents.google.com/patent/EP2116295A1/en" },
     ],
   },
 
@@ -210,7 +210,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Nitrobenzene hydrogenation",
       detail:
-        "Benzene is nitrated with mixed acid (HNO3/H2SO4) to nitrobenzene, which is then catalytically hydrogenated to aniline. In the dominant gas-phase route, vaporised nitrobenzene and excess hydrogen pass over a supported noble-metal (Pd) or copper catalyst at ~250–350 °C in fluidised- or fixed-bed reactors, giving essentially complete single-pass conversion: C6H5NO2 + 3 H2 → C6H5NH2 + 2 H2O. The strongly exothermic heat is removed to protect the catalyst. Crude aniline is separated from process water by decantation and the wet aniline is purified by dehydration and vacuum distillation. Most aniline feeds MDI/polyurethane production.",
+        "Benzene is nitrated with mixed acid (HNO3/H2SO4) to nitrobenzene, which is then catalytically hydrogenated to aniline. In the dominant gas-phase route, vaporised nitrobenzene and excess hydrogen pass over a supported noble-metal (Pd) or copper catalyst at ~250-350 °C in fluidised- or fixed-bed reactors, giving essentially complete single-pass conversion: C6H5NO2 + 3 H2 → C6H5NH2 + 2 H2O. The strongly exothermic heat is removed to protect the catalyst. Crude aniline is separated from process water by decantation and the wet aniline is purified by dehydration and vacuum distillation. Most aniline feeds MDI/polyurethane production.",
     },
     manufacturers: [
       { name: "BASF", url: "https://www.basf.com" },
@@ -220,9 +220,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tosoh Corporation", url: "https://www.tosoh.com" },
     ],
     sources: [
-      { name: "Intratec — Aniline from nitrobenzene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/aniline-e13a-b.pdf" },
-      { name: "NCBI — Aniline (production and use)", url: "https://www.ncbi.nlm.nih.gov/books/NBK576629/" },
-      { name: "Research and Markets — Aniline market", url: "https://www.researchandmarkets.com/report/anilines" },
+      { name: "Intratec: Aniline from nitrobenzene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/aniline-e13a-b.pdf" },
+      { name: "NCBI: Aniline (production and use)", url: "https://www.ncbi.nlm.nih.gov/books/NBK576629/" },
+      { name: "Research and Markets: Aniline market", url: "https://www.researchandmarkets.com/report/anilines" },
     ],
   },
 
@@ -236,7 +236,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ethylene oxide hydration (EO → MEG)",
       detail:
-        "Ethylene is partially oxidised with oxygen over a silver catalyst at ~200–300 °C to ethylene oxide (EO). EO is then reacted with water to open the ring and form monoethylene glycol: C2H4O + H2O → HOCH2CH2OH. In the conventional thermal route a large excess of water is used (to suppress di- and tri-ethylene glycol) at ~150–200 °C and moderate pressure; the dilute glycol solution is concentrated and the glycols separated by multi-effect vacuum distillation. Shell's catalytic OMEGA process instead reacts EO with CO2 to ethylene carbonate and hydrolyses it, reaching over 99% MEG selectivity with far less water and energy. China increasingly makes MEG from coal-derived syngas via dimethyl oxalate.",
+        "Ethylene is partially oxidised with oxygen over a silver catalyst at ~200-300 °C to ethylene oxide (EO). EO is then reacted with water to open the ring and form monoethylene glycol: C2H4O + H2O → HOCH2CH2OH. In the conventional thermal route a large excess of water is used (to suppress di- and tri-ethylene glycol) at ~150-200 °C and moderate pressure; the dilute glycol solution is concentrated and the glycols separated by multi-effect vacuum distillation. Shell's catalytic OMEGA process instead reacts EO with CO2 to ethylene carbonate and hydrolyses it, reaching over 99% MEG selectivity with far less water and energy. China increasingly makes MEG from coal-derived syngas via dimethyl oxalate.",
     },
     manufacturers: [
       { name: "SABIC", url: "https://www.sabic.com" },
@@ -247,9 +247,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IndianOil", url: "https://www.iocl.com" },
     ],
     sources: [
-      { name: "IndianOil — Glycols (MEG)", url: "https://iocl.com/glycols" },
-      { name: "Coherent Market Insights — Top MEG companies", url: "https://www.coherentmarketinsights.com/blog/insights/top-companies-monoethylene-glycol-industry-768" },
-      { name: "Market Research Future — MEG companies", url: "https://www.marketresearchfuture.com/reports/mono-ethylene-glycol-market/companies" },
+      { name: "IndianOil: Glycols (MEG)", url: "https://iocl.com/glycols" },
+      { name: "Coherent Market Insights: Top MEG companies", url: "https://www.coherentmarketinsights.com/blog/insights/top-companies-monoethylene-glycol-industry-768" },
+      { name: "Market Research Future: MEG companies", url: "https://www.marketresearchfuture.com/reports/mono-ethylene-glycol-market/companies" },
     ],
   },
 
@@ -257,12 +257,12 @@ export const verified: Record<string, VerifiedProduct> = {
     routes: [
       "Amoco/Mid-Century liquid-phase air oxidation of p-xylene to crude TA (CTA)",
       "Catalytic hydropurification of CTA to fibre-grade PTA",
-      "Esterification to dimethyl terephthalate (DMT) — older, declining",
+      "Esterification to dimethyl terephthalate (DMT), older, declining",
     ],
     mainProcess: {
       name: "Amoco Mid-Century oxidation + hydropurification",
       detail:
-        "p-Xylene is oxidised with air in glacial acetic acid solvent using a cobalt-manganese-bromide (Co/Mn/Br) catalyst at ~175–225 °C and 15–30 bar. Both methyl groups are oxidised to carboxylic acids, giving crude terephthalic acid (CTA): C6H4(CH3)2 + 3 O2 → C6H4(COOH)2 + 2 H2O. CTA precipitates (terephthalic acid is almost insoluble) and is filtered, but it still carries the colour-forming impurity 4-carboxybenzaldehyde (4-CBA). In purification, CTA is dissolved in hot water at ~270–290 °C and hydrogenated over a palladium-on-carbon catalyst, which converts 4-CBA to soluble p-toluic acid; pure PTA is then crystallised, filtered and dried to fibre grade for polyester (PET).",
+        "p-Xylene is oxidised with air in glacial acetic acid solvent using a cobalt-manganese-bromide (Co/Mn/Br) catalyst at ~175-225 °C and 15-30 bar. Both methyl groups are oxidised to carboxylic acids, giving crude terephthalic acid (CTA): C6H4(CH3)2 + 3 O2 → C6H4(COOH)2 + 2 H2O. CTA precipitates (terephthalic acid is almost insoluble) and is filtered, but it still carries the colour-forming impurity 4-carboxybenzaldehyde (4-CBA). In purification, CTA is dissolved in hot water at ~270-290 °C and hydrogenated over a palladium-on-carbon catalyst, which converts 4-CBA to soluble p-toluic acid; pure PTA is then crystallised, filtered and dried to fibre grade for polyester (PET).",
     },
     manufacturers: [
       { name: "Sinopec (world's largest by capacity)", url: "https://www.sinopec.com" },
@@ -273,15 +273,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Alpek", url: "https://www.alpek.com" },
     ],
     sources: [
-      { name: "Valco — PTA manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/pta-terephthalic-acid-manufacturing-process-of-pta/" },
-      { name: "Verified Market Research — Top PTA manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-purified-terephthalic-acid-manufacturers/" },
-      { name: "Reliance — Fibre intermediates (PTA)", url: "https://www.ril.com/businesses/petrochemicals/fibre-intermediates" },
+      { name: "Valco: PTA manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/pta-terephthalic-acid-manufacturing-process-of-pta/" },
+      { name: "Verified Market Research: Top PTA manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-purified-terephthalic-acid-manufacturers/" },
+      { name: "Reliance: Fibre intermediates (PTA)", url: "https://www.ril.com/businesses/petrochemicals/fibre-intermediates" },
     ],
   },
 
   "sulphuric-acid": {
     routes: [
-      "Contact process — sulfur burning, catalytic SO2 → SO3, absorption",
+      "Contact process, sulfur burning, catalytic SO2 → SO3, absorption",
       "Double Contact Double Absorption (DCDA) for >99.7% conversion and low SO2",
       "Metallurgical acid from smelter off-gas (copper/zinc by-product)",
       "Spent-acid regeneration",
@@ -289,7 +289,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Contact process with Double Contact Double Absorption (DCDA)",
       detail:
-        "Elemental sulfur (or smelter SO2 gas) is burned in dry air to sulfur dioxide: S + O2 → SO2. The cooled gas passes through a multi-bed converter packed with vanadium pentoxide (V2O5) catalyst at ~420–620 °C, where 2 SO2 + O2 ⇌ 2 SO3. In the DCDA configuration the gas is absorbed after the third catalyst bed in an intermediate tower (SO3 + H2SO4 → oleum), which removes product and shifts the equilibrium, then the remaining SO2 is converted in a fourth bed and sent to a final absorber. This two-stage absorption lifts overall conversion above 99.7% and sharply cuts SO2 emissions. SO3 is absorbed into ~98% sulfuric acid (not water) to control the reaction, then diluted to grade.",
+        "Elemental sulfur (or smelter SO2 gas) is burned in dry air to sulfur dioxide: S + O2 → SO2. The cooled gas passes through a multi-bed converter packed with vanadium pentoxide (V2O5) catalyst at ~420-620 °C, where 2 SO2 + O2 ⇌ 2 SO3. In the DCDA configuration the gas is absorbed after the third catalyst bed in an intermediate tower (SO3 + H2SO4 → oleum), which removes product and shifts the equilibrium, then the remaining SO2 is converted in a fourth bed and sent to a final absorber. This two-stage absorption lifts overall conversion above 99.7% and sharply cuts SO2 emissions. SO3 is absorbed into ~98% sulfuric acid (not water) to control the reaction, then diluted to grade.",
     },
     manufacturers: [
       { name: "Aurubis", url: "https://www.aurubis.com" },
@@ -300,15 +300,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "HORIBA — Sulfuric acid by DCDA", url: "https://www.horiba.com/int/process-and-environmental/industries/sulfuric-acid-production/" },
-      { name: "ChemAnalyst — Sulphuric acid supply chain", url: "https://www.chemanalyst.com/Blogs/understanding-the-global-sulphuric-acid-supply-chain-from-production-to-end-use-28" },
-      { name: "Aurubis — Sulfuric acid", url: "https://www.aurubis.com/en/products/other-products/sulfuric-acid" },
+      { name: "HORIBA: Sulfuric acid by DCDA", url: "https://www.horiba.com/int/process-and-environmental/industries/sulfuric-acid-production/" },
+      { name: "ChemAnalyst: Sulphuric acid supply chain", url: "https://www.chemanalyst.com/Blogs/understanding-the-global-sulphuric-acid-supply-chain-from-production-to-end-use-28" },
+      { name: "Aurubis: Sulfuric acid", url: "https://www.aurubis.com/en/products/other-products/sulfuric-acid" },
     ],
   },
 
   "acetic-acid": {
     routes: [
-      "Methanol carbonylation — BP Cativa (Ir) or Monsanto (Rh); dominant",
+      "Methanol carbonylation, BP Cativa (Ir) or Monsanto (Rh); dominant",
       "Acetaldehyde oxidation (older)",
       "Direct liquid-phase oxidation of n-butane/naphtha",
       "Bio-fermentation (food-grade vinegar)",
@@ -316,7 +316,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Methanol carbonylation (BP Cativa process)",
       detail:
-        "Over 75% of acetic acid is made by reacting methanol with carbon monoxide: CH3OH + CO → CH3COOH. In BP's Cativa process an iridium complex with a ruthenium promoter (and a methyl-iodide co-catalyst) catalyses the reaction in the liquid phase at ~150–200 °C and 30–50 bar, with selectivity above 99% on methanol. Iridium gives faster rates, greater stability and lower-water operation than the older rhodium-based Monsanto process, cutting energy and purification cost. Crude acid is dried and distilled to remove water, heavy ends and iodide to reach glacial (99.85%+) quality. Fermentation is still used for food-grade vinegar.",
+        "Over 75% of acetic acid is made by reacting methanol with carbon monoxide: CH3OH + CO → CH3COOH. In BP's Cativa process an iridium complex with a ruthenium promoter (and a methyl-iodide co-catalyst) catalyses the reaction in the liquid phase at ~150-200 °C and 30-50 bar, with selectivity above 99% on methanol. Iridium gives faster rates, greater stability and lower-water operation than the older rhodium-based Monsanto process, cutting energy and purification cost. Crude acid is dried and distilled to remove water, heavy ends and iodide to reach glacial (99.85%+) quality. Fermentation is still used for food-grade vinegar.",
     },
     manufacturers: [
       { name: "Celanese (world's largest)", url: "https://www.celanese.com" },
@@ -327,22 +327,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sinopec", url: "https://www.sinopec.com" },
     ],
     sources: [
-      { name: "ChemAnalyst — Production process of acetic acid", url: "https://www.chemanalyst.com/Blogs/comprehensive-guide-production-process-of-acetic-acid-47" },
-      { name: "Wikipedia — Monsanto process", url: "https://en.wikipedia.org/wiki/Monsanto_process" },
-      { name: "Valco — Acetic acid manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/acetic-acid-manufacturing-process-for-acetic-acid/" },
+      { name: "ChemAnalyst: Production process of acetic acid", url: "https://www.chemanalyst.com/Blogs/comprehensive-guide-production-process-of-acetic-acid-47" },
+      { name: "Wikipedia: Monsanto process", url: "https://en.wikipedia.org/wiki/Monsanto_process" },
+      { name: "Valco: Acetic acid manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/acetic-acid-manufacturing-process-for-acetic-acid/" },
     ],
   },
 
   "6-aminopenicillanic-acid-6-apa": {
     routes: [
       "Enzymatic deacylation of penicillin G/V with immobilised penicillin acylase (dominant, green)",
-      "Chemical deacylation (silylation / PCl5 at low temperature) — older",
+      "Chemical deacylation (silylation / PCl5 at low temperature), older",
       "Direct fermentation (limited)",
     ],
     mainProcess: {
       name: "Enzymatic deacylation of penicillin G",
       detail:
-        "6-APA is the core beta-lactam intermediate for semi-synthetic penicillins (amoxicillin, ampicillin). It is made by enzymatically cleaving the phenylacetyl side chain from fermentation-derived penicillin G (or the phenoxyacetyl chain of penicillin V). Immobilised penicillin G acylase from E. coli is contacted with a penicillin G solution under mild conditions (~28–37 °C, pH ~7.5–8.0) in stirred or packed-bed reactors, hydrolysing the amide bond to give 6-APA plus phenylacetic acid; pH is held constant by base addition as acid is liberated. 6-APA, poorly soluble at its isoelectric point, is crystallised by lowering pH to ~4 and filtered. More than 60% of the world's 20,000+ t/yr of 6-APA is made enzymatically because it avoids chlorinated reagents and cryogenic conditions.",
+        "6-APA is the core beta-lactam intermediate for semi-synthetic penicillins (amoxicillin, ampicillin). It is made by enzymatically cleaving the phenylacetyl side chain from fermentation-derived penicillin G (or the phenoxyacetyl chain of penicillin V). Immobilised penicillin G acylase from E. coli is contacted with a penicillin G solution under mild conditions (~28-37 °C, pH ~7.5-8.0) in stirred or packed-bed reactors, hydrolysing the amide bond to give 6-APA plus phenylacetic acid; pH is held constant by base addition as acid is liberated. 6-APA, poorly soluble at its isoelectric point, is crystallised by lowering pH to ~4 and filtered. More than 60% of the world's 20,000+ t/yr of 6-APA is made enzymatically because it avoids chlorinated reagents and cryogenic conditions.",
     },
     manufacturers: [
       { name: "Centrient Pharmaceuticals (ex DSM-Sinochem)", url: "https://centrient.com" },
@@ -352,9 +352,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "ScienceDirect — Enzymatic transformation of penicillins to 6-APA", url: "https://www.sciencedirect.com/science/article/abs/pii/S0734975000000392" },
-      { name: "Centrient Pharmaceuticals — 6-APA", url: "https://centrient.com/our-products/6-apa" },
-      { name: "ACS Omega — 6-APA process development", url: "https://pubs.acs.org/doi/10.1021/acsomega.0c02813" },
+      { name: "ScienceDirect: Enzymatic transformation of penicillins to 6-APA", url: "https://www.sciencedirect.com/science/article/abs/pii/S0734975000000392" },
+      { name: "Centrient Pharmaceuticals: 6-APA", url: "https://centrient.com/our-products/6-apa" },
+      { name: "ACS Omega: 6-APA process development", url: "https://pubs.acs.org/doi/10.1021/acsomega.0c02813" },
     ],
   },
 
@@ -378,9 +378,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "NBINNO — Synthesis of letrozole", url: "https://www.nbinno.com/article/pharmaceutical-intermediates/navigating-synthesis-letrozole-criticality-4-1h-1-2-4-triazol-1-ylmethyl-benzonitrile-qo" },
-      { name: "Google Patents — Process for preparation of letrozole", url: "https://patents.google.com/patent/US7705159B2/en" },
-      { name: "Pharmaoffer — Letrozole API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/aromatase-inhibitors/letrozole" },
+      { name: "NBINNO: Synthesis of letrozole", url: "https://www.nbinno.com/article/pharmaceutical-intermediates/navigating-synthesis-letrozole-criticality-4-1h-1-2-4-triazol-1-ylmethyl-benzonitrile-qo" },
+      { name: "Google Patents: Process for preparation of letrozole", url: "https://patents.google.com/patent/US7705159B2/en" },
+      { name: "Pharmaoffer: Letrozole API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/aromatase-inhibitors/letrozole" },
     ],
   },
 
@@ -393,7 +393,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Synthetic route via narwedine",
       detail:
-        "Galantamine is an acetylcholinesterase inhibitor used in Alzheimer's disease. The commercial synthetic route (developed by Sanochemia with TU Wien) builds the tetracyclic skeleton by an intramolecular oxidative phenolic coupling that forms narwedine, the key enone precursor. Racemic narwedine is upgraded to the single (−)-enantiomer by a dynamic, crystallisation-induced resolution — seeding an ethanol/triethylamine solution with (−)-narwedine epimerises and funnels almost all material to the desired crystal form. The narwedine enone is then stereoselectively reduced (e.g. with L-Selectride or a chirally modified hydride) to the allylic alcohol (−)-galantamine, isolated as the hydrobromide salt. Part of world supply is still extracted from daffodil (Narcissus) and snowflake (Leucojum) bulbs.",
+        "Galantamine is an acetylcholinesterase inhibitor used in Alzheimer's disease. The commercial synthetic route (developed by Sanochemia with TU Wien) builds the tetracyclic skeleton by an intramolecular oxidative phenolic coupling that forms narwedine, the key enone precursor. Racemic narwedine is upgraded to the single (−)-enantiomer by a dynamic, crystallisation-induced resolution, seeding an ethanol/triethylamine solution with (−)-narwedine epimerises and funnels almost all material to the desired crystal form. The narwedine enone is then stereoselectively reduced (e.g. with L-Selectride or a chirally modified hydride) to the allylic alcohol (−)-galantamine, isolated as the hydrobromide salt. Part of world supply is still extracted from daffodil (Narcissus) and snowflake (Leucojum) bulbs.",
     },
     manufacturers: [
       { name: "Janssen / Johnson & Johnson (originator, Razadyne)", url: "https://www.janssen.com" },
@@ -403,9 +403,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia — Galantamine total synthesis", url: "https://en.wikipedia.org/wiki/Galantamine_total_synthesis" },
-      { name: "RSC Nat. Prod. Rep. — Total synthesis of galantamine", url: "https://pubs.rsc.org/en/content/articlehtml/2024/np/d4np00001c" },
-      { name: "Google Patents — Galantamine hydrobromide process", url: "https://patents.google.com/patent/EP2009015B1/en" },
+      { name: "Wikipedia: Galantamine total synthesis", url: "https://en.wikipedia.org/wiki/Galantamine_total_synthesis" },
+      { name: "RSC Nat. Prod. Rep.: Total synthesis of galantamine", url: "https://pubs.rsc.org/en/content/articlehtml/2024/np/d4np00001c" },
+      { name: "Google Patents: Galantamine hydrobromide process", url: "https://patents.google.com/patent/EP2009015B1/en" },
     ],
   },
 
@@ -418,7 +418,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Streptomyces fradiae fermentation (neomycin B)",
       detail:
-        "Framycetin is essentially neomycin B, the major component of the aminoglycoside antibiotic neomycin. It is produced by aerobic submerged fermentation of the soil actinomycete Streptomyces fradiae in a nutrient broth (carbon source, nitrogen sources such as soybean meal and ammonium salts, mineral salts) at ~28–37 °C for several days with controlled aeration and pH. The organism secretes a mixture of neomycins A, B and C; after fermentation the broth is filtered to remove mycelium and the basic, water-soluble antibiotic is captured and concentrated on a cation-exchange resin, eluted, and the neomycin-B-rich fraction is purified and crystallised as framycetin sulphate. Strain improvement and medium optimisation are used to raise the neomycin-B titre and ratio.",
+        "Framycetin is essentially neomycin B, the major component of the aminoglycoside antibiotic neomycin. It is produced by aerobic submerged fermentation of the soil actinomycete Streptomyces fradiae in a nutrient broth (carbon source, nitrogen sources such as soybean meal and ammonium salts, mineral salts) at ~28-37 °C for several days with controlled aeration and pH. The organism secretes a mixture of neomycins A, B and C; after fermentation the broth is filtered to remove mycelium and the basic, water-soluble antibiotic is captured and concentrated on a cation-exchange resin, eluted, and the neomycin-B-rich fraction is purified and crystallised as framycetin sulphate. Strain improvement and medium optimisation are used to raise the neomycin-B titre and ratio.",
     },
     manufacturers: [
       { name: "Sanofi (Soframycin / Sofradex brands)", url: "https://www.sanofi.com" },
@@ -427,9 +427,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "ScienceDirect — Semi-solid-state fermentation for neomycin", url: "https://www.sciencedirect.com/science/article/abs/pii/S0168165613001685" },
-      { name: "PharmaCompass — Framycetin sulfate", url: "https://www.pharmacompass.com/active-pharmaceutical-ingredients/framycetin-sulfate" },
-      { name: "PMC — Optimisation of neomycin by S. fradiae", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4070395/" },
+      { name: "ScienceDirect: Semi-solid-state fermentation for neomycin", url: "https://www.sciencedirect.com/science/article/abs/pii/S0168165613001685" },
+      { name: "PharmaCompass: Framycetin sulfate", url: "https://www.pharmacompass.com/active-pharmaceutical-ingredients/framycetin-sulfate" },
+      { name: "PMC: Optimisation of neomycin by S. fradiae", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4070395/" },
     ],
   },
   benzene: {
@@ -442,7 +442,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Aromatics extraction from reformate / pygas",
       detail:
-        "About 70% of benzene is recovered from catalytic reformate (from naphtha catalytic reforming) and from pyrolysis gasoline produced as a co-product of olefin steam cracking. Because benzene boils close to non-aromatic hydrocarbons, it is separated by liquid-liquid extraction or extractive distillation with a polar solvent such as sulfolane that preferentially dissolves the aromatics; the extract is then distilled to high-purity benzene. To balance supply, surplus toluene is converted to benzene by hydrodealkylation (toluene + H2 → benzene + methane at ~500–600 °C, 40–60 bar) or by disproportionation, which also produces xylenes.",
+        "About 70% of benzene is recovered from catalytic reformate (from naphtha catalytic reforming) and from pyrolysis gasoline produced as a co-product of olefin steam cracking. Because benzene boils close to non-aromatic hydrocarbons, it is separated by liquid-liquid extraction or extractive distillation with a polar solvent such as sulfolane that preferentially dissolves the aromatics; the extract is then distilled to high-purity benzene. To balance supply, surplus toluene is converted to benzene by hydrodealkylation (toluene + H2 → benzene + methane at ~500-600 °C, 40-60 bar) or by disproportionation, which also produces xylenes.",
     },
     manufacturers: [
       { name: "Chevron Phillips Chemical", url: "https://www.cpchem.com" },
@@ -453,22 +453,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dow", url: "https://www.dow.com" },
     ],
     sources: [
-      { name: "Essential Chemical Industry — Benzene", url: "https://www.essentialchemicalindustry.org/chemicals/benzene.html" },
-      { name: "ChemAnalyst — Industrial production of benzene", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/understanding-the-industrial-production-process-of-benzene-37940" },
-      { name: "Chevron Phillips Chemical — Benzene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/benzene" },
+      { name: "Essential Chemical Industry: Benzene", url: "https://www.essentialchemicalindustry.org/chemicals/benzene.html" },
+      { name: "ChemAnalyst: Industrial production of benzene", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/understanding-the-industrial-production-process-of-benzene-37940" },
+      { name: "Chevron Phillips Chemical: Benzene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/benzene" },
     ],
   },
 
   phenol: {
     routes: [
-      "Cumene (Hock) process — cumene oxidation to hydroperoxide, then acid cleavage (~95% of output)",
+      "Cumene (Hock) process, cumene oxidation to hydroperoxide, then acid cleavage (~95% of output)",
       "Toluene oxidation via benzoic acid (Dow/Lummus)",
       "Direct benzene oxidation / sulphonation routes (largely historical)",
     ],
     mainProcess: {
       name: "Cumene (Hock) process",
       detail:
-        "Benzene is alkylated with propylene over an acid catalyst to cumene (isopropylbenzene). Cumene is oxidised with air at ~80–130 °C to cumene hydroperoxide (CHP), which is then cleaved with a small amount of sulfuric acid to give phenol plus acetone as a co-product: C6H5CH(CH3)2 → C6H5OH + (CH3)2CO. Each tonne of phenol yields roughly 0.6 t of acetone, so the two markets are linked. The crude is neutralised and separated by a train of distillation columns to recover phenol, acetone, and unreacted cumene/alpha-methylstyrene for recycle or hydrogenation.",
+        "Benzene is alkylated with propylene over an acid catalyst to cumene (isopropylbenzene). Cumene is oxidised with air at ~80-130 °C to cumene hydroperoxide (CHP), which is then cleaved with a small amount of sulfuric acid to give phenol plus acetone as a co-product: C6H5CH(CH3)2 → C6H5OH + (CH3)2CO. Each tonne of phenol yields roughly 0.6 t of acetone, so the two markets are linked. The crude is neutralised and separated by a train of distillation columns to recover phenol, acetone, and unreacted cumene/alpha-methylstyrene for recycle or hydrogenation.",
     },
     manufacturers: [
       { name: "INEOS Phenol (world's largest)", url: "https://www.ineos.com" },
@@ -479,15 +479,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Plastics", url: "https://www.fpc.com.tw" },
     ],
     sources: [
-      { name: "INEOS — Phenol", url: "https://www.ineos.com/industry/products/chemicals/phenol/" },
-      { name: "Wikipedia — Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
-      { name: "ChemAnalyst — Phenol market", url: "https://www.chemanalyst.com/industry-report/phenol-market-184" },
+      { name: "INEOS: Phenol", url: "https://www.ineos.com/industry/products/chemicals/phenol/" },
+      { name: "Wikipedia: Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
+      { name: "ChemAnalyst: Phenol market", url: "https://www.chemanalyst.com/industry-report/phenol-market-184" },
     ],
   },
 
   acetone: {
     routes: [
-      "Co-product of the cumene-to-phenol (Hock) process — dominant",
+      "Co-product of the cumene-to-phenol (Hock) process, dominant",
       "Catalytic dehydrogenation of isopropanol (IPA)",
       "Recovery from petrochemical streams (minor)",
     ],
@@ -505,23 +505,23 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SABIC", url: "https://www.sabic.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
-      { name: "NBINNO — Cumene process: phenol & acetone", url: "https://www.nbinno.com/article/other-organic-chemicals/cumene-process-deep-dive-phenol-acetone-manufacturing-vh" },
-      { name: "DOMO Chemicals — Acetone", url: "https://www.domochemicals.com/en/products/chemical-intermediates/acetone" },
+      { name: "Wikipedia: Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
+      { name: "NBINNO: Cumene process: phenol & acetone", url: "https://www.nbinno.com/article/other-organic-chemicals/cumene-process-deep-dive-phenol-acetone-manufacturing-vh" },
+      { name: "DOMO Chemicals: Acetone", url: "https://www.domochemicals.com/en/products/chemical-intermediates/acetone" },
     ],
   },
 
   propylene: {
     routes: [
-      "Co-product of ethylene steam cracking (~60–65% of supply)",
+      "Co-product of ethylene steam cracking (~60-65% of supply)",
       "By-product of refinery fluid catalytic cracking (FCC) (~30%)",
-      "On-purpose propane dehydrogenation (PDH — CATOFIN / Oleflex)",
+      "On-purpose propane dehydrogenation (PDH, CATOFIN / Oleflex)",
       "Olefin metathesis of ethylene + 2-butene",
     ],
     mainProcess: {
       name: "Steam cracking (with FCC and PDH on purpose)",
       detail:
-        "Most propylene is a co-product of ethylene manufacture: hydrocarbon feeds (naphtha, LPG) are steam-cracked at 800–900 °C and the cracked gas is separated cryogenically, yielding propylene alongside ethylene — lower-severity, heavier feeds give relatively more propylene. Refinery FCC units supply roughly another 30% as a by-product of gasoline production, often boosted with ZSM-5 additive. Because cracker propylene has fallen with the shift to ethane feed, on-purpose propane dehydrogenation (PDH, CATOFIN or Oleflex: C3H8 → C3H6 + H2) and metathesis are increasingly used to close the gap.",
+        "Most propylene is a co-product of ethylene manufacture: hydrocarbon feeds (naphtha, LPG) are steam-cracked at 800-900 °C and the cracked gas is separated cryogenically, yielding propylene alongside ethylene, lower-severity, heavier feeds give relatively more propylene. Refinery FCC units supply roughly another 30% as a by-product of gasoline production, often boosted with ZSM-5 additive. Because cracker propylene has fallen with the shift to ethane feed, on-purpose propane dehydrogenation (PDH, CATOFIN or Oleflex: C3H8 → C3H6 + H2) and metathesis are increasingly used to close the gap.",
     },
     manufacturers: [
       { name: "Dow", url: "https://www.dow.com" },
@@ -532,23 +532,23 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Reliance Industries", url: "https://www.ril.com" },
     ],
     sources: [
-      { name: "Wikipedia — Propylene", url: "https://en.wikipedia.org/wiki/Propylene" },
-      { name: "Wikipedia — Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
-      { name: "Applied Petrochemical Research — Propylene via FCC", url: "https://link.springer.com/article/10.1007/s13203-015-0104-3" },
+      { name: "Wikipedia: Propylene", url: "https://en.wikipedia.org/wiki/Propylene" },
+      { name: "Wikipedia: Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
+      { name: "Applied Petrochemical Research: Propylene via FCC", url: "https://link.springer.com/article/10.1007/s13203-015-0104-3" },
     ],
   },
 
   ethylene: {
     routes: [
-      "Steam cracking of ethane/LPG (gas crackers — high ethylene yield)",
-      "Steam cracking of naphtha/gas oil (liquid crackers — more co-products)",
+      "Steam cracking of ethane/LPG (gas crackers, high ethylene yield)",
+      "Steam cracking of naphtha/gas oil (liquid crackers, more co-products)",
       "Coal/methanol to olefins (MTO/CTO, China)",
       "Catalytic/oxidative dehydrogenation of ethane (emerging)",
     ],
     mainProcess: {
       name: "Hydrocarbon steam cracking",
       detail:
-        "Ethylene is produced by steam cracking: a hydrocarbon feed (ethane, propane/LPG, or naphtha/gas oil) is mixed with dilution steam and heated in tubular furnaces to 800–900 °C with very short residence time, breaking C–C bonds to form ethylene and other olefins. The furnace effluent is quenched and the cracked gas is compressed, treated, and separated by cryogenic distillation into polymer-grade ethylene, propylene and other fractions. Light feeds such as ethane give ~80% ethylene and few co-products; naphtha gives ~30% ethylene plus propylene, butadiene and aromatics. China increasingly makes ethylene via coal/methanol-to-olefins.",
+        "Ethylene is produced by steam cracking: a hydrocarbon feed (ethane, propane/LPG, or naphtha/gas oil) is mixed with dilution steam and heated in tubular furnaces to 800-900 °C with very short residence time, breaking C-C bonds to form ethylene and other olefins. The furnace effluent is quenched and the cracked gas is compressed, treated, and separated by cryogenic distillation into polymer-grade ethylene, propylene and other fractions. Light feeds such as ethane give ~80% ethylene and few co-products; naphtha gives ~30% ethylene plus propylene, butadiene and aromatics. China increasingly makes ethylene via coal/methanol-to-olefins.",
     },
     manufacturers: [
       { name: "SABIC", url: "https://www.sabic.com" },
@@ -559,9 +559,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LyondellBasell", url: "https://www.lyondellbasell.com" },
     ],
     sources: [
-      { name: "Wikipedia — Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
-      { name: "ScienceDirect — Steam cracking overview", url: "https://www.sciencedirect.com/topics/chemistry/steam-cracking" },
-      { name: "Coherent Market Insights — Ethylene market", url: "https://www.coherentmarketinsights.com/market-insight/global-ethylene-market-371" },
+      { name: "Wikipedia: Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
+      { name: "ScienceDirect: Steam cracking overview", url: "https://www.sciencedirect.com/topics/chemistry/steam-cracking" },
+      { name: "Coherent Market Insights: Ethylene market", url: "https://www.coherentmarketinsights.com/market-insight/global-ethylene-market-371" },
     ],
   },
 
@@ -574,7 +574,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ammonia + CO2 synthesis (CO2-stripping)",
       detail:
-        "Urea is made from its own upstream ammonia and the CO2 captured during ammonia synthesis. In a high-pressure reactor (~140–200 bar, 180–200 °C) ammonia and carbon dioxide first form ammonium carbamate, which then dehydrates to urea: 2 NH3 + CO2 → NH2COONH4 → NH2CONH2 + H2O. Conversion per pass is incomplete, so unreacted carbamate is decomposed and recovered — in the Stamicarbon process CO2 is used as a stripping agent inside the high-pressure loop (Snamprogetti strips with ammonia) to recycle reactants efficiently. The urea solution is concentrated by evaporation and finished into prills or granules.",
+        "Urea is made from its own upstream ammonia and the CO2 captured during ammonia synthesis. In a high-pressure reactor (~140-200 bar, 180-200 °C) ammonia and carbon dioxide first form ammonium carbamate, which then dehydrates to urea: 2 NH3 + CO2 → NH2COONH4 → NH2CONH2 + H2O. Conversion per pass is incomplete, so unreacted carbamate is decomposed and recovered, in the Stamicarbon process CO2 is used as a stripping agent inside the high-pressure loop (Snamprogetti strips with ammonia) to recycle reactants efficiently. The urea solution is concentrated by evaporation and finished into prills or granules.",
     },
     manufacturers: [
       { name: "Yara International", url: "https://www.yara.com" },
@@ -585,9 +585,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "OCI Global", url: "https://www.oci-global.com" },
     ],
     sources: [
-      { name: "Saipem — Snamprogetti urea technology", url: "https://www.saipem.com/en/solutions-energy-transition/onshore/snamprogetti-urea" },
-      { name: "Fertilizer Industrial Services — Urea technology", url: "https://fertilizer.services/urea/" },
-      { name: "Expert Market Research — Top urea companies", url: "https://www.expertmarketresearch.com/blogs/top-urea-companies" },
+      { name: "Saipem: Snamprogetti urea technology", url: "https://www.saipem.com/en/solutions-energy-transition/onshore/snamprogetti-urea" },
+      { name: "Fertilizer Industrial Services: Urea technology", url: "https://fertilizer.services/urea/" },
+      { name: "Expert Market Research: Top urea companies", url: "https://www.expertmarketresearch.com/blogs/top-urea-companies" },
     ],
   },
 
@@ -600,7 +600,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Phenol-acetone condensation (ion-exchange resin)",
       detail:
-        "Bisphenol A is made by condensing acetone with a large excess of phenol over a sulfonic-acid cation-exchange resin catalyst (often modified with a mercaptan promoter) at ~50–90 °C: (CH3)2CO + 2 C6H5OH → (CH3)2C(C6H4OH)2 + H2O. The phenol excess and the catalyst drive high selectivity to the para,para'-isomer required for polycarbonate and epoxy resins. The product is recovered as a phenol-BPA adduct by crystallisation, the phenol is stripped and recycled, and the BPA is finished by distillation/prilling. Isomer and tar by-products are cracked back to useful feeds.",
+        "Bisphenol A is made by condensing acetone with a large excess of phenol over a sulfonic-acid cation-exchange resin catalyst (often modified with a mercaptan promoter) at ~50-90 °C: (CH3)2CO + 2 C6H5OH → (CH3)2C(C6H4OH)2 + H2O. The phenol excess and the catalyst drive high selectivity to the para,para'-isomer required for polycarbonate and epoxy resins. The product is recovered as a phenol-BPA adduct by crystallisation, the phenol is stripped and recycled, and the BPA is finished by distillation/prilling. Isomer and tar by-products are cracked back to useful feeds.",
     },
     manufacturers: [
       { name: "Covestro (largest capacity)", url: "https://www.covestro.com" },
@@ -611,22 +611,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nan Ya Plastics", url: "https://www.nanya.com" },
     ],
     sources: [
-      { name: "Covestro — Bisphenol A", url: "https://www.covestro.com/en/sustainability/how-we-operate/product-responsibility/bisphenol-a" },
-      { name: "Mordor Intelligence — BPA market", url: "https://www.mordorintelligence.com/industry-reports/bisphenol-a-bpa-market" },
-      { name: "Grand View Research — BPA market", url: "https://www.grandviewresearch.com/industry-analysis/bisphenol-a-bpa-market" },
+      { name: "Covestro: Bisphenol A", url: "https://www.covestro.com/en/sustainability/how-we-operate/product-responsibility/bisphenol-a" },
+      { name: "Mordor Intelligence: BPA market", url: "https://www.mordorintelligence.com/industry-reports/bisphenol-a-bpa-market" },
+      { name: "Grand View Research: BPA market", url: "https://www.grandviewresearch.com/industry-analysis/bisphenol-a-bpa-market" },
     ],
   },
 
   acrylonitrile: {
     routes: [
-      "Propylene ammoxidation — SOHIO process (~90% of output)",
+      "Propylene ammoxidation, SOHIO process (~90% of output)",
       "Propane ammoxidation (Asahi Kasei) using cheaper feed",
       "Recovery of by-product acetonitrile and HCN from the same reactor",
     ],
     mainProcess: {
       name: "Propylene ammoxidation (SOHIO process)",
       detail:
-        "Acrylonitrile is made by the single-step gas-phase ammoxidation of propylene with ammonia and air over a bismuth-molybdate (multi-metal oxide) catalyst in a fluidised-bed reactor at roughly 400–500 °C and modest pressure: 2 C3H6 + 2 NH3 + 3 O2 → 2 CH2=CHCN + 6 H2O. The strongly exothermic reaction also produces valuable by-products acetonitrile and hydrogen cyanide, which are recovered. Reactor effluent is quenched, the acrylonitrile is absorbed in water and purified by extractive and conventional distillation. Asahi Kasei operates a variant that uses cheaper propane as feed.",
+        "Acrylonitrile is made by the single-step gas-phase ammoxidation of propylene with ammonia and air over a bismuth-molybdate (multi-metal oxide) catalyst in a fluidised-bed reactor at roughly 400-500 °C and modest pressure: 2 C3H6 + 2 NH3 + 3 O2 → 2 CH2=CHCN + 6 H2O. The strongly exothermic reaction also produces valuable by-products acetonitrile and hydrogen cyanide, which are recovered. Reactor effluent is quenched, the acrylonitrile is absorbed in water and purified by extractive and conventional distillation. Asahi Kasei operates a variant that uses cheaper propane as feed.",
     },
     manufacturers: [
       { name: "INEOS Nitriles", url: "https://www.ineos.com" },
@@ -637,15 +637,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sinopec", url: "https://www.sinopec.com" },
     ],
     sources: [
-      { name: "ACS — Sohio acrylonitrile process landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/acrylonitrile.html" },
-      { name: "ScienceDirect — Ammoxidation overview", url: "https://www.sciencedirect.com/topics/chemical-engineering/ammoxidation" },
-      { name: "Technavio — Acrylonitrile market participants", url: "https://www.prnewswire.com/news-releases/acrylonitrile-market--asahi-kasei-corp-ascend-performance-materials-operations-llc-and-cornerstone-chemical-co-will-emerge-as-major-acrylonitrile-market-participants--technavio-301576121.html" },
+      { name: "ACS: Sohio acrylonitrile process landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/acrylonitrile.html" },
+      { name: "ScienceDirect: Ammoxidation overview", url: "https://www.sciencedirect.com/topics/chemical-engineering/ammoxidation" },
+      { name: "Technavio: Acrylonitrile market participants", url: "https://www.prnewswire.com/news-releases/acrylonitrile-market--asahi-kasei-corp-ascend-performance-materials-operations-llc-and-cornerstone-chemical-co-will-emerge-as-major-acrylonitrile-market-participants--technavio-301576121.html" },
     ],
   },
 
   "caustic-soda": {
     routes: [
-      "Chlor-alkali electrolysis of brine — membrane cell (modern standard)",
+      "Chlor-alkali electrolysis of brine, membrane cell (modern standard)",
       "Diaphragm cell electrolysis (older)",
       "Mercury cell electrolysis (being phased out)",
     ],
@@ -663,22 +663,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "US EPA — Sodium hydroxide supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Sodium+Hydroxide+Supply+Chain+Profile.pdf" },
-      { name: "Olin Chlor Alkali — Sodium hydroxide", url: "https://olinchloralkali.com/products/sodium-hydroxide/" },
-      { name: "MarketsandMarkets — Chlor-alkali companies", url: "https://www.marketsandmarkets.com/ResearchInsight/chlor-alkali-market.asp" },
+      { name: "US EPA: Sodium hydroxide supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Sodium+Hydroxide+Supply+Chain+Profile.pdf" },
+      { name: "Olin Chlor Alkali: Sodium hydroxide", url: "https://olinchloralkali.com/products/sodium-hydroxide/" },
+      { name: "MarketsandMarkets: Chlor-alkali companies", url: "https://www.marketsandmarkets.com/ResearchInsight/chlor-alkali-market.asp" },
     ],
   },
 
   "nitric-acid": {
     routes: [
-      "Ostwald process — catalytic ammonia oxidation, then NO2 absorption (dominant)",
+      "Ostwald process, catalytic ammonia oxidation, then NO2 absorption (dominant)",
       "Single-, dual- and high-pressure absorption plant configurations",
       "Concentration to fuming/strong acid via extractive distillation",
     ],
     mainProcess: {
       name: "Ostwald process (ammonia oxidation)",
       detail:
-        "Nitric acid is made from ammonia in three catalytic/absorption steps. Ammonia is mixed with air and oxidised over platinum-rhodium gauze at ~850–950 °C to nitric oxide: 4 NH3 + 5 O2 → 4 NO + 6 H2O. The NO is cooled and further oxidised by oxygen to nitrogen dioxide (2 NO + O2 → 2 NO2), which is then absorbed in water in a tall packed/tray column to give nitric acid: 3 NO2 + H2O → 2 HNO3 + NO, with the NO recycled. This yields ~55–65% acid; stronger or fuming acid is made by extractive distillation with sulfuric acid or magnesium nitrate.",
+        "Nitric acid is made from ammonia in three catalytic/absorption steps. Ammonia is mixed with air and oxidised over platinum-rhodium gauze at ~850-950 °C to nitric oxide: 4 NH3 + 5 O2 → 4 NO + 6 H2O. The NO is cooled and further oxidised by oxygen to nitrogen dioxide (2 NO + O2 → 2 NO2), which is then absorbed in water in a tall packed/tray column to give nitric acid: 3 NO2 + H2O → 2 HNO3 + NO, with the NO recycled. This yields ~55-65% acid; stronger or fuming acid is made by extractive distillation with sulfuric acid or magnesium nitrate.",
     },
     manufacturers: [
       { name: "Yara International", url: "https://www.yara.com" },
@@ -689,22 +689,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "EuroChem Group", url: "https://www.eurochemgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
-      { name: "ChemAnalyst — Production process of nitric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-nitric-acid-10" },
-      { name: "Trademark Nitrogen — Nitric acid & Ostwald process", url: "https://trademarknitrogen.com/News/Blog/ArtMID/774/ArticleID/6/Nitric-Acid-and-the-Ostwald-Process-A-Crucial-Chemical-Duo" },
+      { name: "Wikipedia: Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
+      { name: "ChemAnalyst: Production process of nitric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-nitric-acid-10" },
+      { name: "Trademark Nitrogen: Nitric acid & Ostwald process", url: "https://trademarknitrogen.com/News/Blog/ArtMID/774/ArticleID/6/Nitric-Acid-and-the-Ostwald-Process-A-Crucial-Chemical-Duo" },
     ],
   },
 
   "titanium-dioxide": {
     routes: [
-      "Chloride process — continuous, high-grade ore to TiCl4 then oxidation (rutile)",
-      "Sulfate process — batch digestion of ilmenite with sulfuric acid",
+      "Chloride process, continuous, high-grade ore to TiCl4 then oxidation (rutile)",
+      "Sulfate process, batch digestion of ilmenite with sulfuric acid",
       "Surface treatment/coating and micronising to finished pigment",
     ],
     mainProcess: {
       name: "Chloride process",
       detail:
-        "In the dominant chloride route, high-titanium feedstock (rutile, synthetic rutile or slag) is reacted with chlorine and coke in a fluidised bed at ~900–1000 °C to form titanium tetrachloride: TiO2 + 2 Cl2 + C → TiCl4 + CO2. The TiCl4 is purified by distillation and then oxidised with oxygen at high temperature to regenerate pure rutile TiO2 and release chlorine for recycle: TiCl4 + O2 → TiO2 + 2 Cl2. The raw pigment is then surface-treated (alumina/silica), washed, dried and micronised. The older sulfate process digests ilmenite in sulfuric acid and hydrolyses the titanyl sulfate, and still makes ~40% of world output.",
+        "In the dominant chloride route, high-titanium feedstock (rutile, synthetic rutile or slag) is reacted with chlorine and coke in a fluidised bed at ~900-1000 °C to form titanium tetrachloride: TiO2 + 2 Cl2 + C → TiCl4 + CO2. The TiCl4 is purified by distillation and then oxidised with oxygen at high temperature to regenerate pure rutile TiO2 and release chlorine for recycle: TiCl4 + O2 → TiO2 + 2 Cl2. The raw pigment is then surface-treated (alumina/silica), washed, dried and micronised. The older sulfate process digests ilmenite in sulfuric acid and hydrolyses the titanyl sulfate, and still makes ~40% of world output.",
     },
     manufacturers: [
       { name: "The Chemours Company", url: "https://www.chemours.com" },
@@ -714,9 +714,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Ishihara Sangyo Kaisha (ISK)", url: "https://www.iskweb.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Titanium dioxide", url: "https://en.wikipedia.org/wiki/Titanium_dioxide" },
-      { name: "Tronox — Titanium dioxide", url: "https://www.tronox.com/products/titanium-dioxide/" },
-      { name: "MarketsandMarkets — Titanium dioxide market", url: "https://www.marketsandmarkets.com/ResearchInsight/titanium-dioxide-market.asp" },
+      { name: "Wikipedia: Titanium dioxide", url: "https://en.wikipedia.org/wiki/Titanium_dioxide" },
+      { name: "Tronox: Titanium dioxide", url: "https://www.tronox.com/products/titanium-dioxide/" },
+      { name: "MarketsandMarkets: Titanium dioxide market", url: "https://www.marketsandmarkets.com/ResearchInsight/titanium-dioxide-market.asp" },
     ],
   },
 
@@ -729,7 +729,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Suspension polymerisation of VCM",
       detail:
-        "PVC starts from vinyl chloride monomer (VCM), itself made from ethylene via ethylene dichloride cracking. In suspension polymerisation, VCM droplets are dispersed in water with suspending agents and an oil-soluble free-radical initiator, then polymerised in a batch autoclave at ~50–70 °C and autogenous pressure. The chain-growth reaction (n CH2=CHCl → [CH2-CHCl]n) is run to ~85–90% conversion before unreacted VCM is stripped and recovered; the porous PVC grains are centrifuged, dried and blended. Particle size and porosity are tuned by the suspending system to suit rigid or flexible compounds.",
+        "PVC starts from vinyl chloride monomer (VCM), itself made from ethylene via ethylene dichloride cracking. In suspension polymerisation, VCM droplets are dispersed in water with suspending agents and an oil-soluble free-radical initiator, then polymerised in a batch autoclave at ~50-70 °C and autogenous pressure. The chain-growth reaction (n CH2=CHCl → [CH2-CHCl]n) is run to ~85-90% conversion before unreacted VCM is stripped and recovered; the porous PVC grains are centrifuged, dried and blended. Particle size and porosity are tuned by the suspending system to suit rigid or flexible compounds.",
     },
     manufacturers: [
       { name: "Shin-Etsu Chemical / Shintech (world's largest)", url: "https://www.shinetsu.co.jp" },
@@ -740,22 +740,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Occidental / OxyVinyls", url: "https://www.oxy.com" },
     ],
     sources: [
-      { name: "Shin-Etsu Chemical — PVC", url: "https://www.shinetsu.co.jp/en/products/infrastructure-materials/polyvinyl-chloride-pvc/" },
-      { name: "Westlake — PVC resin", url: "https://westlake.com/chlorovinyls/pvc-resin" },
-      { name: "Verified Market Research — Top PVC manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-polyvinyl-chloride-manufacturers/" },
+      { name: "Shin-Etsu Chemical: PVC", url: "https://www.shinetsu.co.jp/en/products/infrastructure-materials/polyvinyl-chloride-pvc/" },
+      { name: "Westlake: PVC resin", url: "https://westlake.com/chlorovinyls/pvc-resin" },
+      { name: "Verified Market Research: Top PVC manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-polyvinyl-chloride-manufacturers/" },
     ],
   },
 
   "carbon-black": {
     routes: [
-      "Oil-furnace (furnace black) process — ~90% of output",
+      "Oil-furnace (furnace black) process, ~90% of output",
       "Gas black / channel black process",
       "Thermal black and acetylene black (specialty grades)",
     ],
     mainProcess: {
       name: "Oil-furnace process",
       detail:
-        "Most carbon black is made by the furnace process: a heavy aromatic feedstock oil is injected into a hot combustion-gas stream (from burning natural gas or oil) inside a refractory-lined reactor, where it vaporises and pyrolyses in the vapour phase at ~1200–1900 °C to nucleate microscopic carbon particles. The reaction is quenched with water to fix the particle size and structure, then the carbon black is collected from the gas in bag filters, degassed, and pelletised. Adjusting feed rate, air and temperature controls particle size and surface area, which set the grade for tyres, rubber and pigments.",
+        "Most carbon black is made by the furnace process: a heavy aromatic feedstock oil is injected into a hot combustion-gas stream (from burning natural gas or oil) inside a refractory-lined reactor, where it vaporises and pyrolyses in the vapour phase at ~1200-1900 °C to nucleate microscopic carbon particles. The reaction is quenched with water to fix the particle size and structure, then the carbon black is collected from the gas in bag filters, degassed, and pelletised. Adjusting feed rate, air and temperature controls particle size and surface area, which set the grade for tyres, rubber and pigments.",
     },
     manufacturers: [
       { name: "Cabot Corporation (world's largest)", url: "https://www.cabotcorp.com" },
@@ -766,22 +766,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Continental Carbon", url: "https://www.continentalcarbon.com" },
     ],
     sources: [
-      { name: "Wikipedia — Carbon black", url: "https://en.wikipedia.org/wiki/Carbon_black" },
-      { name: "US EPA — Carbon black (AP-42 §6.1, PDF)", url: "https://www3.epa.gov/ttn/chief/ap42/ch06/final/c06s01.pdf" },
-      { name: "IMARC — Top carbon black companies", url: "https://www.imarcgroup.com/top-carbon-black-companies" },
+      { name: "Wikipedia: Carbon black", url: "https://en.wikipedia.org/wiki/Carbon_black" },
+      { name: "US EPA: Carbon black (AP-42 §6.1, PDF)", url: "https://www3.epa.gov/ttn/chief/ap42/ch06/final/c06s01.pdf" },
+      { name: "IMARC: Top carbon black companies", url: "https://www.imarcgroup.com/top-carbon-black-companies" },
     ],
   },
 
   melamine: {
     routes: [
-      "Urea pyrolysis — high-pressure non-catalytic process (Casale/Eurotecnica)",
+      "Urea pyrolysis, high-pressure non-catalytic process (Casale/Eurotecnica)",
       "Low-pressure catalytic process (gas-phase over alumina)",
       "Off-gas (NH3 + CO2) recycled to the urea plant",
     ],
     mainProcess: {
       name: "High-pressure urea pyrolysis",
       detail:
-        "Melamine is made by the thermal condensation (pyrolysis) of urea. In the high-pressure non-catalytic process a urea melt is fed to a reactor at ~70–200 bar and ~360–420 °C, where urea first decomposes to cyanic acid/isocyanic acid and ammonia and then trimerises to melamine: 6 (NH2)2CO → C3H6N6 + 6 NH3 + 3 CO2. The molten melamine is quenched and purified (crystallised from water) to high purity, while the off-gas of ammonia and carbon dioxide is recycled back to an integrated urea unit. Low-pressure catalytic processes run the same chemistry in the gas phase over an alumina catalyst.",
+        "Melamine is made by the thermal condensation (pyrolysis) of urea. In the high-pressure non-catalytic process a urea melt is fed to a reactor at ~70-200 bar and ~360-420 °C, where urea first decomposes to cyanic acid/isocyanic acid and ammonia and then trimerises to melamine: 6 (NH2)2CO → C3H6N6 + 6 NH3 + 3 CO2. The molten melamine is quenched and purified (crystallised from water) to high purity, while the off-gas of ammonia and carbon dioxide is recycled back to an integrated urea unit. Low-pressure catalytic processes run the same chemistry in the gas phase over an alumina catalyst.",
     },
     manufacturers: [
       { name: "Borealis (OMV)", url: "https://www.borealisgroup.com" },
@@ -791,9 +791,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsui Chemicals", url: "https://www.mitsuichemicals.com" },
     ],
     sources: [
-      { name: "Borealis — Melamine technology", url: "https://www.borealisgroup.com/news/borealis-sells-melamine-process-technology-to-urea-casale-sa" },
-      { name: "Google Patents — High-purity melamine from urea", url: "https://patents.google.com/patent/EP2098516A1/en" },
-      { name: "Google Patents — Production of melamine", url: "https://patents.google.com/patent/US2918467A/en" },
+      { name: "Borealis: Melamine technology", url: "https://www.borealisgroup.com/news/borealis-sells-melamine-process-technology-to-urea-casale-sa" },
+      { name: "Google Patents: High-purity melamine from urea", url: "https://patents.google.com/patent/EP2098516A1/en" },
+      { name: "Google Patents: Production of melamine", url: "https://patents.google.com/patent/US2918467A/en" },
     ],
   },
 
@@ -806,7 +806,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ziegler-Natta polymerisation of propylene",
       detail:
-        "Polymer-grade propylene is polymerised with a magnesium-chloride-supported titanium Ziegler-Natta catalyst (activated by an aluminium alkyl and an external electron donor that controls stereoregularity) to give highly isotactic polypropylene. In the widely used gas-phase fluidised-bed (Unipol) or bulk slurry-loop (Spheripol) processes, propylene reacts at ~60–80 °C and ~20–35 bar; the growing polymer forms solid granules around the catalyst particles. Comonomer (ethylene) can be added in a second reactor to make impact copolymers. The powder is degassed of monomer, stabilised and pelletised.",
+        "Polymer-grade propylene is polymerised with a magnesium-chloride-supported titanium Ziegler-Natta catalyst (activated by an aluminium alkyl and an external electron donor that controls stereoregularity) to give highly isotactic polypropylene. In the widely used gas-phase fluidised-bed (Unipol) or bulk slurry-loop (Spheripol) processes, propylene reacts at ~60-80 °C and ~20-35 bar; the growing polymer forms solid granules around the catalyst particles. Comonomer (ethylene) can be added in a second reactor to make impact copolymers. The powder is degassed of monomer, stabilised and pelletised.",
     },
     manufacturers: [
       { name: "LyondellBasell (largest PP technology licensor)", url: "https://www.lyondellbasell.com" },
@@ -817,9 +817,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SABIC", url: "https://www.sabic.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ziegler-Natta catalyst", url: "https://en.wikipedia.org/wiki/Ziegler%E2%80%93Natta_catalyst" },
-      { name: "LyondellBasell — Gas-phase PP processes (PDF)", url: "https://www.lyondellbasell.com/globalassets/products-technology/technology/gas-phase-pp-processes.pdf?id=13744" },
-      { name: "Mordor Intelligence — Polypropylene companies", url: "https://www.mordorintelligence.com/industry-reports/polypropylene-market/companies" },
+      { name: "Wikipedia: Ziegler-Natta catalyst", url: "https://en.wikipedia.org/wiki/Ziegler%E2%80%93Natta_catalyst" },
+      { name: "LyondellBasell: Gas-phase PP processes (PDF)", url: "https://www.lyondellbasell.com/globalassets/products-technology/technology/gas-phase-pp-processes.pdf?id=13744" },
+      { name: "Mordor Intelligence: Polypropylene companies", url: "https://www.mordorintelligence.com/industry-reports/polypropylene-market/companies" },
     ],
   },
 
@@ -832,7 +832,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Catalytic ethylene polymerisation (slurry / gas phase)",
       detail:
-        "High-density polyethylene is made by coordination polymerisation of ethylene (with a little 1-butene/1-hexene comonomer) over Ziegler-Natta, Phillips chromium-oxide, or metallocene catalysts, which give the linear, minimally branched chains responsible for high density and crystallinity. In the slurry process ethylene polymerises in a diluent in loop or stirred reactors at ~80–110 °C and ~30–40 bar, forming solid polymer particles; gas-phase fluidised-bed and solution processes are also widely used. Hydrogen controls molecular weight. The polymer is separated, degassed, additised and pelletised.",
+        "High-density polyethylene is made by coordination polymerisation of ethylene (with a little 1-butene/1-hexene comonomer) over Ziegler-Natta, Phillips chromium-oxide, or metallocene catalysts, which give the linear, minimally branched chains responsible for high density and crystallinity. In the slurry process ethylene polymerises in a diluent in loop or stirred reactors at ~80-110 °C and ~30-40 bar, forming solid polymer particles; gas-phase fluidised-bed and solution processes are also widely used. Hydrogen controls molecular weight. The polymer is separated, degassed, additised and pelletised.",
     },
     manufacturers: [
       { name: "Dow", url: "https://www.dow.com" },
@@ -843,15 +843,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Reliance Industries", url: "https://www.ril.com" },
     ],
     sources: [
-      { name: "Expert Market Research — HDPE market", url: "https://www.expertmarketresearch.com/reports/high-density-polyethylene-hdpe-market" },
-      { name: "American Chemistry Council — HDPE LCA (PDF)", url: "https://www.americanchemistry.com/content/download/8059/file/Cradle-to-Gate-Life-Cycle-Analysis-of-High-Density-Polyethylene-HDPE-Resin.pdf" },
-      { name: "DOAJ — PE by slurry process (patent review)", url: "https://doaj.org/article/ece134ed6eed4ee3b72a0287d740b43f" },
+      { name: "Expert Market Research: HDPE market", url: "https://www.expertmarketresearch.com/reports/high-density-polyethylene-hdpe-market" },
+      { name: "American Chemistry Council: HDPE LCA (PDF)", url: "https://www.americanchemistry.com/content/download/8059/file/Cradle-to-Gate-Life-Cycle-Analysis-of-High-Density-Polyethylene-HDPE-Resin.pdf" },
+      { name: "DOAJ: PE by slurry process (patent review)", url: "https://doaj.org/article/ece134ed6eed4ee3b72a0287d740b43f" },
     ],
   },
 
   "methyl-methacrylate-mma": {
     routes: [
-      "Acetone cyanohydrin (ACH) sulfuric-acid route — long-dominant",
+      "Acetone cyanohydrin (ACH) sulfuric-acid route, long-dominant",
       "C4 direct oxidation of isobutylene/tert-butanol",
       "Ethylene-based Alpha / LiMA routes (Mitsubishi, Röhm)",
     ],
@@ -868,21 +868,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kuraray", url: "https://www.kuraray.com" },
     ],
     sources: [
-      { name: "ACS — Methyl methacrylate", url: "https://www.acs.org/molecule-of-the-week/archive/m/methyl-methacrylate.html" },
-      { name: "Röhm — LiMA MMA technology", url: "https://www.roehm.com/en/detail/lima-technology-at-full-scale-operation-official-opening-of-rohm-s-bay-city-mma-plant" },
-      { name: "SL Chemtech — MMA production overview", url: "https://www.slchemtech.com/news/methyl-methacrylate-production.html" },
+      { name: "ACS: Methyl methacrylate", url: "https://www.acs.org/molecule-of-the-week/archive/m/methyl-methacrylate.html" },
+      { name: "Röhm: LiMA MMA technology", url: "https://www.roehm.com/en/detail/lima-technology-at-full-scale-operation-official-opening-of-rohm-s-bay-city-mma-plant" },
+      { name: "SL Chemtech: MMA production overview", url: "https://www.slchemtech.com/news/methyl-methacrylate-production.html" },
     ],
   },
 
   "vinyl-acetate-monomer-vam": {
     routes: [
-      "Vapour-phase ethylene acetoxylation (ethylene + acetic acid + O2, Pd catalyst) — dominant",
+      "Vapour-phase ethylene acetoxylation (ethylene + acetic acid + O2, Pd catalyst), dominant",
       "Acetylene + acetic acid addition (older, still used in China with coal acetylene)",
     ],
     mainProcess: {
       name: "Ethylene acetoxylation (Pd/Au catalyst)",
       detail:
-        "Vinyl acetate is made by the gas-phase oxidative addition (acetoxylation) of acetic acid to ethylene with oxygen over a supported palladium-gold catalyst (often with potassium acetate promoter) at ~150–180 °C and ~5–10 bar: C2H4 + CH3COOH + 1/2 O2 → CH2=CHOOCCH3 + H2O. The reactor effluent is cooled, the monomer absorbed/scrubbed, and CO2 and light ends removed, then VAM is purified by distillation with an inhibitor. Coal-rich regions still use the older acetylene-plus-acetic-acid route.",
+        "Vinyl acetate is made by the gas-phase oxidative addition (acetoxylation) of acetic acid to ethylene with oxygen over a supported palladium-gold catalyst (often with potassium acetate promoter) at ~150-180 °C and ~5-10 bar: C2H4 + CH3COOH + 1/2 O2 → CH2=CHOOCCH3 + H2O. The reactor effluent is cooled, the monomer absorbed/scrubbed, and CO2 and light ends removed, then VAM is purified by distillation with an inhibitor. Coal-rich regions still use the older acetylene-plus-acetic-acid route.",
     },
     manufacturers: [
       { name: "Celanese (world's largest VAM maker)", url: "https://www.celanese.com" },
@@ -893,22 +893,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Wacker Chemie", url: "https://www.wacker.com" },
     ],
     sources: [
-      { name: "Wikipedia — Vinyl acetate", url: "https://en.wikipedia.org/wiki/Vinyl_acetate" },
-      { name: "Celanese — Vinyl Acetate Monomer (PDF)", url: "https://www.celanese.com/-/media/Intermediate-Chemistry/Files/Brochures/Vinyl-Acetate-Monomer-VAM-Brochure.pdf" },
-      { name: "Merchant Research — VAM overview", url: "https://mcgroup.co.uk/news/20240115/vinyl-acetate-monomer-vam-the-essential-chemical-in-modern-manufacturing.html" },
+      { name: "Wikipedia: Vinyl acetate", url: "https://en.wikipedia.org/wiki/Vinyl_acetate" },
+      { name: "Celanese: Vinyl Acetate Monomer (PDF)", url: "https://www.celanese.com/-/media/Intermediate-Chemistry/Files/Brochures/Vinyl-Acetate-Monomer-VAM-Brochure.pdf" },
+      { name: "Merchant Research: VAM overview", url: "https://mcgroup.co.uk/news/20240115/vinyl-acetate-monomer-vam-the-essential-chemical-in-modern-manufacturing.html" },
     ],
   },
 
   "acrylic-acid": {
     routes: [
-      "Two-stage vapour-phase oxidation of propylene (via acrolein) — dominant",
+      "Two-stage vapour-phase oxidation of propylene (via acrolein), dominant",
       "Propane oxidation (developmental)",
       "Bio-based routes from glycerol / 3-HP (emerging)",
     ],
     mainProcess: {
       name: "Two-stage propylene oxidation",
       detail:
-        "Acrylic acid is made by oxidising propylene with air in two catalytic vapour-phase stages. In the first reactor propylene is oxidised over a bismuth-molybdate catalyst to acrolein (CH2=CHCHO); in the second reactor the acrolein is oxidised over a molybdenum-vanadium oxide catalyst to acrylic acid (CH2=CHCOOH), each stage at ~200–320 °C with separate temperature control. The reactor gas is absorbed in water and the crude acid is recovered and purified by solvent extraction and distillation, with glacial acrylic acid taken for esters and superabsorbent polymers. An inhibitor is used throughout to prevent polymerisation.",
+        "Acrylic acid is made by oxidising propylene with air in two catalytic vapour-phase stages. In the first reactor propylene is oxidised over a bismuth-molybdate catalyst to acrolein (CH2=CHCHO); in the second reactor the acrolein is oxidised over a molybdenum-vanadium oxide catalyst to acrylic acid (CH2=CHCOOH), each stage at ~200-320 °C with separate temperature control. The reactor gas is absorbed in water and the crude acid is recovered and purified by solvent extraction and distillation, with glacial acrylic acid taken for esters and superabsorbent polymers. An inhibitor is used throughout to prevent polymerisation.",
     },
     manufacturers: [
       { name: "BASF (largest capacity)", url: "https://www.basf.com" },
@@ -919,9 +919,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Plastics", url: "https://www.fpc.com.tw" },
     ],
     sources: [
-      { name: "Intratec — Acrylic acid from propylene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/acrylic-acid-e11a-b.pdf" },
-      { name: "Nippon Shokubai — Process catalysts", url: "https://www.shokubai.co.jp/en/products/detail/process_cat/" },
-      { name: "US EPA — Acrylic acid manufacture", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=91017W1A.TXT" },
+      { name: "Intratec: Acrylic acid from propylene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/acrylic-acid-e11a-b.pdf" },
+      { name: "Nippon Shokubai: Process catalysts", url: "https://www.shokubai.co.jp/en/products/detail/process_cat/" },
+      { name: "US EPA: Acrylic acid manufacture", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=91017W1A.TXT" },
     ],
   },
 
@@ -934,7 +934,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Cyclohexanone oxime Beckmann rearrangement",
       detail:
-        "Caprolactam, the monomer for nylon-6, is made from cyclohexanone. The ketone is converted to cyclohexanone oxime with hydroxylamine, and the oxime then undergoes the acid-catalysed Beckmann rearrangement — traditionally in fuming sulfuric acid (oleum) — to ring-expand into ε-caprolactam. The acidic mixture is neutralised with ammonia, producing large amounts of ammonium sulfate by-product, after which the lactam is purified by extraction and distillation. Newer routes (Sumitomo's vapour-phase Beckmann over a high-silica zeolite with HPO ammoximation) avoid the sulfate by-product.",
+        "Caprolactam, the monomer for nylon-6, is made from cyclohexanone. The ketone is converted to cyclohexanone oxime with hydroxylamine, and the oxime then undergoes the acid-catalysed Beckmann rearrangement, traditionally in fuming sulfuric acid (oleum), to ring-expand into ε-caprolactam. The acidic mixture is neutralised with ammonia, producing large amounts of ammonium sulfate by-product, after which the lactam is purified by extraction and distillation. Newer routes (Sumitomo's vapour-phase Beckmann over a high-silica zeolite with HPO ammoximation) avoid the sulfate by-product.",
     },
     manufacturers: [
       { name: "Fibrant (Highsun)", url: "https://www.fibrant52.com" },
@@ -945,22 +945,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "DOMO Chemicals", url: "https://www.domochemicals.com" },
     ],
     sources: [
-      { name: "Fibrant — Caprolactam", url: "https://www.fibrant52.com/en/products/caprolactam" },
-      { name: "Google Patents — Beckmann rearrangement to caprolactam", url: "https://patents.google.com/patent/US5264571A/en" },
-      { name: "Mordor Intelligence — Caprolactam companies", url: "https://www.mordorintelligence.com/industry-reports/caprolactam-market/companies" },
+      { name: "Fibrant: Caprolactam", url: "https://www.fibrant52.com/en/products/caprolactam" },
+      { name: "Google Patents: Beckmann rearrangement to caprolactam", url: "https://patents.google.com/patent/US5264571A/en" },
+      { name: "Mordor Intelligence: Caprolactam companies", url: "https://www.mordorintelligence.com/industry-reports/caprolactam-market/companies" },
     ],
   },
 
   "ethylene-dichloride-edc": {
     routes: [
       "Direct chlorination of ethylene (Cl2 addition, FeCl3 catalyst)",
-      "Oxychlorination of ethylene (with HCl + O2) — recycles HCl from VCM cracking",
+      "Oxychlorination of ethylene (with HCl + O2), recycles HCl from VCM cracking",
       "Balanced plants combine both routes for chlorine efficiency",
     ],
     mainProcess: {
       name: "Direct chlorination + oxychlorination (balanced process)",
       detail:
-        "Ethylene dichloride (1,2-dichloroethane), the precursor to vinyl chloride, is made from ethylene by two complementary reactions run together. Direct chlorination adds chlorine across ethylene in the liquid phase over a ferric-chloride catalyst at ~50–70 °C: C2H4 + Cl2 → C2H4Cl2. Oxychlorination reacts ethylene with hydrogen chloride and oxygen over a copper-chloride catalyst (C2H4 + 2 HCl + 1/2 O2 → C2H4Cl2 + H2O), consuming the HCl that is released when EDC is later cracked to vinyl chloride. Combining the two closes the chlorine balance; the EDC is purified by distillation.",
+        "Ethylene dichloride (1,2-dichloroethane), the precursor to vinyl chloride, is made from ethylene by two complementary reactions run together. Direct chlorination adds chlorine across ethylene in the liquid phase over a ferric-chloride catalyst at ~50-70 °C: C2H4 + Cl2 → C2H4Cl2. Oxychlorination reacts ethylene with hydrogen chloride and oxygen over a copper-chloride catalyst (C2H4 + 2 HCl + 1/2 O2 → C2H4Cl2 + H2O), consuming the HCl that is released when EDC is later cracked to vinyl chloride. Combining the two closes the chlorine balance; the EDC is purified by distillation.",
     },
     manufacturers: [
       { name: "Occidental / OxyChem", url: "https://www.oxy.com" },
@@ -971,9 +971,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shin-Etsu / Shintech", url: "https://www.shinetsu.co.jp" },
     ],
     sources: [
-      { name: "OxyChem — EDC handbook (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/products/chlorinated-organics/edc.pdf" },
-      { name: "Westlake Vinnolit — EDC/VCM process", url: "https://www.westlakevinnolit.com/en/licensing/edc-vcm-process/" },
-      { name: "ChemAnalyst — EDC supply chain", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/untangling-the-global-ethylene-dichloride-edc-supply-chain-from-feedstock-38377" },
+      { name: "OxyChem: EDC handbook (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/products/chlorinated-organics/edc.pdf" },
+      { name: "Westlake Vinnolit: EDC/VCM process", url: "https://www.westlakevinnolit.com/en/licensing/edc-vcm-process/" },
+      { name: "ChemAnalyst: EDC supply chain", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/untangling-the-global-ethylene-dichloride-edc-supply-chain-from-feedstock-38377" },
     ],
   },
 
@@ -996,9 +996,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hanwha Solutions", url: "https://www.hanwhasolutions.com" },
     ],
     sources: [
-      { name: "ChemAnalyst — How TDI is made", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/how-toluene-diisocyanate-tdi-is-made-a-quick-dive-into-process-sustainability-37881" },
-      { name: "Mordor Intelligence — TDI market", url: "https://www.mordorintelligence.com/industry-reports/toluene-diisocyanate-market" },
-      { name: "Fortune Business Insights — TDI market", url: "https://www.fortunebusinessinsights.com/toluene-diisocyanate-market-113962" },
+      { name: "ChemAnalyst: How TDI is made", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/how-toluene-diisocyanate-tdi-is-made-a-quick-dive-into-process-sustainability-37881" },
+      { name: "Mordor Intelligence: TDI market", url: "https://www.mordorintelligence.com/industry-reports/toluene-diisocyanate-market" },
+      { name: "Fortune Business Insights: TDI market", url: "https://www.fortunebusinessinsights.com/toluene-diisocyanate-market-113962" },
     ],
   },
 
@@ -1020,9 +1020,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LG Chem", url: "https://www.lgchem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ethyl acrylate", url: "https://en.wikipedia.org/wiki/Ethyl_acrylate" },
+      { name: "Wikipedia: Ethyl acrylate", url: "https://en.wikipedia.org/wiki/Ethyl_acrylate" },
       { name: "Basic Acrylic Monomer Manufacturers (BAMM)", url: "https://www.bamm.net/about-bamm" },
-      { name: "MarketsandMarkets — Acrylate market", url: "https://www.marketsandmarkets.com/ResearchInsight/acrylate-market.asp" },
+      { name: "MarketsandMarkets: Acrylate market", url: "https://www.marketsandmarkets.com/ResearchInsight/acrylate-market.asp" },
     ],
   },
 
@@ -1044,9 +1044,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LG Chem", url: "https://www.lgchem.com" },
     ],
     sources: [
-      { name: "Arkema — Butyl acrylate", url: "https://www.arkema.com/usa/en/product/acrylics/butylacrylate/" },
+      { name: "Arkema: Butyl acrylate", url: "https://www.arkema.com/usa/en/product/acrylics/butylacrylate/" },
       { name: "Basic Acrylic Monomer Manufacturers (BAMM)", url: "https://www.bamm.net/about-bamm" },
-      { name: "ChemPoint — Butyl acrylate (BASF)", url: "https://www.chempoint.com/products/basf/basf-acrylic-monomers/butyl-acrylate" },
+      { name: "ChemPoint: Butyl acrylate (BASF)", url: "https://www.chempoint.com/products/basf/basf-acrylic-monomers/butyl-acrylate" },
     ],
   },
 
@@ -1069,9 +1069,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Plastics", url: "https://www.fpc.com.tw" },
     ],
     sources: [
-      { name: "US DOE — The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
-      { name: "S&P Global — ortho-Xylene CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0825-Global-CEH-ortho-Xylene-Abstract.pdf" },
-      { name: "US EPA — Phthalic anhydride from o-xylene", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100BG0H.TXT" },
+      { name: "US DOE: The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
+      { name: "S&P Global: ortho-Xylene CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0825-Global-CEH-ortho-Xylene-Abstract.pdf" },
+      { name: "US EPA: Phthalic anhydride from o-xylene", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100BG0H.TXT" },
     ],
   },
 
@@ -1084,7 +1084,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Cyclohexane air oxidation (KA oil)",
       detail:
-        "Most cyclohexanone is made by the catalytic oxidation of cyclohexane with air over a cobalt or manganese catalyst at ~150–160 °C and ~10–20 bar, which gives a mixture of cyclohexanol and cyclohexanone known as KA (ketone-alcohol) oil at low per-pass conversion to limit over-oxidation. The cyclohexanol portion is then dehydrogenated over a zinc/copper catalyst to additional cyclohexanone. Alternatively, phenol is hydrogenated to cyclohexanone (directly or via cyclohexanol). Cyclohexanone is overwhelmingly used to make caprolactam (nylon-6) and adipic acid (nylon-66).",
+        "Most cyclohexanone is made by the catalytic oxidation of cyclohexane with air over a cobalt or manganese catalyst at ~150-160 °C and ~10-20 bar, which gives a mixture of cyclohexanol and cyclohexanone known as KA (ketone-alcohol) oil at low per-pass conversion to limit over-oxidation. The cyclohexanol portion is then dehydrogenated over a zinc/copper catalyst to additional cyclohexanone. Alternatively, phenol is hydrogenated to cyclohexanone (directly or via cyclohexanol). Cyclohexanone is overwhelmingly used to make caprolactam (nylon-6) and adipic acid (nylon-66).",
     },
     manufacturers: [
       { name: "Fibrant (Highsun)", url: "https://www.fibrant52.com" },
@@ -1095,9 +1095,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Cyclohexanone", url: "https://en.wikipedia.org/wiki/Cyclohexanone" },
-      { name: "ChemicalBook — Cyclohexanone production", url: "https://www.chemicalbook.com/article/cyclohexanone-chemical-and-physical-properties-production-and-uses.htm" },
-      { name: "Vinipul — Cyclohexanone in nylon", url: "https://vinipulchemicals.com/cyclohexanone-in-nylon-production" },
+      { name: "Wikipedia: Cyclohexanone", url: "https://en.wikipedia.org/wiki/Cyclohexanone" },
+      { name: "ChemicalBook: Cyclohexanone production", url: "https://www.chemicalbook.com/article/cyclohexanone-chemical-and-physical-properties-production-and-uses.htm" },
+      { name: "Vinipul: Cyclohexanone in nylon", url: "https://vinipulchemicals.com/cyclohexanone-in-nylon-production" },
     ],
   },
 
@@ -1110,7 +1110,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Biodiesel by-product recovery + refining",
       detail:
-        "Most glycerol is recovered as the co-product of biodiesel and oleochemical manufacture. When vegetable oils or fats are transesterified with methanol (or hydrolysed/saponified), the triglyceride's glycerol backbone is released as a crude glycerol stream — roughly 10 kg per 100 kg of biodiesel. The crude is acidified to remove soaps and free fatty acids, the methanol is recovered, and the glycerol is refined by vacuum distillation and/or ion exchange plus activated-carbon bleaching to reach >99.5% USP/pharmaceutical purity. A small amount of synthetic glycerol is still made from propylene via epichlorohydrin.",
+        "Most glycerol is recovered as the co-product of biodiesel and oleochemical manufacture. When vegetable oils or fats are transesterified with methanol (or hydrolysed/saponified), the triglyceride's glycerol backbone is released as a crude glycerol stream, roughly 10 kg per 100 kg of biodiesel. The crude is acidified to remove soaps and free fatty acids, the methanol is recovered, and the glycerol is refined by vacuum distillation and/or ion exchange plus activated-carbon bleaching to reach >99.5% USP/pharmaceutical purity. A small amount of synthetic glycerol is still made from propylene via epichlorohydrin.",
     },
     manufacturers: [
       { name: "Wilmar International", url: "https://www.wilmar-international.com" },
@@ -1121,22 +1121,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cargill", url: "https://www.cargill.com" },
     ],
     sources: [
-      { name: "Grand View Research — Glycerol market", url: "https://www.grandviewresearch.com/industry-analysis/glycerol-market" },
-      { name: "RSC Advances — Crude glycerol from biodiesel", url: "https://pubs.rsc.org/en/content/articlehtml/2022/ra/d2ra05090k" },
-      { name: "GMInsights — Glycerol market", url: "https://www.gminsights.com/industry-analysis/glycerol-market-size" },
+      { name: "Grand View Research: Glycerol market", url: "https://www.grandviewresearch.com/industry-analysis/glycerol-market" },
+      { name: "RSC Advances: Crude glycerol from biodiesel", url: "https://pubs.rsc.org/en/content/articlehtml/2022/ra/d2ra05090k" },
+      { name: "GMInsights: Glycerol market", url: "https://www.gminsights.com/industry-analysis/glycerol-market-size" },
     ],
   },
 
   "sodium-tripolyphosphate-stpp": {
     routes: [
       "Neutralise phosphoric acid with soda ash to ortho-phosphate mix, then calcine",
-      "Spray-dry and high-temperature polymerisation (~350–450 °C)",
+      "Spray-dry and high-temperature polymerisation (~350-450 °C)",
       "Feedstock from thermal or purified wet-process phosphoric acid",
     ],
     mainProcess: {
       name: "Phosphoric acid / soda-ash neutralisation + calcination",
       detail:
-        "STPP is made by first neutralising phosphoric acid with sodium carbonate (soda ash) and/or caustic to a sodium-to-phosphorus ratio of about 5:3, giving an aqueous mixture of mono- and di-sodium orthophosphate (roughly 1:2). This solution is dried, and the orthophosphate powder is then calcined at ~350–450 °C, where the molecules condense (polymerise) and split out water to form sodium tripolyphosphate (Na5P3O10). Cooling and milling give the finished product, whose hydration form (Phase I/II) is controlled by calcination temperature; it is used mainly in detergents and as a food additive.",
+        "STPP is made by first neutralising phosphoric acid with sodium carbonate (soda ash) and/or caustic to a sodium-to-phosphorus ratio of about 5:3, giving an aqueous mixture of mono- and di-sodium orthophosphate (roughly 1:2). This solution is dried, and the orthophosphate powder is then calcined at ~350-450 °C, where the molecules condense (polymerise) and split out water to form sodium tripolyphosphate (Na5P3O10). Cooling and milling give the finished product, whose hydration form (Phase I/II) is controlled by calcination temperature; it is used mainly in detergents and as a food additive.",
     },
     manufacturers: [
       { name: "Prayon", url: "https://www.prayon.com" },
@@ -1146,9 +1146,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PhosAgro", url: "https://www.phosagro.com" },
     ],
     sources: [
-      { name: "Google Patents — STPP from wet-process acid & soda ash", url: "https://patents.google.com/patent/US4209497A/en" },
-      { name: "ScienceDirect — Sodium triphosphate overview", url: "https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/sodium-triphosphate" },
-      { name: "MarketsandMarkets — STPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/sodium-tripolyphosphate-companies.asp" },
+      { name: "Google Patents: STPP from wet-process acid & soda ash", url: "https://patents.google.com/patent/US4209497A/en" },
+      { name: "ScienceDirect: Sodium triphosphate overview", url: "https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/sodium-triphosphate" },
+      { name: "MarketsandMarkets: STPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/sodium-tripolyphosphate-companies.asp" },
     ],
   },
 
@@ -1171,15 +1171,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Evonik Industries", url: "https://www.evonik.com" },
     ],
     sources: [
-      { name: "Armand Products — Potassium carbonate handbook", url: "https://www.armandproducts.com/products/media/potassium-carbonate-handbook/" },
-      { name: "Google Patents — Producing potassium carbonate", url: "https://patents.google.com/patent/US5449506A/en" },
-      { name: "USDA — Potassium carbonate technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2023Technical_Report_Potassium_Carbonate_Handling.pdf" },
+      { name: "Armand Products: Potassium carbonate handbook", url: "https://www.armandproducts.com/products/media/potassium-carbonate-handbook/" },
+      { name: "Google Patents: Producing potassium carbonate", url: "https://patents.google.com/patent/US5449506A/en" },
+      { name: "USDA: Potassium carbonate technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2023Technical_Report_Potassium_Carbonate_Handling.pdf" },
     ],
   },
 
   "sodium-bicarbonate": {
     routes: [
-      "Solvay process — carbonation of ammoniated brine (NaHCO3 is the intermediate)",
+      "Solvay process, carbonation of ammoniated brine (NaHCO3 is the intermediate)",
       "Carbonation of soda-ash solution with CO2 (refined bicarbonate)",
       "From natural trona/nahcolite (mining)",
     ],
@@ -1196,16 +1196,16 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Natural Soda (ASX)", url: "https://www.naturalsoda.com" },
     ],
     sources: [
-      { name: "Wikipedia — Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "Tata Chemicals — Sodium bicarbonate", url: "https://www.tatachemicals.com/products-and-applications/sodium-bicarbonate" },
-      { name: "Mordor Intelligence — Sodium bicarbonate market", url: "https://www.mordorintelligence.com/industry-reports/sodium-bicarbonate-market" },
+      { name: "Wikipedia: Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "Tata Chemicals: Sodium bicarbonate", url: "https://www.tatachemicals.com/products-and-applications/sodium-bicarbonate" },
+      { name: "Mordor Intelligence: Sodium bicarbonate market", url: "https://www.mordorintelligence.com/industry-reports/sodium-bicarbonate-market" },
     ],
   },
 
   "aluminium-fluoride": {
     routes: [
-      "Dry process — HF gas from fluorspar/sulfuric acid reacted with alumina hydrate",
-      "Wet process — fluosilicic acid (H2SiF6) by-product reacted with alumina",
+      "Dry process, HF gas from fluorspar/sulfuric acid reacted with alumina hydrate",
+      "Wet process, fluosilicic acid (H2SiF6) by-product reacted with alumina",
     ],
     mainProcess: {
       name: "Dry process (HF + alumina hydrate)",
@@ -1220,22 +1220,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PhosAgro", url: "https://www.phosagro.com" },
     ],
     sources: [
-      { name: "Fluorsid — Aluminium fluoride", url: "https://fluorsid.com/what-we-do/chemical/aluminium-fluoride/" },
-      { name: "Business Research Insights — Aluminium fluoride market", url: "https://www.businessresearchinsights.com/market-reports/aluminum-fluoride-market-122568" },
-      { name: "24 Chemical Research — Aluminium fluoride market", url: "https://www.24chemicalresearch.com/reports/215971/global-aluminium-fluoride-market" },
+      { name: "Fluorsid: Aluminium fluoride", url: "https://fluorsid.com/what-we-do/chemical/aluminium-fluoride/" },
+      { name: "Business Research Insights: Aluminium fluoride market", url: "https://www.businessresearchinsights.com/market-reports/aluminum-fluoride-market-122568" },
+      { name: "24 Chemical Research: Aluminium fluoride market", url: "https://www.24chemicalresearch.com/reports/215971/global-aluminium-fluoride-market" },
     ],
   },
 
   "hydrochloric-acid": {
     routes: [
-      "By-product of chlorination (VCM, isocyanates, fluorocarbons) — >90% of supply",
-      "Direct synthesis — burning hydrogen in chlorine, absorbed in water",
+      "By-product of chlorination (VCM, isocyanates, fluorocarbons), >90% of supply",
+      "Direct synthesis, burning hydrogen in chlorine, absorbed in water",
       "Salt-cake (Mannheim) route as a by-product of sodium sulfate (minor)",
     ],
     mainProcess: {
       name: "By-product recovery + direct H2/Cl2 synthesis",
       detail:
-        "Most hydrochloric acid is recovered as the by-product hydrogen chloride from organic chlorination reactions (vinyl chloride, isocyanates, chlorinated solvents, fluorocarbons): the HCl off-gas is absorbed in water in falling-film absorbers to give 30–37% acid. High-purity acid is made by direct synthesis, where chlorine and hydrogen (both from chlor-alkali electrolysis) are burned together in a controlled flame — H2 + Cl2 → 2 HCl — and the hot gas is absorbed in demineralised water. Direct synthesis gives a cleaner product but accounts for under 10% of volume.",
+        "Most hydrochloric acid is recovered as the by-product hydrogen chloride from organic chlorination reactions (vinyl chloride, isocyanates, chlorinated solvents, fluorocarbons): the HCl off-gas is absorbed in water in falling-film absorbers to give 30-37% acid. High-purity acid is made by direct synthesis, where chlorine and hydrogen (both from chlor-alkali electrolysis) are burned together in a controlled flame, H2 + Cl2 → 2 HCl, and the hot gas is absorbed in demineralised water. Direct synthesis gives a cleaner product but accounts for under 10% of volume.",
     },
     manufacturers: [
       { name: "Occidental / OxyChem", url: "https://www.oxy.com" },
@@ -1246,9 +1246,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "INEOS", url: "https://www.ineos.com" },
     ],
     sources: [
-      { name: "US EPA — Hydrochloric acid supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Hydrochloric%20Acid%20Supply%20Chain%20Profile.pdf" },
-      { name: "OxyChem — Hydrochloric acid stewardship (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/stewardship/hydrochloric-acid.pdf" },
-      { name: "Covestro — Hydrochloric acid", url: "https://solutions.covestro.com/en/brands/hydrochloric-acid" },
+      { name: "US EPA: Hydrochloric acid supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Hydrochloric%20Acid%20Supply%20Chain%20Profile.pdf" },
+      { name: "OxyChem: Hydrochloric acid stewardship (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/stewardship/hydrochloric-acid.pdf" },
+      { name: "Covestro: Hydrochloric acid", url: "https://solutions.covestro.com/en/brands/hydrochloric-acid" },
     ],
   },
 
@@ -1268,9 +1268,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Yabang (representative China producer)", url: "https://www.yabang.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sulfamic acid", url: "https://en.wikipedia.org/wiki/Sulfamic_acid" },
-      { name: "Brenntag — Sulphamic acid", url: "https://www.brenntag.com/en-dk/products/sulphamic-acid.html" },
-      { name: "Metoree — Sulfamic acid manufacturers", url: "https://us.metoree.com/categories/6319/" },
+      { name: "Wikipedia: Sulfamic acid", url: "https://en.wikipedia.org/wiki/Sulfamic_acid" },
+      { name: "Brenntag: Sulphamic acid", url: "https://www.brenntag.com/en-dk/products/sulphamic-acid.html" },
+      { name: "Metoree: Sulfamic acid manufacturers", url: "https://us.metoree.com/categories/6319/" },
     ],
   },
 
@@ -1290,15 +1290,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Theophylline manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/theophylline" },
-      { name: "BASF Pharma — APIs", url: "https://pharmaceutical.basf.com/global/en/pharma-solutions/platforms/apis" },
-      { name: "Pharmaoffer — Theophylline API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/bronchodilators/theophylline" },
+      { name: "PharmaCompass: Theophylline manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/theophylline" },
+      { name: "BASF Pharma: APIs", url: "https://pharmaceutical.basf.com/global/en/pharma-solutions/platforms/apis" },
+      { name: "Pharmaoffer: Theophylline API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/bronchodilators/theophylline" },
     ],
   },
 
   "diclofenac-sodium": {
     routes: [
-      "Diphenylamine route — N-phenyl-2,6-dichloroaniline, then indolinone cyclisation and ring opening",
+      "Diphenylamine route, N-phenyl-2,6-dichloroaniline, then indolinone cyclisation and ring opening",
       "Direct N-arylation / Smiles-rearrangement variants",
     ],
     mainProcess: {
@@ -1314,9 +1314,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Diclofenac sodium manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/diclofenac-sodium-5018304" },
-      { name: "Procurement Resource — Diclofenac sodium process", url: "https://www.procurementresource.com/reports/diclofenac-sodium-manufacturing-plant-project-report" },
-      { name: "Elam Pharma — Diclofenac", url: "https://www.elampharma.com/product/diclofenac-sodium-ip-bp" },
+      { name: "PharmaCompass: Diclofenac sodium manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/diclofenac-sodium-5018304" },
+      { name: "Procurement Resource: Diclofenac sodium process", url: "https://www.procurementresource.com/reports/diclofenac-sodium-manufacturing-plant-project-report" },
+      { name: "Elam Pharma: Diclofenac", url: "https://www.elampharma.com/product/diclofenac-sodium-ip-bp" },
     ],
   },
 
@@ -1328,7 +1328,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Hofmann rearrangement of the cyclohexanediacetic monoamide",
       detail:
-        "Gabapentin (1-(aminomethyl)cyclohexaneacetic acid) is made from a cyclohexane backbone built from cyclohexanone. 1,1-Cyclohexanediacetic acid is converted to its mono-amide (CAM), and the amide is then subjected to a Hofmann rearrangement — treatment with a hypohalite (or PIFA / bromine + base) converts the amide to an amine with loss of one carbon, installing the aminomethyl group adjacent to the ring. The resulting amino-acid is isolated, often via its hydrochloride, and purified/crystallised to the free zwitterionic API.",
+        "Gabapentin (1-(aminomethyl)cyclohexaneacetic acid) is made from a cyclohexane backbone built from cyclohexanone. 1,1-Cyclohexanediacetic acid is converted to its mono-amide (CAM), and the amide is then subjected to a Hofmann rearrangement, treatment with a hypohalite (or PIFA / bromine + base) converts the amide to an amine with loss of one carbon, installing the aminomethyl group adjacent to the ring. The resulting amino-acid is isolated, often via its hydrochloride, and purified/crystallised to the free zwitterionic API.",
     },
     manufacturers: [
       { name: "IOL Chemicals and Pharmaceuticals", url: "https://www.iolcp.com" },
@@ -1338,9 +1338,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "Pipeline Pharma — Gabapentin manufacturing process", url: "https://www.pipelinepharma.com/blog/understanding-the-gabapentin-manufacturing-process" },
-      { name: "Google Patents — Industrial-scale gabapentin", url: "https://patents.google.com/patent/US7442834B2/en" },
-      { name: "IOLCP — Gabapentin API", url: "https://www.iolcp.com/gabapentin" },
+      { name: "Pipeline Pharma: Gabapentin manufacturing process", url: "https://www.pipelinepharma.com/blog/understanding-the-gabapentin-manufacturing-process" },
+      { name: "Google Patents: Industrial-scale gabapentin", url: "https://patents.google.com/patent/US7442834B2/en" },
+      { name: "IOLCP: Gabapentin API", url: "https://www.iolcp.com/gabapentin" },
     ],
   },
 
@@ -1362,9 +1362,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Cetirizine dihydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/cetirizine-dihydrochloride" },
-      { name: "Dr. Reddy's — Cetirizine dihydrochloride API", url: "https://api.drreddys.com/product/cetirizine-dihydrochloride" },
-      { name: "Pharmaoffer — Cetirizine dihydrochloride suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/cetirizine-dihydrochloride" },
+      { name: "PharmaCompass: Cetirizine dihydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/cetirizine-dihydrochloride" },
+      { name: "Dr. Reddy's: Cetirizine dihydrochloride API", url: "https://api.drreddys.com/product/cetirizine-dihydrochloride" },
+      { name: "Pharmaoffer: Cetirizine dihydrochloride suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/cetirizine-dihydrochloride" },
     ],
   },
 
@@ -1386,9 +1386,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hovione", url: "https://www.hovione.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Ketoconazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ketoconazole" },
-      { name: "IMARC — Ketoconazole manufacturing", url: "https://www.imarcgroup.com/ketoconazole-manufacturing-plant-project-report" },
-      { name: "DrugPatentWatch — Ketoconazole API sources", url: "https://www.drugpatentwatch.com/p/bulk-api/KETOCONAZOLE" },
+      { name: "PharmaCompass: Ketoconazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ketoconazole" },
+      { name: "IMARC: Ketoconazole manufacturing", url: "https://www.imarcgroup.com/ketoconazole-manufacturing-plant-project-report" },
+      { name: "DrugPatentWatch: Ketoconazole API sources", url: "https://www.drugpatentwatch.com/p/bulk-api/KETOCONAZOLE" },
     ],
   },
 
@@ -1401,7 +1401,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Oxathiolane coupling with cytosine",
       detail:
-        "Lamivudine (3TC) is a cytidine analogue in which the sugar is replaced by a chiral 1,3-oxathiolane ring. Manufacture is convergent: a substituted 1,3-oxathiolane bearing an activated (e.g. acetoxy) anomeric centre is built — classically from a menthyl glyoxylate and a dithiane/mercaptoacetaldehyde unit that also sets stereochemistry — and is then coupled (Vorbruggen-type N-glycosylation) with silyl-protected cytosine using a Lewis acid. The mixture is resolved/crystallised to obtain the single cis-(−) enantiomer required for activity, and deprotected to the API.",
+        "Lamivudine (3TC) is a cytidine analogue in which the sugar is replaced by a chiral 1,3-oxathiolane ring. Manufacture is convergent: a substituted 1,3-oxathiolane bearing an activated (e.g. acetoxy) anomeric centre is built, classically from a menthyl glyoxylate and a dithiane/mercaptoacetaldehyde unit that also sets stereochemistry, and is then coupled (Vorbruggen-type N-glycosylation) with silyl-protected cytosine using a Lewis acid. The mixture is resolved/crystallised to obtain the single cis-(−) enantiomer required for activity, and deprotected to the API.",
     },
     manufacturers: [
       { name: "GSK / ViiV Healthcare (originator)", url: "https://www.gsk.com" },
@@ -1411,9 +1411,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Laurus Labs", url: "https://www.lauruslabs.com" },
     ],
     sources: [
-      { name: "ACS OPRD — Economical route to lamivudine", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.0c00083" },
-      { name: "Medicines4All — 3TC process (PDF)", url: "https://medicines4all.vcu.edu/media/medicines4all/assets/documents/3TC%20PDR_vFinal-1.pdf" },
-      { name: "PharmaCompass — Lamivudine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/lamivudine" },
+      { name: "ACS OPRD: Economical route to lamivudine", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.0c00083" },
+      { name: "Medicines4All: 3TC process (PDF)", url: "https://medicines4all.vcu.edu/media/medicines4all/assets/documents/3TC%20PDR_vFinal-1.pdf" },
+      { name: "PharmaCompass: Lamivudine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/lamivudine" },
     ],
   },
 
@@ -1436,9 +1436,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "ChemAnalyst — Levetiracetam production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/the-production-process-of-levetiracetam-a-technical-insight-into-modern-api-38886" },
-      { name: "ScienceDirect — Levetiracetam overview", url: "https://www.sciencedirect.com/topics/chemistry/levetiracetam" },
-      { name: "ChemAnalyst — Levetiracetam supply chain", url: "https://www.chemanalyst.com/Blogs/decoding-the-levetiracetam-supply-chain-from-raw-material-to-global-distribution-58" },
+      { name: "ChemAnalyst: Levetiracetam production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/the-production-process-of-levetiracetam-a-technical-insight-into-modern-api-38886" },
+      { name: "ScienceDirect: Levetiracetam overview", url: "https://www.sciencedirect.com/topics/chemistry/levetiracetam" },
+      { name: "ChemAnalyst: Levetiracetam supply chain", url: "https://www.chemanalyst.com/Blogs/decoding-the-levetiracetam-supply-chain-from-raw-material-to-global-distribution-58" },
     ],
   },
 
@@ -1459,9 +1459,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hikal", url: "https://www.hikal.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Sulbactam sodium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulbactam-sodium" },
-      { name: "Google Patents — Penicillanic acid compounds", url: "https://patents.google.com/patent/US4942229A/en" },
-      { name: "Pharmaoffer — Sulbactam API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/beta-lactamase-inhibitors/sulbactam" },
+      { name: "PharmaCompass: Sulbactam sodium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulbactam-sodium" },
+      { name: "Google Patents: Penicillanic acid compounds", url: "https://patents.google.com/patent/US4942229A/en" },
+      { name: "Pharmaoffer: Sulbactam API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/beta-lactamase-inhibitors/sulbactam" },
     ],
   },
 
@@ -1473,7 +1473,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Gluconic-acid fermentation + calcium neutralisation",
       detail:
-        "Calcium gluconate is made by first producing gluconic acid from glucose. In submerged aerobic fermentation, Aspergillus niger (using its glucose-oxidase system) oxidises the aldehyde group of glucose to the carboxylic acid, giving gluconic acid at near-quantitative yield under controlled pH and aeration. The gluconic acid (or its sodium salt) is then neutralised with a calcium source — calcium hydroxide or calcium carbonate — to form calcium gluconate, which is decolourised, concentrated and crystallised to pharmaceutical/food grade.",
+        "Calcium gluconate is made by first producing gluconic acid from glucose. In submerged aerobic fermentation, Aspergillus niger (using its glucose-oxidase system) oxidises the aldehyde group of glucose to the carboxylic acid, giving gluconic acid at near-quantitative yield under controlled pH and aeration. The gluconic acid (or its sodium salt) is then neutralised with a calcium source, calcium hydroxide or calcium carbonate, to form calcium gluconate, which is decolourised, concentrated and crystallised to pharmaceutical/food grade.",
     },
     manufacturers: [
       { name: "Jungbunzlauer", url: "https://www.jungbunzlauer.com" },
@@ -1482,9 +1482,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Roquette", url: "https://www.roquette.com" },
     ],
     sources: [
-      { name: "PMC — Gluconic acid by microbial fermentation", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9149244/" },
-      { name: "Google Patents — Preparing calcium gluconate", url: "https://patents.google.com/patent/US7618664B2/en" },
-      { name: "Mordor Intelligence — Calcium gluconate market", url: "https://www.mordorintelligence.com/industry-reports/calcium-gluconate-market" },
+      { name: "PMC: Gluconic acid by microbial fermentation", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9149244/" },
+      { name: "Google Patents: Preparing calcium gluconate", url: "https://patents.google.com/patent/US7618664B2/en" },
+      { name: "Mordor Intelligence: Calcium gluconate market", url: "https://www.mordorintelligence.com/industry-reports/calcium-gluconate-market" },
     ],
   },
 
@@ -1497,7 +1497,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Catalytic hydrogenation of fructose",
       detail:
-        "D-Mannitol is made by the high-pressure catalytic hydrogenation of fructose/glucose (invert sugar) solutions over a Raney-nickel catalyst at ~120–160 °C. Fructose hydrogenates to a roughly equal mixture of mannitol and sorbitol, while any glucose gives sorbitol only — so a typical 50/50 fructose/glucose feed yields about 30% mannitol and 70% sorbitol. Because mannitol is much less soluble than sorbitol, it is separated and purified by selective crystallisation from the hydrogenated syrup. Some mannitol is also produced by fermentation of fructose.",
+        "D-Mannitol is made by the high-pressure catalytic hydrogenation of fructose/glucose (invert sugar) solutions over a Raney-nickel catalyst at ~120-160 °C. Fructose hydrogenates to a roughly equal mixture of mannitol and sorbitol, while any glucose gives sorbitol only, so a typical 50/50 fructose/glucose feed yields about 30% mannitol and 70% sorbitol. Because mannitol is much less soluble than sorbitol, it is separated and purified by selective crystallisation from the hydrogenated syrup. Some mannitol is also produced by fermentation of fructose.",
     },
     manufacturers: [
       { name: "Roquette", url: "https://www.roquette.com" },
@@ -1506,9 +1506,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Cargill — Mannitol", url: "https://www.cargill.com/pharmaceutical/pharma-products/mannitol" },
-      { name: "ResearchGate — Production methods of D-mannitol", url: "https://www.researchgate.net/publication/230122916_Production_Methods_of_D-Mannitol" },
-      { name: "Across Biotech — Key mannitol manufacturers", url: "https://acrossbiotech.com/key-manufacturers-of-mannitol/" },
+      { name: "Cargill: Mannitol", url: "https://www.cargill.com/pharmaceutical/pharma-products/mannitol" },
+      { name: "ResearchGate: Production methods of D-mannitol", url: "https://www.researchgate.net/publication/230122916_Production_Methods_of_D-Mannitol" },
+      { name: "Across Biotech: Key mannitol manufacturers", url: "https://acrossbiotech.com/key-manufacturers-of-mannitol/" },
     ],
   },
 
@@ -1532,15 +1532,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Weifang Ensign Industry", url: "https://www.ensign-ind.com" },
     ],
     sources: [
-      { name: "PMC — Citric acid production by A. niger", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11956825/" },
-      { name: "MDPI Life — Citric acid via A. niger fermentation", url: "https://www.mdpi.com/2075-1729/14/6/756" },
-      { name: "IMARC / AdPand — Top citric acid manufacturers", url: "https://www.adpand.com/top-10-citric-acid-manufacturers-in-the-world-imarc-group/" },
+      { name: "PMC: Citric acid production by A. niger", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11956825/" },
+      { name: "MDPI Life: Citric acid via A. niger fermentation", url: "https://www.mdpi.com/2075-1729/14/6/756" },
+      { name: "IMARC / AdPand: Top citric acid manufacturers", url: "https://www.adpand.com/top-10-citric-acid-manufacturers-in-the-world-imarc-group/" },
     ],
   },
 
   menthol: {
     routes: [
-      "Synthetic from thymol (m-cresol) — hydrogenation, then resolution (Symrise)",
+      "Synthetic from thymol (m-cresol), hydrogenation, then resolution (Symrise)",
       "Synthetic from myrcene/citronellal via isopulegol asymmetric route (Takasago, BASF)",
       "Natural extraction from Mentha arvensis (mint) oil by freezing/crystallisation",
     ],
@@ -1555,9 +1555,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Takasago International", url: "https://www.takasago.com" },
     ],
     sources: [
-      { name: "Wiley FFJ — Industrial synthesis of (−)-menthol", url: "https://onlinelibrary.wiley.com/doi/full/10.1002/ffj.3699" },
-      { name: "Chemistry LibreTexts — Strategies in (−)-menthol synthesis", url: "https://chem.libretexts.org/Bookshelves/Organic_Chemistry/Logic_of_Organic_Synthesis_(Rao)/06:_Strategies_in_(-)-Menthol_Synthesis" },
-      { name: "Outsourcing-Pharma — BASF synthetic menthol", url: "https://www.outsourcing-pharma.com/Article/2011/11/08/BASF-to-enter-synthetic-menthol-market-in-2012/" },
+      { name: "Wiley FFJ: Industrial synthesis of (−)-menthol", url: "https://onlinelibrary.wiley.com/doi/full/10.1002/ffj.3699" },
+      { name: "Chemistry LibreTexts: Strategies in (−)-menthol synthesis", url: "https://chem.libretexts.org/Bookshelves/Organic_Chemistry/Logic_of_Organic_Synthesis_(Rao)/06:_Strategies_in_(-)-Menthol_Synthesis" },
+      { name: "Outsourcing-Pharma: BASF synthetic menthol", url: "https://www.outsourcing-pharma.com/Article/2011/11/08/BASF-to-enter-synthetic-menthol-market-in-2012/" },
     ],
   },
 
@@ -1580,9 +1580,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Intratec — DL-methionine from acrolein/MeSH/HCN (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/methionine-e41a-b.pdf" },
-      { name: "Thunen Institute — Methionine production review (PDF)", url: "https://literatur.thuenen.de/digbib_extern/dn054249.pdf" },
-      { name: "Across Biotech — Methionine manufacturers", url: "https://acrossbiotech.com/methionine-manufacturers-and-production-methods/" },
+      { name: "Intratec: DL-methionine from acrolein/MeSH/HCN (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/methionine-e41a-b.pdf" },
+      { name: "Thunen Institute: Methionine production review (PDF)", url: "https://literatur.thuenen.de/digbib_extern/dn054249.pdf" },
+      { name: "Across Biotech: Methionine manufacturers", url: "https://acrossbiotech.com/methionine-manufacturers-and-production-methods/" },
     ],
   },
 
@@ -1604,9 +1604,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Meihua Holdings Group", url: "https://www.meihuagrp.com" },
     ],
     sources: [
-      { name: "ScienceDirect — L-lysine in C. glutamicum", url: "https://www.sciencedirect.com/science/article/pii/S0944501322001410" },
-      { name: "Ande Group — Industrial lysine fermentation", url: "https://www.myandegroup.com/blog/industrial-lysine-fermentation-process" },
-      { name: "Fortune Business Insights — Lysine market", url: "https://www.fortunebusinessinsights.com/lysine-market-109615" },
+      { name: "ScienceDirect: L-lysine in C. glutamicum", url: "https://www.sciencedirect.com/science/article/pii/S0944501322001410" },
+      { name: "Ande Group: Industrial lysine fermentation", url: "https://www.myandegroup.com/blog/industrial-lysine-fermentation-process" },
+      { name: "Fortune Business Insights: Lysine market", url: "https://www.fortunebusinessinsights.com/lysine-market-109615" },
     ],
   },
 
@@ -1618,7 +1618,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Glutamic-acid fermentation + neutralisation",
       detail:
-        "MSG is produced by fermentation, the same biotechnology established in 1956 with Corynebacterium glutamicum. The bacterium is grown aerobically on glucose, cane molasses or tapioca-starch sugars at ~30–37 °C for 30–40 hours, over-secreting L-glutamic acid (to ~150 g/L) when biotin and other conditions are limited. The glutamic acid is recovered from the broth by isoelectric crystallisation, then neutralised with sodium hydroxide to form monosodium glutamate, which is decolourised and re-crystallised to bright, pure flavour-enhancer crystals.",
+        "MSG is produced by fermentation, the same biotechnology established in 1956 with Corynebacterium glutamicum. The bacterium is grown aerobically on glucose, cane molasses or tapioca-starch sugars at ~30-37 °C for 30-40 hours, over-secreting L-glutamic acid (to ~150 g/L) when biotin and other conditions are limited. The glutamic acid is recovered from the broth by isoelectric crystallisation, then neutralised with sodium hydroxide to form monosodium glutamate, which is decolourised and re-crystallised to bright, pure flavour-enhancer crystals.",
     },
     manufacturers: [
       { name: "Ajinomoto", url: "https://www.ajinomoto.com" },
@@ -1628,9 +1628,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cargill", url: "https://www.cargill.com" },
     ],
     sources: [
-      { name: "ChemFYI — MSG production by fermentation", url: "https://chemfyi.com/application/monosodium-glutamate-msg-production-by-fermentation/" },
-      { name: "The Science Notes — MSG production", url: "https://thesciencenotes.com/monosodium-glutamate-msg-history-structure-properties-production-effects/" },
-      { name: "Mordor Intelligence — MSG companies", url: "https://www.mordorintelligence.com/industry-reports/monosodium-glutamate-msg-market/companies" },
+      { name: "ChemFYI: MSG production by fermentation", url: "https://chemfyi.com/application/monosodium-glutamate-msg-production-by-fermentation/" },
+      { name: "The Science Notes: MSG production", url: "https://thesciencenotes.com/monosodium-glutamate-msg-history-structure-properties-production-effects/" },
+      { name: "Mordor Intelligence: MSG companies", url: "https://www.mordorintelligence.com/industry-reports/monosodium-glutamate-msg-market/companies" },
     ],
   },
 
@@ -1643,7 +1643,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Fat splitting + fractional distillation",
       detail:
-        "Lauric acid (C12) is an oleochemical made from lauric oils — coconut oil and palm-kernel oil, which are rich in C12. The triglycerides are first hydrolysed ('fat splitting') with water at high temperature (~250 °C) and pressure, breaking them into crude mixed fatty acids and glycerol. The mixed fatty acids are then separated by fractional distillation into C8, C10, C12, C14 and higher cuts; the lauric cut is taken and, depending on grade, distilled further or hydrogenated to give high-purity (e.g. 99%) lauric acid for surfactants, soaps and personal care.",
+        "Lauric acid (C12) is an oleochemical made from lauric oils, coconut oil and palm-kernel oil, which are rich in C12. The triglycerides are first hydrolysed ('fat splitting') with water at high temperature (~250 °C) and pressure, breaking them into crude mixed fatty acids and glycerol. The mixed fatty acids are then separated by fractional distillation into C8, C10, C12, C14 and higher cuts; the lauric cut is taken and, depending on grade, distilled further or hydrogenated to give high-purity (e.g. 99%) lauric acid for surfactants, soaps and personal care.",
     },
     manufacturers: [
       { name: "Wilmar International", url: "https://www.wilmar-international.com" },
@@ -1653,22 +1653,22 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Acme-Hardesty", url: "https://www.acme-hardesty.com" },
     ],
     sources: [
-      { name: "Wilmar — Lauric acid 98%", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
-      { name: "Springer — Palm kernel & coconut oils technology", url: "https://link.springer.com/article/10.1007/BF02543521" },
-      { name: "Future Market Insights — Lauric acid market", url: "https://www.futuremarketinsights.com/reports/lauric-acid-market" },
+      { name: "Wilmar: Lauric acid 98%", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
+      { name: "Springer: Palm kernel & coconut oils technology", url: "https://link.springer.com/article/10.1007/BF02543521" },
+      { name: "Future Market Insights: Lauric acid market", url: "https://www.futuremarketinsights.com/reports/lauric-acid-market" },
     ],
   },
 
   "propylene-glycol": {
     routes: [
-      "Hydration of propylene oxide (thermal, water excess) — dominant",
+      "Hydration of propylene oxide (thermal, water excess), dominant",
       "Catalytic hydration variants",
       "Bio-based hydrogenolysis of glycerol / sugars (renewable PG)",
     ],
     mainProcess: {
       name: "Propylene oxide hydration",
       detail:
-        "Mono-propylene glycol is made by hydrating propylene oxide with a large excess of water, usually thermally (uncatalysed) at ~150–200 °C and moderate pressure: C3H6O + H2O → CH3CH(OH)CH2OH. The water excess suppresses the formation of di- and tri-propylene glycol co-products. The dilute glycol solution is concentrated by multi-effect evaporation and the mono-, di- and tri-propylene glycols are separated by vacuum distillation. (Propylene oxide itself is made by chlorohydrin, styrene-monomer/PO, cumene-hydroperoxide or HPPO routes.) Renewable PG is made by hydrogenolysis of glycerol.",
+        "Mono-propylene glycol is made by hydrating propylene oxide with a large excess of water, usually thermally (uncatalysed) at ~150-200 °C and moderate pressure: C3H6O + H2O → CH3CH(OH)CH2OH. The water excess suppresses the formation of di- and tri-propylene glycol co-products. The dilute glycol solution is concentrated by multi-effect evaporation and the mono-, di- and tri-propylene glycols are separated by vacuum distillation. (Propylene oxide itself is made by chlorohydrin, styrene-monomer/PO, cumene-hydroperoxide or HPPO routes.) Renewable PG is made by hydrogenolysis of glycerol.",
     },
     manufacturers: [
       { name: "Dow (largest capacity)", url: "https://www.dow.com" },
@@ -1678,15 +1678,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ADM", url: "https://www.adm.com" },
     ],
     sources: [
-      { name: "LyondellBasell — Propylene glycol industrial", url: "https://www.lyondellbasell.com/en/chemicals/p/PROPYLENE-GLYCOL-INDUSTRIAL/723d4ad9-7f19-4bea-ae6b-59f521c7c97e" },
-      { name: "Mordor Intelligence — Propylene glycol market", url: "https://www.mordorintelligence.com/industry-reports/propylene-glycol-market" },
-      { name: "iScience — Renewable propylene glycol", url: "https://www.cell.com/iscience/fulltext/S2589-0042(22)01175-0" },
+      { name: "LyondellBasell: Propylene glycol industrial", url: "https://www.lyondellbasell.com/en/chemicals/p/PROPYLENE-GLYCOL-INDUSTRIAL/723d4ad9-7f19-4bea-ae6b-59f521c7c97e" },
+      { name: "Mordor Intelligence: Propylene glycol market", url: "https://www.mordorintelligence.com/industry-reports/propylene-glycol-market" },
+      { name: "iScience: Renewable propylene glycol", url: "https://www.cell.com/iscience/fulltext/S2589-0042(22)01175-0" },
     ],
   },
 
   acetonitrile: {
     routes: [
-      "Recovery as a by-product of acrylonitrile (propylene ammoxidation) — dominant",
+      "Recovery as a by-product of acrylonitrile (propylene ammoxidation), dominant",
       "Purification by distillation/dehydration to HPLC grades",
       "On-purpose synthesis from acetic acid + ammonia (minor)",
     ],
@@ -1703,9 +1703,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PetroChina (CNPC)", url: "https://www.petrochina.com.cn" },
     ],
     sources: [
-      { name: "INEOS Nitriles — Speciality nitriles", url: "https://www.ineos.com/businesses/ineos-nitriles/products/speciality-nitriles/" },
-      { name: "Nova Molecular — Acetonitrile market", url: "https://novamolecular.com/nova-molecular-technologies-major-player-acetonitrile-market/" },
-      { name: "Coherent Market Insights — Acetonitrile companies", url: "https://www.coherentmarketinsights.com/blog/insights/major-companies-acetonitrile-industry-1032" },
+      { name: "INEOS Nitriles: Speciality nitriles", url: "https://www.ineos.com/businesses/ineos-nitriles/products/speciality-nitriles/" },
+      { name: "Nova Molecular: Acetonitrile market", url: "https://novamolecular.com/nova-molecular-technologies-major-player-acetonitrile-market/" },
+      { name: "Coherent Market Insights: Acetonitrile companies", url: "https://www.coherentmarketinsights.com/blog/insights/major-companies-acetonitrile-industry-1032" },
     ],
   },
 
@@ -1718,7 +1718,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Kolbe-Schmitt carboxylation",
       detail:
-        "Salicylic acid is made by the Kolbe-Schmitt reaction. Phenol is first neutralised with sodium hydroxide to dry sodium phenoxide, which is then reacted with carbon dioxide under pressure (~5–10 bar, ~125 °C); the phenoxide attacks CO2 and, after rearrangement, gives sodium salicylate with the carboxyl group ortho to the hydroxyl. Acidification with sulfuric acid liberates free salicylic acid, which is purified by recrystallisation or sublimation. It is the key precursor to aspirin (acetylsalicylic acid) and to methyl salicylate.",
+        "Salicylic acid is made by the Kolbe-Schmitt reaction. Phenol is first neutralised with sodium hydroxide to dry sodium phenoxide, which is then reacted with carbon dioxide under pressure (~5-10 bar, ~125 °C); the phenoxide attacks CO2 and, after rearrangement, gives sodium salicylate with the carboxyl group ortho to the hydroxyl. Acidification with sulfuric acid liberates free salicylic acid, which is purified by recrystallisation or sublimation. It is the key precursor to aspirin (acetylsalicylic acid) and to methyl salicylate.",
     },
     manufacturers: [
       { name: "Novacyl (world leader)", url: "https://www.novacyl.com" },
@@ -1726,9 +1726,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Siddharth Carbochem Products", url: "https://www.siddharthcarbochem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Kolbe-Schmitt reaction", url: "https://en.wikipedia.org/wiki/Kolbe%E2%80%93Schmitt_reaction" },
-      { name: "MDPI Molecules — Kolbe-Schmitt salicylic acid", url: "https://www.mdpi.com/1420-3049/29/11/2527" },
-      { name: "ChemAnalyst — Aspirin/salicylic acid process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
+      { name: "Wikipedia: Kolbe-Schmitt reaction", url: "https://en.wikipedia.org/wiki/Kolbe%E2%80%93Schmitt_reaction" },
+      { name: "MDPI Molecules: Kolbe-Schmitt salicylic acid", url: "https://www.mdpi.com/1420-3049/29/11/2527" },
+      { name: "ChemAnalyst: Aspirin/salicylic acid process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
     ],
   },
 
@@ -1741,7 +1741,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Toluene oxidation / benzal chloride hydrolysis",
       detail:
-        "Benzaldehyde is made on scale by two main routes. In catalytic liquid-phase air oxidation, toluene is oxidised with air over a cobalt/manganese catalyst, and conditions are tuned to stop at the aldehyde stage (benzaldehyde) before over-oxidation to benzoic acid. In the chlorination route, toluene's methyl group is chlorinated to benzal chloride (PhCHCl2), which is then hydrolysed with water/base at ~100–200 °C to benzaldehyde plus HCl. The chlorination route gives a 'technical' grade; oxidation gives chlorine-free benzaldehyde preferred for flavour and fragrance use.",
+        "Benzaldehyde is made on scale by two main routes. In catalytic liquid-phase air oxidation, toluene is oxidised with air over a cobalt/manganese catalyst, and conditions are tuned to stop at the aldehyde stage (benzaldehyde) before over-oxidation to benzoic acid. In the chlorination route, toluene's methyl group is chlorinated to benzal chloride (PhCHCl2), which is then hydrolysed with water/base at ~100-200 °C to benzaldehyde plus HCl. The chlorination route gives a 'technical' grade; oxidation gives chlorine-free benzaldehyde preferred for flavour and fragrance use.",
     },
     manufacturers: [
       { name: "LANXESS (Emerald Kalama)", url: "https://www.lanxess.com" },
@@ -1749,9 +1749,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kadillac Chemicals", url: "https://www.kadillacchemicals.com" },
     ],
     sources: [
-      { name: "Grand View Research — Benzaldehyde market", url: "https://www.grandviewresearch.com/industry-analysis/benzaldehyde-market-report" },
-      { name: "C&EN — Lanxess acquires Emerald Kalama", url: "https://cen.acs.org/business/specialty-chemicals/Lanxess-acquire-US-firm-Emerald/99/web/2021/02" },
-      { name: "Google Patents — Benzaldehyde by toluene air oxidation", url: "https://patents.google.com/patent/US6495726B1/en" },
+      { name: "Grand View Research: Benzaldehyde market", url: "https://www.grandviewresearch.com/industry-analysis/benzaldehyde-market-report" },
+      { name: "C&EN: Lanxess acquires Emerald Kalama", url: "https://cen.acs.org/business/specialty-chemicals/Lanxess-acquire-US-firm-Emerald/99/web/2021/02" },
+      { name: "Google Patents: Benzaldehyde by toluene air oxidation", url: "https://patents.google.com/patent/US6495726B1/en" },
     ],
   },
 
@@ -1770,9 +1770,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Naphthalene-2-sulfonic acid", url: "https://en.wikipedia.org/wiki/Naphthalene-2-sulfonic_acid" },
-      { name: "IMARC — Beta-naphthol manufacturing", url: "https://www.imarcgroup.com/beta-naphthol-manufacturing-plant-project-report" },
-      { name: "ChemicalBook — Applications of 2-naphthol", url: "https://www.chemicalbook.com/article/different-applications-of-2-naphthol.htm" },
+      { name: "Wikipedia: Naphthalene-2-sulfonic acid", url: "https://en.wikipedia.org/wiki/Naphthalene-2-sulfonic_acid" },
+      { name: "IMARC: Beta-naphthol manufacturing", url: "https://www.imarcgroup.com/beta-naphthol-manufacturing-plant-project-report" },
+      { name: "ChemicalBook: Applications of 2-naphthol", url: "https://www.chemicalbook.com/article/different-applications-of-2-naphthol.htm" },
     ],
   },
 
@@ -1784,7 +1784,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Carbothermic reduction of quartz (electric-arc furnace)",
       detail:
-        "Silicon metal is made by reducing high-purity quartz (SiO2) with carbon in a submerged electric-arc furnace. Quartz is mixed with carbon reductants (metallurgical coke, coal, charcoal and woodchips) and heated by the arc between carbon electrodes to ~1700–2000 °C, where carbon strips the oxygen: SiO2 + 2 C → Si + 2 CO. Molten silicon is tapped from the furnace, oxidatively refined in the ladle to remove impurities (e.g. with air/oxygen and slag formers), and cast and crushed. The process is highly energy-intensive (~13,000–15,000 kWh per tonne).",
+        "Silicon metal is made by reducing high-purity quartz (SiO2) with carbon in a submerged electric-arc furnace. Quartz is mixed with carbon reductants (metallurgical coke, coal, charcoal and woodchips) and heated by the arc between carbon electrodes to ~1700-2000 °C, where carbon strips the oxygen: SiO2 + 2 C → Si + 2 CO. Molten silicon is tapped from the furnace, oxidatively refined in the ladle to remove impurities (e.g. with air/oxygen and slag formers), and cast and crushed. The process is highly energy-intensive (~13,000-15,000 kWh per tonne).",
     },
     manufacturers: [
       { name: "Ferroglobe", url: "https://www.ferroglobe.com" },
@@ -1793,9 +1793,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mississippi Silicon", url: "https://www.mississippisilicon.com" },
     ],
     sources: [
-      { name: "Elkem — From quartz to silicon to silicones", url: "https://magazine.elkem.com/material-science-insights/from-quartz-to-silicon-to-silicones/" },
-      { name: "Ferroglobe — Silicon metal", url: "https://www.ferroglobe.com/solutions/silicon-metal" },
-      { name: "USGS — Silicon 2020 minerals yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2020/myb1-2020-silicon.pdf" },
+      { name: "Elkem: From quartz to silicon to silicones", url: "https://magazine.elkem.com/material-science-insights/from-quartz-to-silicon-to-silicones/" },
+      { name: "Ferroglobe: Silicon metal", url: "https://www.ferroglobe.com/solutions/silicon-metal" },
+      { name: "USGS: Silicon 2020 minerals yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2020/myb1-2020-silicon.pdf" },
     ],
   },
 
@@ -1816,9 +1816,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "TETRA Technologies — Calcium chloride", url: "https://onetetra.com/industrial-chemicals/calcium-chloride/" },
-      { name: "USDA — Calcium chloride technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2024TechnicalReportCalciumChlorideHandling.pdf" },
-      { name: "Merchant Research — Calcium chloride market", url: "https://mcgroup.co.uk/news/20250116/calcium-chloride-navigating-major-applications-and-market-trends.html" },
+      { name: "TETRA Technologies: Calcium chloride", url: "https://onetetra.com/industrial-chemicals/calcium-chloride/" },
+      { name: "USDA: Calcium chloride technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2024TechnicalReportCalciumChlorideHandling.pdf" },
+      { name: "Merchant Research: Calcium chloride market", url: "https://mcgroup.co.uk/news/20250116/calcium-chloride-navigating-major-applications-and-market-trends.html" },
     ],
   },
 
@@ -1840,9 +1840,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sulfozyme Agro", url: "https://sulfozyme.com" },
     ],
     sources: [
-      { name: "Metoree — Copper sulfate manufacturers", url: "https://us.metoree.com/categories/6720/" },
-      { name: "Anmol Chemicals — Copper sulphate", url: "https://anmolchemicals.org/sc-copper-sulphate-pentahydrate.php" },
-      { name: "Norkem — Copper sulphate", url: "https://norkem.com/products/copper-sulphate" },
+      { name: "Metoree: Copper sulfate manufacturers", url: "https://us.metoree.com/categories/6720/" },
+      { name: "Anmol Chemicals: Copper sulphate", url: "https://anmolchemicals.org/sc-copper-sulphate-pentahydrate.php" },
+      { name: "Norkem: Copper sulphate", url: "https://norkem.com/products/copper-sulphate" },
     ],
   },
 
@@ -1864,21 +1864,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tosoh Silica", url: "https://www.tosoh.com" },
     ],
     sources: [
-      { name: "Verified Market Research — Top precipitated silica makers", url: "https://www.verifiedmarketresearch.com/blog/top-precipitated-silica-manufacturers/" },
-      { name: "MarketsandMarkets — Precipitated silica companies", url: "https://www.marketsandmarkets.com/ResearchInsight/precipitated-silica-market.asp" },
-      { name: "Mordor Intelligence — Precipitated silica market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-silica-market" },
+      { name: "Verified Market Research: Top precipitated silica makers", url: "https://www.verifiedmarketresearch.com/blog/top-precipitated-silica-manufacturers/" },
+      { name: "MarketsandMarkets: Precipitated silica companies", url: "https://www.marketsandmarkets.com/ResearchInsight/precipitated-silica-market.asp" },
+      { name: "Mordor Intelligence: Precipitated silica market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-silica-market" },
     ],
   },
 
   "aluminium-hydroxide": {
     routes: [
-      "Bayer process — caustic digestion of bauxite, then seeded precipitation",
+      "Bayer process, caustic digestion of bauxite, then seeded precipitation",
       "Re-precipitation/grinding to fine ATH (flame-retardant) grades",
     ],
     mainProcess: {
       name: "Bayer process precipitation",
       detail:
-        "Aluminium hydroxide is produced via the Bayer process. Finely ground bauxite is digested in hot concentrated sodium hydroxide in autoclaves at ~130–250 °C, dissolving the alumina as sodium aluminate while the iron/silicon impurities settle out as 'red mud'. The clarified, cooled aluminate liquor is then seeded with fine aluminium-hydroxide crystals, which makes dissolved alumina precipitate as crystalline Al(OH)3 (gibbsite): NaAl(OH)4 → Al(OH)3 + NaOH. The hydroxide is filtered and washed; part is calcined to alumina for aluminium smelting, and finer precipitated grades (ATH) are used as flame retardants and fillers.",
+        "Aluminium hydroxide is produced via the Bayer process. Finely ground bauxite is digested in hot concentrated sodium hydroxide in autoclaves at ~130-250 °C, dissolving the alumina as sodium aluminate while the iron/silicon impurities settle out as 'red mud'. The clarified, cooled aluminate liquor is then seeded with fine aluminium-hydroxide crystals, which makes dissolved alumina precipitate as crystalline Al(OH)3 (gibbsite): NaAl(OH)4 → Al(OH)3 + NaOH. The hydroxide is filtered and washed; part is calcined to alumina for aluminium smelting, and finer precipitated grades (ATH) are used as flame retardants and fillers.",
     },
     manufacturers: [
       { name: "Almatis", url: "https://www.almatis.com" },
@@ -1888,9 +1888,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chalco (Aluminum Corp. of China)", url: "https://www.chalco.com.cn" },
     ],
     sources: [
-      { name: "Aluminium Guide — Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
-      { name: "Almatis — Our story", url: "https://www.almatis.com/en/about-us/our-story" },
-      { name: "KMT Industrial — Aluminium hydroxide manufacturers", url: "https://www.kmtindustrial.com/top-aluminum-hydroxide-manufacturers/" },
+      { name: "Aluminium Guide: Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
+      { name: "Almatis: Our story", url: "https://www.almatis.com/en/about-us/our-story" },
+      { name: "KMT Industrial: Aluminium hydroxide manufacturers", url: "https://www.kmtindustrial.com/top-aluminum-hydroxide-manufacturers/" },
     ],
   },
 
@@ -1902,7 +1902,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Biurea formation + oxidation",
       detail:
-        "Azodicarbonamide (ADC), the main chemical blowing agent for foamed plastics and rubber, is made in two steps. Urea is first condensed with hydrazine (hydrate) to form biurea (hydrazodicarbonamide): 2 (NH2)2CO + N2H4 → (H2NCONH)2 + 2 NH3. The biurea is then oxidised — classically with chlorine gas, or with sodium hypochlorite or hydrogen peroxide — to introduce the azo (-N=N-) bond, giving azodicarbonamide, which is filtered, washed, dried and milled to a controlled particle size. On heating it decomposes to release nitrogen and other gases that foam the polymer.",
+        "Azodicarbonamide (ADC), the main chemical blowing agent for foamed plastics and rubber, is made in two steps. Urea is first condensed with hydrazine (hydrate) to form biurea (hydrazodicarbonamide): 2 (NH2)2CO + N2H4 → (H2NCONH)2 + 2 NH3. The biurea is then oxidised, classically with chlorine gas, or with sodium hypochlorite or hydrogen peroxide, to introduce the azo (-N=N-) bond, giving azodicarbonamide, which is filtered, washed, dried and milled to a controlled particle size. On heating it decomposes to release nitrogen and other gases that foam the polymer.",
     },
     manufacturers: [
       { name: "Otsuka Chemical (Unifoam AZ)", url: "https://www.otsukac.co.jp" },
@@ -1910,9 +1910,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sundow Polymers", url: "https://www.sundow.com" },
     ],
     sources: [
-      { name: "Wikipedia — Azodicarbonamide", url: "https://en.wikipedia.org/wiki/Azodicarbonamide" },
-      { name: "Otsuka Chemical — Unifoam AZ blowing agent", url: "https://www.otsukac.co.jp/en/products/cat-hydrazine-derivative/blendtype-fa.html" },
-      { name: "NBINNO — Azodicarbonamide production & uses", url: "https://www.nbinno.com/article/blowing-agents/deep-dive-azodicarbonamide-properties-production-uses-nw" },
+      { name: "Wikipedia: Azodicarbonamide", url: "https://en.wikipedia.org/wiki/Azodicarbonamide" },
+      { name: "Otsuka Chemical: Unifoam AZ blowing agent", url: "https://www.otsukac.co.jp/en/products/cat-hydrazine-derivative/blendtype-fa.html" },
+      { name: "NBINNO: Azodicarbonamide production & uses", url: "https://www.nbinno.com/article/blowing-agents/deep-dive-azodicarbonamide-properties-production-uses-nw" },
     ],
   },
 
@@ -1924,7 +1924,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "meta-Xylene oxidation (Amoco-type)",
       detail:
-        "Purified isophthalic acid is made by the catalytic liquid-phase air oxidation of meta-xylene, the isomer chemistry analogous to PTA from para-xylene. m-Xylene is oxidised with air in acetic-acid solvent using a cobalt-manganese-bromide catalyst at ~175–225 °C and elevated pressure, converting both methyl groups to carboxylic acids to give crude isophthalic acid. The crude is then purified (crystallisation and/or hydrogenation steps) to remove colour-forming aldehyde impurities, giving PIA used in unsaturated polyester resins, PET co-monomer and high-performance coatings.",
+        "Purified isophthalic acid is made by the catalytic liquid-phase air oxidation of meta-xylene, the isomer chemistry analogous to PTA from para-xylene. m-Xylene is oxidised with air in acetic-acid solvent using a cobalt-manganese-bromide catalyst at ~175-225 °C and elevated pressure, converting both methyl groups to carboxylic acids to give crude isophthalic acid. The crude is then purified (crystallisation and/or hydrogenation steps) to remove colour-forming aldehyde impurities, giving PIA used in unsaturated polyester resins, PET co-monomer and high-performance coatings.",
     },
     manufacturers: [
       { name: "Lotte Chemical (world's largest)", url: "https://www.lottechem.com" },
@@ -1934,9 +1934,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Chemicals & Fibre", url: "https://www.fcfc.com.tw" },
     ],
     sources: [
-      { name: "INEOS — Purified isophthalic acid", url: "https://www.ineos.com/businesses/ineos-enterprises/businesses/ineos-joliet/products/purified-isophthalic-acid/" },
-      { name: "Transparency Market Research — PIA market", url: "https://www.transparencymarketresearch.com/purified-isophthalic-acid-market.html" },
-      { name: "Procurement Resource — PIA process", url: "https://www.procurementresource.com/reports/purified-isophthalic-acid-pia-manufacturing-plant-project-report" },
+      { name: "INEOS: Purified isophthalic acid", url: "https://www.ineos.com/businesses/ineos-enterprises/businesses/ineos-joliet/products/purified-isophthalic-acid/" },
+      { name: "Transparency Market Research: PIA market", url: "https://www.transparencymarketresearch.com/purified-isophthalic-acid-market.html" },
+      { name: "Procurement Resource: PIA process", url: "https://www.procurementresource.com/reports/purified-isophthalic-acid-pia-manufacturing-plant-project-report" },
     ],
   },
 
@@ -1949,7 +1949,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Alkoxylation of a starter with PO/EO",
       detail:
-        "Polyether polyols are made by the catalytic ring-opening polymerisation (alkoxylation) of propylene oxide — often with some ethylene oxide — onto a hydroxyl- or amine-functional starter (such as glycerol, sucrose or propylene glycol). Traditionally potassium hydroxide catalyses the addition at ~100–130 °C and moderate pressure, growing polyether chains of controlled length and functionality; the product is neutralised and the catalyst removed. Double-metal-cyanide (DMC) catalysts increasingly replace KOH for high-molecular-weight polyols because they give narrow polydispersity and very low unsaturation (monol). The polyols are the soft segment for polyurethane foams, elastomers and coatings.",
+        "Polyether polyols are made by the catalytic ring-opening polymerisation (alkoxylation) of propylene oxide, often with some ethylene oxide, onto a hydroxyl- or amine-functional starter (such as glycerol, sucrose or propylene glycol). Traditionally potassium hydroxide catalyses the addition at ~100-130 °C and moderate pressure, growing polyether chains of controlled length and functionality; the product is neutralised and the catalyst removed. Double-metal-cyanide (DMC) catalysts increasingly replace KOH for high-molecular-weight polyols because they give narrow polydispersity and very low unsaturation (monol). The polyols are the soft segment for polyurethane foams, elastomers and coatings.",
     },
     manufacturers: [
       { name: "BASF", url: "https://www.basf.com" },
@@ -1959,9 +1959,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Wanhua Chemical", url: "https://www.wanhuachemical.com" },
     ],
     sources: [
-      { name: "Google Patents — Polyether polyol via DMC catalyst", url: "https://patents.google.com/patent/US20180237587A1/en" },
-      { name: "BASF — Polyether polyols (patent)", url: "https://www.freepatentsonline.com/y2011/0269863.html" },
-      { name: "Google Patents — DMC catalysts", url: "https://patents.google.com/patent/US5627120A/en" },
+      { name: "Google Patents: Polyether polyol via DMC catalyst", url: "https://patents.google.com/patent/US20180237587A1/en" },
+      { name: "BASF: Polyether polyols (patent)", url: "https://www.freepatentsonline.com/y2011/0269863.html" },
+      { name: "Google Patents: DMC catalysts", url: "https://patents.google.com/patent/US5627120A/en" },
     ],
   },
 
@@ -1973,7 +1973,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Alkali absorption of nitrous gases",
       detail:
-        "Sodium nitrite is produced by absorbing nitrous gases — a mixture of nitric oxide and nitrogen dioxide, often the tail gas from ammonia oxidation/nitric-acid plants — into a solution of sodium carbonate (soda ash) or sodium hydroxide. The NO and NO2 react with the alkali to form a mixture of sodium nitrite and sodium nitrate (NO + NO2 + Na2CO3 → 2 NaNO2 + CO2). Because nitrate also forms, the gas ratio (kept near NO:NO2 = 1:1) is controlled to maximise nitrite, and the more soluble nitrite is separated from nitrate by fractional crystallisation, then dried.",
+        "Sodium nitrite is produced by absorbing nitrous gases, a mixture of nitric oxide and nitrogen dioxide, often the tail gas from ammonia oxidation/nitric-acid plants, into a solution of sodium carbonate (soda ash) or sodium hydroxide. The NO and NO2 react with the alkali to form a mixture of sodium nitrite and sodium nitrate (NO + NO2 + Na2CO3 → 2 NaNO2 + CO2). Because nitrate also forms, the gas ratio (kept near NO:NO2 = 1:1) is controlled to maximise nitrite, and the more soluble nitrite is separated from nitrate by fractional crystallisation, then dried.",
     },
     manufacturers: [
       { name: "BASF", url: "https://www.basf.com" },
@@ -1981,9 +1981,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Anmol Chemicals Group", url: "https://www.anmolchemicals.org" },
     ],
     sources: [
-      { name: "ChemicalBook — Sodium nitrite", url: "https://www.chemicalbook.com/article/sodium-nitrite-an-all-rounder-with-good-and-evil.htm" },
-      { name: "BASF Inorganics — Nitrogen salts", url: "https://inorganics.basf.com/products/nitrogen-salts" },
-      { name: "Google Patents — Production of sodium nitrite", url: "https://patents.google.com/patent/US2032699A/en" },
+      { name: "ChemicalBook: Sodium nitrite", url: "https://www.chemicalbook.com/article/sodium-nitrite-an-all-rounder-with-good-and-evil.htm" },
+      { name: "BASF Inorganics: Nitrogen salts", url: "https://inorganics.basf.com/products/nitrogen-salts" },
+      { name: "Google Patents: Production of sodium nitrite", url: "https://patents.google.com/patent/US2032699A/en" },
     ],
   },
 
@@ -2002,9 +2002,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jubilant Ingrevia", url: "https://www.jubilantingrevia.com" },
     ],
     sources: [
-      { name: "Wikipedia — 3-Methylpyridine", url: "https://en.wikipedia.org/wiki/3-Methylpyridine" },
-      { name: "S&P Global — Pyridines CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0325_Global_CEH_Pyridines_Abstract.pdf" },
-      { name: "Google Patents — Synthesis of 3-methylpyridine", url: "https://patents.google.com/patent/US9701634B2/en" },
+      { name: "Wikipedia: 3-Methylpyridine", url: "https://en.wikipedia.org/wiki/3-Methylpyridine" },
+      { name: "S&P Global: Pyridines CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0325_Global_CEH_Pyridines_Abstract.pdf" },
+      { name: "Google Patents: Synthesis of 3-methylpyridine", url: "https://patents.google.com/patent/US9701634B2/en" },
     ],
   },
 
@@ -2017,7 +2017,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Electrolytic manganese dioxide (EMD)",
       detail:
-        "Battery-grade manganese dioxide is made electrolytically. Manganese ore is reduced and leached with sulfuric acid to a purified manganese-sulfate electrolyte, which is electrolysed in heated cells (~90–98 °C) using titanium or graphite anodes. Manganese is oxidised and deposits as a hard layer of gamma-MnO2 on the anode (Mn2+ + 2 H2O → MnO2 + 4 H+ + 2 e-). The deposit is stripped, crushed, washed free of acid, neutralised and milled to the fine, high-activity powder used in alkaline and zinc-carbon batteries. Chemical (CMD) and natural grades serve lower-demand uses.",
+        "Battery-grade manganese dioxide is made electrolytically. Manganese ore is reduced and leached with sulfuric acid to a purified manganese-sulfate electrolyte, which is electrolysed in heated cells (~90-98 °C) using titanium or graphite anodes. Manganese is oxidised and deposits as a hard layer of gamma-MnO2 on the anode (Mn2+ + 2 H2O → MnO2 + 4 H+ + 2 e-). The deposit is stripped, crushed, washed free of acid, neutralised and milled to the fine, high-activity powder used in alkaline and zinc-carbon batteries. Chemical (CMD) and natural grades serve lower-demand uses.",
     },
     manufacturers: [
       { name: "Tosoh Corporation (largest EMD maker)", url: "https://www.tosoh.com" },
@@ -2025,9 +2025,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tronox Holdings", url: "https://www.tronox.com" },
     ],
     sources: [
-      { name: "Mordor Intelligence — EMD market", url: "https://www.mordorintelligence.com/industry-reports/electrolytic-manganese-dioxide-market" },
-      { name: "Tosoh — Battery materials", url: "https://www.tosoh.com/our-products/advanced-materials" },
-      { name: "SkyQuest — EMD companies", url: "https://www.skyquestt.com/report/electrolytic-manganese-dioxide-market/companies" },
+      { name: "Mordor Intelligence: EMD market", url: "https://www.mordorintelligence.com/industry-reports/electrolytic-manganese-dioxide-market" },
+      { name: "Tosoh: Battery materials", url: "https://www.tosoh.com/our-products/advanced-materials" },
+      { name: "SkyQuest: EMD companies", url: "https://www.skyquestt.com/report/electrolytic-manganese-dioxide-market/companies" },
     ],
   },
 
@@ -2049,9 +2049,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Reliance Industries", url: "https://www.ril.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ethylene glycol (glycols co-products)", url: "https://en.wikipedia.org/wiki/Ethylene_glycol" },
-      { name: "Solventis — Diethylene glycol", url: "https://solventis.net/products/glycols/diethylene-glycol/" },
-      { name: "ScienceDirect — EO hydration to MEG", url: "https://www.sciencedirect.com/science/article/abs/pii/S0920586107001149" },
+      { name: "Wikipedia: Ethylene glycol (glycols co-products)", url: "https://en.wikipedia.org/wiki/Ethylene_glycol" },
+      { name: "Solventis: Diethylene glycol", url: "https://solventis.net/products/glycols/diethylene-glycol/" },
+      { name: "ScienceDirect: EO hydration to MEG", url: "https://www.sciencedirect.com/science/article/abs/pii/S0920586107001149" },
     ],
   },
 
@@ -2063,16 +2063,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Esterification of salicylic acid with methanol",
       detail:
-        "Synthetic methyl salicylate (oil of wintergreen) is made by the acid-catalysed Fischer esterification of salicylic acid with methanol. Salicylic acid is dissolved in excess methanol with sulfuric acid catalyst and heated under reflux at ~90–100 °C for several hours: C6H4(OH)COOH + CH3OH ⇌ C6H4(OH)COOCH3 + H2O. The excess methanol drives the equilibrium; the cooled mixture is washed with sodium-carbonate solution to remove acid and then vacuum-distilled to >99% product. The upstream salicylic acid comes from the Kolbe-Schmitt process.",
+        "Synthetic methyl salicylate (oil of wintergreen) is made by the acid-catalysed Fischer esterification of salicylic acid with methanol. Salicylic acid is dissolved in excess methanol with sulfuric acid catalyst and heated under reflux at ~90-100 °C for several hours: C6H4(OH)COOH + CH3OH ⇌ C6H4(OH)COOCH3 + H2O. The excess methanol drives the equilibrium; the cooled mixture is washed with sodium-carbonate solution to remove acid and then vacuum-distilled to >99% product. The upstream salicylic acid comes from the Kolbe-Schmitt process.",
     },
     manufacturers: [
       { name: "Novacyl", url: "https://www.novacyl.com" },
       { name: "Shandong Xinhua Pharmaceutical", url: "https://www.xinhuapharm.com" },
     ],
     sources: [
-      { name: "Wikipedia — Methyl salicylate", url: "https://en.wikipedia.org/wiki/Methyl_salicylate" },
-      { name: "Britannica — Methyl salicylate", url: "https://www.britannica.com/science/methyl-salicylate" },
-      { name: "ChemicalBook — Methyl salicylate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8491046.htm" },
+      { name: "Wikipedia: Methyl salicylate", url: "https://en.wikipedia.org/wiki/Methyl_salicylate" },
+      { name: "Britannica: Methyl salicylate", url: "https://www.britannica.com/science/methyl-salicylate" },
+      { name: "ChemicalBook: Methyl salicylate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8491046.htm" },
     ],
   },
 
@@ -2084,7 +2084,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "ortho-Nitrotoluene hydrogenation",
       detail:
-        "ortho-Toluidine (2-methylaniline) is made from toluene. Toluene is nitrated with mixed acid (HNO3/H2SO4) to a mix of nitrotoluenes, from which ortho-nitrotoluene is separated by distillation. The ortho-nitrotoluene is then catalytically hydrogenated over palladium-on-carbon or nickel in the liquid phase at ~80–120 °C under moderate hydrogen pressure, reducing the nitro group to an amine with high (>90%) selectivity: o-CH3C6H4NO2 + 3 H2 → o-CH3C6H4NH2 + 2 H2O. The crude amine is purified by distillation. It is a dye, pigment and agrochemical intermediate.",
+        "ortho-Toluidine (2-methylaniline) is made from toluene. Toluene is nitrated with mixed acid (HNO3/H2SO4) to a mix of nitrotoluenes, from which ortho-nitrotoluene is separated by distillation. The ortho-nitrotoluene is then catalytically hydrogenated over palladium-on-carbon or nickel in the liquid phase at ~80-120 °C under moderate hydrogen pressure, reducing the nitro group to an amine with high (>90%) selectivity: o-CH3C6H4NO2 + 3 H2 → o-CH3C6H4NH2 + 2 H2O. The crude amine is purified by distillation. It is a dye, pigment and agrochemical intermediate.",
     },
     manufacturers: [
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
@@ -2092,9 +2092,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Aarti Industries — Ortho Toluidine", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/hydrogenation/ortho-toluidine-ot" },
-      { name: "NCBI — ortho-Toluidine", url: "https://www.ncbi.nlm.nih.gov/books/NBK390860/" },
-      { name: "Metoree — Toluidine manufacturers", url: "https://us.metoree.com/categories/6373/" },
+      { name: "Aarti Industries: Ortho Toluidine", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/hydrogenation/ortho-toluidine-ot" },
+      { name: "NCBI: ortho-Toluidine", url: "https://www.ncbi.nlm.nih.gov/books/NBK390860/" },
+      { name: "Metoree: Toluidine manufacturers", url: "https://us.metoree.com/categories/6373/" },
     ],
   },
 
@@ -2106,16 +2106,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Dimethyl ether + sulfur trioxide",
       detail:
-        "Dimethyl sulfate (a powerful methylating agent) is produced industrially by the continuous reaction of dimethyl ether with sulfur trioxide. Gaseous dimethyl ether is bubbled into the bottom of an absorption tower while liquid SO3 is fed at the top: (CH3)2O + SO3 → (CH3O)2SO2. The tower fills with a mixture of ~96–97% dimethyl sulfate together with sulfuric acid and monomethyl sulfate, which is continuously withdrawn and purified by vacuum distillation (over sodium sulfate). Because DMS is highly toxic, plants are closed and tightly controlled. Production is concentrated among specialty makers in China, India and Europe.",
+        "Dimethyl sulfate (a powerful methylating agent) is produced industrially by the continuous reaction of dimethyl ether with sulfur trioxide. Gaseous dimethyl ether is bubbled into the bottom of an absorption tower while liquid SO3 is fed at the top: (CH3)2O + SO3 → (CH3O)2SO2. The tower fills with a mixture of ~96-97% dimethyl sulfate together with sulfuric acid and monomethyl sulfate, which is continuously withdrawn and purified by vacuum distillation (over sodium sulfate). Because DMS is highly toxic, plants are closed and tightly controlled. Production is concentrated among specialty makers in China, India and Europe.",
     },
     manufacturers: [
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "Wikipedia — Dimethyl sulfate", url: "https://en.wikipedia.org/wiki/Dimethyl_sulfate" },
-      { name: "INCHEM — Dimethyl sulfate (EHC 48)", url: "https://www.inchem.org/documents/ehc/ehc/ehc48.htm" },
-      { name: "Metoree — Dimethyl sulfate manufacturers", url: "https://us.metoree.com/categories/7132/" },
+      { name: "Wikipedia: Dimethyl sulfate", url: "https://en.wikipedia.org/wiki/Dimethyl_sulfate" },
+      { name: "INCHEM: Dimethyl sulfate (EHC 48)", url: "https://www.inchem.org/documents/ehc/ehc/ehc48.htm" },
+      { name: "Metoree: Dimethyl sulfate manufacturers", url: "https://us.metoree.com/categories/7132/" },
     ],
   },
 
@@ -2127,7 +2127,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Fractional distillation of turpentine",
       detail:
-        "Alpha-pinene is the major component of turpentine. Most industrial supply comes from crude sulfate turpentine (CST), a by-product recovered from the kraft (sulfate) pulping of pine wood — the volatile turpentine is condensed from the digester relief gases and skimmed from the black liquor. The CST (or gum turpentine from pine tapping) is then refined and fractionally distilled to separate alpha-pinene from beta-pinene, camphene and limonene. Purified alpha-pinene is the feedstock for synthetic terpene fragrances, camphor, resins, and adhesive tackifiers.",
+        "Alpha-pinene is the major component of turpentine. Most industrial supply comes from crude sulfate turpentine (CST), a by-product recovered from the kraft (sulfate) pulping of pine wood, the volatile turpentine is condensed from the digester relief gases and skimmed from the black liquor. The CST (or gum turpentine from pine tapping) is then refined and fractionally distilled to separate alpha-pinene from beta-pinene, camphene and limonene. Purified alpha-pinene is the feedstock for synthetic terpene fragrances, camphor, resins, and adhesive tackifiers.",
     },
     manufacturers: [
       { name: "DRT (Firmenich)", url: "https://www.drt.fr" },
@@ -2135,9 +2135,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Ingevity", url: "https://www.ingevity.com" },
     ],
     sources: [
-      { name: "Grand View Research — Crude sulfate turpentine market", url: "https://www.grandviewresearch.com/industry-analysis/crude-sulfate-turpentine-market" },
-      { name: "Future Market Insights — Crude sulfate turpentine", url: "https://www.futuremarketinsights.com/reports/crude-sulfate-turpentine-market" },
-      { name: "FactMR — Crude sulfate turpentine market", url: "https://www.factmr.com/report/4435/crude-sulfate-turpentine-market" },
+      { name: "Grand View Research: Crude sulfate turpentine market", url: "https://www.grandviewresearch.com/industry-analysis/crude-sulfate-turpentine-market" },
+      { name: "Future Market Insights: Crude sulfate turpentine", url: "https://www.futuremarketinsights.com/reports/crude-sulfate-turpentine-market" },
+      { name: "FactMR: Crude sulfate turpentine market", url: "https://www.factmr.com/report/4435/crude-sulfate-turpentine-market" },
     ],
   },
 
@@ -2149,7 +2149,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Pyrochlore concentration + chemical refining",
       detail:
-        "Most niobium comes from the mineral pyrochlore. The ore is mined and beneficiated by physical processing (crushing, flotation, magnetic separation) to a concentrate of ~55–60% Nb2O5. To make high-purity niobium pentoxide, the concentrate is digested (e.g. with hydrofluoric/sulfuric acid) and the niobium is separated from tantalum and impurities by solvent extraction, then precipitated and calcined to Nb2O5 of 98.5–99.5% purity (optical/electronic grades require a further purification step). Much niobium is instead made into ferroniobium for steel by aluminothermic reduction. Supply is dominated by Brazil's CBMM.",
+        "Most niobium comes from the mineral pyrochlore. The ore is mined and beneficiated by physical processing (crushing, flotation, magnetic separation) to a concentrate of ~55-60% Nb2O5. To make high-purity niobium pentoxide, the concentrate is digested (e.g. with hydrofluoric/sulfuric acid) and the niobium is separated from tantalum and impurities by solvent extraction, then precipitated and calcined to Nb2O5 of 98.5-99.5% purity (optical/electronic grades require a further purification step). Much niobium is instead made into ferroniobium for steel by aluminothermic reduction. Supply is dominated by Brazil's CBMM.",
     },
     manufacturers: [
       { name: "CBMM (over 80% of world supply)", url: "https://www.cbmm.com" },
@@ -2157,9 +2157,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Magris Performance Materials (Niobec)", url: "https://www.magrispm.com" },
     ],
     sources: [
-      { name: "Wikipedia — CBMM", url: "https://en.wikipedia.org/wiki/Companhia_Brasileira_de_Metalurgia_e_Minera%C3%A7%C3%A3o" },
-      { name: "USGS — Niobium 2018 yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2018/myb1-2018-niobium.pdf" },
-      { name: "niobium.tech — Mining & ferroniobium at CBMM (PDF)", url: "https://niobium.tech/-/media/niobiumtech/attachments-biblioteca-tecnica/nt_mining-ore-preparation-and-ferroniobium-production-at-cbmm.pdf" },
+      { name: "Wikipedia: CBMM", url: "https://en.wikipedia.org/wiki/Companhia_Brasileira_de_Metalurgia_e_Minera%C3%A7%C3%A3o" },
+      { name: "USGS: Niobium 2018 yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2018/myb1-2018-niobium.pdf" },
+      { name: "niobium.tech: Mining & ferroniobium at CBMM (PDF)", url: "https://niobium.tech/-/media/niobiumtech/attachments-biblioteca-tecnica/nt_mining-ore-preparation-and-ferroniobium-production-at-cbmm.pdf" },
     ],
   },
 
@@ -2171,7 +2171,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Tincal ore refining + crystallisation",
       detail:
-        "Borax pentahydrate is a refined sodium tetraborate made from borate ore. Mined tincal (and kernite) ore is crushed and dissolved in hot water/weak liquor; insoluble gangue (clays) is settled and removed, and the clarified sodium-borate solution is then crystallised under controlled temperature — crystallising above ~60 °C yields the pentahydrate (Na2B4O7·5H2O) rather than the decahydrate. The crystals are filtered, dried and graded. Supply is a near-duopoly of Turkey's Eti Maden and Rio Tinto's Boron (California) operation. Borax pentahydrate is used in glass/fibreglass, detergents and fertilisers.",
+        "Borax pentahydrate is a refined sodium tetraborate made from borate ore. Mined tincal (and kernite) ore is crushed and dissolved in hot water/weak liquor; insoluble gangue (clays) is settled and removed, and the clarified sodium-borate solution is then crystallised under controlled temperature, crystallising above ~60 °C yields the pentahydrate (Na2B4O7·5H2O) rather than the decahydrate. The crystals are filtered, dried and graded. Supply is a near-duopoly of Turkey's Eti Maden and Rio Tinto's Boron (California) operation. Borax pentahydrate is used in glass/fibreglass, detergents and fertilisers.",
     },
     manufacturers: [
       { name: "Eti Maden", url: "https://www.etimaden.gov.tr" },
@@ -2179,9 +2179,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Searles Valley Minerals", url: "https://www.svminerals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Eti Maden", url: "https://en.wikipedia.org/wiki/Eti_Maden" },
-      { name: "Borates Today — Boron mining processes", url: "https://borates.today/boron-mining-processes/" },
-      { name: "Sinopeakchem — Borax pentahydrate guide", url: "https://www.sinopeakchem.com/en/blog/borax-pentahydrate-guide" },
+      { name: "Wikipedia: Eti Maden", url: "https://en.wikipedia.org/wiki/Eti_Maden" },
+      { name: "Borates Today: Boron mining processes", url: "https://borates.today/boron-mining-processes/" },
+      { name: "Sinopeakchem: Borax pentahydrate guide", url: "https://www.sinopeakchem.com/en/blog/borax-pentahydrate-guide" },
     ],
   },
 
@@ -2193,7 +2193,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Phosphoric acid + lime neutralisation",
       detail:
-        "Monocalcium phosphate (MCP, calcium dihydrogen phosphate) is made by reacting purified phosphoric acid with a calcium source — limestone (CaCO3) or quicklime — under controlled conditions: Ca(OH)2 + 2 H3PO4 → Ca(H2PO4)2 + 2 H2O. For food/feed grade the neutralisation endpoint is held near pH 3.2 to give the monocalcium (rather than di- or tri-calcium) salt; the anhydrous grade is made with a slight lime excess in concentrated acid so the exotherm holds the mass above ~140 °C while avoiding pyrophosphate formation. The slurry is filtered, dried and milled/granulated for baking leavening and animal feed.",
+        "Monocalcium phosphate (MCP, calcium dihydrogen phosphate) is made by reacting purified phosphoric acid with a calcium source, limestone (CaCO3) or quicklime, under controlled conditions: Ca(OH)2 + 2 H3PO4 → Ca(H2PO4)2 + 2 H2O. For food/feed grade the neutralisation endpoint is held near pH 3.2 to give the monocalcium (rather than di- or tri-calcium) salt; the anhydrous grade is made with a slight lime excess in concentrated acid so the exotherm holds the mass above ~140 °C while avoiding pyrophosphate formation. The slurry is filtered, dried and milled/granulated for baking leavening and animal feed.",
     },
     manufacturers: [
       { name: "J.R. Simplot", url: "https://www.simplot.com" },
@@ -2201,21 +2201,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Khonor Chemicals", url: "https://www.khonorchem.com" },
     ],
     sources: [
-      { name: "GJ Phosphate — Food-grade MCP manufacturing", url: "https://www.gjphosphate.com/food-grade-monocalcium-phosphate-mcp/" },
-      { name: "Simplot — Livestock feed ingredients", url: "https://www.simplot.com/livestock/feed-ingredients" },
-      { name: "Google Patents — MCP leavening acid", url: "https://patents.google.com/patent/US5667836A/en" },
+      { name: "GJ Phosphate: Food-grade MCP manufacturing", url: "https://www.gjphosphate.com/food-grade-monocalcium-phosphate-mcp/" },
+      { name: "Simplot: Livestock feed ingredients", url: "https://www.simplot.com/livestock/feed-ingredients" },
+      { name: "Google Patents: MCP leavening acid", url: "https://patents.google.com/patent/US5667836A/en" },
     ],
   },
 
   "phosphoric-acid-tech-grade": {
     routes: [
-      "Thermal process — burn elemental phosphorus, hydrate P2O5 (high purity)",
+      "Thermal process, burn elemental phosphorus, hydrate P2O5 (high purity)",
       "Purified wet-process acid (solvent extraction of fertiliser acid)",
     ],
     mainProcess: {
       name: "Thermal process (elemental phosphorus combustion)",
       detail:
-        "Technical/industrial and food-grade phosphoric acid is traditionally made by the thermal process, which gives a much purer acid than the fertiliser wet process. Elemental phosphorus (itself smelted from phosphate rock in an electric furnace) is burned in air in a combustion chamber at ~1650–2760 °C to phosphorus pentoxide (P4 + 5 O2 → 2 P2O5); the P2O5 is then hydrated with dilute acid or water in a hydration tower to strong phosphoric acid, and an electrostatic demister removes the acid mist. Increasingly, technical grade is instead made by solvent-extraction purification of wet-process acid, which is far less energy-intensive.",
+        "Technical/industrial and food-grade phosphoric acid is traditionally made by the thermal process, which gives a much purer acid than the fertiliser wet process. Elemental phosphorus (itself smelted from phosphate rock in an electric furnace) is burned in air in a combustion chamber at ~1650-2760 °C to phosphorus pentoxide (P4 + 5 O2 → 2 P2O5); the P2O5 is then hydrated with dilute acid or water in a hydration tower to strong phosphoric acid, and an electrostatic demister removes the acid mist. Increasingly, technical grade is instead made by solvent-extraction purification of wet-process acid, which is far less energy-intensive.",
     },
     manufacturers: [
       { name: "ICL Group", url: "https://www.icl-group.com" },
@@ -2225,9 +2225,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aditya Birla Chemicals", url: "https://www.adityabirlachemicals.com" },
     ],
     sources: [
-      { name: "US EPA — Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
-      { name: "Biology Insights — Wet vs thermal phosphoric acid", url: "https://biologyinsights.com/how-is-phosphoric-acid-made-wet-vs-thermal-process/" },
-      { name: "ICL — Phosphoric acid for chemical manufacturing", url: "https://www.icl-group.com/our-business/industrial/phosphoric-acid-chemical-manufacturing/" },
+      { name: "US EPA: Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
+      { name: "Biology Insights: Wet vs thermal phosphoric acid", url: "https://biologyinsights.com/how-is-phosphoric-acid-made-wet-vs-thermal-process/" },
+      { name: "ICL: Phosphoric acid for chemical manufacturing", url: "https://www.icl-group.com/our-business/industrial/phosphoric-acid-chemical-manufacturing/" },
     ],
   },
 
@@ -2240,7 +2240,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Nitrile hydrogenation / fatty-alcohol amination",
       detail:
-        "n-Octylamine (a C8 fatty amine) is made by two main industrial routes. In the nitrile route, octanenitrile (from the fatty acid/triglyceride chain or by hydrocyanation) is hydrogenated over a nickel or cobalt catalyst to the primary amine: C7H15CN + 2 H2 → C8H17NH2. In the fatty-alcohol route, 1-octanol is reacted with ammonia and hydrogen over a metal catalyst in a fixed-bed reactor at ~120–250 °C and 0.5–2 MPa ('hydrogen-borrowing' reductive amination), replacing the hydroxyl with an amino group. The crude amine is purified by distillation; selectivity to primary vs secondary/tertiary amine is set by the ammonia excess and catalyst.",
+        "n-Octylamine (a C8 fatty amine) is made by two main industrial routes. In the nitrile route, octanenitrile (from the fatty acid/triglyceride chain or by hydrocyanation) is hydrogenated over a nickel or cobalt catalyst to the primary amine: C7H15CN + 2 H2 → C8H17NH2. In the fatty-alcohol route, 1-octanol is reacted with ammonia and hydrogen over a metal catalyst in a fixed-bed reactor at ~120-250 °C and 0.5-2 MPa ('hydrogen-borrowing' reductive amination), replacing the hydroxyl with an amino group. The crude amine is purified by distillation; selectivity to primary vs secondary/tertiary amine is set by the ammonia excess and catalyst.",
     },
     manufacturers: [
       { name: "BASF", url: "https://www.basf.com" },
@@ -2248,9 +2248,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kao Corporation", url: "https://www.kao.com" },
     ],
     sources: [
-      { name: "ScienceDirect — Amination of 1-octanol", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926860X9900054X" },
-      { name: "Wiley — Catalytic approaches to fatty amines", url: "https://onlinelibrary.wiley.com/doi/10.1002/tcr.202500225" },
-      { name: "Google Patents — Synthesis of n-octylamine", url: "https://patents.google.com/patent/CN103664633A/en" },
+      { name: "ScienceDirect: Amination of 1-octanol", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926860X9900054X" },
+      { name: "Wiley: Catalytic approaches to fatty amines", url: "https://onlinelibrary.wiley.com/doi/10.1002/tcr.202500225" },
+      { name: "Google Patents: Synthesis of n-octylamine", url: "https://patents.google.com/patent/CN103664633A/en" },
     ],
   },
 
@@ -2269,9 +2269,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Emco Dyestuff", url: "https://emcochemicals.com" },
     ],
     sources: [
-      { name: "Google Patents — p-Toluenesulfonamide by direct amidation", url: "https://patents.google.com/patent/CN104945288A/en" },
-      { name: "Emco Chemicals — Para-toluenesulfonamide (PTSA)", url: "https://emcochemicals.com/para-toluenesulfonamide-ptsa/" },
-      { name: "ChemBK — p-Toluenesulfonamide", url: "https://www.chembk.com/en/chem/p-Toluenesulfonamide" },
+      { name: "Google Patents: p-Toluenesulfonamide by direct amidation", url: "https://patents.google.com/patent/CN104945288A/en" },
+      { name: "Emco Chemicals: Para-toluenesulfonamide (PTSA)", url: "https://emcochemicals.com/para-toluenesulfonamide-ptsa/" },
+      { name: "ChemBK: p-Toluenesulfonamide", url: "https://www.chembk.com/en/chem/p-Toluenesulfonamide" },
     ],
   },
 
@@ -2291,9 +2291,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia — 1,2,4-Trichlorobenzene", url: "https://en.wikipedia.org/wiki/1,2,4-Trichlorobenzene" },
-      { name: "Aarti Industries — 1,2,4-TCB", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination/1-2-4-tri-chloro-benzene-(1-2-4-tcb)" },
-      { name: "ATSDR — Trichlorobenzenes production (PDF)", url: "https://www.atsdr.cdc.gov/toxprofiles/tp199-c5.pdf" },
+      { name: "Wikipedia: 1,2,4-Trichlorobenzene", url: "https://en.wikipedia.org/wiki/1,2,4-Trichlorobenzene" },
+      { name: "Aarti Industries: 1,2,4-TCB", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination/1-2-4-tri-chloro-benzene-(1-2-4-tcb)" },
+      { name: "ATSDR: Trichlorobenzenes production (PDF)", url: "https://www.atsdr.cdc.gov/toxprofiles/tp199-c5.pdf" },
     ],
   },
 
@@ -2314,9 +2314,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — 4-Aminophenol", url: "https://en.wikipedia.org/wiki/4-Aminophenol" },
-      { name: "ACS OPRD — PAP from nitrobenzene (Bamberger)", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.7b00354" },
-      { name: "ChemAnalyst — Para-aminophenol market", url: "https://www.chemanalyst.com/industry-report/para-aminophenol-market-3088" },
+      { name: "Wikipedia: 4-Aminophenol", url: "https://en.wikipedia.org/wiki/4-Aminophenol" },
+      { name: "ACS OPRD: PAP from nitrobenzene (Bamberger)", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.7b00354" },
+      { name: "ChemAnalyst: Para-aminophenol market", url: "https://www.chemanalyst.com/industry-report/para-aminophenol-market-3088" },
     ],
   },
 
@@ -2338,9 +2338,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sasol", url: "https://www.sasol.com" },
     ],
     sources: [
-      { name: "Wikipedia — Linear alpha olefin", url: "https://en.wikipedia.org/wiki/Linear_alpha_olefin" },
-      { name: "Chemical Engineering — LAO production profile", url: "https://www.chemengonline.com/technology-profile-production-of-linear-alpha-olefins/" },
-      { name: "Grand View Research — Higher alpha olefins market", url: "https://www.grandviewresearch.com/industry-analysis/higher-alpha-olefins-market-report" },
+      { name: "Wikipedia: Linear alpha olefin", url: "https://en.wikipedia.org/wiki/Linear_alpha_olefin" },
+      { name: "Chemical Engineering: LAO production profile", url: "https://www.chemengonline.com/technology-profile-production-of-linear-alpha-olefins/" },
+      { name: "Grand View Research: Higher alpha olefins market", url: "https://www.grandviewresearch.com/industry-analysis/higher-alpha-olefins-market-report" },
     ],
   },
 
@@ -2352,7 +2352,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Oxo process (hydroformylation of dodecene)",
       detail:
-        "Isotridecyl alcohol (isotridecanol, a branched C13 oxo alcohol) is made by the oxo process. A branched C12 olefin feed — typically propylene tetramer (tetrapropylene) — is hydroformylated by reacting it with synthesis gas (CO + H2) over a cobalt carbonyl catalyst at ~150–170 °C and high pressure (~30 MPa), adding one carbon as an aldehyde group. The resulting C13 aldehyde mixture is then hydrogenated to the corresponding branched primary alcohol. Because the feed is branched, the product is an isomer mixture rather than a single structure. It is mainly ethoxylated into nonionic surfactants and used in lubricants and plasticisers.",
+        "Isotridecyl alcohol (isotridecanol, a branched C13 oxo alcohol) is made by the oxo process. A branched C12 olefin feed, typically propylene tetramer (tetrapropylene), is hydroformylated by reacting it with synthesis gas (CO + H2) over a cobalt carbonyl catalyst at ~150-170 °C and high pressure (~30 MPa), adding one carbon as an aldehyde group. The resulting C13 aldehyde mixture is then hydrogenated to the corresponding branched primary alcohol. Because the feed is branched, the product is an isomer mixture rather than a single structure. It is mainly ethoxylated into nonionic surfactants and used in lubricants and plasticisers.",
     },
     manufacturers: [
       { name: "BASF", url: "https://www.basf.com" },
@@ -2362,9 +2362,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "KH Neochem", url: "https://www.khneochem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Hydroformylation", url: "https://en.wikipedia.org/wiki/Hydroformylation" },
-      { name: "The Chemical Company — Isotridecyl alcohol", url: "https://thechemco.com/isotridecyl-alcohol-uses-applications/" },
-      { name: "Johnson Matthey — LP Oxo alcohols technology", url: "https://matthey.com/products-and-markets/chemicals/process-licensing/oxo-alcohols-process" },
+      { name: "Wikipedia: Hydroformylation", url: "https://en.wikipedia.org/wiki/Hydroformylation" },
+      { name: "The Chemical Company: Isotridecyl alcohol", url: "https://thechemco.com/isotridecyl-alcohol-uses-applications/" },
+      { name: "Johnson Matthey: LP Oxo alcohols technology", url: "https://matthey.com/products-and-markets/chemicals/process-licensing/oxo-alcohols-process" },
     ],
   },
 
@@ -2384,9 +2384,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Heranba Industries", url: "https://www.heranba.co.in" },
     ],
     sources: [
-      { name: "ACS OPRD — Synthesis of m-phenoxybenzaldehyde", url: "https://pubs.acs.org/doi/abs/10.1021/op990028z" },
-      { name: "Google Patents — Preparation of m-phenoxybenzaldehyde", url: "https://patents.google.com/patent/US4108904A/en" },
-      { name: "PW Consulting — Pyrethroid intermediate market", url: "https://pmarketresearch.com/chemi/pyrethroid-pesticide-intermediate-market/" },
+      { name: "ACS OPRD: Synthesis of m-phenoxybenzaldehyde", url: "https://pubs.acs.org/doi/abs/10.1021/op990028z" },
+      { name: "Google Patents: Preparation of m-phenoxybenzaldehyde", url: "https://patents.google.com/patent/US4108904A/en" },
+      { name: "PW Consulting: Pyrethroid intermediate market", url: "https://pmarketresearch.com/chemi/pyrethroid-pesticide-intermediate-market/" },
     ],
   },
 
@@ -2398,7 +2398,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "gamma-Cyclodextrin per-6-thioetherification",
       detail:
-        "Sugammadex is a modified gamma-cyclodextrin used to reverse neuromuscular blockade. Synthesis starts from gamma-cyclodextrin (a ring of eight glucose units): the eight primary (6-position) hydroxyls are all activated by halogenation — typically iodination with iodine/triphenylphosphine in DMF, or chlorination with phosphorus pentachloride — to give the per-6-halo-cyclodextrin. This octa-halide is then reacted with 3-mercaptopropionic acid under base (sodium hydride) so that the thiol displaces each halide, installing eight carboxyl-thioether arms; neutralisation gives the octasodium salt (sugammadex sodium), which is purified by chromatography/ultrafiltration to API grade.",
+        "Sugammadex is a modified gamma-cyclodextrin used to reverse neuromuscular blockade. Synthesis starts from gamma-cyclodextrin (a ring of eight glucose units): the eight primary (6-position) hydroxyls are all activated by halogenation, typically iodination with iodine/triphenylphosphine in DMF, or chlorination with phosphorus pentachloride, to give the per-6-halo-cyclodextrin. This octa-halide is then reacted with 3-mercaptopropionic acid under base (sodium hydride) so that the thiol displaces each halide, installing eight carboxyl-thioether arms; neutralisation gives the octasodium salt (sugammadex sodium), which is purified by chromatography/ultrafiltration to API grade.",
     },
     manufacturers: [
       { name: "Merck & Co. (originator, Bridion)", url: "https://www.merck.com" },
@@ -2407,9 +2407,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nuray Chemicals", url: "https://www.nuraychemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sugammadex", url: "https://en.wikipedia.org/wiki/Sugammadex" },
-      { name: "Google Patents — Process for preparation of sugammadex", url: "https://patents.google.com/patent/US9120876B2/en" },
-      { name: "Nuray Chemicals — Sugammadex sodium", url: "https://www.nuraychemicals.com/products/suggamadex-sodium/" },
+      { name: "Wikipedia: Sugammadex", url: "https://en.wikipedia.org/wiki/Sugammadex" },
+      { name: "Google Patents: Process for preparation of sugammadex", url: "https://patents.google.com/patent/US9120876B2/en" },
+      { name: "Nuray Chemicals: Sugammadex sodium", url: "https://www.nuraychemicals.com/products/suggamadex-sodium/" },
     ],
   },
 
@@ -2421,7 +2421,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Clary sage extraction (and biotech fermentation)",
       detail:
-        "Sclareol is a labdane diterpene and the main fragrance precursor to Ambrox/ambroxide. Traditionally it is obtained from clary sage (Salvia sclarea): the harvested plant material is solvent- or CO2-extracted to a concrete, from which sclareol (which makes up ~1–2% of the essential oil) is concentrated and crystallised/purified. Increasingly it is produced by white biotechnology — fragrance houses have reconstructed the sclareol biosynthetic pathway in engineered microorganisms (e.g. yeast/E. coli) and ferment sugar feedstocks to sclareol, improving yield and supply stability. The sclareol is then chemically converted to ambroxide.",
+        "Sclareol is a labdane diterpene and the main fragrance precursor to Ambrox/ambroxide. Traditionally it is obtained from clary sage (Salvia sclarea): the harvested plant material is solvent- or CO2-extracted to a concrete, from which sclareol (which makes up ~1-2% of the essential oil) is concentrated and crystallised/purified. Increasingly it is produced by white biotechnology, fragrance houses have reconstructed the sclareol biosynthetic pathway in engineered microorganisms (e.g. yeast/E. coli) and ferment sugar feedstocks to sclareol, improving yield and supply stability. The sclareol is then chemically converted to ambroxide.",
     },
     manufacturers: [
       { name: "dsm-firmenich", url: "https://www.dsm-firmenich.com" },
@@ -2430,9 +2430,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFF", url: "https://www.iff.com" },
     ],
     sources: [
-      { name: "PMC — Diterpene synthases for sclareol in clary sage", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3520730/" },
-      { name: "C&EN — Givaudan Ambrofix via microbes", url: "https://cen.acs.org/biological-chemistry/biotechnology/Givaudan-makes-Ambrofix-brand-ambroxide/97/i44" },
-      { name: "PubMed — Biosynthetic route to sclareol", url: "https://pubmed.ncbi.nlm.nih.gov/23113661/" },
+      { name: "PMC: Diterpene synthases for sclareol in clary sage", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3520730/" },
+      { name: "C&EN: Givaudan Ambrofix via microbes", url: "https://cen.acs.org/biological-chemistry/biotechnology/Givaudan-makes-Ambrofix-brand-ambroxide/97/i44" },
+      { name: "PubMed: Biosynthetic route to sclareol", url: "https://pubmed.ncbi.nlm.nih.gov/23113661/" },
     ],
   },
 
@@ -2453,9 +2453,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Racecadotril manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/racecadotril-acetorphan" },
-      { name: "New Drug Approvals — Racecadotril", url: "https://newdrugapprovals.org/2022/01/15/racecadotril/" },
-      { name: "All About Drugs — Racecadotril (acetorphan)", url: "https://www.allfordrugs.com/2016/06/21/racecadotril-acetorphan/" },
+      { name: "PharmaCompass: Racecadotril manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/racecadotril-acetorphan" },
+      { name: "New Drug Approvals: Racecadotril", url: "https://newdrugapprovals.org/2022/01/15/racecadotril/" },
+      { name: "All About Drugs: Racecadotril (acetorphan)", url: "https://www.allfordrugs.com/2016/06/21/racecadotril-acetorphan/" },
     ],
   },
 
@@ -2470,7 +2470,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Catalytic liquid-phase air oxidation of toluene",
       detail:
-        "Benzoic acid is produced commercially by the partial oxidation of toluene with air or oxygen in the liquid phase, catalysed by soluble cobalt or manganese salts (naphthenates/acetates). The reaction runs at roughly 130–165 °C and several bar; toluene conversion is held near 50% with about 80% selectivity to benzoic acid to limit over-oxidation. The methyl group is oxidised through benzyl alcohol and benzaldehyde to the carboxylic acid: C6H5CH3 + 1.5 O2 → C6H5COOH + H2O. The crude melt is degassed, then purified by distillation (and, for food/USP grade, by recrystallisation or a further hydrogenation/wash) to remove benzaldehyde and ring-oxidised by-products. The process uses cheap feedstock, runs in high yield and is regarded as relatively clean.",
+        "Benzoic acid is produced commercially by the partial oxidation of toluene with air or oxygen in the liquid phase, catalysed by soluble cobalt or manganese salts (naphthenates/acetates). The reaction runs at roughly 130-165 °C and several bar; toluene conversion is held near 50% with about 80% selectivity to benzoic acid to limit over-oxidation. The methyl group is oxidised through benzyl alcohol and benzaldehyde to the carboxylic acid: C6H5CH3 + 1.5 O2 → C6H5COOH + H2O. The crude melt is degassed, then purified by distillation (and, for food/USP grade, by recrystallisation or a further hydrogenation/wash) to remove benzaldehyde and ring-oxidised by-products. The process uses cheap feedstock, runs in high yield and is regarded as relatively clean.",
     },
     manufacturers: [
       { name: "Emerald Kalama Chemical (LANXESS)", url: "https://lanxess.com" },
@@ -2480,9 +2480,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Jiujiu Jiu Technology", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wikidoc — Benzoic acid (production)", url: "https://www.wikidoc.org/index.php/Benzoic_acid" },
-      { name: "ResearchGate — Catalytic oxidation of toluene to benzoic acid", url: "https://www.researchgate.net/publication/385558112_Improvements_in_the_manufacture_of_benzoic_acid_obtained_by_catalytic_oxidation_of_toluene" },
-      { name: "Google Patents US3210416A — Benzoic acid from toluene", url: "https://patents.google.com/patent/US3210416A/" },
+      { name: "Wikidoc: Benzoic acid (production)", url: "https://www.wikidoc.org/index.php/Benzoic_acid" },
+      { name: "ResearchGate: Catalytic oxidation of toluene to benzoic acid", url: "https://www.researchgate.net/publication/385558112_Improvements_in_the_manufacture_of_benzoic_acid_obtained_by_catalytic_oxidation_of_toluene" },
+      { name: "Google Patents US3210416A: Benzoic acid from toluene", url: "https://patents.google.com/patent/US3210416A/" },
     ],
   },
   "sodium-benzoate": {
@@ -2494,7 +2494,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Neutralisation of benzoic acid with caustic soda",
       detail:
-        "Sodium benzoate is made by neutralising benzoic acid with a sodium base: C6H5COOH + NaOH → C6H5COONa + H2O. Benzoic acid is charged to a neutraliser with caustic soda (or soda ash) and water and reacted at about 70–98 °C to a controlled end-point of pH 7.5–8.0, giving a crude sodium benzoate solution. The liquor is decolourised with activated carbon, filtered under pressure, then concentrated by evaporation and dried. Depending on the grade the product is finished as crystals, powder or granules/pellets, then screened and packed to food (E211) or technical specification.",
+        "Sodium benzoate is made by neutralising benzoic acid with a sodium base: C6H5COOH + NaOH → C6H5COONa + H2O. Benzoic acid is charged to a neutraliser with caustic soda (or soda ash) and water and reacted at about 70-98 °C to a controlled end-point of pH 7.5-8.0, giving a crude sodium benzoate solution. The liquor is decolourised with activated carbon, filtered under pressure, then concentrated by evaporation and dried. Depending on the grade the product is finished as crystals, powder or granules/pellets, then screened and packed to food (E211) or technical specification.",
     },
     manufacturers: [
       { name: "Emerald Kalama Chemical (LANXESS)", url: "https://lanxess.com" },
@@ -2504,14 +2504,14 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tianjin Dongda Chemical Group", url: "https://www.tjddhg.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium benzoate", url: "https://en.wikipedia.org/wiki/Sodium_benzoate" },
-      { name: "Google Patents CN1887845A — Granular sodium benzoate", url: "https://patents.google.com/patent/CN1887845A/en" },
-      { name: "eCFR 21 CFR 184.1733 — Sodium benzoate", url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-184/subpart-B/section-184.1733" },
+      { name: "Wikipedia: Sodium benzoate", url: "https://en.wikipedia.org/wiki/Sodium_benzoate" },
+      { name: "Google Patents CN1887845A: Granular sodium benzoate", url: "https://patents.google.com/patent/CN1887845A/en" },
+      { name: "eCFR 21 CFR 184.1733: Sodium benzoate", url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-184/subpart-B/section-184.1733" },
     ],
   },
   "benzyl-alcohol": {
     routes: [
-      "Alkaline hydrolysis (saponification) of benzyl chloride — the principal industrial route",
+      "Alkaline hydrolysis (saponification) of benzyl chloride, the principal industrial route",
       "Catalytic hydrogenation of benzaldehyde",
       "Minor: hydrogenation of benzoic acid esters; electrochemical and bio-catalytic routes",
     ],
@@ -2528,9 +2528,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Velsicol Chemical", url: "https://www.eastman.com" },
     ],
     sources: [
-      { name: "Chemcess — Benzyl alcohol production", url: "https://chemcess.com/benzyl-alcohol-production-reactions-and-uses/" },
-      { name: "Google Patents US3557222A — Hydrolysis of benzyl chloride to benzyl alcohol", url: "https://patents.google.com/patent/US3557222A/en" },
-      { name: "MDPI Microorganisms — Benzyl alcohol production routes", url: "https://www.mdpi.com/2076-2607/10/5/966" },
+      { name: "Chemcess: Benzyl alcohol production", url: "https://chemcess.com/benzyl-alcohol-production-reactions-and-uses/" },
+      { name: "Google Patents US3557222A: Hydrolysis of benzyl chloride to benzyl alcohol", url: "https://patents.google.com/patent/US3557222A/en" },
+      { name: "MDPI Microorganisms: Benzyl alcohol production routes", url: "https://www.mdpi.com/2076-2607/10/5/966" },
     ],
   },
   "calcium-carbonate": {
@@ -2542,7 +2542,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Carbonation of milk of lime (PCC)",
       detail:
-        "Precipitated calcium carbonate is made by a calcine–slake–carbonate loop. Limestone (CaCO3) is calcined in a kiln to quicklime and carbon dioxide: CaCO3 → CaO + CO2. The quicklime is slaked with water to a calcium hydroxide slurry ('milk of lime'): CaO + H2O → Ca(OH)2. Carbon dioxide gas — usually the CO2 recovered from the kiln — is then bubbled through the milk of lime in a carbonator, reprecipitating calcium carbonate: Ca(OH)2 + CO2 → CaCO3 + H2O. Temperature, CO2 rate and additives control the crystal habit (calcite vs aragonite) and particle size; the slurry is dewatered, dried and milled. Ground calcium carbonate (GCC), by contrast, is simply mined high-purity limestone/marble that is crushed, milled and classified.",
+        "Precipitated calcium carbonate is made by a calcine-slake-carbonate loop. Limestone (CaCO3) is calcined in a kiln to quicklime and carbon dioxide: CaCO3 → CaO + CO2. The quicklime is slaked with water to a calcium hydroxide slurry ('milk of lime'): CaO + H2O → Ca(OH)2. Carbon dioxide gas, usually the CO2 recovered from the kiln, is then bubbled through the milk of lime in a carbonator, reprecipitating calcium carbonate: Ca(OH)2 + CO2 → CaCO3 + H2O. Temperature, CO2 rate and additives control the crystal habit (calcite vs aragonite) and particle size; the slurry is dewatered, dried and milled. Ground calcium carbonate (GCC), by contrast, is simply mined high-purity limestone/marble that is crushed, milled and classified.",
     },
     manufacturers: [
       { name: "Omya", url: "https://www.omya.com" },
@@ -2552,9 +2552,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nordkalk", url: "https://www.nordkalk.com" },
     ],
     sources: [
-      { name: "Sudarshan Group — PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
-      { name: "Intratec — Calcium carbonate from lime and CO2", url: "https://medium.com/intratec-products-blog/calcium-carbonate-production-from-lime-and-carbon-dioxide-economic-analysis-6cca76f51dbc" },
-      { name: "Mordor Intelligence — PCC market & companies", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
+      { name: "Sudarshan Group: PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
+      { name: "Intratec: Calcium carbonate from lime and CO2", url: "https://medium.com/intratec-products-blog/calcium-carbonate-production-from-lime-and-carbon-dioxide-economic-analysis-6cca76f51dbc" },
+      { name: "Mordor Intelligence: PCC market & companies", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
     ],
   },
   "calcium-nitrate": {
@@ -2576,9 +2576,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong Tianyi Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Google Patents WO2006031139A1 — Method of calcium nitrate production", url: "https://patents.google.com/patent/WO2006031139A1/en" },
-      { name: "Procurement Resource — Calcium nitrate production", url: "https://www.procurementresource.com/production-cost-report-store/calcium-nitrate" },
-      { name: "NIIR — CAN / NPK production", url: "https://www.niir.org/blog/production-of-npk-fertilizer-calcium-ammonium-nitrate-can/" },
+      { name: "Google Patents WO2006031139A1: Method of calcium nitrate production", url: "https://patents.google.com/patent/WO2006031139A1/en" },
+      { name: "Procurement Resource: Calcium nitrate production", url: "https://www.procurementresource.com/production-cost-report-store/calcium-nitrate" },
+      { name: "NIIR: CAN / NPK production", url: "https://www.niir.org/blog/production-of-npk-fertilizer-calcium-ammonium-nitrate-can/" },
     ],
   },
   "calcium-propionate": {
@@ -2590,7 +2590,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Neutralisation of propionic acid with calcium hydroxide",
       detail:
-        "Calcium propionate is made by neutralising propionic acid with a calcium base: 2 CH3CH2COOH + Ca(OH)2 → Ca(CH3CH2COO)2 + 2 H2O (calcium carbonate can be used instead, releasing CO2). Calcium hydroxide is charged to a reactor with process water and propionic acid is metered in stepwise to control the exotherm; the mixture is stirred and held at about 70–100 °C for 2–3 hours to complete the neutralisation. The resulting solution is filtered to remove insolubles, then concentrated and dried (spray or fluid-bed) and milled to a fine white food- or feed-grade powder.",
+        "Calcium propionate is made by neutralising propionic acid with a calcium base: 2 CH3CH2COOH + Ca(OH)2 → Ca(CH3CH2COO)2 + 2 H2O (calcium carbonate can be used instead, releasing CO2). Calcium hydroxide is charged to a reactor with process water and propionic acid is metered in stepwise to control the exotherm; the mixture is stirred and held at about 70-100 °C for 2-3 hours to complete the neutralisation. The resulting solution is filtered to remove insolubles, then concentrated and dried (spray or fluid-bed) and milled to a fine white food- or feed-grade powder.",
     },
     manufacturers: [
       { name: "Niacet (Kerry Group)", url: "https://www.niacet.com" },
@@ -2600,9 +2600,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kemin Industries", url: "https://www.kemin.com" },
     ],
     sources: [
-      { name: "Scribd — Calcium propionate manufacturing process", url: "https://www.scribd.com/document/451864932/17-Calcium-Propionate-manufacturing-process" },
-      { name: "Google Patents EP0093317A1 — Preparation of calcium propionate", url: "https://patents.google.com/patent/EP0093317A1/en" },
-      { name: "FreePatentsOnline US4700000 — Preparation of calcium propionate (BASF)", url: "https://www.freepatentsonline.com/4700000.html" },
+      { name: "Scribd: Calcium propionate manufacturing process", url: "https://www.scribd.com/document/451864932/17-Calcium-Propionate-manufacturing-process" },
+      { name: "Google Patents EP0093317A1: Preparation of calcium propionate", url: "https://patents.google.com/patent/EP0093317A1/en" },
+      { name: "FreePatentsOnline US4700000: Preparation of calcium propionate (BASF)", url: "https://www.freepatentsonline.com/4700000.html" },
     ],
   },
   "calcium-stearate": {
@@ -2624,9 +2624,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Ace Kakoh", url: "https://www.sunace.com.sg" },
     ],
     sources: [
-      { name: "Alapolystabs — Manufacturing process of calcium stearates", url: "https://alapolystabs.com/calcium-stearates.html" },
-      { name: "PishroChem — Manufacturing process of calcium stearate", url: "https://www.pishrochem.com/blog/en/the-manufacturing-process-of-calcium-stearate/" },
-      { name: "Google Patents US4307027A — Continuous metallic stearate process", url: "https://patents.google.com/patent/US4307027A/en" },
+      { name: "Alapolystabs: Manufacturing process of calcium stearates", url: "https://alapolystabs.com/calcium-stearates.html" },
+      { name: "PishroChem: Manufacturing process of calcium stearate", url: "https://www.pishrochem.com/blog/en/the-manufacturing-process-of-calcium-stearate/" },
+      { name: "Google Patents US4307027A: Continuous metallic stearate process", url: "https://patents.google.com/patent/US4307027A/en" },
     ],
   },
   "cocamidopropyl-betaine-capb": {
@@ -2649,9 +2649,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Stepan Company", url: "https://www.stepan.com" },
     ],
     sources: [
-      { name: "Elchemy — How is CAPB manufactured", url: "https://elchemy.com/blogs/capb-reports/how-is-capb-manufactured" },
-      { name: "Wikipedia — Cocamidopropyl betaine", url: "https://en.wikipedia.org/wiki/Cocamidopropyl_betaine" },
-      { name: "Procurement Resource — CAPB from DMAPA", url: "https://www.procurementresource.com/cost-analysis/capb-cocamidopropyl-betaine-production-from-dimethylaminopropylamine-dmapa" },
+      { name: "Elchemy: How is CAPB manufactured", url: "https://elchemy.com/blogs/capb-reports/how-is-capb-manufactured" },
+      { name: "Wikipedia: Cocamidopropyl betaine", url: "https://en.wikipedia.org/wiki/Cocamidopropyl_betaine" },
+      { name: "Procurement Resource: CAPB from DMAPA", url: "https://www.procurementresource.com/cost-analysis/capb-cocamidopropyl-betaine-production-from-dimethylaminopropylamine-dmapa" },
     ],
   },
   "cocamide-dea": {
@@ -2673,9 +2673,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Fengchen Group", url: "https://www.fengchengroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cocamide DEA", url: "https://en.wikipedia.org/wiki/Cocamide_DEA" },
-      { name: "ARPN J. Eng. — Transesterification & amidation route to cocamide DEA", url: "https://www.arpnjournals.org/jeas/research_papers/rp_2019/jeas_0619_7781.pdf" },
-      { name: "SpecialChem — Cocamide DEA (INCI)", url: "https://cosmetics.specialchem.com/inci-ingredients/cocamide-dea" },
+      { name: "Wikipedia: Cocamide DEA", url: "https://en.wikipedia.org/wiki/Cocamide_DEA" },
+      { name: "ARPN J. Eng.: Transesterification & amidation route to cocamide DEA", url: "https://www.arpnjournals.org/jeas/research_papers/rp_2019/jeas_0619_7781.pdf" },
+      { name: "SpecialChem: Cocamide DEA (INCI)", url: "https://cosmetics.specialchem.com/inci-ingredients/cocamide-dea" },
     ],
   },
   "cocamide-mea-cmea": {
@@ -2697,21 +2697,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "KLK Oleo", url: "https://www.klkoleo.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cocamide MEA", url: "https://en.wikipedia.org/wiki/Cocamide_MEA" },
-      { name: "Scimplify — Cocamide MEA (CMEA)", url: "https://www.scimplify.com/en-us/cocamide-mea" },
-      { name: "Google Patents US8937102 — Cocamide monoethanolamide concentrates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8937102" },
+      { name: "Wikipedia: Cocamide MEA", url: "https://en.wikipedia.org/wiki/Cocamide_MEA" },
+      { name: "Scimplify: Cocamide MEA (CMEA)", url: "https://www.scimplify.com/en-us/cocamide-mea" },
+      { name: "Google Patents US8937102: Cocamide monoethanolamide concentrates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8937102" },
     ],
   },
   "coconut-oil": {
     routes: [
       "Expeller (screw-press) extraction of oil from dried copra, with solvent extraction of the press cake",
-      "Refining of crude coconut oil — degumming, neutralisation, bleaching and deodorisation (RBD)",
+      "Refining of crude coconut oil, degumming, neutralisation, bleaching and deodorisation (RBD)",
       "Virgin coconut oil by cold/wet processing of fresh coconut kernel",
     ],
     mainProcess: {
       name: "Copra expeller pressing and RBD refining",
       detail:
-        "Most commercial coconut oil starts from copra — the dried kernel of mature coconuts (~64% oil). The cleaned, sized copra is conditioned and pressed in screw presses (expellers) to express crude oil; the residual press cake (still ~6–10% oil) is solvent-extracted (hexane) to recover the rest. The combined crude oil is then refined to RBD (refined, bleached, deodorised) grade: degumming/neutralisation removes free fatty acids and phosphatides, bleaching with activated clay removes colour, and steam deodorisation under vacuum strips odour and volatiles. Virgin coconut oil instead is made from fresh kernel by wet/cold processes without high-heat refining.",
+        "Most commercial coconut oil starts from copra, the dried kernel of mature coconuts (~64% oil). The cleaned, sized copra is conditioned and pressed in screw presses (expellers) to express crude oil; the residual press cake (still ~6-10% oil) is solvent-extracted (hexane) to recover the rest. The combined crude oil is then refined to RBD (refined, bleached, deodorised) grade: degumming/neutralisation removes free fatty acids and phosphatides, bleaching with activated clay removes colour, and steam deodorisation under vacuum strips odour and volatiles. Virgin coconut oil instead is made from fresh kernel by wet/cold processes without high-heat refining.",
     },
     manufacturers: [
       { name: "Cargill", url: "https://www.cargill.com" },
@@ -2721,9 +2721,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Greenville Agro / P&G Chemicals", url: "https://www.pgchemicals.com" },
     ],
     sources: [
-      { name: "OFI Magazine — Processing coconut oil", url: "https://www.ofimagazine.com/content-images/news/Coconut_oil_processing.pdf" },
-      { name: "Musim Mas — How coconut is processed into oil and oleochemicals", url: "https://www.musimmas.com/resources/blogs/how-is-coconut-processed-from-a-plant-into-oil-and-oleochemicals/" },
-      { name: "Kumar Metal — Copra/coconut oil production", url: "https://kumarmetal.com/copra-or-coconut-oil-productions-specification-applications/" },
+      { name: "OFI Magazine: Processing coconut oil", url: "https://www.ofimagazine.com/content-images/news/Coconut_oil_processing.pdf" },
+      { name: "Musim Mas: How coconut is processed into oil and oleochemicals", url: "https://www.musimmas.com/resources/blogs/how-is-coconut-processed-from-a-plant-into-oil-and-oleochemicals/" },
+      { name: "Kumar Metal: Copra/coconut oil production", url: "https://kumarmetal.com/copra-or-coconut-oil-productions-specification-applications/" },
     ],
   },
   "diethyl-carbonate": {
@@ -2735,7 +2735,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Transesterification with ethanol",
       detail:
-        "Battery- and solvent-grade diethyl carbonate is most commonly made by transesterification, swapping the alkyl groups of a cheaper carbonate with ethanol. Dimethyl carbonate (or ethylene carbonate) is reacted with ethanol over a basic catalyst (e.g. sodium ethoxide or a solid base): (CH3O)2CO + 2 C2H5OH ⇌ (C2H5O)2CO + 2 CH3OH, proceeding through the mixed ethyl methyl carbonate intermediate. The equilibrium is pulled toward DEC by removing the light methanol (as a methanol–DMC azeotrope) in a reactive-distillation column, and the product is purified to the very low water and protic-impurity levels needed for lithium-ion electrolytes. The alternative direct route is oxidative carbonylation of ethanol (EtOH + CO + ½O2 → DEC + H2O) over copper catalysts.",
+        "Battery- and solvent-grade diethyl carbonate is most commonly made by transesterification, swapping the alkyl groups of a cheaper carbonate with ethanol. Dimethyl carbonate (or ethylene carbonate) is reacted with ethanol over a basic catalyst (e.g. sodium ethoxide or a solid base): (CH3O)2CO + 2 C2H5OH ⇌ (C2H5O)2CO + 2 CH3OH, proceeding through the mixed ethyl methyl carbonate intermediate. The equilibrium is pulled toward DEC by removing the light methanol (as a methanol-DMC azeotrope) in a reactive-distillation column, and the product is purified to the very low water and protic-impurity levels needed for lithium-ion electrolytes. The alternative direct route is oxidative carbonylation of ethanol (EtOH + CO + ½O2 → DEC + H2O) over copper catalysts.",
     },
     manufacturers: [
       { name: "UBE Corporation", url: "https://www.ube.com" },
@@ -2745,9 +2745,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tongling Jintai Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "ACS Energy & Fuels — DEC from ethanol and CO", url: "https://pubs.acs.org/doi/10.1021/ef0101816" },
-      { name: "Nature Sci. Reports — DEC from CO2 and ethanol", url: "https://www.nature.com/articles/s41598-024-59070-y" },
-      { name: "ACS Sustainable Chem. Eng. — Oxidative carbonylation vs alternatives", url: "https://pubs.acs.org/doi/10.1021/acssuschemeng.5b01515" },
+      { name: "ACS Energy & Fuels: DEC from ethanol and CO", url: "https://pubs.acs.org/doi/10.1021/ef0101816" },
+      { name: "Nature Sci. Reports: DEC from CO2 and ethanol", url: "https://www.nature.com/articles/s41598-024-59070-y" },
+      { name: "ACS Sustainable Chem. Eng.: Oxidative carbonylation vs alternatives", url: "https://pubs.acs.org/doi/10.1021/acssuschemeng.5b01515" },
     ],
   },
   "diethyl-maleate": {
@@ -2769,9 +2769,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Chemical", url: "https://www.mcgc.com" },
     ],
     sources: [
-      { name: "Wikipedia — Diethyl maleate", url: "https://en.wikipedia.org/wiki/Diethyl_maleate" },
-      { name: "ScienceDirect — Esterification of maleic acid with ethanol over resins", url: "https://www.sciencedirect.com/science/article/abs/pii/S138151480200086X" },
-      { name: "Google Patents US4795824A — Production of dialkyl maleates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4795824" },
+      { name: "Wikipedia: Diethyl maleate", url: "https://en.wikipedia.org/wiki/Diethyl_maleate" },
+      { name: "ScienceDirect: Esterification of maleic acid with ethanol over resins", url: "https://www.sciencedirect.com/science/article/abs/pii/S138151480200086X" },
+      { name: "Google Patents US4795824A: Production of dialkyl maleates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4795824" },
     ],
   },
   "diethyl-malonate": {
@@ -2793,9 +2793,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Hualun Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Grokipedia — Diethyl malonate", url: "https://grokipedia.com/page/Diethyl_malonate" },
-      { name: "Google Patents CN101525290B — Preparation of diethyl malonate", url: "https://patents.google.com/patent/CN101525290B/en" },
-      { name: "Perlego — Malonic ester synthesis overview", url: "https://www.perlego.com/index/chemistry/malonic-ester-synthesis" },
+      { name: "Grokipedia: Diethyl malonate", url: "https://grokipedia.com/page/Diethyl_malonate" },
+      { name: "Google Patents CN101525290B: Preparation of diethyl malonate", url: "https://patents.google.com/patent/CN101525290B/en" },
+      { name: "Perlego: Malonic ester synthesis overview", url: "https://www.perlego.com/index/chemistry/malonic-ester-synthesis" },
     ],
   },
   "diethyl-phthalate": {
@@ -2817,21 +2817,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aekyung Petrochemical", url: "https://www.aekyungchem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Diethyl phthalate", url: "https://en.wikipedia.org/wiki/Diethyl_phthalate" },
-      { name: "ATSDR — Diethyl phthalate production", url: "https://www.atsdr.cdc.gov/toxprofiles/tp73-c4.pdf" },
-      { name: "IG Petrochemicals — Diethyl phthalate (DEP)", url: "https://www.igpetro.com/dep" },
+      { name: "Wikipedia: Diethyl phthalate", url: "https://en.wikipedia.org/wiki/Diethyl_phthalate" },
+      { name: "ATSDR: Diethyl phthalate production", url: "https://www.atsdr.cdc.gov/toxprofiles/tp73-c4.pdf" },
+      { name: "IG Petrochemicals: Diethyl phthalate (DEP)", url: "https://www.igpetro.com/dep" },
     ],
   },
   "dimer-acid": {
     routes: [
       "Clay-catalysed thermal/cationic dimerisation of unsaturated C18 fatty acids (tall oil or soybean fatty acids)",
-      "Diels–Alder dimerisation forming a partially unsaturated cyclic C36 di-acid",
+      "Diels-Alder dimerisation forming a partially unsaturated cyclic C36 di-acid",
       "Molecular distillation to separate monomer, dimer and trimer/polymer fractions; optional hydrogenation",
     ],
     mainProcess: {
       name: "Clay-catalysed dimerisation of tall oil fatty acid",
       detail:
-        "Dimer acid is made by dimerising unsaturated C18 fatty acids — typically tall oil fatty acid (TOFA, oleic/linoleic) — by heat-bodying them at about 230–260 °C under pressure in the presence of an acidic montmorillonite clay catalyst. The clay promotes cationic and Diels–Alder coupling of the fatty chains, building predominantly a C36 di-carboxylic acid (with a partially unsaturated six-membered ring) alongside trimer and higher oligomers. After reaction the clay is filtered off and the mixture is separated by wiped-film/molecular distillation into monomer, dimer and trimer cuts; the dimer fraction may be hydrogenated for colour and oxidative stability. A drawback of the clay route is that the spent catalyst is not recyclable, so zeolite-catalysed processes on plant-based feeds are emerging.",
+        "Dimer acid is made by dimerising unsaturated C18 fatty acids, typically tall oil fatty acid (TOFA, oleic/linoleic), by heat-bodying them at about 230-260 °C under pressure in the presence of an acidic montmorillonite clay catalyst. The clay promotes cationic and Diels-Alder coupling of the fatty chains, building predominantly a C36 di-carboxylic acid (with a partially unsaturated six-membered ring) alongside trimer and higher oligomers. After reaction the clay is filtered off and the mixture is separated by wiped-film/molecular distillation into monomer, dimer and trimer cuts; the dimer fraction may be hydrogenated for colour and oxidative stability. A drawback of the clay route is that the spent catalyst is not recyclable, so zeolite-catalysed processes on plant-based feeds are emerging.",
     },
     manufacturers: [
       { name: "Croda International", url: "https://www.croda.com" },
@@ -2841,9 +2841,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Florachem", url: "https://www.florachem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Dimer acid", url: "https://en.wikipedia.org/wiki/Dimer_acid" },
-      { name: "ScienceDirect — Advanced process for structurally selective dimer acids", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926669020300480" },
-      { name: "ScienceDirect Topics — Dimer acid overview", url: "https://www.sciencedirect.com/topics/engineering/dimer-acid" },
+      { name: "Wikipedia: Dimer acid", url: "https://en.wikipedia.org/wiki/Dimer_acid" },
+      { name: "ScienceDirect: Advanced process for structurally selective dimer acids", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926669020300480" },
+      { name: "ScienceDirect Topics: Dimer acid overview", url: "https://www.sciencedirect.com/topics/engineering/dimer-acid" },
     ],
   },
   edta: {
@@ -2855,7 +2855,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Alkaline cyanomethylation of ethylenediamine",
       detail:
-        "The dominant industrial route is the alkaline cyanomethylation (a Strecker-type carboxymethylation) of ethylenediamine. Ethylenediamine reacts with formaldehyde and sodium cyanide under alkaline conditions so that each of the four N–H bonds is converted to an –CH2COO⁻ group, giving tetrasodium EDTA in over 90% yield (sodium hydroxide hydrolyses the intermediate nitriles to carboxylates, releasing ammonia). In the two-step variant, ethylenediamine, hydrogen cyanide and formaldehyde first give (ethylenedinitrilo)tetraacetonitrile in high yield, which is isolated and then hydrolysed with sodium hydroxide to pure tetrasodium EDTA. Acidifying the sodium salt precipitates the free acid (H4EDTA). Because cyanide is used, the plants are tightly regulated for handling and effluent.",
+        "The dominant industrial route is the alkaline cyanomethylation (a Strecker-type carboxymethylation) of ethylenediamine. Ethylenediamine reacts with formaldehyde and sodium cyanide under alkaline conditions so that each of the four N-H bonds is converted to an -CH2COO⁻ group, giving tetrasodium EDTA in over 90% yield (sodium hydroxide hydrolyses the intermediate nitriles to carboxylates, releasing ammonia). In the two-step variant, ethylenediamine, hydrogen cyanide and formaldehyde first give (ethylenedinitrilo)tetraacetonitrile in high yield, which is isolated and then hydrolysed with sodium hydroxide to pure tetrasodium EDTA. Acidifying the sodium salt precipitates the free acid (H4EDTA). Because cyanide is used, the plants are tightly regulated for handling and effluent.",
     },
     manufacturers: [
       { name: "Nouryon (Dissolvine)", url: "https://www.nouryon.com" },
@@ -2865,9 +2865,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Huaihe / Hubei Xinghong (chelates)", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Chemcess — EDTA properties, production and uses", url: "https://chemcess.com/ethylenediaminetetraacetic-acid-edta-properties-production-and-uses/" },
-      { name: "Google Patents EP0085277A1 — Production of EDTA", url: "https://patents.google.com/patent/EP0085277A1/en" },
-      { name: "Google Patents CN1388113A — EDTA via HCN synthesis gas", url: "https://patents.google.com/patent/CN1388113A/en" },
+      { name: "Chemcess: EDTA properties, production and uses", url: "https://chemcess.com/ethylenediaminetetraacetic-acid-edta-properties-production-and-uses/" },
+      { name: "Google Patents EP0085277A1: Production of EDTA", url: "https://patents.google.com/patent/EP0085277A1/en" },
+      { name: "Google Patents CN1388113A: EDTA via HCN synthesis gas", url: "https://patents.google.com/patent/CN1388113A/en" },
     ],
   },
   "guar-gum": {
@@ -2879,7 +2879,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Seed splitting and endosperm milling",
       detail:
-        "Guar gum is the milled endosperm of the guar bean (Cyamopsis tetragonoloba), a galactomannan polysaccharide. Cleaned guar seed is processed (often with heating) to loosen and remove the fibrous husk and the protein-rich germ — typically by splitting in a horizontal burr/roller mill and separating the germ in a pin mill with screening — to leave the gum-bearing 'splits' (refined endosperm halves). The splits are then ground and polished into powder, with mesh/particle size set by repeated grinding, sieving and classification. For food grade, the splits are soaked/pre-hydrated, flaked, ground, dried and screened to the required viscosity and granulation; many grades are further derivatised (e.g. hydroxypropyl or cationic guar) for oilfield and personal-care use. India (mainly Rajasthan) accounts for the bulk of world output.",
+        "Guar gum is the milled endosperm of the guar bean (Cyamopsis tetragonoloba), a galactomannan polysaccharide. Cleaned guar seed is processed (often with heating) to loosen and remove the fibrous husk and the protein-rich germ, typically by splitting in a horizontal burr/roller mill and separating the germ in a pin mill with screening, to leave the gum-bearing 'splits' (refined endosperm halves). The splits are then ground and polished into powder, with mesh/particle size set by repeated grinding, sieving and classification. For food grade, the splits are soaked/pre-hydrated, flaked, ground, dried and screened to the required viscosity and granulation; many grades are further derivatised (e.g. hydroxypropyl or cationic guar) for oilfield and personal-care use. India (mainly Rajasthan) accounts for the bulk of world output.",
     },
     manufacturers: [
       { name: "Vikas WSP", url: "https://www.vikaswsp.com" },
@@ -2889,9 +2889,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Lamberti", url: "https://www.lamberti.com" },
     ],
     sources: [
-      { name: "Wikipedia — Guar gum", url: "https://en.wikipedia.org/wiki/Guar_gum" },
-      { name: "Agrogums — Step-by-step guar gum powder process", url: "https://www.agrogums.com/blogs/from-field-to-final-product-the-step-by-step-process-of-making-guar-gum-powder" },
-      { name: "ScienceDirect — Dehulling of guar seeds", url: "https://www.sciencedirect.com/science/article/abs/pii/S0960308516300207" },
+      { name: "Wikipedia: Guar gum", url: "https://en.wikipedia.org/wiki/Guar_gum" },
+      { name: "Agrogums: Step-by-step guar gum powder process", url: "https://www.agrogums.com/blogs/from-field-to-final-product-the-step-by-step-process-of-making-guar-gum-powder" },
+      { name: "ScienceDirect: Dehulling of guar seeds", url: "https://www.sciencedirect.com/science/article/abs/pii/S0960308516300207" },
     ],
   },
   "hydrogenated-castor-oil-hco": {
@@ -2903,7 +2903,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Nickel-catalysed hydrogenation of castor oil",
       detail:
-        "Hydrogenated castor oil (castor wax) is produced by hydrogenating bleached castor oil. The oil is heated under vacuum to around 160 °C with a nickel catalyst, and hydrogen is sparged in with agitation; the carbon–carbon double bonds of the ricinoleic-acid chains are saturated, converting the triglyceride of ricinoleic acid into the triglyceride of 12-hydroxystearic acid — a hard, wax-like solid melting near 86 °C. When the target degree of hydrogenation (iodine value) is reached the hydrogen feed is stopped, the batch is cooled to ~100 °C, the nickel catalyst is filtered off (and largely reclaimed), and the product is flaked. The retained hydroxyl groups give HCO its characteristic gelling and structuring behaviour in lubricants, cosmetics and coatings.",
+        "Hydrogenated castor oil (castor wax) is produced by hydrogenating bleached castor oil. The oil is heated under vacuum to around 160 °C with a nickel catalyst, and hydrogen is sparged in with agitation; the carbon-carbon double bonds of the ricinoleic-acid chains are saturated, converting the triglyceride of ricinoleic acid into the triglyceride of 12-hydroxystearic acid, a hard, wax-like solid melting near 86 °C. When the target degree of hydrogenation (iodine value) is reached the hydrogen feed is stopped, the batch is cooled to ~100 °C, the nickel catalyst is filtered off (and largely reclaimed), and the product is flaked. The retained hydroxyl groups give HCO its characteristic gelling and structuring behaviour in lubricants, cosmetics and coatings.",
     },
     manufacturers: [
       { name: "Jayant Agro-Organics", url: "https://www.jayantagro.com" },
@@ -2913,9 +2913,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gokul Agro Resources", url: "https://www.gokulagro.com" },
     ],
     sources: [
-      { name: "Jayant Agro-Organics — Hydrogenated Castor Oil (HCO)", url: "https://www.jayantagro.com/products/hydrogenated-castor-oil--hco-/30" },
-      { name: "Google Patents KR101655764B1 — Nickel catalyst & hydrogenated castor oil", url: "https://patents.google.com/patent/KR101655764B1/en" },
-      { name: "Grand View Research — Castor oil & derivatives market", url: "https://www.grandviewresearch.com/industry-analysis/castor-oil-derivatives-industry" },
+      { name: "Jayant Agro-Organics: Hydrogenated Castor Oil (HCO)", url: "https://www.jayantagro.com/products/hydrogenated-castor-oil--hco-/30" },
+      { name: "Google Patents KR101655764B1: Nickel catalyst & hydrogenated castor oil", url: "https://patents.google.com/patent/KR101655764B1/en" },
+      { name: "Grand View Research: Castor oil & derivatives market", url: "https://www.grandviewresearch.com/industry-analysis/castor-oil-derivatives-industry" },
     ],
   },
   "lauric-acid-rspo-mb": {
@@ -2927,7 +2927,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Fat splitting and fractionation under RSPO Mass Balance",
       detail:
-        "Lauric acid is an oleochemical from lauric oils — coconut and palm-kernel oil, which are rich in C12. The triglycerides are hydrolysed ('fat splitting') with water at high temperature (~250 °C) and pressure (e.g. a Colgate–Emery column), breaking them into crude mixed fatty acids and glycerol. The mixed acids are then separated by fractional distillation into C8, C10, C12, C14 and heavier cuts; the lauric (C12) cut is taken and, by grade, further distilled or hydrogenated to high purity (e.g. 99%). The 'RSPO MB' designation refers to the Roundtable on Sustainable Palm Oil Mass Balance supply-chain model: certified sustainable palm-kernel feedstock is administratively mixed with conventional material, and the certified volume sold is matched to the certified volume purchased — guaranteeing that an equivalent quantity was produced sustainably, without requiring full physical segregation.",
+        "Lauric acid is an oleochemical from lauric oils, coconut and palm-kernel oil, which are rich in C12. The triglycerides are hydrolysed ('fat splitting') with water at high temperature (~250 °C) and pressure (e.g. a Colgate-Emery column), breaking them into crude mixed fatty acids and glycerol. The mixed acids are then separated by fractional distillation into C8, C10, C12, C14 and heavier cuts; the lauric (C12) cut is taken and, by grade, further distilled or hydrogenated to high purity (e.g. 99%). The 'RSPO MB' designation refers to the Roundtable on Sustainable Palm Oil Mass Balance supply-chain model: certified sustainable palm-kernel feedstock is administratively mixed with conventional material, and the certified volume sold is matched to the certified volume purchased, guaranteeing that an equivalent quantity was produced sustainably, without requiring full physical segregation.",
     },
     manufacturers: [
       { name: "Wilmar International", url: "https://www.wilmar-international.com" },
@@ -2937,9 +2937,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Emery Oleochemicals", url: "https://www.emeryoleo.com" },
     ],
     sources: [
-      { name: "RSPO — Supply chain models (Mass Balance)", url: "https://rspo.org/as-an-organisation/certification/supply-chains/" },
-      { name: "Wilmar — Lauric acid", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
-      { name: "Colonial Chemical — Palm oil & RSPO Mass Balance", url: "https://colonialchem.com/company/palm-oil/" },
+      { name: "RSPO: Supply chain models (Mass Balance)", url: "https://rspo.org/as-an-organisation/certification/supply-chains/" },
+      { name: "Wilmar: Lauric acid", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
+      { name: "Colonial Chemical: Palm oil & RSPO Mass Balance", url: "https://colonialchem.com/company/palm-oil/" },
     ],
   },
   "paraffin-wax": {
@@ -2951,7 +2951,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Solvent dewaxing and hydrofinishing of slack wax",
       detail:
-        "Paraffin wax is recovered from crude oil refining. After atmospheric and vacuum distillation, the waxy lube-oil distillate is solvent-dewaxed: a solvent such as MEK (methyl ethyl ketone) with toluene is mixed in and the stream is chilled so wax crystallises, then filtered off — yielding 'slack wax' that still holds roughly 5–30% oil. The slack wax is de-oiled (by controlled 'sweating' or further solvent extraction) to set the oil content and hardness, then hydrofinished — treated with hydrogen at high temperature and pressure to remove sulfur, nitrogen, colour bodies and polar compounds — to give odourless, white semi-refined or fully refined paraffin wax. Fischer–Tropsch (gas-to-liquids) wax from synthesis gas is an alternative, very pure source.",
+        "Paraffin wax is recovered from crude oil refining. After atmospheric and vacuum distillation, the waxy lube-oil distillate is solvent-dewaxed: a solvent such as MEK (methyl ethyl ketone) with toluene is mixed in and the stream is chilled so wax crystallises, then filtered off, yielding 'slack wax' that still holds roughly 5-30% oil. The slack wax is de-oiled (by controlled 'sweating' or further solvent extraction) to set the oil content and hardness, then hydrofinished, treated with hydrogen at high temperature and pressure to remove sulfur, nitrogen, colour bodies and polar compounds, to give odourless, white semi-refined or fully refined paraffin wax. Fischer-Tropsch (gas-to-liquids) wax from synthesis gas is an alternative, very pure source.",
     },
     manufacturers: [
       { name: "ExxonMobil", url: "https://www.exxonmobil.com" },
@@ -2961,9 +2961,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "The International Group (IGI Wax)", url: "https://igiwax.com" },
     ],
     sources: [
-      { name: "Hydrocarbon Processing — Paraffin wax production process", url: "https://www.hydrocarbonprocessing.com/news/2024/07/digital-feature-paraffin-wax-a-detailed-look-at-its-production-process/" },
-      { name: "Petronaft — Paraffin wax production process", url: "https://www.petronaftco.com/paraffin-wax-production-process/" },
-      { name: "Grand View Research — Paraffin wax market", url: "https://www.grandviewresearch.com/industry-analysis/paraffin-wax-market" },
+      { name: "Hydrocarbon Processing: Paraffin wax production process", url: "https://www.hydrocarbonprocessing.com/news/2024/07/digital-feature-paraffin-wax-a-detailed-look-at-its-production-process/" },
+      { name: "Petronaft: Paraffin wax production process", url: "https://www.petronaftco.com/paraffin-wax-production-process/" },
+      { name: "Grand View Research: Paraffin wax market", url: "https://www.grandviewresearch.com/industry-analysis/paraffin-wax-market" },
     ],
   },
   "propionic-anhydride": {
@@ -2975,7 +2975,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ketene route from propionic acid",
       detail:
-        "Propionic anhydride is produced industrially via ketene chemistry, analogous to acetic anhydride. Ketene (CH2=C=O), generated by high-temperature dehydration/cracking (commonly of acetic acid at ~700–780 °C), is absorbed into propionic acid, where it acylates the carboxyl to give the mixed/ symmetric anhydride; through anhydride exchange the system yields propionic anhydride, (CH3CH2CO)2O, with acetic acid as the co-product. Alternatively, methylketene generated from propionic acid itself can be reacted with further propionic acid. Modern plants run the absorption/reactive-distillation under conditions tuned to minimise tar and coloured by-products, and the anhydride is purified by fractional distillation.",
+        "Propionic anhydride is produced industrially via ketene chemistry, analogous to acetic anhydride. Ketene (CH2=C=O), generated by high-temperature dehydration/cracking (commonly of acetic acid at ~700-780 °C), is absorbed into propionic acid, where it acylates the carboxyl to give the mixed/ symmetric anhydride; through anhydride exchange the system yields propionic anhydride, (CH3CH2CO)2O, with acetic acid as the co-product. Alternatively, methylketene generated from propionic acid itself can be reacted with further propionic acid. Modern plants run the absorption/reactive-distillation under conditions tuned to minimise tar and coloured by-products, and the anhydride is purified by fractional distillation.",
     },
     manufacturers: [
       { name: "BASF", url: "https://www.basf.com" },
@@ -2985,21 +2985,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hubei Greenhome / Jiangsu producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Google Patents US2235561A — Methyl ketene and propionic anhydride (Eastman Kodak)", url: "https://patents.google.com/patent/US2235561A/en" },
-      { name: "nbinno — Chemistry of propionic anhydride: synthesis & reactions", url: "https://www.nbinno.com/article/other-organic-chemicals/chemistry-propionic-anhydride-synthesis-reactions-hi" },
-      { name: "Google Patents US7553991 — Producing carboxylic acid anhydrides", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7553991" },
+      { name: "Google Patents US2235561A: Methyl ketene and propionic anhydride (Eastman Kodak)", url: "https://patents.google.com/patent/US2235561A/en" },
+      { name: "nbinno: Chemistry of propionic anhydride: synthesis & reactions", url: "https://www.nbinno.com/article/other-organic-chemicals/chemistry-propionic-anhydride-synthesis-reactions-hi" },
+      { name: "Google Patents US7553991: Producing carboxylic acid anhydrides", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7553991" },
     ],
   },
   "sodium-methyl-cocoyl-taurate": {
     routes: [
       "Make the precursor N-methyltaurine (react sodium isethionate with methylamine, or via taurine)",
-      "Schotten–Baumann acylation: react coconut fatty acid chloride with N-methyltaurine under alkali",
+      "Schotten-Baumann acylation: react coconut fatty acid chloride with N-methyltaurine under alkali",
       "Alternative direct amidation of coconut fatty acid with N-methyltaurine using a boric-acid catalyst",
     ],
     mainProcess: {
       name: "Acylation of N-methyltaurine with coconut fatty acid chloride",
       detail:
-        "Sodium methyl cocoyl taurate (SMCT) is a mild anionic taurate surfactant. The key intermediate, N-methyltaurine, is first prepared (for example by reacting sodium isethionate with methylamine). It is then N-acylated with the fatty acyl group of coconut oil: in the common Schotten–Baumann route, N-methyltaurine is dissolved in aqueous caustic/alcohol and coconut fatty acid chloride is added under cooling and alkali so the amine is acylated to the amide, RCON(CH3)CH2CH2SO3Na, with sodium chloride as by-product; the product is then salted, filtered and dried to a white powder/paste. A solvent-free variant condenses coconut fatty acid directly with N-methyltaurine using a boric-acid catalyst at ~200 °C while distilling off water. SMCT is prized for its mildness and creamy foam in facial cleansers and syndet bars.",
+        "Sodium methyl cocoyl taurate (SMCT) is a mild anionic taurate surfactant. The key intermediate, N-methyltaurine, is first prepared (for example by reacting sodium isethionate with methylamine). It is then N-acylated with the fatty acyl group of coconut oil: in the common Schotten-Baumann route, N-methyltaurine is dissolved in aqueous caustic/alcohol and coconut fatty acid chloride is added under cooling and alkali so the amine is acylated to the amide, RCON(CH3)CH2CH2SO3Na, with sodium chloride as by-product; the product is then salted, filtered and dried to a white powder/paste. A solvent-free variant condenses coconut fatty acid directly with N-methyltaurine using a boric-acid catalyst at ~200 °C while distilling off water. SMCT is prized for its mildness and creamy foam in facial cleansers and syndet bars.",
     },
     manufacturers: [
       { name: "Clariant (Hostapon)", url: "https://www.clariant.com" },
@@ -3009,9 +3009,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Innospec", url: "https://www.innospecinc.com" },
     ],
     sources: [
-      { name: "Cosmetics & Toiletries — Sodium methyl cocoyl taurate", url: "https://www.cosmeticsandtoiletries.com/research/literature-data/article/21835802/sodium-methyl-cocoyl-taurate-biosurfactant-in-action" },
-      { name: "CIR — Safety assessment of alkyl taurate amides and taurate salts", url: "https://www.cir-safety.org/sites/default/files/taurat122015FR.pdf" },
-      { name: "SpecialChem — Sodium methyl cocoyl taurate (INCI)", url: "https://www.specialchem.com/cosmetics/inci-ingredients/sodium-methyl-cocoyl-taurate" },
+      { name: "Cosmetics & Toiletries: Sodium methyl cocoyl taurate", url: "https://www.cosmeticsandtoiletries.com/research/literature-data/article/21835802/sodium-methyl-cocoyl-taurate-biosurfactant-in-action" },
+      { name: "CIR: Safety assessment of alkyl taurate amides and taurate salts", url: "https://www.cir-safety.org/sites/default/files/taurat122015FR.pdf" },
+      { name: "SpecialChem: Sodium methyl cocoyl taurate (INCI)", url: "https://www.specialchem.com/cosmetics/inci-ingredients/sodium-methyl-cocoyl-taurate" },
     ],
   },
   "tris-nonylphenyl-phosphite-tnpp": {
@@ -3023,7 +3023,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Esterification of PCl3 with excess nonylphenol",
       detail:
-        "Tris(nonylphenyl) phosphite is a phosphite antioxidant/secondary stabiliser made by esterifying phosphorus trichloride with nonylphenol. Three equivalents of p-nonylphenol react with PCl3, with each P–Cl bond displaced by a phenol to form a P–O–aryl bond and liberate hydrogen chloride: PCl3 + 3 C9H19C6H4OH → (C9H19C6H4O)3P + 3 HCl. A molar excess of nonylphenol (typically >5–6%) is used to force the reaction to completion and obtain a low acid number; the evolved HCl is absorbed/scrubbed. The excess nonylphenol is then removed by thin-film (short-path) distillation, and the product is often stabilised with a trace of amine to suppress hydrolysis. TNPP protects PVC, polyolefins and rubber against thermal/oxidative degradation during processing, usually at 0.05–3%.",
+        "Tris(nonylphenyl) phosphite is a phosphite antioxidant/secondary stabiliser made by esterifying phosphorus trichloride with nonylphenol. Three equivalents of p-nonylphenol react with PCl3, with each P-Cl bond displaced by a phenol to form a P-O-aryl bond and liberate hydrogen chloride: PCl3 + 3 C9H19C6H4OH → (C9H19C6H4O)3P + 3 HCl. A molar excess of nonylphenol (typically >5-6%) is used to force the reaction to completion and obtain a low acid number; the evolved HCl is absorbed/scrubbed. The excess nonylphenol is then removed by thin-film (short-path) distillation, and the product is often stabilised with a trace of amine to suppress hydrolysis. TNPP protects PVC, polyolefins and rubber against thermal/oxidative degradation during processing, usually at 0.05-3%.",
     },
     manufacturers: [
       { name: "SI Group (incl. former Addivant)", url: "https://www.siigroup.com" },
@@ -3033,16 +3033,16 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sterling Auxiliaries", url: "https://www.sterlingauxiliaries.com" },
     ],
     sources: [
-      { name: "Google Patents US5532401A — Production of tris(nonylphenyl) phosphite", url: "https://patents.google.com/patent/US5532401A/en" },
-      { name: "MarketsandMarkets — TNPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/tris-nonylphenyl-phosphite-market.asp" },
-      { name: "ChemicalBook — Tris(nonylphenyl) phosphite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1266308.htm" },
+      { name: "Google Patents US5532401A: Production of tris(nonylphenyl) phosphite", url: "https://patents.google.com/patent/US5532401A/en" },
+      { name: "MarketsandMarkets: TNPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/tris-nonylphenyl-phosphite-market.asp" },
+      { name: "ChemicalBook: Tris(nonylphenyl) phosphite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1266308.htm" },
     ],
   },
 
   "zinc-oxide": {
     routes: [
-      "Indirect (French) process — vaporise/oxidise zinc metal",
-      "Direct (American) process — carbothermic reduction of zinc ore, then oxidation",
+      "Indirect (French) process, vaporise/oxidise zinc metal",
+      "Direct (American) process, carbothermic reduction of zinc ore, then oxidation",
       "Wet chemical process from zinc salt solutions (fine/active grades)",
     ],
     mainProcess: {
@@ -3057,9 +3057,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Brüggemann", url: "https://www.brueggemann.com" },
     ],
     sources: [
-      { name: "Wikipedia — Zinc oxide (production)", url: "https://en.wikipedia.org/wiki/Zinc_oxide" },
-      { name: "EverZinc — Zinc oxide", url: "https://www.everzinc.com/our-products/zinc-oxide/" },
-      { name: "Britannica — Zinc processing", url: "https://www.britannica.com/technology/zinc-processing" },
+      { name: "Wikipedia: Zinc oxide (production)", url: "https://en.wikipedia.org/wiki/Zinc_oxide" },
+      { name: "EverZinc: Zinc oxide", url: "https://www.everzinc.com/our-products/zinc-oxide/" },
+      { name: "Britannica: Zinc processing", url: "https://www.britannica.com/technology/zinc-processing" },
     ],
   },
 
@@ -3082,9 +3082,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nirma", url: "https://www.nirma.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "C&EN — Can synthetic soda ash survive?", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
-      { name: "Solvay — Soda Solvay", url: "https://www.solvay.com/en/brands/soda-solvay" },
+      { name: "Wikipedia: Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "C&EN: Can synthetic soda ash survive?", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
+      { name: "Solvay: Soda Solvay", url: "https://www.solvay.com/en/brands/soda-solvay" },
     ],
   },
 
@@ -3105,9 +3105,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ammonium chloride", url: "https://en.wikipedia.org/wiki/Ammonium_chloride" },
-      { name: "Wikipedia — Solvay process (Hou's process)", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "ChemicalBook — Ammonium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852160.htm" },
+      { name: "Wikipedia: Ammonium chloride", url: "https://en.wikipedia.org/wiki/Ammonium_chloride" },
+      { name: "Wikipedia: Solvay process (Hou's process)", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "ChemicalBook: Ammonium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852160.htm" },
     ],
   },
 
@@ -3119,7 +3119,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Natural brine recovery / synthetic by-product",
       detail:
-        "Sodium sulfate is produced naturally and as a by-product. Natural production extracts mirabilite (Glauber's salt, Na2SO4·10H2O) from brine lakes and deposits; the solution is cooled to crystallise the decahydrate, which is dehydrated and dried to anhydrous Na2SO4. Large synthetic volumes arise as a by-product where sodium and sulfate ions combine — e.g. the Mannheim process (2 NaCl + H2SO4 → Na2SO4 + 2 HCl), and rayon, resorcinol, chromate and battery manufacture — where the salt is recovered, purified and crystallised. It is mainly used in detergents and glass.",
+        "Sodium sulfate is produced naturally and as a by-product. Natural production extracts mirabilite (Glauber's salt, Na2SO4·10H2O) from brine lakes and deposits; the solution is cooled to crystallise the decahydrate, which is dehydrated and dried to anhydrous Na2SO4. Large synthetic volumes arise as a by-product where sodium and sulfate ions combine, e.g. the Mannheim process (2 NaCl + H2SO4 → Na2SO4 + 2 HCl), and rayon, resorcinol, chromate and battery manufacture, where the salt is recovered, purified and crystallised. It is mainly used in detergents and glass.",
     },
     manufacturers: [
       { name: "Searles Valley Minerals", url: "https://www.svminerals.com" },
@@ -3127,9 +3127,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cooper Natural Resources", url: "https://www.coopernr.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium sulfate (production)", url: "https://en.wikipedia.org/wiki/Sodium_sulfate" },
-      { name: "USGS — Sodium sulfate (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-sodium-sulfate.pdf" },
-      { name: "Grupo Crimidesa — Sodium sulphate", url: "https://www.crimidesa.com/en/sodium-sulphate/" },
+      { name: "Wikipedia: Sodium sulfate (production)", url: "https://en.wikipedia.org/wiki/Sodium_sulfate" },
+      { name: "USGS: Sodium sulfate (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-sodium-sulfate.pdf" },
+      { name: "Grupo Crimidesa: Sodium sulphate", url: "https://www.crimidesa.com/en/sodium-sulphate/" },
     ],
   },
 
@@ -3141,7 +3141,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Magnesia/magnesite + sulfuric acid",
       detail:
-        "Magnesium sulfate heptahydrate (Epsom salt) is commonly made by reacting a magnesium source — magnesium oxide/hydroxide, magnesite (MgCO3) or dolomite — with sulfuric acid: MgO + H2SO4 + 6 H2O → MgSO4·7H2O. The solution is purified, concentrated and cooled so the heptahydrate crystallises; the crystals are centrifuged and dried at controlled temperature to keep the seven waters of hydration. It is also refined from natural epsomite/kieserite and salt-lake brines. Uses include fertilisers, animal feed, bath salts and pharmaceuticals.",
+        "Magnesium sulfate heptahydrate (Epsom salt) is commonly made by reacting a magnesium source, magnesium oxide/hydroxide, magnesite (MgCO3) or dolomite, with sulfuric acid: MgO + H2SO4 + 6 H2O → MgSO4·7H2O. The solution is purified, concentrated and cooled so the heptahydrate crystallises; the crystals are centrifuged and dried at controlled temperature to keep the seven waters of hydration. It is also refined from natural epsomite/kieserite and salt-lake brines. Uses include fertilisers, animal feed, bath salts and pharmaceuticals.",
     },
     manufacturers: [
       { name: "K+S", url: "https://www.kpluss.com" },
@@ -3149,9 +3149,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PQ / Ecovyst", url: "https://www.ecovyst.com" },
     ],
     sources: [
-      { name: "Wikipedia — Magnesium sulfate", url: "https://en.wikipedia.org/wiki/Magnesium_sulfate" },
-      { name: "K+S — Products", url: "https://www.kpluss.com/en-us/products/" },
-      { name: "ChemicalBook — Magnesium sulfate heptahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7186761.htm" },
+      { name: "Wikipedia: Magnesium sulfate", url: "https://en.wikipedia.org/wiki/Magnesium_sulfate" },
+      { name: "K+S: Products", url: "https://www.kpluss.com/en-us/products/" },
+      { name: "ChemicalBook: Magnesium sulfate heptahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7186761.htm" },
     ],
   },
 
@@ -3163,7 +3163,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Alumina + sulfuric acid digestion",
       detail:
-        "Aluminium sulfate ('alum'), the main coagulant in water treatment, is made by reacting an alumina source — aluminium hydroxide (purest), bauxite or kaolin clay — with sulfuric acid: 2 Al(OH)3 + 3 H2SO4 → Al2(SO4)3 + 6 H2O. The reaction runs hot in acid-brick reactors; the slurry is settled to remove insolubles and the clarified liquor is concentrated and sold as solution or cast/solidified into slabs, lumps or ground product (~17% Al2O3). Iron-free grades use refined alumina hydrate. It is used in water/wastewater treatment and paper sizing.",
+        "Aluminium sulfate ('alum'), the main coagulant in water treatment, is made by reacting an alumina source, aluminium hydroxide (purest), bauxite or kaolin clay, with sulfuric acid: 2 Al(OH)3 + 3 H2SO4 → Al2(SO4)3 + 6 H2O. The reaction runs hot in acid-brick reactors; the slurry is settled to remove insolubles and the clarified liquor is concentrated and sold as solution or cast/solidified into slabs, lumps or ground product (~17% Al2O3). Iron-free grades use refined alumina hydrate. It is used in water/wastewater treatment and paper sizing.",
     },
     manufacturers: [
       { name: "Kemira", url: "https://www.kemira.com" },
@@ -3172,9 +3172,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chemtrade Logistics", url: "https://www.chemtradelogistics.com" },
     ],
     sources: [
-      { name: "Wikipedia — Aluminium sulfate", url: "https://en.wikipedia.org/wiki/Aluminium_sulfate" },
-      { name: "USALCO — Aluminum sulfate", url: "https://www.usalco.com/products/aluminum-sulfate/" },
-      { name: "Kemira — Coagulants", url: "https://www.kemira.com/products/coagulants/" },
+      { name: "Wikipedia: Aluminium sulfate", url: "https://en.wikipedia.org/wiki/Aluminium_sulfate" },
+      { name: "USALCO: Aluminum sulfate", url: "https://www.usalco.com/products/aluminum-sulfate/" },
+      { name: "Kemira: Coagulants", url: "https://www.kemira.com/products/coagulants/" },
     ],
   },
 
@@ -3195,9 +3195,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Pencco", url: "https://www.pencco.com" },
     ],
     sources: [
-      { name: "Wikipedia — Iron(II) sulfate", url: "https://en.wikipedia.org/wiki/Iron(II)_sulfate" },
-      { name: "Crown Technology — Ferrous sulfate", url: "https://www.crowntechnology.net/ferrous-sulfate/" },
-      { name: "ScienceDirect — Ferrous sulphate (copperas)", url: "https://www.sciencedirect.com/topics/engineering/ferrous-sulphate" },
+      { name: "Wikipedia: Iron(II) sulfate", url: "https://en.wikipedia.org/wiki/Iron(II)_sulfate" },
+      { name: "Crown Technology: Ferrous sulfate", url: "https://www.crowntechnology.net/ferrous-sulfate/" },
+      { name: "ScienceDirect: Ferrous sulphate (copperas)", url: "https://www.sciencedirect.com/topics/engineering/ferrous-sulphate" },
     ],
   },
 
@@ -3217,9 +3217,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hydrite Chemical", url: "https://www.hydrite.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium thiosulfate", url: "https://en.wikipedia.org/wiki/Sodium_thiosulfate" },
-      { name: "ChemicalBook — Sodium thiosulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854234.htm" },
-      { name: "Calabrian — Sodium thiosulfate", url: "https://www.calabriancorp.com/products/sodium-thiosulfate" },
+      { name: "Wikipedia: Sodium thiosulfate", url: "https://en.wikipedia.org/wiki/Sodium_thiosulfate" },
+      { name: "ChemicalBook: Sodium thiosulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854234.htm" },
+      { name: "Calabrian: Sodium thiosulfate", url: "https://www.calabriancorp.com/products/sodium-thiosulfate" },
     ],
   },
 
@@ -3239,9 +3239,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ADEKA Corporation", url: "https://www.adeka.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Potassium persulfate", url: "https://en.wikipedia.org/wiki/Potassium_persulfate" },
-      { name: "United Initiators — Persulfates", url: "https://www.united-initiators.com/en/products/persulfates" },
-      { name: "ChemicalBook — Potassium persulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854095.htm" },
+      { name: "Wikipedia: Potassium persulfate", url: "https://en.wikipedia.org/wiki/Potassium_persulfate" },
+      { name: "United Initiators: Persulfates", url: "https://www.united-initiators.com/en/products/persulfates" },
+      { name: "ChemicalBook: Potassium persulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854095.htm" },
     ],
   },
 
@@ -3261,9 +3261,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Prince (Vibrantz)", url: "https://www.vibrantz.com" },
     ],
     sources: [
-      { name: "Wikipedia — Manganese(II) sulfate", url: "https://en.wikipedia.org/wiki/Manganese(II)_sulfate" },
-      { name: "ChemicalBook — Manganese sulfate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4485392.htm" },
-      { name: "Mordor Intelligence — Manganese sulfate market", url: "https://www.mordorintelligence.com/industry-reports/manganese-sulphate-market" },
+      { name: "Wikipedia: Manganese(II) sulfate", url: "https://en.wikipedia.org/wiki/Manganese(II)_sulfate" },
+      { name: "ChemicalBook: Manganese sulfate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4485392.htm" },
+      { name: "Mordor Intelligence: Manganese sulfate market", url: "https://www.mordorintelligence.com/industry-reports/manganese-sulphate-market" },
     ],
   },
 
@@ -3275,16 +3275,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Precipitation from manganese salt + carbonate",
       detail:
-        "Manganese carbonate is made by precipitating a purified manganese-salt solution with an alkali carbonate. A manganese sulfate (or chloride) liquor — itself from acid leaching of manganese ore — is reacted with sodium carbonate or sodium bicarbonate, precipitating insoluble manganese carbonate: MnSO4 + Na2CO3 → MnCO3 + Na2SO4. The pink-to-brown precipitate is filtered, washed free of soluble salts and dried under controlled conditions to limit oxidation. It is used as a micronutrient, a ceramic/ferrite raw material, and a precursor for other manganese chemicals.",
+        "Manganese carbonate is made by precipitating a purified manganese-salt solution with an alkali carbonate. A manganese sulfate (or chloride) liquor, itself from acid leaching of manganese ore, is reacted with sodium carbonate or sodium bicarbonate, precipitating insoluble manganese carbonate: MnSO4 + Na2CO3 → MnCO3 + Na2SO4. The pink-to-brown precipitate is filtered, washed free of soluble salts and dried under controlled conditions to limit oxidation. It is used as a micronutrient, a ceramic/ferrite raw material, and a precursor for other manganese chemicals.",
     },
     manufacturers: [
       { name: "Vibrantz Technologies", url: "https://www.vibrantz.com" },
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia — Manganese(II) carbonate", url: "https://en.wikipedia.org/wiki/Manganese(II)_carbonate" },
-      { name: "ChemicalBook — Manganese carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852159.htm" },
-      { name: "American Elements — Manganese carbonate", url: "https://www.americanelements.com/manganese-carbonate-598-62-9" },
+      { name: "Wikipedia: Manganese(II) carbonate", url: "https://en.wikipedia.org/wiki/Manganese(II)_carbonate" },
+      { name: "ChemicalBook: Manganese carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852159.htm" },
+      { name: "American Elements: Manganese carbonate", url: "https://www.americanelements.com/manganese-carbonate-598-62-9" },
     ],
   },
 
@@ -3296,7 +3296,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Chlorination of lime slurry",
       detail:
-        "Calcium hypochlorite (HTH, 'bleaching powder' at lower strength) is made by chlorinating hydrated lime. In the calcium process a slurry of slaked lime (and caustic/soda) is reacted with chlorine gas under controlled temperature to form calcium hypochlorite, which crystallises as a dibasic/hydrated salt: 2 Ca(OH)2 + 2 Cl2 → Ca(OCl)2 + CaCl2 + 2 H2O (net). The product is filtered, dried and granulated to ~65–70% available chlorine. The sodium process instead makes sodium hypochlorite first and then converts it with lime/calcium chloride. It is the main solid pool/drinking-water disinfectant.",
+        "Calcium hypochlorite (HTH, 'bleaching powder' at lower strength) is made by chlorinating hydrated lime. In the calcium process a slurry of slaked lime (and caustic/soda) is reacted with chlorine gas under controlled temperature to form calcium hypochlorite, which crystallises as a dibasic/hydrated salt: 2 Ca(OH)2 + 2 Cl2 → Ca(OCl)2 + CaCl2 + 2 H2O (net). The product is filtered, dried and granulated to ~65-70% available chlorine. The sodium process instead makes sodium hypochlorite first and then converts it with lime/calcium chloride. It is the main solid pool/drinking-water disinfectant.",
     },
     manufacturers: [
       { name: "Olin Corporation", url: "https://www.olin.com" },
@@ -3305,15 +3305,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tosoh Corporation", url: "https://www.tosoh.com" },
     ],
     sources: [
-      { name: "Wikipedia — Calcium hypochlorite", url: "https://en.wikipedia.org/wiki/Calcium_hypochlorite" },
-      { name: "ChemAnalyst — Calcium hypochlorite market", url: "https://www.chemanalyst.com/industry-report/calcium-hypochlorite-market-697" },
-      { name: "Mordor Intelligence — Calcium hypochlorite market", url: "https://www.mordorintelligence.com/industry-reports/calcium-hypochlorite-market" },
+      { name: "Wikipedia: Calcium hypochlorite", url: "https://en.wikipedia.org/wiki/Calcium_hypochlorite" },
+      { name: "ChemAnalyst: Calcium hypochlorite market", url: "https://www.chemanalyst.com/industry-report/calcium-hypochlorite-market-697" },
+      { name: "Mordor Intelligence: Calcium hypochlorite market", url: "https://www.mordorintelligence.com/industry-reports/calcium-hypochlorite-market" },
     ],
   },
 
   "sodium-hydro-sulphite": {
     routes: [
-      "Sodium formate process (formate + SO2 + caustic in methanol) — modern standard",
+      "Sodium formate process (formate + SO2 + caustic in methanol), modern standard",
       "Zinc-dust process (older)",
       "Sodium amalgam / electrolytic routes (minor)",
     ],
@@ -3328,9 +3328,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Esseco Group", url: "https://www.esseco.it" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium dithionite", url: "https://en.wikipedia.org/wiki/Sodium_dithionite" },
-      { name: "Rongda Chemical — Sodium dithionite production", url: "https://www.rongdachemical.com/blog/properties-production-sodium-dithionite/" },
-      { name: "FreePatentsOnline — BASF sodium dithionite process", url: "https://www.freepatentsonline.com/4017593.html" },
+      { name: "Wikipedia: Sodium dithionite", url: "https://en.wikipedia.org/wiki/Sodium_dithionite" },
+      { name: "Rongda Chemical: Sodium dithionite production", url: "https://www.rongdachemical.com/blog/properties-production-sodium-dithionite/" },
+      { name: "FreePatentsOnline: BASF sodium dithionite process", url: "https://www.freepatentsonline.com/4017593.html" },
     ],
   },
 
@@ -3350,9 +3350,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Calabrian Corporation", url: "https://www.calabriancorp.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium sulfite", url: "https://en.wikipedia.org/wiki/Sodium_sulfite" },
-      { name: "ChemicalBook — Sodium sulfite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852633.htm" },
-      { name: "Solvay — Sodium sulfite", url: "https://www.solvay.com/en/product/sodium-sulfite" },
+      { name: "Wikipedia: Sodium sulfite", url: "https://en.wikipedia.org/wiki/Sodium_sulfite" },
+      { name: "ChemicalBook: Sodium sulfite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852633.htm" },
+      { name: "Solvay: Sodium sulfite", url: "https://www.solvay.com/en/product/sodium-sulfite" },
     ],
   },
 
@@ -3372,9 +3372,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Old Bridge Chemicals", url: "https://www.oldbridgechem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Copper(II) oxide", url: "https://en.wikipedia.org/wiki/Copper(II)_oxide" },
-      { name: "American Chemet — Copper oxides", url: "https://www.chemet.com/copper-chemistry/" },
-      { name: "ChemicalBook — Copper(II) oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854112.htm" },
+      { name: "Wikipedia: Copper(II) oxide", url: "https://en.wikipedia.org/wiki/Copper(II)_oxide" },
+      { name: "American Chemet: Copper oxides", url: "https://www.chemet.com/copper-chemistry/" },
+      { name: "ChemicalBook: Copper(II) oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854112.htm" },
     ],
   },
 
@@ -3395,9 +3395,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jinchuan Group", url: "https://www.jnmc.com" },
     ],
     sources: [
-      { name: "Wikipedia — Nickel(II) sulfate", url: "https://en.wikipedia.org/wiki/Nickel(II)_sulfate" },
-      { name: "ChemicalBook — Nickel sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5184400.htm" },
-      { name: "Sumitomo Metal Mining — Nickel", url: "https://www.smm.co.jp/en/business/metals/nickel/" },
+      { name: "Wikipedia: Nickel(II) sulfate", url: "https://en.wikipedia.org/wiki/Nickel(II)_sulfate" },
+      { name: "ChemicalBook: Nickel sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5184400.htm" },
+      { name: "Sumitomo Metal Mining: Nickel", url: "https://www.smm.co.jp/en/business/metals/nickel/" },
     ],
   },
 
@@ -3412,13 +3412,13 @@ export const verified: Record<string, VerifiedProduct> = {
         "Zinc borate (the common flame-retardant grade 2ZnO·3B2O3·3.5H2O, e.g. Firebrake ZB) is made by reacting zinc oxide with boric acid (and sometimes borax) in an aqueous slurry at controlled temperature and pH, seeding to grow the desired hydrate crystal. The precipitated zinc borate is filtered, washed, dried and milled to a fine powder. It acts as a flame retardant, smoke suppressant and anti-arcing/afterglow agent in plastics, rubber, coatings and wood, often partly replacing antimony trioxide.",
     },
     manufacturers: [
-      { name: "Rio Tinto Borates (U.S. Borax — Firebrake)", url: "https://www.riotinto.com" },
+      { name: "Rio Tinto Borates (U.S. Borax: Firebrake)", url: "https://www.riotinto.com" },
       { name: "ICL Group", url: "https://www.icl-group.com" },
     ],
     sources: [
-      { name: "Wikipedia — Zinc borate", url: "https://en.wikipedia.org/wiki/Zinc_borate" },
-      { name: "U.S. Borax — Firebrake zinc borate", url: "https://www.borax.com/products/firebrake" },
-      { name: "ChemicalBook — Zinc borate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853246.htm" },
+      { name: "Wikipedia: Zinc borate", url: "https://en.wikipedia.org/wiki/Zinc_borate" },
+      { name: "U.S. Borax: Firebrake zinc borate", url: "https://www.borax.com/products/firebrake" },
+      { name: "ChemicalBook: Zinc borate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853246.htm" },
     ],
   },
 
@@ -3430,7 +3430,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Reduction of dichromate to Cr(III) sulfate",
       detail:
-        "Basic chromium sulfate (the principal leather-tanning chrome) is made by reducing hexavalent chromium to the trivalent state in a sulfate medium. Sodium dichromate is reduced — with sulfur dioxide, or with organic reductants such as molasses/glucose plus sulfuric acid — to give a green basic chromium(III) sulfate of about 33% basicity (typically written Cr(OH)SO4): Na2Cr2O7 + 3 SO2 → 2 Cr(OH)SO4 + Na2SO4. The liquor is dried (spray/drum) to a powder of ~25–26% Cr2O3. It is used almost entirely for chrome tanning of leather.",
+        "Basic chromium sulfate (the principal leather-tanning chrome) is made by reducing hexavalent chromium to the trivalent state in a sulfate medium. Sodium dichromate is reduced, with sulfur dioxide, or with organic reductants such as molasses/glucose plus sulfuric acid, to give a green basic chromium(III) sulfate of about 33% basicity (typically written Cr(OH)SO4): Na2Cr2O7 + 3 SO2 → 2 Cr(OH)SO4 + Na2SO4. The liquor is dried (spray/drum) to a powder of ~25-26% Cr2O3. It is used almost entirely for chrome tanning of leather.",
     },
     manufacturers: [
       { name: "LANXESS", url: "https://www.lanxess.com" },
@@ -3438,9 +3438,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vishnu Chemicals", url: "https://www.vishnuchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chromium(III) sulfate", url: "https://en.wikipedia.org/wiki/Chromium(III)_sulfate" },
-      { name: "Vishnu Chemicals — Basic chromium sulphate", url: "https://www.vishnuchemicals.com/basic-chromium-sulphate.php" },
-      { name: "ScienceDirect — Chrome tanning agents", url: "https://www.sciencedirect.com/topics/materials-science/chromium-sulfate" },
+      { name: "Wikipedia: Chromium(III) sulfate", url: "https://en.wikipedia.org/wiki/Chromium(III)_sulfate" },
+      { name: "Vishnu Chemicals: Basic chromium sulphate", url: "https://www.vishnuchemicals.com/basic-chromium-sulphate.php" },
+      { name: "ScienceDirect: Chrome tanning agents", url: "https://www.sciencedirect.com/topics/materials-science/chromium-sulfate" },
     ],
   },
 
@@ -3460,9 +3460,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vishnu Chemicals", url: "https://www.vishnuchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Potassium dichromate", url: "https://en.wikipedia.org/wiki/Potassium_dichromate" },
-      { name: "Wikipedia — Sodium dichromate (production)", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
-      { name: "ChemicalBook — Potassium dichromate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852592.htm" },
+      { name: "Wikipedia: Potassium dichromate", url: "https://en.wikipedia.org/wiki/Potassium_dichromate" },
+      { name: "Wikipedia: Sodium dichromate (production)", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
+      { name: "ChemicalBook: Potassium dichromate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852592.htm" },
     ],
   },
 
@@ -3480,9 +3480,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Lead(II) nitrate", url: "https://en.wikipedia.org/wiki/Lead(II)_nitrate" },
-      { name: "American Elements — Lead nitrate", url: "https://www.americanelements.com/lead-nitrate-10099-74-8" },
-      { name: "ChemicalBook — Lead nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852604.htm" },
+      { name: "Wikipedia: Lead(II) nitrate", url: "https://en.wikipedia.org/wiki/Lead(II)_nitrate" },
+      { name: "American Elements: Lead nitrate", url: "https://www.americanelements.com/lead-nitrate-10099-74-8" },
+      { name: "ChemicalBook: Lead nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852604.htm" },
     ],
   },
 
@@ -3502,9 +3502,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Largo", url: "https://www.largoinc.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ammonium metavanadate", url: "https://en.wikipedia.org/wiki/Ammonium_metavanadate" },
-      { name: "ChemicalBook — Ammonium metavanadate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852611.htm" },
-      { name: "U.S. Vanadium — Vanadium chemicals", url: "https://www.usvanadium.com/products" },
+      { name: "Wikipedia: Ammonium metavanadate", url: "https://en.wikipedia.org/wiki/Ammonium_metavanadate" },
+      { name: "ChemicalBook: Ammonium metavanadate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852611.htm" },
+      { name: "U.S. Vanadium: Vanadium chemicals", url: "https://www.usvanadium.com/products" },
     ],
   },
 
@@ -3524,9 +3524,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Innophos", url: "https://www.innophos.com" },
     ],
     sources: [
-      { name: "Wikipedia — Phosphorus pentoxide", url: "https://en.wikipedia.org/wiki/Phosphorus_pentoxide" },
-      { name: "Britannica — Phosphorus oxides", url: "https://www.britannica.com/science/phosphorus-chemical-element/Oxides" },
-      { name: "ChemicalBook — Phosphorus pentoxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852623.htm" },
+      { name: "Wikipedia: Phosphorus pentoxide", url: "https://en.wikipedia.org/wiki/Phosphorus_pentoxide" },
+      { name: "Britannica: Phosphorus oxides", url: "https://www.britannica.com/science/phosphorus-chemical-element/Oxides" },
+      { name: "ChemicalBook: Phosphorus pentoxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852623.htm" },
     ],
   },
 
@@ -3547,9 +3547,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "Wikipedia — Barium sulfate", url: "https://en.wikipedia.org/wiki/Barium_sulfate" },
-      { name: "Venator — Barium sulfate (blanc fixe)", url: "https://www.venatorcorp.com/products/functional-additives/barium-sulfate" },
-      { name: "ChemicalBook — Barium sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6357618.htm" },
+      { name: "Wikipedia: Barium sulfate", url: "https://en.wikipedia.org/wiki/Barium_sulfate" },
+      { name: "Venator: Barium sulfate (blanc fixe)", url: "https://www.venatorcorp.com/products/functional-additives/barium-sulfate" },
+      { name: "ChemicalBook: Barium sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6357618.htm" },
     ],
   },
 
@@ -3561,7 +3561,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Calcination of Bayer alumina hydrate",
       detail:
-        "Calcined alumina is made by heating Bayer-process aluminium hydroxide (gibbsite) in rotary or fluid-flash calciners at ~1100–1300 °C, driving off the chemically bound water and converting the hydroxide into crystalline alpha-alumina: 2 Al(OH)3 → Al2O3 + 3 H2O. Calcination temperature, time and mineraliser additions control the soda content, crystal size and degree of alpha-phase conversion that define 'non-metallurgical' grades for refractories, ceramics, polishing and electronics (as opposed to smelter-grade alumina used to make aluminium metal). The product is milled to specified fineness.",
+        "Calcined alumina is made by heating Bayer-process aluminium hydroxide (gibbsite) in rotary or fluid-flash calciners at ~1100-1300 °C, driving off the chemically bound water and converting the hydroxide into crystalline alpha-alumina: 2 Al(OH)3 → Al2O3 + 3 H2O. Calcination temperature, time and mineraliser additions control the soda content, crystal size and degree of alpha-phase conversion that define 'non-metallurgical' grades for refractories, ceramics, polishing and electronics (as opposed to smelter-grade alumina used to make aluminium metal). The product is milled to specified fineness.",
     },
     manufacturers: [
       { name: "Almatis", url: "https://www.almatis.com" },
@@ -3570,21 +3570,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Aluminium oxide", url: "https://en.wikipedia.org/wiki/Aluminium_oxide" },
-      { name: "Almatis — Calcined aluminas", url: "https://www.almatis.com/en/products/calcined-alumina/" },
-      { name: "Wikipedia — Bayer process", url: "https://en.wikipedia.org/wiki/Bayer_process" },
+      { name: "Wikipedia: Aluminium oxide", url: "https://en.wikipedia.org/wiki/Aluminium_oxide" },
+      { name: "Almatis: Calcined aluminas", url: "https://www.almatis.com/en/products/calcined-alumina/" },
+      { name: "Wikipedia: Bayer process", url: "https://en.wikipedia.org/wiki/Bayer_process" },
     ],
   },
 
   "silicon-carbide-grains-sicl7-details-as": {
     routes: [
-      "Acheson process — carbothermic reduction of silica with carbon",
+      "Acheson process, carbothermic reduction of silica with carbon",
       "Crushing/grading of the SiC crystal mass into grains",
     ],
     mainProcess: {
       name: "Acheson process",
       detail:
-        "Silicon carbide is made by the Acheson process: a mixture of high-purity silica sand and petroleum coke (carbon) is packed around a graphite resistor core in a long electric resistance furnace and heated to ~1700–2500 °C. The carbon reduces the silica and combines with the silicon to form silicon carbide: SiO2 + 3 C → SiC + 2 CO. After a multi-day heating/cooling cycle the furnace yields a cylindrical crystalline SiC mass graded by purity (black to green); it is broken out, crushed, chemically cleaned, and screened into abrasive/refractory grains and powders of defined grit size.",
+        "Silicon carbide is made by the Acheson process: a mixture of high-purity silica sand and petroleum coke (carbon) is packed around a graphite resistor core in a long electric resistance furnace and heated to ~1700-2500 °C. The carbon reduces the silica and combines with the silicon to form silicon carbide: SiO2 + 3 C → SiC + 2 CO. After a multi-day heating/cooling cycle the furnace yields a cylindrical crystalline SiC mass graded by purity (black to green); it is broken out, crushed, chemically cleaned, and screened into abrasive/refractory grains and powders of defined grit size.",
     },
     manufacturers: [
       { name: "Saint-Gobain", url: "https://www.saint-gobain.com" },
@@ -3592,9 +3592,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ESK-SIC", url: "https://www.esk-sic.de" },
     ],
     sources: [
-      { name: "Wikipedia — Silicon carbide (Acheson process)", url: "https://en.wikipedia.org/wiki/Silicon_carbide" },
-      { name: "Washington Mills — Silicon carbide", url: "https://www.washingtonmills.com/materials/silicon-carbide" },
-      { name: "Britannica — Acheson process", url: "https://www.britannica.com/technology/Acheson-process" },
+      { name: "Wikipedia: Silicon carbide (Acheson process)", url: "https://en.wikipedia.org/wiki/Silicon_carbide" },
+      { name: "Washington Mills: Silicon carbide", url: "https://www.washingtonmills.com/materials/silicon-carbide" },
+      { name: "Britannica: Acheson process", url: "https://www.britannica.com/technology/Acheson-process" },
     ],
   },
 
@@ -3614,9 +3614,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Prayon", url: "https://www.prayon.com" },
     ],
     sources: [
-      { name: "Wikipedia — Tricalcium phosphate", url: "https://en.wikipedia.org/wiki/Tricalcium_phosphate" },
-      { name: "Budenheim — Calcium phosphates", url: "https://www.budenheim.com/en/markets/food" },
-      { name: "ChemicalBook — Tricalcium phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5853246.htm" },
+      { name: "Wikipedia: Tricalcium phosphate", url: "https://en.wikipedia.org/wiki/Tricalcium_phosphate" },
+      { name: "Budenheim: Calcium phosphates", url: "https://www.budenheim.com/en/markets/food" },
+      { name: "ChemicalBook: Tricalcium phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5853246.htm" },
     ],
   },
 
@@ -3635,9 +3635,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia — Magnesium trisilicate", url: "https://en.wikipedia.org/wiki/Magnesium_trisilicate" },
-      { name: "DrugBank — Magnesium trisilicate", url: "https://go.drugbank.com/drugs/DB09280" },
-      { name: "ChemicalBook — Magnesium trisilicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354340.htm" },
+      { name: "Wikipedia: Magnesium trisilicate", url: "https://en.wikipedia.org/wiki/Magnesium_trisilicate" },
+      { name: "DrugBank: Magnesium trisilicate", url: "https://go.drugbank.com/drugs/DB09280" },
+      { name: "ChemicalBook: Magnesium trisilicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354340.htm" },
     ],
   },
 
@@ -3658,9 +3658,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Feralco Group", url: "https://www.feralco.com" },
     ],
     sources: [
-      { name: "Wikipedia — Aluminium chlorohydrate", url: "https://en.wikipedia.org/wiki/Aluminium_chlorohydrate" },
-      { name: "USALCO — Aluminum chlorohydrate", url: "https://www.usalco.com/products/aluminum-chlorohydrate/" },
-      { name: "Gulbrandsen — ACH", url: "https://www.gulbrandsen.com/products/water-treatment-chemicals/" },
+      { name: "Wikipedia: Aluminium chlorohydrate", url: "https://en.wikipedia.org/wiki/Aluminium_chlorohydrate" },
+      { name: "USALCO: Aluminum chlorohydrate", url: "https://www.usalco.com/products/aluminum-chlorohydrate/" },
+      { name: "Gulbrandsen: ACH", url: "https://www.gulbrandsen.com/products/water-treatment-chemicals/" },
     ],
   },
 
@@ -3672,7 +3672,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Citric acid neutralisation with soda",
       detail:
-        "Trisodium citrate is made by fully neutralising citric acid — itself produced by Aspergillus niger fermentation of sugar — with sodium hydroxide or sodium carbonate: C6H8O7 + 3 NaOH → Na3C6H5O7 + 3 H2O. The neutralised solution is decolourised (carbon), filtered and concentrated, then cooled so trisodium citrate dihydrate crystallises; the crystals are centrifuged and dried. It is a buffer, sequestrant and emulsifier in food and pharmaceuticals and an anticoagulant in blood collection.",
+        "Trisodium citrate is made by fully neutralising citric acid, itself produced by Aspergillus niger fermentation of sugar, with sodium hydroxide or sodium carbonate: C6H8O7 + 3 NaOH → Na3C6H5O7 + 3 H2O. The neutralised solution is decolourised (carbon), filtered and concentrated, then cooled so trisodium citrate dihydrate crystallises; the crystals are centrifuged and dried. It is a buffer, sequestrant and emulsifier in food and pharmaceuticals and an anticoagulant in blood collection.",
     },
     manufacturers: [
       { name: "Jungbunzlauer", url: "https://www.jungbunzlauer.com" },
@@ -3681,9 +3681,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "RZBC Group", url: "https://www.rzbc.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium citrate", url: "https://en.wikipedia.org/wiki/Sodium_citrate" },
-      { name: "Jungbunzlauer — Sodium citrates", url: "https://www.jungbunzlauer.com/en/products/citrics/sodium-citrate.html" },
-      { name: "ChemicalBook — Trisodium citrate dihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7853179.htm" },
+      { name: "Wikipedia: Sodium citrate", url: "https://en.wikipedia.org/wiki/Sodium_citrate" },
+      { name: "Jungbunzlauer: Sodium citrates", url: "https://www.jungbunzlauer.com/en/products/citrics/sodium-citrate.html" },
+      { name: "ChemicalBook: Trisodium citrate dihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7853179.htm" },
     ],
   },
 
@@ -3702,9 +3702,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jubilant Ingrevia", url: "https://www.jubilantingrevia.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium acetate", url: "https://en.wikipedia.org/wiki/Sodium_acetate" },
-      { name: "ChemicalBook — Sodium acetate trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854349.htm" },
-      { name: "Niacet — Acetates", url: "https://www.niacet.com/markets/" },
+      { name: "Wikipedia: Sodium acetate", url: "https://en.wikipedia.org/wiki/Sodium_acetate" },
+      { name: "ChemicalBook: Sodium acetate trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854349.htm" },
+      { name: "Niacet: Acetates", url: "https://www.niacet.com/markets/" },
     ],
   },
 
@@ -3723,9 +3723,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Potassium oxalate", url: "https://en.wikipedia.org/wiki/Potassium_oxalate" },
-      { name: "ChemicalBook — Potassium oxalate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159524.htm" },
-      { name: "American Elements — Potassium oxalate", url: "https://www.americanelements.com/potassium-oxalate-monohydrate-6487-48-5" },
+      { name: "Wikipedia: Potassium oxalate", url: "https://en.wikipedia.org/wiki/Potassium_oxalate" },
+      { name: "ChemicalBook: Potassium oxalate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159524.htm" },
+      { name: "American Elements: Potassium oxalate", url: "https://www.americanelements.com/potassium-oxalate-monohydrate-6487-48-5" },
     ],
   },
 
@@ -3746,9 +3746,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chemische Fabrik Budenheim", url: "https://www.budenheim.com" },
     ],
     sources: [
-      { name: "Wikipedia — Monopotassium phosphate", url: "https://en.wikipedia.org/wiki/Monopotassium_phosphate" },
-      { name: "Haifa Group — MKP", url: "https://www.haifa-group.com/mkp-monopotassium-phosphate-0" },
-      { name: "ChemicalBook — Potassium dihydrogen phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113379.htm" },
+      { name: "Wikipedia: Monopotassium phosphate", url: "https://en.wikipedia.org/wiki/Monopotassium_phosphate" },
+      { name: "Haifa Group: MKP", url: "https://www.haifa-group.com/mkp-monopotassium-phosphate-0" },
+      { name: "ChemicalBook: Potassium dihydrogen phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113379.htm" },
     ],
   },
 
@@ -3760,7 +3760,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Phosphoric acid + sodium base (mono-neutralisation)",
       detail:
-        "Monosodium phosphate (sodium dihydrogen phosphate) is made by partially neutralising purified phosphoric acid with sodium hydroxide or sodium carbonate, stopping at a 1:1 sodium-to-phosphorus ratio (around pH 4–4.5): H3PO4 + NaOH → NaH2PO4 + H2O. The liquor is concentrated and crystallised; below ~60 °C the monohydrate (NaH2PO4·H2O) is the stable form. The crystals are centrifuged and dried at controlled temperature. It is a buffer, acidulant and sequestrant in food, water treatment and pharmaceuticals.",
+        "Monosodium phosphate (sodium dihydrogen phosphate) is made by partially neutralising purified phosphoric acid with sodium hydroxide or sodium carbonate, stopping at a 1:1 sodium-to-phosphorus ratio (around pH 4-4.5): H3PO4 + NaOH → NaH2PO4 + H2O. The liquor is concentrated and crystallised; below ~60 °C the monohydrate (NaH2PO4·H2O) is the stable form. The crystals are centrifuged and dried at controlled temperature. It is a buffer, acidulant and sequestrant in food, water treatment and pharmaceuticals.",
     },
     manufacturers: [
       { name: "ICL Group", url: "https://www.icl-group.com" },
@@ -3768,9 +3768,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chemische Fabrik Budenheim", url: "https://www.budenheim.com" },
     ],
     sources: [
-      { name: "Wikipedia — Monosodium phosphate", url: "https://en.wikipedia.org/wiki/Monosodium_phosphate" },
-      { name: "ICL Food Specialties — Phosphates", url: "https://www.icl-group.com/our-business/icl-growing-solutions/" },
-      { name: "ChemicalBook — Sodium dihydrogen phosphate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113380.htm" },
+      { name: "Wikipedia: Monosodium phosphate", url: "https://en.wikipedia.org/wiki/Monosodium_phosphate" },
+      { name: "ICL Food Specialties: Phosphates", url: "https://www.icl-group.com/our-business/icl-growing-solutions/" },
+      { name: "ChemicalBook: Sodium dihydrogen phosphate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113380.htm" },
     ],
   },
 
@@ -3782,7 +3782,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Lithium carbonate + hydrobromic acid",
       detail:
-        "Lithium bromide is made by reacting a lithium base — lithium carbonate or lithium hydroxide — with hydrobromic acid: Li2CO3 + 2 HBr → 2 LiBr + CO2 + H2O. The solution is purified and then either crystallised/dried to the anhydrous salt (it is strongly hygroscopic, so drying is done carefully under vacuum/heat) or concentrated and stabilised with an inhibitor for sale as solution. Its main use is as the desiccant/absorbent working fluid in lithium-bromide absorption chillers; it is also used in air-drying systems and organic synthesis.",
+        "Lithium bromide is made by reacting a lithium base, lithium carbonate or lithium hydroxide, with hydrobromic acid: Li2CO3 + 2 HBr → 2 LiBr + CO2 + H2O. The solution is purified and then either crystallised/dried to the anhydrous salt (it is strongly hygroscopic, so drying is done carefully under vacuum/heat) or concentrated and stabilised with an inhibitor for sale as solution. Its main use is as the desiccant/absorbent working fluid in lithium-bromide absorption chillers; it is also used in air-drying systems and organic synthesis.",
     },
     manufacturers: [
       { name: "LANXESS", url: "https://www.lanxess.com" },
@@ -3790,9 +3790,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Honjo Chemical", url: "https://www.honjo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Lithium bromide", url: "https://en.wikipedia.org/wiki/Lithium_bromide" },
-      { name: "LANXESS — Lithium derivatives", url: "https://lanxess.com/en/Products-and-Solutions/Brands/Lithium" },
-      { name: "ChemicalBook — Lithium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852630.htm" },
+      { name: "Wikipedia: Lithium bromide", url: "https://en.wikipedia.org/wiki/Lithium_bromide" },
+      { name: "LANXESS: Lithium derivatives", url: "https://lanxess.com/en/Products-and-Solutions/Brands/Lithium" },
+      { name: "ChemicalBook: Lithium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852630.htm" },
     ],
   },
 
@@ -3811,9 +3811,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Potassium ferrocyanide", url: "https://en.wikipedia.org/wiki/Potassium_ferrocyanide" },
-      { name: "ChemicalBook — Potassium ferrocyanide trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852638.htm" },
-      { name: "American Elements — Potassium ferrocyanide", url: "https://www.americanelements.com/potassium-ferrocyanide-trihydrate-14459-95-1" },
+      { name: "Wikipedia: Potassium ferrocyanide", url: "https://en.wikipedia.org/wiki/Potassium_ferrocyanide" },
+      { name: "ChemicalBook: Potassium ferrocyanide trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852638.htm" },
+      { name: "American Elements: Potassium ferrocyanide", url: "https://www.americanelements.com/potassium-ferrocyanide-trihydrate-14459-95-1" },
     ],
   },
 
@@ -3834,9 +3834,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Ashland", url: "https://www.ashland.com" },
     ],
     sources: [
-      { name: "Wikipedia — Phenoxyethanol", url: "https://en.wikipedia.org/wiki/Phenoxyethanol" },
-      { name: "ChemicalBook — 2-Phenoxyethanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854198.htm" },
-      { name: "Clariant — Preservatives", url: "https://www.clariant.com/en/Solutions/Products" },
+      { name: "Wikipedia: Phenoxyethanol", url: "https://en.wikipedia.org/wiki/Phenoxyethanol" },
+      { name: "ChemicalBook: 2-Phenoxyethanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854198.htm" },
+      { name: "Clariant: Preservatives", url: "https://www.clariant.com/en/Solutions/Products" },
     ],
   },
 
@@ -3856,9 +3856,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia — p-Phenylenediamine", url: "https://en.wikipedia.org/wiki/P-Phenylenediamine" },
-      { name: "ChemicalBook — p-Phenylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854220.htm" },
-      { name: "Nouryon — Diamines & derivatives", url: "https://www.nouryon.com/products/" },
+      { name: "Wikipedia: p-Phenylenediamine", url: "https://en.wikipedia.org/wiki/P-Phenylenediamine" },
+      { name: "ChemicalBook: p-Phenylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854220.htm" },
+      { name: "Nouryon: Diamines & derivatives", url: "https://www.nouryon.com/products/" },
     ],
   },
 
@@ -3877,9 +3877,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teijin", url: "https://www.teijin.com" },
     ],
     sources: [
-      { name: "Wikipedia — Terephthaloyl chloride", url: "https://en.wikipedia.org/wiki/Terephthaloyl_chloride" },
-      { name: "Wikipedia — Kevlar (synthesis)", url: "https://en.wikipedia.org/wiki/Kevlar" },
-      { name: "ChemicalBook — Terephthaloyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1219732.htm" },
+      { name: "Wikipedia: Terephthaloyl chloride", url: "https://en.wikipedia.org/wiki/Terephthaloyl_chloride" },
+      { name: "Wikipedia: Kevlar (synthesis)", url: "https://en.wikipedia.org/wiki/Kevlar" },
+      { name: "ChemicalBook: Terephthaloyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1219732.htm" },
     ],
   },
 
@@ -3891,16 +3891,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Benzene chlorination (para-selective)",
       detail:
-        "para-Dichlorobenzene is made by the iron/Lewis-acid-catalysed chlorination of benzene or monochlorobenzene with chlorine; conditions and catalysts are chosen to favour the para isomer over the ortho. The dichlorobenzene isomer mixture is then separated — the high-melting para isomer is recovered by crystallisation (and distillation) from the ortho. It is used as a moth repellent and deodorant block and, importantly, as the monomer feedstock for polyphenylene sulfide (PPS) engineering plastic.",
+        "para-Dichlorobenzene is made by the iron/Lewis-acid-catalysed chlorination of benzene or monochlorobenzene with chlorine; conditions and catalysts are chosen to favour the para isomer over the ortho. The dichlorobenzene isomer mixture is then separated, the high-melting para isomer is recovered by crystallisation (and distillation) from the ortho. It is used as a moth repellent and deodorant block and, importantly, as the monomer feedstock for polyphenylene sulfide (PPS) engineering plastic.",
     },
     manufacturers: [
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
       { name: "Kureha Corporation", url: "https://www.kureha.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — 1,4-Dichlorobenzene", url: "https://en.wikipedia.org/wiki/1,4-Dichlorobenzene" },
-      { name: "Aarti Industries — Chlorination products", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination" },
-      { name: "ChemicalBook — p-Dichlorobenzene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854120.htm" },
+      { name: "Wikipedia: 1,4-Dichlorobenzene", url: "https://en.wikipedia.org/wiki/1,4-Dichlorobenzene" },
+      { name: "Aarti Industries: Chlorination products", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination" },
+      { name: "ChemicalBook: p-Dichlorobenzene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854120.htm" },
     ],
   },
 
@@ -3912,7 +3912,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Side-chain chlorination of toluene",
       detail:
-        "Benzyl chloride is made by the free-radical chlorination of the methyl side chain of toluene with chlorine, promoted by light or a radical initiator at ~100–130 °C: C6H5CH3 + Cl2 → C6H5CH2Cl + HCl. The reaction is run to limited conversion to favour the mono-chloride over the more highly chlorinated benzal chloride and benzotrichloride, and the products are separated by fractional distillation. It is a versatile alkylating/benzylating agent used to make benzyl alcohol, quaternary ammonium compounds, benzyl esters, plasticisers and pharmaceuticals.",
+        "Benzyl chloride is made by the free-radical chlorination of the methyl side chain of toluene with chlorine, promoted by light or a radical initiator at ~100-130 °C: C6H5CH3 + Cl2 → C6H5CH2Cl + HCl. The reaction is run to limited conversion to favour the mono-chloride over the more highly chlorinated benzal chloride and benzotrichloride, and the products are separated by fractional distillation. It is a versatile alkylating/benzylating agent used to make benzyl alcohol, quaternary ammonium compounds, benzyl esters, plasticisers and pharmaceuticals.",
     },
     manufacturers: [
       { name: "LANXESS", url: "https://www.lanxess.com" },
@@ -3920,9 +3920,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tokuyama Corporation", url: "https://www.tokuyama.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Benzyl chloride", url: "https://en.wikipedia.org/wiki/Benzyl_chloride" },
-      { name: "ChemicalBook — Benzyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854160.htm" },
-      { name: "ScienceDirect — Side-chain chlorination of toluene", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-chloride" },
+      { name: "Wikipedia: Benzyl chloride", url: "https://en.wikipedia.org/wiki/Benzyl_chloride" },
+      { name: "ChemicalBook: Benzyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854160.htm" },
+      { name: "ScienceDirect: Side-chain chlorination of toluene", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-chloride" },
     ],
   },
 
@@ -3942,9 +3942,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia — Benzothiazole", url: "https://en.wikipedia.org/wiki/Benzothiazole" },
-      { name: "Wikipedia — 2-Mercaptobenzothiazole", url: "https://en.wikipedia.org/wiki/2-Mercaptobenzothiazole" },
-      { name: "ChemicalBook — Benzothiazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853243.htm" },
+      { name: "Wikipedia: Benzothiazole", url: "https://en.wikipedia.org/wiki/Benzothiazole" },
+      { name: "Wikipedia: 2-Mercaptobenzothiazole", url: "https://en.wikipedia.org/wiki/2-Mercaptobenzothiazole" },
+      { name: "ChemicalBook: Benzothiazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853243.htm" },
     ],
   },
 
@@ -3964,9 +3964,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "AltiVia", url: "https://www.altivia.com" },
     ],
     sources: [
-      { name: "Wikipedia — Alpha-Methylstyrene", url: "https://en.wikipedia.org/wiki/Alpha-Methylstyrene" },
-      { name: "AltiVia — Alpha methylstyrene", url: "https://www.altivia.com/product/alpha-methylstyrene/" },
-      { name: "ChemicalBook — alpha-Methylstyrene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1354214.htm" },
+      { name: "Wikipedia: Alpha-Methylstyrene", url: "https://en.wikipedia.org/wiki/Alpha-Methylstyrene" },
+      { name: "AltiVia: Alpha methylstyrene", url: "https://www.altivia.com/product/alpha-methylstyrene/" },
+      { name: "ChemicalBook: alpha-Methylstyrene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1354214.htm" },
     ],
   },
 
@@ -3988,9 +3988,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sasol", url: "https://www.sasol.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ethyl acetate", url: "https://en.wikipedia.org/wiki/Ethyl_acetate" },
-      { name: "ChemicalBook — Ethyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854142.htm" },
-      { name: "Celanese — Ethyl acetate", url: "https://www.celanese.com/products/ethyl-acetate" },
+      { name: "Wikipedia: Ethyl acetate", url: "https://en.wikipedia.org/wiki/Ethyl_acetate" },
+      { name: "ChemicalBook: Ethyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854142.htm" },
+      { name: "Celanese: Ethyl acetate", url: "https://www.celanese.com/products/ethyl-acetate" },
     ],
   },
 
@@ -4012,9 +4012,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LyondellBasell", url: "https://www.lyondellbasell.com" },
     ],
     sources: [
-      { name: "Wikipedia — Tetrahydrofuran (production)", url: "https://en.wikipedia.org/wiki/Tetrahydrofuran" },
-      { name: "Wikipedia — 1,4-Butanediol", url: "https://en.wikipedia.org/wiki/1,4-Butanediol" },
-      { name: "ChemicalBook — Tetrahydrofuran", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854098.htm" },
+      { name: "Wikipedia: Tetrahydrofuran (production)", url: "https://en.wikipedia.org/wiki/Tetrahydrofuran" },
+      { name: "Wikipedia: 1,4-Butanediol", url: "https://en.wikipedia.org/wiki/1,4-Butanediol" },
+      { name: "ChemicalBook: Tetrahydrofuran", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854098.htm" },
     ],
   },
 
@@ -4035,9 +4035,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Arkema", url: "https://www.arkema.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chlorodifluoromethane (R-22)", url: "https://en.wikipedia.org/wiki/Chlorodifluoromethane" },
-      { name: "US EPA — Phaseout of class II ODS (HCFCs)", url: "https://www.epa.gov/ods-phaseout/phaseout-class-ii-ozone-depleting-substances" },
-      { name: "ChemicalBook — Chlorodifluoromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
+      { name: "Wikipedia: Chlorodifluoromethane (R-22)", url: "https://en.wikipedia.org/wiki/Chlorodifluoromethane" },
+      { name: "US EPA: Phaseout of class II ODS (HCFCs)", url: "https://www.epa.gov/ods-phaseout/phaseout-class-ii-ozone-depleting-substances" },
+      { name: "ChemicalBook: Chlorodifluoromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
     ],
   },
 
@@ -4057,9 +4057,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia — Trimethylolpropane", url: "https://en.wikipedia.org/wiki/Trimethylolpropane" },
-      { name: "Perstorp — TMP", url: "https://www.perstorp.com/en/products/trimethylolpropane_tmp" },
-      { name: "ChemicalBook — Trimethylolpropane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6125327.htm" },
+      { name: "Wikipedia: Trimethylolpropane", url: "https://en.wikipedia.org/wiki/Trimethylolpropane" },
+      { name: "Perstorp: TMP", url: "https://www.perstorp.com/en/products/trimethylolpropane_tmp" },
+      { name: "ChemicalBook: Trimethylolpropane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6125327.htm" },
     ],
   },
 
@@ -4078,9 +4078,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Chemical Group", url: "https://www.mcgc.com" },
     ],
     sources: [
-      { name: "Wikipedia — Methacrylic anhydride", url: "https://en.wikipedia.org/wiki/Methacrylic_anhydride" },
-      { name: "ChemicalBook — Methacrylic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6112079.htm" },
-      { name: "Röhm — Methacrylate monomers", url: "https://www.roehm.com/en/products-industries/methacrylate-monomers" },
+      { name: "Wikipedia: Methacrylic anhydride", url: "https://en.wikipedia.org/wiki/Methacrylic_anhydride" },
+      { name: "ChemicalBook: Methacrylic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6112079.htm" },
+      { name: "Röhm: Methacrylate monomers", url: "https://www.roehm.com/en/products-industries/methacrylate-monomers" },
     ],
   },
 
@@ -4098,9 +4098,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Westlake Epoxy (Versatic acids)", url: "https://www.westlake.com" },
     ],
     sources: [
-      { name: "Wikipedia — Neodecanoic acid (Versatic 10)", url: "https://en.wikipedia.org/wiki/Neodecanoic_acid" },
-      { name: "Nouryon — Organic peroxides", url: "https://www.nouryon.com/products/organic-peroxides/" },
-      { name: "ChemicalBook — Neodecanoyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852153.htm" },
+      { name: "Wikipedia: Neodecanoic acid (Versatic 10)", url: "https://en.wikipedia.org/wiki/Neodecanoic_acid" },
+      { name: "Nouryon: Organic peroxides", url: "https://www.nouryon.com/products/organic-peroxides/" },
+      { name: "ChemicalBook: Neodecanoyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852153.htm" },
     ],
   },
 
@@ -4112,7 +4112,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Phthalic anhydride + isononanol esterification",
       detail:
-        "Di-isononyl phthalate (DINP), a general-purpose plasticiser, is made by esterifying phthalic anhydride with two moles of isononyl alcohol (a branched C9 oxo-alcohol from octene hydroformylation). The anhydride first opens to the mono-ester rapidly, and a catalyst (e.g. titanate or acid) drives the second esterification at ~200–230 °C with continuous water removal: phthalic anhydride + 2 C9H19OH → DINP + H2O. The crude ester is neutralised, washed, steam-stripped of excess alcohol and carbon-treated to a clear, low-odour product used mainly to soften PVC.",
+        "Di-isononyl phthalate (DINP), a general-purpose plasticiser, is made by esterifying phthalic anhydride with two moles of isononyl alcohol (a branched C9 oxo-alcohol from octene hydroformylation). The anhydride first opens to the mono-ester rapidly, and a catalyst (e.g. titanate or acid) drives the second esterification at ~200-230 °C with continuous water removal: phthalic anhydride + 2 C9H19OH → DINP + H2O. The crude ester is neutralised, washed, steam-stripped of excess alcohol and carbon-treated to a clear, low-odour product used mainly to soften PVC.",
     },
     manufacturers: [
       { name: "ExxonMobil Chemical (Jayflex)", url: "https://www.exxonmobilchemical.com" },
@@ -4121,9 +4121,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nan Ya Plastics", url: "https://www.nanya.com" },
     ],
     sources: [
-      { name: "Wikipedia — Diisononyl phthalate", url: "https://en.wikipedia.org/wiki/Diisononyl_phthalate" },
-      { name: "ExxonMobil — Jayflex DINP plasticizer", url: "https://www.exxonmobilchemical.com/en/products/plasticizers/jayflex-dinp" },
-      { name: "ChemicalBook — Diisononyl phthalate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1230086.htm" },
+      { name: "Wikipedia: Diisononyl phthalate", url: "https://en.wikipedia.org/wiki/Diisononyl_phthalate" },
+      { name: "ExxonMobil: Jayflex DINP plasticizer", url: "https://www.exxonmobilchemical.com/en/products/plasticizers/jayflex-dinp" },
+      { name: "ChemicalBook: Diisononyl phthalate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1230086.htm" },
     ],
   },
 
@@ -4141,9 +4141,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Clariant", url: "https://www.clariant.com" },
     ],
     sources: [
-      { name: "Wikipedia — Methylparaben", url: "https://en.wikipedia.org/wiki/Methylparaben" },
-      { name: "ChemicalBook — Methylparaben", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
-      { name: "Sharon Laboratories — Parabens", url: "https://www.sharon-labs.com/preservatives/" },
+      { name: "Wikipedia: Methylparaben", url: "https://en.wikipedia.org/wiki/Methylparaben" },
+      { name: "ChemicalBook: Methylparaben", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
+      { name: "Sharon Laboratories: Parabens", url: "https://www.sharon-labs.com/preservatives/" },
     ],
   },
 
@@ -4162,9 +4162,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Resorcinol (production)", url: "https://en.wikipedia.org/wiki/Resorcinol" },
-      { name: "Atul Ltd — Resorcinol", url: "https://www.atul.co.in/products/aromatics" },
-      { name: "ChemicalBook — Resorcinol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854211.htm" },
+      { name: "Wikipedia: Resorcinol (production)", url: "https://en.wikipedia.org/wiki/Resorcinol" },
+      { name: "Atul Ltd: Resorcinol", url: "https://www.atul.co.in/products/aromatics" },
+      { name: "ChemicalBook: Resorcinol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854211.htm" },
     ],
   },
 
@@ -4183,9 +4183,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "Wikipedia — p-Toluenesulfonic acid", url: "https://en.wikipedia.org/wiki/P-Toluenesulfonic_acid" },
-      { name: "ChemicalBook — p-Toluenesulfonic acid monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7159418.htm" },
-      { name: "Atul Ltd — Sulfones/sulfonic acids", url: "https://www.atul.co.in/products/aromatics" },
+      { name: "Wikipedia: p-Toluenesulfonic acid", url: "https://en.wikipedia.org/wiki/P-Toluenesulfonic_acid" },
+      { name: "ChemicalBook: p-Toluenesulfonic acid monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7159418.htm" },
+      { name: "Atul Ltd: Sulfones/sulfonic acids", url: "https://www.atul.co.in/products/aromatics" },
     ],
   },
 
@@ -4204,9 +4204,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "ChemicalBook — Sodium 3-nitrobenzenesulfonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4318188.htm" },
-      { name: "Archroma — Textile specialties", url: "https://www.archroma.com/markets/textiles" },
-      { name: "PubChem — Sodium 3-nitrobenzenesulfonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-3-nitrobenzenesulfonate" },
+      { name: "ChemicalBook: Sodium 3-nitrobenzenesulfonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4318188.htm" },
+      { name: "Archroma: Textile specialties", url: "https://www.archroma.com/markets/textiles" },
+      { name: "PubChem: Sodium 3-nitrobenzenesulfonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-3-nitrobenzenesulfonate" },
     ],
   },
 
@@ -4226,9 +4226,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chattem Chemicals", url: "https://www.chattemchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Glycine (chemical synthesis)", url: "https://en.wikipedia.org/wiki/Glycine" },
-      { name: "ChemicalBook — Glycine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854227.htm" },
-      { name: "Chattem Chemicals — Glycine", url: "https://www.chattemchemicals.com/products/" },
+      { name: "Wikipedia: Glycine (chemical synthesis)", url: "https://en.wikipedia.org/wiki/Glycine" },
+      { name: "ChemicalBook: Glycine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854227.htm" },
+      { name: "Chattem Chemicals: Glycine", url: "https://www.chattemchemicals.com/products/" },
     ],
   },
 
@@ -4240,7 +4240,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Catalytic hydrogenation of glucose",
       detail:
-        "Sorbitol is made by the high-pressure catalytic hydrogenation of glucose (dextrose) syrup, derived from starch. The purified glucose solution is hydrogenated over a Raney-nickel (or supported ruthenium) catalyst at ~120–150 °C and high hydrogen pressure, reducing the aldehyde group to a primary alcohol: C6H12O6 + H2 → C6H14O6. The catalyst is filtered off, the solution is ion-exchange purified and carbon-treated, then concentrated to a ~70% 'non-crystallising' sorbitol solution (USP). It is a humectant, sweetener and excipient in food, oral care and pharmaceuticals.",
+        "Sorbitol is made by the high-pressure catalytic hydrogenation of glucose (dextrose) syrup, derived from starch. The purified glucose solution is hydrogenated over a Raney-nickel (or supported ruthenium) catalyst at ~120-150 °C and high hydrogen pressure, reducing the aldehyde group to a primary alcohol: C6H12O6 + H2 → C6H14O6. The catalyst is filtered off, the solution is ion-exchange purified and carbon-treated, then concentrated to a ~70% 'non-crystallising' sorbitol solution (USP). It is a humectant, sweetener and excipient in food, oral care and pharmaceuticals.",
     },
     manufacturers: [
       { name: "Roquette", url: "https://www.roquette.com" },
@@ -4249,9 +4249,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gulshan Polyols", url: "https://www.gulshanindia.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sorbitol (production)", url: "https://en.wikipedia.org/wiki/Sorbitol" },
-      { name: "Roquette — Sorbitol", url: "https://www.roquette.com/industries/pharmaceuticals/sorbitol" },
-      { name: "ChemicalBook — Sorbitol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
+      { name: "Wikipedia: Sorbitol (production)", url: "https://en.wikipedia.org/wiki/Sorbitol" },
+      { name: "Roquette: Sorbitol", url: "https://www.roquette.com/industries/pharmaceuticals/sorbitol" },
+      { name: "ChemicalBook: Sorbitol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
     ],
   },
 
@@ -4263,7 +4263,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Erucic acid + ammonia amidation",
       detail:
-        "Erucamide (the primary amide of erucic acid, a C22 mono-unsaturated fatty acid) is a slip/anti-block additive for polyolefin films. It is made by reacting erucic acid — obtained by splitting high-erucic rapeseed or mustard oil — with ammonia at elevated temperature, first forming the ammonium soap and then dehydrating it to the amide: C21H41COOH + NH3 → C21H41CONH2 + H2O. The molten amide is purified and solidified into beads/flakes (e.g. Finawax-E). Migrating to the film surface, it reduces friction (slip) and prevents sheets sticking (anti-block).",
+        "Erucamide (the primary amide of erucic acid, a C22 mono-unsaturated fatty acid) is a slip/anti-block additive for polyolefin films. It is made by reacting erucic acid, obtained by splitting high-erucic rapeseed or mustard oil, with ammonia at elevated temperature, first forming the ammonium soap and then dehydrating it to the amide: C21H41COOH + NH3 → C21H41CONH2 + H2O. The molten amide is purified and solidified into beads/flakes (e.g. Finawax-E). Migrating to the film surface, it reduces friction (slip) and prevents sheets sticking (anti-block).",
     },
     manufacturers: [
       { name: "Fine Organics", url: "https://www.fineorganics.com" },
@@ -4271,9 +4271,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PMC Biogenix", url: "https://www.pmcbiogenix.com" },
     ],
     sources: [
-      { name: "Wikipedia — Erucamide", url: "https://en.wikipedia.org/wiki/Erucamide" },
-      { name: "Fine Organics — Slip additives", url: "https://www.fineorganics.com/products" },
-      { name: "ChemicalBook — Erucamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8246171.htm" },
+      { name: "Wikipedia: Erucamide", url: "https://en.wikipedia.org/wiki/Erucamide" },
+      { name: "Fine Organics: Slip additives", url: "https://www.fineorganics.com/products" },
+      { name: "ChemicalBook: Erucamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8246171.htm" },
     ],
   },
 
@@ -4293,9 +4293,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kanchi Karpooram", url: "https://www.kanchikarpooram.com" },
     ],
     sources: [
-      { name: "Wikipedia — Camphor (production)", url: "https://en.wikipedia.org/wiki/Camphor" },
-      { name: "Mangalam Organics — Camphor", url: "https://www.mangalamorganics.com/camphor/" },
-      { name: "ChemicalBook — Camphor", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854237.htm" },
+      { name: "Wikipedia: Camphor (production)", url: "https://en.wikipedia.org/wiki/Camphor" },
+      { name: "Mangalam Organics: Camphor", url: "https://www.mangalamorganics.com/camphor/" },
+      { name: "ChemicalBook: Camphor", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854237.htm" },
     ],
   },
 
@@ -4314,9 +4314,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vigon International", url: "https://www.vigon.com" },
     ],
     sources: [
-      { name: "Wikipedia — Allyl isothiocyanate", url: "https://en.wikipedia.org/wiki/Allyl_isothiocyanate" },
-      { name: "ChemicalBook — Allyl isothiocyanate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854216.htm" },
-      { name: "PubChem — Allyl isothiocyanate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Allyl-isothiocyanate" },
+      { name: "Wikipedia: Allyl isothiocyanate", url: "https://en.wikipedia.org/wiki/Allyl_isothiocyanate" },
+      { name: "ChemicalBook: Allyl isothiocyanate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854216.htm" },
+      { name: "PubChem: Allyl isothiocyanate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Allyl-isothiocyanate" },
     ],
   },
 
@@ -4335,9 +4335,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vigon International", url: "https://www.vigon.com" },
     ],
     sources: [
-      { name: "ChemicalBook — Isoeugenol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5292533.htm" },
-      { name: "Wikipedia — Isoeugenol", url: "https://en.wikipedia.org/wiki/Isoeugenol" },
-      { name: "The Good Scents Company — Isoeugenyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1009431.html" },
+      { name: "ChemicalBook: Isoeugenol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5292533.htm" },
+      { name: "Wikipedia: Isoeugenol", url: "https://en.wikipedia.org/wiki/Isoeugenol" },
+      { name: "The Good Scents Company: Isoeugenyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1009431.html" },
     ],
   },
 
@@ -4357,9 +4357,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Croda International", url: "https://www.croda.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cholesterol (industrial)", url: "https://en.wikipedia.org/wiki/Cholesterol" },
-      { name: "Dishman — Cholesterol & derivatives", url: "https://www.dishmangroup.com/cholesterol-and-related-products" },
-      { name: "ChemicalBook — Cholesterol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
+      { name: "Wikipedia: Cholesterol (industrial)", url: "https://en.wikipedia.org/wiki/Cholesterol" },
+      { name: "Dishman: Cholesterol & derivatives", url: "https://www.dishmangroup.com/cholesterol-and-related-products" },
+      { name: "ChemicalBook: Cholesterol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
     ],
   },
 
@@ -4378,9 +4378,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Acetylcysteine", url: "https://en.wikipedia.org/wiki/Acetylcysteine" },
-      { name: "ChemicalBook — N-Acetyl-L-cysteine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852915.htm" },
-      { name: "PharmaCompass — Acetylcysteine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/acetylcysteine" },
+      { name: "Wikipedia: Acetylcysteine", url: "https://en.wikipedia.org/wiki/Acetylcysteine" },
+      { name: "ChemicalBook: N-Acetyl-L-cysteine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852915.htm" },
+      { name: "PharmaCompass: Acetylcysteine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/acetylcysteine" },
     ],
   },
 
@@ -4398,9 +4398,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cyclohexanecarboxylic acid", url: "https://en.wikipedia.org/wiki/Cyclohexanecarboxylic_acid" },
-      { name: "ChemicalBook — Cyclohexanecarboxylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852616.htm" },
-      { name: "PubChem — Cyclohexanecarboxylic acid", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Cyclohexanecarboxylic-acid" },
+      { name: "Wikipedia: Cyclohexanecarboxylic acid", url: "https://en.wikipedia.org/wiki/Cyclohexanecarboxylic_acid" },
+      { name: "ChemicalBook: Cyclohexanecarboxylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852616.htm" },
+      { name: "PubChem: Cyclohexanecarboxylic acid", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Cyclohexanecarboxylic-acid" },
     ],
   },
 
@@ -4420,9 +4420,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Symrise", url: "https://www.symrise.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ionone", url: "https://en.wikipedia.org/wiki/Ionone" },
-      { name: "The Good Scents Company — Methyl ionone", url: "http://www.thegoodscentscompany.com/data/rw1004471.html" },
-      { name: "ChemicalBook — alpha-Methylionone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854255.htm" },
+      { name: "Wikipedia: Ionone", url: "https://en.wikipedia.org/wiki/Ionone" },
+      { name: "The Good Scents Company: Methyl ionone", url: "http://www.thegoodscentscompany.com/data/rw1004471.html" },
+      { name: "ChemicalBook: alpha-Methylionone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854255.htm" },
     ],
   },
 
@@ -4441,9 +4441,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sanofi (originator, Flagyl)", url: "https://www.sanofi.com" },
     ],
     sources: [
-      { name: "Wikipedia — Metronidazole", url: "https://en.wikipedia.org/wiki/Metronidazole" },
-      { name: "PharmaCompass — Metronidazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/metronidazole" },
-      { name: "Procurement Resource — Metronidazole process", url: "https://www.procurementresource.com/reports/metronidazole-manufacturing-plant-project-report" },
+      { name: "Wikipedia: Metronidazole", url: "https://en.wikipedia.org/wiki/Metronidazole" },
+      { name: "PharmaCompass: Metronidazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/metronidazole" },
+      { name: "Procurement Resource: Metronidazole process", url: "https://www.procurementresource.com/reports/metronidazole-manufacturing-plant-project-report" },
     ],
   },
 
@@ -4461,9 +4461,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GSK (originator, Piriton)", url: "https://www.gsk.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chlorphenamine", url: "https://en.wikipedia.org/wiki/Chlorphenamine" },
-      { name: "Supriya Lifescience — Antihistamines", url: "https://www.supriyalifescience.com/product-portfolio/" },
-      { name: "PharmaCompass — Chlorpheniramine maleate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/chlorpheniramine-maleate" },
+      { name: "Wikipedia: Chlorphenamine", url: "https://en.wikipedia.org/wiki/Chlorphenamine" },
+      { name: "Supriya Lifescience: Antihistamines", url: "https://www.supriyalifescience.com/product-portfolio/" },
+      { name: "PharmaCompass: Chlorpheniramine maleate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/chlorpheniramine-maleate" },
     ],
   },
 
@@ -4475,7 +4475,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "7-ADCA acylation with D-phenylglycine",
       detail:
-        "Cephalexin is a semi-synthetic oral cephalosporin made from the beta-lactam nucleus 7-aminodeacetoxycephalosporanic acid (7-ADCA), itself produced by ring-expanding penicillin G. The D-phenylglycine side chain is then coupled to the 7-amino group of 7-ADCA — increasingly by an immobilised penicillin-acylase enzyme using the phenylglycine amide/ester under mild aqueous conditions (greener than the older chemical acylation via a Dane salt/mixed anhydride). The product is crystallised as cephalexin monohydrate to BP/USP/EP grade.",
+        "Cephalexin is a semi-synthetic oral cephalosporin made from the beta-lactam nucleus 7-aminodeacetoxycephalosporanic acid (7-ADCA), itself produced by ring-expanding penicillin G. The D-phenylglycine side chain is then coupled to the 7-amino group of 7-ADCA, increasingly by an immobilised penicillin-acylase enzyme using the phenylglycine amide/ester under mild aqueous conditions (greener than the older chemical acylation via a Dane salt/mixed anhydride). The product is crystallised as cephalexin monohydrate to BP/USP/EP grade.",
     },
     manufacturers: [
       { name: "Centrient Pharmaceuticals", url: "https://centrient.com" },
@@ -4483,9 +4483,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ACS Dobfar", url: "https://www.acsdobfar.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cefalexin", url: "https://en.wikipedia.org/wiki/Cefalexin" },
-      { name: "Centrient — Enzymatic cephalosporins", url: "https://centrient.com/our-products/cephalosporins" },
-      { name: "PharmaCompass — Cephalexin", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/cefalexin" },
+      { name: "Wikipedia: Cefalexin", url: "https://en.wikipedia.org/wiki/Cefalexin" },
+      { name: "Centrient: Enzymatic cephalosporins", url: "https://centrient.com/our-products/cephalosporins" },
+      { name: "PharmaCompass: Cephalexin", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/cefalexin" },
     ],
   },
 
@@ -4505,9 +4505,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "Wikipedia — Hydroxycarbamide", url: "https://en.wikipedia.org/wiki/Hydroxycarbamide" },
-      { name: "ChemicalBook — Hydroxyurea", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5274408.htm" },
-      { name: "PharmaCompass — Hydroxyurea", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/hydroxyurea" },
+      { name: "Wikipedia: Hydroxycarbamide", url: "https://en.wikipedia.org/wiki/Hydroxycarbamide" },
+      { name: "ChemicalBook: Hydroxyurea", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5274408.htm" },
+      { name: "PharmaCompass: Hydroxyurea", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/hydroxyurea" },
     ],
   },
 
@@ -4528,9 +4528,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kudos Chemie", url: "https://www.kudoschemie.com" },
     ],
     sources: [
-      { name: "Wikipedia — Caffeine (synthesis)", url: "https://en.wikipedia.org/wiki/Caffeine" },
-      { name: "ChemicalBook — Caffeine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852793.htm" },
-      { name: "Kudos Chemie — Caffeine", url: "https://www.kudoschemie.com/caffeine.php" },
+      { name: "Wikipedia: Caffeine (synthesis)", url: "https://en.wikipedia.org/wiki/Caffeine" },
+      { name: "ChemicalBook: Caffeine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852793.htm" },
+      { name: "Kudos Chemie: Caffeine", url: "https://www.kudoschemie.com/caffeine.php" },
     ],
   },
 
@@ -4542,7 +4542,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "6-APA acylation with hydroxyphenylglycine",
       detail:
-        "Amoxicillin is a semi-synthetic aminopenicillin made from the penicillin nucleus 6-aminopenicillanic acid (6-APA). The D-(-)-para-hydroxyphenylglycine side chain is coupled to the 6-amino group of 6-APA — increasingly by an immobilised penicillin-acylase enzyme using the activated glycine amide/ester in water (the green route), replacing the older chemical acylation via a Dane salt/mixed anhydride in cold chlorinated solvent. The product is crystallised at its isoelectric point as amoxicillin trihydrate to pharmacopoeial grade. It is one of the most widely used oral antibiotics.",
+        "Amoxicillin is a semi-synthetic aminopenicillin made from the penicillin nucleus 6-aminopenicillanic acid (6-APA). The D-(-)-para-hydroxyphenylglycine side chain is coupled to the 6-amino group of 6-APA, increasingly by an immobilised penicillin-acylase enzyme using the activated glycine amide/ester in water (the green route), replacing the older chemical acylation via a Dane salt/mixed anhydride in cold chlorinated solvent. The product is crystallised at its isoelectric point as amoxicillin trihydrate to pharmacopoeial grade. It is one of the most widely used oral antibiotics.",
     },
     manufacturers: [
       { name: "Centrient Pharmaceuticals", url: "https://centrient.com" },
@@ -4551,9 +4551,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sandoz", url: "https://www.sandoz.com" },
     ],
     sources: [
-      { name: "Wikipedia — Amoxicillin", url: "https://en.wikipedia.org/wiki/Amoxicillin" },
-      { name: "Centrient — Enzymatic amoxicillin", url: "https://centrient.com/our-products/penicillins" },
-      { name: "ScienceDirect — Enzymatic amoxicillin synthesis", url: "https://www.sciencedirect.com/science/article/abs/pii/S1359511309002475" },
+      { name: "Wikipedia: Amoxicillin", url: "https://en.wikipedia.org/wiki/Amoxicillin" },
+      { name: "Centrient: Enzymatic amoxicillin", url: "https://centrient.com/our-products/penicillins" },
+      { name: "ScienceDirect: Enzymatic amoxicillin synthesis", url: "https://www.sciencedirect.com/science/article/abs/pii/S1359511309002475" },
     ],
   },
 
@@ -4564,16 +4564,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Chlorination of 8-hydroxyquinoline",
       detail:
-        "Halquinol is a defined mixture of chlorinated 8-hydroxyquinolines — chiefly 5,7-dichloro-8-hydroxyquinoline together with the 5-chloro and 7-chloro isomers. It is made by the controlled chlorination of 8-hydroxyquinoline (itself from the Skraup synthesis on 2-aminophenol) with chlorine or a chlorinating agent in acidic medium; the reaction stoichiometry and conditions are tuned to reproduce the pharmacopoeial (BP) ratio of mono- and di-chloro species. The solid is filtered, washed and dried. It is a broad-spectrum antibacterial used as a veterinary gut-active agent and feed additive.",
+        "Halquinol is a defined mixture of chlorinated 8-hydroxyquinolines, chiefly 5,7-dichloro-8-hydroxyquinoline together with the 5-chloro and 7-chloro isomers. It is made by the controlled chlorination of 8-hydroxyquinoline (itself from the Skraup synthesis on 2-aminophenol) with chlorine or a chlorinating agent in acidic medium; the reaction stoichiometry and conditions are tuned to reproduce the pharmacopoeial (BP) ratio of mono- and di-chloro species. The solid is filtered, washed and dried. It is a broad-spectrum antibacterial used as a veterinary gut-active agent and feed additive.",
     },
     manufacturers: [
       { name: "Stallen South Asia", url: "https://www.stallen.com" },
       { name: "Mayur Dyechem", url: "https://www.mayurdyeschem.com" },
     ],
     sources: [
-      { name: "Poultry Trends — Stallen's Halquinol API facility", url: "https://www.poultrytrends.in/stallens-new-api-facility-for-halquinol/" },
-      { name: "PharmaCompass — Halquinol", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/halquinol" },
-      { name: "Wikipedia — Halquinol", url: "https://en.wikipedia.org/wiki/Halquinol" },
+      { name: "Poultry Trends: Stallen's Halquinol API facility", url: "https://www.poultrytrends.in/stallens-new-api-facility-for-halquinol/" },
+      { name: "PharmaCompass: Halquinol", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/halquinol" },
+      { name: "Wikipedia: Halquinol", url: "https://en.wikipedia.org/wiki/Halquinol" },
     ],
   },
 
@@ -4592,9 +4592,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Farmson Pharmaceutical", url: "https://www.farmson.com" },
     ],
     sources: [
-      { name: "Wikipedia — Paracetamol (synthesis)", url: "https://en.wikipedia.org/wiki/Paracetamol" },
-      { name: "ChemicalBook — Acetaminophen", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854301.htm" },
-      { name: "ChemAnalyst — Paracetamol production", url: "https://www.chemanalyst.com/industry-report/paracetamol-market-665" },
+      { name: "Wikipedia: Paracetamol (synthesis)", url: "https://en.wikipedia.org/wiki/Paracetamol" },
+      { name: "ChemicalBook: Acetaminophen", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854301.htm" },
+      { name: "ChemAnalyst: Paracetamol production", url: "https://www.chemanalyst.com/industry-report/paracetamol-market-665" },
     ],
   },
 
@@ -4615,9 +4615,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solara Active Pharma Sciences", url: "https://www.solara.co.in" },
     ],
     sources: [
-      { name: "ACS — BHC ibuprofen green chemistry landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/ibuprofen.html" },
-      { name: "Wikipedia — Ibuprofen (synthesis)", url: "https://en.wikipedia.org/wiki/Ibuprofen" },
-      { name: "IOLCP — Ibuprofen", url: "https://www.iolcp.com/ibuprofen" },
+      { name: "ACS: BHC ibuprofen green chemistry landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/ibuprofen.html" },
+      { name: "Wikipedia: Ibuprofen (synthesis)", url: "https://en.wikipedia.org/wiki/Ibuprofen" },
+      { name: "IOLCP: Ibuprofen", url: "https://www.iolcp.com/ibuprofen" },
     ],
   },
 
@@ -4629,7 +4629,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Quinoline core + chiral statin side chain",
       detail:
-        "Pitavastatin is a fully synthetic statin built from a 2-cyclopropyl-4-(4-fluorophenyl)quinoline-3-carbaldehyde core and the statin (3R,5S)-3,5-dihydroxy-6-heptenoate side chain. The side chain — bearing the two defined stereocentres — is constructed on a protected chiral building block and joined to the quinoline aldehyde by an olefination (Wittig/Horner-Wadsworth-Emmons or Heck) to set the E-alkene. The protecting groups and ester are removed, and the resulting hydroxy-acid is converted to the hemicalcium salt and crystallised to JP/USP grade. It is a potent cholesterol-lowering drug.",
+        "Pitavastatin is a fully synthetic statin built from a 2-cyclopropyl-4-(4-fluorophenyl)quinoline-3-carbaldehyde core and the statin (3R,5S)-3,5-dihydroxy-6-heptenoate side chain. The side chain, bearing the two defined stereocentres, is constructed on a protected chiral building block and joined to the quinoline aldehyde by an olefination (Wittig/Horner-Wadsworth-Emmons or Heck) to set the E-alkene. The protecting groups and ester are removed, and the resulting hydroxy-acid is converted to the hemicalcium salt and crystallised to JP/USP grade. It is a potent cholesterol-lowering drug.",
     },
     manufacturers: [
       { name: "Kowa (originator, Livalo)", url: "https://www.kowa.co.jp" },
@@ -4637,9 +4637,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "MSN Laboratories", url: "https://www.msnlabs.com" },
     ],
     sources: [
-      { name: "Wikipedia — Pitavastatin", url: "https://en.wikipedia.org/wiki/Pitavastatin" },
-      { name: "PharmaCompass — Pitavastatin calcium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/pitavastatin-calcium" },
-      { name: "ChemicalBook — Pitavastatin calcium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409801.htm" },
+      { name: "Wikipedia: Pitavastatin", url: "https://en.wikipedia.org/wiki/Pitavastatin" },
+      { name: "PharmaCompass: Pitavastatin calcium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/pitavastatin-calcium" },
+      { name: "ChemicalBook: Pitavastatin calcium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409801.htm" },
     ],
   },
 
@@ -4651,7 +4651,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Rhein diacetylation",
       detail:
-        "Diacerein (diacetylrhein) is a semi-synthetic anthraquinone derived from rhein. Rhein is obtained by oxidising natural aloe constituents — barbaloin/aloin (or aloe-emodin) from Aloe or senna — to the dicarboxylic anthraquinone. Both phenolic hydroxyl groups of rhein are then acetylated with acetic anhydride to give diacerein, which is purified by recrystallisation to EP grade (with tight control of the residual aloe-emodin impurity). It is a slow-acting anti-inflammatory/interleukin-1 inhibitor used for osteoarthritis.",
+        "Diacerein (diacetylrhein) is a semi-synthetic anthraquinone derived from rhein. Rhein is obtained by oxidising natural aloe constituents, barbaloin/aloin (or aloe-emodin) from Aloe or senna, to the dicarboxylic anthraquinone. Both phenolic hydroxyl groups of rhein are then acetylated with acetic anhydride to give diacerein, which is purified by recrystallisation to EP grade (with tight control of the residual aloe-emodin impurity). It is a slow-acting anti-inflammatory/interleukin-1 inhibitor used for osteoarthritis.",
     },
     manufacturers: [
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
@@ -4659,9 +4659,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Medichem", url: "https://www.medichem.es" },
     ],
     sources: [
-      { name: "Wikipedia — Diacerein", url: "https://en.wikipedia.org/wiki/Diacerein" },
-      { name: "PharmaCompass — Diacerein", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/diacerein" },
-      { name: "ChemicalBook — Diacerein", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4253900.htm" },
+      { name: "Wikipedia: Diacerein", url: "https://en.wikipedia.org/wiki/Diacerein" },
+      { name: "PharmaCompass: Diacerein", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/diacerein" },
+      { name: "ChemicalBook: Diacerein", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4253900.htm" },
     ],
   },
 
@@ -4681,9 +4681,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Neuland Laboratories", url: "https://www.neulandlabs.com" },
     ],
     sources: [
-      { name: "Wikipedia — Salbutamol", url: "https://en.wikipedia.org/wiki/Salbutamol" },
-      { name: "PharmaCompass — Salbutamol sulfate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/salbutamol-sulfate" },
-      { name: "ChemicalBook — Albuterol sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3387159.htm" },
+      { name: "Wikipedia: Salbutamol", url: "https://en.wikipedia.org/wiki/Salbutamol" },
+      { name: "PharmaCompass: Salbutamol sulfate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/salbutamol-sulfate" },
+      { name: "ChemicalBook: Albuterol sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3387159.htm" },
     ],
   },
 
@@ -4702,9 +4702,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dishman Carbogen Amcis", url: "https://www.dishmangroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Propranolol", url: "https://en.wikipedia.org/wiki/Propranolol" },
-      { name: "ChemicalBook — Propranolol hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113458.htm" },
-      { name: "PharmaCompass — Propranolol hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/propranolol-hydrochloride" },
+      { name: "Wikipedia: Propranolol", url: "https://en.wikipedia.org/wiki/Propranolol" },
+      { name: "ChemicalBook: Propranolol hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113458.htm" },
+      { name: "PharmaCompass: Propranolol hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/propranolol-hydrochloride" },
     ],
   },
 
@@ -4723,9 +4723,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Alkaloids Corporation", url: "https://www.alkaloids.com" },
     ],
     sources: [
-      { name: "Wikipedia — Nicotine", url: "https://en.wikipedia.org/wiki/Nicotine" },
-      { name: "ChemicalBook — Nicotine sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2229957.htm" },
-      { name: "CNT — Nicotine products", url: "https://www.cnt-tobacco.com/products/" },
+      { name: "Wikipedia: Nicotine", url: "https://en.wikipedia.org/wiki/Nicotine" },
+      { name: "ChemicalBook: Nicotine sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2229957.htm" },
+      { name: "CNT: Nicotine products", url: "https://www.cnt-tobacco.com/products/" },
     ],
   },
 
@@ -4745,9 +4745,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Gas Chemical", url: "https://www.mgc.co.jp/eng/" },
     ],
     sources: [
-      { name: "Wikipedia — Coenzyme Q10", url: "https://en.wikipedia.org/wiki/Coenzyme_Q10" },
-      { name: "Kaneka — Coenzyme Q10", url: "https://www.kaneka.co.jp/business/health/nbd_007.html" },
-      { name: "PMC — Microbial production of CoQ10", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5408984/" },
+      { name: "Wikipedia: Coenzyme Q10", url: "https://en.wikipedia.org/wiki/Coenzyme_Q10" },
+      { name: "Kaneka: Coenzyme Q10", url: "https://www.kaneka.co.jp/business/health/nbd_007.html" },
+      { name: "PMC: Microbial production of CoQ10", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5408984/" },
     ],
   },
 
@@ -4759,7 +4759,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Lactic-acid fermentation",
       detail:
-        "Most lactic acid (and essentially all single-enantiomer L-lactic acid) is made by fermentation. A carbohydrate feed (glucose, sucrose, or starch/sugar from corn or cane) is fermented by Lactobacillus bacteria at controlled pH — neutralised with lime or ammonia so the lactate salt accumulates — to give lactic acid at high yield. The broth is then filtered and the acid recovered and purified by acidification/esterification-hydrolysis, ion exchange or electrodialysis to food (FCC), pharmaceutical or polymer grade. Polymer-grade L-lactic acid is the monomer for polylactic acid (PLA). A minor synthetic route hydrolyses lactonitrile.",
+        "Most lactic acid (and essentially all single-enantiomer L-lactic acid) is made by fermentation. A carbohydrate feed (glucose, sucrose, or starch/sugar from corn or cane) is fermented by Lactobacillus bacteria at controlled pH, neutralised with lime or ammonia so the lactate salt accumulates, to give lactic acid at high yield. The broth is then filtered and the acid recovered and purified by acidification/esterification-hydrolysis, ion exchange or electrodialysis to food (FCC), pharmaceutical or polymer grade. Polymer-grade L-lactic acid is the monomer for polylactic acid (PLA). A minor synthetic route hydrolyses lactonitrile.",
     },
     manufacturers: [
       { name: "Corbion (Purac)", url: "https://www.corbion.com" },
@@ -4767,9 +4767,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Galactic", url: "https://www.lactic.com" },
     ],
     sources: [
-      { name: "Wikipedia — Lactic acid (production)", url: "https://en.wikipedia.org/wiki/Lactic_acid" },
-      { name: "Corbion — Lactic acid", url: "https://www.corbion.com/products/lactic-acid-and-derivatives" },
-      { name: "PMC — Microbial lactic acid production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8235664/" },
+      { name: "Wikipedia: Lactic acid (production)", url: "https://en.wikipedia.org/wiki/Lactic_acid" },
+      { name: "Corbion: Lactic acid", url: "https://www.corbion.com/products/lactic-acid-and-derivatives" },
+      { name: "PMC: Microbial lactic acid production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8235664/" },
     ],
   },
 
@@ -4789,9 +4789,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Northeast Pharmaceutical Group", url: "https://www.nepharm.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium ascorbate", url: "https://en.wikipedia.org/wiki/Sodium_ascorbate" },
-      { name: "Wikipedia — Vitamin C (industrial synthesis)", url: "https://en.wikipedia.org/wiki/Vitamin_C" },
-      { name: "ChemicalBook — Sodium ascorbate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5859613.htm" },
+      { name: "Wikipedia: Sodium ascorbate", url: "https://en.wikipedia.org/wiki/Sodium_ascorbate" },
+      { name: "Wikipedia: Vitamin C (industrial synthesis)", url: "https://en.wikipedia.org/wiki/Vitamin_C" },
+      { name: "ChemicalBook: Sodium ascorbate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5859613.htm" },
     ],
   },
 
@@ -4810,9 +4810,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vertellus", url: "https://www.vertellus.com" },
     ],
     sources: [
-      { name: "Wikipedia — Docusate", url: "https://en.wikipedia.org/wiki/Docusate" },
-      { name: "ChemicalBook — Docusate sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1234567.htm" },
-      { name: "PubChem — Docusate sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Docusate-sodium" },
+      { name: "Wikipedia: Docusate", url: "https://en.wikipedia.org/wiki/Docusate" },
+      { name: "ChemicalBook: Docusate sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1234567.htm" },
+      { name: "PubChem: Docusate sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Docusate-sodium" },
     ],
   },
 
@@ -4823,16 +4823,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Malonate + thiourea barbiturate synthesis",
       detail:
-        "Thiopental is a thiobarbiturate. The dialkylated malonic ester — diethyl 2-ethyl-2-(1-methylbutyl)malonate — is condensed with thiourea in the presence of sodium ethoxide; the two ester groups and the thiourea cyclise (with loss of ethanol) to build the six-membered thiobarbituric-acid ring, giving thiopental acid. Treatment with sodium hydroxide/carbonate then gives the water-soluble thiopental sodium, blended with anhydrous sodium carbonate as a buffer for injection. It is an ultra-short-acting anaesthetic/induction agent (a controlled product).",
+        "Thiopental is a thiobarbiturate. The dialkylated malonic ester, diethyl 2-ethyl-2-(1-methylbutyl)malonate, is condensed with thiourea in the presence of sodium ethoxide; the two ester groups and the thiourea cyclise (with loss of ethanol) to build the six-membered thiobarbituric-acid ring, giving thiopental acid. Treatment with sodium hydroxide/carbonate then gives the water-soluble thiopental sodium, blended with anhydrous sodium carbonate as a buffer for injection. It is an ultra-short-acting anaesthetic/induction agent (a controlled product).",
     },
     manufacturers: [
       { name: "Hikma Pharmaceuticals", url: "https://www.hikma.com" },
       { name: "Merck (Sigma-Aldrich, reference)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium thiopental", url: "https://en.wikipedia.org/wiki/Sodium_thiopental" },
-      { name: "ChemicalBook — Thiopental sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354344.htm" },
-      { name: "PubChem — Thiopental sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Thiopental-sodium" },
+      { name: "Wikipedia: Sodium thiopental", url: "https://en.wikipedia.org/wiki/Sodium_thiopental" },
+      { name: "ChemicalBook: Thiopental sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354344.htm" },
+      { name: "PubChem: Thiopental sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Thiopental-sodium" },
     ],
   },
 
@@ -4844,16 +4844,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Vapour-phase propane nitration",
       detail:
-        "Industrial nitromethane is made by the high-temperature vapour-phase nitration of propane with nitric acid (or NO2). At ~350–450 °C the radical reaction cleaves C-C and C-H bonds, producing a mixture of nitromethane, nitroethane, 1-nitropropane and 2-nitropropane; the products are separated by distillation. (A small-scale laboratory route reacts sodium chloroacetate with sodium nitrite.) Nitromethane is used as a high-energy fuel (drag racing, model engines), a polar solvent and stabiliser, and a synthetic building block (e.g. nitroaldol/Henry reactions).",
+        "Industrial nitromethane is made by the high-temperature vapour-phase nitration of propane with nitric acid (or NO2). At ~350-450 °C the radical reaction cleaves C-C and C-H bonds, producing a mixture of nitromethane, nitroethane, 1-nitropropane and 2-nitropropane; the products are separated by distillation. (A small-scale laboratory route reacts sodium chloroacetate with sodium nitrite.) Nitromethane is used as a high-energy fuel (drag racing, model engines), a polar solvent and stabiliser, and a synthetic building block (e.g. nitroaldol/Henry reactions).",
     },
     manufacturers: [
       { name: "ANGUS Chemical Company", url: "https://www.angus.com" },
       { name: "Vertellus", url: "https://www.vertellus.com" },
     ],
     sources: [
-      { name: "Wikipedia — Nitromethane (production)", url: "https://en.wikipedia.org/wiki/Nitromethane" },
-      { name: "ANGUS Chemical — Nitroalkanes", url: "https://www.angus.com/products/" },
-      { name: "ChemicalBook — Nitromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852656.htm" },
+      { name: "Wikipedia: Nitromethane (production)", url: "https://en.wikipedia.org/wiki/Nitromethane" },
+      { name: "ANGUS Chemical: Nitroalkanes", url: "https://www.angus.com/products/" },
+      { name: "ChemicalBook: Nitromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852656.htm" },
     ],
   },
 
@@ -4874,9 +4874,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Corteva Agriscience", url: "https://www.corteva.com" },
     ],
     sources: [
-      { name: "Wikipedia — Mancozeb", url: "https://en.wikipedia.org/wiki/Mancozeb" },
-      { name: "Indofil — Mancozeb", url: "https://www.indofil.com/crop-protection" },
-      { name: "US EPA — Mancozeb", url: "https://www.epa.gov/ingredients-used-pesticide-products/mancozeb" },
+      { name: "Wikipedia: Mancozeb", url: "https://en.wikipedia.org/wiki/Mancozeb" },
+      { name: "Indofil: Mancozeb", url: "https://www.indofil.com/crop-protection" },
+      { name: "US EPA: Mancozeb", url: "https://www.epa.gov/ingredients-used-pesticide-products/mancozeb" },
     ],
   },
 
@@ -4896,9 +4896,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia — Samarium(III) oxide", url: "https://en.wikipedia.org/wiki/Samarium(III)_oxide" },
-      { name: "Wikipedia — Rare-earth element (separation)", url: "https://en.wikipedia.org/wiki/Rare-earth_element" },
-      { name: "American Elements — Samarium oxide", url: "https://www.americanelements.com/samarium-oxide-12060-58-1" },
+      { name: "Wikipedia: Samarium(III) oxide", url: "https://en.wikipedia.org/wiki/Samarium(III)_oxide" },
+      { name: "Wikipedia: Rare-earth element (separation)", url: "https://en.wikipedia.org/wiki/Rare-earth_element" },
+      { name: "American Elements: Samarium oxide", url: "https://www.americanelements.com/samarium-oxide-12060-58-1" },
     ],
   },
 
@@ -4917,9 +4917,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Mercury(II) chloride", url: "https://en.wikipedia.org/wiki/Mercury(II)_chloride" },
-      { name: "ChemicalBook — Mercuric chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852602.htm" },
-      { name: "PubChem — Mercuric chloride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Mercuric-chloride" },
+      { name: "Wikipedia: Mercury(II) chloride", url: "https://en.wikipedia.org/wiki/Mercury(II)_chloride" },
+      { name: "ChemicalBook: Mercuric chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852602.htm" },
+      { name: "PubChem: Mercuric chloride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Mercuric-chloride" },
     ],
   },
 
@@ -4940,9 +4940,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Delamine", url: "https://www.delamine.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ethylenediamine", url: "https://en.wikipedia.org/wiki/Ethylenediamine" },
-      { name: "Delamine — Ethyleneamines", url: "https://www.delamine.com/products" },
-      { name: "ChemicalBook — Ethylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854096.htm" },
+      { name: "Wikipedia: Ethylenediamine", url: "https://en.wikipedia.org/wiki/Ethylenediamine" },
+      { name: "Delamine: Ethyleneamines", url: "https://www.delamine.com/products" },
+      { name: "ChemicalBook: Ethylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854096.htm" },
     ],
   },
 
@@ -4963,9 +4963,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia — Fatty alcohol (production)", url: "https://en.wikipedia.org/wiki/Fatty_alcohol" },
-      { name: "KLK OLEO — Fatty alcohols", url: "https://www.klkoleo.com/product/fatty-alcohols.html" },
-      { name: "ScienceDirect — Fatty alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/fatty-alcohol" },
+      { name: "Wikipedia: Fatty alcohol (production)", url: "https://en.wikipedia.org/wiki/Fatty_alcohol" },
+      { name: "KLK OLEO: Fatty alcohols", url: "https://www.klkoleo.com/product/fatty-alcohols.html" },
+      { name: "ScienceDirect: Fatty alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/fatty-alcohol" },
     ],
   },
 
@@ -4977,7 +4977,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Selenium dioxide + sodium base",
       detail:
-        "Sodium selenite is made from selenium recovered as a by-product of copper electro-refining (anode slimes). Elemental selenium is oxidised — by roasting/burning in air to selenium dioxide, or with nitric acid to selenous acid — and the selenium(IV) oxide/acid is then dissolved in sodium hydroxide or sodium carbonate to give sodium selenite: SeO2 + 2 NaOH → Na2SeO3 + H2O. The solution is purified and crystallised (anhydrous or pentahydrate). It is used as a trace-element nutrient in animal feed and fertilisers, a glass decolouriser and a laboratory reagent (handled carefully, as selenium is toxic).",
+        "Sodium selenite is made from selenium recovered as a by-product of copper electro-refining (anode slimes). Elemental selenium is oxidised, by roasting/burning in air to selenium dioxide, or with nitric acid to selenous acid, and the selenium(IV) oxide/acid is then dissolved in sodium hydroxide or sodium carbonate to give sodium selenite: SeO2 + 2 NaOH → Na2SeO3 + H2O. The solution is purified and crystallised (anhydrous or pentahydrate). It is used as a trace-element nutrient in animal feed and fertilisers, a glass decolouriser and a laboratory reagent (handled carefully, as selenium is toxic).",
     },
     manufacturers: [
       { name: "Vital Materials", url: "https://www.vitalmaterials.com" },
@@ -4985,9 +4985,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium selenite", url: "https://en.wikipedia.org/wiki/Sodium_selenite" },
-      { name: "Wikipedia — Selenium dioxide", url: "https://en.wikipedia.org/wiki/Selenium_dioxide" },
-      { name: "ChemicalBook — Sodium selenite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158228.htm" },
+      { name: "Wikipedia: Sodium selenite", url: "https://en.wikipedia.org/wiki/Sodium_selenite" },
+      { name: "Wikipedia: Selenium dioxide", url: "https://en.wikipedia.org/wiki/Selenium_dioxide" },
+      { name: "ChemicalBook: Sodium selenite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158228.htm" },
     ],
   },
 
@@ -5006,9 +5006,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Boron trifluoride", url: "https://en.wikipedia.org/wiki/Boron_trifluoride" },
-      { name: "ChemicalBook — Boron trifluoride-methanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8156490.htm" },
-      { name: "PubChem — Boron trifluoride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Boron-trifluoride" },
+      { name: "Wikipedia: Boron trifluoride", url: "https://en.wikipedia.org/wiki/Boron_trifluoride" },
+      { name: "ChemicalBook: Boron trifluoride-methanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8156490.htm" },
+      { name: "PubChem: Boron trifluoride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Boron-trifluoride" },
     ],
   },
 
@@ -5026,9 +5026,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "TCI Chemicals", url: "https://www.tcichemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Diisopropyl tartrate", url: "https://en.wikipedia.org/wiki/Diisopropyl_tartrate" },
-      { name: "Wikipedia — Sharpless epoxidation", url: "https://en.wikipedia.org/wiki/Sharpless_epoxidation" },
-      { name: "ChemicalBook — Diisopropyl D-tartrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854262.htm" },
+      { name: "Wikipedia: Diisopropyl tartrate", url: "https://en.wikipedia.org/wiki/Diisopropyl_tartrate" },
+      { name: "Wikipedia: Sharpless epoxidation", url: "https://en.wikipedia.org/wiki/Sharpless_epoxidation" },
+      { name: "ChemicalBook: Diisopropyl D-tartrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854262.htm" },
     ],
   },
 
@@ -5049,9 +5049,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nirma", url: "https://www.nirma.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Sodium_hydroxide" },
-      { name: "GACL — Caustic soda", url: "https://www.gacl.com/product-caustic-soda-flakes" },
-      { name: "Wikipedia — Chloralkali process", url: "https://en.wikipedia.org/wiki/Chloralkali_process" },
+      { name: "Wikipedia: Sodium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Sodium_hydroxide" },
+      { name: "GACL: Caustic soda", url: "https://www.gacl.com/product-caustic-soda-flakes" },
+      { name: "Wikipedia: Chloralkali process", url: "https://en.wikipedia.org/wiki/Chloralkali_process" },
     ],
   },
 
@@ -5070,9 +5070,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality Chemicals", url: "https://www.privi.com" },
     ],
     sources: [
-      { name: "The Good Scents Company — Verdyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1008492.html" },
-      { name: "Wikipedia — Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
-      { name: "ChemicalBook — Tricyclodecenyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1330336.htm" },
+      { name: "The Good Scents Company: Verdyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1008492.html" },
+      { name: "Wikipedia: Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
+      { name: "ChemicalBook: Tricyclodecenyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1330336.htm" },
     ],
   },
 
@@ -5091,9 +5091,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality Chemicals", url: "https://www.privi.com" },
     ],
     sources: [
-      { name: "The Good Scents Company — Verdyl propionate", url: "http://www.thegoodscentscompany.com/data/rw1008493.html" },
-      { name: "Wikipedia — Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
-      { name: "ChemicalBook — Tricyclodecenyl propionate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6330337.htm" },
+      { name: "The Good Scents Company: Verdyl propionate", url: "http://www.thegoodscentscompany.com/data/rw1008493.html" },
+      { name: "Wikipedia: Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
+      { name: "ChemicalBook: Tricyclodecenyl propionate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6330337.htm" },
     ],
   },
 
@@ -5111,9 +5111,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFF", url: "https://www.iff.com" },
     ],
     sources: [
-      { name: "Wikipedia — Acetal", url: "https://en.wikipedia.org/wiki/Acetal" },
-      { name: "The Good Scents Company — Fragrance acetals", url: "http://www.thegoodscentscompany.com/" },
-      { name: "ScienceDirect — Acetals in flavour & fragrance", url: "https://www.sciencedirect.com/topics/chemistry/acetal" },
+      { name: "Wikipedia: Acetal", url: "https://en.wikipedia.org/wiki/Acetal" },
+      { name: "The Good Scents Company: Fragrance acetals", url: "http://www.thegoodscentscompany.com/" },
+      { name: "ScienceDirect: Acetals in flavour & fragrance", url: "https://www.sciencedirect.com/topics/chemistry/acetal" },
     ],
   },
 
@@ -5132,9 +5132,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "ChemicalBook — 4-Methoxy-2-nitroaniline", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854252.htm" },
-      { name: "PubChem — 4-Methoxy-2-nitroaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methoxy-2-nitroaniline" },
-      { name: "Aarti Industries — Nitro / amino aromatics", url: "https://www.aarti-industries.com/products/chemical-products" },
+      { name: "ChemicalBook: 4-Methoxy-2-nitroaniline", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854252.htm" },
+      { name: "PubChem: 4-Methoxy-2-nitroaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methoxy-2-nitroaniline" },
+      { name: "Aarti Industries: Nitro / amino aromatics", url: "https://www.aarti-industries.com/products/chemical-products" },
     ],
   },
 
@@ -5152,9 +5152,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Claisen condensation", url: "https://en.wikipedia.org/wiki/Claisen_condensation" },
-      { name: "PubChem — 1-Cyclopropyl-1,3-butanedione", url: "https://pubchem.ncbi.nlm.nih.gov/compound/1-Cyclopropyl-1_3-butanedione" },
-      { name: "ChemicalBook — 1-Cyclopropane-1,3-butanedione", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1745310.htm" },
+      { name: "Wikipedia: Claisen condensation", url: "https://en.wikipedia.org/wiki/Claisen_condensation" },
+      { name: "PubChem: 1-Cyclopropyl-1,3-butanedione", url: "https://pubchem.ncbi.nlm.nih.gov/compound/1-Cyclopropyl-1_3-butanedione" },
+      { name: "ChemicalBook: 1-Cyclopropane-1,3-butanedione", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1745310.htm" },
     ],
   },
 
@@ -5165,16 +5165,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Acetylation of sulfurol",
       detail:
-        "4-Methyl-5-thiazoleethanol acetate (sulfurol acetate) is a savoury/meaty flavour ester. It is made by acetylating the primary alcohol of 4-methyl-5-thiazoleethanol ('sulfurol') — itself a thiazole built from a chloroketone, thioformamide-type and amino-alcohol chemistry — with acetic anhydride under a base or acid catalyst: thiazole-CH2CH2OH + (CH3CO)2O → thiazole-CH2CH2OOCCH3 + CH3COOH. The ester is washed free of acid and vacuum-distilled to flavour grade. It is used in trace amounts in savoury and nutty flavour compositions.",
+        "4-Methyl-5-thiazoleethanol acetate (sulfurol acetate) is a savoury/meaty flavour ester. It is made by acetylating the primary alcohol of 4-methyl-5-thiazoleethanol ('sulfurol'), itself a thiazole built from a chloroketone, thioformamide-type and amino-alcohol chemistry, with acetic anhydride under a base or acid catalyst: thiazole-CH2CH2OH + (CH3CO)2O → thiazole-CH2CH2OOCCH3 + CH3COOH. The ester is washed free of acid and vacuum-distilled to flavour grade. It is used in trace amounts in savoury and nutty flavour compositions.",
     },
     manufacturers: [
       { name: "Vigon International", url: "https://www.vigon.com" },
       { name: "Advanced Biotech", url: "https://www.adv-bio.com" },
     ],
     sources: [
-      { name: "The Good Scents Company — Sulfurol acetate", url: "http://www.thegoodscentscompany.com/data/rw1010191.html" },
-      { name: "PubChem — 4-Methyl-5-thiazoleethanol acetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methyl-5-thiazoleethanol-acetate" },
-      { name: "ChemicalBook — 4-Methyl-5-thiazoleethanol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7466992.htm" },
+      { name: "The Good Scents Company: Sulfurol acetate", url: "http://www.thegoodscentscompany.com/data/rw1010191.html" },
+      { name: "PubChem: 4-Methyl-5-thiazoleethanol acetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methyl-5-thiazoleethanol-acetate" },
+      { name: "ChemicalBook: 4-Methyl-5-thiazoleethanol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7466992.htm" },
     ],
   },
 
@@ -5186,16 +5186,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Cyclen synthesis, then hydrochloride salt",
       detail:
-        "1,4,7,10-Tetraazacyclododecane ('cyclen') is the macrocyclic tetraamine behind MRI contrast agents (DOTA/gadolinium) and is sold as the stable tetrahydrochloride. It is made by macrocyclisation — classically the Richman-Atkins route, in which a per-tosylated linear tetraamine is cyclised with a tosylated diol/dihalide under high dilution and base to close the 12-membered ring, then the tosyl groups are removed (e.g. with acid/HBr) to free cyclen. Treatment with hydrochloric acid gives cyclen tetrahydrochloride, which is crystallised to high purity. Newer bis-aminal template routes improve the yield.",
+        "1,4,7,10-Tetraazacyclododecane ('cyclen') is the macrocyclic tetraamine behind MRI contrast agents (DOTA/gadolinium) and is sold as the stable tetrahydrochloride. It is made by macrocyclisation, classically the Richman-Atkins route, in which a per-tosylated linear tetraamine is cyclised with a tosylated diol/dihalide under high dilution and base to close the 12-membered ring, then the tosyl groups are removed (e.g. with acid/HBr) to free cyclen. Treatment with hydrochloric acid gives cyclen tetrahydrochloride, which is crystallised to high purity. Newer bis-aminal template routes improve the yield.",
     },
     manufacturers: [
       { name: "CheMatech", url: "https://www.chematech-mdt.com" },
       { name: "Macrocyclics", url: "https://www.macrocyclics.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cyclen", url: "https://en.wikipedia.org/wiki/Cyclen" },
-      { name: "Wikipedia — Richman-Atkins reaction", url: "https://en.wikipedia.org/wiki/Richman%E2%80%93Atkins_reaction" },
-      { name: "ChemicalBook — Cyclen tetrahydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8746392.htm" },
+      { name: "Wikipedia: Cyclen", url: "https://en.wikipedia.org/wiki/Cyclen" },
+      { name: "Wikipedia: Richman-Atkins reaction", url: "https://en.wikipedia.org/wiki/Richman%E2%80%93Atkins_reaction" },
+      { name: "ChemicalBook: Cyclen tetrahydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8746392.htm" },
     ],
   },
 
@@ -5214,9 +5214,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Benzyl alcohol (production)", url: "https://en.wikipedia.org/wiki/Benzyl_alcohol" },
-      { name: "ChemicalBook — Benzyl alcohol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854161.htm" },
-      { name: "ScienceDirect — Benzyl alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-alcohol" },
+      { name: "Wikipedia: Benzyl alcohol (production)", url: "https://en.wikipedia.org/wiki/Benzyl_alcohol" },
+      { name: "ChemicalBook: Benzyl alcohol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854161.htm" },
+      { name: "ScienceDirect: Benzyl alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-alcohol" },
     ],
   },
 
@@ -5235,9 +5235,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Zydus Lifesciences", url: "https://www.zyduslife.com" },
     ],
     sources: [
-      { name: "Wikipedia — Furosemide", url: "https://en.wikipedia.org/wiki/Furosemide" },
-      { name: "PharmaCompass — Furosemide", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/furosemide" },
-      { name: "ChemicalBook — Furosemide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354345.htm" },
+      { name: "Wikipedia: Furosemide", url: "https://en.wikipedia.org/wiki/Furosemide" },
+      { name: "PharmaCompass: Furosemide", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/furosemide" },
+      { name: "ChemicalBook: Furosemide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354345.htm" },
     ],
   },
 
@@ -5257,9 +5257,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Harman Finochem", url: "https://www.harmanfinochem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Metformin", url: "https://en.wikipedia.org/wiki/Metformin" },
-      { name: "PharmaCompass — Metformin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/metformin-hydrochloride" },
-      { name: "ChemicalBook — Metformin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354346.htm" },
+      { name: "Wikipedia: Metformin", url: "https://en.wikipedia.org/wiki/Metformin" },
+      { name: "PharmaCompass: Metformin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/metformin-hydrochloride" },
+      { name: "ChemicalBook: Metformin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354346.htm" },
     ],
   },
 
@@ -5278,9 +5278,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong Xinhua Pharmaceutical", url: "https://www.xinhuapharm.com" },
     ],
     sources: [
-      { name: "Wikipedia — Aspirin (synthesis)", url: "https://en.wikipedia.org/wiki/Aspirin" },
-      { name: "ChemAnalyst — Aspirin production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
-      { name: "ChemicalBook — Acetylsalicylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854240.htm" },
+      { name: "Wikipedia: Aspirin (synthesis)", url: "https://en.wikipedia.org/wiki/Aspirin" },
+      { name: "ChemAnalyst: Aspirin production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
+      { name: "ChemicalBook: Acetylsalicylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854240.htm" },
     ],
   },
 
@@ -5291,7 +5291,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Benzimidazole-2-carbamate cyclisation",
       detail:
-        "Mebendazole, a benzimidazole anthelmintic, is assembled from a 4-benzoyl-1,2-phenylenediamine (3,4-diaminobenzophenone). The ortho-diamine is condensed/cyclised with a one-carbon carbamate reagent — typically 1,3-bis(methoxycarbonyl)-S-methylisothiourea or methyl cyanocarbamate — which closes the imidazole ring and installs the methyl carbamate at C-2, giving methyl (5-benzoyl-1H-benzimidazol-2-yl)carbamate (mebendazole). The crude is purified by recrystallisation to bulk-drug grade.",
+        "Mebendazole, a benzimidazole anthelmintic, is assembled from a 4-benzoyl-1,2-phenylenediamine (3,4-diaminobenzophenone). The ortho-diamine is condensed/cyclised with a one-carbon carbamate reagent, typically 1,3-bis(methoxycarbonyl)-S-methylisothiourea or methyl cyanocarbamate, which closes the imidazole ring and installs the methyl carbamate at C-2, giving methyl (5-benzoyl-1H-benzimidazol-2-yl)carbamate (mebendazole). The crude is purified by recrystallisation to bulk-drug grade.",
     },
     manufacturers: [
       { name: "Janssen (originator, Vermox)", url: "https://www.janssen.com" },
@@ -5299,9 +5299,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia — Mebendazole", url: "https://en.wikipedia.org/wiki/Mebendazole" },
-      { name: "PharmaCompass — Mebendazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebendazole" },
-      { name: "ChemicalBook — Mebendazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354347.htm" },
+      { name: "Wikipedia: Mebendazole", url: "https://en.wikipedia.org/wiki/Mebendazole" },
+      { name: "PharmaCompass: Mebendazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebendazole" },
+      { name: "ChemicalBook: Mebendazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354347.htm" },
     ],
   },
 
@@ -5321,9 +5321,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hetero", url: "https://www.heteroworld.com" },
     ],
     sources: [
-      { name: "Wikipedia — Paroxetine", url: "https://en.wikipedia.org/wiki/Paroxetine" },
-      { name: "PharmaCompass — Paroxetine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/paroxetine-hydrochloride" },
-      { name: "ChemicalBook — Paroxetine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7354352.htm" },
+      { name: "Wikipedia: Paroxetine", url: "https://en.wikipedia.org/wiki/Paroxetine" },
+      { name: "PharmaCompass: Paroxetine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/paroxetine-hydrochloride" },
+      { name: "ChemicalBook: Paroxetine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7354352.htm" },
     ],
   },
 
@@ -5343,9 +5343,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dr. Reddy's Laboratories", url: "https://www.drreddys.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sertraline", url: "https://en.wikipedia.org/wiki/Sertraline" },
-      { name: "ACS — Greener sertraline process (Pfizer)", url: "https://www.acs.org/pressroom/presspacs/2002/june.html" },
-      { name: "PharmaCompass — Sertraline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sertraline-hydrochloride" },
+      { name: "Wikipedia: Sertraline", url: "https://en.wikipedia.org/wiki/Sertraline" },
+      { name: "ACS: Greener sertraline process (Pfizer)", url: "https://www.acs.org/pressroom/presspacs/2002/june.html" },
+      { name: "PharmaCompass: Sertraline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sertraline-hydrochloride" },
     ],
   },
 
@@ -5357,16 +5357,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Veratric acid esterification",
       detail:
-        "Mebeverine, an antispasmodic, is an ester of veratric acid (3,4-dimethoxybenzoic acid) with a substituted amino-alcohol. The amino-alcohol — 4-[ethyl(4-methoxy-alpha-methylphenethyl)amino]butan-1-ol — is built by reductive amination/alkylation steps, then esterified with veratric acid (as its acid chloride, with a base) to join the two halves: veratroyl chloride + amino-alcohol → mebeverine base. Treatment with hydrochloric acid gives mebeverine hydrochloride, crystallised to BP grade.",
+        "Mebeverine, an antispasmodic, is an ester of veratric acid (3,4-dimethoxybenzoic acid) with a substituted amino-alcohol. The amino-alcohol, 4-[ethyl(4-methoxy-alpha-methylphenethyl)amino]butan-1-ol, is built by reductive amination/alkylation steps, then esterified with veratric acid (as its acid chloride, with a base) to join the two halves: veratroyl chloride + amino-alcohol → mebeverine base. Treatment with hydrochloric acid gives mebeverine hydrochloride, crystallised to BP grade.",
     },
     manufacturers: [
       { name: "Abbott (Mylan, originator Colofac/Duspatalin)", url: "https://www.abbott.com" },
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "Wikipedia — Mebeverine", url: "https://en.wikipedia.org/wiki/Mebeverine" },
-      { name: "PharmaCompass — Mebeverine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebeverine-hydrochloride" },
-      { name: "ChemicalBook — Mebeverine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8354353.htm" },
+      { name: "Wikipedia: Mebeverine", url: "https://en.wikipedia.org/wiki/Mebeverine" },
+      { name: "PharmaCompass: Mebeverine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebeverine-hydrochloride" },
+      { name: "ChemicalBook: Mebeverine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8354353.htm" },
     ],
   },
 
@@ -5386,9 +5386,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dr. Reddy's Laboratories", url: "https://www.drreddys.com" },
     ],
     sources: [
-      { name: "Wikipedia — Terbinafine", url: "https://en.wikipedia.org/wiki/Terbinafine" },
-      { name: "PharmaCompass — Terbinafine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/terbinafine-hydrochloride" },
-      { name: "ChemicalBook — Terbinafine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354354.htm" },
+      { name: "Wikipedia: Terbinafine", url: "https://en.wikipedia.org/wiki/Terbinafine" },
+      { name: "PharmaCompass: Terbinafine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/terbinafine-hydrochloride" },
+      { name: "ChemicalBook: Terbinafine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354354.htm" },
     ],
   },
 
@@ -5407,9 +5407,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia — Famotidine", url: "https://en.wikipedia.org/wiki/Famotidine" },
-      { name: "PharmaCompass — Famotidine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/famotidine" },
-      { name: "ChemicalBook — Famotidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354355.htm" },
+      { name: "Wikipedia: Famotidine", url: "https://en.wikipedia.org/wiki/Famotidine" },
+      { name: "PharmaCompass: Famotidine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/famotidine" },
+      { name: "ChemicalBook: Famotidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354355.htm" },
     ],
   },
 
@@ -5429,9 +5429,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "The United Laboratories", url: "https://www.tul.com.hk" },
     ],
     sources: [
-      { name: "Wikipedia — Ampicillin", url: "https://en.wikipedia.org/wiki/Ampicillin" },
-      { name: "Centrient — Penicillins", url: "https://centrient.com/our-products/penicillins" },
-      { name: "PharmaCompass — Ampicillin trihydrate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ampicillin-trihydrate" },
+      { name: "Wikipedia: Ampicillin", url: "https://en.wikipedia.org/wiki/Ampicillin" },
+      { name: "Centrient: Penicillins", url: "https://centrient.com/our-products/penicillins" },
+      { name: "PharmaCompass: Ampicillin trihydrate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ampicillin-trihydrate" },
     ],
   },
 
@@ -5450,9 +5450,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "Wikipedia — Amitriptyline", url: "https://en.wikipedia.org/wiki/Amitriptyline" },
-      { name: "PharmaCompass — Amitriptyline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/amitriptyline-hydrochloride" },
-      { name: "ChemicalBook — Amitriptyline hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354356.htm" },
+      { name: "Wikipedia: Amitriptyline", url: "https://en.wikipedia.org/wiki/Amitriptyline" },
+      { name: "PharmaCompass: Amitriptyline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/amitriptyline-hydrochloride" },
+      { name: "ChemicalBook: Amitriptyline hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354356.htm" },
     ],
   },
 
@@ -5472,9 +5472,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "Wikipedia — Linezolid", url: "https://en.wikipedia.org/wiki/Linezolid" },
-      { name: "PharmaCompass — Linezolid", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linezolid" },
-      { name: "ChemicalBook — Linezolid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9354357.htm" },
+      { name: "Wikipedia: Linezolid", url: "https://en.wikipedia.org/wiki/Linezolid" },
+      { name: "PharmaCompass: Linezolid", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linezolid" },
+      { name: "ChemicalBook: Linezolid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9354357.htm" },
     ],
   },
 
@@ -5493,9 +5493,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "Wikipedia — Linagliptin", url: "https://en.wikipedia.org/wiki/Linagliptin" },
-      { name: "PharmaCompass — Linagliptin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linagliptin" },
-      { name: "ChemicalBook — Linagliptin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409802.htm" },
+      { name: "Wikipedia: Linagliptin", url: "https://en.wikipedia.org/wiki/Linagliptin" },
+      { name: "PharmaCompass: Linagliptin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linagliptin" },
+      { name: "ChemicalBook: Linagliptin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409802.htm" },
     ],
   },
 
@@ -5513,9 +5513,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Drugs", url: "https://www.aartidrugs.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Trimethoprim", url: "https://en.wikipedia.org/wiki/Trimethoprim" },
-      { name: "PharmaCompass — Trimethoprim", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/trimethoprim" },
-      { name: "ChemicalBook — Trimethoprim", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2354358.htm" },
+      { name: "Wikipedia: Trimethoprim", url: "https://en.wikipedia.org/wiki/Trimethoprim" },
+      { name: "PharmaCompass: Trimethoprim", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/trimethoprim" },
+      { name: "ChemicalBook: Trimethoprim", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2354358.htm" },
     ],
   },
 
@@ -5533,15 +5533,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Drugs", url: "https://www.aartidrugs.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Sulfamethoxazole", url: "https://en.wikipedia.org/wiki/Sulfamethoxazole" },
-      { name: "PharmaCompass — Sulfamethoxazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulfamethoxazole" },
-      { name: "ChemicalBook — Sulfamethoxazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354359.htm" },
+      { name: "Wikipedia: Sulfamethoxazole", url: "https://en.wikipedia.org/wiki/Sulfamethoxazole" },
+      { name: "PharmaCompass: Sulfamethoxazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulfamethoxazole" },
+      { name: "ChemicalBook: Sulfamethoxazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354359.htm" },
     ],
   },
 
   "pharmaceutical-raw-material-bulk-drugs-guaifenesin": {
     routes: [
-      "Reaction of guaiacol with glycidol (or 3-chloro-1,2-propanediol) — Williamson ether",
+      "Reaction of guaiacol with glycidol (or 3-chloro-1,2-propanediol), Williamson ether",
     ],
     mainProcess: {
       name: "Guaiacol + glycidol etherification",
@@ -5553,9 +5553,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vianex", url: "https://www.vianex.gr" },
     ],
     sources: [
-      { name: "Wikipedia — Guaifenesin", url: "https://en.wikipedia.org/wiki/Guaifenesin" },
-      { name: "PharmaCompass — Guaifenesin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/guaifenesin" },
-      { name: "ChemicalBook — Guaifenesin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354360.htm" },
+      { name: "Wikipedia: Guaifenesin", url: "https://en.wikipedia.org/wiki/Guaifenesin" },
+      { name: "PharmaCompass: Guaifenesin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/guaifenesin" },
+      { name: "ChemicalBook: Guaifenesin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354360.htm" },
     ],
   },
 
@@ -5574,9 +5574,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ciprofloxacin", url: "https://en.wikipedia.org/wiki/Ciprofloxacin" },
-      { name: "PharmaCompass — Ciprofloxacin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ciprofloxacin-hydrochloride" },
-      { name: "ChemicalBook — Ciprofloxacin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4354361.htm" },
+      { name: "Wikipedia: Ciprofloxacin", url: "https://en.wikipedia.org/wiki/Ciprofloxacin" },
+      { name: "PharmaCompass: Ciprofloxacin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ciprofloxacin-hydrochloride" },
+      { name: "ChemicalBook: Ciprofloxacin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4354361.htm" },
     ],
   },
 
@@ -5587,16 +5587,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Dibromo-anthranilaldehyde reductive amination",
       detail:
-        "Bromhexine, a mucolytic, is a benzylamine derivative. 2-Aminobenzaldehyde is brominated to 2-amino-3,5-dibromobenzaldehyde; this aldehyde is then reductively aminated with N-methylcyclohexylamine — forming the imine and reducing it (e.g. with a borohydride or by catalytic hydrogenation) — to give the N-(2-amino-3,5-dibromobenzyl)-N-methylcyclohexylamine that is bromhexine base. Treatment with hydrochloric acid gives bromhexine hydrochloride, crystallised to BP grade. It breaks down mucopolysaccharides to thin mucus.",
+        "Bromhexine, a mucolytic, is a benzylamine derivative. 2-Aminobenzaldehyde is brominated to 2-amino-3,5-dibromobenzaldehyde; this aldehyde is then reductively aminated with N-methylcyclohexylamine, forming the imine and reducing it (e.g. with a borohydride or by catalytic hydrogenation), to give the N-(2-amino-3,5-dibromobenzyl)-N-methylcyclohexylamine that is bromhexine base. Treatment with hydrochloric acid gives bromhexine hydrochloride, crystallised to BP grade. It breaks down mucopolysaccharides to thin mucus.",
     },
     manufacturers: [
       { name: "Boehringer Ingelheim (originator, Bisolvon)", url: "https://www.boehringer-ingelheim.com" },
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "Wikipedia — Bromhexine", url: "https://en.wikipedia.org/wiki/Bromhexine" },
-      { name: "PharmaCompass — Bromhexine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/bromhexine-hydrochloride" },
-      { name: "ChemicalBook — Bromhexine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354362.htm" },
+      { name: "Wikipedia: Bromhexine", url: "https://en.wikipedia.org/wiki/Bromhexine" },
+      { name: "PharmaCompass: Bromhexine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/bromhexine-hydrochloride" },
+      { name: "ChemicalBook: Bromhexine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354362.htm" },
     ],
   },
 
@@ -5608,16 +5608,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Chiral total synthesis of (+)-biotin",
       detail:
-        "Biotin (vitamin B7/H) is a bicyclic molecule — a fused tetrahydrothiophene and an imidazolidone (ureido) ring — bearing a valeric-acid side chain and three contiguous stereocentres, so manufacture is a demanding multi-step asymmetric synthesis. Classic industrial routes (Goldberg-Sternbach and the improved Lonza/DSM processes) build a meso-bicyclic anhydride/lactone from cysteine- or fumarate-derived intermediates, set the all-cis stereochemistry by enzymatic or chiral resolution, then attach the C5 side chain (e.g. by a Grignard/Wittig sequence) and adjust oxidation state to give (+)-biotin, purified by crystallisation. Fermentation routes are emerging.",
+        "Biotin (vitamin B7/H) is a bicyclic molecule, a fused tetrahydrothiophene and an imidazolidone (ureido) ring, bearing a valeric-acid side chain and three contiguous stereocentres, so manufacture is a demanding multi-step asymmetric synthesis. Classic industrial routes (Goldberg-Sternbach and the improved Lonza/DSM processes) build a meso-bicyclic anhydride/lactone from cysteine- or fumarate-derived intermediates, set the all-cis stereochemistry by enzymatic or chiral resolution, then attach the C5 side chain (e.g. by a Grignard/Wittig sequence) and adjust oxidation state to give (+)-biotin, purified by crystallisation. Fermentation routes are emerging.",
     },
     manufacturers: [
       { name: "dsm-firmenich", url: "https://www.dsm-firmenich.com" },
       { name: "Zhejiang NHU", url: "https://www.nhu.com.cn" },
     ],
     sources: [
-      { name: "Wikipedia — Biotin (synthesis)", url: "https://en.wikipedia.org/wiki/Biotin" },
-      { name: "ChemicalBook — D-Biotin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854264.htm" },
-      { name: "PMC — Industrial biotin synthesis review", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8839607/" },
+      { name: "Wikipedia: Biotin (synthesis)", url: "https://en.wikipedia.org/wiki/Biotin" },
+      { name: "ChemicalBook: D-Biotin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854264.htm" },
+      { name: "PMC: Industrial biotin synthesis review", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8839607/" },
     ],
   },
 
@@ -5636,15 +5636,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Pyridoxine", url: "https://en.wikipedia.org/wiki/Pyridoxine" },
-      { name: "ChemicalBook — Pyridoxine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854265.htm" },
-      { name: "ScienceDirect — Vitamin B6 synthesis", url: "https://www.sciencedirect.com/topics/chemistry/pyridoxine" },
+      { name: "Wikipedia: Pyridoxine", url: "https://en.wikipedia.org/wiki/Pyridoxine" },
+      { name: "ChemicalBook: Pyridoxine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854265.htm" },
+      { name: "ScienceDirect: Vitamin B6 synthesis", url: "https://www.sciencedirect.com/topics/chemistry/pyridoxine" },
     ],
   },
 
   "riboflavin-ip": {
     routes: [
-      "Microbial fermentation (Ashbya gossypii or engineered Bacillus subtilis) — dominant",
+      "Microbial fermentation (Ashbya gossypii or engineered Bacillus subtilis), dominant",
       "Chemical synthesis from D-ribose + 3,4-dimethylaniline + alloxan/barbituric acid (older)",
     ],
     mainProcess: {
@@ -5657,9 +5657,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia — Riboflavin (production)", url: "https://en.wikipedia.org/wiki/Riboflavin" },
-      { name: "ChemicalBook — Riboflavin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854266.htm" },
-      { name: "PMC — Biotechnological riboflavin production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3920794/" },
+      { name: "Wikipedia: Riboflavin (production)", url: "https://en.wikipedia.org/wiki/Riboflavin" },
+      { name: "ChemicalBook: Riboflavin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854266.htm" },
+      { name: "PMC: Biotechnological riboflavin production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3920794/" },
     ],
   },
 
@@ -5671,7 +5671,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "3-Cyanopyridine partial hydrolysis",
       detail:
-        "Niacinamide (nicotinamide, vitamin B3 amide) is made mainly by the controlled partial hydrolysis of 3-cyanopyridine. 3-Cyanopyridine — produced by the ammoxidation of 3-methylpyridine (beta-picoline) — is hydrolysed (enzymatically with a nitrile hydratase, or chemically with base) only as far as the amide, stopping before the carboxylic acid: 3-NC-C5H4N + H2O → 3-H2NCO-C5H4N. Enzymatic hydration gives a very clean product. It is crystallised to IP/USP grade and used as a vitamin, a cosmetic active and a feed additive.",
+        "Niacinamide (nicotinamide, vitamin B3 amide) is made mainly by the controlled partial hydrolysis of 3-cyanopyridine. 3-Cyanopyridine, produced by the ammoxidation of 3-methylpyridine (beta-picoline), is hydrolysed (enzymatically with a nitrile hydratase, or chemically with base) only as far as the amide, stopping before the carboxylic acid: 3-NC-C5H4N + H2O → 3-H2NCO-C5H4N. Enzymatic hydration gives a very clean product. It is crystallised to IP/USP grade and used as a vitamin, a cosmetic active and a feed additive.",
     },
     manufacturers: [
       { name: "Lonza", url: "https://www.lonza.com" },
@@ -5679,9 +5679,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vertellus", url: "https://www.vertellus.com" },
     ],
     sources: [
-      { name: "Wikipedia — Nicotinamide", url: "https://en.wikipedia.org/wiki/Nicotinamide" },
-      { name: "Lonza — Niacinamide / vitamin B3", url: "https://www.lonza.com/products" },
-      { name: "ChemicalBook — Nicotinamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854267.htm" },
+      { name: "Wikipedia: Nicotinamide", url: "https://en.wikipedia.org/wiki/Nicotinamide" },
+      { name: "Lonza: Niacinamide / vitamin B3", url: "https://www.lonza.com/products" },
+      { name: "ChemicalBook: Nicotinamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854267.htm" },
     ],
   },
 
@@ -5699,9 +5699,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Daicel Corporation", url: "https://www.daicel.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sorbic acid", url: "https://en.wikipedia.org/wiki/Sorbic_acid" },
-      { name: "ChemicalBook — Sorbic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854268.htm" },
-      { name: "Celanese — Sorbates", url: "https://www.celanese.com/products/sorbates" },
+      { name: "Wikipedia: Sorbic acid", url: "https://en.wikipedia.org/wiki/Sorbic_acid" },
+      { name: "ChemicalBook: Sorbic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854268.htm" },
+      { name: "Celanese: Sorbates", url: "https://www.celanese.com/products/sorbates" },
     ],
   },
 
@@ -5713,7 +5713,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Fluorspar + sulfuric acid",
       detail:
-        "Hydrogen fluoride is made by reacting acid-grade fluorspar (calcium fluoride) with concentrated sulfuric acid in an externally heated rotary kiln at ~200–250 °C: CaF2 + H2SO4 → 2 HF + CaSO4. The gaseous HF is cooled, scrubbed of dust and sulfuric acid, and condensed to anhydrous HF or absorbed in water to make aqueous hydrofluoric acid; by-product gypsum (anhydrite) is removed. It is the gateway chemical to all fluorine products — fluorocarbons/refrigerants, aluminium fluoride, fluoropolymers, and uranium hexafluoride — and is used in glass etching and metal pickling.",
+        "Hydrogen fluoride is made by reacting acid-grade fluorspar (calcium fluoride) with concentrated sulfuric acid in an externally heated rotary kiln at ~200-250 °C: CaF2 + H2SO4 → 2 HF + CaSO4. The gaseous HF is cooled, scrubbed of dust and sulfuric acid, and condensed to anhydrous HF or absorbed in water to make aqueous hydrofluoric acid; by-product gypsum (anhydrite) is removed. It is the gateway chemical to all fluorine products, fluorocarbons/refrigerants, aluminium fluoride, fluoropolymers, and uranium hexafluoride, and is used in glass etching and metal pickling.",
     },
     manufacturers: [
       { name: "Honeywell", url: "https://www.honeywell.com" },
@@ -5722,9 +5722,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Daikin Industries", url: "https://www.daikin.com" },
     ],
     sources: [
-      { name: "Wikipedia — Hydrogen fluoride (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_fluoride" },
-      { name: "US EPA — Hydrofluoric acid (AP-42 §8.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch08/final/c08s07.pdf" },
-      { name: "ChemicalBook — Hydrofluoric acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
+      { name: "Wikipedia: Hydrogen fluoride (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_fluoride" },
+      { name: "US EPA: Hydrofluoric acid (AP-42 §8.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch08/final/c08s07.pdf" },
+      { name: "ChemicalBook: Hydrofluoric acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
     ],
   },
 
@@ -5743,15 +5743,15 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Elementis", url: "https://www.elementis.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chromium trioxide", url: "https://en.wikipedia.org/wiki/Chromium_trioxide" },
-      { name: "ChemicalBook — Chromium trioxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852595.htm" },
-      { name: "Wikipedia — Sodium dichromate", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
+      { name: "Wikipedia: Chromium trioxide", url: "https://en.wikipedia.org/wiki/Chromium_trioxide" },
+      { name: "ChemicalBook: Chromium trioxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852595.htm" },
+      { name: "Wikipedia: Sodium dichromate", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
     ],
   },
 
   iodine: {
     routes: [
-      "From caliche/nitrate brine (Chile) — extract iodate, reduce with SO2, blow-out",
+      "From caliche/nitrate brine (Chile), extract iodate, reduce with SO2, blow-out",
       "From natural gas/oilfield brines (Japan, USA) by blow-out/ion exchange",
     ],
     mainProcess: {
@@ -5765,9 +5765,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ISE Chemicals", url: "https://www.isechem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia — Iodine (production)", url: "https://en.wikipedia.org/wiki/Iodine" },
-      { name: "USGS — Iodine (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-iodine.pdf" },
-      { name: "SQM — Iodine", url: "https://www.sqm.com/en/producto/iodine-and-derivatives/" },
+      { name: "Wikipedia: Iodine (production)", url: "https://en.wikipedia.org/wiki/Iodine" },
+      { name: "USGS: Iodine (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-iodine.pdf" },
+      { name: "SQM: Iodine", url: "https://www.sqm.com/en/producto/iodine-and-derivatives/" },
     ],
   },
 
@@ -5787,9 +5787,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Orica", url: "https://www.orica.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium cyanide (production)", url: "https://en.wikipedia.org/wiki/Sodium_cyanide" },
-      { name: "Wikipedia — Andrussow process", url: "https://en.wikipedia.org/wiki/Andrussow_process" },
-      { name: "Cyanco — Sodium cyanide", url: "https://www.cyanco.com/products/" },
+      { name: "Wikipedia: Sodium cyanide (production)", url: "https://en.wikipedia.org/wiki/Sodium_cyanide" },
+      { name: "Wikipedia: Andrussow process", url: "https://en.wikipedia.org/wiki/Andrussow_process" },
+      { name: "Cyanco: Sodium cyanide", url: "https://www.cyanco.com/products/" },
     ],
   },
 
@@ -5801,7 +5801,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "MnO2 fusion + manganate oxidation",
       detail:
-        "Potassium permanganate is made in two stages from manganese dioxide ore. MnO2 is roasted/fused with potassium hydroxide and an oxidant (air or potassium nitrate) to give green potassium manganate, K2MnO4 (2 MnO2 + 4 KOH + O2 → 2 K2MnO4 + 2 H2O). The manganate(VI) is then oxidised to permanganate(VII) — most efficiently by electrolytic oxidation in alkaline solution (or with chlorine/ozone) — and the purple potassium permanganate is crystallised, centrifuged and dried. It is a strong oxidiser used in water treatment, disinfection and organic synthesis.",
+        "Potassium permanganate is made in two stages from manganese dioxide ore. MnO2 is roasted/fused with potassium hydroxide and an oxidant (air or potassium nitrate) to give green potassium manganate, K2MnO4 (2 MnO2 + 4 KOH + O2 → 2 K2MnO4 + 2 H2O). The manganate(VI) is then oxidised to permanganate(VII), most efficiently by electrolytic oxidation in alkaline solution (or with chlorine/ozone), and the purple potassium permanganate is crystallised, centrifuged and dried. It is a strong oxidiser used in water treatment, disinfection and organic synthesis.",
     },
     manufacturers: [
       { name: "Carus Group", url: "https://www.caruslc.com" },
@@ -5809,9 +5809,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Universal Chemicals & Industries", url: "https://www.universalmanganese.com" },
     ],
     sources: [
-      { name: "Wikipedia — Potassium permanganate (production)", url: "https://en.wikipedia.org/wiki/Potassium_permanganate" },
-      { name: "Carus — Potassium permanganate", url: "https://www.caruslc.com/product/potassium-permanganate/" },
-      { name: "ChemicalBook — Potassium permanganate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852609.htm" },
+      { name: "Wikipedia: Potassium permanganate (production)", url: "https://en.wikipedia.org/wiki/Potassium_permanganate" },
+      { name: "Carus: Potassium permanganate", url: "https://www.caruslc.com/product/potassium-permanganate/" },
+      { name: "ChemicalBook: Potassium permanganate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852609.htm" },
     ],
   },
 
@@ -5822,7 +5822,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Silver + nitric acid",
       detail:
-        "Silver nitrate is made by dissolving high-purity silver metal in nitric acid: 3 Ag + 4 HNO3(dilute) → 3 AgNO3 + NO + 2 H2O (concentrated acid evolves NO2 instead). The reaction is run in stainless/glass-lined vessels, the nitrogen oxides are scrubbed, and the solution is evaporated so colourless silver nitrate crystallises; it is recrystallised to ACS-reagent purity and kept from light. It is the gateway silver chemical — for photographic materials, silver halides, mirrors, antimicrobials, plating and analytical reagents.",
+        "Silver nitrate is made by dissolving high-purity silver metal in nitric acid: 3 Ag + 4 HNO3(dilute) → 3 AgNO3 + NO + 2 H2O (concentrated acid evolves NO2 instead). The reaction is run in stainless/glass-lined vessels, the nitrogen oxides are scrubbed, and the solution is evaporated so colourless silver nitrate crystallises; it is recrystallised to ACS-reagent purity and kept from light. It is the gateway silver chemical, for photographic materials, silver halides, mirrors, antimicrobials, plating and analytical reagents.",
     },
     manufacturers: [
       { name: "Ames Goldsmith", url: "https://www.amesgoldsmith.com" },
@@ -5830,9 +5830,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Umicore", url: "https://www.umicore.com" },
     ],
     sources: [
-      { name: "Wikipedia — Silver nitrate", url: "https://en.wikipedia.org/wiki/Silver_nitrate" },
-      { name: "ChemicalBook — Silver nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852595.htm" },
-      { name: "Ames Goldsmith — Silver nitrate", url: "https://www.amesgoldsmith.com/products/" },
+      { name: "Wikipedia: Silver nitrate", url: "https://en.wikipedia.org/wiki/Silver_nitrate" },
+      { name: "ChemicalBook: Silver nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852595.htm" },
+      { name: "Ames Goldsmith: Silver nitrate", url: "https://www.amesgoldsmith.com/products/" },
     ],
   },
 
@@ -5844,7 +5844,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Sand + soda-ash fusion",
       detail:
-        "Sodium silicate ('water glass') is made by fusing pure silica sand with sodium carbonate (soda ash) in a furnace at ~1300–1500 °C, where they react to a glassy silicate of the chosen SiO2:Na2O ratio: x SiO2 + Na2CO3 → Na2O·x SiO2 + CO2. The solid 'cullet' is then dissolved under pressure in hot water to give the liquid silicate solution, which is filtered and concentrated. A direct hydrothermal route dissolves sand in caustic soda. It is used in detergents, adhesives, silica gel/zeolite manufacture, paper, water treatment and construction.",
+        "Sodium silicate ('water glass') is made by fusing pure silica sand with sodium carbonate (soda ash) in a furnace at ~1300-1500 °C, where they react to a glassy silicate of the chosen SiO2:Na2O ratio: x SiO2 + Na2CO3 → Na2O·x SiO2 + CO2. The solid 'cullet' is then dissolved under pressure in hot water to give the liquid silicate solution, which is filtered and concentrated. A direct hydrothermal route dissolves sand in caustic soda. It is used in detergents, adhesives, silica gel/zeolite manufacture, paper, water treatment and construction.",
     },
     manufacturers: [
       { name: "PQ / Ecovyst", url: "https://www.ecovyst.com" },
@@ -5852,9 +5852,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Qemetica (CIECH)", url: "https://www.qemetica.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium silicate", url: "https://en.wikipedia.org/wiki/Sodium_silicate" },
-      { name: "Britannica — Sodium silicate", url: "https://www.britannica.com/science/sodium-silicate" },
-      { name: "ChemicalBook — Sodium silicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852625.htm" },
+      { name: "Wikipedia: Sodium silicate", url: "https://en.wikipedia.org/wiki/Sodium_silicate" },
+      { name: "Britannica: Sodium silicate", url: "https://www.britannica.com/science/sodium-silicate" },
+      { name: "ChemicalBook: Sodium silicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852625.htm" },
     ],
   },
 
@@ -5875,21 +5875,21 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nedmag", url: "https://www.nedmag.com" },
     ],
     sources: [
-      { name: "Wikipedia — Magnesium chloride", url: "https://en.wikipedia.org/wiki/Magnesium_chloride" },
-      { name: "ChemicalBook — Magnesium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854118.htm" },
-      { name: "Compass Minerals — Magnesium chloride", url: "https://www.compassminerals.com/products/magnesium-chloride/" },
+      { name: "Wikipedia: Magnesium chloride", url: "https://en.wikipedia.org/wiki/Magnesium_chloride" },
+      { name: "ChemicalBook: Magnesium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854118.htm" },
+      { name: "Compass Minerals: Magnesium chloride", url: "https://www.compassminerals.com/products/magnesium-chloride/" },
     ],
   },
 
   "hydrogen-peroxide-industrial-use-not-for": {
     routes: [
-      "Anthraquinone auto-oxidation (AO) process — hydrogenate, oxidise, extract",
+      "Anthraquinone auto-oxidation (AO) process, hydrogenate, oxidise, extract",
       "Direct synthesis from H2 + O2 (developmental)",
     ],
     mainProcess: {
       name: "Anthraquinone auto-oxidation process",
       detail:
-        "Almost all hydrogen peroxide is made by the anthraquinone (AO) process, an indirect H2 + O2 route. A 2-alkylanthraquinone dissolved in a working solvent is catalytically hydrogenated to the anthrahydroquinone; this is then oxidised with air, regenerating the quinone and releasing hydrogen peroxide (net: H2 + O2 → H2O2). The H2O2 is extracted into water, the quinone solution is recycled, and the aqueous peroxide is concentrated by distillation to commercial strengths (35–70%) and stabilised. It is used in pulp/paper and textile bleaching, water treatment, chemical synthesis (e.g. propylene oxide via HPPO) and electronics.",
+        "Almost all hydrogen peroxide is made by the anthraquinone (AO) process, an indirect H2 + O2 route. A 2-alkylanthraquinone dissolved in a working solvent is catalytically hydrogenated to the anthrahydroquinone; this is then oxidised with air, regenerating the quinone and releasing hydrogen peroxide (net: H2 + O2 → H2O2). The H2O2 is extracted into water, the quinone solution is recycled, and the aqueous peroxide is concentrated by distillation to commercial strengths (35-70%) and stabilised. It is used in pulp/paper and textile bleaching, water treatment, chemical synthesis (e.g. propylene oxide via HPPO) and electronics.",
     },
     manufacturers: [
       { name: "Solvay", url: "https://www.solvay.com" },
@@ -5898,9 +5898,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Arkema", url: "https://www.arkema.com" },
     ],
     sources: [
-      { name: "Wikipedia — Hydrogen peroxide (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_peroxide" },
-      { name: "Evonik — Hydrogen peroxide", url: "https://www.evonik.com/en/products/hydrogen-peroxide.html" },
-      { name: "ChemicalBook — Hydrogen peroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
+      { name: "Wikipedia: Hydrogen peroxide (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_peroxide" },
+      { name: "Evonik: Hydrogen peroxide", url: "https://www.evonik.com/en/products/hydrogen-peroxide.html" },
+      { name: "ChemicalBook: Hydrogen peroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
     ],
   },
 
@@ -5912,7 +5912,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Dichromate reduction + calcination",
       detail:
-        "Chromium(III) oxide green pigment (Cr2O3) is made by reducing a hexavalent chromium compound. Sodium dichromate is mixed with a reductant — sulfur or a carbonaceous material (or ammonium chloride) — and calcined at high temperature, reducing the chromium to the +3 state and forming Cr2O3 (Na2Cr2O7 + S → Cr2O3 + Na2SO4). The fired product is leached to remove soluble salts, filtered, dried and milled to a fine, very stable green pigment. (Thermal decomposition of ammonium dichromate gives a fluffy Cr2O3 for some grades.) It is used in paints, ceramics, roofing granules, refractories and as a polishing/catalyst material.",
+        "Chromium(III) oxide green pigment (Cr2O3) is made by reducing a hexavalent chromium compound. Sodium dichromate is mixed with a reductant, sulfur or a carbonaceous material (or ammonium chloride), and calcined at high temperature, reducing the chromium to the +3 state and forming Cr2O3 (Na2Cr2O7 + S → Cr2O3 + Na2SO4). The fired product is leached to remove soluble salts, filtered, dried and milled to a fine, very stable green pigment. (Thermal decomposition of ammonium dichromate gives a fluffy Cr2O3 for some grades.) It is used in paints, ceramics, roofing granules, refractories and as a polishing/catalyst material.",
     },
     manufacturers: [
       { name: "LANXESS", url: "https://www.lanxess.com" },
@@ -5920,9 +5920,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Elementis", url: "https://www.elementis.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chromium(III) oxide", url: "https://en.wikipedia.org/wiki/Chromium(III)_oxide" },
-      { name: "ChemicalBook — Chromium oxide green", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852596.htm" },
-      { name: "LANXESS — Chrome oxide pigments", url: "https://www.lanxess.com/en/Products-and-Solutions/Brands/Bayferrox" },
+      { name: "Wikipedia: Chromium(III) oxide", url: "https://en.wikipedia.org/wiki/Chromium(III)_oxide" },
+      { name: "ChemicalBook: Chromium oxide green", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852596.htm" },
+      { name: "LANXESS: Chrome oxide pigments", url: "https://www.lanxess.com/en/Products-and-Solutions/Brands/Bayferrox" },
     ],
   },
 
@@ -5933,7 +5933,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "MoO3 dissolution in ammonia",
       detail:
-        "Ammonium heptamolybdate (AHM) is made from molybdenum disulfide concentrate. Molybdenite (MoS2) is roasted in air to technical molybdenum trioxide (MoO3) and SO2; the MoO3 is purified and dissolved in aqueous ammonia to give ammonium molybdate solution (MoO3 + 2 NH3 + H2O → (NH4)2MoO4). On controlled evaporation/crystallisation the solution yields ammonium heptamolybdate tetrahydrate, (NH4)6Mo7O24·4H2O, which is filtered and dried. It is the main soluble molybdenum source — for catalysts, micronutrients, corrosion inhibitors, pigments and as a precursor to other molybdenum chemicals and metal.",
+        "Ammonium heptamolybdate (AHM) is made from molybdenum disulfide concentrate. Molybdenite (MoS2) is roasted in air to technical molybdenum trioxide (MoO3) and SO2; the MoO3 is purified and dissolved in aqueous ammonia to give ammonium molybdate solution (MoO3 + 2 NH3 + H2O → (NH4)2MoO4). On controlled evaporation/crystallisation the solution yields ammonium heptamolybdate tetrahydrate, (NH4)6Mo7O24·4H2O, which is filtered and dried. It is the main soluble molybdenum source, for catalysts, micronutrients, corrosion inhibitors, pigments and as a precursor to other molybdenum chemicals and metal.",
     },
     manufacturers: [
       { name: "Climax Molybdenum (Freeport-McMoRan)", url: "https://www.climaxmolybdenum.com" },
@@ -5941,9 +5941,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "CMOC Group", url: "https://www.cmoc.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ammonium heptamolybdate", url: "https://en.wikipedia.org/wiki/Ammonium_heptamolybdate" },
-      { name: "ChemicalBook — Ammonium molybdate tetrahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852614.htm" },
-      { name: "Molymet — Molybdenum chemicals", url: "https://www.molymet.com/en/products/" },
+      { name: "Wikipedia: Ammonium heptamolybdate", url: "https://en.wikipedia.org/wiki/Ammonium_heptamolybdate" },
+      { name: "ChemicalBook: Ammonium molybdate tetrahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852614.htm" },
+      { name: "Molymet: Molybdenum chemicals", url: "https://www.molymet.com/en/products/" },
     ],
   },
 
@@ -5963,9 +5963,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gujarat Alkalies and Chemicals (GACL)", url: "https://www.gacl.com" },
     ],
     sources: [
-      { name: "Wikipedia — Potassium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Potassium_hydroxide" },
-      { name: "ChemicalBook — Potassium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852640.htm" },
-      { name: "Vynova — Potassium hydroxide", url: "https://www.vynova-group.com/products/potassium-hydroxide" },
+      { name: "Wikipedia: Potassium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Potassium_hydroxide" },
+      { name: "ChemicalBook: Potassium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852640.htm" },
+      { name: "Vynova: Potassium hydroxide", url: "https://www.vynova-group.com/products/potassium-hydroxide" },
     ],
   },
 
@@ -5986,9 +5986,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Premier Magnesia", url: "https://www.premiermagnesia.com" },
     ],
     sources: [
-      { name: "Wikipedia — Magnesium hydroxide", url: "https://en.wikipedia.org/wiki/Magnesium_hydroxide" },
-      { name: "ChemicalBook — Magnesium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854119.htm" },
-      { name: "Martin Marietta — Magnesium hydroxide", url: "https://www.magnesiaspecialties.com/products/" },
+      { name: "Wikipedia: Magnesium hydroxide", url: "https://en.wikipedia.org/wiki/Magnesium_hydroxide" },
+      { name: "ChemicalBook: Magnesium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854119.htm" },
+      { name: "Martin Marietta: Magnesium hydroxide", url: "https://www.magnesiaspecialties.com/products/" },
     ],
   },
 
@@ -6000,7 +6000,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Methane chlorination",
       detail:
-        "Chloroform (trichloromethane) is made by the successive chlorination of methane (or methyl chloride from methanol + HCl). Methane reacts with chlorine at ~400–500 °C, progressively substituting hydrogens to give a mixture of methyl chloride, dichloromethane, chloroform and carbon tetrachloride; the products are separated by distillation and the lighter chloromethanes recycled to tune the chloroform yield. The product is stabilised (e.g. with a little ethanol/amylene) because it slowly oxidises to phosgene. Its largest use is as feedstock for R-22/fluoropolymers (PTFE); it is also a solvent and reagent.",
+        "Chloroform (trichloromethane) is made by the successive chlorination of methane (or methyl chloride from methanol + HCl). Methane reacts with chlorine at ~400-500 °C, progressively substituting hydrogens to give a mixture of methyl chloride, dichloromethane, chloroform and carbon tetrachloride; the products are separated by distillation and the lighter chloromethanes recycled to tune the chloroform yield. The product is stabilised (e.g. with a little ethanol/amylene) because it slowly oxidises to phosgene. Its largest use is as feedstock for R-22/fluoropolymers (PTFE); it is also a solvent and reagent.",
     },
     manufacturers: [
       { name: "AGC Inc.", url: "https://www.agc.com" },
@@ -6009,9 +6009,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "INEOS", url: "https://www.ineos.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chloroform (production)", url: "https://en.wikipedia.org/wiki/Chloroform" },
-      { name: "Wikipedia — Chloromethane (chlorination)", url: "https://en.wikipedia.org/wiki/Chloromethane" },
-      { name: "ChemicalBook — Chloroform", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854114.htm" },
+      { name: "Wikipedia: Chloroform (production)", url: "https://en.wikipedia.org/wiki/Chloroform" },
+      { name: "Wikipedia: Chloromethane (chlorination)", url: "https://en.wikipedia.org/wiki/Chloromethane" },
+      { name: "ChemicalBook: Chloroform", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854114.htm" },
     ],
   },
 
@@ -6031,9 +6031,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality Chemicals", url: "https://www.privi.com" },
     ],
     sources: [
-      { name: "Wikipedia — Benzyl acetate", url: "https://en.wikipedia.org/wiki/Benzyl_acetate" },
-      { name: "The Good Scents Company — Benzyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1000492.html" },
-      { name: "ChemicalBook — Benzyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854163.htm" },
+      { name: "Wikipedia: Benzyl acetate", url: "https://en.wikipedia.org/wiki/Benzyl_acetate" },
+      { name: "The Good Scents Company: Benzyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1000492.html" },
+      { name: "ChemicalBook: Benzyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854163.htm" },
     ],
   },
 
@@ -6045,16 +6045,16 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Chlorobenzene + sodium phenoxide",
       detail:
-        "Diphenyl oxide (diphenyl ether) is made by reacting chlorobenzene with sodium phenoxide in a copper-catalysed Ullmann ether synthesis at high temperature: C6H5Cl + C6H5ONa → C6H5-O-C6H5 + NaCl. It also arises in quantity as a by-product when phenol is produced from chlorobenzene (the Dow hydrolysis process). The product is purified by distillation. It is valued for its very high thermal stability and pleasant geranium odour — used (with biphenyl) as the Dowtherm/Therminol heat-transfer eutectic, and as a fragrance and a building block for high-performance polymers.",
+        "Diphenyl oxide (diphenyl ether) is made by reacting chlorobenzene with sodium phenoxide in a copper-catalysed Ullmann ether synthesis at high temperature: C6H5Cl + C6H5ONa → C6H5-O-C6H5 + NaCl. It also arises in quantity as a by-product when phenol is produced from chlorobenzene (the Dow hydrolysis process). The product is purified by distillation. It is valued for its very high thermal stability and pleasant geranium odour, used (with biphenyl) as the Dowtherm/Therminol heat-transfer eutectic, and as a fragrance and a building block for high-performance polymers.",
     },
     manufacturers: [
       { name: "Eastman Chemical (Therminol)", url: "https://www.eastman.com" },
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia — Diphenyl ether", url: "https://en.wikipedia.org/wiki/Diphenyl_ether" },
-      { name: "ChemicalBook — Diphenyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854180.htm" },
-      { name: "Eastman — Therminol/heat transfer fluids", url: "https://www.eastman.com/en/products/heat-transfer-fluids" },
+      { name: "Wikipedia: Diphenyl ether", url: "https://en.wikipedia.org/wiki/Diphenyl_ether" },
+      { name: "ChemicalBook: Diphenyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854180.htm" },
+      { name: "Eastman: Therminol/heat transfer fluids", url: "https://www.eastman.com/en/products/heat-transfer-fluids" },
     ],
   },
 
@@ -6074,9 +6074,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Rain Carbon", url: "https://www.raincarbon.com" },
     ],
     sources: [
-      { name: "Wikipedia — p-Cresol", url: "https://en.wikipedia.org/wiki/P-Cresol" },
-      { name: "Wikipedia — Cresol (production)", url: "https://en.wikipedia.org/wiki/Cresol" },
-      { name: "ChemicalBook — p-Cresol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854212.htm" },
+      { name: "Wikipedia: p-Cresol", url: "https://en.wikipedia.org/wiki/P-Cresol" },
+      { name: "Wikipedia: Cresol (production)", url: "https://en.wikipedia.org/wiki/Cresol" },
+      { name: "ChemicalBook: p-Cresol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854212.htm" },
     ],
   },
 
@@ -6088,7 +6088,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "ortho-Xylene air oxidation",
       detail:
-        "Phthalic anhydride is made by the catalytic vapour-phase oxidation of ortho-xylene (largely replacing the older naphthalene route). o-Xylene vapour mixed with excess air is passed over a vanadium-pentoxide/titania catalyst in a fixed- or fluid-bed reactor at ~350–400 °C, oxidising both methyl groups and closing the anhydride ring: o-C6H4(CH3)2 + 3 O2 → C6H4(CO)2O + 3 H2O. The reactor gas is cooled in switch condensers where phthalic anhydride desublimes, then it is purified by distillation. It is the key precursor to plasticisers (phthalate esters), unsaturated polyester and alkyd resins.",
+        "Phthalic anhydride is made by the catalytic vapour-phase oxidation of ortho-xylene (largely replacing the older naphthalene route). o-Xylene vapour mixed with excess air is passed over a vanadium-pentoxide/titania catalyst in a fixed- or fluid-bed reactor at ~350-400 °C, oxidising both methyl groups and closing the anhydride ring: o-C6H4(CH3)2 + 3 O2 → C6H4(CO)2O + 3 H2O. The reactor gas is cooled in switch condensers where phthalic anhydride desublimes, then it is purified by distillation. It is the key precursor to plasticisers (phthalate esters), unsaturated polyester and alkyd resins.",
     },
     manufacturers: [
       { name: "IG Petrochemicals", url: "https://www.igpetro.com" },
@@ -6097,9 +6097,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aekyung Petrochemical", url: "https://www.aekyungpetro.co.kr" },
     ],
     sources: [
-      { name: "Wikipedia — Phthalic anhydride", url: "https://en.wikipedia.org/wiki/Phthalic_anhydride" },
-      { name: "US EPA — Phthalic anhydride (AP-42 §6.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch06/final/c06s07.pdf" },
-      { name: "ChemicalBook — Phthalic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854240.htm" },
+      { name: "Wikipedia: Phthalic anhydride", url: "https://en.wikipedia.org/wiki/Phthalic_anhydride" },
+      { name: "US EPA: Phthalic anhydride (AP-42 §6.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch06/final/c06s07.pdf" },
+      { name: "ChemicalBook: Phthalic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854240.htm" },
     ],
   },
 
@@ -6121,9 +6121,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "UBE Corporation", url: "https://www.ube.com" },
     ],
     sources: [
-      { name: "Wikipedia — Hydroquinone (production)", url: "https://en.wikipedia.org/wiki/Hydroquinone" },
-      { name: "ChemicalBook — Hydroquinone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854218.htm" },
-      { name: "Camlin Fine Sciences — Hydroquinone", url: "https://www.camlinfs.com/businesses/shelf-life-solutions/" },
+      { name: "Wikipedia: Hydroquinone (production)", url: "https://en.wikipedia.org/wiki/Hydroquinone" },
+      { name: "ChemicalBook: Hydroquinone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854218.htm" },
+      { name: "Camlin Fine Sciences: Hydroquinone", url: "https://www.camlinfs.com/businesses/shelf-life-solutions/" },
     ],
   },
 
@@ -6134,7 +6134,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Isobutylene + methanol etherification",
       detail:
-        "MTBE (methyl tert-butyl ether) is made by reacting isobutylene with methanol over an acidic sulfonic ion-exchange resin catalyst at ~40–90 °C and moderate pressure: (CH3)2C=CH2 + CH3OH → (CH3)3C-O-CH3. The isobutylene comes from refinery/steam-cracker C4 raffinate or from isobutane dehydration/dehydrogenation; the highly selective reaction also serves to extract isobutylene from C4 streams. Unreacted methanol is recovered and recycled and the MTBE purified by distillation. It is a high-octane gasoline blending oxygenate (restricted in some markets) and a source of high-purity isobutylene.",
+        "MTBE (methyl tert-butyl ether) is made by reacting isobutylene with methanol over an acidic sulfonic ion-exchange resin catalyst at ~40-90 °C and moderate pressure: (CH3)2C=CH2 + CH3OH → (CH3)3C-O-CH3. The isobutylene comes from refinery/steam-cracker C4 raffinate or from isobutane dehydration/dehydrogenation; the highly selective reaction also serves to extract isobutylene from C4 streams. Unreacted methanol is recovered and recycled and the MTBE purified by distillation. It is a high-octane gasoline blending oxygenate (restricted in some markets) and a source of high-purity isobutylene.",
     },
     manufacturers: [
       { name: "LyondellBasell", url: "https://www.lyondellbasell.com" },
@@ -6143,9 +6143,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Evonik Industries", url: "https://www.evonik.com" },
     ],
     sources: [
-      { name: "Wikipedia — Methyl tert-butyl ether", url: "https://en.wikipedia.org/wiki/Methyl_tert-butyl_ether" },
-      { name: "ChemicalBook — Methyl tert-butyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854099.htm" },
-      { name: "ScienceDirect — MTBE synthesis", url: "https://www.sciencedirect.com/topics/chemistry/methyl-tert-butyl-ether" },
+      { name: "Wikipedia: Methyl tert-butyl ether", url: "https://en.wikipedia.org/wiki/Methyl_tert-butyl_ether" },
+      { name: "ChemicalBook: Methyl tert-butyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854099.htm" },
+      { name: "ScienceDirect: MTBE synthesis", url: "https://www.sciencedirect.com/topics/chemistry/methyl-tert-butyl-ether" },
     ],
   },
 
@@ -6157,7 +6157,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Monochloroacetic acid neutralisation",
       detail:
-        "Sodium monochloroacetate (SMCA) is the sodium salt of monochloroacetic acid (MCA). MCA is first made by chlorinating glacial acetic acid (with acetic anhydride/sulfur as catalyst), and the dichloroacetic-acid impurity is removed by catalytic hydrogenation to give high-purity MCA. The MCA is then neutralised with sodium hydroxide or sodium carbonate to give SMCA: ClCH2COOH + NaOH → ClCH2COONa + H2O, which is dried to a free-flowing powder. It is a key alkylating intermediate — for carboxymethyl cellulose (CMC), glycine, thioglycolates, agrochemicals (e.g. glyphosate, 2,4-D) and dyes.",
+        "Sodium monochloroacetate (SMCA) is the sodium salt of monochloroacetic acid (MCA). MCA is first made by chlorinating glacial acetic acid (with acetic anhydride/sulfur as catalyst), and the dichloroacetic-acid impurity is removed by catalytic hydrogenation to give high-purity MCA. The MCA is then neutralised with sodium hydroxide or sodium carbonate to give SMCA: ClCH2COOH + NaOH → ClCH2COONa + H2O, which is dried to a free-flowing powder. It is a key alkylating intermediate, for carboxymethyl cellulose (CMC), glycine, thioglycolates, agrochemicals (e.g. glyphosate, 2,4-D) and dyes.",
     },
     manufacturers: [
       { name: "CABB Group", url: "https://www.cabb-chemicals.com" },
@@ -6165,9 +6165,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Daicel Corporation", url: "https://www.daicel.com" },
     ],
     sources: [
-      { name: "Wikipedia — Chloroacetic acid (uses/salts)", url: "https://en.wikipedia.org/wiki/Chloroacetic_acid" },
-      { name: "CABB — Monochloroacetic acid & derivatives", url: "https://www.cabb-chemicals.com/products/monochloroacetic-acid/" },
-      { name: "ChemicalBook — Sodium monochloroacetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158494.htm" },
+      { name: "Wikipedia: Chloroacetic acid (uses/salts)", url: "https://en.wikipedia.org/wiki/Chloroacetic_acid" },
+      { name: "CABB: Monochloroacetic acid & derivatives", url: "https://www.cabb-chemicals.com/products/monochloroacetic-acid/" },
+      { name: "ChemicalBook: Sodium monochloroacetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158494.htm" },
     ],
   },
 
@@ -6186,9 +6186,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — m-Toluidine", url: "https://en.wikipedia.org/wiki/M-Toluidine" },
-      { name: "ChemicalBook — m-Toluidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854221.htm" },
-      { name: "PubChem — 3-Methylaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/m-Toluidine" },
+      { name: "Wikipedia: m-Toluidine", url: "https://en.wikipedia.org/wiki/M-Toluidine" },
+      { name: "ChemicalBook: m-Toluidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854221.htm" },
+      { name: "PubChem: 3-Methylaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/m-Toluidine" },
     ],
   },
 
@@ -6199,22 +6199,22 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "tert-Butyl carbonate coupling",
       detail:
-        "Di-tert-butyl dicarbonate (Boc anhydride, Boc2O) is the reagent that installs the tert-butoxycarbonyl (Boc) amine protecting group. It is made by reacting tert-butanol with carbon dioxide and a base (e.g. potassium or sodium) to form a tert-butyl carbonate salt, which is then converted — via phosgene or a tert-butyl chloroformate intermediate, with a DABCO catalyst — into the symmetrical dicarbonate, (Boc)2O. The product is purified by distillation/crystallisation and kept cold. It is heavily used in peptide and pharmaceutical synthesis to protect amines as their Boc carbamates.",
+        "Di-tert-butyl dicarbonate (Boc anhydride, Boc2O) is the reagent that installs the tert-butoxycarbonyl (Boc) amine protecting group. It is made by reacting tert-butanol with carbon dioxide and a base (e.g. potassium or sodium) to form a tert-butyl carbonate salt, which is then converted, via phosgene or a tert-butyl chloroformate intermediate, with a DABCO catalyst, into the symmetrical dicarbonate, (Boc)2O. The product is purified by distillation/crystallisation and kept cold. It is heavily used in peptide and pharmaceutical synthesis to protect amines as their Boc carbamates.",
     },
     manufacturers: [
       { name: "TCI Chemicals", url: "https://www.tcichemicals.com" },
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Di-tert-butyl dicarbonate", url: "https://en.wikipedia.org/wiki/Di-tert-butyl_dicarbonate" },
-      { name: "ChemicalBook — Di-tert-butyl dicarbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158501.htm" },
-      { name: "PubChem — Di-tert-butyl dicarbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Di-tert-butyl-dicarbonate" },
+      { name: "Wikipedia: Di-tert-butyl dicarbonate", url: "https://en.wikipedia.org/wiki/Di-tert-butyl_dicarbonate" },
+      { name: "ChemicalBook: Di-tert-butyl dicarbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158501.htm" },
+      { name: "PubChem: Di-tert-butyl dicarbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Di-tert-butyl-dicarbonate" },
     ],
   },
 
   "liquid-argon": {
     routes: [
-      "Cryogenic distillation (air separation) — argon side-cut, then purification and liquefaction",
+      "Cryogenic distillation (air separation), argon side-cut, then purification and liquefaction",
     ],
     mainProcess: {
       name: "Cryogenic air separation",
@@ -6228,9 +6228,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Messer Group", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Argon (production)", url: "https://en.wikipedia.org/wiki/Argon" },
-      { name: "Wikipedia — Air separation", url: "https://en.wikipedia.org/wiki/Air_separation" },
-      { name: "Linde — Argon", url: "https://www.linde-gas.com/en/products_and_supply/gases_atmospheric/argon.html" },
+      { name: "Wikipedia: Argon (production)", url: "https://en.wikipedia.org/wiki/Argon" },
+      { name: "Wikipedia: Air separation", url: "https://en.wikipedia.org/wiki/Air_separation" },
+      { name: "Linde: Argon", url: "https://www.linde-gas.com/en/products_and_supply/gases_atmospheric/argon.html" },
     ],
   },
 
@@ -6241,7 +6241,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ammonium nitrate decomposition",
       detail:
-        "Nitrous oxide (N2O) is made by the carefully controlled thermal decomposition of molten ammonium nitrate at about 240–270 °C: NH4NO3 → N2O + 2 H2O. Temperature is tightly controlled to favour nitrous oxide and avoid a runaway to higher nitrogen oxides; the gas is scrubbed (caustic/permanganate) to remove NO/NO2 and acidic impurities, dried, compressed and liquefied for storage in cylinders. Pharmaceutical/food grades are purified to strict limits. It is used as an anaesthetic/analgesic ('laughing gas'), an aerosol propellant (whipped cream), and an oxidiser.",
+        "Nitrous oxide (N2O) is made by the carefully controlled thermal decomposition of molten ammonium nitrate at about 240-270 °C: NH4NO3 → N2O + 2 H2O. Temperature is tightly controlled to favour nitrous oxide and avoid a runaway to higher nitrogen oxides; the gas is scrubbed (caustic/permanganate) to remove NO/NO2 and acidic impurities, dried, compressed and liquefied for storage in cylinders. Pharmaceutical/food grades are purified to strict limits. It is used as an anaesthetic/analgesic ('laughing gas'), an aerosol propellant (whipped cream), and an oxidiser.",
     },
     manufacturers: [
       { name: "Linde", url: "https://www.linde.com" },
@@ -6249,9 +6249,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Air Products", url: "https://www.airproducts.com" },
     ],
     sources: [
-      { name: "Wikipedia — Nitrous oxide (production)", url: "https://en.wikipedia.org/wiki/Nitrous_oxide" },
-      { name: "ChemicalBook — Nitrous oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7462576.htm" },
-      { name: "Linde — Nitrous oxide", url: "https://www.linde-gas.com/en/products_and_supply/gases_medical/index.html" },
+      { name: "Wikipedia: Nitrous oxide (production)", url: "https://en.wikipedia.org/wiki/Nitrous_oxide" },
+      { name: "ChemicalBook: Nitrous oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7462576.htm" },
+      { name: "Linde: Nitrous oxide", url: "https://www.linde-gas.com/en/products_and_supply/gases_medical/index.html" },
     ],
   },
 
@@ -6270,9 +6270,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia — Magnesium carbonate", url: "https://en.wikipedia.org/wiki/Magnesium_carbonate" },
-      { name: "ChemicalBook — Magnesium carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854120.htm" },
-      { name: "PubChem — Magnesium carbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Magnesium-carbonate" },
+      { name: "Wikipedia: Magnesium carbonate", url: "https://en.wikipedia.org/wiki/Magnesium_carbonate" },
+      { name: "ChemicalBook: Magnesium carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854120.htm" },
+      { name: "PubChem: Magnesium carbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Magnesium-carbonate" },
     ],
   },
 
@@ -6284,7 +6284,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Citric acid + calcium base",
       detail:
-        "Calcium citrate is made by reacting citric acid (from Aspergillus niger fermentation) with a calcium source — calcium hydroxide or calcium carbonate: 2 C6H8O7 + 3 Ca(OH)2 → Ca3(C6H5O7)2 + 6 H2O. The sparingly soluble tricalcium citrate tetrahydrate precipitates, and is filtered, washed and dried to USP grade. (Industrially, calcium citrate is also the intermediate in the classic citric-acid recovery, where the fermentation broth is precipitated as calcium citrate and later sprung free with sulfuric acid.) It is used as a calcium supplement, a firming agent and a food acidity buffer.",
+        "Calcium citrate is made by reacting citric acid (from Aspergillus niger fermentation) with a calcium source, calcium hydroxide or calcium carbonate: 2 C6H8O7 + 3 Ca(OH)2 → Ca3(C6H5O7)2 + 6 H2O. The sparingly soluble tricalcium citrate tetrahydrate precipitates, and is filtered, washed and dried to USP grade. (Industrially, calcium citrate is also the intermediate in the classic citric-acid recovery, where the fermentation broth is precipitated as calcium citrate and later sprung free with sulfuric acid.) It is used as a calcium supplement, a firming agent and a food acidity buffer.",
     },
     manufacturers: [
       { name: "Jungbunzlauer", url: "https://www.jungbunzlauer.com" },
@@ -6292,9 +6292,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Global Calcium", url: "https://www.globalcalcium.com" },
     ],
     sources: [
-      { name: "Wikipedia — Calcium citrate", url: "https://en.wikipedia.org/wiki/Calcium_citrate" },
-      { name: "Jungbunzlauer — Calcium citrate", url: "https://www.jungbunzlauer.com/en/products/citrics/calcium-citrate.html" },
-      { name: "ChemicalBook — Calcium citrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159531.htm" },
+      { name: "Wikipedia: Calcium citrate", url: "https://en.wikipedia.org/wiki/Calcium_citrate" },
+      { name: "Jungbunzlauer: Calcium citrate", url: "https://www.jungbunzlauer.com/en/products/citrics/calcium-citrate.html" },
+      { name: "ChemicalBook: Calcium citrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159531.htm" },
     ],
   },
 
@@ -6307,7 +6307,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Blending of soluble N-P-K salts",
       detail:
-        "Water-soluble NPK 19-19-19 is a balanced fertiliser made by carefully blending and reacting soluble nitrogen, phosphate and potassium sources — typically mono-ammonium phosphate (P and some N), urea and ammonium/potassium nitrate (N) and potassium salts (K) — to the precise 19:19:19 ratio of N:P2O5:K2O. The raw salts are weighed, co-dissolved/reacted and then crystallised or granulated into a fully water-soluble product for fertigation and foliar feeding.",
+        "Water-soluble NPK 19-19-19 is a balanced fertiliser made by carefully blending and reacting soluble nitrogen, phosphate and potassium sources, typically mono-ammonium phosphate (P and some N), urea and ammonium/potassium nitrate (N) and potassium salts (K), to the precise 19:19:19 ratio of N:P2O5:K2O. The raw salts are weighed, co-dissolved/reacted and then crystallised or granulated into a fully water-soluble product for fertigation and foliar feeding.",
     },
     manufacturers: [
       { name: "Yara International (YaraRega)", url: "https://www.yara.com" },
@@ -6317,9 +6317,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFFCO", url: "https://www.iffco.in" },
     ],
     sources: [
-      { name: "Haifa — Poly-Feed 19-19-19", url: "https://www.haifa-group.com/poly-feed-gg-19-19-191mgo" },
-      { name: "Yara — YaraRega water-soluble NPK", url: "https://www.yara.com/crop-nutrition/our-global-fertilizer-brands/yararega/" },
-      { name: "IFFCO — NPK 19-19-19", url: "https://www.iffco.in/en/npk-19-19-19" },
+      { name: "Haifa: Poly-Feed 19-19-19", url: "https://www.haifa-group.com/poly-feed-gg-19-19-191mgo" },
+      { name: "Yara: YaraRega water-soluble NPK", url: "https://www.yara.com/crop-nutrition/our-global-fertilizer-brands/yararega/" },
+      { name: "IFFCO: NPK 19-19-19", url: "https://www.iffco.in/en/npk-19-19-19" },
     ],
   },
   "aluminum-zirconium-pentachlorohydrate-solution-usp-achieve": {
@@ -6340,8 +6340,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Google Patents US7153495B2 — Antiperspirant actives", url: "https://patents.google.com/patent/US7153495B2/en" },
-      { name: "SpecialChem — Aluminum zirconium tetrachlorohydrex Gly", url: "https://www.specialchem.com/cosmetics/inci-ingredients/aluminum-zirconium-tetrachlorohydrex-gly" },
+      { name: "Google Patents US7153495B2: Antiperspirant actives", url: "https://patents.google.com/patent/US7153495B2/en" },
+      { name: "SpecialChem: Aluminum zirconium tetrachlorohydrex Gly", url: "https://www.specialchem.com/cosmetics/inci-ingredients/aluminum-zirconium-tetrachlorohydrex-gly" },
     ],
   },
   "trans-2-3-dibromo-2-butene-1-4-diol-toxic-solid-orga-inic-n": {
@@ -6362,8 +6362,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong fine-chem producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "PubChem — 2,3-Dibromo-2-butene-1,4-diol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
-      { name: "ChemicalBook — Dibromobutenediol", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem: 2,3-Dibromo-2-butene-1,4-diol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "ChemicalBook: Dibromobutenediol", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "non-gmo-soya-lecithin-unadjusted": {
@@ -6385,14 +6385,14 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Lasenor", url: "https://lasenor.com" },
     ],
     sources: [
-      { name: "USSEC — Soybean lecithin fact sheet", url: "https://ussec.org/wp-content/uploads/2025/07/Soybean-Lecithin-Fact-Sheet-0901.pdf" },
-      { name: "Lecitein — Degumming of soy lecithin", url: "https://www.lecitein.com/blog/all-you-need-to-know-about-degumming-of-soy-lecithin" },
-      { name: "PMC — Chemical & enzymatic degumming", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10876682/" },
+      { name: "USSEC: Soybean lecithin fact sheet", url: "https://ussec.org/wp-content/uploads/2025/07/Soybean-Lecithin-Fact-Sheet-0901.pdf" },
+      { name: "Lecitein: Degumming of soy lecithin", url: "https://www.lecitein.com/blog/all-you-need-to-know-about-degumming-of-soy-lecithin" },
+      { name: "PMC: Chemical & enzymatic degumming", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10876682/" },
     ],
   },
   "nitric-acid-pct": {
     routes: [
-      "Ostwald process — catalytic oxidation of ammonia, then absorption in water",
+      "Ostwald process, catalytic oxidation of ammonia, then absorption in water",
       "Ammonia oxidation over Pt/Rh gauze to NO, oxidation to NO2",
       "Absorption to ~60% acid; extractive distillation for concentrated acid",
     ],
@@ -6409,8 +6409,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "EuroChem", url: "https://www.eurochemgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
-      { name: "Britannica — Nitric acid", url: "https://www.britannica.com/science/nitric-acid" },
+      { name: "Wikipedia: Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
+      { name: "Britannica: Nitric acid", url: "https://www.britannica.com/science/nitric-acid" },
     ],
   },
   "aroma-chemicals-galaxmusk-pure": {
@@ -6431,8 +6431,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality", url: "https://www.privispeciality.com" },
     ],
     sources: [
-      { name: "Wikipedia — Galaxolide", url: "https://en.wikipedia.org/wiki/Galaxolide" },
-      { name: "US EPA — HHCB risk assessment", url: "https://www.epa.gov/sites/default/files/2015-09/documents/hhcb_wp_ra_final_08_27_14.pdf" },
+      { name: "Wikipedia: Galaxolide", url: "https://en.wikipedia.org/wiki/Galaxolide" },
+      { name: "US EPA: HHCB risk assessment", url: "https://www.epa.gov/sites/default/files/2015-09/documents/hhcb_wp_ra_final_08_27_14.pdf" },
     ],
   },
   "caustic-soda-prills": {
@@ -6454,8 +6454,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GACL", url: "https://www.gacl.com" },
     ],
     sources: [
-      { name: "Euro Chlor — Membrane cell process", url: "https://www.eurochlor.org/about-chlor-alkali/how-are-chlorine-and-caustic-soda-made/membrane-cell-process/" },
-      { name: "INEOS — Chlor-alkali process", url: "https://www.ineos.com/businesses/ineos-electrochemical-solutions/electrolysers/chlor-alkali-process/" },
+      { name: "Euro Chlor: Membrane cell process", url: "https://www.eurochlor.org/about-chlor-alkali/how-are-chlorine-and-caustic-soda-made/membrane-cell-process/" },
+      { name: "INEOS: Chlor-alkali process", url: "https://www.ineos.com/businesses/ineos-electrochemical-solutions/electrolysers/chlor-alkali-process/" },
     ],
   },
   "liquid-carbon-dioxide-gas-gas-crbn": {
@@ -6467,7 +6467,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "CO2 recovery, purification and liquefaction",
       detail:
-        "Liquid carbon dioxide is recovered as a by-product gas — most commonly from ammonia/hydrogen plants, ethanol fermentation or natural-gas/flue-gas streams. The raw CO2 is scrubbed of impurities, dried and deodorised over activated carbon, then compressed and refrigerated below its critical point to a liquid stored under pressure in insulated tanks. It supplies food/beverage carbonation, freezing, welding, water treatment and as a chemical feedstock.",
+        "Liquid carbon dioxide is recovered as a by-product gas, most commonly from ammonia/hydrogen plants, ethanol fermentation or natural-gas/flue-gas streams. The raw CO2 is scrubbed of impurities, dried and deodorised over activated carbon, then compressed and refrigerated below its critical point to a liquid stored under pressure in insulated tanks. It supplies food/beverage carbonation, freezing, welding, water treatment and as a chemical feedstock.",
     },
     manufacturers: [
       { name: "Linde", url: "https://www.linde.com" },
@@ -6476,8 +6476,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Messer", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Carbon dioxide (industrial)", url: "https://en.wikipedia.org/wiki/Carbon_dioxide" },
-      { name: "Linde — Carbon dioxide", url: "https://www.linde-gas.com" },
+      { name: "Wikipedia: Carbon dioxide (industrial)", url: "https://en.wikipedia.org/wiki/Carbon_dioxide" },
+      { name: "Linde: Carbon dioxide", url: "https://www.linde-gas.com" },
     ],
   },
   "pvc-processing-aid-resin-p": {
@@ -6499,8 +6499,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Chemical", url: "https://www.mcgc.com" },
     ],
     sources: [
-      { name: "Google Patents US10150831 — Acrylic processing aid", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10150831" },
-      { name: "Repolyfine — Acrylic impact modifiers for PVC", url: "https://www.repolyfine.com/news/empowering-pvc-with-acrylic-impact-modifiers-71620694.html" },
+      { name: "Google Patents US10150831: Acrylic processing aid", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10150831" },
+      { name: "Repolyfine: Acrylic impact modifiers for PVC", url: "https://www.repolyfine.com/news/empowering-pvc-with-acrylic-impact-modifiers-71620694.html" },
     ],
   },
   "zinc-phosphatet-p-69": {
@@ -6521,8 +6521,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nubiola (Vibrantz)", url: "https://www.vibrantz.com" },
     ],
     sources: [
-      { name: "SNCZ — Zinc phosphate PZ20", url: "https://www.sncz.com/en/pigment/zinc-phosphate-pz20/" },
-      { name: "Heubach — Zinc phosphate", url: "https://www.heubach-india.com/zincphosphate-calciumphosphate.aspx" },
+      { name: "SNCZ: Zinc phosphate PZ20", url: "https://www.sncz.com/en/pigment/zinc-phosphate-pz20/" },
+      { name: "Heubach: Zinc phosphate", url: "https://www.heubach-india.com/zincphosphate-calciumphosphate.aspx" },
     ],
   },
   "propenyl-guaethol": {
@@ -6543,8 +6543,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurochemicals", url: "https://www.aurochemicals.com" },
     ],
     sources: [
-      { name: "The Good Scents Company — propenyl guaethol", url: "https://www.thegoodscentscompany.com" },
-      { name: "PubChem — Propenylguaethol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "The Good Scents Company: propenyl guaethol", url: "https://www.thegoodscentscompany.com" },
+      { name: "PubChem: Propenylguaethol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
     ],
   },
   "sanitron-s-sodium-dimethyldithiocarbamate": {
@@ -6565,8 +6565,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vibrantz", url: "https://www.vibrantz.com" },
     ],
     sources: [
-      { name: "Wikipedia — Sodium dimethyldithiocarbamate", url: "https://en.wikipedia.org/wiki/Sodium_dimethyldithiocarbamate" },
-      { name: "ResearchGate — SDDC production & applications", url: "https://www.researchgate.net/publication/378827468" },
+      { name: "Wikipedia: Sodium dimethyldithiocarbamate", url: "https://en.wikipedia.org/wiki/Sodium_dimethyldithiocarbamate" },
+      { name: "ResearchGate: SDDC production & applications", url: "https://www.researchgate.net/publication/378827468" },
     ],
   },
   "tetraethylammonium-nitrate-n": {
@@ -6587,8 +6587,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tokyo Chemical Industry", url: "https://www.tcichemicals.com" },
     ],
     sources: [
-      { name: "PubChem — Tetraethylammonium nitrate", url: "https://pubchem.ncbi.nlm.nih.gov/" },
-      { name: "ChemicalBook — Tetraethylammonium nitrate", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem: Tetraethylammonium nitrate", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "ChemicalBook: Tetraethylammonium nitrate", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "silica-gel-mesh-sap": {
@@ -6610,8 +6610,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Clariant", url: "https://www.clariant.com" },
     ],
     sources: [
-      { name: "Streampeak — How silica gel is produced", url: "https://www.streampeakgroup.com/how-is-silica-gel-produced/" },
-      { name: "Google Patents US3313739 — Preparation of silica gel", url: "https://patents.google.com/patent/US3313739A/en" },
+      { name: "Streampeak: How silica gel is produced", url: "https://www.streampeakgroup.com/how-is-silica-gel-produced/" },
+      { name: "Google Patents US3313739: Preparation of silica gel", url: "https://patents.google.com/patent/US3313739A/en" },
     ],
   },
   "ethylene-oxide-gas-ethylene-carbon-di": {
@@ -6623,7 +6623,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Silver-catalysed oxidation of ethylene",
       detail:
-        "Ethylene oxide is made by the direct vapour-phase oxidation of ethylene over a supported silver catalyst — the only selective epoxidation catalyst. Ethylene and oxygen pass over silver-on-alumina at about 230-290 °C and 10-20 bar (C2H4 + ½O2 → C2H4O), with chloride moderators suppressing total combustion. EO is absorbed into water and either purified as liquid or fed onward to glycols, ethoxylates and ethanolamines. It is shipped as a liquefied gas and is also used directly as a sterilant.",
+        "Ethylene oxide is made by the direct vapour-phase oxidation of ethylene over a supported silver catalyst, the only selective epoxidation catalyst. Ethylene and oxygen pass over silver-on-alumina at about 230-290 °C and 10-20 bar (C2H4 + ½O2 → C2H4O), with chloride moderators suppressing total combustion. EO is absorbed into water and either purified as liquid or fed onward to glycols, ethoxylates and ethanolamines. It is shipped as a liquefied gas and is also used directly as a sterilant.",
     },
     manufacturers: [
       { name: "Dow", url: "https://www.dow.com" },
@@ -6633,8 +6633,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "INEOS Oxide", url: "https://www.ineos.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ethylene oxide", url: "https://en.wikipedia.org/wiki/Ethylene_oxide" },
-      { name: "ChemAnalyst — How ethylene oxide is produced", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-how-ethylene-oxide-is-produced-38346" },
+      { name: "Wikipedia: Ethylene oxide", url: "https://en.wikipedia.org/wiki/Ethylene_oxide" },
+      { name: "ChemAnalyst: How ethylene oxide is produced", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-how-ethylene-oxide-is-produced-38346" },
     ],
   },
   "liquid-oxygen": {
@@ -6655,14 +6655,14 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Messer", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Wikipedia — Cryogenic gas plant", url: "https://en.wikipedia.org/wiki/Cryogenic_gas_plant" },
-      { name: "Air Products — Cryogenic air separation", url: "https://www.airproducts.com" },
+      { name: "Wikipedia: Cryogenic gas plant", url: "https://en.wikipedia.org/wiki/Cryogenic_gas_plant" },
+      { name: "Air Products: Cryogenic air separation", url: "https://www.airproducts.com" },
     ],
   },
   "mts-synthetic-iron-oxide-pigment-red": {
     routes: [
-      "Penniman process — scrap iron + ferrous nitrate + air to grow hematite",
-      "Laux process — by-product of aniline (nitrobenzene reduction) manufacture",
+      "Penniman process, scrap iron + ferrous nitrate + air to grow hematite",
+      "Laux process, by-product of aniline (nitrobenzene reduction) manufacture",
       "Direct precipitation/calcination of iron salts",
     ],
     mainProcess: {
@@ -6677,8 +6677,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Toda / ICC Industries", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "LANXESS — Bayferrox processes", url: "https://lanxess.com/en/products-and-brands/brands/bayferrox/products-and-applications" },
-      { name: "PCI — A new development in Penniman red", url: "https://www.pcimag.com/articles/100040-a-new-development-in-penniman-red-production" },
+      { name: "LANXESS: Bayferrox processes", url: "https://lanxess.com/en/products-and-brands/brands/bayferrox/products-and-applications" },
+      { name: "PCI: A new development in Penniman red", url: "https://www.pcimag.com/articles/100040-a-new-development-in-penniman-red-production" },
     ],
   },
   "verol-pr-polyglycerol-polyricinoleate": {
@@ -6700,8 +6700,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "TER Chemicals", url: "https://www.terchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Polyglycerol polyricinoleate", url: "https://en.wikipedia.org/wiki/Polyglycerol_polyricinoleate" },
-      { name: "Google Patents US8101707B2 — Direct manufacture of PGPR", url: "https://patents.google.com/patent/US8101707B2/en" },
+      { name: "Wikipedia: Polyglycerol polyricinoleate", url: "https://en.wikipedia.org/wiki/Polyglycerol_polyricinoleate" },
+      { name: "Google Patents US8101707B2: Direct manufacture of PGPR", url: "https://patents.google.com/patent/US8101707B2/en" },
     ],
   },
   "dense-soda-ash-packed-in-jumbo": {
@@ -6713,7 +6713,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Solvay process / natural trona, then densification",
       detail:
-        "Soda ash (sodium carbonate) is made by the Solvay ammonia-soda process — ammoniated brine is carbonated to precipitate sodium bicarbonate (NaCl + NH3 + CO2 + H2O → NaHCO3 + NH4Cl), which is calcined to soda ash — or by refining natural trona ore. 'Dense' soda ash is produced by hydrating light soda ash to the monohydrate and re-calcining (or by mechanical densification) to give larger, free-flowing, non-dusting granules preferred for glassmaking.",
+        "Soda ash (sodium carbonate) is made by the Solvay ammonia-soda process, ammoniated brine is carbonated to precipitate sodium bicarbonate (NaCl + NH3 + CO2 + H2O → NaHCO3 + NH4Cl), which is calcined to soda ash, or by refining natural trona ore. 'Dense' soda ash is produced by hydrating light soda ash to the monohydrate and re-calcining (or by mechanical densification) to give larger, free-flowing, non-dusting granules preferred for glassmaking.",
     },
     manufacturers: [
       { name: "Solvay", url: "https://www.solvay.com" },
@@ -6723,8 +6723,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GHCL", url: "https://www.ghcl.co.in" },
     ],
     sources: [
-      { name: "Wikipedia — Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "C&EN — Synthetic soda ash", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
+      { name: "Wikipedia: Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "C&EN: Synthetic soda ash", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
     ],
   },
   "glycerine-purified": {
@@ -6746,8 +6746,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Emery Oleochemicals", url: "https://www.emeryoleo.com" },
     ],
     sources: [
-      { name: "Wikipedia — Glycerol", url: "https://en.wikipedia.org/wiki/Glycerol" },
-      { name: "Procurement Resource — Glycerine production", url: "https://www.procurementresource.com" },
+      { name: "Wikipedia: Glycerol", url: "https://en.wikipedia.org/wiki/Glycerol" },
+      { name: "Procurement Resource: Glycerine production", url: "https://www.procurementresource.com" },
     ],
   },
   "magnesium-stearate-ip": {
@@ -6769,8 +6769,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Valtris Specialty Chemicals", url: "https://www.valtris.com" },
     ],
     sources: [
-      { name: "Alapolystabs — Role of metallic stearates", url: "https://alapolystabs.com/role-of-metallic-stearates.html" },
-      { name: "Procurement Resource — Magnesium stearate plant", url: "https://www.procurementresource.com/reports/magnesium-stearate-manufacturing-plant-project-report" },
+      { name: "Alapolystabs: Role of metallic stearates", url: "https://alapolystabs.com/role-of-metallic-stearates.html" },
+      { name: "Procurement Resource: Magnesium stearate plant", url: "https://www.procurementresource.com/reports/magnesium-stearate-manufacturing-plant-project-report" },
     ],
   },
   "calcium-carbonate-light-powder": {
@@ -6792,8 +6792,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gulshan Polyols", url: "https://www.gulshanpolyols.com" },
     ],
     sources: [
-      { name: "Sudarshan — PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
-      { name: "Mordor — PCC market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
+      { name: "Sudarshan: PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
+      { name: "Mordor: PCC market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
     ],
   },
   "metamitron-technical": {
@@ -6805,7 +6805,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Triazinone ring synthesis",
       detail:
-        "Metamitron is a 1,2,4-triazin-5-one herbicide. It is synthesised by building the triazinone ring — typically condensing a phenyl-substituted intermediate (from benzaldehyde/phenyl precursors) with an amino/hydrazine and a methyl-bearing nitrile or ester, then cyclising to 4-amino-3-methyl-6-phenyl-1,2,4-triazin-5(4H)-one. The technical active is purified and formulated (e.g. 70% SC). It is a photosystem-II-inhibiting selective herbicide used mainly in sugar and fodder beet.",
+        "Metamitron is a 1,2,4-triazin-5-one herbicide. It is synthesised by building the triazinone ring, typically condensing a phenyl-substituted intermediate (from benzaldehyde/phenyl precursors) with an amino/hydrazine and a methyl-bearing nitrile or ester, then cyclising to 4-amino-3-methyl-6-phenyl-1,2,4-triazin-5(4H)-one. The technical active is purified and formulated (e.g. 70% SC). It is a photosystem-II-inhibiting selective herbicide used mainly in sugar and fodder beet.",
     },
     manufacturers: [
       { name: "ADAMA", url: "https://www.adama.com" },
@@ -6815,8 +6815,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Rayfull Chemicals", url: "https://www.rayfull.net" },
     ],
     sources: [
-      { name: "ADAMA — Goltix (metamitron)", url: "https://www.adama.com/uk/en/our-solutions/herbicides/goltix-70-sc" },
-      { name: "BCPC — UK pesticide guide", url: "https://www.bcpc.org" },
+      { name: "ADAMA: Goltix (metamitron)", url: "https://www.adama.com/uk/en/our-solutions/herbicides/goltix-70-sc" },
+      { name: "BCPC: UK pesticide guide", url: "https://www.bcpc.org" },
     ],
   },
   "manganese-oxide-60-62-feed": {
@@ -6828,7 +6828,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Reductive roasting of manganese ore",
       detail:
-        "Feed-grade manganese oxide (MnO, ~60-62% Mn) is made by reductively roasting/calcining a manganese source — manganese carbonate ore or higher manganese oxides — in a controlled reducing atmosphere so the manganese is converted to the green monoxide MnO and CO2/water is driven off. The product is cooled, milled and sized. It is used as a manganese micronutrient in animal feed and fertiliser and as a chemical/ceramic raw material.",
+        "Feed-grade manganese oxide (MnO, ~60-62% Mn) is made by reductively roasting/calcining a manganese source, manganese carbonate ore or higher manganese oxides, in a controlled reducing atmosphere so the manganese is converted to the green monoxide MnO and CO2/water is driven off. The product is cooled, milled and sized. It is used as a manganese micronutrient in animal feed and fertiliser and as a chemical/ceramic raw material.",
     },
     manufacturers: [
       { name: "Vibrantz Technologies (Prince)", url: "https://www.vibrantz.com" },
@@ -6837,8 +6837,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Eramet / Comilog", url: "https://www.eramet.com" },
     ],
     sources: [
-      { name: "Vibrantz — Manganese for animal feed", url: "https://vibrantz.com/markets/agriculture/animal-nutrition/" },
-      { name: "Manganese Supply — MnO grades", url: "https://manganesesupply.com/chemical-industry-catalysts-grade-manganese-oxide-mno/" },
+      { name: "Vibrantz: Manganese for animal feed", url: "https://vibrantz.com/markets/agriculture/animal-nutrition/" },
+      { name: "Manganese Supply: MnO grades", url: "https://manganesesupply.com/chemical-industry-catalysts-grade-manganese-oxide-mno/" },
     ],
   },
   camphorusp: {
@@ -6859,8 +6859,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Saurabh Aromatics / Indian producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "NIIR — Synthetic camphor production", url: "https://www.niir.org/blog/production-of-synthetic-camphor/" },
-      { name: "Sciencing — How synthetic camphor is made", url: "https://www.sciencing.com/how-does-5649691-synthetic-camphor-made-/" },
+      { name: "NIIR: Synthetic camphor production", url: "https://www.niir.org/blog/production-of-synthetic-camphor/" },
+      { name: "Sciencing: How synthetic camphor is made", url: "https://www.sciencing.com/how-does-5649691-synthetic-camphor-made-/" },
     ],
   },
   "pharmaceutical-raw-material-bulk-drugs-boric": {
@@ -6872,7 +6872,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Acidulation of borate minerals",
       detail:
-        "Boric acid is produced by reacting a refined borate — borax (sodium tetraborate) or colemanite/ulexite (calcium borate) — with sulfuric acid: Na2B4O7 + H2SO4 + 5 H2O → 4 H3BO3 + Na2SO4. The acid breaks down the borate, releasing boric acid which is crystallised on cooling and separated from the sulfate by-product, then recrystallised to the required purity. About 80% of refined borates come from Turkey (Eti Maden) and California (Rio Tinto/U.S. Borax).",
+        "Boric acid is produced by reacting a refined borate, borax (sodium tetraborate) or colemanite/ulexite (calcium borate), with sulfuric acid: Na2B4O7 + H2SO4 + 5 H2O → 4 H3BO3 + Na2SO4. The acid breaks down the borate, releasing boric acid which is crystallised on cooling and separated from the sulfate by-product, then recrystallised to the required purity. About 80% of refined borates come from Turkey (Eti Maden) and California (Rio Tinto/U.S. Borax).",
     },
     manufacturers: [
       { name: "Eti Maden", url: "https://www.etimaden.gov.tr" },
@@ -6881,8 +6881,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Quiborax", url: "https://www.quiborax.com" },
     ],
     sources: [
-      { name: "USGS — Boron minerals yearbook", url: "https://pubs.usgs.gov/myb/vol1/2019/myb1-2019-boron.pdf" },
-      { name: "Procurement Resource — Boric acid plant", url: "https://www.procurementresource.com/reports/boric-acid-manufacturing-plant-project-report" },
+      { name: "USGS: Boron minerals yearbook", url: "https://pubs.usgs.gov/myb/vol1/2019/myb1-2019-boron.pdf" },
+      { name: "Procurement Resource: Boric acid plant", url: "https://www.procurementresource.com/reports/boric-acid-manufacturing-plant-project-report" },
     ],
   },
   "pharmaceutical-raw-materials-clobetasone-butyrate-bp": {
@@ -6903,8 +6903,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Crystal Pharma (Aspen)", url: "https://www.aspenpharma.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Clobetasone butyrate manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/clobetasone-butyrate" },
-      { name: "Axplora — Clobetasone butyrate API", url: "https://www.axplora.com/api-product/25122-57-0-s/" },
+      { name: "PharmaCompass: Clobetasone butyrate manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/clobetasone-butyrate" },
+      { name: "Axplora: Clobetasone butyrate API", url: "https://www.axplora.com/api-product/25122-57-0-s/" },
     ],
   },
   undecavertol: {
@@ -6922,8 +6922,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Givaudan", url: "https://www.givaudan.com" },
     ],
     sources: [
-      { name: "Givaudan — Undecavertol", url: "https://www.givaudan.com/fragrance-beauty/eindex/undecavertol" },
-      { name: "The Good Scents Company — undecavertol", url: "https://www.thegoodscentscompany.com/data/rw1003762.html" },
+      { name: "Givaudan: Undecavertol", url: "https://www.givaudan.com/fragrance-beauty/eindex/undecavertol" },
+      { name: "The Good Scents Company: undecavertol", url: "https://www.thegoodscentscompany.com/data/rw1003762.html" },
     ],
   },
   alum: {
@@ -6935,7 +6935,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Sulfuric-acid digestion of alumina",
       detail:
-        "Alum (aluminium sulfate, 'filter alum') is made by reacting an aluminium hydroxide source — bauxite or purer alumina trihydrate — with sulfuric acid: 2 Al(OH)3 + 3 H2SO4 + 8 H2O → Al2(SO4)3·14H2O. Using purified alumina trihydrate gives a low-iron product for paper and potable water. The hot liquor is clarified to remove insolubles and either sold as ~48% solution or concentrated and cast/crystallised to solid alum. It is consumed mainly as a coagulant in water/wastewater treatment and in paper sizing.",
+        "Alum (aluminium sulfate, 'filter alum') is made by reacting an aluminium hydroxide source, bauxite or purer alumina trihydrate, with sulfuric acid: 2 Al(OH)3 + 3 H2SO4 + 8 H2O → Al2(SO4)3·14H2O. Using purified alumina trihydrate gives a low-iron product for paper and potable water. The hot liquor is clarified to remove insolubles and either sold as ~48% solution or concentrated and cast/crystallised to solid alum. It is consumed mainly as a coagulant in water/wastewater treatment and in paper sizing.",
     },
     manufacturers: [
       { name: "Kemira", url: "https://www.kemira.com" },
@@ -6944,8 +6944,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GEO Specialty Chemicals", url: "https://www.geosc.com" },
     ],
     sources: [
-      { name: "NZIC — Manufacture of aluminium sulfate", url: "https://www.nzic.org.nz/unsecure_files/book/1F.pdf" },
-      { name: "Affinity Chemical — Alum manufacturing", url: "https://www.affinitychemical.com/alum-manufacturing-techniques-the-affinity-process/" },
+      { name: "NZIC: Manufacture of aluminium sulfate", url: "https://www.nzic.org.nz/unsecure_files/book/1F.pdf" },
+      { name: "Affinity Chemical: Alum manufacturing", url: "https://www.affinitychemical.com/alum-manufacturing-techniques-the-affinity-process/" },
     ],
   },
   "phenoxyethyl-isobutyrate": {
@@ -6966,8 +6966,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Eternis Fine Chemicals", url: "https://www.eternis.com" },
     ],
     sources: [
-      { name: "The Good Scents Company — phenoxyethyl isobutyrate", url: "https://www.thegoodscentscompany.com" },
-      { name: "PubChem — Phenethyl/phenoxyethyl esters", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "The Good Scents Company: phenoxyethyl isobutyrate", url: "https://www.thegoodscentscompany.com" },
+      { name: "PubChem: Phenethyl/phenoxyethyl esters", url: "https://pubchem.ncbi.nlm.nih.gov/" },
     ],
   },
   "sodium-bromide-solution": {
@@ -6989,8 +6989,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jordan Bromine Company", url: "https://www.jbcjordan.com" },
     ],
     sources: [
-      { name: "ChemicalBook — Sodium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3181001.htm" },
-      { name: "Google Patents CN1354125A — Sodium bromide/bromate", url: "https://patents.google.com/patent/CN1354125A/en" },
+      { name: "ChemicalBook: Sodium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3181001.htm" },
+      { name: "Google Patents CN1354125A: Sodium bromide/bromate", url: "https://patents.google.com/patent/CN1354125A/en" },
     ],
   },
   "oxyclozan-de-vet-bp": {
@@ -7002,7 +7002,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Salicylanilide condensation",
       detail:
-        "Oxyclozanide is a salicylanilide anthelmintic made by condensing a polyhalogenated salicylic acid (3,5,6-trichloro-2-hydroxybenzoic acid) with 2-chloroaniline to form the salicylanilide amide bond — typically by activating the acid (PCl3 or the acid chloride) and coupling with the amine. The crude is purified by crystallisation to BP grade. It uncouples oxidative phosphorylation in liver flukes and is used to treat fasciolosis in cattle, sheep and goats.",
+        "Oxyclozanide is a salicylanilide anthelmintic made by condensing a polyhalogenated salicylic acid (3,5,6-trichloro-2-hydroxybenzoic acid) with 2-chloroaniline to form the salicylanilide amide bond, typically by activating the acid (PCl3 or the acid chloride) and coupling with the amine. The crude is purified by crystallisation to BP grade. It uncouples oxidative phosphorylation in liver flukes and is used to treat fasciolosis in cattle, sheep and goats.",
     },
     manufacturers: [
       { name: "Orex Pharma", url: "https://orexpharma.com" },
@@ -7011,8 +7011,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SBD Healthcare", url: "https://www.sbdhealthcare.in" },
     ],
     sources: [
-      { name: "PharmaCompass — Oxyclozanide manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/oxyclozanide" },
-      { name: "Orex Pharma — Oxyclozanide BP", url: "http://orexpharma.com/oxyclozanide-bp/" },
+      { name: "PharmaCompass: Oxyclozanide manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/oxyclozanide" },
+      { name: "Orex Pharma: Oxyclozanide BP", url: "http://orexpharma.com/oxyclozanide-bp/" },
     ],
   },
   "copper-oxychloride-technical-material-as-per": {
@@ -7033,8 +7033,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Spiess-Urania Chemicals", url: "https://www.spiess-urania.com" },
     ],
     sources: [
-      { name: "Manica — Copper oxychloride", url: "https://www.manica.com/en/crop-protection/copper-oxychloride/" },
-      { name: "Google Patents US2655432A — Producing copper oxychloride", url: "https://patents.google.com/patent/US2655432A/en" },
+      { name: "Manica: Copper oxychloride", url: "https://www.manica.com/en/crop-protection/copper-oxychloride/" },
+      { name: "Google Patents US2655432A: Producing copper oxychloride", url: "https://patents.google.com/patent/US2655432A/en" },
     ],
   },
   "phenylpentan-1-one-hclcas-no-16-1": {
@@ -7055,8 +7055,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Indian/Chinese fine-chem", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "PubChem — Valerophenone", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Valerophenone" },
-      { name: "ChemicalBook — 1-Phenyl-1-pentanone", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem: Valerophenone", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Valerophenone" },
+      { name: "ChemicalBook: 1-Phenyl-1-pentanone", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "aroma-chemicals-anethole": {
@@ -7068,7 +7068,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Isomerisation of estragole",
       detail:
-        "trans-Anethole (the sweet anise/liquorice aroma chemical) is made industrially by base-catalysed isomerisation of estragole — sourced from crude sulfate turpentine or basil oil — at 140-215 °C with NaOH/KOH, which shifts the allyl double bond into the conjugated propenyl position and favours the stable trans isomer. It is also obtained naturally by fractional distillation of star-anise, anise and fennel oils, and synthetically by condensing anisole with propionaldehyde. The product is distilled/crystallised to high purity.",
+        "trans-Anethole (the sweet anise/liquorice aroma chemical) is made industrially by base-catalysed isomerisation of estragole, sourced from crude sulfate turpentine or basil oil, at 140-215 °C with NaOH/KOH, which shifts the allyl double bond into the conjugated propenyl position and favours the stable trans isomer. It is also obtained naturally by fractional distillation of star-anise, anise and fennel oils, and synthetically by condensing anisole with propionaldehyde. The product is distilled/crystallised to high purity.",
     },
     manufacturers: [
       { name: "Symrise", url: "https://www.symrise.com" },
@@ -7077,8 +7077,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vigon International", url: "https://www.vigon.com" },
     ],
     sources: [
-      { name: "Grokipedia — Anethole", url: "https://grokipedia.com/page/Anethole" },
-      { name: "Google Patents CN103755533A — Anethole from estragole", url: "https://patents.google.com/patent/CN103755533A/en" },
+      { name: "Grokipedia: Anethole", url: "https://grokipedia.com/page/Anethole" },
+      { name: "Google Patents CN103755533A: Anethole from estragole", url: "https://patents.google.com/patent/CN103755533A/en" },
     ],
   },
   "trixylenyl-phosphate": {
@@ -7099,8 +7099,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Valtris (Santicizer)", url: "https://www.valtris.com" },
     ],
     sources: [
-      { name: "Valtris — Santicizer phosphate esters", url: "https://www.valtris.com/product/plasticizers/santicizer-flame-retardant-plasticizers/" },
-      { name: "NBInno — Trixylyl phosphate", url: "https://www.nbinno.com/flame-retardants/trixylyl-phosphate-txp-supplier-flame-retardant-plasticizer-ub" },
+      { name: "Valtris: Santicizer phosphate esters", url: "https://www.valtris.com/product/plasticizers/santicizer-flame-retardant-plasticizers/" },
+      { name: "NBInno: Trixylyl phosphate", url: "https://www.nbinno.com/flame-retardants/trixylyl-phosphate-txp-supplier-flame-retardant-plasticizer-ub" },
     ],
   },
   "aluminium-oxide-grains-artificial-corundum-w": {
@@ -7122,8 +7122,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Henan Ruishi", url: "https://ruishi-abrasives.com" },
     ],
     sources: [
-      { name: "Washington Mills — Brown fused aluminum oxide", url: "https://washingtonmills.com/products/brown-fused-aluminum-oxide" },
-      { name: "Imerys — Fused alumina", url: "https://www.imerys.com/minerals/fused-alumina" },
+      { name: "Washington Mills: Brown fused aluminum oxide", url: "https://washingtonmills.com/products/brown-fused-aluminum-oxide" },
+      { name: "Imerys: Fused alumina", url: "https://www.imerys.com/minerals/fused-alumina" },
     ],
   },
   "h-acid": {
@@ -7144,8 +7144,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Zhejiang Longsheng", url: "https://www.longsheng.com" },
     ],
     sources: [
-      { name: "NBInno — Naphthalene dye intermediates", url: "https://www.nbinno.com/article/dye-intermediates/from-naphthalene-to-vivid-hues-the-synthesis-of-1-naphthylamine-5-sulfonic-acid-and-its-derivatives-lr" },
-      { name: "Grokipedia — Naphthalene", url: "https://grokipedia.com/page/Naphthalene" },
+      { name: "NBInno: Naphthalene dye intermediates", url: "https://www.nbinno.com/article/dye-intermediates/from-naphthalene-to-vivid-hues-the-synthesis-of-1-naphthylamine-5-sulfonic-acid-and-its-derivatives-lr" },
+      { name: "Grokipedia: Naphthalene", url: "https://grokipedia.com/page/Naphthalene" },
     ],
   },
   "tertairy-amyl-methyl-ether": {
@@ -7166,8 +7166,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Refinery oxygenate units", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wiley — Synthesis of TAME equilibrium", url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ceat.270180205" },
-      { name: "Google Patents US4988366 — TAME/MTBE production", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4988366" },
+      { name: "Wiley: Synthesis of TAME equilibrium", url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ceat.270180205" },
+      { name: "Google Patents US4988366: TAME/MTBE production", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4988366" },
     ],
   },
   "zinc-citrate-trihydrate-ih": {
@@ -7179,7 +7179,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Neutralisation of citric acid with zinc oxide",
       detail:
-        "Zinc citrate is made by completely neutralising citric acid with a high-purity zinc source — zinc oxide, hydroxide or carbonate — in water (3 ZnO + 2 C6H8O7 → Zn3(C6H5O7)2 + 3 H2O), then precipitating and dehydrating to the dihydrate or trihydrate. Integrated producers use captive citric acid. The fine powder is washed, dried and milled to pharmacopoeial grade, used as a zinc supplement in tablets and as an anti-plaque/anti-tartar active in toothpaste.",
+        "Zinc citrate is made by completely neutralising citric acid with a high-purity zinc source, zinc oxide, hydroxide or carbonate, in water (3 ZnO + 2 C6H8O7 → Zn3(C6H5O7)2 + 3 H2O), then precipitating and dehydrating to the dihydrate or trihydrate. Integrated producers use captive citric acid. The fine powder is washed, dried and milled to pharmacopoeial grade, used as a zinc supplement in tablets and as an anti-plaque/anti-tartar active in toothpaste.",
     },
     manufacturers: [
       { name: "Jungbunzlauer", url: "https://www.jungbunzlauer.com" },
@@ -7188,8 +7188,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jost Chemical", url: "https://www.jostchemical.com" },
     ],
     sources: [
-      { name: "Jungbunzlauer — Zinc citrate", url: "https://www.jungbunzlauer.com/en/products/special-salts/zinc-citrate" },
-      { name: "Mordor — Zinc citrate market", url: "https://www.mordorintelligence.com/industry-reports/zinc-citrate-market" },
+      { name: "Jungbunzlauer: Zinc citrate", url: "https://www.jungbunzlauer.com/en/products/special-salts/zinc-citrate" },
+      { name: "Mordor: Zinc citrate market", url: "https://www.mordorintelligence.com/industry-reports/zinc-citrate-market" },
     ],
   },
   "cis-8-methoxy-1-3-diaza-spiro-decane-2-4-dione-sodium-salt": {
@@ -7209,8 +7209,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Simson Pharma", url: "https://www.simsonpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia — Bucherer–Bergs reaction", url: "https://en.wikipedia.org/wiki/Bucherer%E2%80%93Bergs_reaction" },
-      { name: "PubChem — diazaspirodecane-dione", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "Wikipedia: Bucherer-Bergs reaction", url: "https://en.wikipedia.org/wiki/Bucherer%E2%80%93Bergs_reaction" },
+      { name: "PubChem: diazaspirodecane-dione", url: "https://pubchem.ncbi.nlm.nih.gov/" },
     ],
   },
   "propanil-dg-stam-dg-x-kg": {
@@ -7231,13 +7231,13 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "RiceCo", url: "https://www.riceco.com" },
     ],
     sources: [
-      { name: "Wikipedia — Propanil", url: "https://en.wikipedia.org/wiki/Propanil" },
-      { name: "Grokipedia — Propionyl chloride", url: "https://grokipedia.com/page/Propionyl_chloride" },
+      { name: "Wikipedia: Propanil", url: "https://en.wikipedia.org/wiki/Propanil" },
+      { name: "Grokipedia: Propionyl chloride", url: "https://grokipedia.com/page/Propionyl_chloride" },
     ],
   },
   "calcined-alumina": {
     routes: [
-      "Bayer process — caustic digestion of bauxite, precipitate aluminium hydroxide",
+      "Bayer process, caustic digestion of bauxite, precipitate aluminium hydroxide",
       "Calcine aluminium hydroxide in rotary kiln/fluid bed to alpha-alumina",
       "Mill/grade to reactive, low-soda or tabular grades",
     ],
@@ -7254,8 +7254,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "J.M. Huber", url: "https://www.hubermaterials.com" },
     ],
     sources: [
-      { name: "Aluminium Guide — Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
-      { name: "EPSA — Specialty aluminas", url: "https://specialty-chemicals.eu/epsa/" },
+      { name: "Aluminium Guide: Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
+      { name: "EPSA: Specialty aluminas", url: "https://specialty-chemicals.eu/epsa/" },
     ],
   },
   "n-chlorosuccinimide-x": {
@@ -7267,7 +7267,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "N-chlorination of succinimide",
       detail:
-        "N-Chlorosuccinimide (NCS) is made by chlorinating succinimide at the N-H position using a Cl+ source — chlorine gas or sodium hypochlorite (bleach) — under controlled alkaline, low-temperature conditions: succinimide + Cl source → N-chlorosuccinimide. The product precipitates and is filtered, washed and dried. NCS is a convenient solid chlorinating and mild oxidising reagent for pharmaceuticals, agrochemicals and fine-chemical synthesis (e.g. allylic chlorination, alcohol oxidation).",
+        "N-Chlorosuccinimide (NCS) is made by chlorinating succinimide at the N-H position using a Cl+ source, chlorine gas or sodium hypochlorite (bleach), under controlled alkaline, low-temperature conditions: succinimide + Cl source → N-chlorosuccinimide. The product precipitates and is filtered, washed and dried. NCS is a convenient solid chlorinating and mild oxidising reagent for pharmaceuticals, agrochemicals and fine-chemical synthesis (e.g. allylic chlorination, alcohol oxidation).",
     },
     manufacturers: [
       { name: "LANXESS", url: "https://lanxess.com" },
@@ -7276,8 +7276,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu/Chinese fine-chem", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wikipedia — N-Chlorosuccinimide", url: "https://en.wikipedia.org/wiki/N-Chlorosuccinimide" },
-      { name: "NBInno — Chemistry of N-chlorosuccinimide", url: "https://www.nbinno.com/article/other-organic-chemicals/the-chemistry-of-n-chlorosuccinimide-synthesis-industrial-applications" },
+      { name: "Wikipedia: N-Chlorosuccinimide", url: "https://en.wikipedia.org/wiki/N-Chlorosuccinimide" },
+      { name: "NBInno: Chemistry of N-chlorosuccinimide", url: "https://www.nbinno.com/article/other-organic-chemicals/the-chemistry-of-n-chlorosuccinimide-synthesis-industrial-applications" },
     ],
   },
   "pharmaceutical-raw-materials-rani-tid-ine": {
@@ -7298,8 +7298,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hetero", url: "https://www.heteroworld.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Ranitidine HCl manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ranitidine-hydrochloride" },
-      { name: "Google Patents US5621120 — Form 1 ranitidine HCl", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/5621120" },
+      { name: "PharmaCompass: Ranitidine HCl manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ranitidine-hydrochloride" },
+      { name: "Google Patents US5621120: Form 1 ranitidine HCl", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/5621120" },
     ],
   },
   "permethric-acid-chloride": {
@@ -7320,8 +7320,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tagros Chemicals", url: "https://www.tagros.com" },
     ],
     sources: [
-      { name: "Gharda — Cypermethric acid chloride (DV acid chloride)", url: "https://gharda.com/cypermethric-acid-chloride-d-v-acid-chloride" },
-      { name: "ChemBK — Cypermethric acid chloride", url: "https://www.chembk.com/en/chem/Cypermethric%20Acid%20Chloride" },
+      { name: "Gharda: Cypermethric acid chloride (DV acid chloride)", url: "https://gharda.com/cypermethric-acid-chloride-d-v-acid-chloride" },
+      { name: "ChemBK: Cypermethric acid chloride", url: "https://www.chembk.com/en/chem/Cypermethric%20Acid%20Chloride" },
     ],
   },
   "neostigmine-methyl-sulphate": {
@@ -7342,8 +7342,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LGM Pharma", url: "https://lgmpharma.com" },
     ],
     sources: [
-      { name: "PharmaCompass — Neostigmine methylsulfate", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/neostigmine-methylsulfate" },
-      { name: "Wiley IJAC — Neostigmine methylsulfate analysis", url: "https://onlinelibrary.wiley.com/doi/10.1155/2021/5570173" },
+      { name: "PharmaCompass: Neostigmine methylsulfate", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/neostigmine-methylsulfate" },
+      { name: "Wiley IJAC: Neostigmine methylsulfate analysis", url: "https://onlinelibrary.wiley.com/doi/10.1155/2021/5570173" },
     ],
   },
   "tax-invoice-no-trifluoro-acetic-acid": {
@@ -7355,7 +7355,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Electrofluorination then hydrolysis",
       detail:
-        "Trifluoroacetic acid (TFA) is made by electrochemical fluorination — acetyl chloride or acetic anhydride is electrolysed in anhydrous hydrogen fluoride (Simons process) to perfluoroacetyl fluoride, which is hydrolysed to TFA. In China much TFA is made by hydrolysing CFC-113a (1,1,1-trichloro-2,2,2-trifluoroethane). The strongly corrosive intermediates demand specialised equipment, and the crude is distilled to anhydrous high-purity acid. TFA is used in pharmaceutical synthesis, peptide chemistry and as a strong acid reagent.",
+        "Trifluoroacetic acid (TFA) is made by electrochemical fluorination, acetyl chloride or acetic anhydride is electrolysed in anhydrous hydrogen fluoride (Simons process) to perfluoroacetyl fluoride, which is hydrolysed to TFA. In China much TFA is made by hydrolysing CFC-113a (1,1,1-trichloro-2,2,2-trifluoroethane). The strongly corrosive intermediates demand specialised equipment, and the crude is distilled to anhydrous high-purity acid. TFA is used in pharmaceutical synthesis, peptide chemistry and as a strong acid reagent.",
     },
     manufacturers: [
       { name: "Halocarbon Products", url: "https://www.halocarbon.com" },
@@ -7364,8 +7364,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay (until 2026)", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "Wikipedia — Trifluoroacetic acid", url: "https://en.wikipedia.org/wiki/Trifluoroacetic_acid" },
-      { name: "Solvay — Update on TFA", url: "https://www.solvay.com/en/tfa" },
+      { name: "Wikipedia: Trifluoroacetic acid", url: "https://en.wikipedia.org/wiki/Trifluoroacetic_acid" },
+      { name: "Solvay: Update on TFA", url: "https://www.solvay.com/en/tfa" },
     ],
   },
   "sodium-saccharin-pure-dental": {
@@ -7386,8 +7386,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shree Vardayini Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wikipedia — Saccharin", url: "https://en.wikipedia.org/wiki/Saccharin" },
-      { name: "EFSA — Re-evaluation of saccharin and salts", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11565076/" },
+      { name: "Wikipedia: Saccharin", url: "https://en.wikipedia.org/wiki/Saccharin" },
+      { name: "EFSA: Re-evaluation of saccharin and salts", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11565076/" },
     ],
   },
   "alpha-alpha-alpha-trifluoro-p-tolualde-h": {
@@ -7408,8 +7408,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nantong Reform Petrochemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "TCI — 4-(Trifluoromethyl)benzaldehyde", url: "https://www.tcichemicals.com/OP/en/p/T1091" },
-      { name: "ChemicalBook — 4-(Trifluoromethyl)benzaldehyde", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6403483.htm" },
+      { name: "TCI: 4-(Trifluoromethyl)benzaldehyde", url: "https://www.tcichemicals.com/OP/en/p/T1091" },
+      { name: "ChemicalBook: 4-(Trifluoromethyl)benzaldehyde", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6403483.htm" },
     ],
   },
   "potassium-fluoroborate-potassium-fluorotitanate": {
@@ -7431,8 +7431,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "DDFluor — Potassium fluoroborate KBF4", url: "https://www.ddfluor.com/fluorochemicals/potassium-fluoroborate-kbf4/" },
-      { name: "American Elements — Potassium tetrafluoroborate", url: "https://www.americanelements.com/potassium-tetrafluoroborate-14075-53-7" },
+      { name: "DDFluor: Potassium fluoroborate KBF4", url: "https://www.ddfluor.com/fluorochemicals/potassium-fluoroborate-kbf4/" },
+      { name: "American Elements: Potassium tetrafluoroborate", url: "https://www.americanelements.com/potassium-tetrafluoroborate-14075-53-7" },
     ],
   },
   "denatonium-benzoate": {
@@ -7453,8 +7453,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Indian/Chinese fine-chem", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Johnson Matthey/CPHI — Bitrex (denatonium benzoate)", url: "https://www.cphi-online.com/bitrex-denatonium-benzoate-prod710530.html" },
-      { name: "Wikipedia — MacFarlan Smith", url: "https://en.wikipedia.org/wiki/MacFarlan_Smith" },
+      { name: "Johnson Matthey/CPHI: Bitrex (denatonium benzoate)", url: "https://www.cphi-online.com/bitrex-denatonium-benzoate-prod710530.html" },
+      { name: "Wikipedia: MacFarlan Smith", url: "https://en.wikipedia.org/wiki/MacFarlan_Smith" },
     ],
   },
   "carbon-black-acetylene-compressed": {
@@ -7475,8 +7475,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Soltex", url: "https://www.soltexinc.com" },
     ],
     sources: [
-      { name: "Denka — Denka Black", url: "https://www.denka.co.jp/eng/product/detail_00025/" },
-      { name: "UT Austin — Carbon black from acetylene decomposition", url: "https://repositories.lib.utexas.edu/items/80c43471-da93-4f1a-8752-65cb78e76986" },
+      { name: "Denka: Denka Black", url: "https://www.denka.co.jp/eng/product/detail_00025/" },
+      { name: "UT Austin: Carbon black from acetylene decomposition", url: "https://repositories.lib.utexas.edu/items/80c43471-da93-4f1a-8752-65cb78e76986" },
     ],
   },
   "date-04-methyldiethanolamine": {
@@ -7498,8 +7498,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Eastman Chemical", url: "https://www.eastman.com" },
     ],
     sources: [
-      { name: "Wikipedia — Methyldiethanolamine", url: "https://en.wikipedia.org/wiki/Methyldiethanolamine" },
-      { name: "Grokipedia — Methyldiethanolamine", url: "https://grokipedia.com/page/Methyldiethanolamine" },
+      { name: "Wikipedia: Methyldiethanolamine", url: "https://en.wikipedia.org/wiki/Methyldiethanolamine" },
+      { name: "Grokipedia: Methyldiethanolamine", url: "https://grokipedia.com/page/Methyldiethanolamine" },
     ],
   },
   "ammonium-bi-sulphite-solution": {
@@ -7520,8 +7520,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hydrite Chemical", url: "https://www.hydrite.com" },
     ],
     sources: [
-      { name: "PubChem — Ammonium bisulfite", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Ammonium-bisulfite" },
-      { name: "ChemicalBook — Ammonium bisulfite", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem: Ammonium bisulfite", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Ammonium-bisulfite" },
+      { name: "ChemicalBook: Ammonium bisulfite", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "aqueous-ammonia-solution-iupacname-ammonium-hydroxide": {
@@ -7533,7 +7533,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Dissolution of ammonia in water",
       detail:
-        "Aqueous ammonia (ammonium hydroxide) is simply ammonia gas dissolved in water. The ammonia is first made by the Haber-Bosch process (N2 + 3 H2 → 2 NH3 over an iron catalyst at high pressure/temperature); compressed anhydrous ammonia is then absorbed into demineralised water in an absorber with cooling (the dissolution is exothermic) and the solution is standardised to a target strength — commonly ~24.5%, up to ~33%. It is used in water treatment, NOx control (SCR), cleaning, fertiliser and as a chemical reagent.",
+        "Aqueous ammonia (ammonium hydroxide) is simply ammonia gas dissolved in water. The ammonia is first made by the Haber-Bosch process (N2 + 3 H2 → 2 NH3 over an iron catalyst at high pressure/temperature); compressed anhydrous ammonia is then absorbed into demineralised water in an absorber with cooling (the dissolution is exothermic) and the solution is standardised to a target strength, commonly ~24.5%, up to ~33%. It is used in water treatment, NOx control (SCR), cleaning, fertiliser and as a chemical reagent.",
     },
     manufacturers: [
       { name: "Yara International", url: "https://www.yara.com" },
@@ -7543,8 +7543,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tata Chemicals", url: "https://www.tatachemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ammonia solution", url: "https://en.wikipedia.org/wiki/Ammonia_solution" },
-      { name: "Vaisala — Liquid ammonia/ammonium hydroxide process", url: "https://www.vaisala.com/en/chemical-industry-solutions/chemicals-allied-products/liquid-ammonia-ammonium-hydroxide-production-process" },
+      { name: "Wikipedia: Ammonia solution", url: "https://en.wikipedia.org/wiki/Ammonia_solution" },
+      { name: "Vaisala: Liquid ammonia/ammonium hydroxide process", url: "https://www.vaisala.com/en/chemical-industry-solutions/chemicals-allied-products/liquid-ammonia-ammonium-hydroxide-production-process" },
     ],
   },
   "sodium-trichloracetate": {
@@ -7565,8 +7565,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Denak / Spanish producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "PubChem — Sodium trichloroacetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-trichloroacetate" },
-      { name: "Wikipedia — Trichloroacetic acid", url: "https://en.wikipedia.org/wiki/Trichloroacetic_acid" },
+      { name: "PubChem: Sodium trichloroacetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-trichloroacetate" },
+      { name: "Wikipedia: Trichloroacetic acid", url: "https://en.wikipedia.org/wiki/Trichloroacetic_acid" },
     ],
   },
   "nickel-sulphate": {
@@ -7578,7 +7578,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Acid dissolution of nickel, then crystallisation",
       detail:
-        "Nickel sulphate is made by dissolving nickel metal, nickel oxide or nickel hydroxide (or nickel-bearing refinery intermediates) in sulfuric acid: Ni + H2SO4 (+ ½O2) → NiSO4 + H2O. The crude solution is filtered and purified — for battery grade by solvent extraction/ion exchange to strip cobalt, iron and copper — then concentrated and crystallised as the hexahydrate (NiSO4·6H2O). It is the key precursor for nickel-rich NMC/NCA lithium-ion cathode materials, and is used in electroplating.",
+        "Nickel sulphate is made by dissolving nickel metal, nickel oxide or nickel hydroxide (or nickel-bearing refinery intermediates) in sulfuric acid: Ni + H2SO4 (+ ½O2) → NiSO4 + H2O. The crude solution is filtered and purified, for battery grade by solvent extraction/ion exchange to strip cobalt, iron and copper, then concentrated and crystallised as the hexahydrate (NiSO4·6H2O). It is the key precursor for nickel-rich NMC/NCA lithium-ion cathode materials, and is used in electroplating.",
     },
     manufacturers: [
       { name: "Umicore", url: "https://www.umicore.com" },
@@ -7588,8 +7588,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GEM Co.", url: "https://www.gem.com.cn" },
     ],
     sources: [
-      { name: "Umicore — Cobalt & nickel precursors", url: "https://www.umicore.com/en/markets-products/automotive-mobility/battery-materials/cobalt-nickel-precursors/" },
-      { name: "ScienceDirect — Battery-grade nickel sulfate", url: "https://www.sciencedirect.com/science/article/pii/S1383586625042698" },
+      { name: "Umicore: Cobalt & nickel precursors", url: "https://www.umicore.com/en/markets-products/automotive-mobility/battery-materials/cobalt-nickel-precursors/" },
+      { name: "ScienceDirect: Battery-grade nickel sulfate", url: "https://www.sciencedirect.com/science/article/pii/S1383586625042698" },
     ],
   },
   "dehydrated-castor-oil-fatty-acid-per": {
@@ -7610,8 +7610,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Itoh Oil Chemicals", url: "https://www.itoh-oil.co.jp" },
     ],
     sources: [
-      { name: "Nova Industries — DCOFA technical data", url: "https://novaind.in/dehydrated-castor-oil-fatty-acid-dcofa-technical-data/" },
-      { name: "Girnar Industries — DCOFA", url: "https://girnarindustries.com/castor-derivatives/dehydrated-castor-oil-fatty-acid/" },
+      { name: "Nova Industries: DCOFA technical data", url: "https://novaind.in/dehydrated-castor-oil-fatty-acid-dcofa-technical-data/" },
+      { name: "Girnar Industries: DCOFA", url: "https://girnarindustries.com/castor-derivatives/dehydrated-castor-oil-fatty-acid/" },
     ],
   },
   "diethyl-sulphate": {
@@ -7632,8 +7632,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mubychem", url: "https://mubychem.com" },
     ],
     sources: [
-      { name: "Wikipedia — Ethyl sulfate / diethyl sulfate", url: "https://en.wikipedia.org/wiki/Ethyl_sulfate" },
-      { name: "NCBI — Diethyl sulfate production", url: "https://www.ncbi.nlm.nih.gov/books/NBK424638/" },
+      { name: "Wikipedia: Ethyl sulfate / diethyl sulfate", url: "https://en.wikipedia.org/wiki/Ethyl_sulfate" },
+      { name: "NCBI: Diethyl sulfate production", url: "https://www.ncbi.nlm.nih.gov/books/NBK424638/" },
     ],
   },
   "arsenic-metal": {
@@ -7654,8 +7654,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "5N Plus", url: "https://www.5nplus.com" },
     ],
     sources: [
-      { name: "Wikipedia — Arsenic", url: "https://en.wikipedia.org/wiki/Arsenic" },
-      { name: "USGS — Arsenic mineral commodity summary", url: "https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-arsenic.pdf" },
+      { name: "Wikipedia: Arsenic", url: "https://en.wikipedia.org/wiki/Arsenic" },
+      { name: "USGS: Arsenic mineral commodity summary", url: "https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-arsenic.pdf" },
     ],
   },
   "liters-liquid-helium-at-the-rateof": {
@@ -7667,7 +7667,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Cryogenic extraction from natural gas, then liquefaction",
       detail:
-        "Helium is extracted from helium-rich natural-gas fields. After the gas is processed, the non-condensable fraction is cryogenically separated to a crude helium stream, which is purified — typically by pressure-swing adsorption — to better than 99.999% helium. The pure gas is then liquefied in a helium liquefier (cascade refrigeration plus Joule-Thomson/turbo-expansion) to about -269 °C (4 K) and stored/shipped in vacuum-insulated dewars and ISO containers. Liquid helium is essential for MRI magnets, semiconductors and cryogenic research.",
+        "Helium is extracted from helium-rich natural-gas fields. After the gas is processed, the non-condensable fraction is cryogenically separated to a crude helium stream, which is purified, typically by pressure-swing adsorption, to better than 99.999% helium. The pure gas is then liquefied in a helium liquefier (cascade refrigeration plus Joule-Thomson/turbo-expansion) to about -269 °C (4 K) and stored/shipped in vacuum-insulated dewars and ISO containers. Liquid helium is essential for MRI magnets, semiconductors and cryogenic research.",
     },
     manufacturers: [
       { name: "Linde", url: "https://www.linde.com" },
@@ -7677,8 +7677,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Qatargas / Messer", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Linde Engineering — Helium recovery & liquefaction", url: "https://www.linde-engineering.com/products-and-services/process-plants/natural-gas-processing/helium-recovery-and-liquefaction-plants" },
-      { name: "Air Products — Helium", url: "https://www.airproducts.com/gases/helium" },
+      { name: "Linde Engineering: Helium recovery & liquefaction", url: "https://www.linde-engineering.com/products-and-services/process-plants/natural-gas-processing/helium-recovery-and-liquefaction-plants" },
+      { name: "Air Products: Helium", url: "https://www.airproducts.com/gases/helium" },
     ],
   },
   "fosetyl-al-tc": {
@@ -7690,7 +7690,7 @@ export const verified: Record<string, VerifiedProduct> = {
     mainProcess: {
       name: "Ethyl phosphite then aluminium salt formation",
       detail:
-        "Fosetyl-aluminium (aluminium tris(O-ethyl phosphonate)) is a systemic fungicide. Monoethyl phosphite (ethyl phosphonic acid mono-ester) is first prepared — usually from phosphorus trichloride and ethanol via diethyl phosphite, then partial hydrolysis — and is reacted with aluminium hydroxide or aluminium sulfate in aqueous solution to form the aluminium salt: 3 (EtO)P(O)H(OH) + Al(OH)3 → Al[(EtO)P(O)HO]3 + 3 H2O. The technical is filtered, dried and formulated (e.g. 80% WG/WP). Its active metabolite is phosphonic acid; it controls oomycete (downy mildew/Phytophthora) diseases.",
+        "Fosetyl-aluminium (aluminium tris(O-ethyl phosphonate)) is a systemic fungicide. Monoethyl phosphite (ethyl phosphonic acid mono-ester) is first prepared, usually from phosphorus trichloride and ethanol via diethyl phosphite, then partial hydrolysis, and is reacted with aluminium hydroxide or aluminium sulfate in aqueous solution to form the aluminium salt: 3 (EtO)P(O)H(OH) + Al(OH)3 → Al[(EtO)P(O)HO]3 + 3 H2O. The technical is filtered, dried and formulated (e.g. 80% WG/WP). Its active metabolite is phosphonic acid; it controls oomycete (downy mildew/Phytophthora) diseases.",
     },
     manufacturers: [
       { name: "Bayer CropScience", url: "https://www.bayer.com" },
@@ -7699,8 +7699,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Rayfull Chemicals", url: "https://www.rayfull.net" },
     ],
     sources: [
-      { name: "AERU — Fosetyl-aluminium", url: "https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/363.htm" },
-      { name: "FAO — Fosetyl-aluminium specification", url: "https://openknowledge.fao.org/server/api/core/bitstreams/86edff2a-3045-40a2-aaf4-e7988dcd2b34/content" },
+      { name: "AERU: Fosetyl-aluminium", url: "https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/363.htm" },
+      { name: "FAO: Fosetyl-aluminium specification", url: "https://openknowledge.fao.org/server/api/core/bitstreams/86edff2a-3045-40a2-aaf4-e7988dcd2b34/content" },
     ],
   },
   "mono-methyl-aniline": {
@@ -7721,8 +7721,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aarti-industries.com" },
     ],
     sources: [
-      { name: "IntelMarketResearch — Mono methyl aniline", url: "https://www.intelmarketresearch.com/mono-methyl-aniline-market-10902" },
-      { name: "Minal Specialities — N-Methylaniline", url: "https://www.minalspecialities.com/n-methylaniline/" },
+      { name: "IntelMarketResearch: Mono methyl aniline", url: "https://www.intelmarketresearch.com/mono-methyl-aniline-market-10902" },
+      { name: "Minal Specialities: N-Methylaniline", url: "https://www.minalspecialities.com/n-methylaniline/" },
     ],
   },
 };

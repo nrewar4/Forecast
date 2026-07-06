@@ -88,7 +88,7 @@ export default function TradeAnalytics() {
     [inMode],
   );
 
-  // Rows after the structural filters (mode/sector/country) — drives KPIs & charts.
+  // Rows after the structural filters (mode/sector/country), drives KPIs & charts.
   const filtered = useMemo(() => {
     let rows = inMode;
     if (sector !== "all") rows = rows.filter((r) => r.sector === sector);
@@ -490,7 +490,7 @@ export default function TradeAnalytics() {
                           <span className="ml-1 rounded bg-amber-100 px-1 py-0.5 text-[9px] font-medium text-amber-700">est</span>
                         ) : null}
                       </td>
-                      <td className="px-3 py-2.5 text-right tabular-nums text-muted-foreground">{avg ? money(avg) : "—"}</td>
+                      <td className="px-3 py-2.5 text-right tabular-nums text-muted-foreground">{avg ? money(avg) : "N/A"}</td>
                       <td className="px-3 py-2.5 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <div className="hidden h-1.5 w-16 overflow-hidden rounded-full bg-muted sm:block">
@@ -556,7 +556,7 @@ export default function TradeAnalytics() {
               {[
                 { icon: Wallet, label: "Trade value", value: money(selStats.v) },
                 { icon: Scale, label: "Volume", value: `${num(Math.round(selStats.q))} t` },
-                { icon: Tag, label: `Avg ${symbol}/t`, value: selStats.avg ? money(selStats.avg) : "—" },
+                { icon: Tag, label: `Avg ${symbol}/t`, value: selStats.avg ? money(selStats.avg) : "N/A" },
                 { icon: Boxes, label: "Shipments", value: num(selectedRows.length) },
                 { icon: Globe2, label: mode === "Imports" ? "Origins" : "Destinations", value: num(selStats.origins) },
                 { icon: Users, label: mode === "Imports" ? "Buyers" : "Suppliers", value: num(mode === "Imports" ? selStats.buyers : selStats.suppliers) },

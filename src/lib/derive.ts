@@ -132,7 +132,7 @@ export type Partner = {
   buyShipments: number;
   sellValue: number;
   sellShipments: number;
-  value: number; // buy + sell — total trade footprint
+  value: number; // buy + sell, total trade footprint
   qty: number;
   shipments: number;
   products: string[];

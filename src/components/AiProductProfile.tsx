@@ -36,7 +36,7 @@ export function AiProductProfile({ profile: p, onClose }: { profile: AiProfile; 
         <p className="flex items-center gap-2 text-sm text-foreground">
           <Sparkles className="h-4 w-4 text-primary" />
           <span>
-            <span className="font-semibold">AI-researched profile</span> — not in your catalog. Compiled from the web
+            <span className="font-semibold">AI-researched profile</span>, not in your catalog. Compiled from the web
             sources listed below; verify before procurement.
           </span>
         </p>
@@ -120,7 +120,7 @@ export function AiProductProfile({ profile: p, onClose }: { profile: AiProfile; 
             {p.mainProcess ? (
               <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
-                  Predominant process — {p.mainProcess.name}
+                  Predominant process: {p.mainProcess.name}
                 </p>
                 <p className="mt-1.5 text-sm leading-relaxed text-foreground">{p.mainProcess.detail}</p>
               </div>
@@ -346,7 +346,7 @@ export function AiProductProfile({ profile: p, onClose }: { profile: AiProfile; 
         <Card>
           <CardHeader className="pb-2">
             <CardTitle>Major Manufacturers</CardTitle>
-            <p className="mt-0.5 text-xs text-muted-foreground">Leading global producers from web research — links open each company&apos;s site</p>
+            <p className="mt-0.5 text-xs text-muted-foreground">Leading global producers from web research, links open each company&apos;s site</p>
           </CardHeader>
           <CardContent className="pt-2">
             <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -399,7 +399,7 @@ export function AiProductProfile({ profile: p, onClose }: { profile: AiProfile; 
             </div>
             <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
               <FlaskConical className="h-3.5 w-3.5 text-primary" />
-              AI estimate from public sources — confirm with ICIS / Platts quotations.
+              AI estimate from public sources, confirm with ICIS / Platts quotations.
             </p>
           </CardContent>
         </Card>

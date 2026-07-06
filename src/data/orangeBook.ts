@@ -1,7 +1,7 @@
 // Curated FDA Orange Book patent/exclusivity SNAPSHOT for the molecules we cover
 // in depth. The full Orange Book patent/exclusivity data is only distributed as
-// monthly downloadable files (product/patent/exclusivity.txt) — there is no live
-// CORS API — so this is a hand-verified snapshot of well-documented public facts
+// monthly downloadable files (product/patent/exclusivity.txt), there is no live
+// CORS API, so this is a hand-verified snapshot of well-documented public facts
 // (originator, US loss-of-exclusivity year, current status). For live, current
 // patent listings the UI links out to the FDA Orange Book. We deliberately do NOT
 // assert specific patent numbers here to avoid stale/incorrect data.
