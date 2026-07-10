@@ -73,21 +73,41 @@ try {
   await shot("03-cdmo");
 
   // Path B: type a molecule into the embedded assistant
-  const input = await page.$('input[placeholder*="product"]');
+  const input = await page.$('input[placeholder*="product"], input[placeholder*="CAS"]');
   await input.type("ibuprofen");
   await page.keyboard.press("Enter");
   // wait for the feasibility card (PubChem lookup + render)
-  await sleep(8000);
+  await sleep(9000);
   const afterText = await page.evaluate(() => document.body.innerText);
-  ok("feasibility vendor count shown", /manufacturers can make this/.test(afterText));
-  // No known vendor company name should appear (spot check a few from the dataset)
+  ok("feasibility vendor count shown", /capable manufacturers/.test(afterText));
+  // The CAS field is always wired; its value resolves live from PubChem in a real
+  // browser (PubChem is network-blocked in this sandbox, so it may read "Not listed").
+  ok("feasibility shows CAS field", /CAS number/i.test(afterText));
+  ok("feasibility core chemistry", /Core chemistry/i.test(afterText));
+  ok("timeline options offered", /\bFast\b/.test(afterText) && /Certainty/.test(afterText));
   ok("vendor identities withheld", !/(BASF|Sinopec|Reliance Industries|ExxonMobil)/.test(afterText));
   await shot("04-cdmo-feasibility");
+
+  // Pick a timeline priority and expect a milestone projection
+  await page.evaluate(() => {
+    const b = [...document.querySelectorAll("button")].find((x) => x.textContent.trim() === "Balanced");
+    b?.click();
+  });
+  await sleep(2500);
+  const milestoneText = await page.evaluate(() => document.body.innerText);
+  ok("milestones projected", /Milestone projection/.test(milestoneText) && /Indicative timeline/.test(milestoneText));
+  await shot("05-cdmo-milestones");
 
   // Floating widget appears on a non-embedded page
   await page.goto(base + "/", { waitUntil: "networkidle0" });
   await sleep(900);
   ok("floating chat on landing", (await page.$$('[aria-label="Open the APAC assistant"]')).length === 1);
+
+  // Market Overview is framed as chemical trade from a verified source
+  await page.goto(base + "/dashboard", { waitUntil: "networkidle0" });
+  await sleep(1500);
+  const dashText = await page.evaluate(() => document.body.innerText);
+  ok("market overview chemical only", /Chemical trade/.test(dashText) && !/merchandise trade/i.test(dashText));
 
   // 5. Admin login and dashboard shows lead KPIs
   await page.goto(base + "/login", { waitUntil: "networkidle0" });
@@ -101,7 +121,7 @@ try {
   const adminText = await page.evaluate(() => document.body.innerText);
   ok("admin login works", !page.url().includes("/login"), page.url());
   ok("admin lead panel present", /assistant and cdmo leads/i.test(adminText));
-  await shot("05-admin", false);
+  await shot("06-admin", false);
 
   ok("no page errors", errors.length === 0, errors.slice(0, 3).join(" | "));
 } finally {

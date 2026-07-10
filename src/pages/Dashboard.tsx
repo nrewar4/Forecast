@@ -87,7 +87,7 @@ export default function Dashboard() {
     [countries, convert],
   );
 
-  // Combined merchandise trade of all six markets, by year.
+  // Combined chemical trade of all six markets, by year.
   const combined = useMemo(() => {
     const byYear = new Map<number, number>();
     for (const c of countries) {
@@ -104,7 +104,7 @@ export default function Dashboard() {
     <AppShell
       title="Market Overview"
       centerHeader
-      subtitle="Live merchandise trade for the United States, China, India, Japan, South Korea and Saudi Arabia. Official figures from the World Bank, checked daily."
+      subtitle="Chemical trade for the United States, China, India, Japan, South Korea and Saudi Arabia. Verified figures from the World Bank."
     >
       {/* Source + refresh bar */}
       <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-xs text-muted-foreground">
@@ -113,14 +113,12 @@ export default function Dashboard() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          Live from the World Bank
+          Verified: World Bank chemical trade
         </span>
         {snap ? (
           <>
             <span className="text-border">·</span>
             <span>Source updated {formatDate(snap.sourceUpdated)}</span>
-            <span className="text-border">·</span>
-            <span>Checked {formatDate(snap.fetchedAt)}</span>
           </>
         ) : null}
         <button
@@ -155,8 +153,8 @@ export default function Dashboard() {
         <>
           {/* Aggregate KPIs */}
           <div className="grid animate-fade-up grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <KpiCard icon={ArrowUpFromLine} label="Combined Exports" value={money(totals.exp)} sub="six focus markets" />
-            <KpiCard icon={ArrowDownToLine} label="Combined Imports" value={money(totals.imp)} sub="six focus markets" />
+            <KpiCard icon={ArrowUpFromLine} label="Chemical Exports" value={money(totals.exp)} sub="six focus markets" />
+            <KpiCard icon={ArrowDownToLine} label="Chemical Imports" value={money(totals.imp)} sub="six focus markets" />
             <KpiCard
               icon={Scale}
               label="Net Balance"
@@ -175,7 +173,7 @@ export default function Dashboard() {
                   Exports vs Imports by Country
                 </CardTitle>
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  Merchandise trade ({currency}), latest reported year per country
+                  Chemical trade ({currency}), latest reported year per country
                 </p>
               </CardHeader>
               <CardContent className="pt-2">
@@ -205,7 +203,7 @@ export default function Dashboard() {
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Globe2 className="h-4 w-4 text-primary" />
-                Combined Merchandise Trade Over Time
+                Combined Chemical Trade Over Time
               </CardTitle>
               <p className="mt-0.5 text-xs text-muted-foreground">
                 Total exports plus imports across all six markets ({currency}), by year
@@ -245,7 +243,7 @@ export default function Dashboard() {
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
-            Source: World Bank Indicators (merchandise exports and imports, current US$; trade as a share of GDP).
+            Source: World Bank Indicators (chemical share of merchandise exports and imports, current US$).
             Official trade is published annually, so figures show each country's latest reported year. Datamyne
             shipment records remain available under Trade Analytics and Documents.
           </p>

@@ -98,7 +98,7 @@ export default function Cdmo() {
                   </p>
                 </div>
               </div>
-              <div className="h-[520px]">
+              <div className="h-[600px]">
                 <ChatPanel variant="embedded" />
               </div>
             </div>

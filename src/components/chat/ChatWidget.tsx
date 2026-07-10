@@ -39,7 +39,7 @@ export function ChatWidget() {
   return (
     <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end print:hidden">
       {open ? (
-        <div className="mb-3 flex h-[560px] w-[min(92vw,384px)] animate-chat-pop flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
+        <div className="mb-3 flex h-[min(82vh,720px)] w-[min(94vw,460px)] animate-chat-pop flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
           <div className="flex items-center justify-between border-b border-border bg-ink px-4 py-3">
             <div className="flex items-center gap-2">
               <span className="grid h-7 w-7 place-items-center rounded-full bg-primary/15">

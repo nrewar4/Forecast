@@ -190,6 +190,17 @@ export type Pathway = {
   weeks: [number, number];
 };
 
+export type Urgency = "fast" | "balanced" | "certainty";
+
+// How the customer wants to trade speed against assurance. Fast compresses and
+// parallelises; certainty extends and adds the validation work that de-risks a
+// regulated launch.
+export const URGENCY_META: Record<Urgency, { label: string; factor: number; note: string }> = {
+  fast: { label: "Fast", factor: 0.78, note: "Compressed and parallelised to first delivery." },
+  balanced: { label: "Balanced", factor: 1, note: "Standard staging of development and scale-up." },
+  certainty: { label: "Certainty", factor: 1.22, note: "Extra validation and de-risking for a regulated launch." },
+};
+
 export type PathwayOptions = {
   /** phase the customer starts at (earlier phases are trimmed) */
   startPhase?: Phase;
@@ -197,10 +208,16 @@ export type PathwayOptions = {
   endPhase?: Phase;
   /** a regulated filing is required (keeps validation batches) */
   regulated?: boolean;
+  /** speed vs assurance preference; scales the timeline */
+  urgency?: Urgency;
 };
 
 function phaseIndex(p: Phase): number {
   return PHASE_ORDER.indexOf(p);
+}
+
+function scaleWeeks(w: [number, number], factor: number): [number, number] {
+  return [Math.max(1, Math.round(w[0] * factor)), Math.max(2, Math.round(w[1] * factor))];
 }
 
 // Composes a pathway from an archetype, trimming stages outside the customer's
@@ -211,6 +228,9 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
 
   const startIdx = opts.startPhase ? phaseIndex(opts.startPhase) : 0;
   const endIdx = opts.endPhase ? phaseIndex(opts.endPhase) : PHASE_ORDER.length - 1;
+  const factor = opts.urgency ? URGENCY_META[opts.urgency].factor : 1;
+  // Certainty implies a regulated, validated launch unless told otherwise.
+  const regulated = opts.regulated ?? opts.urgency === "certainty";
 
   const stages = archetype.stageIds
     .map((id) => STAGES[id])
@@ -218,9 +238,10 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
     .filter((s) => {
       const idx = phaseIndex(s.phase);
       if (idx < startIdx || idx > endIdx) return false;
-      if (opts.regulated === false && s.id === "valid") return false;
+      if (!regulated && s.id === "valid") return false;
       return true;
-    });
+    })
+    .map((s) => (factor === 1 ? s : { ...s, weeks: scaleWeeks(s.weeks, factor) }));
 
   // Group into milestones by phase, in phase order.
   const milestones: Milestone[] = [];
@@ -246,4 +267,12 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
   ];
 
   return { archetype, stages, milestones, weeks };
+}
+
+// Builds a milestone projection for making a specific product. A pharma API
+// takes the generic-API archetype (validation matters); everything else takes
+// specialty custom synthesis. Urgency scales the timeline.
+export function productPathway(isPharma: boolean, urgency: Urgency = "balanced"): Pathway {
+  const id = isPharma ? "generic-api" : "specialty";
+  return buildPathway(id, { urgency })!;
 }

@@ -17,6 +17,7 @@ export type ChemIdentity = {
   name: string; // best common/display name
   iupac: string | null;
   formula: string | null;
+  mw: string | null; // molecular weight, g/mol
   smiles: string | null;
   primaryCas: string | null; // canonical CAS RN
   casList: string[]; // all CAS-shaped synonyms (registry variants)
@@ -81,7 +82,7 @@ export async function resolveIdentity(
 
   try {
     // 1. Resolve to a CID + core properties (name lookup also matches CAS).
-    const propUrl = `${BASE}/name/${encodeURIComponent(q)}/property/MolecularFormula,SMILES,ConnectivitySMILES,IUPACName/JSON`;
+    const propUrl = `${BASE}/name/${encodeURIComponent(q)}/property/MolecularFormula,MolecularWeight,SMILES,ConnectivitySMILES,IUPACName/JSON`;
     const propRes = await fetch(propUrl, { signal });
     if (!propRes.ok) {
       cacheSet(cacheKey, null, DAY);
@@ -92,6 +93,7 @@ export async function resolveIdentity(
         Properties?: Array<{
           CID?: number;
           MolecularFormula?: string;
+          MolecularWeight?: string;
           SMILES?: string;
           ConnectivitySMILES?: string;
           IUPACName?: string;
@@ -127,6 +129,7 @@ export async function resolveIdentity(
       name: pickName(synonyms, p.IUPACName ?? null),
       iupac: p.IUPACName ?? null,
       formula: p.MolecularFormula ?? null,
+      mw: p.MolecularWeight ?? null,
       smiles: p.SMILES ?? p.ConnectivitySMILES ?? null,
       primaryCas: typedCas ?? principalCas(casList),
       casList,
@@ -135,6 +138,35 @@ export async function resolveIdentity(
     };
     cacheSet(cacheKey, identity, DAY);
     return identity;
+  } catch (err) {
+    if (signal && (err as Error)?.name === "AbortError") throw err;
+    return null;
+  }
+}
+
+// A short, plain-language description of the compound from PubChem's PUG-View
+// description endpoint (an authoritative, citable source). Best-effort and
+// cached for a day; returns null when PubChem has no description.
+export async function fetchCompoundDescription(
+  cid: number,
+  signal?: AbortSignal,
+): Promise<string | null> {
+  const cacheKey = `desc:${cid}`;
+  const hit = cacheGet<string | null>(cacheKey);
+  if (hit !== null) return hit;
+  try {
+    const res = await fetch(`${BASE}/cid/${cid}/description/JSON`, { signal });
+    if (!res.ok) {
+      cacheSet(cacheKey, null, DAY);
+      return null;
+    }
+    const json = (await res.json()) as {
+      InformationList?: { Information?: Array<{ Description?: string }> };
+    };
+    const info = json?.InformationList?.Information ?? [];
+    const desc = info.find((i) => i.Description)?.Description ?? null;
+    cacheSet(cacheKey, desc, DAY);
+    return desc;
   } catch (err) {
     if (signal && (err as Error)?.name === "AbortError") throw err;
     return null;

@@ -2,64 +2,62 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, SendHorizonal, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { loadAiConfig, hasApiKey } from "@/lib/aiConfig";
+import { loadAiConfig } from "@/lib/aiConfig";
 import { streamChat, type ChatMsg } from "@/lib/openrouter";
 import { track } from "@/lib/analytics";
 import {
   GREETING,
   START_REPLIES,
   SITUATION_REPLIES,
-  detectIntent,
+  understand,
   runFeasibility,
   classifySituation,
   pathwayFor,
+  milestonesForProduct,
   sampleProducts,
   type Intent,
   type QuickReply,
   type Feasibility,
 } from "@/lib/chatAssistant";
-import { findProduct } from "@/lib/cdmoMatch";
-import type { Pathway } from "@/data/cdmoPathway";
+import type { CdmoMatch } from "@/lib/cdmoMatch";
+import type { Pathway, Urgency } from "@/data/cdmoPathway";
+import { URGENCY_META } from "@/data/cdmoPathway";
 import { FeasibilityReport } from "@/components/cdmo/FeasibilityReport";
 import { PathwaySpine } from "@/components/cdmo/PathwaySpine";
 import { EnquiryForm } from "@/components/cdmo/EnquiryForm";
 
+type PathwayMsg = {
+  id: number;
+  role: "bot";
+  kind: "pathway";
+  data: Pathway;
+  title?: string;
+  subtitle?: string;
+  eyebrow?: string;
+};
 type BotMsg =
   | { id: number; role: "bot"; kind: "text"; text: string }
   | { id: number; role: "bot"; kind: "typing" }
   | { id: number; role: "bot"; kind: "feasibility"; data: Feasibility }
-  | { id: number; role: "bot"; kind: "pathway"; data: Pathway }
+  | PathwayMsg
   | { id: number; role: "bot"; kind: "enquiry"; product?: string }
   | { id: number; role: "bot"; kind: "products"; items: string[] };
 type UserMsg = { id: number; role: "user"; kind: "text"; text: string };
 type Msg = BotMsg | UserMsg;
 
-type Awaiting = "molecule" | "situation" | "chat" | null;
+type Awaiting = "molecule" | "situation" | null;
 
-// Distributive Omit so each bot variant keeps its own discriminated shape
-// (a plain Omit over the union would collapse to only the shared keys).
-type BotPayload = BotMsg extends infer T
-  ? T extends BotMsg
-    ? Omit<T, "id" | "role">
-    : never
-  : never;
+// Distributive Omit so each bot variant keeps its own discriminated shape.
+type BotPayload = BotMsg extends infer T ? (T extends BotMsg ? Omit<T, "id" | "role"> : never) : never;
 
 let uid = 0;
 const nextId = () => ++uid;
 
-// Tries to pull a known product out of free text so "make me some ibuprofen"
-// runs the feasibility flow directly instead of asking again.
-function extractProduct(text: string): string | null {
-  if (findProduct(text)) return text;
-  const words = text.replace(/[^a-z0-9\- ]/gi, " ").split(/\s+/).filter((w) => w.length >= 4);
-  for (const w of words) if (findProduct(w)) return w;
-  // Longest 2-word window
-  for (let i = 0; i < words.length - 1; i++) {
-    const pair = `${words[i]} ${words[i + 1]}`;
-    if (findProduct(pair)) return pair;
-  }
-  return null;
-}
+const TIMELINE_REPLIES: QuickReply[] = [
+  { label: "Fast", value: "urgency:fast" },
+  { label: "Balanced", value: "urgency:balanced" },
+  { label: "Certainty", value: "urgency:certainty" },
+];
 
 export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "embedded" }) {
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -67,11 +65,11 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const awaiting = useRef<Awaiting>(null);
+  const lastMatch = useRef<CdmoMatch | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const started = useRef(false);
 
-  // Greeting on first mount.
   useEffect(() => {
     if (started.current) return;
     started.current = true;
@@ -96,30 +94,32 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
   function replace(id: number, msg: BotPayload) {
     setMessages((m) => m.map((x) => (x.id === id ? ({ id, role: "bot", ...msg } as Msg) : x)));
   }
+  function freshController() {
+    abortRef.current?.abort();
+    const c = new AbortController();
+    abortRef.current = c;
+    return c;
+  }
 
   async function doFeasibility(query: string) {
     const typingId = pushBot({ kind: "typing" });
     setBusy(true);
     const cfg = loadAiConfig();
-    const controller = new AbortController();
-    abortRef.current = controller;
+    const controller = freshController();
     try {
       const data = await runFeasibility(query, cfg, controller.signal);
+      lastMatch.current = data.match;
       track("cdmo_feasibility", { product: data.match.productName, vendors: String(data.match.vendorCount) });
       replace(typingId, { kind: "feasibility", data });
       pushBot({
         kind: "text",
-        text: `${data.match.vendorCount} manufacturers in our network are assessed capable of making ${data.match.productName}. Ready to take it further?`,
+        text: `${data.match.vendorCount} manufacturers in our network can make ${data.match.productName}. How should we run the project? Choose your priority and I will project the milestones.`,
       });
-      setQuick([
-        { label: "Contact APAC", value: "contact", intent: "contact" },
-        { label: "Check another product", value: "another", intent: "feasibility" },
-        { label: "Plan the project", value: "plan", intent: "pathway" },
-      ]);
+      setQuick([...TIMELINE_REPLIES, { label: "Contact APAC", value: "contact", intent: "contact" }]);
     } catch {
       replace(typingId, {
         kind: "text",
-        text: "I could not complete that lookup just now. Please try another name, or contact APAC directly and we will take it from there.",
+        text: "I could not complete that lookup just now. Please try another name, or contact APAC and we will take it from there.",
       });
       setQuick([{ label: "Contact APAC", value: "contact", intent: "contact" }]);
     } finally {
@@ -128,12 +128,35 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
     }
   }
 
+  function showMilestones(urgency: Urgency) {
+    const match = lastMatch.current;
+    if (!match) {
+      awaiting.current = "molecule";
+      pushBot({ kind: "text", text: "Which product should I project milestones for?" });
+      return;
+    }
+    const pathway = milestonesForProduct(match, urgency);
+    track("cdmo_pathway", { product: match.productName, urgency });
+    pushBot({
+      kind: "pathway",
+      data: pathway,
+      eyebrow: `${URGENCY_META[urgency].label} track`,
+      title: `Milestone projection for ${match.productName}`,
+      subtitle: URGENCY_META[urgency].note,
+    });
+    pushBot({ kind: "text", text: "Want APAC to scope this against your real volumes and timeline?" });
+    setQuick([
+      { label: "Contact APAC", value: "contact", intent: "contact" },
+      { label: "Try another priority", value: "adjust" },
+      { label: "Check another product", value: "another", intent: "feasibility" },
+    ]);
+  }
+
   async function doPathway(text: string) {
     const typingId = pushBot({ kind: "typing" });
     setBusy(true);
     const cfg = loadAiConfig();
-    const controller = new AbortController();
-    abortRef.current = controller;
+    const controller = freshController();
     try {
       const archetype = await classifySituation(text, cfg, controller.signal);
       const pathway = pathwayFor(archetype);
@@ -158,23 +181,14 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
 
   async function generalReply(text: string) {
     const cfg = loadAiConfig();
-    if (!hasApiKey(cfg)) {
-      pushBot({
-        kind: "text",
-        text: "I can help two ways: work out how a product gets made and who in our network can make it, or map a CDMO development pathway for your situation. Which sounds right?",
-      });
-      setQuick(START_REPLIES);
-      return;
-    }
     const botId = pushBot({ kind: "text", text: "" });
     setBusy(true);
-    const controller = new AbortController();
-    abortRef.current = controller;
+    const controller = freshController();
     const history: ChatMsg[] = [
       {
         role: "system",
         content:
-          "You are APAC Sourcing Solutions' assistant, a chemical sourcing and CDMO company. Keep replies to 2 or 3 sentences. Always steer the customer toward one of two actions: get a product made (feasibility) or plan a CDMO project (pathway), and offer to connect them with APAC. Never use an em dash.",
+          "You are APAC Sourcing Solutions' assistant, a chemical sourcing and CDMO company. Answer the user's question helpfully in 2 to 4 sentences, then, when it fits, offer to either assess how a specific product gets made and who can make it, or map a CDMO development pathway. Be concrete and factual. Never use an em dash.",
       },
       { role: "user", content: text },
     ];
@@ -185,38 +199,59 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
         replace(botId, { kind: "text", text: acc });
       }, controller.signal);
     } catch {
-      if (!acc) replace(botId, { kind: "text", text: "Let me point you the right way instead. What are you trying to do?" });
+      if (!acc)
+        replace(botId, {
+          kind: "text",
+          text: "I can help two ways: work out how a product gets made and who in our network can make it, or map a CDMO development pathway. Which would you like?",
+        });
     } finally {
       setBusy(false);
       setQuick(START_REPLIES);
     }
   }
 
-  function handleSend(raw: string, intentHint?: Intent) {
-    const text = raw.trim();
-    if (!text || busy) return;
-
-    // Quick-reply shortcuts that are commands, not real messages.
-    if (text === "contact" || intentHint === "contact") {
+  // Handles command-style quick replies. Returns true if it consumed the input.
+  function handleCommand(text: string): boolean {
+    if (text === "contact") {
       pushUser("I would like to contact APAC");
       setQuick([]);
-      pushBot({ kind: "text", text: "Happy to connect you. Share a few details and we respond " });
-      pushBot({ kind: "enquiry" });
+      pushBot({ kind: "text", text: "Happy to connect you. Share a few details and we respond within one business day." });
+      pushBot({ kind: "enquiry", product: lastMatch.current?.productName });
       awaiting.current = null;
-      return;
+      return true;
     }
     if (text === "another") {
       setQuick([]);
       awaiting.current = "molecule";
-      pushBot({ kind: "text", text: "Sure. Which product or molecule? A name, CAS number, or SMILES works." });
-      return;
+      pushBot({ kind: "text", text: "Sure. Which product or molecule? A name or CAS number works." });
+      return true;
     }
     if (text === "plan") {
       setQuick(SITUATION_REPLIES);
       awaiting.current = "situation";
       pushBot({ kind: "text", text: "Describe your situation in a sentence, or pick the closest below." });
-      return;
+      return true;
     }
+    if (text === "adjust") {
+      setQuick(TIMELINE_REPLIES);
+      pushBot({ kind: "text", text: "Pick a different priority and I will reproject the milestones." });
+      return true;
+    }
+    if (text.startsWith("urgency:")) {
+      const u = text.slice("urgency:".length) as Urgency;
+      pushUser(`${URGENCY_META[u]?.label ?? u} track`);
+      setQuick([]);
+      showMilestones(u);
+      return true;
+    }
+    return false;
+  }
+
+  async function handleSend(raw: string, intentHint?: Intent) {
+    const text = raw.trim();
+    if (!text || busy) return;
+
+    if (handleCommand(text)) return;
 
     pushUser(text);
     setQuick([]);
@@ -230,19 +265,49 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
       return;
     }
 
-    const intent = intentHint ?? detectIntent(text);
-    if (intent === "feasibility") {
-      const product = extractProduct(text);
-      if (product) {
-        doFeasibility(product);
-      } else {
+    // Dynamic routing: understand any prompt (LLM when a key is set, else rules).
+    if (intentHint) {
+      route(intentHint, text);
+      return;
+    }
+    const cfg = loadAiConfig();
+    const typingId = pushBot({ kind: "typing" });
+    setBusy(true);
+    const controller = freshController();
+    try {
+      const u = await understand(text, cfg, controller.signal);
+      setMessages((m) => m.filter((x) => x.id !== typingId));
+      setBusy(false);
+      if (u.intent === "feasibility" && u.product) {
+        doFeasibility(u.product);
+      } else if (u.intent === "feasibility") {
         awaiting.current = "molecule";
-        pushBot({ kind: "text", text: "Great. Which product or molecule do you want made? A name, CAS number, or SMILES works." });
+        pushBot({ kind: "text", text: "Which product or molecule do you want made? A name or CAS number works." });
+      } else if (u.intent === "pathway") {
+        doPathway(u.situation || text);
+      } else if (u.intent === "contact") {
+        handleCommand("contact");
+      } else if (u.intent === "discovery") {
+        route("discovery", text);
+      } else {
+        generalReply(text);
       }
+    } catch {
+      setMessages((m) => m.filter((x) => x.id !== typingId));
+      setBusy(false);
+      generalReply(text);
+    }
+  }
+
+  function route(intent: Intent, text: string) {
+    if (intent === "feasibility") {
+      doFeasibility(text);
     } else if (intent === "pathway") {
       awaiting.current = "situation";
       pushBot({ kind: "text", text: "I can map a development pathway. Describe your situation, or pick the closest below." });
       setQuick(SITUATION_REPLIES);
+    } else if (intent === "contact") {
+      handleCommand("contact");
     } else if (intent === "discovery") {
       const items = sampleProducts(text);
       pushBot({ kind: "text", text: "Here are a few from our catalog. Product Discovery has the full searchable set." });
@@ -252,28 +317,20 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
         { label: "Contact APAC", value: "contact", intent: "contact" },
       ]);
     } else {
-      // Unknown intent: if the message names a product we know, treat it as a
-      // feasibility request directly so a bare "ibuprofen" just works.
-      const product = extractProduct(text);
-      if (product) {
-        doFeasibility(product);
-      } else {
-        generalReply(text);
-      }
+      generalReply(text);
     }
   }
 
   return (
     <div className="flex h-full flex-col">
-      <div
-        ref={scrollRef}
-        className={cn(
-          "flex-1 space-y-3 overflow-y-auto px-4 py-4",
-          variant === "embedded" ? "max-h-[560px]" : "",
-        )}
-      >
+      <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
         {messages.map((m) => (
-          <MessageBubble key={m.id} msg={m} onContact={() => handleSend("contact", "contact")} onPick={(p) => handleSend(p, "feasibility")} />
+          <MessageBubble
+            key={m.id}
+            msg={m}
+            onContact={() => handleSend("contact", "contact")}
+            onPick={(p) => handleSend(p, "feasibility")}
+          />
         ))}
 
         {quick.length > 0 && !busy ? (
@@ -303,7 +360,7 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a product, CAS, or your situation"
+          placeholder="Type a product, CAS, or ask anything"
           className="h-10 flex-1 rounded-lg border border-border bg-background px-3 text-sm outline-none transition-colors focus:border-primary"
         />
         <button
@@ -338,7 +395,6 @@ function MessageBubble({
     );
   }
 
-  // Bot
   const wide = msg.kind === "feasibility" || msg.kind === "pathway" || msg.kind === "enquiry";
   return (
     <div className="flex gap-2">
@@ -349,15 +405,11 @@ function MessageBubble({
         {msg.kind === "typing" ? (
           <div className="inline-flex items-center gap-1 rounded-2xl rounded-bl-sm bg-muted px-3.5 py-2.5">
             {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="typing-dot h-1.5 w-1.5 rounded-full bg-muted-foreground"
-                style={{ animationDelay: `${i * 160}ms` }}
-              />
+              <span key={i} className="typing-dot h-1.5 w-1.5 rounded-full bg-muted-foreground" style={{ animationDelay: `${i * 160}ms` }} />
             ))}
           </div>
         ) : msg.kind === "text" ? (
-          <div className="animate-slide-up-in rounded-2xl rounded-bl-sm bg-muted px-3.5 py-2 text-sm text-foreground">
+          <div className="animate-slide-up-in rounded-2xl rounded-bl-sm bg-muted px-3.5 py-2 text-sm leading-relaxed text-foreground">
             {msg.text || "…"}
           </div>
         ) : msg.kind === "feasibility" ? (
@@ -366,7 +418,7 @@ function MessageBubble({
           </div>
         ) : msg.kind === "pathway" ? (
           <div className="animate-slide-up-in">
-            <PathwaySpine pathway={msg.data} onContact={onContact} compact />
+            <PathwaySpine pathway={msg.data} onContact={onContact} compact title={msg.title} subtitle={msg.subtitle} eyebrow={msg.eyebrow} />
           </div>
         ) : msg.kind === "enquiry" ? (
           <div className="animate-slide-up-in">
@@ -385,10 +437,7 @@ function MessageBubble({
                 <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
               </button>
             ))}
-            <Link
-              to="/knowledge-base"
-              className="press inline-flex items-center gap-1 pt-1 text-xs font-semibold text-primary hover:underline"
-            >
+            <Link to="/knowledge-base" className="press inline-flex items-center gap-1 pt-1 text-xs font-semibold text-primary hover:underline">
               Open Product Discovery <ArrowUpRight className="h-3 w-3" />
             </Link>
           </div>

@@ -13,9 +13,16 @@
 import type { AiConfig } from "@/lib/aiConfig";
 import { hasApiKey } from "@/lib/aiConfig";
 import { chatComplete, type ChatMsg } from "@/lib/openrouter";
-import { resolveMolecule, type PubchemResult } from "@/lib/pubchem";
+import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
 import { matchVendors, findProduct, type CdmoMatch } from "@/lib/cdmoMatch";
-import { ARCHETYPES, buildPathway, type Archetype, type Pathway } from "@/data/cdmoPathway";
+import {
+  ARCHETYPES,
+  buildPathway,
+  productPathway,
+  type Archetype,
+  type Pathway,
+  type Urgency,
+} from "@/data/cdmoPathway";
 import { products } from "@/data/products";
 
 export type Intent = "feasibility" | "pathway" | "discovery" | "contact" | "unknown";
@@ -31,6 +38,67 @@ export function detectIntent(text: string): Intent {
   if (/\b(price|pricing|cost|route|knowledge|discover|browse|search|product|find)\b/.test(t))
     return "discovery";
   return "unknown";
+}
+
+const QUESTION_WORDS = /^(what|how|why|when|where|who|which|can|do|does|is|are|should|could|would|tell|explain|help)\b/i;
+
+// Heuristic: a short, mostly-chemical string with no question framing is very
+// likely a product name the user wants assessed, even if it is not in our data.
+export function looksLikeProductQuery(text: string): boolean {
+  const t = text.trim();
+  if (!t || t.length > 48) return false;
+  if (t.includes("?") || QUESTION_WORDS.test(t)) return false;
+  const words = t.split(/\s+/);
+  if (words.length > 5) return false;
+  return /^[A-Za-z0-9][A-Za-z0-9\s,'()\-+/.]*$/.test(t);
+}
+
+export type Understanding = { intent: Intent; product?: string; situation?: string };
+
+// Dynamic understanding of any prompt. With a key, one small LLM call classifies
+// intent and pulls out a product or a situation from free-form text; without a
+// key it falls back to keywords plus the product heuristic. Always safe.
+export async function understand(
+  text: string,
+  cfg: AiConfig,
+  signal?: AbortSignal,
+): Promise<Understanding> {
+  const keyword = detectIntent(text);
+
+  if (hasApiKey(cfg)) {
+    try {
+      const messages: ChatMsg[] = [
+        {
+          role: "system",
+          content:
+            'You route messages for a chemical sourcing and CDMO company. Reply with ONLY a JSON object, no prose. Shape: {"intent":"feasibility|pathway|discovery|contact|unknown","product":"<chemical name or CAS if the user named one, else empty>","situation":"<one-line paraphrase if they describe a CDMO problem, else empty>"}. Use "feasibility" when they name or ask to make/source a specific chemical or product. Use "pathway" when they describe a development or supply situation. Use "contact" when they want to reach a human. Use "discovery" to browse products. Never use an em dash.',
+        },
+        { role: "user", content: text },
+      ];
+      const raw = await chatComplete(cfg, messages, signal);
+      const match = raw.match(/\{[\s\S]*\}/);
+      if (match) {
+        const parsed = JSON.parse(match[0]) as Understanding;
+        const intent: Intent = ["feasibility", "pathway", "discovery", "contact", "unknown"].includes(
+          parsed.intent,
+        )
+          ? parsed.intent
+          : keyword;
+        return {
+          intent,
+          product: parsed.product?.trim() || undefined,
+          situation: parsed.situation?.trim() || undefined,
+        };
+      }
+    } catch {
+      // fall through to the deterministic path
+    }
+  }
+
+  if (keyword === "unknown" && looksLikeProductQuery(text)) {
+    return { intent: "feasibility", product: text.trim() };
+  }
+  return { intent: keyword };
 }
 
 export type QuickReply = { label: string; value: string; intent?: Intent };
@@ -58,20 +126,44 @@ export type CoreChemistry = {
   startingMaterials: string[];
   plantType: string;
   hazardNote: string;
+  /** where the route came from: our verified catalog or an AI-compiled summary */
+  source: "catalog" | "ai";
 };
 
 export type Feasibility = {
   query: string;
-  pubchem: PubchemResult | null;
+  identity: ChemIdentity | null;
+  description: string | null;
   chemistry: CoreChemistry | null;
   match: CdmoMatch;
   /** optional LLM-written précis, added when a key is configured */
   aiSummary?: string;
 };
 
-// Derives concise, honest core chemistry from the catalog when the molecule is
-// known. Starting materials are read from the first route step's feedstocks.
-function coreChemistry(name: string): CoreChemistry | null {
+// Races a promise against a timeout so PubChem never stalls the report. Returns
+// the fallback on timeout and aborts the in-flight request.
+function withTimeout<T>(
+  make: (signal: AbortSignal) => Promise<T>,
+  ms: number,
+  fallback: T,
+  parent?: AbortSignal,
+): Promise<T> {
+  const ctrl = new AbortController();
+  if (parent) parent.addEventListener("abort", () => ctrl.abort(), { once: true });
+  return Promise.race([
+    make(ctrl.signal).catch(() => fallback),
+    new Promise<T>((resolve) =>
+      setTimeout(() => {
+        ctrl.abort();
+        resolve(fallback);
+      }, ms),
+    ),
+  ]);
+}
+
+// Concise, honest core chemistry from the verified catalog when we cover the
+// molecule. Starting materials are read from the route's feedstock cost drivers.
+function catalogChemistry(name: string): CoreChemistry | null {
   const p = findProduct(name);
   if (!p || !p.route.length) return null;
   const starting = p.costDrivers
@@ -81,56 +173,98 @@ function coreChemistry(name: string): CoreChemistry | null {
   return {
     headline: p.route[0],
     route: p.route.slice(0, 4),
-    startingMaterials: starting.length ? starting : p.producers.length ? [] : [],
+    startingMaterials: starting,
     plantType: p.plantType,
     hazardNote:
       p.plantType === "Continuous"
         ? "Continuous processing; standard chemical handling and containment apply."
         : "Multipurpose batch chemistry; confirm hazard and containment class at feasibility.",
+    source: "catalog",
   };
 }
 
-// Runs the whole Path B lookup. PubChem is best-effort; the vendor match and
-// chemistry never depend on it, so the report always renders.
+// When the catalog does not cover a molecule and a key is present, ask the LLM
+// for the major industrial route as a short factual list. Parsed defensively.
+async function aiChemistry(
+  identity: ChemIdentity | null,
+  query: string,
+  cfg: AiConfig,
+  signal?: AbortSignal,
+): Promise<CoreChemistry | null> {
+  if (!hasApiKey(cfg)) return null;
+  const name = identity?.name || query;
+  const facts = [
+    `Compound: ${name}`,
+    identity?.primaryCas ? `CAS: ${identity.primaryCas}` : "",
+    identity?.formula ? `Formula: ${identity.formula}` : "",
+  ]
+    .filter(Boolean)
+    .join(", ");
+  try {
+    const messages: ChatMsg[] = [
+      {
+        role: "system",
+        content:
+          'Return ONLY JSON, no prose. For the given compound, give the major industrial synthesis route. Shape: {"headline":"<one-line name of the dominant route>","route":["step 1","step 2","step 3"],"startingMaterials":["m1","m2"],"hazardNote":"<one short handling note>"}. Keep 3 to 5 short factual steps. If you are not confident, use an empty route array. Never use an em dash.',
+      },
+      { role: "user", content: facts },
+    ];
+    const raw = await chatComplete(cfg, messages, signal);
+    const m = raw.match(/\{[\s\S]*\}/);
+    if (!m) return null;
+    const parsed = JSON.parse(m[0]) as Partial<CoreChemistry>;
+    if (!parsed.route || parsed.route.length === 0) return null;
+    return {
+      headline: parsed.headline || parsed.route[0],
+      route: parsed.route.slice(0, 5),
+      startingMaterials: (parsed.startingMaterials ?? []).slice(0, 4),
+      plantType: "Batch",
+      hazardNote: parsed.hazardNote || "Confirm hazard and containment class at feasibility.",
+      source: "ai",
+    };
+  } catch {
+    return null;
+  }
+}
+
+// Runs the whole Path B lookup for any product, in or out of our catalog:
+// resolve identity + CAS from PubChem, pull a short description, establish the
+// core chemistry, and match APAC vendors by capability. Every step is
+// best-effort and time-boxed, so the report always renders fast.
 export async function runFeasibility(
   query: string,
   cfg: AiConfig,
   signal?: AbortSignal,
 ): Promise<Feasibility> {
-  // PubChem is best-effort and must never stall the report. Race the lookup
-  // against a short timeout with its own abort so the card always renders fast.
-  let pubchem: PubchemResult | null = null;
-  const pubchemController = new AbortController();
-  if (signal) signal.addEventListener("abort", () => pubchemController.abort(), { once: true });
-  try {
-    pubchem = await Promise.race([
-      resolveMolecule(query, pubchemController.signal),
-      new Promise<null>((resolve) =>
-        setTimeout(() => {
-          pubchemController.abort();
-          resolve(null);
-        }, 4500),
-      ),
-    ]);
-  } catch {
-    pubchem = null; // outside PubChem or offline; keep going with catalog data
-  }
+  const identity = await withTimeout(
+    (s) => resolveIdentity(query, s),
+    5000,
+    null as ChemIdentity | null,
+    signal,
+  );
 
-  const displayName = pubchem?.name || undefined;
+  const description = identity?.cid
+    ? await withTimeout((s) => fetchCompoundDescription(identity.cid, s), 4000, null as string | null, signal)
+    : null;
+
+  const displayName = identity?.name || undefined;
   const match = matchVendors(query, displayName);
-  const chemistry = coreChemistry(match.productName) || coreChemistry(query);
 
-  const result: Feasibility = { query, pubchem, chemistry, match };
+  let chemistry = catalogChemistry(match.productName) || catalogChemistry(query);
+  if (!chemistry) chemistry = await aiChemistry(identity, query, cfg, signal);
+
+  const result: Feasibility = { query, identity, description, chemistry, match };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {
     try {
       const facts = [
         `Product: ${match.productName}`,
-        pubchem?.formula ? `Formula: ${pubchem.formula}` : "",
-        pubchem?.mw ? `Molecular weight: ${pubchem.mw}` : "",
+        identity?.primaryCas ? `CAS: ${identity.primaryCas}` : "",
+        identity?.formula ? `Formula: ${identity.formula}` : "",
         chemistry ? `Primary route: ${chemistry.headline}` : "",
         `APAC group: ${match.group} / ${match.category}`,
+        `Capable vendors in network: ${match.vendorCount}`,
       ]
         .filter(Boolean)
         .join("\n");
@@ -138,7 +272,7 @@ export async function runFeasibility(
         {
           role: "system",
           content:
-            "You are APAC's CDMO sourcing assistant. In 2 or 3 concise sentences, tell a B2B customer how APAC can help them manufacture this product. Be specific and factual, no marketing fluff, no invented numbers. Never use an em dash.",
+            "You are APAC's CDMO sourcing assistant. In 2 or 3 concise sentences, tell a B2B customer how APAC can help them manufacture this product. Be specific and factual, no marketing fluff, no invented numbers, and do not name any vendor. Never use an em dash.",
         },
         { role: "user", content: facts },
       ];
@@ -196,8 +330,13 @@ function scoreArchetype(text: string): Archetype {
   return ARCHETYPES.find((a) => a.id === "specialty")!;
 }
 
-export function pathwayFor(archetype: Archetype): Pathway {
-  return buildPathway(archetype.id)!;
+export function pathwayFor(archetype: Archetype, urgency: Urgency = "balanced"): Pathway {
+  return buildPathway(archetype.id, { urgency })!;
+}
+
+// Milestone projection for making a specific assessed product, tuned by urgency.
+export function milestonesForProduct(match: CdmoMatch, urgency: Urgency): Pathway {
+  return productPathway(match.isPharma, urgency);
 }
 
 // ---- Discovery -----------------------------------------------------------

@@ -26,14 +26,18 @@ export const FOCUS_COUNTRIES: FocusCountry[] = [
   { code: "SAU", name: "Saudi Arabia", flag: "🇸🇦" },
 ];
 
-// World Bank indicator codes used, all "current US$" or a ratio.
+// World Bank indicator codes used, all "current US$" or a ratio. Chemical trade
+// is derived from merchandise trade and the World Bank / WITS chemical-share
+// indicators, so the figures stay from a single authoritative source.
 const IND_EXPORTS = "TX.VAL.MRCH.CD.WT"; // Merchandise exports (current US$)
 const IND_IMPORTS = "TM.VAL.MRCH.CD.WT"; // Merchandise imports (current US$)
 const IND_TRADE_GDP = "NE.TRD.GNFS.ZS"; // Trade (% of GDP)
+const IND_CHEM_EXP_PCT = "TX.VAL.CHEM.ZS.UN"; // Chemicals, % of merchandise exports
+const IND_CHEM_IMP_PCT = "TM.VAL.CHEM.ZS.UN"; // Chemicals, % of merchandise imports
 
 const CODES = FOCUS_COUNTRIES.map((c) => c.code).join(";");
 const BASE = "https://api.worldbank.org/v2";
-const CACHE_KEY = "apac.worldbank.v1";
+const CACHE_KEY = "apac.worldbank.chem.v2";
 
 export type YearValue = { year: number; value: number };
 
@@ -110,29 +114,66 @@ function latest(points: YearValue[] | undefined): YearValue | null {
   return points[points.length - 1];
 }
 
-// Fetches the full snapshot from the World Bank API (three indicator calls).
+// The chemical share for a given year, or the latest available share as a
+// fallback (the share moves slowly, so carrying it forward is reasonable and
+// keeps the figure sourced from the World Bank rather than invented).
+function pctForYear(points: YearValue[] | undefined, year: number): number | null {
+  if (!points || points.length === 0) return null;
+  const exact = points.find((p) => p.year === year);
+  if (exact) return exact.value;
+  return points[points.length - 1].value;
+}
+
+// Fetches the full snapshot from the World Bank API and derives chemical-only
+// trade (merchandise value multiplied by the chemical share). Everything the
+// Market Overview shows is chemical trade.
 async function fetchSnapshot(signal?: AbortSignal): Promise<TradeSnapshot> {
-  const [exp, imp, gdp] = await Promise.all([
+  const [exp, imp, gdp, chemExp, chemImp] = await Promise.all([
     fetchIndicator(IND_EXPORTS, signal),
     fetchIndicator(IND_IMPORTS, signal),
     fetchIndicator(IND_TRADE_GDP, signal),
+    fetchIndicator(IND_CHEM_EXP_PCT, signal),
+    fetchIndicator(IND_CHEM_IMP_PCT, signal),
   ]);
 
   const countries: CountryTrade[] = FOCUS_COUNTRIES.map((c) => {
     const expPts = exp.byCountry.get(c.code) ?? [];
     const impPts = imp.byCountry.get(c.code) ?? [];
-    const eLatest = latest(expPts);
-    const iLatest = latest(impPts);
+    const chemExpPts = chemExp.byCountry.get(c.code) ?? [];
+    const chemImpPts = chemImp.byCountry.get(c.code) ?? [];
     const gLatest = latest(gdp.byCountry.get(c.code));
 
-    // Total-trade history joins exports and imports per year where both exist.
+    // Chemical value per year = merchandise value x chemical share / 100.
     const impMap = new Map(impPts.map((p) => [p.year, p.value]));
-    const history: YearValue[] = expPts
-      .filter((p) => impMap.has(p.year))
-      .map((p) => ({ year: p.year, value: p.value + (impMap.get(p.year) as number) }));
+    const chemExpByYear: YearValue[] = [];
+    const historyMap = new Map<number, number>();
+    for (const p of expPts) {
+      const pct = pctForYear(chemExpPts, p.year);
+      if (pct == null) continue;
+      const chemE = (p.value * pct) / 100;
+      chemExpByYear.push({ year: p.year, value: chemE });
+      let total = chemE;
+      const impVal = impMap.get(p.year);
+      const impPct = pctForYear(chemImpPts, p.year);
+      if (impVal != null && impPct != null) total += (impVal * impPct) / 100;
+      historyMap.set(p.year, total);
+    }
 
-    const exportsVal = eLatest?.value ?? null;
-    const importsVal = iLatest?.value ?? null;
+    const eLatestChem = latest(chemExpByYear);
+    const latestYear = eLatestChem?.year ?? null;
+    const exportsVal = eLatestChem?.value ?? null;
+
+    let importsVal: number | null = null;
+    if (latestYear != null) {
+      const impVal = impMap.get(latestYear);
+      const impPct = pctForYear(chemImpPts, latestYear);
+      if (impVal != null && impPct != null) importsVal = (impVal * impPct) / 100;
+    }
+
+    const history: YearValue[] = [...historyMap.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .map(([year, value]) => ({ year, value }));
+
     return {
       code: c.code,
       name: c.name,
@@ -141,7 +182,7 @@ async function fetchSnapshot(signal?: AbortSignal): Promise<TradeSnapshot> {
       imports: importsVal,
       balance: exportsVal != null && importsVal != null ? exportsVal - importsVal : null,
       tradeGdp: gLatest?.value ?? null,
-      latestYear: eLatest?.year ?? iLatest?.year ?? null,
+      latestYear,
       history,
     };
   });

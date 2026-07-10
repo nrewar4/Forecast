@@ -9,10 +9,17 @@ export function PathwaySpine({
   pathway,
   onContact,
   compact = false,
+  title,
+  subtitle,
+  eyebrow = "Suggested pathway",
 }: {
   pathway: Pathway;
   onContact?: () => void;
   compact?: boolean;
+  /** overrides the archetype title (e.g. a product milestone projection) */
+  title?: string;
+  subtitle?: string;
+  eyebrow?: string;
 }) {
   const { archetype, milestones, weeks } = pathway;
 
@@ -20,10 +27,10 @@ export function PathwaySpine({
     <div className="space-y-4 text-left">
       <div className="rounded-xl border border-border bg-card p-4">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-          Suggested pathway
+          {eyebrow}
         </p>
-        <p className="mt-1 text-base font-semibold text-ink">{archetype.title}</p>
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{archetype.situation}</p>
+        <p className="mt-1 text-base font-semibold text-ink">{title ?? archetype.title}</p>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{subtitle ?? archetype.situation}</p>
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
           <span>
             Indicative timeline{" "}
