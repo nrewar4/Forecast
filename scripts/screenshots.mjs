@@ -73,13 +73,16 @@ async function main() {
     await go("/documents");
     check("guard: /documents redirects to /login", page.url().includes("/login"));
 
-    // ---- Knowledge sidebar hides admin items when anonymous ----
-    await go("/dashboard");
+    // ---- Market Overview (public) + admin-gating of sidebar ----
+    await go("/dashboard", 3500); // allow the World Bank fetch to resolve
     const t2 = await text();
+    check("overview: title", /Market Overview/.test(t2));
+    check("overview: six countries named", /China/.test(t2) && /Saudi Arabia/.test(t2) && /South Korea/.test(t2));
+    check("overview: World Bank source", /World Bank/.test(t2));
     check("sidebar: no Trade Analytics for anonymous", !/Trade Analytics/.test(t2));
     check("sidebar: no Documents for anonymous", !/Documents/.test(t2));
     check("sidebar: has Admin sign in", /Admin sign in/i.test(t2));
-    await shot("02-knowledge-anonymous");
+    await shot("02-market-overview");
 
     // ---- Synthesis workspace ----
     await go("/synthesis-routes");

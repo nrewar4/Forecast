@@ -64,7 +64,7 @@ export function Sidebar({ nav = KNOWLEDGE_NAV }: { nav?: SidebarNav }) {
     <aside className="hidden w-64 shrink-0 flex-col border-r border-border bg-background md:flex">
       <div className="px-5 py-5">
         <Link to="/" aria-label="APAC Supply Chain home" className="press inline-block">
-          <Logo className="h-10 w-auto" />
+          <Logo className="h-14 w-auto" />
         </Link>
       </div>
 

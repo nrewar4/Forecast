@@ -40,7 +40,7 @@ export default function Login() {
       <div className="relative w-full max-w-sm animate-fade-up">
         <div className="mb-8 flex justify-center">
           <Link to="/" aria-label="APAC Supply Chain home" className="press">
-            <Logo className="h-10 w-auto" />
+            <Logo className="h-14 w-auto" />
           </Link>
         </div>
 

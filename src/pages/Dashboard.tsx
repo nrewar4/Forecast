@@ -1,391 +1,352 @@
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Area,
   AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
-  Cell,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import {
+  AlertTriangle,
   ArrowDownToLine,
   ArrowUpFromLine,
+  CalendarDays,
   Globe2,
+  RefreshCw,
   Scale,
-  TrendingUp,
 } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui/primitives";
 import { KpiCard } from "@/components/ui/Kpi";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { MarketNews } from "@/components/knowledge/MarketNews";
-import { useTradeData } from "@/context/TradeData";
 import { useCurrency } from "@/context/Currency";
-import type { Shipment } from "@/data/trade";
-import { compact, num } from "@/lib/utils";
+import { compact } from "@/lib/utils";
+import { TRADE_QUERIES } from "@/lib/news";
+import { loadTradeSnapshot, type CountryTrade, type TradeSnapshot } from "@/lib/worldbank";
 
-const US = "United States Of America";
+const EXPORT_COLOR = "#F47920"; // brand orange
+const IMPORT_COLOR = "#475569"; // neutral slate
 
-type Ranked = { name: string; value: number };
-
-// Top products in a set of rows, by total declared value.
-function topProductsBy(rows: Shipment[], n = 5): Ranked[] {
-  const map = new Map<string, number>();
-  for (const r of rows) {
-    const k = r.product.trim();
-    if (!k || k === "Unspecified") continue;
-    map.set(k, (map.get(k) ?? 0) + r.totalValue);
-  }
-  return Array.from(map, ([name, value]) => ({ name, value }))
-    .sort((a, b) => b.value - a.value)
-    .slice(0, n);
+function formatDate(iso: string | null): string {
+  if (!iso) return "unknown";
+  const d = new Date(iso);
+  return Number.isNaN(+d) ? iso : d.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
 }
-
-// Top countries by value, looking at each row's origin (trade partner).
-function topCountriesBy(rows: Shipment[], n = 6): Ranked[] {
-  const map = new Map<string, number>();
-  for (const r of rows) {
-    const k = r.origin.trim();
-    if (!k || k === "Unknown") continue;
-    map.set(k, (map.get(k) ?? 0) + r.totalValue);
-  }
-  return Array.from(map, ([name, value]) => ({ name, value }))
-    .sort((a, b) => b.value - a.value)
-    .slice(0, n);
-}
-
-const sum = (rows: Shipment[]) => rows.reduce((a, r) => a + r.totalValue, 0);
 
 export default function Dashboard() {
-  const { shipments } = useTradeData();
-  const { convert, money, currency } = useCurrency();
+  const { money, convert, symbol, currency } = useCurrency();
+  const [snap, setSnap] = useState<TradeSnapshot | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const axisMoney = (usd: number) => compact(convert(usd));
-
-  const imports = useMemo(() => shipments.filter((s) => s.mode === "Imports"), [shipments]);
-  const exports = useMemo(() => shipments.filter((s) => s.mode === "Exports"), [shipments]);
-
-  const importValue = useMemo(() => sum(imports), [imports]);
-  const exportValue = useMemo(() => sum(exports), [exports]);
-  const balance = exportValue - importValue;
-
-  const partners = useMemo(() => {
-    const set = new Set<string>();
-    for (const s of shipments) if (s.origin && s.origin !== "Unknown") set.add(s.origin);
-    return set.size;
-  }, [shipments]);
-  const productCount = useMemo(() => new Set(shipments.map((s) => s.product)).size, [shipments]);
-
-  // Monthly momentum: declared value per calendar month, imports vs exports.
-  const momentum = useMemo(() => {
-    const map = new Map<string, { key: string; imports: number; exports: number }>();
-    for (const s of shipments) {
-      const key = (s.date ?? "").slice(0, 7); // YYYY-MM
-      if (!/^\d{4}-\d{2}$/.test(key)) continue;
-      const e = map.get(key) ?? { key, imports: 0, exports: 0 };
-      if (s.mode === "Imports") e.imports += s.totalValue;
-      else e.exports += s.totalValue;
-      map.set(key, e);
+  const load = useCallback(async (force = false) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await loadTradeSnapshot({ force });
+      setSnap(data);
+    } catch {
+      setError("Live trade data could not be loaded right now. Check your connection and try again.");
+    } finally {
+      setLoading(false);
     }
-    return Array.from(map.values())
-      .sort((a, b) => a.key.localeCompare(b.key))
-      .map((m) => {
-        const [y, mo] = m.key.split("-");
-        const label = new Date(+y, +mo - 1, 1).toLocaleString("en-US", { month: "short", year: "2-digit" });
-        return { label, imports: m.imports, exports: m.exports };
-      });
-  }, [shipments]);
+  }, []);
 
-  // Top sourcing partners (origins of India's imports) by value.
-  const sourcing = useMemo(() => topCountriesBy(imports, 10).reverse(), [imports]);
+  useEffect(() => {
+    load();
+  }, [load]);
 
-  // India = the whole dataset (Indian import & export records).
-  const india = {
-    importValue,
-    exportValue,
-    balance,
-    topImports: topProductsBy(imports, 5),
-    topExports: topProductsBy(exports, 5),
-    topSources: topCountriesBy(imports, 5),
-  };
+  const countries = snap?.countries ?? [];
 
-  // US = the subset of trade with the United States.
-  const usImports = useMemo(() => imports.filter((s) => s.origin === US), [imports]);
-  const usExports = useMemo(() => exports.filter((s) => s.origin === US), [exports]);
-  const us = {
-    importValue: sum(usImports),
-    exportValue: sum(usExports),
-    get balance() {
-      return this.exportValue - this.importValue;
-    },
-    topImports: topProductsBy(usImports, 5),
-    topExports: topProductsBy(usExports, 5),
-    importShare: importValue ? (sum(usImports) / importValue) * 100 : 0,
-  };
+  const totals = useMemo(() => {
+    let exp = 0;
+    let imp = 0;
+    let year = 0;
+    for (const c of countries) {
+      if (c.exports) exp += c.exports;
+      if (c.imports) imp += c.imports;
+      if (c.latestYear && c.latestYear > year) year = c.latestYear;
+    }
+    return { exp, imp, balance: exp - imp, year };
+  }, [countries]);
 
-  const kpis = [
-    {
-      icon: ArrowDownToLine,
-      label: "Import Value",
-      value: money(importValue),
-      sub: `${num(imports.length)} inbound records`,
-    },
-    {
-      icon: ArrowUpFromLine,
-      label: "Export Value",
-      value: money(exportValue),
-      sub: `${num(exports.length)} outbound records`,
-    },
-    {
-      icon: Scale,
-      label: "Trade Balance",
-      value: (balance < 0 ? "−" : "+") + money(Math.abs(balance)),
-      sub: balance < 0 ? "net import deficit" : "net export surplus",
-    },
-    {
-      icon: Globe2,
-      label: "Trading Partners",
-      value: num(partners),
-      sub: `${num(productCount)} products tracked`,
-    },
-  ];
+  // Grouped exports vs imports per country, in the active currency.
+  const comparison = useMemo(
+    () =>
+      countries.map((c) => ({
+        name: c.name,
+        Exports: convert(c.exports ?? 0),
+        Imports: convert(c.imports ?? 0),
+      })),
+    [countries, convert],
+  );
+
+  // Combined merchandise trade of all six markets, by year.
+  const combined = useMemo(() => {
+    const byYear = new Map<number, number>();
+    for (const c of countries) {
+      for (const p of c.history) byYear.set(p.year, (byYear.get(p.year) ?? 0) + p.value);
+    }
+    return Array.from(byYear.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(([year, value]) => ({ year: String(year), value: convert(value) }));
+  }, [countries, convert]);
+
+  const axisMoney = (v: number) => symbol + compact(v);
 
   return (
     <AppShell
       title="Market Overview"
-      subtitle="India's chemical trade and its trade with the United States, with current industry news."
+      centerHeader
+      subtitle="Live merchandise trade for the United States, China, India, Japan, South Korea and Saudi Arabia. Official figures from the World Bank, checked daily."
     >
-      <div className="grid animate-fade-up grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {kpis.map((k) => (
-          <KpiCard key={k.label} icon={k.icon} label={k.label} value={k.value} sub={k.sub} />
-        ))}
+      {/* Source + refresh bar */}
+      <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-xs text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+          </span>
+          Live from the World Bank
+        </span>
+        {snap ? (
+          <>
+            <span className="text-border">·</span>
+            <span>Source updated {formatDate(snap.sourceUpdated)}</span>
+            <span className="text-border">·</span>
+            <span>Checked {formatDate(snap.fetchedAt)}</span>
+          </>
+        ) : null}
+        <button
+          type="button"
+          onClick={() => load(true)}
+          disabled={loading}
+          className="press inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1 font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:opacity-50"
+        >
+          <RefreshCw className={"h-3.5 w-3.5" + (loading ? " animate-spin" : "")} />
+          Refresh
+        </button>
       </div>
 
-      {/* Momentum chart + live news */}
-      <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_380px]">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-primary" />
-              Trade Momentum
-            </CardTitle>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              Monthly trade value ({currency}), imports vs exports across the recorded months
-            </p>
-          </CardHeader>
-          <CardContent className="pt-2">
-            {momentum.length === 0 ? (
-              <p className="py-16 text-center text-sm text-muted-foreground">No dated records yet.</p>
-            ) : (
-              <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={momentum} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="impFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#F47920" stopOpacity={0.35} />
-                      <stop offset="100%" stopColor="#F47920" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="expFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#34D399" stopOpacity={0.3} />
-                      <stop offset="100%" stopColor="#34D399" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="label" tick={{ fontSize: 11, fill: "#64748B" }} />
-                  <YAxis tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={axisMoney} />
-                  <Tooltip
-                    contentStyle={tooltipStyle}
-                    formatter={(v: number, name) => [money(v), name === "imports" ? "Imports" : "Exports"]}
-                  />
-                  <Area type="monotone" dataKey="imports" stroke="#F47920" strokeWidth={2} fill="url(#impFill)" isAnimationActive={false} />
-                  <Area type="monotone" dataKey="exports" stroke="#10B981" strokeWidth={2} fill="url(#expFill)" isAnimationActive={false} />
-                </AreaChart>
-              </ResponsiveContainer>
-            )}
-            <div className="mt-2 flex items-center gap-4 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-sm bg-primary" /> Imports
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-sm bg-emerald-500" /> Exports
-              </span>
-            </div>
-          </CardContent>
-        </Card>
-
-        <MarketNews />
-      </div>
-
-      {/* India & US market breakdown */}
-      <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
-        <MarketBreakdown
-          title="India, Market Breakdown"
-          subtitle="The full set of recorded chemical trade"
-          flag="🇮🇳"
-          importValue={india.importValue}
-          exportValue={india.exportValue}
-          balance={india.balance}
-          topImports={india.topImports}
-          topExports={india.topExports}
-          extraLabel="Top sourcing countries"
-          extra={india.topSources}
-          money={money}
+      {error && !snap ? (
+        <EmptyState
+          icon={AlertTriangle}
+          title="Trade data unavailable"
+          hint={error}
+          action={
+            <button
+              type="button"
+              onClick={() => load(true)}
+              className="press inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+            >
+              <RefreshCw className="h-4 w-4" /> Try again
+            </button>
+          }
         />
-        <MarketBreakdown
-          title="United States, Trade with India"
-          subtitle={`US accounts for ${us.importShare.toFixed(1)}% of India's import value`}
-          flag="🇺🇸"
-          importValue={us.importValue}
-          exportValue={us.exportValue}
-          balance={us.balance}
-          topImports={us.topImports}
-          topExports={us.topExports}
-          importLabel="Top products India imports from the US"
-          exportLabel="Top products India exports to the US"
-          money={money}
-        />
-      </div>
+      ) : loading && !snap ? (
+        <LoadingSkeleton />
+      ) : (
+        <>
+          {/* Aggregate KPIs */}
+          <div className="grid animate-fade-up grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <KpiCard icon={ArrowUpFromLine} label="Combined Exports" value={money(totals.exp)} sub="six focus markets" />
+            <KpiCard icon={ArrowDownToLine} label="Combined Imports" value={money(totals.imp)} sub="six focus markets" />
+            <KpiCard
+              icon={Scale}
+              label="Net Balance"
+              value={(totals.balance < 0 ? "−" : "+") + money(Math.abs(totals.balance))}
+              sub={totals.balance < 0 ? "net import deficit" : "net export surplus"}
+            />
+            <KpiCard icon={CalendarDays} label="Latest Data Year" value={totals.year ? String(totals.year) : "—"} sub="most recent reported" />
+          </div>
 
-      {/* Geographic: where India sources from */}
-      <Card className="mt-4">
-        <CardHeader className="pb-2">
-          <CardTitle className="flex items-center gap-2">
-            <Globe2 className="h-4 w-4 text-primary" />
-            Top Sourcing Partners
-          </CardTitle>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            Countries India imports the most chemicals from, by value ({currency})
+          {/* Comparison + news */}
+          <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_380px]">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2">
+                  <Globe2 className="h-4 w-4 text-primary" />
+                  Exports vs Imports by Country
+                </CardTitle>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Merchandise trade ({currency}), latest reported year per country
+                </p>
+              </CardHeader>
+              <CardContent className="pt-2">
+                <ResponsiveContainer width="100%" height={320}>
+                  <BarChart data={comparison} margin={{ top: 8, right: 12, left: 4, bottom: 0 }} barGap={2}>
+                    <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#334155" }} interval={0} />
+                    <YAxis tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={axisMoney} width={54} />
+                    <Tooltip
+                      contentStyle={tooltipStyle}
+                      cursor={{ fill: "#F8FAFC" }}
+                      formatter={(v: number, name) => [symbol + compact(v), name]}
+                    />
+                    <Legend iconType="circle" wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
+                    <Bar dataKey="Exports" fill={EXPORT_COLOR} radius={[4, 4, 0, 0]} maxBarSize={38} isAnimationActive={false} />
+                    <Bar dataKey="Imports" fill={IMPORT_COLOR} radius={[4, 4, 0, 0]} maxBarSize={38} isAnimationActive={false} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            <MarketNews title="Trade Headlines" queries={TRADE_QUERIES} />
+          </div>
+
+          {/* Combined trend */}
+          <Card className="mt-4">
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2">
+                <Globe2 className="h-4 w-4 text-primary" />
+                Combined Merchandise Trade Over Time
+              </CardTitle>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Total exports plus imports across all six markets ({currency}), by year
+              </p>
+            </CardHeader>
+            <CardContent className="pt-2">
+              {combined.length === 0 ? (
+                <p className="py-16 text-center text-sm text-muted-foreground">No history available.</p>
+              ) : (
+                <ResponsiveContainer width="100%" height={260}>
+                  <AreaChart data={combined} margin={{ top: 8, right: 12, left: 4, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="combinedFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={EXPORT_COLOR} stopOpacity={0.3} />
+                        <stop offset="100%" stopColor={EXPORT_COLOR} stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#64748B" }} />
+                    <YAxis tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={axisMoney} width={54} />
+                    <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [symbol + compact(v), "Total trade"]} />
+                    <Area type="monotone" dataKey="value" stroke={EXPORT_COLOR} strokeWidth={2} fill="url(#combinedFill)" isAnimationActive={false} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Per-country cards */}
+          <h2 className="mt-8 text-center text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            By Country
+          </h2>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {countries.map((c) => (
+              <CountryCard key={c.code} country={c} money={money} convert={convert} />
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-xs text-muted-foreground">
+            Source: World Bank Indicators (merchandise exports and imports, current US$; trade as a share of GDP).
+            Official trade is published annually, so figures show each country's latest reported year. Datamyne
+            shipment records remain available under Trade Analytics and Documents.
           </p>
-        </CardHeader>
-        <CardContent className="pt-2">
-          {sourcing.length === 0 ? (
-            <p className="py-12 text-center text-sm text-muted-foreground">No import records yet.</p>
-          ) : (
-            <ResponsiveContainer width="100%" height={Math.max(240, sourcing.length * 30)}>
-              <BarChart data={sourcing} layout="vertical" margin={{ top: 4, right: 64, left: 8, bottom: 0 }}>
-                <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" horizontal={false} />
-                <XAxis type="number" tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={axisMoney} />
-                <YAxis type="category" dataKey="name" width={180} tick={{ fontSize: 11, fill: "#1E293B" }} interval={0} />
-                <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "#F8FAFC" }} formatter={(v: number) => [money(v), "Import value"]} />
-                <Bar dataKey="value" radius={[0, 6, 6, 0]} isAnimationActive={false}>
-                  {sourcing.map((s, i) => (
-                    <Cell key={i} fill={s.name === US ? "#1E293B" : i === sourcing.length - 1 ? "#F47920" : "#F9A663"} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          )}
-        </CardContent>
-      </Card>
+        </>
+      )}
     </AppShell>
   );
 }
 
-// A compact import/export breakdown for one market: headline values, the net
-// balance, and the top products on each side (plus an optional extra list).
-function MarketBreakdown({
-  title,
-  subtitle,
-  flag,
-  importValue,
-  exportValue,
-  balance,
-  topImports,
-  topExports,
-  importLabel = "Top imported products",
-  exportLabel = "Top exported products",
-  extraLabel,
-  extra,
+function CountryCard({
+  country: c,
   money,
+  convert,
 }: {
-  title: string;
-  subtitle: string;
-  flag: string;
-  importValue: number;
-  exportValue: number;
-  balance: number;
-  topImports: Ranked[];
-  topExports: Ranked[];
-  importLabel?: string;
-  exportLabel?: string;
-  extraLabel?: string;
-  extra?: Ranked[];
+  country: CountryTrade;
   money: (usd: number) => string;
+  convert: (usd: number) => number;
 }) {
-  const maxImp = Math.max(1, ...topImports.map((p) => p.value));
-  const maxExp = Math.max(1, ...topExports.map((p) => p.value));
-
-  const Bars = ({ rows, max, label }: { rows: Ranked[]; max: number; label: string }) => (
-    <div>
-      <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
-      {rows.length === 0 ? (
-        <p className="py-2 text-xs text-muted-foreground">No records.</p>
-      ) : (
-        <ul className="space-y-1.5">
-          {rows.map((p) => (
-            <li key={p.name} className="text-xs">
-              <div className="flex items-center justify-between gap-2">
-                <span className="truncate text-foreground" title={p.name}>{p.name}</span>
-                <span className="shrink-0 font-semibold tabular-nums text-foreground">{money(p.value)}</span>
-              </div>
-              <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                <div className="h-full rounded-full bg-primary" style={{ width: `${Math.max(4, (p.value / max) * 100)}%` }} />
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-
+  const spark = c.history.map((p) => ({ year: p.year, value: convert(p.value) }));
+  const balancePositive = (c.balance ?? 0) >= 0;
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <span aria-hidden className="text-lg leading-none">{flag}</span>
-          {title}
-        </CardTitle>
-        <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
-      </CardHeader>
-      <CardContent className="space-y-4 pt-2">
-        <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-lg border border-border bg-muted/30 px-3 py-2">
-            <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Imports</p>
-            <p className="mt-0.5 text-base font-semibold tabular-nums text-foreground">{money(importValue)}</p>
+    <Card className="transition-colors duration-200 hover:border-primary/40">
+      <CardContent className="p-5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <span aria-hidden className="text-2xl leading-none">{c.flag}</span>
+            <span className="text-base font-semibold text-ink">{c.name}</span>
           </div>
-          <div className="rounded-lg border border-border bg-muted/30 px-3 py-2">
-            <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Exports</p>
-            <p className="mt-0.5 text-base font-semibold tabular-nums text-foreground">{money(exportValue)}</p>
-          </div>
-          <div className="rounded-lg border border-border bg-muted/30 px-3 py-2">
-            <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Balance</p>
-            <p className={"mt-0.5 text-base font-semibold tabular-nums " + (balance < 0 ? "text-rose-600" : "text-emerald-600")}>
-              {(balance < 0 ? "−" : "+") + money(Math.abs(balance))}
+          {c.latestYear ? (
+            <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+              {c.latestYear}
+            </span>
+          ) : null}
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <Stat label="Exports" value={c.exports != null ? money(c.exports) : "—"} />
+          <Stat label="Imports" value={c.imports != null ? money(c.imports) : "—"} />
+          <Stat
+            label="Balance"
+            value={c.balance != null ? (balancePositive ? "+" : "−") + money(Math.abs(c.balance)) : "—"}
+            tone={c.balance == null ? "muted" : balancePositive ? "up" : "down"}
+          />
+        </div>
+
+        <div className="mt-4 flex items-end justify-between gap-3">
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Trade / GDP</p>
+            <p className="text-lg font-semibold tabular-nums text-foreground">
+              {c.tradeGdp != null ? `${c.tradeGdp.toFixed(0)}%` : "—"}
             </p>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Bars rows={topImports} max={maxImp} label={importLabel} />
-          <Bars rows={topExports} max={maxExp} label={exportLabel} />
-        </div>
-
-        {extra && extraLabel ? (
-          <div className="border-t border-border pt-3">
-            <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{extraLabel}</p>
-            <div className="flex flex-wrap gap-1.5">
-              {extra.map((c) => (
-                <span key={c.name} className="inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-foreground">
-                  {c.name}
-                  <span className="font-semibold text-muted-foreground">{money(c.value)}</span>
-                </span>
-              ))}
+          {spark.length > 1 ? (
+            <div className="h-12 w-28">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={spark} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id={`spark-${c.code}`} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor={EXPORT_COLOR} stopOpacity={0.4} />
+                      <stop offset="100%" stopColor={EXPORT_COLOR} stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <Area type="monotone" dataKey="value" stroke={EXPORT_COLOR} strokeWidth={1.5} fill={`url(#spark-${c.code})`} isAnimationActive={false} />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </CardContent>
     </Card>
+  );
+}
+
+function Stat({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "up" | "down" | "muted" }) {
+  const color =
+    tone === "up" ? "text-emerald-600" : tone === "down" ? "text-rose-600" : tone === "muted" ? "text-muted-foreground" : "text-foreground";
+  return (
+    <div className="rounded-lg border border-border bg-muted/30 px-2.5 py-2">
+      <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{label}</p>
+      <p className={"mt-0.5 text-sm font-semibold tabular-nums " + color}>{value}</p>
+    </div>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className="animate-pulse space-y-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="h-28 rounded-xl border border-border bg-card" />
+        ))}
+      </div>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_380px]">
+        <div className="h-96 rounded-xl border border-border bg-card" />
+        <div className="h-96 rounded-xl border border-border bg-card" />
+      </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="h-40 rounded-xl border border-border bg-card" />
+        ))}
+      </div>
+    </div>
   );
 }

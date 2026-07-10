@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, Newspaper, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/primitives";
-import { fallbackTopics, fetchMarketNews, type NewsItem } from "@/lib/news";
+import { topicLinks, fetchMarketNews, type NewsItem, type NewsQuery } from "@/lib/news";
 
 function timeAgo(iso: string): string {
   const diff = Date.now() - +new Date(iso);
@@ -17,7 +17,13 @@ function timeAgo(iso: string): string {
 // Recent chemical-industry and trade headlines, fetched live from Google News.
 // Falls back to topic search links if the live feed cannot be reached so the
 // panel always offers something useful and never renders empty.
-export function MarketNews() {
+export function MarketNews({
+  title = "Recent Market News",
+  queries,
+}: {
+  title?: string;
+  queries?: NewsQuery[];
+}) {
   const [items, setItems] = useState<NewsItem[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -26,7 +32,7 @@ export function MarketNews() {
     setLoading(true);
     setFailed(false);
     try {
-      const news = await fetchMarketNews(14);
+      const news = await fetchMarketNews(16, queries);
       setItems(news);
     } catch {
       setItems(null);
@@ -38,14 +44,17 @@ export function MarketNews() {
 
   useEffect(() => {
     load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const fallbacks = topicLinks(queries);
 
   return (
     <Card className="flex h-full flex-col">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="flex items-center gap-2">
           <Newspaper className="h-4 w-4 text-primary" />
-          Recent Market News
+          {title}
         </CardTitle>
         <button
           onClick={load}
@@ -98,7 +107,7 @@ export function MarketNews() {
               </p>
             ) : null}
             <div className="flex flex-wrap gap-2">
-              {fallbackTopics.map((t) => (
+              {fallbacks.map((t) => (
                 <a
                   key={t.label}
                   href={t.link}

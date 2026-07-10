@@ -19,6 +19,7 @@ export function compact(n: number): string {
   if (!Number.isFinite(n)) return "0";
   const sign = n < 0 ? "-" : "";
   const abs = Math.abs(n);
+  if (abs >= 1e12) return sign + oneDecimal(abs / 1e12) + "T";
   if (abs >= 1e9) return sign + oneDecimal(abs / 1e9) + "B";
   if (abs >= 1e6) return sign + oneDecimal(abs / 1e6) + "M";
   if (abs >= 1e3) return sign + oneDecimal(abs / 1e3) + "K";

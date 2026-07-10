@@ -1,32 +1,24 @@
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  FlaskConical,
-  ShoppingCart,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
 import { track } from "@/lib/analytics";
 
-// The three ways into the platform: an icon, a micro-caption, and a name.
+// The three ways into the platform. Text only, no icons, large and centered.
 const OPTIONS: {
   key: string;
   to: string;
   external?: boolean;
   caption: string;
   title: string;
-  icon: LucideIcon;
+  featured?: boolean;
 }[] = [
-  { key: "buy", to: "https://apacss.com/", external: true, caption: "Storefront", title: "Buy", icon: ShoppingCart },
-  { key: "knowledge", to: "/dashboard", caption: "Platform", title: "Knowledge", icon: BookOpen },
-  { key: "custom-synthesis", to: "/custom-synthesis", caption: "CDMO", title: "Custom Synthesis", icon: FlaskConical },
+  { key: "buy", to: "https://apacss.com/", external: true, caption: "Storefront", title: "Buy" },
+  { key: "knowledge", to: "/dashboard", caption: "Platform", title: "Knowledge", featured: true },
+  { key: "custom-synthesis", to: "/custom-synthesis", caption: "CDMO", title: "Custom Synthesis" },
 ];
 
-// Company figures from the APACSS admin portal.
 const STATS = [
   { label: "Products", value: 8927 },
   { label: "Manufacturers", value: 3241 },
@@ -56,12 +48,19 @@ const CDMO_STEPS = [
   { title: "Export", detail: "Delivery to USA, EU, Canada" },
 ];
 
-// Small uppercase section kicker, Vercel style: quiet, precise.
-function Kicker({ children }: { children: React.ReactNode }) {
+// Centered section header: quiet mono kicker over a bold title.
+function SectionHeader({ kicker, title }: { kicker: string; title: React.ReactNode }) {
   return (
-    <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-      {children}
-    </p>
+    <div className="mx-auto max-w-2xl text-center">
+      <Reveal>
+        <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          {kicker}
+        </p>
+      </Reveal>
+      <Reveal delay={70}>
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">{title}</h2>
+      </Reveal>
+    </div>
   );
 }
 
@@ -72,7 +71,7 @@ export default function Landing() {
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" aria-label="APAC Supply Chain home" className="press inline-block">
-            <Logo className="h-8 w-auto" />
+            <Logo className="h-11 w-auto" />
           </Link>
           <Link
             to="/dashboard"
@@ -96,128 +95,122 @@ export default function Landing() {
             className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.02)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(75%_55%_at_50%_0%,black,transparent_80%)]"
           />
 
-          <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-20 md:pt-28">
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="animate-fade-up text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-6xl">
-                One platform for sourcing,
-                <br className="hidden sm:block" />
-                <span className="text-primary">knowledge</span> and synthesis.
-              </h1>
-              <p className="mt-6 animate-fade-up text-lg text-muted-foreground [animation-delay:80ms] md:text-xl">
-                <CountUp value={8927} className="font-semibold tabular-nums text-ink" /> products
-                across <CountUp value={3241} className="font-semibold tabular-nums text-ink" />{" "}
-                manufacturers in{" "}
-                <CountUp value={30} suffix="+" className="font-semibold tabular-nums text-ink" />{" "}
-                countries.
-              </p>
-            </div>
+          <div className="relative mx-auto max-w-5xl px-6 pb-20 pt-20 text-center md:pt-28">
+            <h1 className="animate-fade-up text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-6xl">
+              One platform for sourcing,
+              <br className="hidden sm:block" />
+              <span className="text-primary">knowledge</span> and synthesis.
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-lg text-muted-foreground [animation-delay:80ms] md:text-xl">
+              <CountUp value={8927} className="font-semibold tabular-nums text-ink" /> products across{" "}
+              <CountUp value={3241} className="font-semibold tabular-nums text-ink" /> manufacturers in{" "}
+              <CountUp value={30} suffix="+" className="font-semibold tabular-nums text-ink" /> countries.
+            </p>
 
-            {/* Entry panel: one bordered container, three hairline-divided cells */}
-            <div className="mx-auto mt-14 max-w-4xl animate-fade-up overflow-hidden rounded-2xl border border-border bg-card shadow-card [animation-delay:160ms]">
-              <div className="grid divide-y divide-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-                {OPTIONS.map((o) => {
-                  const Icon = o.icon;
-                  const inner = (
-                    <>
-                      <div className="flex items-center justify-between">
-                        <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        {o.external ? (
-                          <ArrowUpRight className="h-4 w-4 text-border transition-all duration-200 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                        ) : (
-                          <ArrowRight className="h-4 w-4 text-border transition-all duration-200 ease-out-expo group-hover:translate-x-1 group-hover:text-primary" />
-                        )}
-                      </div>
-                      <div className="mt-9">
-                        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                          {o.caption}
-                        </p>
-                        <p className="mt-1 whitespace-nowrap text-lg font-semibold tracking-tight text-ink">
-                          {o.title}
-                        </p>
-                      </div>
-                      {/* Underline sweep */}
-                      <span
-                        aria-hidden
-                        className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-300 ease-out-expo group-hover:scale-x-100"
-                      />
-                    </>
-                  );
-                  const cls =
-                    "group relative flex flex-col p-7 text-left transition-colors duration-200 hover:bg-muted/60 focus-visible:bg-muted/60";
-                  return o.external ? (
-                    <a
-                      key={o.key}
-                      href={o.to}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className={cls}
-                      onClick={() => track("landing_option", { option: o.key })}
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <Link
-                      key={o.key}
-                      to={o.to}
-                      className={cls}
-                      onClick={() => track("landing_option", { option: o.key })}
-                    >
-                      {inner}
-                    </Link>
-                  );
-                })}
-              </div>
+            {/* Entry buttons: text only, large, centered */}
+            <div className="stagger mx-auto mt-16 grid max-w-4xl gap-5 sm:grid-cols-3">
+              {OPTIONS.map((o, i) => {
+                const featured = o.featured;
+                const cls =
+                  "press group relative flex min-h-[132px] flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border px-6 py-8 text-center transition-[transform,box-shadow,border-color,background-color] duration-200 ease-out-expo hover:-translate-y-1 " +
+                  (featured
+                    ? "border-primary bg-primary text-primary-foreground shadow-glow hover:shadow-lift"
+                    : "border-border bg-card text-ink shadow-card hover:border-primary/50 hover:shadow-lift");
+                const caption = (
+                  <span
+                    className={
+                      "font-mono text-[11px] font-medium uppercase tracking-[0.18em] " +
+                      (featured ? "text-primary-foreground/75" : "text-muted-foreground")
+                    }
+                  >
+                    {o.caption}
+                  </span>
+                );
+                const name = (
+                  <span className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight md:text-[26px]">
+                    {o.title}
+                    {o.external ? (
+                      <ArrowUpRight className={"h-5 w-5 transition-transform duration-200 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 " + (featured ? "text-primary-foreground/80" : "text-muted-foreground")} />
+                    ) : (
+                      <ArrowRight className={"h-5 w-5 transition-transform duration-200 ease-out-expo group-hover:translate-x-1 " + (featured ? "text-primary-foreground/80" : "text-muted-foreground")} />
+                    )}
+                  </span>
+                );
+                const body = (
+                  <>
+                    {caption}
+                    {name}
+                  </>
+                );
+                return o.external ? (
+                  <a
+                    key={o.key}
+                    href={o.to}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    style={{ "--i": i } as React.CSSProperties}
+                    className={cls}
+                    onClick={() => track("landing_option", { option: o.key })}
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  <Link
+                    key={o.key}
+                    to={o.to}
+                    style={{ "--i": i } as React.CSSProperties}
+                    className={cls}
+                    onClick={() => track("landing_option", { option: o.key })}
+                  >
+                    {body}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* About: narrative + route map */}
+        {/* About */}
         <section className="border-t border-border" aria-label="About APAC Supply Chain">
-          <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 lg:grid-cols-[1.1fr,1fr]">
-            <div>
-              <Reveal>
-                <Kicker>Asia to USA, EU and Canada</Kicker>
-              </Reveal>
-              <Reveal delay={70}>
-                <h2 className="mt-4 text-3xl font-bold leading-[1.12] tracking-tight text-ink md:text-5xl">
-                  <CountUp value={8927} className="tabular-nums" /> products.
-                  <br />
-                  <CountUp value={3241} className="tabular-nums" /> manufacturers.
-                  <br />
+          <div className="mx-auto max-w-6xl px-6 py-24">
+            <SectionHeader
+              kicker="Asia to USA, EU and Canada"
+              title={
+                <>
+                  <CountUp value={8927} className="tabular-nums" /> products.{" "}
+                  <CountUp value={3241} className="tabular-nums" /> manufacturers.{" "}
                   <span className="text-primary">One network.</span>
-                </h2>
-              </Reveal>
-              <Reveal delay={140}>
-                <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
-                  Chemical and pharmaceutical sourcing across 30+ countries, plus CDMO
-                  development on existing certified plant capacity across Asia.
-                </p>
-              </Reveal>
-              <Reveal delay={210}>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href="https://apacss.com/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="press inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-600"
-                  >
-                    Find a product or supplier
-                  </a>
-                  <Link
-                    to="/custom-synthesis"
-                    className="press inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                  >
-                    Start a CDMO project
-                  </Link>
-                </div>
-              </Reveal>
-            </div>
+                </>
+              }
+            />
+            <Reveal delay={130}>
+              <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
+                Chemical and pharmaceutical sourcing across 30+ countries, plus CDMO development on
+                existing certified plant capacity across Asia.
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <a
+                  href="https://apacss.com/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="press inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-600"
+                >
+                  Find a product or supplier
+                </a>
+                <Link
+                  to="/custom-synthesis"
+                  className="press inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                >
+                  Start a CDMO project
+                </Link>
+              </div>
+            </Reveal>
 
-            {/* Route map, light */}
+            {/* Route map */}
             <Reveal delay={120}>
-              <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+              <div className="mx-auto mt-14 max-w-3xl rounded-2xl border border-border bg-card p-6 shadow-card">
                 <svg
                   width="100%"
                   height="220"
@@ -247,7 +240,7 @@ export default function Landing() {
             </Reveal>
           </div>
 
-          {/* Stat band: hairline grid, orange numbers */}
+          {/* Stat band */}
           <div className="border-t border-border">
             <Reveal>
               <dl className="mx-auto grid max-w-6xl grid-cols-2 sm:grid-cols-5">
@@ -276,12 +269,10 @@ export default function Landing() {
         {/* Divisions + country network */}
         <section className="border-t border-border bg-muted/40">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="grid gap-14 lg:grid-cols-2">
+            <SectionHeader kicker="The network" title="Two divisions, one global reach" />
+            <div className="mt-14 grid gap-14 lg:grid-cols-2">
               <div>
-                <Reveal>
-                  <Kicker>Two divisions</Kicker>
-                </Reveal>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                   {DIVISIONS.map((d, i) => (
                     <Reveal key={d.name} delay={i * 90}>
                       <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-colors duration-200 hover:border-primary/40">
@@ -301,7 +292,9 @@ export default function Landing() {
 
               <div>
                 <Reveal>
-                  <Kicker>Manufacturing network by country</Kicker>
+                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    Manufacturing network by country
+                  </p>
                 </Reveal>
                 <Reveal delay={80}>
                   <div className="mt-6 space-y-4">
@@ -333,16 +326,12 @@ export default function Landing() {
         {/* CDMO process */}
         <section className="border-t border-border">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <Reveal>
-              <Kicker>CDMO process</Kicker>
-            </Reveal>
-            <ol className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
+            <SectionHeader kicker="How it works" title="The CDMO process" />
+            <ol className="mt-14 grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
               {CDMO_STEPS.map((step, i) => (
                 <Reveal key={step.title} delay={i * 80} as="li">
-                  <div className="border-t-2 border-primary/70 pt-4">
-                    <span className="font-mono text-xs font-medium text-primary">
-                      0{i + 1}
-                    </span>
+                  <div className="border-t-2 border-primary/70 pt-4 text-center sm:text-left">
+                    <span className="font-mono text-xs font-medium text-primary">0{i + 1}</span>
                     <p className="mt-1.5 text-sm font-semibold text-ink">{step.title}</p>
                     <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{step.detail}</p>
                   </div>
@@ -353,12 +342,12 @@ export default function Landing() {
             {/* CTA */}
             <Reveal delay={100}>
               <div className="mt-20 overflow-hidden rounded-2xl bg-primary">
-                <div className="flex flex-wrap items-center justify-between gap-5 px-8 py-8">
+                <div className="flex flex-col items-center gap-5 px-8 py-10 text-center">
                   <div>
-                    <p className="text-xl font-bold tracking-tight text-primary-foreground md:text-2xl">
+                    <p className="text-2xl font-bold tracking-tight text-primary-foreground md:text-3xl">
                       Tell us what you're building
                     </p>
-                    <p className="mt-1 text-sm text-primary-foreground/85">
+                    <p className="mt-2 text-sm text-primary-foreground/85">
                       From a single shipment to a multi-year CDMO program.
                     </p>
                   </div>
@@ -366,7 +355,7 @@ export default function Landing() {
                     href="https://apacss.com/"
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="press inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-primary-700 transition-transform hover:scale-[1.02]"
+                    className="press inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary-700 transition-transform hover:scale-[1.02]"
                     onClick={() => track("cta_inquiry", {})}
                   >
                     Start a confidential inquiry

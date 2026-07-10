@@ -206,11 +206,13 @@ export function AppShell({
   title,
   subtitle,
   nav,
+  centerHeader = false,
   children,
 }: {
   title: string;
   subtitle?: string;
   nav?: SidebarNav;
+  centerHeader?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -243,12 +245,17 @@ export function AppShell({
           </div>
         </header>
         <main id="main-content" className="flex-1 px-4 py-6 md:px-8 md:py-8">
-          <div className="mb-6 animate-fade-up">
+          <div className={"mb-6 animate-fade-up" + (centerHeader ? " text-center" : "")}>
             <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
               {title}
             </h1>
             {subtitle ? (
-              <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              <p
+                className={
+                  "mt-1.5 text-sm leading-relaxed text-muted-foreground" +
+                  (centerHeader ? " mx-auto max-w-2xl" : " max-w-2xl")
+                }
+              >
                 {subtitle}
               </p>
             ) : null}
