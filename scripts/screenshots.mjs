@@ -52,20 +52,21 @@ async function main() {
     await warmReveals(); // fire scroll reveals + settle count-ups
     await shot("01-landing");
     const t1 = await text();
-    check("landing: stat line 8,927", /8,927/.test(t1));
-    check("landing: stat line 3,241", /3,241/.test(t1));
+    check("landing: rounded stat 8,900+", /8,900\+/.test(t1));
+    check("landing: rounded stat 3,200+", /3,200\+/.test(t1));
     check("landing: About 'One network'", /One network/i.test(t1));
     check("landing: CDMO process", /CDMO process/i.test(t1));
+    check("landing: route map US only, no Canada", /USA/.test(t1) && !/CANADA/.test(t1));
     check("landing: no Publications", !/Publications/.test(t1));
     check("landing: no 'Live' badge", !/\bLive\b/.test(t1));
     check("landing: no em dash", !t1.includes("—"));
     const tiles = await page.evaluate(
       () =>
         [...document.querySelectorAll("main a")].filter((a) =>
-          a.innerText.split("\n").some((line) => /^(Buy|Knowledge|Custom Synthesis)$/.test(line.trim())),
+          a.innerText.split("\n").some((line) => /^(Procurement|Product Discovery|CDMO)$/.test(line.trim())),
         ).length,
     );
-    check("landing: 3 minimal entry tiles", tiles === 3);
+    check("landing: 3 renamed entry buttons", tiles === 3);
 
     // ---- Anonymous: admin pages redirect to login ----
     await go("/trade-analytics");

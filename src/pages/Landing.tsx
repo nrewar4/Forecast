@@ -10,34 +10,34 @@ const OPTIONS: {
   key: string;
   to: string;
   external?: boolean;
-  caption: string;
   title: string;
   featured?: boolean;
 }[] = [
-  { key: "buy", to: "https://apacss.com/", external: true, caption: "Storefront", title: "Buy" },
-  { key: "knowledge", to: "/dashboard", caption: "Platform", title: "Knowledge", featured: true },
-  { key: "custom-synthesis", to: "/custom-synthesis", caption: "CDMO", title: "Custom Synthesis" },
+  { key: "buy", to: "https://apacss.com/", external: true, title: "Procurement" },
+  { key: "knowledge", to: "/dashboard", title: "Product Discovery", featured: true },
+  { key: "custom-synthesis", to: "/custom-synthesis", title: "CDMO" },
 ];
 
+// Rounded, impact-friendly figures (real counts are a little higher).
 const STATS = [
-  { label: "Products", value: 8927 },
-  { label: "Manufacturers", value: 3241 },
+  { label: "Products", value: 8900, suffix: "+" },
+  { label: "Manufacturers", value: 3200, suffix: "+" },
   { label: "Countries", value: 30, suffix: "+" },
   { label: "Categories", value: 27 },
   { label: "Divisions", value: 2 },
 ];
 
 const DIVISIONS = [
-  { name: "Chemical", products: 6946, manufacturers: 3003 },
-  { name: "Pharmaceuticals", products: 1981, manufacturers: 238 },
+  { name: "Chemical", products: 6900, productsSuffix: "+", manufacturers: 3000, manufacturersSuffix: "+" },
+  { name: "Pharmaceuticals", products: 1900, productsSuffix: "+", manufacturers: 230, manufacturersSuffix: "+" },
 ];
 
 const COUNTRIES = [
-  { name: "India", count: 1306 },
-  { name: "China", count: 506 },
-  { name: "Taiwan", count: 406 },
-  { name: "South Korea", count: 306 },
-  { name: "Indonesia", count: 129 },
+  { name: "India", count: 1300, suffix: "+" },
+  { name: "China", count: 500, suffix: "+" },
+  { name: "Taiwan", count: 400, suffix: "+" },
+  { name: "South Korea", count: 300, suffix: "+" },
+  { name: "Indonesia", count: 120, suffix: "+" },
 ];
 
 const CDMO_STEPS = [
@@ -102,8 +102,8 @@ export default function Landing() {
               <span className="text-primary">knowledge</span> and synthesis.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-lg text-muted-foreground [animation-delay:80ms] md:text-xl">
-              <CountUp value={8927} className="font-semibold tabular-nums text-ink" /> products across{" "}
-              <CountUp value={3241} className="font-semibold tabular-nums text-ink" /> manufacturers in{" "}
+              <CountUp value={8900} suffix="+" className="font-semibold tabular-nums text-ink" /> products across{" "}
+              <CountUp value={3200} suffix="+" className="font-semibold tabular-nums text-ink" /> manufacturers in{" "}
               <CountUp value={30} suffix="+" className="font-semibold tabular-nums text-ink" /> countries.
             </p>
 
@@ -116,17 +116,7 @@ export default function Landing() {
                   (featured
                     ? "border-primary bg-primary text-primary-foreground shadow-glow hover:shadow-lift"
                     : "border-border bg-card text-ink shadow-card hover:border-primary/50 hover:shadow-lift");
-                const caption = (
-                  <span
-                    className={
-                      "font-mono text-[11px] font-medium uppercase tracking-[0.18em] " +
-                      (featured ? "text-primary-foreground/75" : "text-muted-foreground")
-                    }
-                  >
-                    {o.caption}
-                  </span>
-                );
-                const name = (
+                const body = (
                   <span className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight md:text-[26px]">
                     {o.title}
                     {o.external ? (
@@ -135,12 +125,6 @@ export default function Landing() {
                       <ArrowRight className={"h-5 w-5 transition-transform duration-200 ease-out-expo group-hover:translate-x-1 " + (featured ? "text-primary-foreground/80" : "text-muted-foreground")} />
                     )}
                   </span>
-                );
-                const body = (
-                  <>
-                    {caption}
-                    {name}
-                  </>
                 );
                 return o.external ? (
                   <a
@@ -174,11 +158,11 @@ export default function Landing() {
         <section className="border-t border-border" aria-label="About APAC Supply Chain">
           <div className="mx-auto max-w-6xl px-6 py-24">
             <SectionHeader
-              kicker="Asia to USA, EU and Canada"
+              kicker="APAC network to the United States"
               title={
                 <>
-                  <CountUp value={8927} className="tabular-nums" /> products.{" "}
-                  <CountUp value={3241} className="tabular-nums" /> manufacturers.{" "}
+                  <CountUp value={8900} suffix="+" className="tabular-nums" /> products.{" "}
+                  <CountUp value={3200} suffix="+" className="tabular-nums" /> manufacturers.{" "}
                   <span className="text-primary">One network.</span>
                 </>
               }
@@ -216,25 +200,39 @@ export default function Landing() {
                   height="220"
                   viewBox="0 0 320 170"
                   role="img"
-                  aria-label="Route map showing manufacturing nodes across Asia connecting to USA, EU and Canada"
+                  aria-label="Route map showing APAC manufacturing countries connecting to the United States"
                 >
-                  <g>
-                    <circle cx="70" cy="65" r="4.5" fill="#F47920" />
-                    <circle cx="95" cy="95" r="3.5" fill="#F47920" />
-                    <circle cx="60" cy="108" r="3.5" fill="#F47920" />
-                    <text x="40" y="40" fontSize="9" fill="#64748B" fontFamily="JetBrains Mono, monospace" letterSpacing="1">
-                      ASIA NETWORK
-                    </text>
-                  </g>
-                  <path className="route-flow" d="M75,70 C130,38 190,33 250,42" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-                  <path className="route-flow" d="M90,95 C150,105 200,105 250,90" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-                  <path className="route-flow" d="M65,108 C130,140 190,145 245,132" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-                  <circle cx="252" cy="42" r="4" fill="#0F172A" />
-                  <text x="230" y="32" fontSize="9" fill="#64748B" fontFamily="JetBrains Mono, monospace">EU</text>
-                  <circle cx="252" cy="90" r="4" fill="#0F172A" />
-                  <text x="224" y="80" fontSize="9" fill="#64748B" fontFamily="JetBrains Mono, monospace">USA</text>
-                  <circle cx="247" cy="132" r="4" fill="#0F172A" />
-                  <text x="203" y="150" fontSize="9" fill="#64748B" fontFamily="JetBrains Mono, monospace">CANADA</text>
+                  <text x="40" y="18" fontSize="9" fill="#64748B" fontFamily="JetBrains Mono, monospace" letterSpacing="1">
+                    APAC NETWORK
+                  </text>
+
+                  {/* Flow lines converging on the US */}
+                  <path className="route-flow" d="M96,42 C150,42 205,72 250,88" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
+                  <path className="route-flow" d="M96,75 C150,75 205,82 250,89" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
+                  <path className="route-flow" d="M96,108 C150,108 205,98 250,91" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
+                  <path className="route-flow" d="M96,138 C150,138 205,108 250,92" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
+
+                  {/* APAC source nodes */}
+                  {[
+                    { y: 42, label: "India" },
+                    { y: 75, label: "China" },
+                    { y: 108, label: "Japan" },
+                    { y: 138, label: "S. Korea" },
+                  ].map((n) => (
+                    <g key={n.label}>
+                      <text x="86" y={n.y + 3} textAnchor="end" fontSize="8.5" fill="#64748B" fontFamily="JetBrains Mono, monospace">
+                        {n.label}
+                      </text>
+                      <circle cx="96" cy={n.y} r="4" fill="#F47920" />
+                    </g>
+                  ))}
+
+                  {/* US destination node */}
+                  <circle cx="253" cy="90" r="5.5" fill="#0F172A" />
+                  <circle cx="253" cy="90" r="9" fill="none" stroke="#0F172A" strokeOpacity="0.2" strokeWidth="1" />
+                  <text x="266" y="93" fontSize="10" fill="#0F172A" fontFamily="JetBrains Mono, monospace" fontWeight="600">
+                    USA
+                  </text>
                 </svg>
               </div>
             </Reveal>
@@ -278,11 +276,11 @@ export default function Landing() {
                       <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-colors duration-200 hover:border-primary/40">
                         <h3 className="text-sm font-semibold text-ink">{d.name}</h3>
                         <p className="mt-3 text-3xl font-bold tabular-nums tracking-tight text-primary">
-                          <CountUp value={d.products} />
+                          <CountUp value={d.products} suffix={d.productsSuffix} />
                         </p>
                         <p className="text-xs text-muted-foreground">products</p>
                         <p className="mt-3 border-t border-border pt-3 font-mono text-xs tabular-nums text-muted-foreground">
-                          <CountUp value={d.manufacturers} /> manufacturers
+                          <CountUp value={d.manufacturers} suffix={d.manufacturersSuffix} /> manufacturers
                         </p>
                       </div>
                     </Reveal>
@@ -310,8 +308,8 @@ export default function Landing() {
                             }}
                           />
                         </div>
-                        <span className="w-12 shrink-0 text-right font-mono text-sm tabular-nums text-ink">
-                          <CountUp value={c.count} />
+                        <span className="w-14 shrink-0 text-right font-mono text-sm tabular-nums text-ink">
+                          <CountUp value={c.count} suffix={c.suffix} />
                         </span>
                       </div>
                     ))}
