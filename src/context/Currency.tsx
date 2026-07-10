@@ -39,43 +39,20 @@ function readInitial(): Currency {
 }
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>(readInitial);
-
-  const setCurrency = useCallback((c: Currency) => {
-    setCurrencyState(c);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, c);
-    } catch {
-      // ignore storage failures (private mode, etc.)
-    }
-  }, []);
-
-  const toggle = useCallback(() => {
-    setCurrencyState((prev) => {
-      const next = prev === "USD" ? "INR" : "USD";
-      try {
-        window.localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // ignore
-      }
-      return next;
-    });
-  }, []);
-
-  const value = useMemo<CurrencyValue>(() => {
-    const rate = currency === "INR" ? USD_TO_INR : 1;
-    const symbol = SYMBOL[currency];
-    const convert = (usdValue: number) => usdValue * rate;
-    return {
-      currency,
-      symbol,
-      rate,
-      setCurrency,
-      toggle,
-      convert,
-      money: (usdValue: number) => symbol + compact(usdValue * rate),
-    };
-  }, [currency, setCurrency, toggle]);
+  // The platform is USD only. setCurrency and toggle are kept as no-ops so every
+  // existing money()/convert() call site keeps working without an INR path.
+  const value = useMemo<CurrencyValue>(
+    () => ({
+      currency: "USD",
+      symbol: SYMBOL.USD,
+      rate: 1,
+      setCurrency: () => {},
+      toggle: () => {},
+      convert: (usdValue: number) => usdValue,
+      money: (usdValue: number) => SYMBOL.USD + compact(usdValue),
+    }),
+    [],
+  );
 
   return <CurrencyContext.Provider value={value}>{children}</CurrencyContext.Provider>;
 }

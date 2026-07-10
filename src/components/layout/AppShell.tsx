@@ -1,12 +1,9 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Building2, Factory, IndianRupee, Search } from "lucide-react";
+import { Box, Building2, Factory, LogOut, Search } from "lucide-react";
 import { Sidebar, type SidebarNav } from "./Sidebar";
+import { useAuth } from "@/context/Auth";
 import { products } from "@/data/products";
-import { clients } from "@/data/clients";
-import { supplierGroups } from "@/data/suppliers";
-import { matchesCas } from "@/lib/cas";
-import { useCurrency } from "@/context/Currency";
 
 type Result = {
   kind: "Product" | "Buyer" | "Manufacturer";
@@ -15,17 +12,15 @@ type Result = {
   to: string;
 };
 
-const allSuppliers = supplierGroups.flatMap((g) =>
-  g.suppliers.map((s) => ({ ...s, group: g.product })),
-);
-
+// Global search covers the product catalog only. Vendor identities are never
+// surfaced anywhere in the product, by design.
 function buildResults(query: string): Result[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
   const qCas = q.replace(/\s+/g, "");
 
-  const productHits: Result[] = products
+  return products
     .filter(
       (p) =>
         p.name.toLowerCase().includes(q) ||
@@ -33,43 +28,12 @@ function buildResults(query: string): Result[] {
         p.cas.replace(/\s+/g, "").includes(qCas),
     )
     .map((p) => ({
-      kind: "Product",
+      kind: "Product" as const,
       label: p.name,
       hint: `CAS ${p.cas} · HS ${p.hsCode}`,
       to: `/knowledge-base?q=${encodeURIComponent(p.name)}`,
-    }));
-
-  const buyerHits: Result[] = clients
-    .filter(
-      (c) =>
-        c.company.toLowerCase().includes(q) ||
-        c.primaryProducts.some((p) => p.toLowerCase().includes(q)) ||
-        c.hsCodes.some((h) => h.includes(q)) ||
-        matchesCas(q, c.hsCodes, c.primaryProducts),
-    )
-    .map((c) => ({
-      kind: "Buyer",
-      label: c.company,
-      hint: c.sector,
-      to: `/partners?q=${encodeURIComponent(c.company)}`,
-    }));
-
-  const supplierHits: Result[] = allSuppliers
-    .filter(
-      (s) =>
-        s.company.toLowerCase().includes(q) ||
-        s.country.toLowerCase().includes(q) ||
-        s.group.toLowerCase().includes(q) ||
-        matchesCas(q, [], [s.group]),
-    )
-    .map((s) => ({
-      kind: "Manufacturer",
-      label: s.company,
-      hint: s.country,
-      to: `/partners?q=${encodeURIComponent(s.company)}`,
-    }));
-
-  return [...productHits, ...buyerHits, ...supplierHits].slice(0, 8);
+    }))
+    .slice(0, 8);
 }
 
 const kindIcon = {
@@ -183,21 +147,23 @@ function GlobalSearch() {
   );
 }
 
-// Switches every monetary figure in the app between USD and INR. The trade data
-// is stored in USD, so this only changes how amounts are displayed.
-function CurrencyToggle() {
-  const { currency, toggle } = useCurrency();
+// Compact sign-out, shown in the workspace header only when an admin is signed
+// in. Anonymous visitors see a clean header with just the global search.
+function AdminSignOut() {
+  const { isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
+  if (!isAdmin) return null;
   return (
     <button
       type="button"
-      onClick={toggle}
-      title={`Showing ${currency}. Click to switch to ${currency === "USD" ? "INR" : "USD"}.`}
-      className="press inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1.5 text-xs font-semibold text-foreground transition-colors hover:bg-muted"
+      onClick={() => {
+        logout();
+        navigate("/");
+      }}
+      className="press inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
     >
-      <IndianRupee className="h-3.5 w-3.5 text-primary" />
-      <span className={currency === "USD" ? "text-primary" : "text-muted-foreground"}>USD</span>
-      <span className="text-border">/</span>
-      <span className={currency === "INR" ? "text-primary" : "text-muted-foreground"}>INR</span>
+      <LogOut className="h-3.5 w-3.5" />
+      Sign out
     </button>
   );
 }
@@ -228,20 +194,7 @@ export function AppShell({
         <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/80 px-4 backdrop-blur md:px-8">
           <GlobalSearch />
           <div className="ml-auto flex items-center gap-3">
-            <CurrencyToggle />
-            <div className="press flex items-center gap-2 rounded-lg border border-border bg-background px-2.5 py-1.5">
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                AS
-              </div>
-              <div className="hidden text-left md:block">
-                <div className="text-xs font-semibold leading-tight">
-                  APAC Sourcing
-                </div>
-                <div className="text-[11px] leading-tight text-muted-foreground">
-                  Analyst
-                </div>
-              </div>
-            </div>
+            <AdminSignOut />
           </div>
         </header>
         <main id="main-content" className="flex-1 px-4 py-6 md:px-8 md:py-8">

@@ -103,6 +103,22 @@ function toCategory(category: string): ApacCategory {
   return group ? { group, category } : FALLBACK;
 }
 
+// Classify a bare molecule name (not in the catalog) using the same name rules.
+export function classifyByName(name: string): ApacCategory {
+  return classifyProduct({
+    name,
+    route: [],
+    industries: [],
+    costDrivers: [],
+    hsCode: "",
+    cas: "",
+    plantType: "Batch",
+    priceRange: "",
+    priceIndicative: "",
+    producers: [],
+  });
+}
+
 export function classifyProduct(product: Product & { apacCategory?: string }): ApacCategory {
   // Explicit override always wins.
   if (product.apacCategory) return toCategory(product.apacCategory);

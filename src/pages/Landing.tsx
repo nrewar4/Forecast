@@ -14,8 +14,8 @@ const OPTIONS: {
   featured?: boolean;
 }[] = [
   { key: "buy", to: "https://apacss.com/", external: true, title: "Procurement" },
-  { key: "knowledge", to: "/dashboard", title: "Product Discovery", featured: true },
-  { key: "custom-synthesis", to: "/custom-synthesis", title: "CDMO" },
+  { key: "knowledge", to: "/knowledge-base", title: "Product Discovery", featured: true },
+  { key: "custom-synthesis", to: "/cdmo", title: "CDMO" },
 ];
 
 // Rounded, impact-friendly figures (real counts are a little higher).
@@ -71,7 +71,7 @@ export default function Landing() {
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" aria-label="APAC Supply Chain home" className="press inline-block">
-            <Logo className="h-11 w-auto" />
+            <Logo className="h-16 w-auto md:h-20" />
           </Link>
           <Link
             to="/dashboard"

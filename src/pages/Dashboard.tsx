@@ -163,7 +163,7 @@ export default function Dashboard() {
               value={(totals.balance < 0 ? "−" : "+") + money(Math.abs(totals.balance))}
               sub={totals.balance < 0 ? "net import deficit" : "net export surplus"}
             />
-            <KpiCard icon={CalendarDays} label="Latest Data Year" value={totals.year ? String(totals.year) : "—"} sub="most recent reported" />
+            <KpiCard icon={CalendarDays} label="Latest Data Year" value={totals.year ? String(totals.year) : "n/a"} sub="most recent reported" />
           </div>
 
           {/* Comparison + news */}
@@ -282,11 +282,11 @@ function CountryCard({
         </div>
 
         <div className="mt-4 grid grid-cols-3 gap-2">
-          <Stat label="Exports" value={c.exports != null ? money(c.exports) : "—"} />
-          <Stat label="Imports" value={c.imports != null ? money(c.imports) : "—"} />
+          <Stat label="Exports" value={c.exports != null ? money(c.exports) : "n/a"} />
+          <Stat label="Imports" value={c.imports != null ? money(c.imports) : "n/a"} />
           <Stat
             label="Balance"
-            value={c.balance != null ? (balancePositive ? "+" : "−") + money(Math.abs(c.balance)) : "—"}
+            value={c.balance != null ? (balancePositive ? "+" : "−") + money(Math.abs(c.balance)) : "n/a"}
             tone={c.balance == null ? "muted" : balancePositive ? "up" : "down"}
           />
         </div>
@@ -295,7 +295,7 @@ function CountryCard({
           <div>
             <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Trade / GDP</p>
             <p className="text-lg font-semibold tabular-nums text-foreground">
-              {c.tradeGdp != null ? `${c.tradeGdp.toFixed(0)}%` : "—"}
+              {c.tradeGdp != null ? `${c.tradeGdp.toFixed(0)}%` : "n/a"}
             </p>
           </div>
           {spark.length > 1 ? (

@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/components/layout/Logo";
 
 const NAV = [
-  { label: "Knowledge", to: "/dashboard" },
-  { label: "Custom Synthesis", to: "/custom-synthesis" },
+  { label: "Product Discovery", to: "/knowledge-base" },
+  { label: "CDMO", to: "/cdmo" },
 ];
 
 export function MarketingLayout({ children }: { children: ReactNode }) {

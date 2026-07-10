@@ -145,7 +145,7 @@ export default function KnowledgeBase() {
 
   return (
     <AppShell
-      title="Product Knowledge Base"
+      title="Product Discovery"
       subtitle="Manufacturing routes, process, cost drivers, end use, manufacturers and pricing per product."
     >
       <AiProductSearch

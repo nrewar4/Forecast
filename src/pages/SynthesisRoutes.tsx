@@ -160,7 +160,7 @@ export default function SynthesisRoutes() {
   return (
     <AppShell
       nav={SYNTHESIS_NAV}
-      title="Custom Synthesis Routes"
+      title="Synthesis Routes"
       subtitle="ML-assisted retrosynthesis. Enter a chemical name, CAS number, or SMILES."
     >
       {/* Search bar */}
