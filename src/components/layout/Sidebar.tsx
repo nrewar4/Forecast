@@ -5,7 +5,6 @@ import {
   TrendingUp,
   BookOpen,
   FlaskConical,
-  Handshake,
   FileText,
   ShieldCheck,
   LogIn,
@@ -30,29 +29,20 @@ export type SidebarNav = {
   backTo: { url: string; label: string };
 };
 
-// The default workspace: the public Knowledge platform. Analyst tooling (trade
-// analytics, forecasting, uploads) is admin only.
+// The default workspace: the public Product Discovery platform. Analyst tooling
+// (trade analytics, forecasting, the synthesis route explorer, uploads) is admin
+// only and is filtered out for anonymous visitors.
 export const KNOWLEDGE_NAV: SidebarNav = {
-  label: "Knowledge",
+  label: "Workspace",
   items: [
+    { title: "Product Discovery", url: "/knowledge-base", icon: BookOpen },
     { title: "Market Overview", url: "/dashboard", icon: LayoutDashboard },
-    { title: "Product Knowledge Base", url: "/knowledge-base", icon: BookOpen },
-    { title: "Trade Partners", url: "/partners", icon: Handshake },
     { title: "Trade Analytics", url: "/trade-analytics", icon: BarChart3, adminOnly: true },
     { title: "Demand Forecast", url: "/demand-forecast", icon: TrendingUp, adminOnly: true },
+    { title: "Custom Synthesis Routes", url: "/synthesis-routes", icon: FlaskConical, adminOnly: true },
     { title: "Documents", url: "/documents", icon: FileText, adminOnly: true },
   ],
   backTo: { url: "/", label: "Back to site" },
-};
-
-// The Custom Synthesis workspace, reached from the Custom Synthesis page.
-export const SYNTHESIS_NAV: SidebarNav = {
-  label: "Custom Synthesis",
-  items: [
-    { title: "Custom Synthesis Routes", url: "/synthesis-routes", icon: FlaskConical },
-    { title: "Product Knowledge Base", url: "/knowledge-base", icon: BookOpen },
-  ],
-  backTo: { url: "/custom-synthesis", label: "Back to Custom Synthesis" },
 };
 
 export function Sidebar({ nav = KNOWLEDGE_NAV }: { nav?: SidebarNav }) {

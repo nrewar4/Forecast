@@ -145,8 +145,8 @@ export default function KnowledgeBase() {
 
   return (
     <AppShell
-      title="Product Knowledge Base"
-      subtitle="Manufacturing routes, process, cost drivers, end use, manufacturers and pricing per product."
+      title="Product Discovery"
+      subtitle="Search 8,900+ products for manufacturing routes, process chemistry, cost drivers, end uses and indicative pricing."
     >
       <AiProductSearch
         onPick={(name) => {

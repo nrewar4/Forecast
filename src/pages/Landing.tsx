@@ -14,8 +14,8 @@ const OPTIONS: {
   featured?: boolean;
 }[] = [
   { key: "buy", to: "https://apacss.com/", external: true, title: "Procurement" },
-  { key: "knowledge", to: "/dashboard", title: "Product Discovery", featured: true },
-  { key: "custom-synthesis", to: "/custom-synthesis", title: "CDMO" },
+  { key: "knowledge", to: "/knowledge-base", title: "Product Discovery", featured: true },
+  { key: "custom-synthesis", to: "/cdmo", title: "CDMO" },
 ];
 
 // Rounded, impact-friendly figures (real counts are a little higher).
@@ -71,10 +71,10 @@ export default function Landing() {
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" aria-label="APAC Supply Chain home" className="press inline-block">
-            <Logo className="h-11 w-auto" />
+            <Logo className="h-16 w-auto md:h-20" />
           </Link>
           <Link
-            to="/dashboard"
+            to="/knowledge-base"
             className="press inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary"
           >
             Open platform
@@ -184,7 +184,7 @@ export default function Landing() {
                   Find a product or supplier
                 </a>
                 <Link
-                  to="/custom-synthesis"
+                  to="/cdmo"
                   className="press inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
                 >
                   Start a CDMO project

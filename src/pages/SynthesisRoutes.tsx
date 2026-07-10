@@ -14,7 +14,6 @@ import {
   Workflow,
 } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { SYNTHESIS_NAV } from "@/components/layout/Sidebar";
 import { RouteStepCard } from "@/components/knowledge/RouteStepCard";
 import { CdmoIntelligence } from "@/components/knowledge/CdmoIntelligence";
 import { RegulatoryPanel } from "@/components/knowledge/RegulatoryPanel";
@@ -159,7 +158,6 @@ export default function SynthesisRoutes() {
 
   return (
     <AppShell
-      nav={SYNTHESIS_NAV}
       title="Custom Synthesis Routes"
       subtitle="ML-assisted retrosynthesis. Enter a chemical name, CAS number, or SMILES."
     >

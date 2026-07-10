@@ -6,7 +6,11 @@ import {
   Database,
   Eye,
   Factory,
+  FlaskConical,
+  GitBranch,
+  MessageSquare,
   MousePointerClick,
+  Send,
   Trash2,
   Users,
 } from "lucide-react";
@@ -80,6 +84,14 @@ export default function AdminDashboard() {
   const sessions7 = new Set(last7.map((v) => v.session)).size;
   const events7 = events.filter((e) => now - e.t < 7 * DAY_MS);
 
+  // Assistant + CDMO funnel: how the chatbot is converting visitors into leads.
+  const countEvent = (name: string, windowMs?: number) =>
+    events.filter((e) => e.name === name && (windowMs ? now - e.t < windowMs : true)).length;
+  const chatOpens7 = countEvent("chat_open", 7 * DAY_MS);
+  const feasibility7 = countEvent("cdmo_feasibility", 7 * DAY_MS);
+  const pathways7 = countEvent("cdmo_pathway", 7 * DAY_MS);
+  const enquiriesAll = countEvent("cdmo_enquiry");
+
   // Daily views for the last 14 days, including empty days.
   const daily = useMemo(() => {
     const buckets = new Map<string, number>();
@@ -151,11 +163,22 @@ export default function AdminDashboard() {
       subtitle="Website traffic and platform data. Traffic is recorded in this browser; a shared analytics store can be added later."
     >
       {/* Traffic KPIs */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 [&>*]:animate-fade-up">
         <KpiCard icon={Eye} label="Views today" value={String(today.length)} sub={`${views.length} all time`} />
         <KpiCard icon={Activity} label="Views, 7 days" value={String(last7.length)} />
         <KpiCard icon={Users} label="Unique visitors, 7 days" value={String(sessions7)} sub="distinct sessions" />
         <KpiCard icon={MousePointerClick} label="Interactions, 7 days" value={String(events7.length)} sub="tracked clicks and actions" />
+      </div>
+
+      {/* Assistant and CDMO lead funnel */}
+      <h2 className="mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        Assistant and CDMO leads
+      </h2>
+      <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-4 [&>*]:animate-fade-up">
+        <KpiCard icon={MessageSquare} label="Assistant opens, 7 days" value={String(chatOpens7)} sub="floating and embedded" />
+        <KpiCard icon={FlaskConical} label="Feasibility checks, 7 days" value={String(feasibility7)} sub="products assessed" />
+        <KpiCard icon={GitBranch} label="Pathways built, 7 days" value={String(pathways7)} sub="development plans" />
+        <KpiCard icon={Send} label="CDMO enquiries" value={String(enquiriesAll)} sub="all-time leads captured" />
       </div>
 
       {views.length === 0 ? (

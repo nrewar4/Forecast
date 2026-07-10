@@ -1,14 +1,32 @@
 # APAC Sourcing Intelligence
 
 The data and analytics platform for APAC Supply Chain (apacss.com), a chemical
-sourcing and CDMO company. It carries a public knowledge platform (product
-knowledge base, trade partners, market overview), a custom synthesis workspace
-(ML-assisted route exploration), and an admin area (trade analytics, demand
-forecasting, document uploads, website analytics).
+sourcing and CDMO company. It carries a public workspace (Product Discovery and
+a market overview), a conversion-focused CDMO experience built around an AI
+assistant, and an admin area (trade analytics, demand forecasting, document
+uploads, the ML-assisted synthesis route explorer, and website analytics).
 
-Styled in the APAC brand colours, orange and white. Clean and professional. No
-em dash is used anywhere in the product copy; use a comma, a colon, or the word
-"to" instead.
+All figures are shown in USD. Styled in the APAC brand colours, orange on a
+neutral Vercel-style surface. Clean and professional. No em dash is used
+anywhere in the product copy; use a comma, a colon, or the word "to" instead.
+
+## The CDMO assistant
+
+The `/cdmo` page and a floating widget on every public page host an AI assistant
+that qualifies a visitor and routes them to one of two journeys, then to an APAC
+enquiry (phone and email in `src/data/contact.ts`):
+
+- Feasibility: name a molecule and it resolves identity from PubChem, lays out
+  the core chemistry, and reports how many network manufacturers can make it
+  (a count only, identities withheld) before handing off to contact.
+- Pathway: describe a situation and it maps a stage-by-stage CDMO development
+  pathway with deliverables and gates.
+
+The two flows are deterministic (PubChem + catalog + `src/lib/cdmoMatch.ts` +
+`src/data/cdmoPathway.ts`), so they always complete quickly even with no API
+key. When `VITE_OPENROUTER_API_KEY` is set, the LLM (via `src/lib/openrouter.ts`,
+with model fallback) adds natural phrasing and free-text understanding. Assistant
+and enquiry activity is tracked to the Admin Dashboard.
 
 ## Run the app
 
@@ -40,7 +58,8 @@ internal tooling out of casual view but is not a substitute for server-side
 auth. Move to Supabase Auth when real account security is needed.
 
 Admin-only pages: `/admin` (website analytics), `/trade-analytics`,
-`/demand-forecast`, `/documents`.
+`/demand-forecast`, `/documents`, and `/synthesis-routes` (the ML-assisted
+route explorer, an internal analyst tool).
 
 ## Project structure
 
@@ -53,11 +72,10 @@ src/
 
   pages/                  One file per routed page
     Landing.tsx           Public homepage (hero, entry tiles, animated About)
-    CustomSynthesis.tsx   CDMO marketing page
-    SynthesisRoutes.tsx   Custom synthesis workspace (route explorer)
-    Dashboard.tsx         Knowledge workspace: market overview
-    KnowledgeBase.tsx     Knowledge workspace: 200-product knowledge base
-    TradePartners.tsx     Knowledge workspace: buyers and manufacturers
+    SynthesisRoutes.tsx   Admin: ML-assisted route explorer
+    Dashboard.tsx         Market overview (public workspace)
+    KnowledgeBase.tsx     Product Discovery (product knowledge base)
+    Cdmo.tsx              Public CDMO experience (assistant, two paths, enquiry)
     TradeAnalytics.tsx    Admin: shipment analytics
     DemandForecast.tsx    Admin: forecasting models
     Documents.tsx         Admin: Datamyne Excel uploads
@@ -69,11 +87,13 @@ src/
                           Sidebar (workspace navs, admin filtering), MarketingLayout, Logo
     ui/                   Reusable primitives: Card/Badge/Chip (primitives.tsx),
                           KpiCard, EmptyState, Reveal (scroll animation), CountUp
-    knowledge/            Domain components for the knowledge/synthesis pages
+    knowledge/            Domain components for the discovery/synthesis pages
                           (AI search and profiles, CDMO intelligence, regulatory panel,
                           market news, route step cards)
+    chat/                 The floating and embedded AI assistant (ChatWidget, ChatPanel)
+    cdmo/                 CDMO result surfaces (FeasibilityReport, PathwaySpine, EnquiryForm)
 
-  context/                React contexts: Auth (admin session), Currency (USD/INR),
+  context/                React contexts: Auth (admin session), Currency (USD),
                           TradeData (shared shipment store)
 
   lib/                    Framework-free logic
@@ -89,7 +109,7 @@ src/
   data/                   Bundled datasets (products, research, buyers, suppliers,
                           verified sources, FDA Orange Book extract)
 
-scripts/screenshots.mjs   Headless-browser smoke test + screenshot capture
+scripts/verify.mjs        Headless-browser end-to-end check + screenshots
 ```
 
 Conventions:

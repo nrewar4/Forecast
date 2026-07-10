@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/components/layout/Logo";
 
 const NAV = [
-  { label: "Knowledge", to: "/dashboard" },
-  { label: "Custom Synthesis", to: "/custom-synthesis" },
+  { label: "Product Discovery", to: "/knowledge-base" },
+  { label: "CDMO", to: "/cdmo" },
 ];
 
 export function MarketingLayout({ children }: { children: ReactNode }) {
@@ -18,10 +18,10 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
       >
         Skip to content
       </a>
-      <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" aria-label="APAC, Supply Chain | CDMO home" className="press inline-block">
-            <Logo className="h-11 w-auto" />
+      <header className="sticky top-0 z-20 border-b border-border bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+          <Link to="/" aria-label="APAC Supply Chain, CDMO home" className="press inline-block">
+            <Logo className="h-12 w-auto" />
           </Link>
           <nav className="flex items-center gap-1">
             <a
@@ -58,7 +58,7 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-xs text-muted-foreground sm:flex-row">
           <span>© {new Date().getFullYear()} APAC Sourcing Intelligence</span>
           <Link
-            to="/dashboard"
+            to="/knowledge-base"
             className="press inline-flex items-center gap-1.5 font-semibold text-primary hover:underline"
           >
             Open the platform <ArrowRight className="h-3.5 w-3.5" />
