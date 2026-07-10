@@ -5,14 +5,16 @@ import { ChatPanel } from "./ChatPanel";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
-// Floating assistant, persistent across navigation. Hidden on the login page and
-// on the /cdmo page (which embeds the assistant inline, so a floating copy would
-// be redundant).
+// Floating assistant, persistent across navigation. Hidden on the login page, on
+// /cdmo (which embeds the assistant inline), and on the internal admin tools
+// (the assistant is a visitor lead-gen surface, not an analyst tool).
+const HIDE_ON = new Set(["/login", "/cdmo", "/admin", "/trade-analytics", "/demand-forecast", "/documents", "/synthesis-routes"]);
+
 export function ChatWidget() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
-  const hidden = pathname === "/login" || pathname === "/cdmo";
+  const hidden = HIDE_ON.has(pathname);
 
   useEffect(() => {
     if (hidden && open) setOpen(false);

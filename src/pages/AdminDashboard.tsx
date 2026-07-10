@@ -6,7 +6,11 @@ import {
   Database,
   Eye,
   Factory,
+  FlaskConical,
+  Mail,
+  MessageSquare,
   MousePointerClick,
+  Route,
   Trash2,
   Users,
 } from "lucide-react";
@@ -124,6 +128,21 @@ export default function AdminDashboard() {
     }
     return [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
   }, [views]);
+
+  // Assistant and CDMO funnel counts, from the tracked events.
+  const leads = useMemo(() => {
+    const count = (name: string) => events.filter((e) => e.name === name).length;
+    const intents = events.filter((e) => e.name === "chat_intent");
+    return {
+      chatOpen: count("chat_open"),
+      intents: intents.length,
+      pathwayIntent: intents.filter((e) => e.data.path === "A").length,
+      feasibilityIntent: intents.filter((e) => e.data.path === "B").length,
+      pathways: count("cdmo_pathway"),
+      feasibilities: count("cdmo_feasibility"),
+      enquiries: count("cdmo_enquiry"),
+    };
+  }, [events]);
 
   const topEvents = useMemo(() => {
     const m = new Map<string, number>();
@@ -337,6 +356,17 @@ export default function AdminDashboard() {
           </Card>
         </>
       )}
+
+      {/* Assistant and CDMO leads */}
+      <h2 className="mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        Assistant and CDMO leads
+      </h2>
+      <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <KpiCard icon={MessageSquare} label="Assistant Opens" value={String(leads.chatOpen)} sub={`${leads.intents} conversations`} />
+        <KpiCard icon={Route} label="Pathways Mapped" value={String(leads.pathways)} sub={`${leads.pathwayIntent} pathway intents`} />
+        <KpiCard icon={FlaskConical} label="Feasibility Checks" value={String(leads.feasibilities)} sub={`${leads.feasibilityIntent} product intents`} />
+        <KpiCard icon={Mail} label="Enquiries" value={String(leads.enquiries)} sub="captured leads" />
+      </div>
 
       {/* Platform data */}
       <h2 className="mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">

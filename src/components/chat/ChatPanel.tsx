@@ -121,7 +121,7 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
         {messages.map((m) => {
           if (m.kind === "text") {
             return (
-              <div key={m.id} className={cn("flex", m.role === "user" ? "justify-end" : "justify-start")}>
+              <div key={m.id} className={cn("slide-down flex", m.role === "user" ? "justify-end" : "justify-start")}>
                 <div
                   className={cn(
                     "max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
@@ -137,21 +137,21 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
           }
           if (m.kind === "pathway") {
             return (
-              <div key={m.id} className="rounded-2xl border border-border bg-card p-4">
+              <div key={m.id} className="slide-down rounded-2xl border border-border bg-card p-4">
                 <PathwaySpine pathway={m.pathway} />
               </div>
             );
           }
           if (m.kind === "feasibility") {
             return (
-              <div key={m.id}>
+              <div key={m.id} className="slide-down">
                 <FeasibilityReport data={m.data} onEnquire={() => startEnquiry(`Feasibility enquiry: ${m.data.resolvedName}`)} />
               </div>
             );
           }
           // enquiry
           return (
-            <div key={m.id} className="rounded-2xl border border-border bg-card p-4">
+            <div key={m.id} className="slide-down rounded-2xl border border-border bg-card p-4">
               <EnquiryForm context={m.context} compact={!embedded} />
             </div>
           );

@@ -1,4 +1,5 @@
-// Headless-browser smoke test + screenshots. Run against a preview server:
+// Headless-browser smoke test + screenshots for the v5 platform. Run against a
+// preview server:
 //   npm run build && npm run preview -- --port 4173 &
 //   node scripts/screenshots.mjs http://localhost:4173
 import puppeteer from "puppeteer";
@@ -24,77 +25,81 @@ async function main() {
     await page.setViewport({ width: 1280, height: 900 });
 
     async function go(path, waitMs = 1200) {
-      // domcontentloaded + a settle delay: networkidle never fires on pages
-      // with long-polling feeds (e.g. market news).
       await page.goto(base + path, { waitUntil: "domcontentloaded", timeout: 30000 });
       await new Promise((r) => setTimeout(r, waitMs));
     }
-    // Scroll through the page so IntersectionObserver-driven reveals fire, then
-    // return to the top for a clean full-page capture.
-    async function warmReveals() {
-      await page.evaluate(async () => {
-        const step = window.innerHeight / 2;
-        for (let y = 0; y < document.body.scrollHeight; y += step) {
-          window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 90));
-        }
-        window.scrollTo(0, 0);
-      });
-      await new Promise((r) => setTimeout(r, 900));
-    }
-    async function shot(name) {
-      await page.screenshot({ path: `${outDir}/${name}.png`, fullPage: true });
-    }
+    const shot = (name) => page.screenshot({ path: `${outDir}/${name}.png`, fullPage: true });
     const text = () => page.evaluate(() => document.body.innerText);
 
     // ---- Landing ----
-    await go("/", 1200);
-    await warmReveals(); // fire scroll reveals + settle count-ups
+    await go("/");
     await shot("01-landing");
     const t1 = await text();
-    check("landing: rounded stat 8,900+", /8,900\+/.test(t1));
-    check("landing: rounded stat 3,200+", /3,200\+/.test(t1));
-    check("landing: About 'One network'", /One network/i.test(t1));
-    check("landing: CDMO process", /CDMO process/i.test(t1));
-    check("landing: route map US only, no Canada", /USA/.test(t1) && !/CANADA/.test(t1));
-    check("landing: no Publications", !/Publications/.test(t1));
-    check("landing: no 'Live' badge", !/\bLive\b/.test(t1));
+    check("landing: 3 buttons Procurement/Product Discovery/CDMO", /Procurement/.test(t1) && /Product Discovery/.test(t1) && /\bCDMO\b/.test(t1));
+    check("landing: enlarged logo", await page.evaluate(() => {
+      const img = document.querySelector('header img[alt*="APAC"]');
+      return !!img && img.getBoundingClientRect().height >= 60;
+    }));
+    check("landing: floating assistant launcher", await page.evaluate(() => !!document.querySelector('button[aria-label="Open assistant"]')));
     check("landing: no em dash", !t1.includes("—"));
-    const tiles = await page.evaluate(
-      () =>
-        [...document.querySelectorAll("main a")].filter((a) =>
-          a.innerText.split("\n").some((line) => /^(Procurement|Product Discovery|CDMO)$/.test(line.trim())),
-        ).length,
-    );
-    check("landing: 3 renamed entry buttons", tiles === 3);
 
-    // ---- Anonymous: admin pages redirect to login ----
-    await go("/trade-analytics");
-    check("guard: /trade-analytics redirects to /login", page.url().includes("/login"));
-    await go("/documents");
-    check("guard: /documents redirects to /login", page.url().includes("/login"));
+    // Product Discovery button target.
+    const pdHref = await page.evaluate(() => {
+      const a = [...document.querySelectorAll("main a")].find((el) => /Product Discovery/.test(el.innerText));
+      return a ? a.getAttribute("href") : null;
+    });
+    check("landing: Product Discovery -> /knowledge-base", pdHref === "/knowledge-base");
 
-    // ---- Market Overview (public) + admin-gating of sidebar ----
-    await go("/dashboard", 3500); // allow the World Bank fetch to resolve
+    // ---- Product Discovery ----
+    await go("/knowledge-base", 1600);
     const t2 = await text();
-    check("overview: title", /Market Overview/.test(t2));
-    check("overview: six countries named", /China/.test(t2) && /Saudi Arabia/.test(t2) && /South Korea/.test(t2));
-    check("overview: World Bank source", /World Bank/.test(t2));
-    check("sidebar: no Trade Analytics for anonymous", !/Trade Analytics/.test(t2));
-    check("sidebar: no Documents for anonymous", !/Documents/.test(t2));
-    check("sidebar: has Admin sign in", /Admin sign in/i.test(t2));
-    await shot("02-market-overview");
+    check("knowledge-base titled Product Discovery", /Product Discovery/.test(t2));
+    check("knowledge-base: no currency toggle (USD/INR)", !/USD\s*\/\s*INR/.test(t2));
+    check("knowledge-base: no Analyst chip", !/\bAnalyst\b/.test(t2));
 
-    // ---- Synthesis workspace ----
+    // ---- Trade Partners removed ----
+    await go("/partners");
+    check("partners redirects away", !/Trade Partners/.test(await text()) && !page.url().endsWith("/partners"));
+
+    // ---- Synthesis routes admin-only ----
     await go("/synthesis-routes");
-    const t3 = await text();
-    check("synthesis: workspace title", /Custom Synthesis Routes/.test(t3));
-    check("synthesis: own sidebar section", /Custom Synthesis\n/.test(t3));
-    await shot("03-synthesis-workspace");
+    check("synthesis-routes redirects to /login when logged out", page.url().includes("/login"));
 
-    // ---- Login flow ----
+    // ---- CDMO page ----
+    await go("/cdmo", 1500);
+    await shot("02-cdmo");
+    const t3 = await text();
+    check("cdmo: hero", /Tell us the problem/.test(t3));
+    check("cdmo: path A + path B", /development pathway/i.test(t3) && /can be made/i.test(t3));
+    check("cdmo: embedded assistant", /APAC Assistant/.test(t3));
+    check("cdmo: contact phone + email", /092128 03501/.test(t3) && /info@apacss\.com/.test(t3));
+    check("cdmo: no floating launcher (embedded only)", !(await page.evaluate(() => !!document.querySelector('button[aria-label="Open assistant"]'))));
+
+    // Drive Path A in the embedded assistant.
+    const clickedA = await page.evaluate(() => {
+      const b = [...document.querySelectorAll("button")].find((el) => el.textContent.trim() === "De-risk my supply");
+      if (b) { b.click(); return true; }
+      return false;
+    });
+    await new Promise((r) => setTimeout(r, 900));
+    const t4 = await text();
+    check("cdmo Path A: pathway spine renders", clickedA && /Your pathway/i.test(t4) && /Walk-away gate/i.test(t4));
+    check("cdmo Path A: enquiry form appears", /Send enquiry/.test(t4));
+
+    // Enquiry submit fires (fill + submit).
+    await page.evaluate(() => {
+      const set = (sel, val) => { const el = document.querySelector(sel); if (el) { const d = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set; d.call(el, val); el.dispatchEvent(new Event("input", { bubbles: true })); } };
+      set('input[placeholder="Your name"]', "Test Buyer");
+      set('input[placeholder="Work email"]', "buyer@example.com");
+    });
+    const enquiryBefore = await page.evaluate(() => JSON.parse(localStorage.getItem("apac.analytics.events.v1") || "[]").filter((e) => e.name === "cdmo_enquiry").length);
+    await page.evaluate(() => { const b = [...document.querySelectorAll("button")].find((el) => /Send enquiry/.test(el.textContent)); b && b.click(); });
+    await new Promise((r) => setTimeout(r, 500));
+    const enquiryAfter = await page.evaluate(() => JSON.parse(localStorage.getItem("apac.analytics.events.v1") || "[]").filter((e) => e.name === "cdmo_enquiry").length);
+    check("cdmo: enquiry submit fires cdmo_enquiry", enquiryAfter > enquiryBefore);
+
+    // ---- Admin login + leads panel ----
     await go("/login");
-    await shot("04-login");
     await page.type('input[placeholder="admin"]', "admin");
     await page.type('input[type="password"]', "apac-admin");
     await Promise.all([
@@ -102,20 +107,14 @@ async function main() {
       page.click('button[type="submit"]'),
     ]);
     await new Promise((r) => setTimeout(r, 900));
-    check("login: lands on /admin", page.url().includes("/admin"));
-    const t4 = await text();
-    check("admin: dashboard title", /Admin Dashboard/.test(t4));
-    check("admin: platform data", /Platform data/i.test(t4));
-    await shot("05-admin-dashboard");
-
-    // ---- Admin sees gated pages ----
-    await go("/trade-analytics");
-    check("admin: trade analytics reachable", !page.url().includes("/login"));
-    await go("/dashboard");
     const t5 = await text();
-    check("sidebar: Trade Analytics visible for admin", /Trade Analytics/.test(t5));
-    check("sidebar: Sign out visible", /Sign out/.test(t5));
-    await shot("06-knowledge-admin");
+    check("admin: dashboard", /Admin Dashboard/.test(t5));
+    check("admin: assistant and CDMO leads panel", /Assistant and CDMO leads/i.test(t5));
+    await shot("03-admin");
+
+    // Admin can reach synthesis routes.
+    await go("/synthesis-routes");
+    check("admin: synthesis-routes reachable", /Synthesis Routes/.test(await text()) && !page.url().includes("/login"));
 
     // ---- Report ----
     let ok = true;
