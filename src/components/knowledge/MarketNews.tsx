@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ExternalLink, Newspaper, RefreshCw } from "lucide-react";
+import { ExternalLink, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/primitives";
 import { topicLinks, fetchMarketNews, type NewsItem, type NewsQuery } from "@/lib/news";
 
@@ -52,10 +52,7 @@ export function MarketNews({
   return (
     <Card className="flex h-full flex-col">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <Newspaper className="h-4 w-4 text-primary" />
-          {title}
-        </CardTitle>
+        <CardTitle>{title}</CardTitle>
         <button
           onClick={load}
           disabled={loading}
@@ -113,11 +110,9 @@ export function MarketNews({
                   href={t.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition hover:bg-muted"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition hover:bg-muted hover:text-primary"
                 >
-                  <Newspaper className="h-3 w-3 text-primary" />
                   {t.label}
-                  <ExternalLink className="h-3 w-3 text-muted-foreground" />
                 </a>
               ))}
             </div>

@@ -16,7 +16,6 @@ import {
   ArrowDownToLine,
   ArrowUpFromLine,
   CalendarDays,
-  Globe2,
   RefreshCw,
   Scale,
 } from "lucide-react";
@@ -108,13 +107,7 @@ export default function Dashboard() {
     >
       {/* Source + refresh bar */}
       <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-          </span>
-          Verified: World Bank chemical trade
-        </span>
+        <span>World Bank merchandise trade and WITS chemical share</span>
         {snap ? (
           <>
             <span className="text-border">·</span>
@@ -168,10 +161,7 @@ export default function Dashboard() {
           <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_380px]">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2">
-                  <Globe2 className="h-4 w-4 text-primary" />
-                  Exports vs Imports by Country
-                </CardTitle>
+                <CardTitle>Exports vs Imports by Country</CardTitle>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   Chemical trade ({currency}), latest reported year per country
                 </p>
@@ -201,10 +191,7 @@ export default function Dashboard() {
           {/* Combined trend */}
           <Card className="mt-4">
             <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Globe2 className="h-4 w-4 text-primary" />
-                Combined Chemical Trade Over Time
-              </CardTitle>
+              <CardTitle>Combined Chemical Trade Over Time</CardTitle>
               <p className="mt-0.5 text-xs text-muted-foreground">
                 Total exports plus imports across all six markets ({currency}), by year
               </p>
@@ -243,9 +230,9 @@ export default function Dashboard() {
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
-            Source: World Bank Indicators (chemical share of merchandise exports and imports, current US$).
-            Official trade is published annually, so figures show each country's latest reported year. Datamyne
-            shipment records remain available under Trade Analytics and Documents.
+            Chemical trade is estimated as World Bank merchandise trade (current US$) multiplied by each
+            country's chemical share of merchandise trade from World Bank WITS. Trade is published annually,
+            so figures show each country's latest reported year.
           </p>
         </>
       )}

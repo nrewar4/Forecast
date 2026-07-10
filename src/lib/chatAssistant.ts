@@ -15,6 +15,8 @@ import { hasApiKey } from "@/lib/aiConfig";
 import { chatComplete, type ChatMsg } from "@/lib/openrouter";
 import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
 import { matchVendors, findProduct, type CdmoMatch } from "@/lib/cdmoMatch";
+import { verifiedFor, type VerifiedLink } from "@/data/verified";
+import { slug } from "@/lib/utils";
 import {
   ARCHETYPES,
   buildPathway,
@@ -53,6 +55,55 @@ export function looksLikeProductQuery(text: string): boolean {
   return /^[A-Za-z0-9][A-Za-z0-9\s,'()\-+/.]*$/.test(t);
 }
 
+// Words that name no specific product, so a phrase that reduces to only these
+// is a generic request ("I want a product made") and should prompt for the name.
+const GENERIC_TERMS = new Set([
+  "product", "chemical", "molecule", "compound", "material", "api", "intermediate",
+  "something", "it", "this", "that", "one", "stuff", "item",
+]);
+
+// Leading phrases stripped, iteratively, to pull the product out of natural
+// requests like "I want to make Sucrose Stearate" or "can you produce aspirin".
+const LEAD_PATTERNS: RegExp[] = [
+  /^(hi|hello|hey|yo)\b[,\s]*/i,
+  /^i\s*('?m|am|'d|would)?\s*(want|need|wanna|wish|like|looking|trying|hoping)\b/i,
+  /^(can|could|would|will|do)\s+you\b/i,
+  /^(please|kindly|just)\b/i,
+  /^(help|assist)\s+(me|us)\b/i,
+  /^(we|our team|my company|our company)\b/i,
+  /^(to|for|of)\b/i,
+  /^(get|make|manufacture|produce|synthesi[sz]e|source|develop|create|build|supply|order|find|buy)\b/i,
+  /^(me|us)\b/i,
+  /^(a|an|some|the|any)\b/i,
+  /^(product|chemical|molecule|compound|api|material)\s+(called|named|like|:)\b/i,
+];
+
+// Extracts the product/molecule the user named from a natural sentence. Returns
+// null when the message names nothing specific (only generic words remain).
+export function extractProductPhrase(text: string): string | null {
+  let s = text.trim().replace(/[?.!]+$/, "").trim();
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const re of LEAD_PATTERNS) {
+      const next = s.replace(re, "").trim();
+      if (next !== s) {
+        s = next;
+        changed = true;
+      }
+    }
+  }
+  // Drop trailing filler and action words.
+  s = s
+    .replace(/\b(for me|for us|please|thanks|thank you|at scale|in bulk|to spec|manufactured|made|produced|synthesi[sz]ed|developed)\b[\s.]*$/gi, "")
+    .replace(/[?.!,]+$/, "")
+    .trim();
+  if (!s || s.length > 60) return null;
+  const words = s.split(/\s+/);
+  if (words.every((w) => GENERIC_TERMS.has(w.toLowerCase()))) return null;
+  return s;
+}
+
 export type Understanding = { intent: Intent; product?: string; situation?: string };
 
 // Dynamic understanding of any prompt. With a key, one small LLM call classifies
@@ -86,7 +137,7 @@ export async function understand(
           : keyword;
         return {
           intent,
-          product: parsed.product?.trim() || undefined,
+          product: parsed.product?.trim() || extractProductPhrase(text) || undefined,
           situation: parsed.situation?.trim() || undefined,
         };
       }
@@ -95,8 +146,12 @@ export async function understand(
     }
   }
 
+  // No key: pull the product out of the phrasing ourselves.
+  if (keyword === "feasibility") {
+    return { intent: "feasibility", product: extractProductPhrase(text) || undefined };
+  }
   if (keyword === "unknown" && looksLikeProductQuery(text)) {
-    return { intent: "feasibility", product: text.trim() };
+    return { intent: "feasibility", product: extractProductPhrase(text) || text.trim() };
   }
   return { intent: keyword };
 }
@@ -136,6 +191,8 @@ export type Feasibility = {
   description: string | null;
   chemistry: CoreChemistry | null;
   match: CdmoMatch;
+  /** cited sources for the identity and chemistry (PubChem + verified refs) */
+  sources: VerifiedLink[];
   /** optional LLM-written précis, added when a key is configured */
   aiSummary?: string;
 };
@@ -162,9 +219,24 @@ function withTimeout<T>(
 }
 
 // Concise, honest core chemistry from the verified catalog when we cover the
-// molecule. Starting materials are read from the route's feedstock cost drivers.
+// molecule. Prefers the web-verified route + named process (with citations),
+// falling back to the catalog product's route. Starting materials are read from
+// the route's feedstock cost drivers.
 function catalogChemistry(name: string): CoreChemistry | null {
   const p = findProduct(name);
+  const v = p ? verifiedFor(slug(p.name)) : verifiedFor(slug(name));
+
+  if (v && v.routes.length) {
+    return {
+      headline: v.mainProcess.name,
+      route: v.routes.slice(0, 5),
+      startingMaterials: [],
+      plantType: p?.plantType ?? "Batch",
+      hazardNote: "Confirm hazard and containment class at the feasibility stage.",
+      source: "catalog",
+    };
+  }
+
   if (!p || !p.route.length) return null;
   const starting = p.costDrivers
     .filter((c) => /feedstock|raw|material|methanol|benzene|ethylene|acid|chlor|ammonia/i.test(c.label))
@@ -181,6 +253,20 @@ function catalogChemistry(name: string): CoreChemistry | null {
         : "Multipurpose batch chemistry; confirm hazard and containment class at feasibility.",
     source: "catalog",
   };
+}
+
+// Cited sources for the report: PubChem for identity, plus the web-verified
+// references for the chemistry when the molecule is in our catalog.
+function collectSources(identity: ChemIdentity | null, productName: string): VerifiedLink[] {
+  const out: VerifiedLink[] = [];
+  if (identity?.cid) {
+    out.push({ name: "PubChem (identity, CAS)", url: `https://pubchem.ncbi.nlm.nih.gov/compound/${identity.cid}` });
+  }
+  const v = verifiedFor(slug(productName));
+  if (v) for (const s of v.sources) out.push(s);
+  // Dedupe by url.
+  const seen = new Set<string>();
+  return out.filter((s) => (seen.has(s.url) ? false : (seen.add(s.url), true)));
 }
 
 // When the catalog does not cover a molecule and a key is present, ask the LLM
@@ -253,7 +339,9 @@ export async function runFeasibility(
   let chemistry = catalogChemistry(match.productName) || catalogChemistry(query);
   if (!chemistry) chemistry = await aiChemistry(identity, query, cfg, signal);
 
-  const result: Feasibility = { query, identity, description, chemistry, match };
+  const sources = collectSources(identity, match.productName);
+
+  const result: Feasibility = { query, identity, description, chemistry, match, sources };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {

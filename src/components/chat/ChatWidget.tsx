@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { MessageSquare, Sparkles, X } from "lucide-react";
+import { MessageSquare, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { track } from "@/lib/analytics";
 import { ChatPanel } from "./ChatPanel";
@@ -41,16 +41,9 @@ export function ChatWidget() {
       {open ? (
         <div className="mb-3 flex h-[min(90vh,880px)] w-[min(96vw,800px)] animate-chat-pop flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
           <div className="flex items-center justify-between border-b border-border bg-ink px-4 py-3">
-            <div className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-primary/15">
-                <Sparkles className="h-4 w-4 text-primary" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold text-white">APAC Assistant</p>
-                <p className="flex items-center gap-1 text-[11px] text-slate-300">
-                  <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-teal" /> Online
-                </p>
-              </div>
+            <div>
+              <p className="text-sm font-semibold text-white">APAC Assistant</p>
+              <p className="text-[11px] text-slate-300">Ask about any product or project</p>
             </div>
             <button
               type="button"

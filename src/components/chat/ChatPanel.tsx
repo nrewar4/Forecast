@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, SendHorizonal, Sparkles } from "lucide-react";
+import { ArrowUpRight, SendHorizonal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { loadAiConfig } from "@/lib/aiConfig";
 import { streamChat, type ChatMsg } from "@/lib/openrouter";
@@ -16,6 +16,7 @@ import {
   milestonesForProduct,
   sampleProducts,
   looksLikeProductQuery,
+  extractProductPhrase,
   type Intent,
   type QuickReply,
   type Feasibility,
@@ -314,10 +315,12 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
 
   function route(intent: Intent, text: string) {
     if (intent === "feasibility") {
-      // Only assess when the message names a plausible product; a phrase like
-      // "I want a product made" should ask which one, not fabricate a report.
-      if (looksLikeProductQuery(text)) {
-        doFeasibility(text);
+      // Pull the named product out of the phrasing ("I want to make X" -> "X").
+      // Only assess when a specific product is named; a generic phrase such as
+      // "I want a product made" asks which one instead of fabricating a report.
+      const product = extractProductPhrase(text) ?? (looksLikeProductQuery(text) ? text.trim() : null);
+      if (product) {
+        doFeasibility(product);
       } else {
         awaiting.current = "molecule";
         pushBot({ kind: "text", text: "Which product or molecule do you want made? Give me a name (for example \"ibuprofen\") or a CAS number." });
@@ -417,11 +420,8 @@ function MessageBubble({
 
   const wide = msg.kind === "feasibility" || msg.kind === "pathway" || msg.kind === "enquiry";
   return (
-    <div className="flex gap-2">
-      <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink text-primary-foreground">
-        <Sparkles className="h-3.5 w-3.5 text-primary" />
-      </div>
-      <div className={cn("min-w-0", wide ? "w-full" : "max-w-[85%]")}>
+    <div className="flex">
+      <div className={cn("min-w-0", wide ? "w-full" : "max-w-[88%]")}>
         {msg.kind === "typing" ? (
           <div className="inline-flex items-center gap-1 rounded-2xl rounded-bl-sm bg-muted px-3.5 py-2.5">
             {[0, 1, 2].map((i) => (

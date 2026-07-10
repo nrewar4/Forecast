@@ -1,11 +1,10 @@
-import { ArrowRight, BookOpen, FlaskConical, Factory, Hash, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Feasibility } from "@/lib/chatAssistant";
 import { cn } from "@/lib/utils";
 
-// Renders the Path B result: official identity and CAS (PubChem), a short
-// description, the core chemistry, and the APAC vendor match as a count only.
-// Used inline in the chat and full-width on the CDMO page. Vendor identities are
-// never shown, by design.
+// Path B result: official identity and CAS (PubChem), a short description, the
+// core chemistry, the APAC vendor match as a count only, and cited sources.
+// Clean typography, no decorative icons. Vendor identities are never shown.
 export function FeasibilityReport({
   data,
   onContact,
@@ -15,7 +14,7 @@ export function FeasibilityReport({
   onContact?: () => void;
   compact?: boolean;
 }) {
-  const { identity, description, chemistry, match } = data;
+  const { identity, description, chemistry, match, sources } = data;
   const cid = identity?.cid ?? null;
   const cas = identity?.primaryCas ?? null;
   const structure = cid
@@ -26,26 +25,14 @@ export function FeasibilityReport({
     <div className="space-y-2.5 text-left">
       {/* Identity */}
       <div className="overflow-hidden rounded-xl border border-border bg-card shadow-card">
-        <div className="flex items-center justify-between gap-2 border-b border-border bg-gradient-to-r from-accent/60 to-transparent px-4 py-2.5">
+        <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-2.5">
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold capitalize text-ink">{match.productName}</p>
             <p className="text-[11px] text-muted-foreground">{match.group} · {match.category}</p>
           </div>
-          <div className="flex shrink-0 items-center gap-1.5">
-            {cas ? (
-              <span className="inline-flex items-center gap-1 rounded-full bg-ink px-2 py-0.5 font-mono text-[10px] font-semibold text-white">
-                <Hash className="h-2.5 w-2.5" /> {cas}
-              </span>
-            ) : null}
-            <span
-              className={cn(
-                "rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide",
-                cid ? "bg-teal/10 text-teal ring-1 ring-inset ring-teal/25" : "bg-muted text-muted-foreground ring-1 ring-inset ring-border",
-              )}
-            >
-              {cid ? "PubChem" : "Indicative"}
-            </span>
-          </div>
+          <span className="shrink-0 font-mono text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+            {cid ? "Source: PubChem" : "Indicative"}
+          </span>
         </div>
 
         <div className="flex gap-4 p-4">
@@ -58,11 +45,7 @@ export function FeasibilityReport({
               loading="lazy"
               className="h-[92px] w-[92px] shrink-0 rounded-lg border border-border bg-white object-contain p-1"
             />
-          ) : (
-            <div className="grid h-[92px] w-[92px] shrink-0 place-items-center rounded-lg border border-dashed border-border bg-muted/40 text-muted-foreground">
-              <FlaskConical className="h-6 w-6" />
-            </div>
-          )}
+          ) : null}
           <dl className="grid flex-1 grid-cols-2 gap-x-4 gap-y-2 text-xs">
             <Field label="CAS number" value={cas || "Not listed"} mono />
             <Field label="PubChem CID" value={cid ? String(cid) : "Not resolved"} mono />
@@ -75,25 +58,23 @@ export function FeasibilityReport({
       {/* Description */}
       {description ? (
         <div className="rounded-xl border border-border bg-card p-3.5">
-          <p className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-            <BookOpen className="h-3.5 w-3.5 text-primary" /> About
-          </p>
-          <p className="text-xs leading-relaxed text-foreground/90">{clamp(description, 300)}</p>
-          <p className="mt-1.5 text-[10px] text-muted-foreground">Source: PubChem</p>
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">About</p>
+          <p className="text-xs leading-relaxed text-foreground/90">{clamp(description, 320)}</p>
         </div>
       ) : null}
 
       {/* Core chemistry */}
       {chemistry ? (
         <div className="rounded-xl border border-border bg-card p-4">
-          <div className="mb-2 flex items-center justify-between">
-            <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              <FlaskConical className="h-3.5 w-3.5 text-primary" /> Core chemistry
-            </p>
-            <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry</p>
+            <span className="text-[10px] font-medium text-muted-foreground">
               {chemistry.source === "catalog" ? "Verified route" : "Compiled summary"}
             </span>
           </div>
+          {chemistry.headline ? (
+            <p className="mb-2 text-sm font-medium text-ink">{chemistry.headline}</p>
+          ) : null}
           <ol className="space-y-1.5">
             {chemistry.route.map((step, i) => (
               <li key={i} className="flex gap-2.5 text-sm text-foreground">
@@ -125,28 +106,18 @@ export function FeasibilityReport({
       )}
 
       {/* Vendor match: count only */}
-      <div className="overflow-hidden rounded-xl border border-primary/30 bg-gradient-to-br from-accent/60 to-accent/20 p-4">
-        <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground shadow-glow">
-            <Factory className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-2xl font-bold leading-none tracking-tight text-ink">
-              {match.vendorCount}
-              <span className="ml-1.5 text-sm font-medium text-muted-foreground">capable manufacturers</span>
-            </p>
-            <p className="mt-1 text-[11px] text-muted-foreground">
-              In the APAC network, assessed as able to make this. Identities are shared after contact.
-            </p>
-          </div>
-        </div>
+      <div className="rounded-xl border border-primary/30 bg-accent/40 p-4">
+        <p className="text-2xl font-bold leading-none tracking-tight text-ink">
+          {match.vendorCount}
+          <span className="ml-1.5 text-sm font-medium text-muted-foreground">capable manufacturers</span>
+        </p>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          In the APAC network, assessed as able to make this. Identities are shared after contact.
+        </p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {match.capabilities.map((c) => (
-            <span
-              key={c}
-              className="inline-flex items-center gap-1 rounded-md border border-border bg-card px-2 py-0.5 text-[11px] font-medium text-foreground"
-            >
-              <ShieldCheck className="h-3 w-3 text-teal" /> {c}
+            <span key={c} className="rounded-md border border-border bg-card px-2 py-0.5 text-[11px] font-medium text-foreground">
+              {c}
             </span>
           ))}
         </div>
@@ -156,6 +127,27 @@ export function FeasibilityReport({
         <p className="rounded-xl border border-border bg-card p-3 text-xs leading-relaxed text-foreground/90">
           {data.aiSummary}
         </p>
+      ) : null}
+
+      {/* Sources */}
+      {sources.length ? (
+        <div className="rounded-xl border border-border bg-card p-3.5">
+          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Sources</p>
+          <ul className="flex flex-wrap gap-x-3 gap-y-1">
+            {sources.map((s) => (
+              <li key={s.url}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="text-[11px] font-medium text-primary hover:underline"
+                >
+                  {s.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : null}
 
       {onContact ? (

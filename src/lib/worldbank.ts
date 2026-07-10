@@ -2,11 +2,11 @@
 // CORS-friendly, and an authoritative source. It powers the Market Overview for
 // the six focus markets. The API is browser-fetchable directly.
 //
-// Official merchandise trade is published annually, so the newest figure is the
-// latest reported year per country. To keep the page "current" we re-check once
-// per day: results are cached in localStorage under today's date, so the first
-// visit each day refetches and later visits are instant. A manual refresh clears
-// the cache.
+// Chemical trade is derived from merchandise trade x the WITS chemical share
+// (see src/data/chemicalTrade). Results are cached per day; a bundled fallback
+// keeps the page populated when the API cannot be reached.
+
+import { CHEM_SHARE, CHEM_FALLBACK } from "@/data/chemicalTrade";
 
 export type CountryCode = "USA" | "IND" | "CHN" | "JPN" | "KOR" | "SAU";
 
@@ -26,18 +26,15 @@ export const FOCUS_COUNTRIES: FocusCountry[] = [
   { code: "SAU", name: "Saudi Arabia", flag: "🇸🇦" },
 ];
 
-// World Bank indicator codes used, all "current US$" or a ratio. Chemical trade
-// is derived from merchandise trade and the World Bank / WITS chemical-share
-// indicators, so the figures stay from a single authoritative source.
+// World Bank merchandise-trade indicators (reliable, well populated). Chemical
+// trade is derived as merchandise x the WITS chemical share (see chemicalTrade).
 const IND_EXPORTS = "TX.VAL.MRCH.CD.WT"; // Merchandise exports (current US$)
 const IND_IMPORTS = "TM.VAL.MRCH.CD.WT"; // Merchandise imports (current US$)
 const IND_TRADE_GDP = "NE.TRD.GNFS.ZS"; // Trade (% of GDP)
-const IND_CHEM_EXP_PCT = "TX.VAL.CHEM.ZS.UN"; // Chemicals, % of merchandise exports
-const IND_CHEM_IMP_PCT = "TM.VAL.CHEM.ZS.UN"; // Chemicals, % of merchandise imports
 
 const CODES = FOCUS_COUNTRIES.map((c) => c.code).join(";");
 const BASE = "https://api.worldbank.org/v2";
-const CACHE_KEY = "apac.worldbank.chem.v2";
+const CACHE_KEY = "apac.worldbank.chem.v3";
 
 export type YearValue = { year: number; value: number };
 
@@ -114,65 +111,83 @@ function latest(points: YearValue[] | undefined): YearValue | null {
   return points[points.length - 1];
 }
 
-// The chemical share for a given year, or the latest available share as a
-// fallback (the share moves slowly, so carrying it forward is reasonable and
-// keeps the figure sourced from the World Bank rather than invented).
-function pctForYear(points: YearValue[] | undefined, year: number): number | null {
-  if (!points || points.length === 0) return null;
-  const exact = points.find((p) => p.year === year);
-  if (exact) return exact.value;
-  return points[points.length - 1].value;
+// The bundled fallback snapshot: chemical trade from World Bank 2022 merchandise
+// trade x the WITS chemical share. Used when the live fetch is unavailable so
+// the page always shows sourced figures rather than zeros.
+function fallbackSnapshot(): TradeSnapshot {
+  const countries: CountryTrade[] = FOCUS_COUNTRIES.map((c) => {
+    const f = CHEM_FALLBACK.find((x) => x.code === c.code)!;
+    return {
+      code: c.code,
+      name: c.name,
+      flag: c.flag,
+      exports: f.exports,
+      imports: f.imports,
+      balance: f.exports - f.imports,
+      tradeGdp: null,
+      latestYear: f.year,
+      history: [], // multi-year history comes from the live series only
+    };
+  });
+  return { countries, sourceUpdated: "2022", fetchedAt: new Date().toISOString() };
 }
 
-// Fetches the full snapshot from the World Bank API and derives chemical-only
-// trade (merchandise value multiplied by the chemical share). Everything the
-// Market Overview shows is chemical trade.
+// Fetches merchandise trade from the World Bank and derives chemical trade by
+// applying each country's WITS chemical share. If a country returns no data it
+// falls back to the bundled figure, so the snapshot is always complete.
 async function fetchSnapshot(signal?: AbortSignal): Promise<TradeSnapshot> {
-  const [exp, imp, gdp, chemExp, chemImp] = await Promise.all([
+  const [exp, imp, gdp] = await Promise.all([
     fetchIndicator(IND_EXPORTS, signal),
     fetchIndicator(IND_IMPORTS, signal),
     fetchIndicator(IND_TRADE_GDP, signal),
-    fetchIndicator(IND_CHEM_EXP_PCT, signal),
-    fetchIndicator(IND_CHEM_IMP_PCT, signal),
   ]);
 
   const countries: CountryTrade[] = FOCUS_COUNTRIES.map((c) => {
+    const share = CHEM_SHARE[c.code];
+    const fb = CHEM_FALLBACK.find((x) => x.code === c.code)!;
     const expPts = exp.byCountry.get(c.code) ?? [];
     const impPts = imp.byCountry.get(c.code) ?? [];
-    const chemExpPts = chemExp.byCountry.get(c.code) ?? [];
-    const chemImpPts = chemImp.byCountry.get(c.code) ?? [];
     const gLatest = latest(gdp.byCountry.get(c.code));
 
     // Chemical value per year = merchandise value x chemical share / 100.
     const impMap = new Map(impPts.map((p) => [p.year, p.value]));
-    const chemExpByYear: YearValue[] = [];
     const historyMap = new Map<number, number>();
+    let latestYear: number | null = null;
+    let exportsVal: number | null = null;
+    let importsVal: number | null = null;
+
     for (const p of expPts) {
-      const pct = pctForYear(chemExpPts, p.year);
-      if (pct == null) continue;
-      const chemE = (p.value * pct) / 100;
-      chemExpByYear.push({ year: p.year, value: chemE });
+      const chemE = (p.value * share.exportPct) / 100;
       let total = chemE;
       const impVal = impMap.get(p.year);
-      const impPct = pctForYear(chemImpPts, p.year);
-      if (impVal != null && impPct != null) total += (impVal * impPct) / 100;
+      const chemI = impVal != null ? (impVal * share.importPct) / 100 : null;
+      if (chemI != null) total += chemI;
       historyMap.set(p.year, total);
-    }
-
-    const eLatestChem = latest(chemExpByYear);
-    const latestYear = eLatestChem?.year ?? null;
-    const exportsVal = eLatestChem?.value ?? null;
-
-    let importsVal: number | null = null;
-    if (latestYear != null) {
-      const impVal = impMap.get(latestYear);
-      const impPct = pctForYear(chemImpPts, latestYear);
-      if (impVal != null && impPct != null) importsVal = (impVal * impPct) / 100;
+      if (latestYear == null || p.year >= latestYear) {
+        latestYear = p.year;
+        exportsVal = chemE;
+        importsVal = chemI;
+      }
     }
 
     const history: YearValue[] = [...historyMap.entries()]
       .sort((a, b) => a[0] - b[0])
       .map(([year, value]) => ({ year, value }));
+
+    // Fall back to the bundled figure when the live series is empty.
+    if (exportsVal == null) {
+      return {
+        code: c.code,
+        name: c.name,
+        flag: c.flag,
+        exports: fb.exports,
+        imports: fb.imports,
+        balance: fb.exports - fb.imports,
+        tradeGdp: gLatest?.value ?? null,
+        latestYear: fb.year,
+        history: [],
+      };
+    }
 
     return {
       code: c.code,
@@ -217,7 +232,8 @@ function writeCache(snapshot: TradeSnapshot) {
 }
 
 // Returns the daily snapshot, using today's cache when present. Pass force to
-// bypass the cache (the manual refresh button).
+// bypass the cache (the manual refresh button). If the live fetch fails, returns
+// the bundled fallback so the Market Overview always shows sourced figures.
 export async function loadTradeSnapshot(
   opts: { force?: boolean; signal?: AbortSignal } = {},
 ): Promise<TradeSnapshot> {
@@ -225,7 +241,12 @@ export async function loadTradeSnapshot(
     const cached = readCache();
     if (cached) return cached;
   }
-  const snapshot = await fetchSnapshot(opts.signal);
-  writeCache(snapshot);
-  return snapshot;
+  try {
+    const snapshot = await fetchSnapshot(opts.signal);
+    writeCache(snapshot);
+    return snapshot;
+  } catch {
+    // Network blocked or offline: show the bundled World Bank / WITS figures.
+    return fallbackSnapshot();
+  }
 }

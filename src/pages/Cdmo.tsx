@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { FlaskConical, Factory, ShieldCheck, GitBranch, Boxes, Handshake } from "lucide-react";
 import { MarketingLayout } from "@/components/layout/MarketingLayout";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
@@ -9,24 +8,20 @@ import { track } from "@/lib/analytics";
 
 const PATHS = [
   {
-    icon: Factory,
-    kicker: "Get a product made",
-    title: "Feasibility in minutes",
-    body: "Name a molecule and the assistant pulls its identity from PubChem, lays out the core chemistry, and tells you how many manufacturers in our network can make it. Then we connect you.",
+    title: "Get a product made",
+    body: "Name a molecule and the assistant returns its verified identity and CAS from PubChem, the core chemistry, and how many manufacturers in our network can make it. Then we connect you.",
   },
   {
-    icon: GitBranch,
-    kicker: "Plan a project",
-    title: "A pathway, not a directory",
+    title: "Plan a project",
     body: "Describe your situation, a supplier to de-risk, a patent with no plant, a molecule that costs too much, and get a stage-by-stage development pathway with what you receive at each milestone.",
   },
 ];
 
 const DELIVER = [
-  { icon: Handshake, title: "Named governance", body: "A named project manager and lead chemist, a weekly technical call, and monthly steering." },
-  { icon: ShieldCheck, title: "Stage-gate control", body: "Spend is released milestone by milestone, with a written gate you can stop at." },
-  { icon: Boxes, title: "Matched capacity", body: "Development runs on existing certified plant capacity across Asia, not a plant we still have to build." },
-  { icon: FlaskConical, title: "Quality by market", body: "cGMP for regulated work, ISO and REACH for industrial, with the documentation your market needs." },
+  { title: "Named governance", body: "A named project manager and lead chemist, a weekly technical call, and monthly steering." },
+  { title: "Stage-gate control", body: "Spend is released milestone by milestone, with a written gate you can stop at." },
+  { title: "Matched capacity", body: "Development runs on existing certified plant capacity across Asia, not a plant we still have to build." },
+  { title: "Quality by market", body: "cGMP for regulated work, ISO and REACH for industrial, with the documentation your market needs." },
 ];
 
 export default function Cdmo() {
@@ -43,19 +38,12 @@ export default function Cdmo() {
     <MarketingLayout>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
-        <div aria-hidden className="pointer-events-none absolute inset-0 grid-field [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent_75%)]" />
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(244,121,32,0.07),transparent_70%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(244,121,32,0.06),transparent_70%)]" />
 
         <div className="relative mx-auto grid max-w-6xl items-start gap-10 px-6 py-14 lg:grid-cols-2 lg:py-20">
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-card">
-                <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-primary" />
-                CDMO and custom manufacturing
-              </span>
-            </Reveal>
-            <Reveal delay={60}>
-              <h1 className="mt-5 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-5xl">
+              <h1 className="text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-5xl">
                 Tell us what you are building. We show you the path.
               </h1>
             </Reveal>
@@ -87,16 +75,9 @@ export default function Cdmo() {
           {/* Embedded assistant */}
           <Reveal delay={120}>
             <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
-              <div className="flex items-center gap-2 border-b border-border bg-ink px-4 py-3">
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-primary/15">
-                  <FlaskConical className="h-4 w-4 text-primary" />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-white">APAC CDMO Assistant</p>
-                  <p className="flex items-center gap-1 text-[11px] text-slate-300">
-                    <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-teal" /> Ask about any product or project
-                  </p>
-                </div>
+              <div className="border-b border-border bg-ink px-4 py-3">
+                <p className="text-sm font-semibold text-white">APAC CDMO Assistant</p>
+                <p className="text-[11px] text-slate-300">Ask about any product or project</p>
               </div>
               <div className="h-[600px]">
                 <ChatPanel variant="embedded" />
@@ -117,12 +98,9 @@ export default function Cdmo() {
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {PATHS.map((p, i) => (
             <Reveal key={p.title} delay={i * 90}>
-              <div className="press group h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-[transform,box-shadow,border-color] duration-200 ease-out-expo hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift">
-                <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <p.icon className="h-5 w-5" />
-                </div>
-                <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{p.kicker}</p>
-                <h3 className="mt-1 text-lg font-semibold tracking-tight text-ink">{p.title}</h3>
+              <div className="press h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-[transform,box-shadow,border-color] duration-200 ease-out-expo hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift">
+                <p className="font-mono text-xs text-muted-foreground">0{i + 1}</p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight text-ink">{p.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
               </div>
             </Reveal>
@@ -143,8 +121,7 @@ export default function Cdmo() {
             {DELIVER.map((d, i) => (
               <Reveal key={d.title} delay={i * 80}>
                 <div className="h-full rounded-2xl border border-border bg-card p-5 shadow-card">
-                  <d.icon className="h-5 w-5 text-primary" />
-                  <h3 className="mt-3 text-sm font-semibold text-ink">{d.title}</h3>
+                  <h3 className="text-sm font-semibold text-ink">{d.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{d.body}</p>
                 </div>
               </Reveal>

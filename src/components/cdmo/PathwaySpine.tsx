@@ -43,6 +43,11 @@ export function PathwaySpine({
             <span className="font-medium text-foreground">{archetype.model}</span>
           </span>
         </div>
+        <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+          An indicative planning framework based on standard CDMO development phases,
+          not a quotation. Real durations are set for your molecule, volumes and
+          quality target during the feasibility assessment.
+        </p>
       </div>
 
       <ol className="relative space-y-3 pl-2">
