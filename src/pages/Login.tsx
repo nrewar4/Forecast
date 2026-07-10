@@ -32,10 +32,6 @@ export default function Login() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-muted/40 px-4">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_100%_at_50%_0%,rgba(244,121,32,0.07),transparent_70%)]"
-      />
 
       <div className="relative w-full max-w-sm animate-fade-up">
         <div className="mb-8 flex justify-center">

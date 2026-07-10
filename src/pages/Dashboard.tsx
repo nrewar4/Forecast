@@ -1,352 +1,181 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
-  Area,
-  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
+  Cell,
+  Pie,
+  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import {
-  AlertTriangle,
-  ArrowDownToLine,
-  ArrowUpFromLine,
-  CalendarDays,
-  Globe2,
-  RefreshCw,
-  Scale,
-} from "lucide-react";
+import { ArrowUpRight, Beaker, FlaskConical, Globe2, TrendingUp } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui/primitives";
 import { KpiCard } from "@/components/ui/Kpi";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { MarketNews } from "@/components/knowledge/MarketNews";
-import { useCurrency } from "@/context/Currency";
+import { ImpactNews } from "@/components/knowledge/ImpactNews";
+import { CHEM_TRADE_QUERIES } from "@/lib/news";
 import { compact } from "@/lib/utils";
-import { TRADE_QUERIES } from "@/lib/news";
-import { loadTradeSnapshot, type CountryTrade, type TradeSnapshot } from "@/lib/worldbank";
+import { CHEMICAL_EXPORTS, GLOBAL_CHEMICAL, DATA_YEAR } from "@/data/chemicalTrade";
 
-const EXPORT_COLOR = "#F47920"; // brand orange
-const IMPORT_COLOR = "#475569"; // neutral slate
+const ORANGE = "#F47920";
+const ORANGE_SOFT = "#F9A663";
+const INK = "#334155";
 
-function formatDate(iso: string | null): string {
-  if (!iso) return "unknown";
-  const d = new Date(iso);
-  return Number.isNaN(+d) ? iso : d.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
-}
+const usd = (n: number) => "$" + compact(n);
 
 export default function Dashboard() {
-  const { money, convert, symbol, currency } = useCurrency();
-  const [snap, setSnap] = useState<TradeSnapshot | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const ranked = useMemo(() => [...CHEMICAL_EXPORTS].sort((a, b) => b.exports - a.exports), []);
+  const combined = ranked.reduce((n, c) => n + c.exports, 0);
+  const topExporter = ranked[0];
 
-  const load = useCallback(async (force = false) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await loadTradeSnapshot({ force });
-      setSnap(data);
-    } catch {
-      setError("Live trade data could not be loaded right now. Check your connection and try again.");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const barData = ranked.map((c) => ({
+    name: c.name,
+    value: c.exports,
+    share: (c.exports / GLOBAL_CHEMICAL.total) * 100,
+  }));
 
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  const countries = snap?.countries ?? [];
-
-  const totals = useMemo(() => {
-    let exp = 0;
-    let imp = 0;
-    let year = 0;
-    for (const c of countries) {
-      if (c.exports) exp += c.exports;
-      if (c.imports) imp += c.imports;
-      if (c.latestYear && c.latestYear > year) year = c.latestYear;
-    }
-    return { exp, imp, balance: exp - imp, year };
-  }, [countries]);
-
-  // Grouped exports vs imports per country, in the active currency.
-  const comparison = useMemo(
-    () =>
-      countries.map((c) => ({
-        name: c.name,
-        Exports: convert(c.exports ?? 0),
-        Imports: convert(c.imports ?? 0),
-      })),
-    [countries, convert],
-  );
-
-  // Combined merchandise trade of all six markets, by year.
-  const combined = useMemo(() => {
-    const byYear = new Map<number, number>();
-    for (const c of countries) {
-      for (const p of c.history) byYear.set(p.year, (byYear.get(p.year) ?? 0) + p.value);
-    }
-    return Array.from(byYear.entries())
-      .sort((a, b) => a[0] - b[0])
-      .map(([year, value]) => ({ year: String(year), value: convert(value) }));
-  }, [countries, convert]);
-
-  const axisMoney = (v: number) => symbol + compact(v);
+  const split = [
+    { name: "Organic (HS 29)", value: GLOBAL_CHEMICAL.organic },
+    { name: "Inorganic (HS 28)", value: GLOBAL_CHEMICAL.inorganic },
+  ];
 
   return (
     <AppShell
       title="Market Overview"
       centerHeader
-      subtitle="Live merchandise trade for the United States, China, India, Japan, South Korea and Saudi Arabia. Official figures from the World Bank, checked daily."
+      subtitle="Chemical exports for the key markets, inorganic (HS 28) and organic (HS 29) combined."
     >
-      {/* Source + refresh bar */}
-      <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-          </span>
-          Live from the World Bank
-        </span>
-        {snap ? (
-          <>
-            <span className="text-border">·</span>
-            <span>Source updated {formatDate(snap.sourceUpdated)}</span>
-            <span className="text-border">·</span>
-            <span>Checked {formatDate(snap.fetchedAt)}</span>
-          </>
-        ) : null}
-        <button
-          type="button"
-          onClick={() => load(true)}
-          disabled={loading}
-          className="press inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1 font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:opacity-50"
+      {/* Source line */}
+      <div className="mb-6 text-center text-xs text-muted-foreground">
+        Chemical exports, {DATA_YEAR}. Source:{" "}
+        <a
+          href={GLOBAL_CHEMICAL.sourceUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="font-medium text-primary hover:underline"
         >
-          <RefreshCw className={"h-3.5 w-3.5" + (loading ? " animate-spin" : "")} />
-          Refresh
-        </button>
+          {GLOBAL_CHEMICAL.source}
+          <ArrowUpRight className="ml-0.5 inline h-3 w-3" />
+        </a>
+        . Live sector news below.
       </div>
 
-      {error && !snap ? (
-        <EmptyState
-          icon={AlertTriangle}
-          title="Trade data unavailable"
-          hint={error}
-          action={
-            <button
-              type="button"
-              onClick={() => load(true)}
-              className="press inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
-            >
-              <RefreshCw className="h-4 w-4" /> Try again
-            </button>
-          }
-        />
-      ) : loading && !snap ? (
-        <LoadingSkeleton />
-      ) : (
-        <>
-          {/* Aggregate KPIs */}
-          <div className="grid animate-fade-up grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <KpiCard icon={ArrowUpFromLine} label="Combined Exports" value={money(totals.exp)} sub="six focus markets" />
-            <KpiCard icon={ArrowDownToLine} label="Combined Imports" value={money(totals.imp)} sub="six focus markets" />
-            <KpiCard
-              icon={Scale}
-              label="Net Balance"
-              value={(totals.balance < 0 ? "−" : "+") + money(Math.abs(totals.balance))}
-              sub={totals.balance < 0 ? "net import deficit" : "net export surplus"}
-            />
-            <KpiCard icon={CalendarDays} label="Latest Data Year" value={totals.year ? String(totals.year) : "n/a"} sub="most recent reported" />
-          </div>
+      {/* KPIs */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <KpiCard icon={FlaskConical} label="Six-Market Exports" value={usd(combined)} sub={`${DATA_YEAR}, HS 28 and 29`} />
+        <KpiCard icon={Globe2} label="Global Chemical Exports" value={usd(GLOBAL_CHEMICAL.total)} sub="all countries" />
+        <KpiCard icon={TrendingUp} label="Largest Exporter" value={topExporter.name} sub={usd(topExporter.exports)} />
+        <KpiCard icon={Beaker} label="Organic Share" value={`${Math.round((GLOBAL_CHEMICAL.organic / GLOBAL_CHEMICAL.total) * 100)}%`} sub="of world chemical exports" />
+      </div>
 
-          {/* Comparison + news */}
-          <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_380px]">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2">
-                  <Globe2 className="h-4 w-4 text-primary" />
-                  Exports vs Imports by Country
-                </CardTitle>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  Merchandise trade ({currency}), latest reported year per country
+      {/* Country comparison + global split */}
+      <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_360px]">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <FlaskConical className="h-4 w-4 text-primary" />
+              Chemical Exports by Country
+            </CardTitle>
+            <p className="mt-0.5 text-xs text-muted-foreground">Inorganic and organic chemicals, {DATA_YEAR}</p>
+          </CardHeader>
+          <CardContent className="pt-2">
+            <ResponsiveContainer width="100%" height={320}>
+              <BarChart data={barData} layout="vertical" margin={{ top: 4, right: 56, left: 8, bottom: 0 }}>
+                <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" horizontal={false} />
+                <XAxis type="number" tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={usd} />
+                <YAxis type="category" dataKey="name" width={110} tick={{ fontSize: 12, fill: "#334155" }} />
+                <Tooltip
+                  contentStyle={tooltipStyle}
+                  cursor={{ fill: "#F8FAFC" }}
+                  formatter={(v: number) => [`${usd(v)}  (${((v / GLOBAL_CHEMICAL.total) * 100).toFixed(1)}% of world)`, "Exports"]}
+                />
+                <Bar dataKey="value" radius={[0, 6, 6, 0]} isAnimationActive={false}>
+                  {barData.map((_, i) => (
+                    <Cell key={i} fill={i === 0 ? ORANGE : ORANGE_SOFT} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Beaker className="h-4 w-4 text-primary" />
+              World Split
+            </CardTitle>
+            <p className="mt-0.5 text-xs text-muted-foreground">Organic vs inorganic, {DATA_YEAR}</p>
+          </CardHeader>
+          <CardContent className="pt-2">
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie data={split} dataKey="value" nameKey="name" innerRadius={48} outerRadius={78} paddingAngle={2} stroke="#FFFFFF" strokeWidth={2}>
+                  <Cell fill={ORANGE} />
+                  <Cell fill={INK} />
+                </Pie>
+                <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => usd(v)} />
+              </PieChart>
+            </ResponsiveContainer>
+            <ul className="mt-2 space-y-1.5">
+              {split.map((s, i) => (
+                <li key={s.name} className="flex items-center justify-between text-sm">
+                  <span className="inline-flex items-center gap-2 text-foreground/80">
+                    <span className="h-2.5 w-2.5 rounded-full" style={{ background: i === 0 ? ORANGE : INK }} />
+                    {s.name}
+                  </span>
+                  <span className="font-semibold tabular-nums">{usd(s.value)}</span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Per-country cards */}
+      <h2 className="mt-8 text-center text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        By Market
+      </h2>
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {ranked.map((c, i) => {
+          const share = (c.exports / GLOBAL_CHEMICAL.total) * 100;
+          const rel = (c.exports / topExporter.exports) * 100;
+          return (
+            <Card key={c.code} className="transition-colors duration-200 hover:border-primary/40">
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span aria-hidden className="text-2xl leading-none">{c.flag}</span>
+                    <span className="text-base font-semibold text-ink">{c.name}</span>
+                  </div>
+                  <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                    #{i + 1} of six
+                  </span>
+                </div>
+                <p className="mt-4 text-2xl font-bold tabular-nums tracking-tight text-primary">{usd(c.exports)}</p>
+                <p className="text-xs text-muted-foreground">chemical exports, {DATA_YEAR}</p>
+                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                  <div className="h-full rounded-full bg-primary" style={{ width: `${Math.max(6, rel)}%` }} />
+                </div>
+                <p className="mt-2 font-mono text-xs tabular-nums text-muted-foreground">
+                  {share.toFixed(1)}% of world chemical exports
                 </p>
-              </CardHeader>
-              <CardContent className="pt-2">
-                <ResponsiveContainer width="100%" height={320}>
-                  <BarChart data={comparison} margin={{ top: 8, right: 12, left: 4, bottom: 0 }} barGap={2}>
-                    <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#334155" }} interval={0} />
-                    <YAxis tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={axisMoney} width={54} />
-                    <Tooltip
-                      contentStyle={tooltipStyle}
-                      cursor={{ fill: "#F8FAFC" }}
-                      formatter={(v: number, name) => [symbol + compact(v), name]}
-                    />
-                    <Legend iconType="circle" wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
-                    <Bar dataKey="Exports" fill={EXPORT_COLOR} radius={[4, 4, 0, 0]} maxBarSize={38} isAnimationActive={false} />
-                    <Bar dataKey="Imports" fill={IMPORT_COLOR} radius={[4, 4, 0, 0]} maxBarSize={38} isAnimationActive={false} />
-                  </BarChart>
-                </ResponsiveContainer>
               </CardContent>
             </Card>
+          );
+        })}
+      </div>
 
-            <MarketNews title="Trade Headlines" queries={TRADE_QUERIES} />
-          </div>
+      {/* Recent impactful news, live */}
+      <ImpactNews queries={CHEM_TRADE_QUERIES} />
 
-          {/* Combined trend */}
-          <Card className="mt-4">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Globe2 className="h-4 w-4 text-primary" />
-                Combined Merchandise Trade Over Time
-              </CardTitle>
-              <p className="mt-0.5 text-xs text-muted-foreground">
-                Total exports plus imports across all six markets ({currency}), by year
-              </p>
-            </CardHeader>
-            <CardContent className="pt-2">
-              {combined.length === 0 ? (
-                <p className="py-16 text-center text-sm text-muted-foreground">No history available.</p>
-              ) : (
-                <ResponsiveContainer width="100%" height={260}>
-                  <AreaChart data={combined} margin={{ top: 8, right: 12, left: 4, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="combinedFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor={EXPORT_COLOR} stopOpacity={0.3} />
-                        <stop offset="100%" stopColor={EXPORT_COLOR} stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#64748B" }} />
-                    <YAxis tick={{ fontSize: 11, fill: "#64748B" }} tickFormatter={axisMoney} width={54} />
-                    <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [symbol + compact(v), "Total trade"]} />
-                    <Area type="monotone" dataKey="value" stroke={EXPORT_COLOR} strokeWidth={2} fill="url(#combinedFill)" isAnimationActive={false} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Per-country cards */}
-          <h2 className="mt-8 text-center text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-            By Country
-          </h2>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {countries.map((c) => (
-              <CountryCard key={c.code} country={c} money={money} convert={convert} />
-            ))}
-          </div>
-
-          <p className="mt-8 text-center text-xs text-muted-foreground">
-            Source: World Bank Indicators (merchandise exports and imports, current US$; trade as a share of GDP).
-            Official trade is published annually, so figures show each country's latest reported year. Datamyne
-            shipment records remain available under Trade Analytics and Documents.
-          </p>
-        </>
-      )}
+      <p className="mt-8 text-center text-xs text-muted-foreground">
+        Trade figures are inorganic (HS 28) plus organic (HS 29) chemical exports for {DATA_YEAR}, from ITC Trade
+        Map. Datamyne shipment records remain available under Trade Analytics and Documents.
+      </p>
     </AppShell>
-  );
-}
-
-function CountryCard({
-  country: c,
-  money,
-  convert,
-}: {
-  country: CountryTrade;
-  money: (usd: number) => string;
-  convert: (usd: number) => number;
-}) {
-  const spark = c.history.map((p) => ({ year: p.year, value: convert(p.value) }));
-  const balancePositive = (c.balance ?? 0) >= 0;
-  return (
-    <Card className="transition-colors duration-200 hover:border-primary/40">
-      <CardContent className="p-5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span aria-hidden className="text-2xl leading-none">{c.flag}</span>
-            <span className="text-base font-semibold text-ink">{c.name}</span>
-          </div>
-          {c.latestYear ? (
-            <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-              {c.latestYear}
-            </span>
-          ) : null}
-        </div>
-
-        <div className="mt-4 grid grid-cols-3 gap-2">
-          <Stat label="Exports" value={c.exports != null ? money(c.exports) : "n/a"} />
-          <Stat label="Imports" value={c.imports != null ? money(c.imports) : "n/a"} />
-          <Stat
-            label="Balance"
-            value={c.balance != null ? (balancePositive ? "+" : "−") + money(Math.abs(c.balance)) : "n/a"}
-            tone={c.balance == null ? "muted" : balancePositive ? "up" : "down"}
-          />
-        </div>
-
-        <div className="mt-4 flex items-end justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Trade / GDP</p>
-            <p className="text-lg font-semibold tabular-nums text-foreground">
-              {c.tradeGdp != null ? `${c.tradeGdp.toFixed(0)}%` : "n/a"}
-            </p>
-          </div>
-          {spark.length > 1 ? (
-            <div className="h-12 w-28">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={spark} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id={`spark-${c.code}`} x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor={EXPORT_COLOR} stopOpacity={0.4} />
-                      <stop offset="100%" stopColor={EXPORT_COLOR} stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <Area type="monotone" dataKey="value" stroke={EXPORT_COLOR} strokeWidth={1.5} fill={`url(#spark-${c.code})`} isAnimationActive={false} />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          ) : null}
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-function Stat({ label, value, tone = "default" }: { label: string; value: string; tone?: "default" | "up" | "down" | "muted" }) {
-  const color =
-    tone === "up" ? "text-emerald-600" : tone === "down" ? "text-rose-600" : tone === "muted" ? "text-muted-foreground" : "text-foreground";
-  return (
-    <div className="rounded-lg border border-border bg-muted/30 px-2.5 py-2">
-      <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className={"mt-0.5 text-sm font-semibold tabular-nums " + color}>{value}</p>
-    </div>
-  );
-}
-
-function LoadingSkeleton() {
-  return (
-    <div className="animate-pulse space-y-4">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-28 rounded-xl border border-border bg-card" />
-        ))}
-      </div>
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_380px]">
-        <div className="h-96 rounded-xl border border-border bg-card" />
-        <div className="h-96 rounded-xl border border-border bg-card" />
-      </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="h-40 rounded-xl border border-border bg-card" />
-        ))}
-      </div>
-    </div>
   );
 }

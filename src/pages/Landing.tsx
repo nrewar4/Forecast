@@ -85,17 +85,8 @@ export default function Landing() {
 
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_100%_at_50%_0%,rgba(244,121,32,0.05),transparent_70%)]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.02)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(75%_55%_at_50%_0%,black,transparent_80%)]"
-          />
-
-          <div className="relative mx-auto max-w-5xl px-6 pb-20 pt-20 text-center md:pt-28">
+        <section className="border-b border-border">
+          <div className="mx-auto max-w-5xl px-6 pb-20 pt-20 text-center md:pt-28">
             <h1 className="animate-fade-up text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-6xl">
               One platform for sourcing,
               <br className="hidden sm:block" />

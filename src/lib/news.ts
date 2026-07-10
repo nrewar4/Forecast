@@ -40,6 +40,17 @@ export const TRADE_QUERIES: NewsQuery[] = [
   { label: "Saudi trade", q: "Saudi Arabia trade exports oil non-oil when:14d" },
 ];
 
+// Chemical-sector trade queries for the impactful-news section. Tuned to the
+// events that move chemical sourcing: tariffs, capacity, feedstock, freight.
+export const CHEM_TRADE_QUERIES: NewsQuery[] = [
+  { label: "Chemical tariffs and trade", q: "chemical industry tariff OR trade OR export controls when:21d" },
+  { label: "Petrochemical capacity", q: "petrochemical capacity OR plant OR shutdown OR expansion when:21d" },
+  { label: "Feedstock and prices", q: "chemical prices OR naphtha OR ethylene OR feedstock when:21d" },
+  { label: "Freight and supply", q: "chemical shipping OR freight OR supply chain chemicals when:21d" },
+  { label: "China chemicals", q: "China chemical exports OR overcapacity OR anti-dumping when:21d" },
+  { label: "Regulation", q: "chemical regulation OR REACH OR sustainability chemicals when:21d" },
+];
+
 const BRIDGE = "https://api.rss2json.com/v1/api.json?count=12&rss_url=";
 
 type BridgeResponse = {

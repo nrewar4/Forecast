@@ -37,10 +37,7 @@ export function ChatWidget() {
       >
         <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
-            </span>
+            <span className="h-2 w-2 rounded-full bg-primary" />
             <div>
               <p className="text-sm font-semibold text-ink">APAC Assistant</p>
               <p className="text-[11px] text-muted-foreground">Map a path or check a molecule</p>

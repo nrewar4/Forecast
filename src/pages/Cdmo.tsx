@@ -26,12 +26,8 @@ export default function Cdmo() {
   return (
     <MarketingLayout>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(244,121,32,0.06),transparent_70%)]"
-        />
-        <div className="relative mx-auto max-w-6xl px-6 py-20 text-center md:py-24">
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-center md:py-24">
           <Reveal>
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
               APAC CDMO
@@ -109,10 +105,7 @@ export default function Cdmo() {
           <Reveal delay={100}>
             <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-border bg-background shadow-card" style={{ height: "min(640px, 80vh)" }}>
               <div className="flex items-center gap-2 border-b border-border bg-card px-4 py-3">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
-                </span>
+                <span className="h-2 w-2 rounded-full bg-primary" />
                 <p className="text-sm font-semibold text-ink">APAC Assistant</p>
               </div>
               <div className="h-[calc(100%-49px)]">
