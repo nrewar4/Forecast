@@ -15,6 +15,7 @@ import {
   pathwayFor,
   milestonesForProduct,
   sampleProducts,
+  looksLikeProductQuery,
   type Intent,
   type QuickReply,
   type Feasibility,
@@ -108,6 +109,18 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
     const controller = freshController();
     try {
       const data = await runFeasibility(query, cfg, controller.signal);
+      // Only report on something we can actually identify: a catalog product or a
+      // molecule PubChem resolved. Never fabricate a vendor count for free text.
+      if (!data.match.known && !data.identity) {
+        replace(typingId, {
+          kind: "text",
+          text: `I could not identify "${query.trim()}" as a specific chemical or product. Give me a product name (for example "ibuprofen") or a CAS number and I will assess it.`,
+        });
+        awaiting.current = "molecule";
+        setQuick([{ label: "Plan a CDMO project", value: "plan", intent: "pathway" }, { label: "Contact APAC", value: "contact", intent: "contact" }]);
+        return;
+      }
+      awaiting.current = null;
       lastMatch.current = data.match;
       track("cdmo_feasibility", { product: data.match.productName, vendors: String(data.match.vendorCount) });
       replace(typingId, { kind: "feasibility", data });
@@ -117,13 +130,13 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
       });
       setQuick([...TIMELINE_REPLIES, { label: "Contact APAC", value: "contact", intent: "contact" }]);
     } catch {
+      awaiting.current = null;
       replace(typingId, {
         kind: "text",
         text: "I could not complete that lookup just now. Please try another name, or contact APAC and we will take it from there.",
       });
       setQuick([{ label: "Contact APAC", value: "contact", intent: "contact" }]);
     } finally {
-      awaiting.current = null;
       setBusy(false);
     }
   }
@@ -301,7 +314,14 @@ export function ChatPanel({ variant = "floating" }: { variant?: "floating" | "em
 
   function route(intent: Intent, text: string) {
     if (intent === "feasibility") {
-      doFeasibility(text);
+      // Only assess when the message names a plausible product; a phrase like
+      // "I want a product made" should ask which one, not fabricate a report.
+      if (looksLikeProductQuery(text)) {
+        doFeasibility(text);
+      } else {
+        awaiting.current = "molecule";
+        pushBot({ kind: "text", text: "Which product or molecule do you want made? Give me a name (for example \"ibuprofen\") or a CAS number." });
+      }
     } else if (intent === "pathway") {
       awaiting.current = "situation";
       pushBot({ kind: "text", text: "I can map a development pathway. Describe your situation, or pick the closest below." });
