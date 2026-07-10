@@ -75,15 +75,30 @@ async function main() {
     check("cdmo: contact phone + email", /092128 03501/.test(t3) && /info@apacss\.com/.test(t3));
     check("cdmo: no floating launcher (embedded only)", !(await page.evaluate(() => !!document.querySelector('button[aria-label="Open assistant"]'))));
 
-    // Drive Path A in the embedded assistant.
-    const clickedA = await page.evaluate(() => {
-      const b = [...document.querySelectorAll("button")].find((el) => el.textContent.trim() === "De-risk my supply");
-      if (b) { b.click(); return true; }
-      return false;
-    });
-    await new Promise((r) => setTimeout(r, 900));
+    // Drive Path A in the embedded assistant. It now walks a question flow:
+    // product -> start -> goal -> speed, then renders the tailored pathway.
+    const clickChip = async (label, waitMs = 700) => {
+      const clicked = await page.evaluate((lbl) => {
+        const b = [...document.querySelectorAll("button")].find((el) => el.textContent.trim() === lbl);
+        if (b) { b.click(); return true; }
+        return false;
+      }, label);
+      await new Promise((r) => setTimeout(r, waitMs));
+      return clicked;
+    };
+    const cA0 = await clickChip("De-risk my supply", 800);
+    const askedProduct = /which product or molecule/i.test(await text());
+    const cA1 = await clickChip("Keep it general", 800);
+    const askedStart = /where are you today/i.test(await text());
+    const cA2 = await clickChip("Working lab process", 800);
+    const askedGoal = /where should the engagement finish/i.test(await text());
+    const cA3 = await clickChip("Commercial supply", 800);
+    const askedSpeed = /speed or certainty/i.test(await text());
+    const cA4 = await clickChip("Balanced", 1200);
     const t4 = await text();
-    check("cdmo Path A: pathway spine renders", clickedA && /Your pathway/i.test(t4) && /Walk-away gate/i.test(t4));
+    check("cdmo Path A: asks product then start/goal/speed", cA0 && askedProduct && cA1 && askedStart && cA2 && askedGoal && cA3 && askedSpeed && cA4);
+    check("cdmo Path A: tailored pathway spine renders", /Your pathway/i.test(t4) && /Walk-away gate/i.test(t4));
+    check("cdmo Path A: timeline + milestones shown", /weeks/i.test(t4) && /\bM1\b/.test(t4) && /Indicative planning range/i.test(t4));
     check("cdmo Path A: enquiry form appears", /Send enquiry/.test(t4));
 
     // Enquiry submit fires (fill + submit).

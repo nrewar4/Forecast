@@ -272,14 +272,15 @@ export type Pathway = {
   stages: Stage[];
   milestones: Milestone[];
   weeks: [number, number];
+  // Set when the pathway was tailored through the refine questions.
+  refinements?: PathwayRefinements;
+  product?: string;
 };
 
-// Composes an archetype into an ordered stage list and derived phase milestones.
-export function buildPathway(archetype: Archetype): Pathway {
-  const stages = archetype.stageIds.map((id) => STAGES[id]).filter(Boolean);
+// Derives phase milestones from an ordered stage list.
+function deriveMilestones(stages: Stage[]): Milestone[] {
   const order: Phase[] = ["assess", "develop", "scale", "transfer", "supply"];
   const milestones: Milestone[] = [];
-
   for (const phase of order) {
     const inPhase = stages.filter((s) => s.phase === phase);
     if (inPhase.length === 0) continue;
@@ -294,11 +295,97 @@ export function buildPathway(archetype: Archetype): Pathway {
       gate: inPhase[inPhase.length - 1].gate,
     });
   }
+  return milestones;
+}
 
-  const weeks: [number, number] = [
+function totalWeeks(milestones: Milestone[]): [number, number] {
+  return [
     milestones.reduce((n, m) => n + m.weeks[0], 0),
     milestones.reduce((n, m) => n + m.weeks[1], 0),
   ];
+}
 
-  return { archetype, stages, milestones, weeks };
+// Composes an archetype into an ordered stage list and derived phase milestones.
+export function buildPathway(archetype: Archetype): Pathway {
+  const stages = archetype.stageIds.map((id) => STAGES[id]).filter(Boolean);
+  const milestones = deriveMilestones(stages);
+  return { archetype, stages, milestones, weeks: totalWeeks(milestones) };
+}
+
+// ---------------------------------------------------------------------------
+// Refinements: the answers to the assistant's questions. Each one materially
+// changes the pathway rather than decorating it. Stages the customer skips
+// matter as much as the ones they run.
+// ---------------------------------------------------------------------------
+
+export type StartPoint = "idea" | "lab" | "validated" | "second";
+export type EndPoint = "samples" | "commercial" | "regulated";
+export type SpeedPref = "fast" | "balanced" | "certain";
+
+export type PathwayRefinements = {
+  start: StartPoint;
+  goal: EndPoint;
+  speed: SpeedPref;
+};
+
+// Stages already completed at each entry point.
+const SKIP_BY_START: Record<StartPoint, Set<string>> = {
+  idea: new Set(),
+  lab: new Set(["route", "labdev"]),
+  validated: new Set(["route", "labdev", "procopt", "impurity"]),
+  second: new Set(["route", "labdev", "procopt", "impurity", "analyt", "kilo", "pilot", "valid"]),
+};
+
+// Stage order for inserting required stages in the right place.
+const CANONICAL_ORDER = [
+  "assess", "route", "labdev", "procopt", "analyt", "impurity",
+  "kilo", "pilot", "valid", "techtx", "second", "reg", "comm", "supply",
+];
+
+// Speed preference scales the planning ranges: fast compresses through
+// parallel work, certainty extends for extra confirmation runs.
+const SPEED_FACTOR: Record<SpeedPref, number> = { fast: 0.75, balanced: 1, certain: 1.25 };
+
+// Tailors an archetype's stages to the customer's answers, then rebuilds the
+// milestones and timeline. Deterministic, so it works with no API key.
+export function tailorPathway(
+  archetype: Archetype,
+  refinements: PathwayRefinements,
+  product?: string,
+): Pathway {
+  let ids = [...archetype.stageIds];
+
+  // Where you are today: remove work already done (never the assessment).
+  ids = ids.filter((id) => id === "assess" || !SKIP_BY_START[refinements.start].has(id));
+
+  // Where you want to finish.
+  if (refinements.goal === "samples") {
+    // Stop after the first meaningful quantity.
+    const keep = new Set(["assess", "route", "labdev", "procopt", "analyt", "impurity", "kilo"]);
+    ids = ids.filter((id) => keep.has(id));
+    if (!ids.includes("kilo")) ids.push("kilo");
+  } else if (refinements.goal === "commercial") {
+    ids = ids.filter((id) => id !== "valid" && id !== "reg");
+  } else {
+    // Regulated filing: validation batches and regulatory support are required.
+    for (const req of ["valid", "reg"]) if (!ids.includes(req)) ids.push(req);
+  }
+
+  // Restore canonical order and drop unknowns.
+  ids = CANONICAL_ORDER.filter((id) => ids.includes(id));
+
+  const factor = SPEED_FACTOR[refinements.speed];
+  const stages: Stage[] = ids
+    .map((id) => STAGES[id])
+    .filter(Boolean)
+    .map((s) => ({
+      ...s,
+      // Scale planning ranges; ongoing stages (0 weeks) stay ongoing.
+      weeks: (s.weeks[1] === 0
+        ? s.weeks
+        : [Math.max(1, Math.round(s.weeks[0] * factor)), Math.max(1, Math.round(s.weeks[1] * factor))]) as [number, number],
+    }));
+
+  const milestones = deriveMilestones(stages);
+  return { archetype, stages, milestones, weeks: totalWeeks(milestones), refinements, product };
 }

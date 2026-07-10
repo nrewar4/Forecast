@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, Sparkles } from "lucide-react";
 import { PathwaySpine } from "@/components/cdmo/PathwaySpine";
 import { FeasibilityReport } from "@/components/cdmo/FeasibilityReport";
@@ -6,13 +6,21 @@ import { EnquiryForm } from "@/components/cdmo/EnquiryForm";
 import {
   GREETING,
   QUICK_REPLIES,
+  REFINE_SEQUENCE,
   buildFeasibility,
   classifySituation,
   detectPath,
   extractMolecule,
+  matchRefineAnswer,
+  pathwayCommentary,
   type Feasibility,
 } from "@/lib/chatAssistant";
-import { buildPathway, type Pathway } from "@/data/cdmoPathway";
+import {
+  tailorPathway,
+  type Archetype,
+  type PathwayRefinements,
+  type Pathway,
+} from "@/data/cdmoPathway";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
@@ -22,8 +30,17 @@ type Msg =
   | { id: number; role: "assistant"; kind: "feasibility"; data: Feasibility }
   | { id: number; role: "assistant"; kind: "enquiry"; context: string };
 
-// Distributive Omit so each union member keeps its own extra fields.
 type NoId<T> = T extends unknown ? Omit<T, "id"> : never;
+
+// The conversation flow. Refine walks the three questions; awaitProduct asks
+// which molecule a pathway is for; awaitMolecule waits for a Path B input.
+type Flow =
+  | { kind: "idle" }
+  | { kind: "awaitMolecule" }
+  | { kind: "awaitProduct"; archetype: Archetype; situation: string }
+  | { kind: "refine"; step: number; archetype: Archetype; situation: string; product: string; answers: Partial<PathwayRefinements> };
+
+type Chip = { label: string; onClick: () => void };
 
 let counter = 0;
 const nextId = () => ++counter;
@@ -34,100 +51,194 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
   ]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [awaitingMolecule, setAwaitingMolecule] = useState(false);
-  const [showChips, setShowChips] = useState(true);
+  const [flow, setFlow] = useState<Flow>({ kind: "idle" });
+  const [chips, setChips] = useState<Chip[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, busy]);
+  }, [messages, busy, chips]);
 
   useEffect(() => () => abortRef.current?.abort(), []);
 
   const push = (m: NoId<Msg>) => setMessages((cur) => [...cur, { ...m, id: nextId() } as Msg]);
+  const say = (text: string) => push({ role: "assistant", kind: "text", text });
 
-  async function handle(text: string, forced?: { path: "A" | "B" }) {
-    const clean = text.trim();
-    if (!clean || busy) return;
-    setShowChips(false);
-    push({ role: "user", kind: "text", text: clean });
-    setInput("");
+  // Initial quick replies.
+  useEffect(() => {
+    setChips(
+      QUICK_REPLIES.map((q) => ({
+        label: q.label,
+        onClick: () => (q.path === "A" && q.seed ? startPathA(q.seed) : startPathB(undefined)),
+      })),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const path = awaitingMolecule ? "B" : forced?.path ?? detectPath(clean);
-    setAwaitingMolecule(false);
-    track("chat_intent", { path });
-
-    if (path === "A") {
-      const archetype = classifySituation(clean);
-      const pathway = buildPathway(archetype);
-      push({ role: "assistant", kind: "text", text: `Here is how APAC would approach that. This is the "${archetype.title}" path.` });
-      push({ role: "assistant", kind: "pathway", pathway });
-      push({ role: "assistant", kind: "text", text: "Want this scoped for your molecule and volumes? Share a few details and our team will come back with a plan." });
-      push({ role: "assistant", kind: "enquiry", context: `Pathway interest: ${archetype.title}. ${clean}` });
-      track("cdmo_pathway", { archetype: archetype.id });
-      return;
+  // ---- Path A: refine questions ----
+  function startPathA(situation: string, product?: string) {
+    setChips([]);
+    const archetype = classifySituation(situation);
+    if (product) {
+      beginRefine(archetype, situation, product);
+    } else {
+      say(`Good, let me map the "${archetype.title}" path. First, which product or molecule is this for?`);
+      setFlow({ kind: "awaitProduct", archetype, situation });
+      setChips([{ label: "Keep it general", onClick: () => beginRefine(archetype, situation, "") }]);
     }
+  }
 
-    // Path B: feasibility.
-    const molecule = extractMolecule(clean);
-    if (!molecule) {
-      push({ role: "assistant", kind: "text", text: "Which molecule should I check? A name, CAS number, or SMILES all work." });
-      setAwaitingMolecule(true);
-      return;
-    }
+  function beginRefine(archetype: Archetype, situation: string, product: string) {
+    setFlow({ kind: "refine", step: 0, archetype, situation, product, answers: {} });
+    askRefine(0);
+  }
 
-    const loadingId = nextId();
-    setMessages((cur) => [...cur, { id: loadingId, role: "assistant", kind: "text", text: `Checking PubChem and the APAC catalog for ${molecule}...` }]);
-    setBusy(true);
+  function askRefine(step: number) {
+    const q = REFINE_SEQUENCE[step];
+    say(q.question);
+    setChips(
+      q.options.map((o) => ({
+        label: o.label,
+        onClick: () => answerRefine(o.label, o.value),
+      })),
+    );
+  }
 
+  function answerRefine(label: string, value: string) {
+    setFlow((f) => {
+      if (f.kind !== "refine") return f;
+      push({ id: nextId(), role: "user", kind: "text", text: label } as Msg);
+      const q = REFINE_SEQUENCE[f.step];
+      const answers = { ...f.answers, [q.key]: value } as Partial<PathwayRefinements>;
+      const nextStep = f.step + 1;
+      if (nextStep < REFINE_SEQUENCE.length) {
+        setChips([]);
+        setTimeout(() => askRefine(nextStep), 60);
+        return { ...f, step: nextStep, answers };
+      }
+      // All answered: confirm and build.
+      setChips([]);
+      setTimeout(() => finishPathway(f.archetype, f.situation, f.product, answers as PathwayRefinements), 60);
+      return { ...f, step: nextStep, answers };
+    });
+  }
+
+  async function finishPathway(archetype: Archetype, situation: string, product: string, refinements: PathwayRefinements) {
+    setFlow({ kind: "idle" });
+    const pathway = tailorPathway(archetype, refinements, product || undefined);
+    say(
+      `Here is a ${pathway.weeks[0]} to ${pathway.weeks[1]} week pathway${product ? ` for ${product}` : ""}, ${refinements.speed === "fast" ? "compressed for speed" : refinements.speed === "certain" ? "extended for certainty" : "balanced"}.`,
+    );
+    push({ role: "assistant", kind: "pathway", pathway });
+    track("cdmo_pathway", { archetype: archetype.id, start: refinements.start, goal: refinements.goal, speed: refinements.speed });
+
+    // Optional streamed, product-specific commentary.
+    const noteId = nextId();
+    let streamed = "";
+    setMessages((cur) => [...cur, { id: noteId, role: "assistant", kind: "text", text: "" } as Msg]);
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
-
+    setBusy(true);
     try {
-      let streamed = "";
-      const data = await buildFeasibility(molecule, {
-        signal: controller.signal,
-        onAiToken: (tok) => {
-          streamed += tok;
-          setMessages((cur) =>
-            cur.map((m) => (m.id === loadingId && m.kind === "text" ? { ...m, text: `Scoping ${molecule}...\n\n${streamed}` } : m)),
-          );
-        },
-      });
+      await pathwayCommentary(pathway, situation, (tok) => {
+        streamed += tok;
+        setMessages((cur) => cur.map((m) => (m.id === noteId && m.kind === "text" ? { ...m, text: streamed } : m)));
+      }, controller.signal);
+    } finally {
+      setBusy(false);
+    }
+    // Drop the note if nothing streamed (no key), then invite an enquiry.
+    setMessages((cur) => cur.filter((m) => !(m.id === noteId && m.kind === "text" && !streamed.trim())));
+    say("Want this scoped and costed for your volumes? Share a few details and our team will come back with a plan.");
+    push({ role: "assistant", kind: "enquiry", context: `Pathway: ${archetype.title}${product ? ` for ${product}` : ""}. ${situation}` });
+  }
+
+  // ---- Path B: feasibility for any molecule ----
+  function startPathB(seed?: string) {
+    setChips([]);
+    if (seed && extractMolecule(seed)) {
+      runFeasibility(extractMolecule(seed));
+    } else {
+      say("Which molecule should I check? A drug name, CAS number, or SMILES all work.");
+      setFlow({ kind: "awaitMolecule" });
+    }
+  }
+
+  async function runFeasibility(molecule: string) {
+    setFlow({ kind: "idle" });
+    const loadingId = nextId();
+    setMessages((cur) => [...cur, { id: loadingId, role: "assistant", kind: "text", text: `Checking PubChem and scoping the chemistry for ${molecule}...` }]);
+    setBusy(true);
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    try {
+      const data = await buildFeasibility(molecule, { signal: controller.signal });
       if (controller.signal.aborted) return;
-      // Replace the loading line with the structured report.
       setMessages((cur) => cur.filter((m) => m.id !== loadingId));
       push({ role: "assistant", kind: "feasibility", data });
       track("cdmo_feasibility", { molecule: data.resolvedName, inCatalog: String(data.vendor.inCatalog), resolved: String(!!data.identity) });
+      // Offer the pathway follow-up, carrying the product across.
+      say(`Want a CDMO pathway to make ${data.resolvedName}? I can map the timeline and milestones.`);
+      setChips([
+        { label: `Map a pathway for ${truncate(data.resolvedName)}`, onClick: () => startPathA("get this molecule made", data.resolvedName) },
+        { label: "Check another molecule", onClick: () => startPathB(undefined) },
+      ]);
     } catch {
       setMessages((cur) => cur.filter((m) => m.id !== loadingId));
-      push({ role: "assistant", kind: "text", text: "I could not complete that lookup just now. Please try again, or send it to our team and a chemist will confirm." });
+      say("I could not complete that lookup just now. Please try again, or send it to our team and a chemist will confirm.");
       push({ role: "assistant", kind: "enquiry", context: `Feasibility request: ${molecule}` });
     } finally {
       if (abortRef.current === controller) setBusy(false);
     }
   }
 
-  const startEnquiry = (context: string) => push({ role: "assistant", kind: "enquiry", context });
+  // ---- Router ----
+  function handle(text: string) {
+    const clean = text.trim();
+    if (!clean || busy) return;
+    push({ role: "user", kind: "text", text: clean });
+    setInput("");
+    setChips([]);
 
-  const chips = useMemo(() => QUICK_REPLIES, []);
+    if (flow.kind === "awaitMolecule") {
+      const mol = extractMolecule(clean);
+      if (mol) runFeasibility(mol);
+      else say("I did not catch a molecule there. Try a drug name, CAS number, or SMILES.");
+      return;
+    }
+    if (flow.kind === "awaitProduct") {
+      const skip = /^(skip|general|none|no)\b/i.test(clean);
+      beginRefine(flow.archetype, flow.situation, skip ? "" : clean);
+      return;
+    }
+    if (flow.kind === "refine") {
+      const q = REFINE_SEQUENCE[flow.step];
+      answerRefine(clean, matchRefineAnswer(q, clean));
+      return;
+    }
+
+    track("chat_intent", { path: detectPath(clean) });
+    if (detectPath(clean) === "A") startPathA(clean);
+    else startPathB(clean);
+  }
+
+  const startEnquiry = (context: string) => push({ role: "assistant", kind: "enquiry", context });
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      {/* Messages */}
-      <div ref={scrollRef} className={cn("flex-1 space-y-3 overflow-y-auto p-4", embedded ? "" : "")}>
+      <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
         {messages.map((m) => {
           if (m.kind === "text") {
+            if (!m.text) return null;
             return (
               <div key={m.id} className={cn("slide-down flex", m.role === "user" ? "justify-end" : "justify-start")}>
                 <div
                   className={cn(
                     "max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
-                    m.role === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "border border-border bg-card text-foreground",
+                    m.role === "user" ? "bg-primary text-primary-foreground" : "border border-border bg-card text-foreground",
                   )}
                 >
                   {m.text}
@@ -149,7 +260,6 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
               </div>
             );
           }
-          // enquiry
           return (
             <div key={m.id} className="slide-down rounded-2xl border border-border bg-card p-4">
               <EnquiryForm context={m.context} compact={!embedded} />
@@ -157,14 +267,23 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
           );
         })}
 
-        {/* Quick replies */}
-        {showChips ? (
+        {busy ? (
+          <div className="flex justify-start">
+            <div className="inline-flex items-center gap-1.5 rounded-2xl border border-border bg-card px-3 py-2 text-xs text-muted-foreground">
+              <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary [animation-delay:-0.2s]" />
+              <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary [animation-delay:-0.1s]" />
+              <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary" />
+            </div>
+          </div>
+        ) : null}
+
+        {chips.length ? (
           <div className="flex flex-wrap gap-2 pt-1">
-            {chips.map((c) => (
+            {chips.map((c, i) => (
               <button
-                key={c.label}
+                key={i}
                 type="button"
-                onClick={() => (c.seed ? handle(c.seed, { path: c.path }) : (setAwaitingMolecule(true), setShowChips(false), push({ role: "assistant", kind: "text", text: "Which molecule should I check? A name, CAS number, or SMILES all work." })))}
+                onClick={c.onClick}
                 className="press rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary"
               >
                 {c.label}
@@ -174,17 +293,17 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
         ) : null}
       </div>
 
-      {/* Composer */}
-      <form
-        onSubmit={(e) => { e.preventDefault(); handle(input); }}
-        className="flex items-center gap-2 border-t border-border p-3"
-      >
+      <form onSubmit={(e) => { e.preventDefault(); handle(input); }} className="flex items-center gap-2 border-t border-border p-3">
         <div className="relative flex-1">
           <Sparkles className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={awaitingMolecule ? "Name a molecule or CAS number..." : "Describe your situation or name a molecule..."}
+            placeholder={
+              flow.kind === "awaitMolecule" ? "Name a drug or CAS number..."
+              : flow.kind === "refine" ? "Type your answer or pick above..."
+              : "Describe your situation or name a molecule..."
+            }
             className="h-10 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm outline-none transition-colors focus:border-primary"
           />
         </div>
@@ -199,4 +318,8 @@ export function ChatPanel({ embedded = false }: { embedded?: boolean }) {
       </form>
     </div>
   );
+}
+
+function truncate(s: string, n = 22): string {
+  return s.length > n ? s.slice(0, n - 1) + "..." : s;
 }

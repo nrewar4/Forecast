@@ -1,24 +1,71 @@
-import { ArrowRight, Check, Flag } from "lucide-react";
+import { ArrowRight, Check, Clock, Flag } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { PHASE_LABEL, SCALE_LADDER, type Pathway } from "@/data/cdmoPathway";
+
+const months = (w: number) => Math.max(1, Math.round(w / 4.345));
+
+const START_LABEL: Record<string, string> = {
+  idea: "starting from the molecule",
+  lab: "starting from your lab process",
+  validated: "starting from your validated process",
+  second: "qualifying a second source",
+};
+const GOAL_LABEL: Record<string, string> = {
+  samples: "through to kilo quantities",
+  commercial: "through to commercial supply",
+  regulated: "through to a regulated filing and supply",
+};
+const SPEED_LABEL: Record<string, string> = {
+  fast: "compressed for speed",
+  balanced: "balanced plan",
+  certain: "extended for certainty",
+};
 
 // The signature element: the engagement drawn as a downward spine of numbered
 // stage nodes, phase by phase, with the scale rung shown in the right gutter and
 // the walk-away gate named on every stage. Deterministic, so it always renders.
 export function PathwaySpine({ pathway, compact = false }: { pathway: Pathway; compact?: boolean }) {
   const weeks = pathway.weeks;
+  const r = pathway.refinements;
+
+  // Cumulative week ranges per milestone, for the timeline strip.
+  let cumLow = 0;
+  let cumHigh = 0;
+  const timeline = pathway.milestones.map((m) => {
+    const startLow = cumLow + 1;
+    cumLow += m.weeks[0];
+    cumHigh += m.weeks[1];
+    return { ...m, window: m.weeks[1] === 0 ? "ongoing" : `wk ${startLow} to ${cumHigh}` };
+  });
+
   return (
     <div>
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-primary">
-            Your pathway
+            {pathway.product ? `Pathway for ${pathway.product}` : "Your pathway"}
           </p>
           <h3 className="mt-1 text-lg font-bold tracking-tight text-ink">{pathway.archetype.title}</h3>
+          {r ? (
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {START_LABEL[r.start]}, {GOAL_LABEL[r.goal]}, {SPEED_LABEL[r.speed]}
+            </p>
+          ) : null}
         </div>
-        <p className="font-mono text-xs text-muted-foreground">
-          Indicative {weeks[0]} to {weeks[1]} weeks
-        </p>
+      </div>
+
+      {/* Timeline summary */}
+      <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border border-primary/25 bg-primary/5 px-4 py-3">
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
+          <Clock className="h-4 w-4 text-primary" />
+          {weeks[0]} to {weeks[1]} weeks
+        </span>
+        <span className="text-sm text-muted-foreground">
+          about {months(weeks[0])} to {months(weeks[1])} months to {pathway.milestones[pathway.milestones.length - 1]?.label.toLowerCase() ?? "finish"}
+        </span>
+        <span className="w-full text-[11px] text-muted-foreground sm:w-auto">
+          Indicative planning range, confirmed after the feasibility assessment.
+        </span>
       </div>
 
       <ol className="relative ml-1 space-y-3 border-l-2 border-border pl-6">
@@ -70,15 +117,17 @@ export function PathwaySpine({ pathway, compact = false }: { pathway: Pathway; c
         ))}
       </ol>
 
-      {/* Milestone strip */}
+      {/* Milestone strip with cumulative windows */}
       <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-5">
-        {pathway.milestones.map((m) => (
+        {timeline.map((m, i) => (
           <div key={m.phase} className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-center">
-            <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{m.label}</p>
-            <p className="mt-0.5 font-mono text-xs font-semibold text-foreground">
-              {m.weeks[0]}
-              {m.weeks[1] !== m.weeks[0] ? ` to ${m.weeks[1]}` : ""} wk
+            <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              M{i + 1} {m.label}
             </p>
+            <p className="mt-0.5 font-mono text-xs font-semibold text-foreground">
+              {m.weeks[1] === 0 ? "ongoing" : `${m.weeks[0]}${m.weeks[1] !== m.weeks[0] ? ` to ${m.weeks[1]}` : ""} wk`}
+            </p>
+            <p className="font-mono text-[10px] text-muted-foreground">{m.window}</p>
           </div>
         ))}
       </div>
