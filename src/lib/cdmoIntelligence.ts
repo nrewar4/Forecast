@@ -169,13 +169,13 @@ function parseAnalysis(raw: string): Omit<CdmoAnalysis, "citations" | "groundedF
   const cleaned = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
-  if (start < 0 || end <= start) throw new Error("CDMO analysis failed. Retry.");
+  if (start < 0 || end <= start) throw new Error("CDMO analysis failed, retry");
 
   let parsed: Record<string, unknown>;
   try {
     parsed = JSON.parse(cleaned.slice(start, end + 1)) as Record<string, unknown>;
   } catch {
-    throw new Error("CDMO analysis failed. Retry.");
+    throw new Error("CDMO analysis failed, retry");
   }
 
   const arr = <T>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);

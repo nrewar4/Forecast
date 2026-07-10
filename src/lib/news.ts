@@ -21,11 +21,23 @@ export type NewsItem = {
 const GOOGLE_NEWS = (q: string) =>
   `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-US&gl=US&ceid=US:en`;
 
-const QUERIES: { label: string; q: string }[] = [
+export type NewsQuery = { label: string; q: string };
+
+const QUERIES: NewsQuery[] = [
   { label: "India chemicals", q: "India chemical industry OR specialty chemicals when:14d" },
   { label: "US chemicals", q: "United States chemical industry OR petrochemicals when:14d" },
   { label: "Prices & supply", q: "chemical prices OR chemical plant capacity OR feedstock when:14d" },
   { label: "Trade & tariffs", q: "chemical imports OR chemical exports OR tariff chemicals when:14d" },
+];
+
+// Trade-market queries for the Market Overview's six focus countries.
+export const TRADE_QUERIES: NewsQuery[] = [
+  { label: "US trade", q: "United States trade exports imports tariffs when:14d" },
+  { label: "China trade", q: "China trade exports customs data when:14d" },
+  { label: "India trade", q: "India trade exports imports merchandise when:14d" },
+  { label: "Japan trade", q: "Japan trade exports imports balance when:14d" },
+  { label: "Korea trade", q: "South Korea trade exports semiconductors when:14d" },
+  { label: "Saudi trade", q: "Saudi Arabia trade exports oil non-oil when:14d" },
 ];
 
 const BRIDGE = "https://api.rss2json.com/v1/api.json?count=12&rss_url=";
@@ -67,8 +79,8 @@ async function fetchFeed(q: string): Promise<NewsItem[]> {
 
 // Pulls all topic feeds in parallel, merges, de-duplicates by title, and returns
 // the most recent items. Throws only if every feed fails.
-export async function fetchMarketNews(limit = 12): Promise<NewsItem[]> {
-  const results = await Promise.allSettled(QUERIES.map((t) => fetchFeed(t.q)));
+export async function fetchMarketNews(limit = 12, queries: NewsQuery[] = QUERIES): Promise<NewsItem[]> {
+  const results = await Promise.allSettled(queries.map((t) => fetchFeed(t.q)));
   const merged: NewsItem[] = [];
   const seen = new Set<string>();
   for (const r of results) {
@@ -86,7 +98,10 @@ export async function fetchMarketNews(limit = 12): Promise<NewsItem[]> {
 
 // Used when live news cannot load: real, useful links to the same topic searches
 // so the user can still jump straight to current headlines.
-export const fallbackTopics: { label: string; link: string }[] = QUERIES.map((t) => ({
-  label: t.label,
-  link: `https://news.google.com/search?q=${encodeURIComponent(t.q.replace(/ when:14d/, ""))}`,
-}));
+export const topicLinks = (queries: NewsQuery[] = QUERIES): { label: string; link: string }[] =>
+  queries.map((t) => ({
+    label: t.label,
+    link: `https://news.google.com/search?q=${encodeURIComponent(t.q.replace(/ when:14d/, ""))}`,
+  }));
+
+export const fallbackTopics = topicLinks();

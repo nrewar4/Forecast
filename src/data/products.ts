@@ -16,6 +16,9 @@ export type Product = {
   // Price and producers are still real, derived from the uploaded trade data.
   // Undefined or true means the chemistry was authored from verified references.
   verified?: boolean;
+  // Optional explicit APAC category. When absent, the category is inferred from
+  // the product name, route and end uses (see src/lib/apacCategory.ts).
+  apacCategory?: string;
 };
 
 export const products: Product[] = [

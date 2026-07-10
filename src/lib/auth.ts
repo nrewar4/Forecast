@@ -1,28 +1,22 @@
-// Admin authentication. Sessions live in localStorage so a signed-in admin
-// stays signed in across reloads; they expire after SESSION_HOURS.
+// Admin authentication. This is a client-side gate: it controls which pages and
+// navigation the browser shows. The admin password is checked as a SHA-256 hash
+// so the plain text never sits in the bundle, and the session is a random token
+// in localStorage with an expiry.
 //
-// Credentials are checked against a SHA-256 hash so the plain password never
-// ships in the bundle. Override without code changes via .env:
-//   VITE_ADMIN_USERNAME          (default "admin")
-//   VITE_ADMIN_PASSWORD_SHA256   (hex sha256 of the password)
+// Configure the password by setting VITE_ADMIN_PASSWORD_HASH in .env to the
+// SHA-256 hex of your password. Without it, the default password is "apac-admin".
+// For real multi-user security move to Supabase Auth; this gate is for keeping
+// internal tooling out of casual view, not for protecting secrets.
 
-const SESSION_KEY = "apac.admin_session.v1";
-const SESSION_HOURS = 24 * 7;
+const SESSION_KEY = "apac.auth.session.v1";
+const SESSION_HOURS = 12;
 
-const ADMIN_USERNAME =
-  (import.meta.env.VITE_ADMIN_USERNAME as string | undefined) || "admin";
+// SHA-256("apac-admin")
+const DEFAULT_HASH = "071668717afe20902480153d05e4a0d99d834ac9e3af40acdba198162b7d5ebf";
 
-// Default password: apacss@2026
-const ADMIN_PASSWORD_SHA256 =
-  (import.meta.env.VITE_ADMIN_PASSWORD_SHA256 as string | undefined) ||
-  "28ce0c0f124f4a49f23ba45bfa1a40499f086504cf7a5551a9bfe5b64afc86d2";
+const ENV_HASH = (import.meta.env.VITE_ADMIN_PASSWORD_HASH as string | undefined)?.trim();
 
-export type AdminSession = {
-  username: string;
-  token: string;
-  createdAt: number;
-  expiresAt: number;
-};
+export const ADMIN_USERNAME = "admin";
 
 async function sha256Hex(text: string): Promise<string> {
   const data = new TextEncoder().encode(text);
@@ -32,47 +26,46 @@ async function sha256Hex(text: string): Promise<string> {
     .join("");
 }
 
-export function readSession(): AdminSession | null {
+type Session = { token: string; user: string; expiresAt: number };
+
+function readSession(): Session | null {
   try {
     const raw = localStorage.getItem(SESSION_KEY);
     if (!raw) return null;
-    const session = JSON.parse(raw) as AdminSession;
-    if (!session?.token || Date.now() > session.expiresAt) {
+    const s = JSON.parse(raw) as Session;
+    if (!s.token || !s.expiresAt || Date.now() > s.expiresAt) {
       localStorage.removeItem(SESSION_KEY);
       return null;
     }
-    return session;
+    return s;
   } catch {
     return null;
   }
 }
 
-export async function verifyCredentials(
-  username: string,
-  password: string,
-): Promise<boolean> {
-  if (username.trim().toLowerCase() !== ADMIN_USERNAME.toLowerCase()) return false;
-  const hash = await sha256Hex(password);
-  return hash === ADMIN_PASSWORD_SHA256.toLowerCase();
+export function isAdminSession(): boolean {
+  return readSession() !== null;
 }
 
-export function createSession(username: string): AdminSession {
-  const now = Date.now();
-  const session: AdminSession = {
-    username,
+export async function loginAdmin(username: string, password: string): Promise<boolean> {
+  if (username.trim().toLowerCase() !== ADMIN_USERNAME) return false;
+  const hash = await sha256Hex(password);
+  const expected = ENV_HASH || DEFAULT_HASH;
+  if (hash !== expected.toLowerCase()) return false;
+  const session: Session = {
     token: crypto.randomUUID(),
-    createdAt: now,
-    expiresAt: now + SESSION_HOURS * 60 * 60 * 1000,
+    user: ADMIN_USERNAME,
+    expiresAt: Date.now() + SESSION_HOURS * 60 * 60 * 1000,
   };
   try {
     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
   } catch {
-    // storage unavailable (private mode); the session lasts for this tab only
+    return false;
   }
-  return session;
+  return true;
 }
 
-export function clearSession(): void {
+export function logoutAdmin(): void {
   try {
     localStorage.removeItem(SESSION_KEY);
   } catch {

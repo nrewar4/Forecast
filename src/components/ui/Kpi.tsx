@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { Card, CardContent } from "./ui";
+import { Card, CardContent } from "./primitives";
 import { cn } from "@/lib/utils";
 
 export function KpiCard({

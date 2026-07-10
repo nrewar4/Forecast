@@ -10,9 +10,9 @@ import {
   YAxis,
 } from "recharts";
 import { Activity, ArrowUpRight, Gauge, Sparkles } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { Badge, Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui";
-import { KpiChip } from "@/components/Kpi";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge, Card, CardContent, CardHeader, CardTitle, tooltipStyle } from "@/components/ui/primitives";
+import { KpiChip } from "@/components/ui/Kpi";
 import { cn, num, slug } from "@/lib/utils";
 import { useTradeData } from "@/context/TradeData";
 import {

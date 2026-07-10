@@ -116,17 +116,17 @@ function parseRoutes(raw: string, source: "askcos+claude" | "claude"): RouteResu
   const cleaned = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
   const start = cleaned.indexOf("[");
   const end = cleaned.lastIndexOf("]");
-  if (start < 0 || end <= start) throw new Error("Route generation failed. Retry.");
+  if (start < 0 || end <= start) throw new Error("Route generation failed, retry");
 
   let parsed: RouteResult[];
   try {
     parsed = JSON.parse(cleaned.slice(start, end + 1)) as RouteResult[];
   } catch {
-    throw new Error("Route generation failed. Retry.");
+    throw new Error("Route generation failed, retry");
   }
 
   if (!Array.isArray(parsed) || parsed.length === 0) {
-    throw new Error("Route generation failed. Retry.");
+    throw new Error("Route generation failed, retry");
   }
 
   return parsed.map((r, i) => ({

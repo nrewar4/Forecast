@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/components/layout/Logo";
 
 const NAV = [
   { label: "Knowledge", to: "/dashboard" },
@@ -20,8 +20,8 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
       </a>
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" aria-label="APAC Supply Chain | CDMO home" className="press inline-block">
-            <Logo className="h-8 w-auto" />
+          <Link to="/" aria-label="APAC, Supply Chain | CDMO home" className="press inline-block">
+            <Logo className="h-11 w-auto" />
           </Link>
           <nav className="flex items-center gap-1">
             <a

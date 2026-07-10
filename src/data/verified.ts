@@ -37,9 +37,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Lotte Chemical", url: "https://www.lottechem.com" },
     ],
     sources: [
-      { name: "CPMA: Para-xylene", url: "https://cpmaindia.com/knowledge-centre/product-group/-fibre-intermediates/px" },
-      { name: "Honeywell UOP: Benzene/Para-xylene production", url: "https://honeywell-uop.azurewebsites.net/processing-solutions/petrochemicals/benzene-para-xylene-production/" },
-      { name: "ChemAnalyst: Paraxylene production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-a-deep-dive-into-the-paraxylene-production-process-38883" },
+      { name: "CPMA, Para-xylene", url: "https://cpmaindia.com/knowledge-centre/product-group/-fibre-intermediates/px" },
+      { name: "Honeywell UOP, Benzene/Para-xylene production", url: "https://honeywell-uop.azurewebsites.net/processing-solutions/petrochemicals/benzene-para-xylene-production/" },
+      { name: "ChemAnalyst, Paraxylene production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-a-deep-dive-into-the-paraxylene-production-process-38883" },
     ],
   },
 
@@ -64,9 +64,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "EuroChem Group", url: "https://www.eurochemgroup.com" },
     ],
     sources: [
-      { name: "US EPA: Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
-      { name: "ChemAnalyst: Production process of phosphoric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-phosphoric-acid-16" },
-      { name: "FerTech Inform: Phosphoric acid production", url: "https://fertechinform.org/knowledgebase/phosphoric-acid-production-introduction/" },
+      { name: "US EPA, Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
+      { name: "ChemAnalyst, Production process of phosphoric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-phosphoric-acid-16" },
+      { name: "FerTech Inform, Phosphoric acid production", url: "https://fertechinform.org/knowledgebase/phosphoric-acid-production-introduction/" },
     ],
   },
 
@@ -90,9 +90,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SK geo centric", url: "https://www.skgeocentric.com" },
     ],
     sources: [
-      { name: "Shell: Hexane solvent grades", url: "https://www.shell.com/business-customers/chemicals/our-products/solvents-hydrocarbon/special-boiling-point-solvents/hexane.html" },
-      { name: "Junyuan Petroleum Group: n-Hexane supply chain", url: "https://junyuanpetroleumgroup.com/hexane/n-hexane-global-supply-chain-leader/" },
-      { name: "Google Patents: High-purity hexane process", url: "https://patents.google.com/patent/US20170203231A1/en" },
+      { name: "Shell, Hexane solvent grades", url: "https://www.shell.com/business-customers/chemicals/our-products/solvents-hydrocarbon/special-boiling-point-solvents/hexane.html" },
+      { name: "Junyuan Petroleum Group, n-Hexane supply chain", url: "https://junyuanpetroleumgroup.com/hexane/n-hexane-global-supply-chain-leader/" },
+      { name: "Google Patents, High-purity hexane process", url: "https://patents.google.com/patent/US20170203231A1/en" },
     ],
   },
 
@@ -116,9 +116,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dow", url: "https://www.dow.com" },
     ],
     sources: [
-      { name: "Chevron Phillips Chemical: Styrene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/styrene" },
+      { name: "Chevron Phillips Chemical, Styrene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/styrene" },
       { name: "Styrene production from ethylbenzene (technical PDF)", url: "https://michiganfoam.com/wp-content/uploads/2019/03/styrene_production_from_ethylbenzene.pdf" },
-      { name: "NCBI: Styrene production and use", url: "https://www.ncbi.nlm.nih.gov/books/NBK601961/" },
+      { name: "NCBI, Styrene production and use", url: "https://www.ncbi.nlm.nih.gov/books/NBK601961/" },
     ],
   },
 
@@ -142,9 +142,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sinopec", url: "https://www.sinopec.com" },
     ],
     sources: [
-      { name: "Wikipedia: Catalytic reforming", url: "https://en.wikipedia.org/wiki/Catalytic_reforming" },
-      { name: "US DOE: The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
-      { name: "thyssenkrupp: Aromatics extraction (PDF)", url: "https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAIS/assets.files/products___services/chemical_plants___processes/tkis_aromatics.pdf" },
+      { name: "Wikipedia, Catalytic reforming", url: "https://en.wikipedia.org/wiki/Catalytic_reforming" },
+      { name: "US DOE, The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
+      { name: "thyssenkrupp, Aromatics extraction (PDF)", url: "https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAIS/assets.files/products___services/chemical_plants___processes/tkis_aromatics.pdf" },
     ],
   },
 
@@ -168,9 +168,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFFCO", url: "https://www.iffco.in" },
     ],
     sources: [
-      { name: "Wikipedia: Haber process", url: "https://en.wikipedia.org/wiki/Haber_process" },
-      { name: "HY2GEN: Haber-Bosch process", url: "https://www.hy2gen.com/haber-bosch-process" },
-      { name: "C&EN: Ammonia as a fuel of the future", url: "https://cen.acs.org/business/petrochemicals/ammonia-fuel-future/99/i8" },
+      { name: "Wikipedia, Haber process", url: "https://en.wikipedia.org/wiki/Haber_process" },
+      { name: "HY2GEN, Haber-Bosch process", url: "https://www.hy2gen.com/haber-bosch-process" },
+      { name: "C&EN, Ammonia as a fuel of the future", url: "https://cen.acs.org/business/petrochemicals/ammonia-fuel-future/99/i8" },
     ],
   },
 
@@ -195,9 +195,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Yankuang / Zagros (regional)", url: "https://www.methanex.com" },
     ],
     sources: [
-      { name: "HYCO1: Methanol pathways and benchmarks", url: "https://hyco1.com/methanols-moment-part-1/" },
-      { name: "IndexBox: Industrial production of methanol", url: "https://www.indexbox.io/search/industrial-production-of-methanol/" },
-      { name: "Google Patents: Methanol from steam reforming", url: "https://patents.google.com/patent/EP2116295A1/en" },
+      { name: "HYCO1, Methanol pathways and benchmarks", url: "https://hyco1.com/methanols-moment-part-1/" },
+      { name: "IndexBox, Industrial production of methanol", url: "https://www.indexbox.io/search/industrial-production-of-methanol/" },
+      { name: "Google Patents, Methanol from steam reforming", url: "https://patents.google.com/patent/EP2116295A1/en" },
     ],
   },
 
@@ -220,9 +220,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tosoh Corporation", url: "https://www.tosoh.com" },
     ],
     sources: [
-      { name: "Intratec: Aniline from nitrobenzene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/aniline-e13a-b.pdf" },
-      { name: "NCBI: Aniline (production and use)", url: "https://www.ncbi.nlm.nih.gov/books/NBK576629/" },
-      { name: "Research and Markets: Aniline market", url: "https://www.researchandmarkets.com/report/anilines" },
+      { name: "Intratec, Aniline from nitrobenzene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/aniline-e13a-b.pdf" },
+      { name: "NCBI, Aniline (production and use)", url: "https://www.ncbi.nlm.nih.gov/books/NBK576629/" },
+      { name: "Research and Markets, Aniline market", url: "https://www.researchandmarkets.com/report/anilines" },
     ],
   },
 
@@ -247,9 +247,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IndianOil", url: "https://www.iocl.com" },
     ],
     sources: [
-      { name: "IndianOil: Glycols (MEG)", url: "https://iocl.com/glycols" },
-      { name: "Coherent Market Insights: Top MEG companies", url: "https://www.coherentmarketinsights.com/blog/insights/top-companies-monoethylene-glycol-industry-768" },
-      { name: "Market Research Future: MEG companies", url: "https://www.marketresearchfuture.com/reports/mono-ethylene-glycol-market/companies" },
+      { name: "IndianOil, Glycols (MEG)", url: "https://iocl.com/glycols" },
+      { name: "Coherent Market Insights, Top MEG companies", url: "https://www.coherentmarketinsights.com/blog/insights/top-companies-monoethylene-glycol-industry-768" },
+      { name: "Market Research Future, MEG companies", url: "https://www.marketresearchfuture.com/reports/mono-ethylene-glycol-market/companies" },
     ],
   },
 
@@ -273,9 +273,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Alpek", url: "https://www.alpek.com" },
     ],
     sources: [
-      { name: "Valco: PTA manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/pta-terephthalic-acid-manufacturing-process-of-pta/" },
-      { name: "Verified Market Research: Top PTA manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-purified-terephthalic-acid-manufacturers/" },
-      { name: "Reliance: Fibre intermediates (PTA)", url: "https://www.ril.com/businesses/petrochemicals/fibre-intermediates" },
+      { name: "Valco, PTA manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/pta-terephthalic-acid-manufacturing-process-of-pta/" },
+      { name: "Verified Market Research, Top PTA manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-purified-terephthalic-acid-manufacturers/" },
+      { name: "Reliance, Fibre intermediates (PTA)", url: "https://www.ril.com/businesses/petrochemicals/fibre-intermediates" },
     ],
   },
 
@@ -300,9 +300,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "HORIBA: Sulfuric acid by DCDA", url: "https://www.horiba.com/int/process-and-environmental/industries/sulfuric-acid-production/" },
-      { name: "ChemAnalyst: Sulphuric acid supply chain", url: "https://www.chemanalyst.com/Blogs/understanding-the-global-sulphuric-acid-supply-chain-from-production-to-end-use-28" },
-      { name: "Aurubis: Sulfuric acid", url: "https://www.aurubis.com/en/products/other-products/sulfuric-acid" },
+      { name: "HORIBA, Sulfuric acid by DCDA", url: "https://www.horiba.com/int/process-and-environmental/industries/sulfuric-acid-production/" },
+      { name: "ChemAnalyst, Sulphuric acid supply chain", url: "https://www.chemanalyst.com/Blogs/understanding-the-global-sulphuric-acid-supply-chain-from-production-to-end-use-28" },
+      { name: "Aurubis, Sulfuric acid", url: "https://www.aurubis.com/en/products/other-products/sulfuric-acid" },
     ],
   },
 
@@ -327,9 +327,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sinopec", url: "https://www.sinopec.com" },
     ],
     sources: [
-      { name: "ChemAnalyst: Production process of acetic acid", url: "https://www.chemanalyst.com/Blogs/comprehensive-guide-production-process-of-acetic-acid-47" },
-      { name: "Wikipedia: Monsanto process", url: "https://en.wikipedia.org/wiki/Monsanto_process" },
-      { name: "Valco: Acetic acid manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/acetic-acid-manufacturing-process-for-acetic-acid/" },
+      { name: "ChemAnalyst, Production process of acetic acid", url: "https://www.chemanalyst.com/Blogs/comprehensive-guide-production-process-of-acetic-acid-47" },
+      { name: "Wikipedia, Monsanto process", url: "https://en.wikipedia.org/wiki/Monsanto_process" },
+      { name: "Valco, Acetic acid manufacturing process", url: "https://www.valcogroup-valves.com/faq-2/acetic-acid-manufacturing-process-for-acetic-acid/" },
     ],
   },
 
@@ -352,9 +352,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "ScienceDirect: Enzymatic transformation of penicillins to 6-APA", url: "https://www.sciencedirect.com/science/article/abs/pii/S0734975000000392" },
-      { name: "Centrient Pharmaceuticals: 6-APA", url: "https://centrient.com/our-products/6-apa" },
-      { name: "ACS Omega: 6-APA process development", url: "https://pubs.acs.org/doi/10.1021/acsomega.0c02813" },
+      { name: "ScienceDirect, Enzymatic transformation of penicillins to 6-APA", url: "https://www.sciencedirect.com/science/article/abs/pii/S0734975000000392" },
+      { name: "Centrient Pharmaceuticals, 6-APA", url: "https://centrient.com/our-products/6-apa" },
+      { name: "ACS Omega, 6-APA process development", url: "https://pubs.acs.org/doi/10.1021/acsomega.0c02813" },
     ],
   },
 
@@ -378,9 +378,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "NBINNO: Synthesis of letrozole", url: "https://www.nbinno.com/article/pharmaceutical-intermediates/navigating-synthesis-letrozole-criticality-4-1h-1-2-4-triazol-1-ylmethyl-benzonitrile-qo" },
-      { name: "Google Patents: Process for preparation of letrozole", url: "https://patents.google.com/patent/US7705159B2/en" },
-      { name: "Pharmaoffer: Letrozole API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/aromatase-inhibitors/letrozole" },
+      { name: "NBINNO, Synthesis of letrozole", url: "https://www.nbinno.com/article/pharmaceutical-intermediates/navigating-synthesis-letrozole-criticality-4-1h-1-2-4-triazol-1-ylmethyl-benzonitrile-qo" },
+      { name: "Google Patents, Process for preparation of letrozole", url: "https://patents.google.com/patent/US7705159B2/en" },
+      { name: "Pharmaoffer, Letrozole API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/aromatase-inhibitors/letrozole" },
     ],
   },
 
@@ -403,9 +403,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia: Galantamine total synthesis", url: "https://en.wikipedia.org/wiki/Galantamine_total_synthesis" },
-      { name: "RSC Nat. Prod. Rep.: Total synthesis of galantamine", url: "https://pubs.rsc.org/en/content/articlehtml/2024/np/d4np00001c" },
-      { name: "Google Patents: Galantamine hydrobromide process", url: "https://patents.google.com/patent/EP2009015B1/en" },
+      { name: "Wikipedia, Galantamine total synthesis", url: "https://en.wikipedia.org/wiki/Galantamine_total_synthesis" },
+      { name: "RSC Nat. Prod. Rep., Total synthesis of galantamine", url: "https://pubs.rsc.org/en/content/articlehtml/2024/np/d4np00001c" },
+      { name: "Google Patents, Galantamine hydrobromide process", url: "https://patents.google.com/patent/EP2009015B1/en" },
     ],
   },
 
@@ -427,9 +427,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "ScienceDirect: Semi-solid-state fermentation for neomycin", url: "https://www.sciencedirect.com/science/article/abs/pii/S0168165613001685" },
-      { name: "PharmaCompass: Framycetin sulfate", url: "https://www.pharmacompass.com/active-pharmaceutical-ingredients/framycetin-sulfate" },
-      { name: "PMC: Optimisation of neomycin by S. fradiae", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4070395/" },
+      { name: "ScienceDirect, Semi-solid-state fermentation for neomycin", url: "https://www.sciencedirect.com/science/article/abs/pii/S0168165613001685" },
+      { name: "PharmaCompass, Framycetin sulfate", url: "https://www.pharmacompass.com/active-pharmaceutical-ingredients/framycetin-sulfate" },
+      { name: "PMC, Optimisation of neomycin by S. fradiae", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4070395/" },
     ],
   },
   benzene: {
@@ -453,9 +453,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dow", url: "https://www.dow.com" },
     ],
     sources: [
-      { name: "Essential Chemical Industry: Benzene", url: "https://www.essentialchemicalindustry.org/chemicals/benzene.html" },
-      { name: "ChemAnalyst: Industrial production of benzene", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/understanding-the-industrial-production-process-of-benzene-37940" },
-      { name: "Chevron Phillips Chemical: Benzene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/benzene" },
+      { name: "Essential Chemical Industry, Benzene", url: "https://www.essentialchemicalindustry.org/chemicals/benzene.html" },
+      { name: "ChemAnalyst, Industrial production of benzene", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/understanding-the-industrial-production-process-of-benzene-37940" },
+      { name: "Chevron Phillips Chemical, Benzene", url: "https://www.cpchem.com/what-we-do/solutions/aromatics/products/benzene" },
     ],
   },
 
@@ -479,9 +479,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Plastics", url: "https://www.fpc.com.tw" },
     ],
     sources: [
-      { name: "INEOS: Phenol", url: "https://www.ineos.com/industry/products/chemicals/phenol/" },
-      { name: "Wikipedia: Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
-      { name: "ChemAnalyst: Phenol market", url: "https://www.chemanalyst.com/industry-report/phenol-market-184" },
+      { name: "INEOS, Phenol", url: "https://www.ineos.com/industry/products/chemicals/phenol/" },
+      { name: "Wikipedia, Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
+      { name: "ChemAnalyst, Phenol market", url: "https://www.chemanalyst.com/industry-report/phenol-market-184" },
     ],
   },
 
@@ -505,9 +505,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SABIC", url: "https://www.sabic.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
-      { name: "NBINNO: Cumene process: phenol & acetone", url: "https://www.nbinno.com/article/other-organic-chemicals/cumene-process-deep-dive-phenol-acetone-manufacturing-vh" },
-      { name: "DOMO Chemicals: Acetone", url: "https://www.domochemicals.com/en/products/chemical-intermediates/acetone" },
+      { name: "Wikipedia, Cumene process", url: "https://en.wikipedia.org/wiki/Cumene_process" },
+      { name: "NBINNO, Cumene process: phenol & acetone", url: "https://www.nbinno.com/article/other-organic-chemicals/cumene-process-deep-dive-phenol-acetone-manufacturing-vh" },
+      { name: "DOMO Chemicals, Acetone", url: "https://www.domochemicals.com/en/products/chemical-intermediates/acetone" },
     ],
   },
 
@@ -532,9 +532,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Reliance Industries", url: "https://www.ril.com" },
     ],
     sources: [
-      { name: "Wikipedia: Propylene", url: "https://en.wikipedia.org/wiki/Propylene" },
-      { name: "Wikipedia: Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
-      { name: "Applied Petrochemical Research: Propylene via FCC", url: "https://link.springer.com/article/10.1007/s13203-015-0104-3" },
+      { name: "Wikipedia, Propylene", url: "https://en.wikipedia.org/wiki/Propylene" },
+      { name: "Wikipedia, Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
+      { name: "Applied Petrochemical Research, Propylene via FCC", url: "https://link.springer.com/article/10.1007/s13203-015-0104-3" },
     ],
   },
 
@@ -559,9 +559,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LyondellBasell", url: "https://www.lyondellbasell.com" },
     ],
     sources: [
-      { name: "Wikipedia: Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
-      { name: "ScienceDirect: Steam cracking overview", url: "https://www.sciencedirect.com/topics/chemistry/steam-cracking" },
-      { name: "Coherent Market Insights: Ethylene market", url: "https://www.coherentmarketinsights.com/market-insight/global-ethylene-market-371" },
+      { name: "Wikipedia, Steam cracking", url: "https://en.wikipedia.org/wiki/Steam_cracking" },
+      { name: "ScienceDirect, Steam cracking overview", url: "https://www.sciencedirect.com/topics/chemistry/steam-cracking" },
+      { name: "Coherent Market Insights, Ethylene market", url: "https://www.coherentmarketinsights.com/market-insight/global-ethylene-market-371" },
     ],
   },
 
@@ -585,9 +585,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "OCI Global", url: "https://www.oci-global.com" },
     ],
     sources: [
-      { name: "Saipem: Snamprogetti urea technology", url: "https://www.saipem.com/en/solutions-energy-transition/onshore/snamprogetti-urea" },
-      { name: "Fertilizer Industrial Services: Urea technology", url: "https://fertilizer.services/urea/" },
-      { name: "Expert Market Research: Top urea companies", url: "https://www.expertmarketresearch.com/blogs/top-urea-companies" },
+      { name: "Saipem, Snamprogetti urea technology", url: "https://www.saipem.com/en/solutions-energy-transition/onshore/snamprogetti-urea" },
+      { name: "Fertilizer Industrial Services, Urea technology", url: "https://fertilizer.services/urea/" },
+      { name: "Expert Market Research, Top urea companies", url: "https://www.expertmarketresearch.com/blogs/top-urea-companies" },
     ],
   },
 
@@ -611,9 +611,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nan Ya Plastics", url: "https://www.nanya.com" },
     ],
     sources: [
-      { name: "Covestro: Bisphenol A", url: "https://www.covestro.com/en/sustainability/how-we-operate/product-responsibility/bisphenol-a" },
-      { name: "Mordor Intelligence: BPA market", url: "https://www.mordorintelligence.com/industry-reports/bisphenol-a-bpa-market" },
-      { name: "Grand View Research: BPA market", url: "https://www.grandviewresearch.com/industry-analysis/bisphenol-a-bpa-market" },
+      { name: "Covestro, Bisphenol A", url: "https://www.covestro.com/en/sustainability/how-we-operate/product-responsibility/bisphenol-a" },
+      { name: "Mordor Intelligence, BPA market", url: "https://www.mordorintelligence.com/industry-reports/bisphenol-a-bpa-market" },
+      { name: "Grand View Research, BPA market", url: "https://www.grandviewresearch.com/industry-analysis/bisphenol-a-bpa-market" },
     ],
   },
 
@@ -637,9 +637,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sinopec", url: "https://www.sinopec.com" },
     ],
     sources: [
-      { name: "ACS: Sohio acrylonitrile process landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/acrylonitrile.html" },
-      { name: "ScienceDirect: Ammoxidation overview", url: "https://www.sciencedirect.com/topics/chemical-engineering/ammoxidation" },
-      { name: "Technavio: Acrylonitrile market participants", url: "https://www.prnewswire.com/news-releases/acrylonitrile-market--asahi-kasei-corp-ascend-performance-materials-operations-llc-and-cornerstone-chemical-co-will-emerge-as-major-acrylonitrile-market-participants--technavio-301576121.html" },
+      { name: "ACS, Sohio acrylonitrile process landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/acrylonitrile.html" },
+      { name: "ScienceDirect, Ammoxidation overview", url: "https://www.sciencedirect.com/topics/chemical-engineering/ammoxidation" },
+      { name: "Technavio, Acrylonitrile market participants", url: "https://www.prnewswire.com/news-releases/acrylonitrile-market--asahi-kasei-corp-ascend-performance-materials-operations-llc-and-cornerstone-chemical-co-will-emerge-as-major-acrylonitrile-market-participants--technavio-301576121.html" },
     ],
   },
 
@@ -663,9 +663,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "US EPA: Sodium hydroxide supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Sodium+Hydroxide+Supply+Chain+Profile.pdf" },
-      { name: "Olin Chlor Alkali: Sodium hydroxide", url: "https://olinchloralkali.com/products/sodium-hydroxide/" },
-      { name: "MarketsandMarkets: Chlor-alkali companies", url: "https://www.marketsandmarkets.com/ResearchInsight/chlor-alkali-market.asp" },
+      { name: "US EPA, Sodium hydroxide supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Sodium+Hydroxide+Supply+Chain+Profile.pdf" },
+      { name: "Olin Chlor Alkali, Sodium hydroxide", url: "https://olinchloralkali.com/products/sodium-hydroxide/" },
+      { name: "MarketsandMarkets, Chlor-alkali companies", url: "https://www.marketsandmarkets.com/ResearchInsight/chlor-alkali-market.asp" },
     ],
   },
 
@@ -689,9 +689,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "EuroChem Group", url: "https://www.eurochemgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
-      { name: "ChemAnalyst: Production process of nitric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-nitric-acid-10" },
-      { name: "Trademark Nitrogen: Nitric acid & Ostwald process", url: "https://trademarknitrogen.com/News/Blog/ArtMID/774/ArticleID/6/Nitric-Acid-and-the-Ostwald-Process-A-Crucial-Chemical-Duo" },
+      { name: "Wikipedia, Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
+      { name: "ChemAnalyst, Production process of nitric acid", url: "https://www.chemanalyst.com/Blogs/understanding-the-production-process-of-nitric-acid-10" },
+      { name: "Trademark Nitrogen, Nitric acid & Ostwald process", url: "https://trademarknitrogen.com/News/Blog/ArtMID/774/ArticleID/6/Nitric-Acid-and-the-Ostwald-Process-A-Crucial-Chemical-Duo" },
     ],
   },
 
@@ -714,9 +714,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Ishihara Sangyo Kaisha (ISK)", url: "https://www.iskweb.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Titanium dioxide", url: "https://en.wikipedia.org/wiki/Titanium_dioxide" },
-      { name: "Tronox: Titanium dioxide", url: "https://www.tronox.com/products/titanium-dioxide/" },
-      { name: "MarketsandMarkets: Titanium dioxide market", url: "https://www.marketsandmarkets.com/ResearchInsight/titanium-dioxide-market.asp" },
+      { name: "Wikipedia, Titanium dioxide", url: "https://en.wikipedia.org/wiki/Titanium_dioxide" },
+      { name: "Tronox, Titanium dioxide", url: "https://www.tronox.com/products/titanium-dioxide/" },
+      { name: "MarketsandMarkets, Titanium dioxide market", url: "https://www.marketsandmarkets.com/ResearchInsight/titanium-dioxide-market.asp" },
     ],
   },
 
@@ -740,9 +740,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Occidental / OxyVinyls", url: "https://www.oxy.com" },
     ],
     sources: [
-      { name: "Shin-Etsu Chemical: PVC", url: "https://www.shinetsu.co.jp/en/products/infrastructure-materials/polyvinyl-chloride-pvc/" },
-      { name: "Westlake: PVC resin", url: "https://westlake.com/chlorovinyls/pvc-resin" },
-      { name: "Verified Market Research: Top PVC manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-polyvinyl-chloride-manufacturers/" },
+      { name: "Shin-Etsu Chemical, PVC", url: "https://www.shinetsu.co.jp/en/products/infrastructure-materials/polyvinyl-chloride-pvc/" },
+      { name: "Westlake, PVC resin", url: "https://westlake.com/chlorovinyls/pvc-resin" },
+      { name: "Verified Market Research, Top PVC manufacturers", url: "https://www.verifiedmarketresearch.com/blog/top-polyvinyl-chloride-manufacturers/" },
     ],
   },
 
@@ -766,9 +766,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Continental Carbon", url: "https://www.continentalcarbon.com" },
     ],
     sources: [
-      { name: "Wikipedia: Carbon black", url: "https://en.wikipedia.org/wiki/Carbon_black" },
-      { name: "US EPA: Carbon black (AP-42 §6.1, PDF)", url: "https://www3.epa.gov/ttn/chief/ap42/ch06/final/c06s01.pdf" },
-      { name: "IMARC: Top carbon black companies", url: "https://www.imarcgroup.com/top-carbon-black-companies" },
+      { name: "Wikipedia, Carbon black", url: "https://en.wikipedia.org/wiki/Carbon_black" },
+      { name: "US EPA, Carbon black (AP-42 §6.1, PDF)", url: "https://www3.epa.gov/ttn/chief/ap42/ch06/final/c06s01.pdf" },
+      { name: "IMARC, Top carbon black companies", url: "https://www.imarcgroup.com/top-carbon-black-companies" },
     ],
   },
 
@@ -791,9 +791,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsui Chemicals", url: "https://www.mitsuichemicals.com" },
     ],
     sources: [
-      { name: "Borealis: Melamine technology", url: "https://www.borealisgroup.com/news/borealis-sells-melamine-process-technology-to-urea-casale-sa" },
-      { name: "Google Patents: High-purity melamine from urea", url: "https://patents.google.com/patent/EP2098516A1/en" },
-      { name: "Google Patents: Production of melamine", url: "https://patents.google.com/patent/US2918467A/en" },
+      { name: "Borealis, Melamine technology", url: "https://www.borealisgroup.com/news/borealis-sells-melamine-process-technology-to-urea-casale-sa" },
+      { name: "Google Patents, High-purity melamine from urea", url: "https://patents.google.com/patent/EP2098516A1/en" },
+      { name: "Google Patents, Production of melamine", url: "https://patents.google.com/patent/US2918467A/en" },
     ],
   },
 
@@ -817,9 +817,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SABIC", url: "https://www.sabic.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ziegler-Natta catalyst", url: "https://en.wikipedia.org/wiki/Ziegler%E2%80%93Natta_catalyst" },
-      { name: "LyondellBasell: Gas-phase PP processes (PDF)", url: "https://www.lyondellbasell.com/globalassets/products-technology/technology/gas-phase-pp-processes.pdf?id=13744" },
-      { name: "Mordor Intelligence: Polypropylene companies", url: "https://www.mordorintelligence.com/industry-reports/polypropylene-market/companies" },
+      { name: "Wikipedia, Ziegler-Natta catalyst", url: "https://en.wikipedia.org/wiki/Ziegler%E2%80%93Natta_catalyst" },
+      { name: "LyondellBasell, Gas-phase PP processes (PDF)", url: "https://www.lyondellbasell.com/globalassets/products-technology/technology/gas-phase-pp-processes.pdf?id=13744" },
+      { name: "Mordor Intelligence, Polypropylene companies", url: "https://www.mordorintelligence.com/industry-reports/polypropylene-market/companies" },
     ],
   },
 
@@ -843,9 +843,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Reliance Industries", url: "https://www.ril.com" },
     ],
     sources: [
-      { name: "Expert Market Research: HDPE market", url: "https://www.expertmarketresearch.com/reports/high-density-polyethylene-hdpe-market" },
-      { name: "American Chemistry Council: HDPE LCA (PDF)", url: "https://www.americanchemistry.com/content/download/8059/file/Cradle-to-Gate-Life-Cycle-Analysis-of-High-Density-Polyethylene-HDPE-Resin.pdf" },
-      { name: "DOAJ: PE by slurry process (patent review)", url: "https://doaj.org/article/ece134ed6eed4ee3b72a0287d740b43f" },
+      { name: "Expert Market Research, HDPE market", url: "https://www.expertmarketresearch.com/reports/high-density-polyethylene-hdpe-market" },
+      { name: "American Chemistry Council, HDPE LCA (PDF)", url: "https://www.americanchemistry.com/content/download/8059/file/Cradle-to-Gate-Life-Cycle-Analysis-of-High-Density-Polyethylene-HDPE-Resin.pdf" },
+      { name: "DOAJ, PE by slurry process (patent review)", url: "https://doaj.org/article/ece134ed6eed4ee3b72a0287d740b43f" },
     ],
   },
 
@@ -868,9 +868,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kuraray", url: "https://www.kuraray.com" },
     ],
     sources: [
-      { name: "ACS: Methyl methacrylate", url: "https://www.acs.org/molecule-of-the-week/archive/m/methyl-methacrylate.html" },
-      { name: "Röhm: LiMA MMA technology", url: "https://www.roehm.com/en/detail/lima-technology-at-full-scale-operation-official-opening-of-rohm-s-bay-city-mma-plant" },
-      { name: "SL Chemtech: MMA production overview", url: "https://www.slchemtech.com/news/methyl-methacrylate-production.html" },
+      { name: "ACS, Methyl methacrylate", url: "https://www.acs.org/molecule-of-the-week/archive/m/methyl-methacrylate.html" },
+      { name: "Röhm, LiMA MMA technology", url: "https://www.roehm.com/en/detail/lima-technology-at-full-scale-operation-official-opening-of-rohm-s-bay-city-mma-plant" },
+      { name: "SL Chemtech, MMA production overview", url: "https://www.slchemtech.com/news/methyl-methacrylate-production.html" },
     ],
   },
 
@@ -893,9 +893,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Wacker Chemie", url: "https://www.wacker.com" },
     ],
     sources: [
-      { name: "Wikipedia: Vinyl acetate", url: "https://en.wikipedia.org/wiki/Vinyl_acetate" },
-      { name: "Celanese: Vinyl Acetate Monomer (PDF)", url: "https://www.celanese.com/-/media/Intermediate-Chemistry/Files/Brochures/Vinyl-Acetate-Monomer-VAM-Brochure.pdf" },
-      { name: "Merchant Research: VAM overview", url: "https://mcgroup.co.uk/news/20240115/vinyl-acetate-monomer-vam-the-essential-chemical-in-modern-manufacturing.html" },
+      { name: "Wikipedia, Vinyl acetate", url: "https://en.wikipedia.org/wiki/Vinyl_acetate" },
+      { name: "Celanese, Vinyl Acetate Monomer (PDF)", url: "https://www.celanese.com/-/media/Intermediate-Chemistry/Files/Brochures/Vinyl-Acetate-Monomer-VAM-Brochure.pdf" },
+      { name: "Merchant Research, VAM overview", url: "https://mcgroup.co.uk/news/20240115/vinyl-acetate-monomer-vam-the-essential-chemical-in-modern-manufacturing.html" },
     ],
   },
 
@@ -919,9 +919,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Plastics", url: "https://www.fpc.com.tw" },
     ],
     sources: [
-      { name: "Intratec: Acrylic acid from propylene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/acrylic-acid-e11a-b.pdf" },
-      { name: "Nippon Shokubai: Process catalysts", url: "https://www.shokubai.co.jp/en/products/detail/process_cat/" },
-      { name: "US EPA: Acrylic acid manufacture", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=91017W1A.TXT" },
+      { name: "Intratec, Acrylic acid from propylene (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/acrylic-acid-e11a-b.pdf" },
+      { name: "Nippon Shokubai, Process catalysts", url: "https://www.shokubai.co.jp/en/products/detail/process_cat/" },
+      { name: "US EPA, Acrylic acid manufacture", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=91017W1A.TXT" },
     ],
   },
 
@@ -945,9 +945,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "DOMO Chemicals", url: "https://www.domochemicals.com" },
     ],
     sources: [
-      { name: "Fibrant: Caprolactam", url: "https://www.fibrant52.com/en/products/caprolactam" },
-      { name: "Google Patents: Beckmann rearrangement to caprolactam", url: "https://patents.google.com/patent/US5264571A/en" },
-      { name: "Mordor Intelligence: Caprolactam companies", url: "https://www.mordorintelligence.com/industry-reports/caprolactam-market/companies" },
+      { name: "Fibrant, Caprolactam", url: "https://www.fibrant52.com/en/products/caprolactam" },
+      { name: "Google Patents, Beckmann rearrangement to caprolactam", url: "https://patents.google.com/patent/US5264571A/en" },
+      { name: "Mordor Intelligence, Caprolactam companies", url: "https://www.mordorintelligence.com/industry-reports/caprolactam-market/companies" },
     ],
   },
 
@@ -971,9 +971,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shin-Etsu / Shintech", url: "https://www.shinetsu.co.jp" },
     ],
     sources: [
-      { name: "OxyChem: EDC handbook (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/products/chlorinated-organics/edc.pdf" },
-      { name: "Westlake Vinnolit: EDC/VCM process", url: "https://www.westlakevinnolit.com/en/licensing/edc-vcm-process/" },
-      { name: "ChemAnalyst: EDC supply chain", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/untangling-the-global-ethylene-dichloride-edc-supply-chain-from-feedstock-38377" },
+      { name: "OxyChem, EDC handbook (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/products/chlorinated-organics/edc.pdf" },
+      { name: "Westlake Vinnolit, EDC/VCM process", url: "https://www.westlakevinnolit.com/en/licensing/edc-vcm-process/" },
+      { name: "ChemAnalyst, EDC supply chain", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/untangling-the-global-ethylene-dichloride-edc-supply-chain-from-feedstock-38377" },
     ],
   },
 
@@ -996,9 +996,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hanwha Solutions", url: "https://www.hanwhasolutions.com" },
     ],
     sources: [
-      { name: "ChemAnalyst: How TDI is made", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/how-toluene-diisocyanate-tdi-is-made-a-quick-dive-into-process-sustainability-37881" },
-      { name: "Mordor Intelligence: TDI market", url: "https://www.mordorintelligence.com/industry-reports/toluene-diisocyanate-market" },
-      { name: "Fortune Business Insights: TDI market", url: "https://www.fortunebusinessinsights.com/toluene-diisocyanate-market-113962" },
+      { name: "ChemAnalyst, How TDI is made", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/how-toluene-diisocyanate-tdi-is-made-a-quick-dive-into-process-sustainability-37881" },
+      { name: "Mordor Intelligence, TDI market", url: "https://www.mordorintelligence.com/industry-reports/toluene-diisocyanate-market" },
+      { name: "Fortune Business Insights, TDI market", url: "https://www.fortunebusinessinsights.com/toluene-diisocyanate-market-113962" },
     ],
   },
 
@@ -1020,9 +1020,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LG Chem", url: "https://www.lgchem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ethyl acrylate", url: "https://en.wikipedia.org/wiki/Ethyl_acrylate" },
+      { name: "Wikipedia, Ethyl acrylate", url: "https://en.wikipedia.org/wiki/Ethyl_acrylate" },
       { name: "Basic Acrylic Monomer Manufacturers (BAMM)", url: "https://www.bamm.net/about-bamm" },
-      { name: "MarketsandMarkets: Acrylate market", url: "https://www.marketsandmarkets.com/ResearchInsight/acrylate-market.asp" },
+      { name: "MarketsandMarkets, Acrylate market", url: "https://www.marketsandmarkets.com/ResearchInsight/acrylate-market.asp" },
     ],
   },
 
@@ -1044,9 +1044,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LG Chem", url: "https://www.lgchem.com" },
     ],
     sources: [
-      { name: "Arkema: Butyl acrylate", url: "https://www.arkema.com/usa/en/product/acrylics/butylacrylate/" },
+      { name: "Arkema, Butyl acrylate", url: "https://www.arkema.com/usa/en/product/acrylics/butylacrylate/" },
       { name: "Basic Acrylic Monomer Manufacturers (BAMM)", url: "https://www.bamm.net/about-bamm" },
-      { name: "ChemPoint: Butyl acrylate (BASF)", url: "https://www.chempoint.com/products/basf/basf-acrylic-monomers/butyl-acrylate" },
+      { name: "ChemPoint, Butyl acrylate (BASF)", url: "https://www.chempoint.com/products/basf/basf-acrylic-monomers/butyl-acrylate" },
     ],
   },
 
@@ -1069,9 +1069,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Plastics", url: "https://www.fpc.com.tw" },
     ],
     sources: [
-      { name: "US DOE: The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
-      { name: "S&P Global: ortho-Xylene CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0825-Global-CEH-ortho-Xylene-Abstract.pdf" },
-      { name: "US EPA: Phthalic anhydride from o-xylene", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100BG0H.TXT" },
+      { name: "US DOE, The BTX chain (PDF)", url: "http://www1.eere.energy.gov/manufacturing/resources/chemicals/pdfs/profile_chap4.pdf" },
+      { name: "S&P Global, ortho-Xylene CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0825-Global-CEH-ortho-Xylene-Abstract.pdf" },
+      { name: "US EPA, Phthalic anhydride from o-xylene", url: "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100BG0H.TXT" },
     ],
   },
 
@@ -1095,9 +1095,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Cyclohexanone", url: "https://en.wikipedia.org/wiki/Cyclohexanone" },
-      { name: "ChemicalBook: Cyclohexanone production", url: "https://www.chemicalbook.com/article/cyclohexanone-chemical-and-physical-properties-production-and-uses.htm" },
-      { name: "Vinipul: Cyclohexanone in nylon", url: "https://vinipulchemicals.com/cyclohexanone-in-nylon-production" },
+      { name: "Wikipedia, Cyclohexanone", url: "https://en.wikipedia.org/wiki/Cyclohexanone" },
+      { name: "ChemicalBook, Cyclohexanone production", url: "https://www.chemicalbook.com/article/cyclohexanone-chemical-and-physical-properties-production-and-uses.htm" },
+      { name: "Vinipul, Cyclohexanone in nylon", url: "https://vinipulchemicals.com/cyclohexanone-in-nylon-production" },
     ],
   },
 
@@ -1121,9 +1121,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cargill", url: "https://www.cargill.com" },
     ],
     sources: [
-      { name: "Grand View Research: Glycerol market", url: "https://www.grandviewresearch.com/industry-analysis/glycerol-market" },
-      { name: "RSC Advances: Crude glycerol from biodiesel", url: "https://pubs.rsc.org/en/content/articlehtml/2022/ra/d2ra05090k" },
-      { name: "GMInsights: Glycerol market", url: "https://www.gminsights.com/industry-analysis/glycerol-market-size" },
+      { name: "Grand View Research, Glycerol market", url: "https://www.grandviewresearch.com/industry-analysis/glycerol-market" },
+      { name: "RSC Advances, Crude glycerol from biodiesel", url: "https://pubs.rsc.org/en/content/articlehtml/2022/ra/d2ra05090k" },
+      { name: "GMInsights, Glycerol market", url: "https://www.gminsights.com/industry-analysis/glycerol-market-size" },
     ],
   },
 
@@ -1146,9 +1146,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PhosAgro", url: "https://www.phosagro.com" },
     ],
     sources: [
-      { name: "Google Patents: STPP from wet-process acid & soda ash", url: "https://patents.google.com/patent/US4209497A/en" },
-      { name: "ScienceDirect: Sodium triphosphate overview", url: "https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/sodium-triphosphate" },
-      { name: "MarketsandMarkets: STPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/sodium-tripolyphosphate-companies.asp" },
+      { name: "Google Patents, STPP from wet-process acid & soda ash", url: "https://patents.google.com/patent/US4209497A/en" },
+      { name: "ScienceDirect, Sodium triphosphate overview", url: "https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/sodium-triphosphate" },
+      { name: "MarketsandMarkets, STPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/sodium-tripolyphosphate-companies.asp" },
     ],
   },
 
@@ -1171,9 +1171,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Evonik Industries", url: "https://www.evonik.com" },
     ],
     sources: [
-      { name: "Armand Products: Potassium carbonate handbook", url: "https://www.armandproducts.com/products/media/potassium-carbonate-handbook/" },
-      { name: "Google Patents: Producing potassium carbonate", url: "https://patents.google.com/patent/US5449506A/en" },
-      { name: "USDA: Potassium carbonate technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2023Technical_Report_Potassium_Carbonate_Handling.pdf" },
+      { name: "Armand Products, Potassium carbonate handbook", url: "https://www.armandproducts.com/products/media/potassium-carbonate-handbook/" },
+      { name: "Google Patents, Producing potassium carbonate", url: "https://patents.google.com/patent/US5449506A/en" },
+      { name: "USDA, Potassium carbonate technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2023Technical_Report_Potassium_Carbonate_Handling.pdf" },
     ],
   },
 
@@ -1196,9 +1196,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Natural Soda (ASX)", url: "https://www.naturalsoda.com" },
     ],
     sources: [
-      { name: "Wikipedia: Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "Tata Chemicals: Sodium bicarbonate", url: "https://www.tatachemicals.com/products-and-applications/sodium-bicarbonate" },
-      { name: "Mordor Intelligence: Sodium bicarbonate market", url: "https://www.mordorintelligence.com/industry-reports/sodium-bicarbonate-market" },
+      { name: "Wikipedia, Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "Tata Chemicals, Sodium bicarbonate", url: "https://www.tatachemicals.com/products-and-applications/sodium-bicarbonate" },
+      { name: "Mordor Intelligence, Sodium bicarbonate market", url: "https://www.mordorintelligence.com/industry-reports/sodium-bicarbonate-market" },
     ],
   },
 
@@ -1220,9 +1220,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PhosAgro", url: "https://www.phosagro.com" },
     ],
     sources: [
-      { name: "Fluorsid: Aluminium fluoride", url: "https://fluorsid.com/what-we-do/chemical/aluminium-fluoride/" },
-      { name: "Business Research Insights: Aluminium fluoride market", url: "https://www.businessresearchinsights.com/market-reports/aluminum-fluoride-market-122568" },
-      { name: "24 Chemical Research: Aluminium fluoride market", url: "https://www.24chemicalresearch.com/reports/215971/global-aluminium-fluoride-market" },
+      { name: "Fluorsid, Aluminium fluoride", url: "https://fluorsid.com/what-we-do/chemical/aluminium-fluoride/" },
+      { name: "Business Research Insights, Aluminium fluoride market", url: "https://www.businessresearchinsights.com/market-reports/aluminum-fluoride-market-122568" },
+      { name: "24 Chemical Research, Aluminium fluoride market", url: "https://www.24chemicalresearch.com/reports/215971/global-aluminium-fluoride-market" },
     ],
   },
 
@@ -1246,9 +1246,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "INEOS", url: "https://www.ineos.com" },
     ],
     sources: [
-      { name: "US EPA: Hydrochloric acid supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Hydrochloric%20Acid%20Supply%20Chain%20Profile.pdf" },
-      { name: "OxyChem: Hydrochloric acid stewardship (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/stewardship/hydrochloric-acid.pdf" },
-      { name: "Covestro: Hydrochloric acid", url: "https://solutions.covestro.com/en/brands/hydrochloric-acid" },
+      { name: "US EPA, Hydrochloric acid supply chain (PDF)", url: "https://www.epa.gov/system/files/documents/2023-03/Hydrochloric%20Acid%20Supply%20Chain%20Profile.pdf" },
+      { name: "OxyChem, Hydrochloric acid stewardship (PDF)", url: "https://www.oxy.com/siteassets/documents/chemicals/stewardship/hydrochloric-acid.pdf" },
+      { name: "Covestro, Hydrochloric acid", url: "https://solutions.covestro.com/en/brands/hydrochloric-acid" },
     ],
   },
 
@@ -1268,9 +1268,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Yabang (representative China producer)", url: "https://www.yabang.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sulfamic acid", url: "https://en.wikipedia.org/wiki/Sulfamic_acid" },
-      { name: "Brenntag: Sulphamic acid", url: "https://www.brenntag.com/en-dk/products/sulphamic-acid.html" },
-      { name: "Metoree: Sulfamic acid manufacturers", url: "https://us.metoree.com/categories/6319/" },
+      { name: "Wikipedia, Sulfamic acid", url: "https://en.wikipedia.org/wiki/Sulfamic_acid" },
+      { name: "Brenntag, Sulphamic acid", url: "https://www.brenntag.com/en-dk/products/sulphamic-acid.html" },
+      { name: "Metoree, Sulfamic acid manufacturers", url: "https://us.metoree.com/categories/6319/" },
     ],
   },
 
@@ -1290,9 +1290,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Theophylline manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/theophylline" },
-      { name: "BASF Pharma: APIs", url: "https://pharmaceutical.basf.com/global/en/pharma-solutions/platforms/apis" },
-      { name: "Pharmaoffer: Theophylline API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/bronchodilators/theophylline" },
+      { name: "PharmaCompass, Theophylline manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/theophylline" },
+      { name: "BASF Pharma, APIs", url: "https://pharmaceutical.basf.com/global/en/pharma-solutions/platforms/apis" },
+      { name: "Pharmaoffer, Theophylline API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/bronchodilators/theophylline" },
     ],
   },
 
@@ -1314,9 +1314,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Diclofenac sodium manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/diclofenac-sodium-5018304" },
-      { name: "Procurement Resource: Diclofenac sodium process", url: "https://www.procurementresource.com/reports/diclofenac-sodium-manufacturing-plant-project-report" },
-      { name: "Elam Pharma: Diclofenac", url: "https://www.elampharma.com/product/diclofenac-sodium-ip-bp" },
+      { name: "PharmaCompass, Diclofenac sodium manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/diclofenac-sodium-5018304" },
+      { name: "Procurement Resource, Diclofenac sodium process", url: "https://www.procurementresource.com/reports/diclofenac-sodium-manufacturing-plant-project-report" },
+      { name: "Elam Pharma, Diclofenac", url: "https://www.elampharma.com/product/diclofenac-sodium-ip-bp" },
     ],
   },
 
@@ -1338,9 +1338,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "Pipeline Pharma: Gabapentin manufacturing process", url: "https://www.pipelinepharma.com/blog/understanding-the-gabapentin-manufacturing-process" },
-      { name: "Google Patents: Industrial-scale gabapentin", url: "https://patents.google.com/patent/US7442834B2/en" },
-      { name: "IOLCP: Gabapentin API", url: "https://www.iolcp.com/gabapentin" },
+      { name: "Pipeline Pharma, Gabapentin manufacturing process", url: "https://www.pipelinepharma.com/blog/understanding-the-gabapentin-manufacturing-process" },
+      { name: "Google Patents, Industrial-scale gabapentin", url: "https://patents.google.com/patent/US7442834B2/en" },
+      { name: "IOLCP, Gabapentin API", url: "https://www.iolcp.com/gabapentin" },
     ],
   },
 
@@ -1362,9 +1362,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Cetirizine dihydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/cetirizine-dihydrochloride" },
-      { name: "Dr. Reddy's: Cetirizine dihydrochloride API", url: "https://api.drreddys.com/product/cetirizine-dihydrochloride" },
-      { name: "Pharmaoffer: Cetirizine dihydrochloride suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/cetirizine-dihydrochloride" },
+      { name: "PharmaCompass, Cetirizine dihydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/cetirizine-dihydrochloride" },
+      { name: "Dr. Reddy's, Cetirizine dihydrochloride API", url: "https://api.drreddys.com/product/cetirizine-dihydrochloride" },
+      { name: "Pharmaoffer, Cetirizine dihydrochloride suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/cetirizine-dihydrochloride" },
     ],
   },
 
@@ -1386,9 +1386,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hovione", url: "https://www.hovione.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Ketoconazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ketoconazole" },
-      { name: "IMARC: Ketoconazole manufacturing", url: "https://www.imarcgroup.com/ketoconazole-manufacturing-plant-project-report" },
-      { name: "DrugPatentWatch: Ketoconazole API sources", url: "https://www.drugpatentwatch.com/p/bulk-api/KETOCONAZOLE" },
+      { name: "PharmaCompass, Ketoconazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ketoconazole" },
+      { name: "IMARC, Ketoconazole manufacturing", url: "https://www.imarcgroup.com/ketoconazole-manufacturing-plant-project-report" },
+      { name: "DrugPatentWatch, Ketoconazole API sources", url: "https://www.drugpatentwatch.com/p/bulk-api/KETOCONAZOLE" },
     ],
   },
 
@@ -1411,9 +1411,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Laurus Labs", url: "https://www.lauruslabs.com" },
     ],
     sources: [
-      { name: "ACS OPRD: Economical route to lamivudine", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.0c00083" },
-      { name: "Medicines4All: 3TC process (PDF)", url: "https://medicines4all.vcu.edu/media/medicines4all/assets/documents/3TC%20PDR_vFinal-1.pdf" },
-      { name: "PharmaCompass: Lamivudine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/lamivudine" },
+      { name: "ACS OPRD, Economical route to lamivudine", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.0c00083" },
+      { name: "Medicines4All, 3TC process (PDF)", url: "https://medicines4all.vcu.edu/media/medicines4all/assets/documents/3TC%20PDR_vFinal-1.pdf" },
+      { name: "PharmaCompass, Lamivudine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/lamivudine" },
     ],
   },
 
@@ -1436,9 +1436,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "ChemAnalyst: Levetiracetam production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/the-production-process-of-levetiracetam-a-technical-insight-into-modern-api-38886" },
-      { name: "ScienceDirect: Levetiracetam overview", url: "https://www.sciencedirect.com/topics/chemistry/levetiracetam" },
-      { name: "ChemAnalyst: Levetiracetam supply chain", url: "https://www.chemanalyst.com/Blogs/decoding-the-levetiracetam-supply-chain-from-raw-material-to-global-distribution-58" },
+      { name: "ChemAnalyst, Levetiracetam production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/the-production-process-of-levetiracetam-a-technical-insight-into-modern-api-38886" },
+      { name: "ScienceDirect, Levetiracetam overview", url: "https://www.sciencedirect.com/topics/chemistry/levetiracetam" },
+      { name: "ChemAnalyst, Levetiracetam supply chain", url: "https://www.chemanalyst.com/Blogs/decoding-the-levetiracetam-supply-chain-from-raw-material-to-global-distribution-58" },
     ],
   },
 
@@ -1459,9 +1459,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hikal", url: "https://www.hikal.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Sulbactam sodium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulbactam-sodium" },
-      { name: "Google Patents: Penicillanic acid compounds", url: "https://patents.google.com/patent/US4942229A/en" },
-      { name: "Pharmaoffer: Sulbactam API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/beta-lactamase-inhibitors/sulbactam" },
+      { name: "PharmaCompass, Sulbactam sodium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulbactam-sodium" },
+      { name: "Google Patents, Penicillanic acid compounds", url: "https://patents.google.com/patent/US4942229A/en" },
+      { name: "Pharmaoffer, Sulbactam API suppliers", url: "https://pharmaoffer.com/api-excipient-supplier/beta-lactamase-inhibitors/sulbactam" },
     ],
   },
 
@@ -1482,9 +1482,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Roquette", url: "https://www.roquette.com" },
     ],
     sources: [
-      { name: "PMC: Gluconic acid by microbial fermentation", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9149244/" },
-      { name: "Google Patents: Preparing calcium gluconate", url: "https://patents.google.com/patent/US7618664B2/en" },
-      { name: "Mordor Intelligence: Calcium gluconate market", url: "https://www.mordorintelligence.com/industry-reports/calcium-gluconate-market" },
+      { name: "PMC, Gluconic acid by microbial fermentation", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9149244/" },
+      { name: "Google Patents, Preparing calcium gluconate", url: "https://patents.google.com/patent/US7618664B2/en" },
+      { name: "Mordor Intelligence, Calcium gluconate market", url: "https://www.mordorintelligence.com/industry-reports/calcium-gluconate-market" },
     ],
   },
 
@@ -1506,9 +1506,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Cargill: Mannitol", url: "https://www.cargill.com/pharmaceutical/pharma-products/mannitol" },
-      { name: "ResearchGate: Production methods of D-mannitol", url: "https://www.researchgate.net/publication/230122916_Production_Methods_of_D-Mannitol" },
-      { name: "Across Biotech: Key mannitol manufacturers", url: "https://acrossbiotech.com/key-manufacturers-of-mannitol/" },
+      { name: "Cargill, Mannitol", url: "https://www.cargill.com/pharmaceutical/pharma-products/mannitol" },
+      { name: "ResearchGate, Production methods of D-mannitol", url: "https://www.researchgate.net/publication/230122916_Production_Methods_of_D-Mannitol" },
+      { name: "Across Biotech, Key mannitol manufacturers", url: "https://acrossbiotech.com/key-manufacturers-of-mannitol/" },
     ],
   },
 
@@ -1532,9 +1532,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Weifang Ensign Industry", url: "https://www.ensign-ind.com" },
     ],
     sources: [
-      { name: "PMC: Citric acid production by A. niger", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11956825/" },
-      { name: "MDPI Life: Citric acid via A. niger fermentation", url: "https://www.mdpi.com/2075-1729/14/6/756" },
-      { name: "IMARC / AdPand: Top citric acid manufacturers", url: "https://www.adpand.com/top-10-citric-acid-manufacturers-in-the-world-imarc-group/" },
+      { name: "PMC, Citric acid production by A. niger", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11956825/" },
+      { name: "MDPI Life, Citric acid via A. niger fermentation", url: "https://www.mdpi.com/2075-1729/14/6/756" },
+      { name: "IMARC / AdPand, Top citric acid manufacturers", url: "https://www.adpand.com/top-10-citric-acid-manufacturers-in-the-world-imarc-group/" },
     ],
   },
 
@@ -1555,9 +1555,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Takasago International", url: "https://www.takasago.com" },
     ],
     sources: [
-      { name: "Wiley FFJ: Industrial synthesis of (−)-menthol", url: "https://onlinelibrary.wiley.com/doi/full/10.1002/ffj.3699" },
-      { name: "Chemistry LibreTexts: Strategies in (−)-menthol synthesis", url: "https://chem.libretexts.org/Bookshelves/Organic_Chemistry/Logic_of_Organic_Synthesis_(Rao)/06:_Strategies_in_(-)-Menthol_Synthesis" },
-      { name: "Outsourcing-Pharma: BASF synthetic menthol", url: "https://www.outsourcing-pharma.com/Article/2011/11/08/BASF-to-enter-synthetic-menthol-market-in-2012/" },
+      { name: "Wiley FFJ, Industrial synthesis of (−)-menthol", url: "https://onlinelibrary.wiley.com/doi/full/10.1002/ffj.3699" },
+      { name: "Chemistry LibreTexts, Strategies in (−)-menthol synthesis", url: "https://chem.libretexts.org/Bookshelves/Organic_Chemistry/Logic_of_Organic_Synthesis_(Rao)/06:_Strategies_in_(-)-Menthol_Synthesis" },
+      { name: "Outsourcing-Pharma, BASF synthetic menthol", url: "https://www.outsourcing-pharma.com/Article/2011/11/08/BASF-to-enter-synthetic-menthol-market-in-2012/" },
     ],
   },
 
@@ -1580,9 +1580,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Intratec: DL-methionine from acrolein/MeSH/HCN (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/methionine-e41a-b.pdf" },
-      { name: "Thunen Institute: Methionine production review (PDF)", url: "https://literatur.thuenen.de/digbib_extern/dn054249.pdf" },
-      { name: "Across Biotech: Methionine manufacturers", url: "https://acrossbiotech.com/methionine-manufacturers-and-production-methods/" },
+      { name: "Intratec, DL-methionine from acrolein/MeSH/HCN (PDF)", url: "https://cdn.intratec.us/docs/reports/previews/methionine-e41a-b.pdf" },
+      { name: "Thunen Institute, Methionine production review (PDF)", url: "https://literatur.thuenen.de/digbib_extern/dn054249.pdf" },
+      { name: "Across Biotech, Methionine manufacturers", url: "https://acrossbiotech.com/methionine-manufacturers-and-production-methods/" },
     ],
   },
 
@@ -1604,9 +1604,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Meihua Holdings Group", url: "https://www.meihuagrp.com" },
     ],
     sources: [
-      { name: "ScienceDirect: L-lysine in C. glutamicum", url: "https://www.sciencedirect.com/science/article/pii/S0944501322001410" },
-      { name: "Ande Group: Industrial lysine fermentation", url: "https://www.myandegroup.com/blog/industrial-lysine-fermentation-process" },
-      { name: "Fortune Business Insights: Lysine market", url: "https://www.fortunebusinessinsights.com/lysine-market-109615" },
+      { name: "ScienceDirect, L-lysine in C. glutamicum", url: "https://www.sciencedirect.com/science/article/pii/S0944501322001410" },
+      { name: "Ande Group, Industrial lysine fermentation", url: "https://www.myandegroup.com/blog/industrial-lysine-fermentation-process" },
+      { name: "Fortune Business Insights, Lysine market", url: "https://www.fortunebusinessinsights.com/lysine-market-109615" },
     ],
   },
 
@@ -1628,9 +1628,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cargill", url: "https://www.cargill.com" },
     ],
     sources: [
-      { name: "ChemFYI: MSG production by fermentation", url: "https://chemfyi.com/application/monosodium-glutamate-msg-production-by-fermentation/" },
-      { name: "The Science Notes: MSG production", url: "https://thesciencenotes.com/monosodium-glutamate-msg-history-structure-properties-production-effects/" },
-      { name: "Mordor Intelligence: MSG companies", url: "https://www.mordorintelligence.com/industry-reports/monosodium-glutamate-msg-market/companies" },
+      { name: "ChemFYI, MSG production by fermentation", url: "https://chemfyi.com/application/monosodium-glutamate-msg-production-by-fermentation/" },
+      { name: "The Science Notes, MSG production", url: "https://thesciencenotes.com/monosodium-glutamate-msg-history-structure-properties-production-effects/" },
+      { name: "Mordor Intelligence, MSG companies", url: "https://www.mordorintelligence.com/industry-reports/monosodium-glutamate-msg-market/companies" },
     ],
   },
 
@@ -1653,9 +1653,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Acme-Hardesty", url: "https://www.acme-hardesty.com" },
     ],
     sources: [
-      { name: "Wilmar: Lauric acid 98%", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
-      { name: "Springer: Palm kernel & coconut oils technology", url: "https://link.springer.com/article/10.1007/BF02543521" },
-      { name: "Future Market Insights: Lauric acid market", url: "https://www.futuremarketinsights.com/reports/lauric-acid-market" },
+      { name: "Wilmar, Lauric acid 98%", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
+      { name: "Springer, Palm kernel & coconut oils technology", url: "https://link.springer.com/article/10.1007/BF02543521" },
+      { name: "Future Market Insights, Lauric acid market", url: "https://www.futuremarketinsights.com/reports/lauric-acid-market" },
     ],
   },
 
@@ -1678,9 +1678,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ADM", url: "https://www.adm.com" },
     ],
     sources: [
-      { name: "LyondellBasell: Propylene glycol industrial", url: "https://www.lyondellbasell.com/en/chemicals/p/PROPYLENE-GLYCOL-INDUSTRIAL/723d4ad9-7f19-4bea-ae6b-59f521c7c97e" },
-      { name: "Mordor Intelligence: Propylene glycol market", url: "https://www.mordorintelligence.com/industry-reports/propylene-glycol-market" },
-      { name: "iScience: Renewable propylene glycol", url: "https://www.cell.com/iscience/fulltext/S2589-0042(22)01175-0" },
+      { name: "LyondellBasell, Propylene glycol industrial", url: "https://www.lyondellbasell.com/en/chemicals/p/PROPYLENE-GLYCOL-INDUSTRIAL/723d4ad9-7f19-4bea-ae6b-59f521c7c97e" },
+      { name: "Mordor Intelligence, Propylene glycol market", url: "https://www.mordorintelligence.com/industry-reports/propylene-glycol-market" },
+      { name: "iScience, Renewable propylene glycol", url: "https://www.cell.com/iscience/fulltext/S2589-0042(22)01175-0" },
     ],
   },
 
@@ -1703,9 +1703,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PetroChina (CNPC)", url: "https://www.petrochina.com.cn" },
     ],
     sources: [
-      { name: "INEOS Nitriles: Speciality nitriles", url: "https://www.ineos.com/businesses/ineos-nitriles/products/speciality-nitriles/" },
-      { name: "Nova Molecular: Acetonitrile market", url: "https://novamolecular.com/nova-molecular-technologies-major-player-acetonitrile-market/" },
-      { name: "Coherent Market Insights: Acetonitrile companies", url: "https://www.coherentmarketinsights.com/blog/insights/major-companies-acetonitrile-industry-1032" },
+      { name: "INEOS Nitriles, Speciality nitriles", url: "https://www.ineos.com/businesses/ineos-nitriles/products/speciality-nitriles/" },
+      { name: "Nova Molecular, Acetonitrile market", url: "https://novamolecular.com/nova-molecular-technologies-major-player-acetonitrile-market/" },
+      { name: "Coherent Market Insights, Acetonitrile companies", url: "https://www.coherentmarketinsights.com/blog/insights/major-companies-acetonitrile-industry-1032" },
     ],
   },
 
@@ -1726,9 +1726,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Siddharth Carbochem Products", url: "https://www.siddharthcarbochem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Kolbe-Schmitt reaction", url: "https://en.wikipedia.org/wiki/Kolbe%E2%80%93Schmitt_reaction" },
-      { name: "MDPI Molecules: Kolbe-Schmitt salicylic acid", url: "https://www.mdpi.com/1420-3049/29/11/2527" },
-      { name: "ChemAnalyst: Aspirin/salicylic acid process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
+      { name: "Wikipedia, Kolbe-Schmitt reaction", url: "https://en.wikipedia.org/wiki/Kolbe%E2%80%93Schmitt_reaction" },
+      { name: "MDPI Molecules, Kolbe-Schmitt salicylic acid", url: "https://www.mdpi.com/1420-3049/29/11/2527" },
+      { name: "ChemAnalyst, Aspirin/salicylic acid process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
     ],
   },
 
@@ -1749,9 +1749,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kadillac Chemicals", url: "https://www.kadillacchemicals.com" },
     ],
     sources: [
-      { name: "Grand View Research: Benzaldehyde market", url: "https://www.grandviewresearch.com/industry-analysis/benzaldehyde-market-report" },
-      { name: "C&EN: Lanxess acquires Emerald Kalama", url: "https://cen.acs.org/business/specialty-chemicals/Lanxess-acquire-US-firm-Emerald/99/web/2021/02" },
-      { name: "Google Patents: Benzaldehyde by toluene air oxidation", url: "https://patents.google.com/patent/US6495726B1/en" },
+      { name: "Grand View Research, Benzaldehyde market", url: "https://www.grandviewresearch.com/industry-analysis/benzaldehyde-market-report" },
+      { name: "C&EN, Lanxess acquires Emerald Kalama", url: "https://cen.acs.org/business/specialty-chemicals/Lanxess-acquire-US-firm-Emerald/99/web/2021/02" },
+      { name: "Google Patents, Benzaldehyde by toluene air oxidation", url: "https://patents.google.com/patent/US6495726B1/en" },
     ],
   },
 
@@ -1770,9 +1770,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Naphthalene-2-sulfonic acid", url: "https://en.wikipedia.org/wiki/Naphthalene-2-sulfonic_acid" },
-      { name: "IMARC: Beta-naphthol manufacturing", url: "https://www.imarcgroup.com/beta-naphthol-manufacturing-plant-project-report" },
-      { name: "ChemicalBook: Applications of 2-naphthol", url: "https://www.chemicalbook.com/article/different-applications-of-2-naphthol.htm" },
+      { name: "Wikipedia, Naphthalene-2-sulfonic acid", url: "https://en.wikipedia.org/wiki/Naphthalene-2-sulfonic_acid" },
+      { name: "IMARC, Beta-naphthol manufacturing", url: "https://www.imarcgroup.com/beta-naphthol-manufacturing-plant-project-report" },
+      { name: "ChemicalBook, Applications of 2-naphthol", url: "https://www.chemicalbook.com/article/different-applications-of-2-naphthol.htm" },
     ],
   },
 
@@ -1793,9 +1793,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mississippi Silicon", url: "https://www.mississippisilicon.com" },
     ],
     sources: [
-      { name: "Elkem: From quartz to silicon to silicones", url: "https://magazine.elkem.com/material-science-insights/from-quartz-to-silicon-to-silicones/" },
-      { name: "Ferroglobe: Silicon metal", url: "https://www.ferroglobe.com/solutions/silicon-metal" },
-      { name: "USGS: Silicon 2020 minerals yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2020/myb1-2020-silicon.pdf" },
+      { name: "Elkem, From quartz to silicon to silicones", url: "https://magazine.elkem.com/material-science-insights/from-quartz-to-silicon-to-silicones/" },
+      { name: "Ferroglobe, Silicon metal", url: "https://www.ferroglobe.com/solutions/silicon-metal" },
+      { name: "USGS, Silicon 2020 minerals yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2020/myb1-2020-silicon.pdf" },
     ],
   },
 
@@ -1816,9 +1816,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "TETRA Technologies: Calcium chloride", url: "https://onetetra.com/industrial-chemicals/calcium-chloride/" },
-      { name: "USDA: Calcium chloride technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2024TechnicalReportCalciumChlorideHandling.pdf" },
-      { name: "Merchant Research: Calcium chloride market", url: "https://mcgroup.co.uk/news/20250116/calcium-chloride-navigating-major-applications-and-market-trends.html" },
+      { name: "TETRA Technologies, Calcium chloride", url: "https://onetetra.com/industrial-chemicals/calcium-chloride/" },
+      { name: "USDA, Calcium chloride technical report (PDF)", url: "https://www.ams.usda.gov/sites/default/files/media/2024TechnicalReportCalciumChlorideHandling.pdf" },
+      { name: "Merchant Research, Calcium chloride market", url: "https://mcgroup.co.uk/news/20250116/calcium-chloride-navigating-major-applications-and-market-trends.html" },
     ],
   },
 
@@ -1840,9 +1840,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sulfozyme Agro", url: "https://sulfozyme.com" },
     ],
     sources: [
-      { name: "Metoree: Copper sulfate manufacturers", url: "https://us.metoree.com/categories/6720/" },
-      { name: "Anmol Chemicals: Copper sulphate", url: "https://anmolchemicals.org/sc-copper-sulphate-pentahydrate.php" },
-      { name: "Norkem: Copper sulphate", url: "https://norkem.com/products/copper-sulphate" },
+      { name: "Metoree, Copper sulfate manufacturers", url: "https://us.metoree.com/categories/6720/" },
+      { name: "Anmol Chemicals, Copper sulphate", url: "https://anmolchemicals.org/sc-copper-sulphate-pentahydrate.php" },
+      { name: "Norkem, Copper sulphate", url: "https://norkem.com/products/copper-sulphate" },
     ],
   },
 
@@ -1864,9 +1864,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tosoh Silica", url: "https://www.tosoh.com" },
     ],
     sources: [
-      { name: "Verified Market Research: Top precipitated silica makers", url: "https://www.verifiedmarketresearch.com/blog/top-precipitated-silica-manufacturers/" },
-      { name: "MarketsandMarkets: Precipitated silica companies", url: "https://www.marketsandmarkets.com/ResearchInsight/precipitated-silica-market.asp" },
-      { name: "Mordor Intelligence: Precipitated silica market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-silica-market" },
+      { name: "Verified Market Research, Top precipitated silica makers", url: "https://www.verifiedmarketresearch.com/blog/top-precipitated-silica-manufacturers/" },
+      { name: "MarketsandMarkets, Precipitated silica companies", url: "https://www.marketsandmarkets.com/ResearchInsight/precipitated-silica-market.asp" },
+      { name: "Mordor Intelligence, Precipitated silica market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-silica-market" },
     ],
   },
 
@@ -1888,9 +1888,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chalco (Aluminum Corp. of China)", url: "https://www.chalco.com.cn" },
     ],
     sources: [
-      { name: "Aluminium Guide: Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
-      { name: "Almatis: Our story", url: "https://www.almatis.com/en/about-us/our-story" },
-      { name: "KMT Industrial: Aluminium hydroxide manufacturers", url: "https://www.kmtindustrial.com/top-aluminum-hydroxide-manufacturers/" },
+      { name: "Aluminium Guide, Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
+      { name: "Almatis, Our story", url: "https://www.almatis.com/en/about-us/our-story" },
+      { name: "KMT Industrial, Aluminium hydroxide manufacturers", url: "https://www.kmtindustrial.com/top-aluminum-hydroxide-manufacturers/" },
     ],
   },
 
@@ -1910,9 +1910,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sundow Polymers", url: "https://www.sundow.com" },
     ],
     sources: [
-      { name: "Wikipedia: Azodicarbonamide", url: "https://en.wikipedia.org/wiki/Azodicarbonamide" },
-      { name: "Otsuka Chemical: Unifoam AZ blowing agent", url: "https://www.otsukac.co.jp/en/products/cat-hydrazine-derivative/blendtype-fa.html" },
-      { name: "NBINNO: Azodicarbonamide production & uses", url: "https://www.nbinno.com/article/blowing-agents/deep-dive-azodicarbonamide-properties-production-uses-nw" },
+      { name: "Wikipedia, Azodicarbonamide", url: "https://en.wikipedia.org/wiki/Azodicarbonamide" },
+      { name: "Otsuka Chemical, Unifoam AZ blowing agent", url: "https://www.otsukac.co.jp/en/products/cat-hydrazine-derivative/blendtype-fa.html" },
+      { name: "NBINNO, Azodicarbonamide production & uses", url: "https://www.nbinno.com/article/blowing-agents/deep-dive-azodicarbonamide-properties-production-uses-nw" },
     ],
   },
 
@@ -1934,9 +1934,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Formosa Chemicals & Fibre", url: "https://www.fcfc.com.tw" },
     ],
     sources: [
-      { name: "INEOS: Purified isophthalic acid", url: "https://www.ineos.com/businesses/ineos-enterprises/businesses/ineos-joliet/products/purified-isophthalic-acid/" },
-      { name: "Transparency Market Research: PIA market", url: "https://www.transparencymarketresearch.com/purified-isophthalic-acid-market.html" },
-      { name: "Procurement Resource: PIA process", url: "https://www.procurementresource.com/reports/purified-isophthalic-acid-pia-manufacturing-plant-project-report" },
+      { name: "INEOS, Purified isophthalic acid", url: "https://www.ineos.com/businesses/ineos-enterprises/businesses/ineos-joliet/products/purified-isophthalic-acid/" },
+      { name: "Transparency Market Research, PIA market", url: "https://www.transparencymarketresearch.com/purified-isophthalic-acid-market.html" },
+      { name: "Procurement Resource, PIA process", url: "https://www.procurementresource.com/reports/purified-isophthalic-acid-pia-manufacturing-plant-project-report" },
     ],
   },
 
@@ -1959,9 +1959,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Wanhua Chemical", url: "https://www.wanhuachemical.com" },
     ],
     sources: [
-      { name: "Google Patents: Polyether polyol via DMC catalyst", url: "https://patents.google.com/patent/US20180237587A1/en" },
-      { name: "BASF: Polyether polyols (patent)", url: "https://www.freepatentsonline.com/y2011/0269863.html" },
-      { name: "Google Patents: DMC catalysts", url: "https://patents.google.com/patent/US5627120A/en" },
+      { name: "Google Patents, Polyether polyol via DMC catalyst", url: "https://patents.google.com/patent/US20180237587A1/en" },
+      { name: "BASF, Polyether polyols (patent)", url: "https://www.freepatentsonline.com/y2011/0269863.html" },
+      { name: "Google Patents, DMC catalysts", url: "https://patents.google.com/patent/US5627120A/en" },
     ],
   },
 
@@ -1981,9 +1981,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Anmol Chemicals Group", url: "https://www.anmolchemicals.org" },
     ],
     sources: [
-      { name: "ChemicalBook: Sodium nitrite", url: "https://www.chemicalbook.com/article/sodium-nitrite-an-all-rounder-with-good-and-evil.htm" },
-      { name: "BASF Inorganics: Nitrogen salts", url: "https://inorganics.basf.com/products/nitrogen-salts" },
-      { name: "Google Patents: Production of sodium nitrite", url: "https://patents.google.com/patent/US2032699A/en" },
+      { name: "ChemicalBook, Sodium nitrite", url: "https://www.chemicalbook.com/article/sodium-nitrite-an-all-rounder-with-good-and-evil.htm" },
+      { name: "BASF Inorganics, Nitrogen salts", url: "https://inorganics.basf.com/products/nitrogen-salts" },
+      { name: "Google Patents, Production of sodium nitrite", url: "https://patents.google.com/patent/US2032699A/en" },
     ],
   },
 
@@ -2002,9 +2002,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jubilant Ingrevia", url: "https://www.jubilantingrevia.com" },
     ],
     sources: [
-      { name: "Wikipedia: 3-Methylpyridine", url: "https://en.wikipedia.org/wiki/3-Methylpyridine" },
-      { name: "S&P Global: Pyridines CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0325_Global_CEH_Pyridines_Abstract.pdf" },
-      { name: "Google Patents: Synthesis of 3-methylpyridine", url: "https://patents.google.com/patent/US9701634B2/en" },
+      { name: "Wikipedia, 3-Methylpyridine", url: "https://en.wikipedia.org/wiki/3-Methylpyridine" },
+      { name: "S&P Global, Pyridines CEH abstract (PDF)", url: "https://www.spglobal.com/content/dam/spglobal/ci/en/documents/products/pdf/CI_0325_Global_CEH_Pyridines_Abstract.pdf" },
+      { name: "Google Patents, Synthesis of 3-methylpyridine", url: "https://patents.google.com/patent/US9701634B2/en" },
     ],
   },
 
@@ -2025,9 +2025,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tronox Holdings", url: "https://www.tronox.com" },
     ],
     sources: [
-      { name: "Mordor Intelligence: EMD market", url: "https://www.mordorintelligence.com/industry-reports/electrolytic-manganese-dioxide-market" },
-      { name: "Tosoh: Battery materials", url: "https://www.tosoh.com/our-products/advanced-materials" },
-      { name: "SkyQuest: EMD companies", url: "https://www.skyquestt.com/report/electrolytic-manganese-dioxide-market/companies" },
+      { name: "Mordor Intelligence, EMD market", url: "https://www.mordorintelligence.com/industry-reports/electrolytic-manganese-dioxide-market" },
+      { name: "Tosoh, Battery materials", url: "https://www.tosoh.com/our-products/advanced-materials" },
+      { name: "SkyQuest, EMD companies", url: "https://www.skyquestt.com/report/electrolytic-manganese-dioxide-market/companies" },
     ],
   },
 
@@ -2049,9 +2049,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Reliance Industries", url: "https://www.ril.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ethylene glycol (glycols co-products)", url: "https://en.wikipedia.org/wiki/Ethylene_glycol" },
-      { name: "Solventis: Diethylene glycol", url: "https://solventis.net/products/glycols/diethylene-glycol/" },
-      { name: "ScienceDirect: EO hydration to MEG", url: "https://www.sciencedirect.com/science/article/abs/pii/S0920586107001149" },
+      { name: "Wikipedia, Ethylene glycol (glycols co-products)", url: "https://en.wikipedia.org/wiki/Ethylene_glycol" },
+      { name: "Solventis, Diethylene glycol", url: "https://solventis.net/products/glycols/diethylene-glycol/" },
+      { name: "ScienceDirect, EO hydration to MEG", url: "https://www.sciencedirect.com/science/article/abs/pii/S0920586107001149" },
     ],
   },
 
@@ -2070,9 +2070,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong Xinhua Pharmaceutical", url: "https://www.xinhuapharm.com" },
     ],
     sources: [
-      { name: "Wikipedia: Methyl salicylate", url: "https://en.wikipedia.org/wiki/Methyl_salicylate" },
-      { name: "Britannica: Methyl salicylate", url: "https://www.britannica.com/science/methyl-salicylate" },
-      { name: "ChemicalBook: Methyl salicylate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8491046.htm" },
+      { name: "Wikipedia, Methyl salicylate", url: "https://en.wikipedia.org/wiki/Methyl_salicylate" },
+      { name: "Britannica, Methyl salicylate", url: "https://www.britannica.com/science/methyl-salicylate" },
+      { name: "ChemicalBook, Methyl salicylate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8491046.htm" },
     ],
   },
 
@@ -2092,9 +2092,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Aarti Industries: Ortho Toluidine", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/hydrogenation/ortho-toluidine-ot" },
-      { name: "NCBI: ortho-Toluidine", url: "https://www.ncbi.nlm.nih.gov/books/NBK390860/" },
-      { name: "Metoree: Toluidine manufacturers", url: "https://us.metoree.com/categories/6373/" },
+      { name: "Aarti Industries, Ortho Toluidine", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/hydrogenation/ortho-toluidine-ot" },
+      { name: "NCBI, ortho-Toluidine", url: "https://www.ncbi.nlm.nih.gov/books/NBK390860/" },
+      { name: "Metoree, Toluidine manufacturers", url: "https://us.metoree.com/categories/6373/" },
     ],
   },
 
@@ -2113,9 +2113,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "Wikipedia: Dimethyl sulfate", url: "https://en.wikipedia.org/wiki/Dimethyl_sulfate" },
-      { name: "INCHEM: Dimethyl sulfate (EHC 48)", url: "https://www.inchem.org/documents/ehc/ehc/ehc48.htm" },
-      { name: "Metoree: Dimethyl sulfate manufacturers", url: "https://us.metoree.com/categories/7132/" },
+      { name: "Wikipedia, Dimethyl sulfate", url: "https://en.wikipedia.org/wiki/Dimethyl_sulfate" },
+      { name: "INCHEM, Dimethyl sulfate (EHC 48)", url: "https://www.inchem.org/documents/ehc/ehc/ehc48.htm" },
+      { name: "Metoree, Dimethyl sulfate manufacturers", url: "https://us.metoree.com/categories/7132/" },
     ],
   },
 
@@ -2135,9 +2135,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Ingevity", url: "https://www.ingevity.com" },
     ],
     sources: [
-      { name: "Grand View Research: Crude sulfate turpentine market", url: "https://www.grandviewresearch.com/industry-analysis/crude-sulfate-turpentine-market" },
-      { name: "Future Market Insights: Crude sulfate turpentine", url: "https://www.futuremarketinsights.com/reports/crude-sulfate-turpentine-market" },
-      { name: "FactMR: Crude sulfate turpentine market", url: "https://www.factmr.com/report/4435/crude-sulfate-turpentine-market" },
+      { name: "Grand View Research, Crude sulfate turpentine market", url: "https://www.grandviewresearch.com/industry-analysis/crude-sulfate-turpentine-market" },
+      { name: "Future Market Insights, Crude sulfate turpentine", url: "https://www.futuremarketinsights.com/reports/crude-sulfate-turpentine-market" },
+      { name: "FactMR, Crude sulfate turpentine market", url: "https://www.factmr.com/report/4435/crude-sulfate-turpentine-market" },
     ],
   },
 
@@ -2157,9 +2157,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Magris Performance Materials (Niobec)", url: "https://www.magrispm.com" },
     ],
     sources: [
-      { name: "Wikipedia: CBMM", url: "https://en.wikipedia.org/wiki/Companhia_Brasileira_de_Metalurgia_e_Minera%C3%A7%C3%A3o" },
-      { name: "USGS: Niobium 2018 yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2018/myb1-2018-niobium.pdf" },
-      { name: "niobium.tech: Mining & ferroniobium at CBMM (PDF)", url: "https://niobium.tech/-/media/niobiumtech/attachments-biblioteca-tecnica/nt_mining-ore-preparation-and-ferroniobium-production-at-cbmm.pdf" },
+      { name: "Wikipedia, CBMM", url: "https://en.wikipedia.org/wiki/Companhia_Brasileira_de_Metalurgia_e_Minera%C3%A7%C3%A3o" },
+      { name: "USGS, Niobium 2018 yearbook (PDF)", url: "https://pubs.usgs.gov/myb/vol1/2018/myb1-2018-niobium.pdf" },
+      { name: "niobium.tech, Mining & ferroniobium at CBMM (PDF)", url: "https://niobium.tech/-/media/niobiumtech/attachments-biblioteca-tecnica/nt_mining-ore-preparation-and-ferroniobium-production-at-cbmm.pdf" },
     ],
   },
 
@@ -2179,9 +2179,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Searles Valley Minerals", url: "https://www.svminerals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Eti Maden", url: "https://en.wikipedia.org/wiki/Eti_Maden" },
-      { name: "Borates Today: Boron mining processes", url: "https://borates.today/boron-mining-processes/" },
-      { name: "Sinopeakchem: Borax pentahydrate guide", url: "https://www.sinopeakchem.com/en/blog/borax-pentahydrate-guide" },
+      { name: "Wikipedia, Eti Maden", url: "https://en.wikipedia.org/wiki/Eti_Maden" },
+      { name: "Borates Today, Boron mining processes", url: "https://borates.today/boron-mining-processes/" },
+      { name: "Sinopeakchem, Borax pentahydrate guide", url: "https://www.sinopeakchem.com/en/blog/borax-pentahydrate-guide" },
     ],
   },
 
@@ -2201,9 +2201,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Khonor Chemicals", url: "https://www.khonorchem.com" },
     ],
     sources: [
-      { name: "GJ Phosphate: Food-grade MCP manufacturing", url: "https://www.gjphosphate.com/food-grade-monocalcium-phosphate-mcp/" },
-      { name: "Simplot: Livestock feed ingredients", url: "https://www.simplot.com/livestock/feed-ingredients" },
-      { name: "Google Patents: MCP leavening acid", url: "https://patents.google.com/patent/US5667836A/en" },
+      { name: "GJ Phosphate, Food-grade MCP manufacturing", url: "https://www.gjphosphate.com/food-grade-monocalcium-phosphate-mcp/" },
+      { name: "Simplot, Livestock feed ingredients", url: "https://www.simplot.com/livestock/feed-ingredients" },
+      { name: "Google Patents, MCP leavening acid", url: "https://patents.google.com/patent/US5667836A/en" },
     ],
   },
 
@@ -2225,9 +2225,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aditya Birla Chemicals", url: "https://www.adityabirlachemicals.com" },
     ],
     sources: [
-      { name: "US EPA: Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
-      { name: "Biology Insights: Wet vs thermal phosphoric acid", url: "https://biologyinsights.com/how-is-phosphoric-acid-made-wet-vs-thermal-process/" },
-      { name: "ICL: Phosphoric acid for chemical manufacturing", url: "https://www.icl-group.com/our-business/industrial/phosphoric-acid-chemical-manufacturing/" },
+      { name: "US EPA, Phosphoric acid (AP-42 §8.9)", url: "https://www.epa.gov/sites/default/files/2020-09/documents/8.9_phosphoric_acid.pdf" },
+      { name: "Biology Insights, Wet vs thermal phosphoric acid", url: "https://biologyinsights.com/how-is-phosphoric-acid-made-wet-vs-thermal-process/" },
+      { name: "ICL, Phosphoric acid for chemical manufacturing", url: "https://www.icl-group.com/our-business/industrial/phosphoric-acid-chemical-manufacturing/" },
     ],
   },
 
@@ -2248,9 +2248,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kao Corporation", url: "https://www.kao.com" },
     ],
     sources: [
-      { name: "ScienceDirect: Amination of 1-octanol", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926860X9900054X" },
-      { name: "Wiley: Catalytic approaches to fatty amines", url: "https://onlinelibrary.wiley.com/doi/10.1002/tcr.202500225" },
-      { name: "Google Patents: Synthesis of n-octylamine", url: "https://patents.google.com/patent/CN103664633A/en" },
+      { name: "ScienceDirect, Amination of 1-octanol", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926860X9900054X" },
+      { name: "Wiley, Catalytic approaches to fatty amines", url: "https://onlinelibrary.wiley.com/doi/10.1002/tcr.202500225" },
+      { name: "Google Patents, Synthesis of n-octylamine", url: "https://patents.google.com/patent/CN103664633A/en" },
     ],
   },
 
@@ -2269,9 +2269,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Emco Dyestuff", url: "https://emcochemicals.com" },
     ],
     sources: [
-      { name: "Google Patents: p-Toluenesulfonamide by direct amidation", url: "https://patents.google.com/patent/CN104945288A/en" },
-      { name: "Emco Chemicals: Para-toluenesulfonamide (PTSA)", url: "https://emcochemicals.com/para-toluenesulfonamide-ptsa/" },
-      { name: "ChemBK: p-Toluenesulfonamide", url: "https://www.chembk.com/en/chem/p-Toluenesulfonamide" },
+      { name: "Google Patents, p-Toluenesulfonamide by direct amidation", url: "https://patents.google.com/patent/CN104945288A/en" },
+      { name: "Emco Chemicals, Para-toluenesulfonamide (PTSA)", url: "https://emcochemicals.com/para-toluenesulfonamide-ptsa/" },
+      { name: "ChemBK, p-Toluenesulfonamide", url: "https://www.chembk.com/en/chem/p-Toluenesulfonamide" },
     ],
   },
 
@@ -2291,9 +2291,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia: 1,2,4-Trichlorobenzene", url: "https://en.wikipedia.org/wiki/1,2,4-Trichlorobenzene" },
-      { name: "Aarti Industries: 1,2,4-TCB", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination/1-2-4-tri-chloro-benzene-(1-2-4-tcb)" },
-      { name: "ATSDR: Trichlorobenzenes production (PDF)", url: "https://www.atsdr.cdc.gov/toxprofiles/tp199-c5.pdf" },
+      { name: "Wikipedia, 1,2,4-Trichlorobenzene", url: "https://en.wikipedia.org/wiki/1,2,4-Trichlorobenzene" },
+      { name: "Aarti Industries, 1,2,4-TCB", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination/1-2-4-tri-chloro-benzene-(1-2-4-tcb)" },
+      { name: "ATSDR, Trichlorobenzenes production (PDF)", url: "https://www.atsdr.cdc.gov/toxprofiles/tp199-c5.pdf" },
     ],
   },
 
@@ -2314,9 +2314,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: 4-Aminophenol", url: "https://en.wikipedia.org/wiki/4-Aminophenol" },
-      { name: "ACS OPRD: PAP from nitrobenzene (Bamberger)", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.7b00354" },
-      { name: "ChemAnalyst: Para-aminophenol market", url: "https://www.chemanalyst.com/industry-report/para-aminophenol-market-3088" },
+      { name: "Wikipedia, 4-Aminophenol", url: "https://en.wikipedia.org/wiki/4-Aminophenol" },
+      { name: "ACS OPRD, PAP from nitrobenzene (Bamberger)", url: "https://pubs.acs.org/doi/10.1021/acs.oprd.7b00354" },
+      { name: "ChemAnalyst, Para-aminophenol market", url: "https://www.chemanalyst.com/industry-report/para-aminophenol-market-3088" },
     ],
   },
 
@@ -2338,9 +2338,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sasol", url: "https://www.sasol.com" },
     ],
     sources: [
-      { name: "Wikipedia: Linear alpha olefin", url: "https://en.wikipedia.org/wiki/Linear_alpha_olefin" },
-      { name: "Chemical Engineering: LAO production profile", url: "https://www.chemengonline.com/technology-profile-production-of-linear-alpha-olefins/" },
-      { name: "Grand View Research: Higher alpha olefins market", url: "https://www.grandviewresearch.com/industry-analysis/higher-alpha-olefins-market-report" },
+      { name: "Wikipedia, Linear alpha olefin", url: "https://en.wikipedia.org/wiki/Linear_alpha_olefin" },
+      { name: "Chemical Engineering, LAO production profile", url: "https://www.chemengonline.com/technology-profile-production-of-linear-alpha-olefins/" },
+      { name: "Grand View Research, Higher alpha olefins market", url: "https://www.grandviewresearch.com/industry-analysis/higher-alpha-olefins-market-report" },
     ],
   },
 
@@ -2362,9 +2362,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "KH Neochem", url: "https://www.khneochem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Hydroformylation", url: "https://en.wikipedia.org/wiki/Hydroformylation" },
-      { name: "The Chemical Company: Isotridecyl alcohol", url: "https://thechemco.com/isotridecyl-alcohol-uses-applications/" },
-      { name: "Johnson Matthey: LP Oxo alcohols technology", url: "https://matthey.com/products-and-markets/chemicals/process-licensing/oxo-alcohols-process" },
+      { name: "Wikipedia, Hydroformylation", url: "https://en.wikipedia.org/wiki/Hydroformylation" },
+      { name: "The Chemical Company, Isotridecyl alcohol", url: "https://thechemco.com/isotridecyl-alcohol-uses-applications/" },
+      { name: "Johnson Matthey, LP Oxo alcohols technology", url: "https://matthey.com/products-and-markets/chemicals/process-licensing/oxo-alcohols-process" },
     ],
   },
 
@@ -2384,9 +2384,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Heranba Industries", url: "https://www.heranba.co.in" },
     ],
     sources: [
-      { name: "ACS OPRD: Synthesis of m-phenoxybenzaldehyde", url: "https://pubs.acs.org/doi/abs/10.1021/op990028z" },
-      { name: "Google Patents: Preparation of m-phenoxybenzaldehyde", url: "https://patents.google.com/patent/US4108904A/en" },
-      { name: "PW Consulting: Pyrethroid intermediate market", url: "https://pmarketresearch.com/chemi/pyrethroid-pesticide-intermediate-market/" },
+      { name: "ACS OPRD, Synthesis of m-phenoxybenzaldehyde", url: "https://pubs.acs.org/doi/abs/10.1021/op990028z" },
+      { name: "Google Patents, Preparation of m-phenoxybenzaldehyde", url: "https://patents.google.com/patent/US4108904A/en" },
+      { name: "PW Consulting, Pyrethroid intermediate market", url: "https://pmarketresearch.com/chemi/pyrethroid-pesticide-intermediate-market/" },
     ],
   },
 
@@ -2407,9 +2407,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nuray Chemicals", url: "https://www.nuraychemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sugammadex", url: "https://en.wikipedia.org/wiki/Sugammadex" },
-      { name: "Google Patents: Process for preparation of sugammadex", url: "https://patents.google.com/patent/US9120876B2/en" },
-      { name: "Nuray Chemicals: Sugammadex sodium", url: "https://www.nuraychemicals.com/products/suggamadex-sodium/" },
+      { name: "Wikipedia, Sugammadex", url: "https://en.wikipedia.org/wiki/Sugammadex" },
+      { name: "Google Patents, Process for preparation of sugammadex", url: "https://patents.google.com/patent/US9120876B2/en" },
+      { name: "Nuray Chemicals, Sugammadex sodium", url: "https://www.nuraychemicals.com/products/suggamadex-sodium/" },
     ],
   },
 
@@ -2430,9 +2430,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFF", url: "https://www.iff.com" },
     ],
     sources: [
-      { name: "PMC: Diterpene synthases for sclareol in clary sage", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3520730/" },
-      { name: "C&EN: Givaudan Ambrofix via microbes", url: "https://cen.acs.org/biological-chemistry/biotechnology/Givaudan-makes-Ambrofix-brand-ambroxide/97/i44" },
-      { name: "PubMed: Biosynthetic route to sclareol", url: "https://pubmed.ncbi.nlm.nih.gov/23113661/" },
+      { name: "PMC, Diterpene synthases for sclareol in clary sage", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3520730/" },
+      { name: "C&EN, Givaudan Ambrofix via microbes", url: "https://cen.acs.org/biological-chemistry/biotechnology/Givaudan-makes-Ambrofix-brand-ambroxide/97/i44" },
+      { name: "PubMed, Biosynthetic route to sclareol", url: "https://pubmed.ncbi.nlm.nih.gov/23113661/" },
     ],
   },
 
@@ -2453,9 +2453,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Racecadotril manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/racecadotril-acetorphan" },
-      { name: "New Drug Approvals: Racecadotril", url: "https://newdrugapprovals.org/2022/01/15/racecadotril/" },
-      { name: "All About Drugs: Racecadotril (acetorphan)", url: "https://www.allfordrugs.com/2016/06/21/racecadotril-acetorphan/" },
+      { name: "PharmaCompass, Racecadotril manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/racecadotril-acetorphan" },
+      { name: "New Drug Approvals, Racecadotril", url: "https://newdrugapprovals.org/2022/01/15/racecadotril/" },
+      { name: "All About Drugs, Racecadotril (acetorphan)", url: "https://www.allfordrugs.com/2016/06/21/racecadotril-acetorphan/" },
     ],
   },
 
@@ -2480,9 +2480,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Jiujiu Jiu Technology", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wikidoc: Benzoic acid (production)", url: "https://www.wikidoc.org/index.php/Benzoic_acid" },
-      { name: "ResearchGate: Catalytic oxidation of toluene to benzoic acid", url: "https://www.researchgate.net/publication/385558112_Improvements_in_the_manufacture_of_benzoic_acid_obtained_by_catalytic_oxidation_of_toluene" },
-      { name: "Google Patents US3210416A: Benzoic acid from toluene", url: "https://patents.google.com/patent/US3210416A/" },
+      { name: "Wikidoc, Benzoic acid (production)", url: "https://www.wikidoc.org/index.php/Benzoic_acid" },
+      { name: "ResearchGate, Catalytic oxidation of toluene to benzoic acid", url: "https://www.researchgate.net/publication/385558112_Improvements_in_the_manufacture_of_benzoic_acid_obtained_by_catalytic_oxidation_of_toluene" },
+      { name: "Google Patents US3210416A, Benzoic acid from toluene", url: "https://patents.google.com/patent/US3210416A/" },
     ],
   },
   "sodium-benzoate": {
@@ -2504,9 +2504,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tianjin Dongda Chemical Group", url: "https://www.tjddhg.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium benzoate", url: "https://en.wikipedia.org/wiki/Sodium_benzoate" },
-      { name: "Google Patents CN1887845A: Granular sodium benzoate", url: "https://patents.google.com/patent/CN1887845A/en" },
-      { name: "eCFR 21 CFR 184.1733: Sodium benzoate", url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-184/subpart-B/section-184.1733" },
+      { name: "Wikipedia, Sodium benzoate", url: "https://en.wikipedia.org/wiki/Sodium_benzoate" },
+      { name: "Google Patents CN1887845A, Granular sodium benzoate", url: "https://patents.google.com/patent/CN1887845A/en" },
+      { name: "eCFR 21 CFR 184.1733, Sodium benzoate", url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-184/subpart-B/section-184.1733" },
     ],
   },
   "benzyl-alcohol": {
@@ -2528,9 +2528,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Velsicol Chemical", url: "https://www.eastman.com" },
     ],
     sources: [
-      { name: "Chemcess: Benzyl alcohol production", url: "https://chemcess.com/benzyl-alcohol-production-reactions-and-uses/" },
-      { name: "Google Patents US3557222A: Hydrolysis of benzyl chloride to benzyl alcohol", url: "https://patents.google.com/patent/US3557222A/en" },
-      { name: "MDPI Microorganisms: Benzyl alcohol production routes", url: "https://www.mdpi.com/2076-2607/10/5/966" },
+      { name: "Chemcess, Benzyl alcohol production", url: "https://chemcess.com/benzyl-alcohol-production-reactions-and-uses/" },
+      { name: "Google Patents US3557222A, Hydrolysis of benzyl chloride to benzyl alcohol", url: "https://patents.google.com/patent/US3557222A/en" },
+      { name: "MDPI Microorganisms, Benzyl alcohol production routes", url: "https://www.mdpi.com/2076-2607/10/5/966" },
     ],
   },
   "calcium-carbonate": {
@@ -2552,9 +2552,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nordkalk", url: "https://www.nordkalk.com" },
     ],
     sources: [
-      { name: "Sudarshan Group: PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
-      { name: "Intratec: Calcium carbonate from lime and CO2", url: "https://medium.com/intratec-products-blog/calcium-carbonate-production-from-lime-and-carbon-dioxide-economic-analysis-6cca76f51dbc" },
-      { name: "Mordor Intelligence: PCC market & companies", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
+      { name: "Sudarshan Group, PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
+      { name: "Intratec, Calcium carbonate from lime and CO2", url: "https://medium.com/intratec-products-blog/calcium-carbonate-production-from-lime-and-carbon-dioxide-economic-analysis-6cca76f51dbc" },
+      { name: "Mordor Intelligence, PCC market & companies", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
     ],
   },
   "calcium-nitrate": {
@@ -2576,9 +2576,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong Tianyi Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Google Patents WO2006031139A1: Method of calcium nitrate production", url: "https://patents.google.com/patent/WO2006031139A1/en" },
-      { name: "Procurement Resource: Calcium nitrate production", url: "https://www.procurementresource.com/production-cost-report-store/calcium-nitrate" },
-      { name: "NIIR: CAN / NPK production", url: "https://www.niir.org/blog/production-of-npk-fertilizer-calcium-ammonium-nitrate-can/" },
+      { name: "Google Patents WO2006031139A1, Method of calcium nitrate production", url: "https://patents.google.com/patent/WO2006031139A1/en" },
+      { name: "Procurement Resource, Calcium nitrate production", url: "https://www.procurementresource.com/production-cost-report-store/calcium-nitrate" },
+      { name: "NIIR, CAN / NPK production", url: "https://www.niir.org/blog/production-of-npk-fertilizer-calcium-ammonium-nitrate-can/" },
     ],
   },
   "calcium-propionate": {
@@ -2600,9 +2600,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kemin Industries", url: "https://www.kemin.com" },
     ],
     sources: [
-      { name: "Scribd: Calcium propionate manufacturing process", url: "https://www.scribd.com/document/451864932/17-Calcium-Propionate-manufacturing-process" },
-      { name: "Google Patents EP0093317A1: Preparation of calcium propionate", url: "https://patents.google.com/patent/EP0093317A1/en" },
-      { name: "FreePatentsOnline US4700000: Preparation of calcium propionate (BASF)", url: "https://www.freepatentsonline.com/4700000.html" },
+      { name: "Scribd, Calcium propionate manufacturing process", url: "https://www.scribd.com/document/451864932/17-Calcium-Propionate-manufacturing-process" },
+      { name: "Google Patents EP0093317A1, Preparation of calcium propionate", url: "https://patents.google.com/patent/EP0093317A1/en" },
+      { name: "FreePatentsOnline US4700000, Preparation of calcium propionate (BASF)", url: "https://www.freepatentsonline.com/4700000.html" },
     ],
   },
   "calcium-stearate": {
@@ -2624,9 +2624,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Ace Kakoh", url: "https://www.sunace.com.sg" },
     ],
     sources: [
-      { name: "Alapolystabs: Manufacturing process of calcium stearates", url: "https://alapolystabs.com/calcium-stearates.html" },
-      { name: "PishroChem: Manufacturing process of calcium stearate", url: "https://www.pishrochem.com/blog/en/the-manufacturing-process-of-calcium-stearate/" },
-      { name: "Google Patents US4307027A: Continuous metallic stearate process", url: "https://patents.google.com/patent/US4307027A/en" },
+      { name: "Alapolystabs, Manufacturing process of calcium stearates", url: "https://alapolystabs.com/calcium-stearates.html" },
+      { name: "PishroChem, Manufacturing process of calcium stearate", url: "https://www.pishrochem.com/blog/en/the-manufacturing-process-of-calcium-stearate/" },
+      { name: "Google Patents US4307027A, Continuous metallic stearate process", url: "https://patents.google.com/patent/US4307027A/en" },
     ],
   },
   "cocamidopropyl-betaine-capb": {
@@ -2649,9 +2649,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Stepan Company", url: "https://www.stepan.com" },
     ],
     sources: [
-      { name: "Elchemy: How is CAPB manufactured", url: "https://elchemy.com/blogs/capb-reports/how-is-capb-manufactured" },
-      { name: "Wikipedia: Cocamidopropyl betaine", url: "https://en.wikipedia.org/wiki/Cocamidopropyl_betaine" },
-      { name: "Procurement Resource: CAPB from DMAPA", url: "https://www.procurementresource.com/cost-analysis/capb-cocamidopropyl-betaine-production-from-dimethylaminopropylamine-dmapa" },
+      { name: "Elchemy, How is CAPB manufactured", url: "https://elchemy.com/blogs/capb-reports/how-is-capb-manufactured" },
+      { name: "Wikipedia, Cocamidopropyl betaine", url: "https://en.wikipedia.org/wiki/Cocamidopropyl_betaine" },
+      { name: "Procurement Resource, CAPB from DMAPA", url: "https://www.procurementresource.com/cost-analysis/capb-cocamidopropyl-betaine-production-from-dimethylaminopropylamine-dmapa" },
     ],
   },
   "cocamide-dea": {
@@ -2673,9 +2673,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Fengchen Group", url: "https://www.fengchengroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cocamide DEA", url: "https://en.wikipedia.org/wiki/Cocamide_DEA" },
-      { name: "ARPN J. Eng.: Transesterification & amidation route to cocamide DEA", url: "https://www.arpnjournals.org/jeas/research_papers/rp_2019/jeas_0619_7781.pdf" },
-      { name: "SpecialChem: Cocamide DEA (INCI)", url: "https://cosmetics.specialchem.com/inci-ingredients/cocamide-dea" },
+      { name: "Wikipedia, Cocamide DEA", url: "https://en.wikipedia.org/wiki/Cocamide_DEA" },
+      { name: "ARPN J. Eng., Transesterification & amidation route to cocamide DEA", url: "https://www.arpnjournals.org/jeas/research_papers/rp_2019/jeas_0619_7781.pdf" },
+      { name: "SpecialChem, Cocamide DEA (INCI)", url: "https://cosmetics.specialchem.com/inci-ingredients/cocamide-dea" },
     ],
   },
   "cocamide-mea-cmea": {
@@ -2697,9 +2697,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "KLK Oleo", url: "https://www.klkoleo.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cocamide MEA", url: "https://en.wikipedia.org/wiki/Cocamide_MEA" },
-      { name: "Scimplify: Cocamide MEA (CMEA)", url: "https://www.scimplify.com/en-us/cocamide-mea" },
-      { name: "Google Patents US8937102: Cocamide monoethanolamide concentrates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8937102" },
+      { name: "Wikipedia, Cocamide MEA", url: "https://en.wikipedia.org/wiki/Cocamide_MEA" },
+      { name: "Scimplify, Cocamide MEA (CMEA)", url: "https://www.scimplify.com/en-us/cocamide-mea" },
+      { name: "Google Patents US8937102, Cocamide monoethanolamide concentrates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8937102" },
     ],
   },
   "coconut-oil": {
@@ -2721,9 +2721,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Greenville Agro / P&G Chemicals", url: "https://www.pgchemicals.com" },
     ],
     sources: [
-      { name: "OFI Magazine: Processing coconut oil", url: "https://www.ofimagazine.com/content-images/news/Coconut_oil_processing.pdf" },
-      { name: "Musim Mas: How coconut is processed into oil and oleochemicals", url: "https://www.musimmas.com/resources/blogs/how-is-coconut-processed-from-a-plant-into-oil-and-oleochemicals/" },
-      { name: "Kumar Metal: Copra/coconut oil production", url: "https://kumarmetal.com/copra-or-coconut-oil-productions-specification-applications/" },
+      { name: "OFI Magazine, Processing coconut oil", url: "https://www.ofimagazine.com/content-images/news/Coconut_oil_processing.pdf" },
+      { name: "Musim Mas, How coconut is processed into oil and oleochemicals", url: "https://www.musimmas.com/resources/blogs/how-is-coconut-processed-from-a-plant-into-oil-and-oleochemicals/" },
+      { name: "Kumar Metal, Copra/coconut oil production", url: "https://kumarmetal.com/copra-or-coconut-oil-productions-specification-applications/" },
     ],
   },
   "diethyl-carbonate": {
@@ -2745,9 +2745,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tongling Jintai Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "ACS Energy & Fuels: DEC from ethanol and CO", url: "https://pubs.acs.org/doi/10.1021/ef0101816" },
-      { name: "Nature Sci. Reports: DEC from CO2 and ethanol", url: "https://www.nature.com/articles/s41598-024-59070-y" },
-      { name: "ACS Sustainable Chem. Eng.: Oxidative carbonylation vs alternatives", url: "https://pubs.acs.org/doi/10.1021/acssuschemeng.5b01515" },
+      { name: "ACS Energy & Fuels, DEC from ethanol and CO", url: "https://pubs.acs.org/doi/10.1021/ef0101816" },
+      { name: "Nature Sci. Reports, DEC from CO2 and ethanol", url: "https://www.nature.com/articles/s41598-024-59070-y" },
+      { name: "ACS Sustainable Chem. Eng., Oxidative carbonylation vs alternatives", url: "https://pubs.acs.org/doi/10.1021/acssuschemeng.5b01515" },
     ],
   },
   "diethyl-maleate": {
@@ -2769,9 +2769,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Chemical", url: "https://www.mcgc.com" },
     ],
     sources: [
-      { name: "Wikipedia: Diethyl maleate", url: "https://en.wikipedia.org/wiki/Diethyl_maleate" },
-      { name: "ScienceDirect: Esterification of maleic acid with ethanol over resins", url: "https://www.sciencedirect.com/science/article/abs/pii/S138151480200086X" },
-      { name: "Google Patents US4795824A: Production of dialkyl maleates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4795824" },
+      { name: "Wikipedia, Diethyl maleate", url: "https://en.wikipedia.org/wiki/Diethyl_maleate" },
+      { name: "ScienceDirect, Esterification of maleic acid with ethanol over resins", url: "https://www.sciencedirect.com/science/article/abs/pii/S138151480200086X" },
+      { name: "Google Patents US4795824A, Production of dialkyl maleates", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4795824" },
     ],
   },
   "diethyl-malonate": {
@@ -2793,9 +2793,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Hualun Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Grokipedia: Diethyl malonate", url: "https://grokipedia.com/page/Diethyl_malonate" },
-      { name: "Google Patents CN101525290B: Preparation of diethyl malonate", url: "https://patents.google.com/patent/CN101525290B/en" },
-      { name: "Perlego: Malonic ester synthesis overview", url: "https://www.perlego.com/index/chemistry/malonic-ester-synthesis" },
+      { name: "Grokipedia, Diethyl malonate", url: "https://grokipedia.com/page/Diethyl_malonate" },
+      { name: "Google Patents CN101525290B, Preparation of diethyl malonate", url: "https://patents.google.com/patent/CN101525290B/en" },
+      { name: "Perlego, Malonic ester synthesis overview", url: "https://www.perlego.com/index/chemistry/malonic-ester-synthesis" },
     ],
   },
   "diethyl-phthalate": {
@@ -2817,9 +2817,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aekyung Petrochemical", url: "https://www.aekyungchem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Diethyl phthalate", url: "https://en.wikipedia.org/wiki/Diethyl_phthalate" },
-      { name: "ATSDR: Diethyl phthalate production", url: "https://www.atsdr.cdc.gov/toxprofiles/tp73-c4.pdf" },
-      { name: "IG Petrochemicals: Diethyl phthalate (DEP)", url: "https://www.igpetro.com/dep" },
+      { name: "Wikipedia, Diethyl phthalate", url: "https://en.wikipedia.org/wiki/Diethyl_phthalate" },
+      { name: "ATSDR, Diethyl phthalate production", url: "https://www.atsdr.cdc.gov/toxprofiles/tp73-c4.pdf" },
+      { name: "IG Petrochemicals, Diethyl phthalate (DEP)", url: "https://www.igpetro.com/dep" },
     ],
   },
   "dimer-acid": {
@@ -2841,9 +2841,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Florachem", url: "https://www.florachem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Dimer acid", url: "https://en.wikipedia.org/wiki/Dimer_acid" },
-      { name: "ScienceDirect: Advanced process for structurally selective dimer acids", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926669020300480" },
-      { name: "ScienceDirect Topics: Dimer acid overview", url: "https://www.sciencedirect.com/topics/engineering/dimer-acid" },
+      { name: "Wikipedia, Dimer acid", url: "https://en.wikipedia.org/wiki/Dimer_acid" },
+      { name: "ScienceDirect, Advanced process for structurally selective dimer acids", url: "https://www.sciencedirect.com/science/article/abs/pii/S0926669020300480" },
+      { name: "ScienceDirect Topics, Dimer acid overview", url: "https://www.sciencedirect.com/topics/engineering/dimer-acid" },
     ],
   },
   edta: {
@@ -2865,9 +2865,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu Huaihe / Hubei Xinghong (chelates)", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Chemcess: EDTA properties, production and uses", url: "https://chemcess.com/ethylenediaminetetraacetic-acid-edta-properties-production-and-uses/" },
-      { name: "Google Patents EP0085277A1: Production of EDTA", url: "https://patents.google.com/patent/EP0085277A1/en" },
-      { name: "Google Patents CN1388113A: EDTA via HCN synthesis gas", url: "https://patents.google.com/patent/CN1388113A/en" },
+      { name: "Chemcess, EDTA properties, production and uses", url: "https://chemcess.com/ethylenediaminetetraacetic-acid-edta-properties-production-and-uses/" },
+      { name: "Google Patents EP0085277A1, Production of EDTA", url: "https://patents.google.com/patent/EP0085277A1/en" },
+      { name: "Google Patents CN1388113A, EDTA via HCN synthesis gas", url: "https://patents.google.com/patent/CN1388113A/en" },
     ],
   },
   "guar-gum": {
@@ -2889,9 +2889,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Lamberti", url: "https://www.lamberti.com" },
     ],
     sources: [
-      { name: "Wikipedia: Guar gum", url: "https://en.wikipedia.org/wiki/Guar_gum" },
-      { name: "Agrogums: Step-by-step guar gum powder process", url: "https://www.agrogums.com/blogs/from-field-to-final-product-the-step-by-step-process-of-making-guar-gum-powder" },
-      { name: "ScienceDirect: Dehulling of guar seeds", url: "https://www.sciencedirect.com/science/article/abs/pii/S0960308516300207" },
+      { name: "Wikipedia, Guar gum", url: "https://en.wikipedia.org/wiki/Guar_gum" },
+      { name: "Agrogums, Step-by-step guar gum powder process", url: "https://www.agrogums.com/blogs/from-field-to-final-product-the-step-by-step-process-of-making-guar-gum-powder" },
+      { name: "ScienceDirect, Dehulling of guar seeds", url: "https://www.sciencedirect.com/science/article/abs/pii/S0960308516300207" },
     ],
   },
   "hydrogenated-castor-oil-hco": {
@@ -2913,9 +2913,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gokul Agro Resources", url: "https://www.gokulagro.com" },
     ],
     sources: [
-      { name: "Jayant Agro-Organics: Hydrogenated Castor Oil (HCO)", url: "https://www.jayantagro.com/products/hydrogenated-castor-oil--hco-/30" },
-      { name: "Google Patents KR101655764B1: Nickel catalyst & hydrogenated castor oil", url: "https://patents.google.com/patent/KR101655764B1/en" },
-      { name: "Grand View Research: Castor oil & derivatives market", url: "https://www.grandviewresearch.com/industry-analysis/castor-oil-derivatives-industry" },
+      { name: "Jayant Agro-Organics, Hydrogenated Castor Oil (HCO)", url: "https://www.jayantagro.com/products/hydrogenated-castor-oil--hco-/30" },
+      { name: "Google Patents KR101655764B1, Nickel catalyst & hydrogenated castor oil", url: "https://patents.google.com/patent/KR101655764B1/en" },
+      { name: "Grand View Research, Castor oil & derivatives market", url: "https://www.grandviewresearch.com/industry-analysis/castor-oil-derivatives-industry" },
     ],
   },
   "lauric-acid-rspo-mb": {
@@ -2937,9 +2937,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Emery Oleochemicals", url: "https://www.emeryoleo.com" },
     ],
     sources: [
-      { name: "RSPO: Supply chain models (Mass Balance)", url: "https://rspo.org/as-an-organisation/certification/supply-chains/" },
-      { name: "Wilmar: Lauric acid", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
-      { name: "Colonial Chemical: Palm oil & RSPO Mass Balance", url: "https://colonialchem.com/company/palm-oil/" },
+      { name: "RSPO, Supply chain models (Mass Balance)", url: "https://rspo.org/as-an-organisation/certification/supply-chains/" },
+      { name: "Wilmar, Lauric acid", url: "https://www.wilmar-international.com/oleochemicals/products/home-care/lauric-acid-98" },
+      { name: "Colonial Chemical, Palm oil & RSPO Mass Balance", url: "https://colonialchem.com/company/palm-oil/" },
     ],
   },
   "paraffin-wax": {
@@ -2961,9 +2961,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "The International Group (IGI Wax)", url: "https://igiwax.com" },
     ],
     sources: [
-      { name: "Hydrocarbon Processing: Paraffin wax production process", url: "https://www.hydrocarbonprocessing.com/news/2024/07/digital-feature-paraffin-wax-a-detailed-look-at-its-production-process/" },
-      { name: "Petronaft: Paraffin wax production process", url: "https://www.petronaftco.com/paraffin-wax-production-process/" },
-      { name: "Grand View Research: Paraffin wax market", url: "https://www.grandviewresearch.com/industry-analysis/paraffin-wax-market" },
+      { name: "Hydrocarbon Processing, Paraffin wax production process", url: "https://www.hydrocarbonprocessing.com/news/2024/07/digital-feature-paraffin-wax-a-detailed-look-at-its-production-process/" },
+      { name: "Petronaft, Paraffin wax production process", url: "https://www.petronaftco.com/paraffin-wax-production-process/" },
+      { name: "Grand View Research, Paraffin wax market", url: "https://www.grandviewresearch.com/industry-analysis/paraffin-wax-market" },
     ],
   },
   "propionic-anhydride": {
@@ -2985,9 +2985,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hubei Greenhome / Jiangsu producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Google Patents US2235561A: Methyl ketene and propionic anhydride (Eastman Kodak)", url: "https://patents.google.com/patent/US2235561A/en" },
-      { name: "nbinno: Chemistry of propionic anhydride: synthesis & reactions", url: "https://www.nbinno.com/article/other-organic-chemicals/chemistry-propionic-anhydride-synthesis-reactions-hi" },
-      { name: "Google Patents US7553991: Producing carboxylic acid anhydrides", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7553991" },
+      { name: "Google Patents US2235561A, Methyl ketene and propionic anhydride (Eastman Kodak)", url: "https://patents.google.com/patent/US2235561A/en" },
+      { name: "nbinno, Chemistry of propionic anhydride: synthesis & reactions", url: "https://www.nbinno.com/article/other-organic-chemicals/chemistry-propionic-anhydride-synthesis-reactions-hi" },
+      { name: "Google Patents US7553991, Producing carboxylic acid anhydrides", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7553991" },
     ],
   },
   "sodium-methyl-cocoyl-taurate": {
@@ -3009,9 +3009,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Innospec", url: "https://www.innospecinc.com" },
     ],
     sources: [
-      { name: "Cosmetics & Toiletries: Sodium methyl cocoyl taurate", url: "https://www.cosmeticsandtoiletries.com/research/literature-data/article/21835802/sodium-methyl-cocoyl-taurate-biosurfactant-in-action" },
-      { name: "CIR: Safety assessment of alkyl taurate amides and taurate salts", url: "https://www.cir-safety.org/sites/default/files/taurat122015FR.pdf" },
-      { name: "SpecialChem: Sodium methyl cocoyl taurate (INCI)", url: "https://www.specialchem.com/cosmetics/inci-ingredients/sodium-methyl-cocoyl-taurate" },
+      { name: "Cosmetics & Toiletries, Sodium methyl cocoyl taurate", url: "https://www.cosmeticsandtoiletries.com/research/literature-data/article/21835802/sodium-methyl-cocoyl-taurate-biosurfactant-in-action" },
+      { name: "CIR, Safety assessment of alkyl taurate amides and taurate salts", url: "https://www.cir-safety.org/sites/default/files/taurat122015FR.pdf" },
+      { name: "SpecialChem, Sodium methyl cocoyl taurate (INCI)", url: "https://www.specialchem.com/cosmetics/inci-ingredients/sodium-methyl-cocoyl-taurate" },
     ],
   },
   "tris-nonylphenyl-phosphite-tnpp": {
@@ -3033,9 +3033,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sterling Auxiliaries", url: "https://www.sterlingauxiliaries.com" },
     ],
     sources: [
-      { name: "Google Patents US5532401A: Production of tris(nonylphenyl) phosphite", url: "https://patents.google.com/patent/US5532401A/en" },
-      { name: "MarketsandMarkets: TNPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/tris-nonylphenyl-phosphite-market.asp" },
-      { name: "ChemicalBook: Tris(nonylphenyl) phosphite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1266308.htm" },
+      { name: "Google Patents US5532401A, Production of tris(nonylphenyl) phosphite", url: "https://patents.google.com/patent/US5532401A/en" },
+      { name: "MarketsandMarkets, TNPP companies", url: "https://www.marketsandmarkets.com/ResearchInsight/tris-nonylphenyl-phosphite-market.asp" },
+      { name: "ChemicalBook, Tris(nonylphenyl) phosphite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1266308.htm" },
     ],
   },
 
@@ -3057,9 +3057,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Brüggemann", url: "https://www.brueggemann.com" },
     ],
     sources: [
-      { name: "Wikipedia: Zinc oxide (production)", url: "https://en.wikipedia.org/wiki/Zinc_oxide" },
-      { name: "EverZinc: Zinc oxide", url: "https://www.everzinc.com/our-products/zinc-oxide/" },
-      { name: "Britannica: Zinc processing", url: "https://www.britannica.com/technology/zinc-processing" },
+      { name: "Wikipedia, Zinc oxide (production)", url: "https://en.wikipedia.org/wiki/Zinc_oxide" },
+      { name: "EverZinc, Zinc oxide", url: "https://www.everzinc.com/our-products/zinc-oxide/" },
+      { name: "Britannica, Zinc processing", url: "https://www.britannica.com/technology/zinc-processing" },
     ],
   },
 
@@ -3082,9 +3082,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nirma", url: "https://www.nirma.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "C&EN: Can synthetic soda ash survive?", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
-      { name: "Solvay: Soda Solvay", url: "https://www.solvay.com/en/brands/soda-solvay" },
+      { name: "Wikipedia, Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "C&EN, Can synthetic soda ash survive?", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
+      { name: "Solvay, Soda Solvay", url: "https://www.solvay.com/en/brands/soda-solvay" },
     ],
   },
 
@@ -3105,9 +3105,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ammonium chloride", url: "https://en.wikipedia.org/wiki/Ammonium_chloride" },
-      { name: "Wikipedia: Solvay process (Hou's process)", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "ChemicalBook: Ammonium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852160.htm" },
+      { name: "Wikipedia, Ammonium chloride", url: "https://en.wikipedia.org/wiki/Ammonium_chloride" },
+      { name: "Wikipedia, Solvay process (Hou's process)", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "ChemicalBook, Ammonium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852160.htm" },
     ],
   },
 
@@ -3127,9 +3127,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cooper Natural Resources", url: "https://www.coopernr.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium sulfate (production)", url: "https://en.wikipedia.org/wiki/Sodium_sulfate" },
-      { name: "USGS: Sodium sulfate (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-sodium-sulfate.pdf" },
-      { name: "Grupo Crimidesa: Sodium sulphate", url: "https://www.crimidesa.com/en/sodium-sulphate/" },
+      { name: "Wikipedia, Sodium sulfate (production)", url: "https://en.wikipedia.org/wiki/Sodium_sulfate" },
+      { name: "USGS, Sodium sulfate (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-sodium-sulfate.pdf" },
+      { name: "Grupo Crimidesa, Sodium sulphate", url: "https://www.crimidesa.com/en/sodium-sulphate/" },
     ],
   },
 
@@ -3149,9 +3149,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PQ / Ecovyst", url: "https://www.ecovyst.com" },
     ],
     sources: [
-      { name: "Wikipedia: Magnesium sulfate", url: "https://en.wikipedia.org/wiki/Magnesium_sulfate" },
-      { name: "K+S: Products", url: "https://www.kpluss.com/en-us/products/" },
-      { name: "ChemicalBook: Magnesium sulfate heptahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7186761.htm" },
+      { name: "Wikipedia, Magnesium sulfate", url: "https://en.wikipedia.org/wiki/Magnesium_sulfate" },
+      { name: "K+S, Products", url: "https://www.kpluss.com/en-us/products/" },
+      { name: "ChemicalBook, Magnesium sulfate heptahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7186761.htm" },
     ],
   },
 
@@ -3172,9 +3172,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chemtrade Logistics", url: "https://www.chemtradelogistics.com" },
     ],
     sources: [
-      { name: "Wikipedia: Aluminium sulfate", url: "https://en.wikipedia.org/wiki/Aluminium_sulfate" },
-      { name: "USALCO: Aluminum sulfate", url: "https://www.usalco.com/products/aluminum-sulfate/" },
-      { name: "Kemira: Coagulants", url: "https://www.kemira.com/products/coagulants/" },
+      { name: "Wikipedia, Aluminium sulfate", url: "https://en.wikipedia.org/wiki/Aluminium_sulfate" },
+      { name: "USALCO, Aluminum sulfate", url: "https://www.usalco.com/products/aluminum-sulfate/" },
+      { name: "Kemira, Coagulants", url: "https://www.kemira.com/products/coagulants/" },
     ],
   },
 
@@ -3195,9 +3195,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Pencco", url: "https://www.pencco.com" },
     ],
     sources: [
-      { name: "Wikipedia: Iron(II) sulfate", url: "https://en.wikipedia.org/wiki/Iron(II)_sulfate" },
-      { name: "Crown Technology: Ferrous sulfate", url: "https://www.crowntechnology.net/ferrous-sulfate/" },
-      { name: "ScienceDirect: Ferrous sulphate (copperas)", url: "https://www.sciencedirect.com/topics/engineering/ferrous-sulphate" },
+      { name: "Wikipedia, Iron(II) sulfate", url: "https://en.wikipedia.org/wiki/Iron(II)_sulfate" },
+      { name: "Crown Technology, Ferrous sulfate", url: "https://www.crowntechnology.net/ferrous-sulfate/" },
+      { name: "ScienceDirect, Ferrous sulphate (copperas)", url: "https://www.sciencedirect.com/topics/engineering/ferrous-sulphate" },
     ],
   },
 
@@ -3217,9 +3217,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hydrite Chemical", url: "https://www.hydrite.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium thiosulfate", url: "https://en.wikipedia.org/wiki/Sodium_thiosulfate" },
-      { name: "ChemicalBook: Sodium thiosulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854234.htm" },
-      { name: "Calabrian: Sodium thiosulfate", url: "https://www.calabriancorp.com/products/sodium-thiosulfate" },
+      { name: "Wikipedia, Sodium thiosulfate", url: "https://en.wikipedia.org/wiki/Sodium_thiosulfate" },
+      { name: "ChemicalBook, Sodium thiosulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854234.htm" },
+      { name: "Calabrian, Sodium thiosulfate", url: "https://www.calabriancorp.com/products/sodium-thiosulfate" },
     ],
   },
 
@@ -3239,9 +3239,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ADEKA Corporation", url: "https://www.adeka.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Potassium persulfate", url: "https://en.wikipedia.org/wiki/Potassium_persulfate" },
-      { name: "United Initiators: Persulfates", url: "https://www.united-initiators.com/en/products/persulfates" },
-      { name: "ChemicalBook: Potassium persulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854095.htm" },
+      { name: "Wikipedia, Potassium persulfate", url: "https://en.wikipedia.org/wiki/Potassium_persulfate" },
+      { name: "United Initiators, Persulfates", url: "https://www.united-initiators.com/en/products/persulfates" },
+      { name: "ChemicalBook, Potassium persulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854095.htm" },
     ],
   },
 
@@ -3261,9 +3261,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Prince (Vibrantz)", url: "https://www.vibrantz.com" },
     ],
     sources: [
-      { name: "Wikipedia: Manganese(II) sulfate", url: "https://en.wikipedia.org/wiki/Manganese(II)_sulfate" },
-      { name: "ChemicalBook: Manganese sulfate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4485392.htm" },
-      { name: "Mordor Intelligence: Manganese sulfate market", url: "https://www.mordorintelligence.com/industry-reports/manganese-sulphate-market" },
+      { name: "Wikipedia, Manganese(II) sulfate", url: "https://en.wikipedia.org/wiki/Manganese(II)_sulfate" },
+      { name: "ChemicalBook, Manganese sulfate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4485392.htm" },
+      { name: "Mordor Intelligence, Manganese sulfate market", url: "https://www.mordorintelligence.com/industry-reports/manganese-sulphate-market" },
     ],
   },
 
@@ -3282,9 +3282,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia: Manganese(II) carbonate", url: "https://en.wikipedia.org/wiki/Manganese(II)_carbonate" },
-      { name: "ChemicalBook: Manganese carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852159.htm" },
-      { name: "American Elements: Manganese carbonate", url: "https://www.americanelements.com/manganese-carbonate-598-62-9" },
+      { name: "Wikipedia, Manganese(II) carbonate", url: "https://en.wikipedia.org/wiki/Manganese(II)_carbonate" },
+      { name: "ChemicalBook, Manganese carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852159.htm" },
+      { name: "American Elements, Manganese carbonate", url: "https://www.americanelements.com/manganese-carbonate-598-62-9" },
     ],
   },
 
@@ -3305,9 +3305,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tosoh Corporation", url: "https://www.tosoh.com" },
     ],
     sources: [
-      { name: "Wikipedia: Calcium hypochlorite", url: "https://en.wikipedia.org/wiki/Calcium_hypochlorite" },
-      { name: "ChemAnalyst: Calcium hypochlorite market", url: "https://www.chemanalyst.com/industry-report/calcium-hypochlorite-market-697" },
-      { name: "Mordor Intelligence: Calcium hypochlorite market", url: "https://www.mordorintelligence.com/industry-reports/calcium-hypochlorite-market" },
+      { name: "Wikipedia, Calcium hypochlorite", url: "https://en.wikipedia.org/wiki/Calcium_hypochlorite" },
+      { name: "ChemAnalyst, Calcium hypochlorite market", url: "https://www.chemanalyst.com/industry-report/calcium-hypochlorite-market-697" },
+      { name: "Mordor Intelligence, Calcium hypochlorite market", url: "https://www.mordorintelligence.com/industry-reports/calcium-hypochlorite-market" },
     ],
   },
 
@@ -3328,9 +3328,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Esseco Group", url: "https://www.esseco.it" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium dithionite", url: "https://en.wikipedia.org/wiki/Sodium_dithionite" },
-      { name: "Rongda Chemical: Sodium dithionite production", url: "https://www.rongdachemical.com/blog/properties-production-sodium-dithionite/" },
-      { name: "FreePatentsOnline: BASF sodium dithionite process", url: "https://www.freepatentsonline.com/4017593.html" },
+      { name: "Wikipedia, Sodium dithionite", url: "https://en.wikipedia.org/wiki/Sodium_dithionite" },
+      { name: "Rongda Chemical, Sodium dithionite production", url: "https://www.rongdachemical.com/blog/properties-production-sodium-dithionite/" },
+      { name: "FreePatentsOnline, BASF sodium dithionite process", url: "https://www.freepatentsonline.com/4017593.html" },
     ],
   },
 
@@ -3350,9 +3350,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Calabrian Corporation", url: "https://www.calabriancorp.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium sulfite", url: "https://en.wikipedia.org/wiki/Sodium_sulfite" },
-      { name: "ChemicalBook: Sodium sulfite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852633.htm" },
-      { name: "Solvay: Sodium sulfite", url: "https://www.solvay.com/en/product/sodium-sulfite" },
+      { name: "Wikipedia, Sodium sulfite", url: "https://en.wikipedia.org/wiki/Sodium_sulfite" },
+      { name: "ChemicalBook, Sodium sulfite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852633.htm" },
+      { name: "Solvay, Sodium sulfite", url: "https://www.solvay.com/en/product/sodium-sulfite" },
     ],
   },
 
@@ -3372,9 +3372,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Old Bridge Chemicals", url: "https://www.oldbridgechem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Copper(II) oxide", url: "https://en.wikipedia.org/wiki/Copper(II)_oxide" },
-      { name: "American Chemet: Copper oxides", url: "https://www.chemet.com/copper-chemistry/" },
-      { name: "ChemicalBook: Copper(II) oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854112.htm" },
+      { name: "Wikipedia, Copper(II) oxide", url: "https://en.wikipedia.org/wiki/Copper(II)_oxide" },
+      { name: "American Chemet, Copper oxides", url: "https://www.chemet.com/copper-chemistry/" },
+      { name: "ChemicalBook, Copper(II) oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854112.htm" },
     ],
   },
 
@@ -3395,9 +3395,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jinchuan Group", url: "https://www.jnmc.com" },
     ],
     sources: [
-      { name: "Wikipedia: Nickel(II) sulfate", url: "https://en.wikipedia.org/wiki/Nickel(II)_sulfate" },
-      { name: "ChemicalBook: Nickel sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5184400.htm" },
-      { name: "Sumitomo Metal Mining: Nickel", url: "https://www.smm.co.jp/en/business/metals/nickel/" },
+      { name: "Wikipedia, Nickel(II) sulfate", url: "https://en.wikipedia.org/wiki/Nickel(II)_sulfate" },
+      { name: "ChemicalBook, Nickel sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5184400.htm" },
+      { name: "Sumitomo Metal Mining, Nickel", url: "https://www.smm.co.jp/en/business/metals/nickel/" },
     ],
   },
 
@@ -3412,13 +3412,13 @@ export const verified: Record<string, VerifiedProduct> = {
         "Zinc borate (the common flame-retardant grade 2ZnO·3B2O3·3.5H2O, e.g. Firebrake ZB) is made by reacting zinc oxide with boric acid (and sometimes borax) in an aqueous slurry at controlled temperature and pH, seeding to grow the desired hydrate crystal. The precipitated zinc borate is filtered, washed, dried and milled to a fine powder. It acts as a flame retardant, smoke suppressant and anti-arcing/afterglow agent in plastics, rubber, coatings and wood, often partly replacing antimony trioxide.",
     },
     manufacturers: [
-      { name: "Rio Tinto Borates (U.S. Borax: Firebrake)", url: "https://www.riotinto.com" },
+      { name: "Rio Tinto Borates (U.S. Borax, Firebrake)", url: "https://www.riotinto.com" },
       { name: "ICL Group", url: "https://www.icl-group.com" },
     ],
     sources: [
-      { name: "Wikipedia: Zinc borate", url: "https://en.wikipedia.org/wiki/Zinc_borate" },
-      { name: "U.S. Borax: Firebrake zinc borate", url: "https://www.borax.com/products/firebrake" },
-      { name: "ChemicalBook: Zinc borate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853246.htm" },
+      { name: "Wikipedia, Zinc borate", url: "https://en.wikipedia.org/wiki/Zinc_borate" },
+      { name: "U.S. Borax, Firebrake zinc borate", url: "https://www.borax.com/products/firebrake" },
+      { name: "ChemicalBook, Zinc borate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853246.htm" },
     ],
   },
 
@@ -3438,9 +3438,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vishnu Chemicals", url: "https://www.vishnuchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chromium(III) sulfate", url: "https://en.wikipedia.org/wiki/Chromium(III)_sulfate" },
-      { name: "Vishnu Chemicals: Basic chromium sulphate", url: "https://www.vishnuchemicals.com/basic-chromium-sulphate.php" },
-      { name: "ScienceDirect: Chrome tanning agents", url: "https://www.sciencedirect.com/topics/materials-science/chromium-sulfate" },
+      { name: "Wikipedia, Chromium(III) sulfate", url: "https://en.wikipedia.org/wiki/Chromium(III)_sulfate" },
+      { name: "Vishnu Chemicals, Basic chromium sulphate", url: "https://www.vishnuchemicals.com/basic-chromium-sulphate.php" },
+      { name: "ScienceDirect, Chrome tanning agents", url: "https://www.sciencedirect.com/topics/materials-science/chromium-sulfate" },
     ],
   },
 
@@ -3460,9 +3460,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vishnu Chemicals", url: "https://www.vishnuchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Potassium dichromate", url: "https://en.wikipedia.org/wiki/Potassium_dichromate" },
-      { name: "Wikipedia: Sodium dichromate (production)", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
-      { name: "ChemicalBook: Potassium dichromate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852592.htm" },
+      { name: "Wikipedia, Potassium dichromate", url: "https://en.wikipedia.org/wiki/Potassium_dichromate" },
+      { name: "Wikipedia, Sodium dichromate (production)", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
+      { name: "ChemicalBook, Potassium dichromate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852592.htm" },
     ],
   },
 
@@ -3480,9 +3480,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Lead(II) nitrate", url: "https://en.wikipedia.org/wiki/Lead(II)_nitrate" },
-      { name: "American Elements: Lead nitrate", url: "https://www.americanelements.com/lead-nitrate-10099-74-8" },
-      { name: "ChemicalBook: Lead nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852604.htm" },
+      { name: "Wikipedia, Lead(II) nitrate", url: "https://en.wikipedia.org/wiki/Lead(II)_nitrate" },
+      { name: "American Elements, Lead nitrate", url: "https://www.americanelements.com/lead-nitrate-10099-74-8" },
+      { name: "ChemicalBook, Lead nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852604.htm" },
     ],
   },
 
@@ -3502,9 +3502,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Largo", url: "https://www.largoinc.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ammonium metavanadate", url: "https://en.wikipedia.org/wiki/Ammonium_metavanadate" },
-      { name: "ChemicalBook: Ammonium metavanadate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852611.htm" },
-      { name: "U.S. Vanadium: Vanadium chemicals", url: "https://www.usvanadium.com/products" },
+      { name: "Wikipedia, Ammonium metavanadate", url: "https://en.wikipedia.org/wiki/Ammonium_metavanadate" },
+      { name: "ChemicalBook, Ammonium metavanadate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852611.htm" },
+      { name: "U.S. Vanadium, Vanadium chemicals", url: "https://www.usvanadium.com/products" },
     ],
   },
 
@@ -3524,9 +3524,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Innophos", url: "https://www.innophos.com" },
     ],
     sources: [
-      { name: "Wikipedia: Phosphorus pentoxide", url: "https://en.wikipedia.org/wiki/Phosphorus_pentoxide" },
-      { name: "Britannica: Phosphorus oxides", url: "https://www.britannica.com/science/phosphorus-chemical-element/Oxides" },
-      { name: "ChemicalBook: Phosphorus pentoxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852623.htm" },
+      { name: "Wikipedia, Phosphorus pentoxide", url: "https://en.wikipedia.org/wiki/Phosphorus_pentoxide" },
+      { name: "Britannica, Phosphorus oxides", url: "https://www.britannica.com/science/phosphorus-chemical-element/Oxides" },
+      { name: "ChemicalBook, Phosphorus pentoxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852623.htm" },
     ],
   },
 
@@ -3547,9 +3547,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "Wikipedia: Barium sulfate", url: "https://en.wikipedia.org/wiki/Barium_sulfate" },
-      { name: "Venator: Barium sulfate (blanc fixe)", url: "https://www.venatorcorp.com/products/functional-additives/barium-sulfate" },
-      { name: "ChemicalBook: Barium sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6357618.htm" },
+      { name: "Wikipedia, Barium sulfate", url: "https://en.wikipedia.org/wiki/Barium_sulfate" },
+      { name: "Venator, Barium sulfate (blanc fixe)", url: "https://www.venatorcorp.com/products/functional-additives/barium-sulfate" },
+      { name: "ChemicalBook, Barium sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6357618.htm" },
     ],
   },
 
@@ -3570,9 +3570,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sumitomo Chemical", url: "https://www.sumitomo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Aluminium oxide", url: "https://en.wikipedia.org/wiki/Aluminium_oxide" },
-      { name: "Almatis: Calcined aluminas", url: "https://www.almatis.com/en/products/calcined-alumina/" },
-      { name: "Wikipedia: Bayer process", url: "https://en.wikipedia.org/wiki/Bayer_process" },
+      { name: "Wikipedia, Aluminium oxide", url: "https://en.wikipedia.org/wiki/Aluminium_oxide" },
+      { name: "Almatis, Calcined aluminas", url: "https://www.almatis.com/en/products/calcined-alumina/" },
+      { name: "Wikipedia, Bayer process", url: "https://en.wikipedia.org/wiki/Bayer_process" },
     ],
   },
 
@@ -3592,9 +3592,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ESK-SIC", url: "https://www.esk-sic.de" },
     ],
     sources: [
-      { name: "Wikipedia: Silicon carbide (Acheson process)", url: "https://en.wikipedia.org/wiki/Silicon_carbide" },
-      { name: "Washington Mills: Silicon carbide", url: "https://www.washingtonmills.com/materials/silicon-carbide" },
-      { name: "Britannica: Acheson process", url: "https://www.britannica.com/technology/Acheson-process" },
+      { name: "Wikipedia, Silicon carbide (Acheson process)", url: "https://en.wikipedia.org/wiki/Silicon_carbide" },
+      { name: "Washington Mills, Silicon carbide", url: "https://www.washingtonmills.com/materials/silicon-carbide" },
+      { name: "Britannica, Acheson process", url: "https://www.britannica.com/technology/Acheson-process" },
     ],
   },
 
@@ -3614,9 +3614,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Prayon", url: "https://www.prayon.com" },
     ],
     sources: [
-      { name: "Wikipedia: Tricalcium phosphate", url: "https://en.wikipedia.org/wiki/Tricalcium_phosphate" },
-      { name: "Budenheim: Calcium phosphates", url: "https://www.budenheim.com/en/markets/food" },
-      { name: "ChemicalBook: Tricalcium phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5853246.htm" },
+      { name: "Wikipedia, Tricalcium phosphate", url: "https://en.wikipedia.org/wiki/Tricalcium_phosphate" },
+      { name: "Budenheim, Calcium phosphates", url: "https://www.budenheim.com/en/markets/food" },
+      { name: "ChemicalBook, Tricalcium phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5853246.htm" },
     ],
   },
 
@@ -3635,9 +3635,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia: Magnesium trisilicate", url: "https://en.wikipedia.org/wiki/Magnesium_trisilicate" },
-      { name: "DrugBank: Magnesium trisilicate", url: "https://go.drugbank.com/drugs/DB09280" },
-      { name: "ChemicalBook: Magnesium trisilicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354340.htm" },
+      { name: "Wikipedia, Magnesium trisilicate", url: "https://en.wikipedia.org/wiki/Magnesium_trisilicate" },
+      { name: "DrugBank, Magnesium trisilicate", url: "https://go.drugbank.com/drugs/DB09280" },
+      { name: "ChemicalBook, Magnesium trisilicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354340.htm" },
     ],
   },
 
@@ -3658,9 +3658,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Feralco Group", url: "https://www.feralco.com" },
     ],
     sources: [
-      { name: "Wikipedia: Aluminium chlorohydrate", url: "https://en.wikipedia.org/wiki/Aluminium_chlorohydrate" },
-      { name: "USALCO: Aluminum chlorohydrate", url: "https://www.usalco.com/products/aluminum-chlorohydrate/" },
-      { name: "Gulbrandsen: ACH", url: "https://www.gulbrandsen.com/products/water-treatment-chemicals/" },
+      { name: "Wikipedia, Aluminium chlorohydrate", url: "https://en.wikipedia.org/wiki/Aluminium_chlorohydrate" },
+      { name: "USALCO, Aluminum chlorohydrate", url: "https://www.usalco.com/products/aluminum-chlorohydrate/" },
+      { name: "Gulbrandsen, ACH", url: "https://www.gulbrandsen.com/products/water-treatment-chemicals/" },
     ],
   },
 
@@ -3681,9 +3681,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "RZBC Group", url: "https://www.rzbc.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium citrate", url: "https://en.wikipedia.org/wiki/Sodium_citrate" },
-      { name: "Jungbunzlauer: Sodium citrates", url: "https://www.jungbunzlauer.com/en/products/citrics/sodium-citrate.html" },
-      { name: "ChemicalBook: Trisodium citrate dihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7853179.htm" },
+      { name: "Wikipedia, Sodium citrate", url: "https://en.wikipedia.org/wiki/Sodium_citrate" },
+      { name: "Jungbunzlauer, Sodium citrates", url: "https://www.jungbunzlauer.com/en/products/citrics/sodium-citrate.html" },
+      { name: "ChemicalBook, Trisodium citrate dihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7853179.htm" },
     ],
   },
 
@@ -3702,9 +3702,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jubilant Ingrevia", url: "https://www.jubilantingrevia.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium acetate", url: "https://en.wikipedia.org/wiki/Sodium_acetate" },
-      { name: "ChemicalBook: Sodium acetate trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854349.htm" },
-      { name: "Niacet: Acetates", url: "https://www.niacet.com/markets/" },
+      { name: "Wikipedia, Sodium acetate", url: "https://en.wikipedia.org/wiki/Sodium_acetate" },
+      { name: "ChemicalBook, Sodium acetate trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854349.htm" },
+      { name: "Niacet, Acetates", url: "https://www.niacet.com/markets/" },
     ],
   },
 
@@ -3723,9 +3723,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Potassium oxalate", url: "https://en.wikipedia.org/wiki/Potassium_oxalate" },
-      { name: "ChemicalBook: Potassium oxalate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159524.htm" },
-      { name: "American Elements: Potassium oxalate", url: "https://www.americanelements.com/potassium-oxalate-monohydrate-6487-48-5" },
+      { name: "Wikipedia, Potassium oxalate", url: "https://en.wikipedia.org/wiki/Potassium_oxalate" },
+      { name: "ChemicalBook, Potassium oxalate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159524.htm" },
+      { name: "American Elements, Potassium oxalate", url: "https://www.americanelements.com/potassium-oxalate-monohydrate-6487-48-5" },
     ],
   },
 
@@ -3746,9 +3746,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chemische Fabrik Budenheim", url: "https://www.budenheim.com" },
     ],
     sources: [
-      { name: "Wikipedia: Monopotassium phosphate", url: "https://en.wikipedia.org/wiki/Monopotassium_phosphate" },
-      { name: "Haifa Group: MKP", url: "https://www.haifa-group.com/mkp-monopotassium-phosphate-0" },
-      { name: "ChemicalBook: Potassium dihydrogen phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113379.htm" },
+      { name: "Wikipedia, Monopotassium phosphate", url: "https://en.wikipedia.org/wiki/Monopotassium_phosphate" },
+      { name: "Haifa Group, MKP", url: "https://www.haifa-group.com/mkp-monopotassium-phosphate-0" },
+      { name: "ChemicalBook, Potassium dihydrogen phosphate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113379.htm" },
     ],
   },
 
@@ -3768,9 +3768,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chemische Fabrik Budenheim", url: "https://www.budenheim.com" },
     ],
     sources: [
-      { name: "Wikipedia: Monosodium phosphate", url: "https://en.wikipedia.org/wiki/Monosodium_phosphate" },
-      { name: "ICL Food Specialties: Phosphates", url: "https://www.icl-group.com/our-business/icl-growing-solutions/" },
-      { name: "ChemicalBook: Sodium dihydrogen phosphate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113380.htm" },
+      { name: "Wikipedia, Monosodium phosphate", url: "https://en.wikipedia.org/wiki/Monosodium_phosphate" },
+      { name: "ICL Food Specialties, Phosphates", url: "https://www.icl-group.com/our-business/icl-growing-solutions/" },
+      { name: "ChemicalBook, Sodium dihydrogen phosphate monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113380.htm" },
     ],
   },
 
@@ -3790,9 +3790,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Honjo Chemical", url: "https://www.honjo-chem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Lithium bromide", url: "https://en.wikipedia.org/wiki/Lithium_bromide" },
-      { name: "LANXESS: Lithium derivatives", url: "https://lanxess.com/en/Products-and-Solutions/Brands/Lithium" },
-      { name: "ChemicalBook: Lithium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852630.htm" },
+      { name: "Wikipedia, Lithium bromide", url: "https://en.wikipedia.org/wiki/Lithium_bromide" },
+      { name: "LANXESS, Lithium derivatives", url: "https://lanxess.com/en/Products-and-Solutions/Brands/Lithium" },
+      { name: "ChemicalBook, Lithium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852630.htm" },
     ],
   },
 
@@ -3811,9 +3811,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Potassium ferrocyanide", url: "https://en.wikipedia.org/wiki/Potassium_ferrocyanide" },
-      { name: "ChemicalBook: Potassium ferrocyanide trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852638.htm" },
-      { name: "American Elements: Potassium ferrocyanide", url: "https://www.americanelements.com/potassium-ferrocyanide-trihydrate-14459-95-1" },
+      { name: "Wikipedia, Potassium ferrocyanide", url: "https://en.wikipedia.org/wiki/Potassium_ferrocyanide" },
+      { name: "ChemicalBook, Potassium ferrocyanide trihydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852638.htm" },
+      { name: "American Elements, Potassium ferrocyanide", url: "https://www.americanelements.com/potassium-ferrocyanide-trihydrate-14459-95-1" },
     ],
   },
 
@@ -3834,9 +3834,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Ashland", url: "https://www.ashland.com" },
     ],
     sources: [
-      { name: "Wikipedia: Phenoxyethanol", url: "https://en.wikipedia.org/wiki/Phenoxyethanol" },
-      { name: "ChemicalBook: 2-Phenoxyethanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854198.htm" },
-      { name: "Clariant: Preservatives", url: "https://www.clariant.com/en/Solutions/Products" },
+      { name: "Wikipedia, Phenoxyethanol", url: "https://en.wikipedia.org/wiki/Phenoxyethanol" },
+      { name: "ChemicalBook, 2-Phenoxyethanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854198.htm" },
+      { name: "Clariant, Preservatives", url: "https://www.clariant.com/en/Solutions/Products" },
     ],
   },
 
@@ -3856,9 +3856,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia: p-Phenylenediamine", url: "https://en.wikipedia.org/wiki/P-Phenylenediamine" },
-      { name: "ChemicalBook: p-Phenylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854220.htm" },
-      { name: "Nouryon: Diamines & derivatives", url: "https://www.nouryon.com/products/" },
+      { name: "Wikipedia, p-Phenylenediamine", url: "https://en.wikipedia.org/wiki/P-Phenylenediamine" },
+      { name: "ChemicalBook, p-Phenylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854220.htm" },
+      { name: "Nouryon, Diamines & derivatives", url: "https://www.nouryon.com/products/" },
     ],
   },
 
@@ -3877,9 +3877,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teijin", url: "https://www.teijin.com" },
     ],
     sources: [
-      { name: "Wikipedia: Terephthaloyl chloride", url: "https://en.wikipedia.org/wiki/Terephthaloyl_chloride" },
-      { name: "Wikipedia: Kevlar (synthesis)", url: "https://en.wikipedia.org/wiki/Kevlar" },
-      { name: "ChemicalBook: Terephthaloyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1219732.htm" },
+      { name: "Wikipedia, Terephthaloyl chloride", url: "https://en.wikipedia.org/wiki/Terephthaloyl_chloride" },
+      { name: "Wikipedia, Kevlar (synthesis)", url: "https://en.wikipedia.org/wiki/Kevlar" },
+      { name: "ChemicalBook, Terephthaloyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1219732.htm" },
     ],
   },
 
@@ -3898,9 +3898,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kureha Corporation", url: "https://www.kureha.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: 1,4-Dichlorobenzene", url: "https://en.wikipedia.org/wiki/1,4-Dichlorobenzene" },
-      { name: "Aarti Industries: Chlorination products", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination" },
-      { name: "ChemicalBook: p-Dichlorobenzene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854120.htm" },
+      { name: "Wikipedia, 1,4-Dichlorobenzene", url: "https://en.wikipedia.org/wiki/1,4-Dichlorobenzene" },
+      { name: "Aarti Industries, Chlorination products", url: "https://www.aarti-industries.com/products/chemical-products/chemistry/chlorination" },
+      { name: "ChemicalBook, p-Dichlorobenzene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854120.htm" },
     ],
   },
 
@@ -3920,9 +3920,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tokuyama Corporation", url: "https://www.tokuyama.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Benzyl chloride", url: "https://en.wikipedia.org/wiki/Benzyl_chloride" },
-      { name: "ChemicalBook: Benzyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854160.htm" },
-      { name: "ScienceDirect: Side-chain chlorination of toluene", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-chloride" },
+      { name: "Wikipedia, Benzyl chloride", url: "https://en.wikipedia.org/wiki/Benzyl_chloride" },
+      { name: "ChemicalBook, Benzyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854160.htm" },
+      { name: "ScienceDirect, Side-chain chlorination of toluene", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-chloride" },
     ],
   },
 
@@ -3942,9 +3942,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia: Benzothiazole", url: "https://en.wikipedia.org/wiki/Benzothiazole" },
-      { name: "Wikipedia: 2-Mercaptobenzothiazole", url: "https://en.wikipedia.org/wiki/2-Mercaptobenzothiazole" },
-      { name: "ChemicalBook: Benzothiazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853243.htm" },
+      { name: "Wikipedia, Benzothiazole", url: "https://en.wikipedia.org/wiki/Benzothiazole" },
+      { name: "Wikipedia, 2-Mercaptobenzothiazole", url: "https://en.wikipedia.org/wiki/2-Mercaptobenzothiazole" },
+      { name: "ChemicalBook, Benzothiazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4853243.htm" },
     ],
   },
 
@@ -3964,9 +3964,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "AltiVia", url: "https://www.altivia.com" },
     ],
     sources: [
-      { name: "Wikipedia: Alpha-Methylstyrene", url: "https://en.wikipedia.org/wiki/Alpha-Methylstyrene" },
-      { name: "AltiVia: Alpha methylstyrene", url: "https://www.altivia.com/product/alpha-methylstyrene/" },
-      { name: "ChemicalBook: alpha-Methylstyrene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1354214.htm" },
+      { name: "Wikipedia, Alpha-Methylstyrene", url: "https://en.wikipedia.org/wiki/Alpha-Methylstyrene" },
+      { name: "AltiVia, Alpha methylstyrene", url: "https://www.altivia.com/product/alpha-methylstyrene/" },
+      { name: "ChemicalBook, alpha-Methylstyrene", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1354214.htm" },
     ],
   },
 
@@ -3988,9 +3988,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sasol", url: "https://www.sasol.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ethyl acetate", url: "https://en.wikipedia.org/wiki/Ethyl_acetate" },
-      { name: "ChemicalBook: Ethyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854142.htm" },
-      { name: "Celanese: Ethyl acetate", url: "https://www.celanese.com/products/ethyl-acetate" },
+      { name: "Wikipedia, Ethyl acetate", url: "https://en.wikipedia.org/wiki/Ethyl_acetate" },
+      { name: "ChemicalBook, Ethyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854142.htm" },
+      { name: "Celanese, Ethyl acetate", url: "https://www.celanese.com/products/ethyl-acetate" },
     ],
   },
 
@@ -4012,9 +4012,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LyondellBasell", url: "https://www.lyondellbasell.com" },
     ],
     sources: [
-      { name: "Wikipedia: Tetrahydrofuran (production)", url: "https://en.wikipedia.org/wiki/Tetrahydrofuran" },
-      { name: "Wikipedia: 1,4-Butanediol", url: "https://en.wikipedia.org/wiki/1,4-Butanediol" },
-      { name: "ChemicalBook: Tetrahydrofuran", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854098.htm" },
+      { name: "Wikipedia, Tetrahydrofuran (production)", url: "https://en.wikipedia.org/wiki/Tetrahydrofuran" },
+      { name: "Wikipedia, 1,4-Butanediol", url: "https://en.wikipedia.org/wiki/1,4-Butanediol" },
+      { name: "ChemicalBook, Tetrahydrofuran", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854098.htm" },
     ],
   },
 
@@ -4035,9 +4035,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Arkema", url: "https://www.arkema.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chlorodifluoromethane (R-22)", url: "https://en.wikipedia.org/wiki/Chlorodifluoromethane" },
-      { name: "US EPA: Phaseout of class II ODS (HCFCs)", url: "https://www.epa.gov/ods-phaseout/phaseout-class-ii-ozone-depleting-substances" },
-      { name: "ChemicalBook: Chlorodifluoromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
+      { name: "Wikipedia, Chlorodifluoromethane (R-22)", url: "https://en.wikipedia.org/wiki/Chlorodifluoromethane" },
+      { name: "US EPA, Phaseout of class II ODS (HCFCs)", url: "https://www.epa.gov/ods-phaseout/phaseout-class-ii-ozone-depleting-substances" },
+      { name: "ChemicalBook, Chlorodifluoromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
     ],
   },
 
@@ -4057,9 +4057,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia: Trimethylolpropane", url: "https://en.wikipedia.org/wiki/Trimethylolpropane" },
-      { name: "Perstorp: TMP", url: "https://www.perstorp.com/en/products/trimethylolpropane_tmp" },
-      { name: "ChemicalBook: Trimethylolpropane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6125327.htm" },
+      { name: "Wikipedia, Trimethylolpropane", url: "https://en.wikipedia.org/wiki/Trimethylolpropane" },
+      { name: "Perstorp, TMP", url: "https://www.perstorp.com/en/products/trimethylolpropane_tmp" },
+      { name: "ChemicalBook, Trimethylolpropane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6125327.htm" },
     ],
   },
 
@@ -4078,9 +4078,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Chemical Group", url: "https://www.mcgc.com" },
     ],
     sources: [
-      { name: "Wikipedia: Methacrylic anhydride", url: "https://en.wikipedia.org/wiki/Methacrylic_anhydride" },
-      { name: "ChemicalBook: Methacrylic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6112079.htm" },
-      { name: "Röhm: Methacrylate monomers", url: "https://www.roehm.com/en/products-industries/methacrylate-monomers" },
+      { name: "Wikipedia, Methacrylic anhydride", url: "https://en.wikipedia.org/wiki/Methacrylic_anhydride" },
+      { name: "ChemicalBook, Methacrylic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6112079.htm" },
+      { name: "Röhm, Methacrylate monomers", url: "https://www.roehm.com/en/products-industries/methacrylate-monomers" },
     ],
   },
 
@@ -4098,9 +4098,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Westlake Epoxy (Versatic acids)", url: "https://www.westlake.com" },
     ],
     sources: [
-      { name: "Wikipedia: Neodecanoic acid (Versatic 10)", url: "https://en.wikipedia.org/wiki/Neodecanoic_acid" },
-      { name: "Nouryon: Organic peroxides", url: "https://www.nouryon.com/products/organic-peroxides/" },
-      { name: "ChemicalBook: Neodecanoyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852153.htm" },
+      { name: "Wikipedia, Neodecanoic acid (Versatic 10)", url: "https://en.wikipedia.org/wiki/Neodecanoic_acid" },
+      { name: "Nouryon, Organic peroxides", url: "https://www.nouryon.com/products/organic-peroxides/" },
+      { name: "ChemicalBook, Neodecanoyl chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852153.htm" },
     ],
   },
 
@@ -4121,9 +4121,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nan Ya Plastics", url: "https://www.nanya.com" },
     ],
     sources: [
-      { name: "Wikipedia: Diisononyl phthalate", url: "https://en.wikipedia.org/wiki/Diisononyl_phthalate" },
-      { name: "ExxonMobil: Jayflex DINP plasticizer", url: "https://www.exxonmobilchemical.com/en/products/plasticizers/jayflex-dinp" },
-      { name: "ChemicalBook: Diisononyl phthalate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1230086.htm" },
+      { name: "Wikipedia, Diisononyl phthalate", url: "https://en.wikipedia.org/wiki/Diisononyl_phthalate" },
+      { name: "ExxonMobil, Jayflex DINP plasticizer", url: "https://www.exxonmobilchemical.com/en/products/plasticizers/jayflex-dinp" },
+      { name: "ChemicalBook, Diisononyl phthalate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1230086.htm" },
     ],
   },
 
@@ -4141,9 +4141,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Clariant", url: "https://www.clariant.com" },
     ],
     sources: [
-      { name: "Wikipedia: Methylparaben", url: "https://en.wikipedia.org/wiki/Methylparaben" },
-      { name: "ChemicalBook: Methylparaben", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
-      { name: "Sharon Laboratories: Parabens", url: "https://www.sharon-labs.com/preservatives/" },
+      { name: "Wikipedia, Methylparaben", url: "https://en.wikipedia.org/wiki/Methylparaben" },
+      { name: "ChemicalBook, Methylparaben", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
+      { name: "Sharon Laboratories, Parabens", url: "https://www.sharon-labs.com/preservatives/" },
     ],
   },
 
@@ -4162,9 +4162,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Resorcinol (production)", url: "https://en.wikipedia.org/wiki/Resorcinol" },
-      { name: "Atul Ltd: Resorcinol", url: "https://www.atul.co.in/products/aromatics" },
-      { name: "ChemicalBook: Resorcinol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854211.htm" },
+      { name: "Wikipedia, Resorcinol (production)", url: "https://en.wikipedia.org/wiki/Resorcinol" },
+      { name: "Atul Ltd, Resorcinol", url: "https://www.atul.co.in/products/aromatics" },
+      { name: "ChemicalBook, Resorcinol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2854211.htm" },
     ],
   },
 
@@ -4183,9 +4183,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "Wikipedia: p-Toluenesulfonic acid", url: "https://en.wikipedia.org/wiki/P-Toluenesulfonic_acid" },
-      { name: "ChemicalBook: p-Toluenesulfonic acid monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7159418.htm" },
-      { name: "Atul Ltd: Sulfones/sulfonic acids", url: "https://www.atul.co.in/products/aromatics" },
+      { name: "Wikipedia, p-Toluenesulfonic acid", url: "https://en.wikipedia.org/wiki/P-Toluenesulfonic_acid" },
+      { name: "ChemicalBook, p-Toluenesulfonic acid monohydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7159418.htm" },
+      { name: "Atul Ltd, Sulfones/sulfonic acids", url: "https://www.atul.co.in/products/aromatics" },
     ],
   },
 
@@ -4204,9 +4204,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aartiindustries.com" },
     ],
     sources: [
-      { name: "ChemicalBook: Sodium 3-nitrobenzenesulfonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4318188.htm" },
-      { name: "Archroma: Textile specialties", url: "https://www.archroma.com/markets/textiles" },
-      { name: "PubChem: Sodium 3-nitrobenzenesulfonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-3-nitrobenzenesulfonate" },
+      { name: "ChemicalBook, Sodium 3-nitrobenzenesulfonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4318188.htm" },
+      { name: "Archroma, Textile specialties", url: "https://www.archroma.com/markets/textiles" },
+      { name: "PubChem, Sodium 3-nitrobenzenesulfonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-3-nitrobenzenesulfonate" },
     ],
   },
 
@@ -4226,9 +4226,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Chattem Chemicals", url: "https://www.chattemchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Glycine (chemical synthesis)", url: "https://en.wikipedia.org/wiki/Glycine" },
-      { name: "ChemicalBook: Glycine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854227.htm" },
-      { name: "Chattem Chemicals: Glycine", url: "https://www.chattemchemicals.com/products/" },
+      { name: "Wikipedia, Glycine (chemical synthesis)", url: "https://en.wikipedia.org/wiki/Glycine" },
+      { name: "ChemicalBook, Glycine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854227.htm" },
+      { name: "Chattem Chemicals, Glycine", url: "https://www.chattemchemicals.com/products/" },
     ],
   },
 
@@ -4249,9 +4249,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gulshan Polyols", url: "https://www.gulshanindia.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sorbitol (production)", url: "https://en.wikipedia.org/wiki/Sorbitol" },
-      { name: "Roquette: Sorbitol", url: "https://www.roquette.com/industries/pharmaceuticals/sorbitol" },
-      { name: "ChemicalBook: Sorbitol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
+      { name: "Wikipedia, Sorbitol (production)", url: "https://en.wikipedia.org/wiki/Sorbitol" },
+      { name: "Roquette, Sorbitol", url: "https://www.roquette.com/industries/pharmaceuticals/sorbitol" },
+      { name: "ChemicalBook, Sorbitol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
     ],
   },
 
@@ -4271,9 +4271,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "PMC Biogenix", url: "https://www.pmcbiogenix.com" },
     ],
     sources: [
-      { name: "Wikipedia: Erucamide", url: "https://en.wikipedia.org/wiki/Erucamide" },
-      { name: "Fine Organics: Slip additives", url: "https://www.fineorganics.com/products" },
-      { name: "ChemicalBook: Erucamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8246171.htm" },
+      { name: "Wikipedia, Erucamide", url: "https://en.wikipedia.org/wiki/Erucamide" },
+      { name: "Fine Organics, Slip additives", url: "https://www.fineorganics.com/products" },
+      { name: "ChemicalBook, Erucamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8246171.htm" },
     ],
   },
 
@@ -4293,9 +4293,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kanchi Karpooram", url: "https://www.kanchikarpooram.com" },
     ],
     sources: [
-      { name: "Wikipedia: Camphor (production)", url: "https://en.wikipedia.org/wiki/Camphor" },
-      { name: "Mangalam Organics: Camphor", url: "https://www.mangalamorganics.com/camphor/" },
-      { name: "ChemicalBook: Camphor", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854237.htm" },
+      { name: "Wikipedia, Camphor (production)", url: "https://en.wikipedia.org/wiki/Camphor" },
+      { name: "Mangalam Organics, Camphor", url: "https://www.mangalamorganics.com/camphor/" },
+      { name: "ChemicalBook, Camphor", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854237.htm" },
     ],
   },
 
@@ -4314,9 +4314,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vigon International", url: "https://www.vigon.com" },
     ],
     sources: [
-      { name: "Wikipedia: Allyl isothiocyanate", url: "https://en.wikipedia.org/wiki/Allyl_isothiocyanate" },
-      { name: "ChemicalBook: Allyl isothiocyanate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854216.htm" },
-      { name: "PubChem: Allyl isothiocyanate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Allyl-isothiocyanate" },
+      { name: "Wikipedia, Allyl isothiocyanate", url: "https://en.wikipedia.org/wiki/Allyl_isothiocyanate" },
+      { name: "ChemicalBook, Allyl isothiocyanate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854216.htm" },
+      { name: "PubChem, Allyl isothiocyanate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Allyl-isothiocyanate" },
     ],
   },
 
@@ -4335,9 +4335,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vigon International", url: "https://www.vigon.com" },
     ],
     sources: [
-      { name: "ChemicalBook: Isoeugenol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5292533.htm" },
-      { name: "Wikipedia: Isoeugenol", url: "https://en.wikipedia.org/wiki/Isoeugenol" },
-      { name: "The Good Scents Company: Isoeugenyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1009431.html" },
+      { name: "ChemicalBook, Isoeugenol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5292533.htm" },
+      { name: "Wikipedia, Isoeugenol", url: "https://en.wikipedia.org/wiki/Isoeugenol" },
+      { name: "The Good Scents Company, Isoeugenyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1009431.html" },
     ],
   },
 
@@ -4357,9 +4357,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Croda International", url: "https://www.croda.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cholesterol (industrial)", url: "https://en.wikipedia.org/wiki/Cholesterol" },
-      { name: "Dishman: Cholesterol & derivatives", url: "https://www.dishmangroup.com/cholesterol-and-related-products" },
-      { name: "ChemicalBook: Cholesterol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
+      { name: "Wikipedia, Cholesterol (industrial)", url: "https://en.wikipedia.org/wiki/Cholesterol" },
+      { name: "Dishman, Cholesterol & derivatives", url: "https://www.dishmangroup.com/cholesterol-and-related-products" },
+      { name: "ChemicalBook, Cholesterol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854175.htm" },
     ],
   },
 
@@ -4378,9 +4378,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Acetylcysteine", url: "https://en.wikipedia.org/wiki/Acetylcysteine" },
-      { name: "ChemicalBook: N-Acetyl-L-cysteine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852915.htm" },
-      { name: "PharmaCompass: Acetylcysteine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/acetylcysteine" },
+      { name: "Wikipedia, Acetylcysteine", url: "https://en.wikipedia.org/wiki/Acetylcysteine" },
+      { name: "ChemicalBook, N-Acetyl-L-cysteine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852915.htm" },
+      { name: "PharmaCompass, Acetylcysteine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/acetylcysteine" },
     ],
   },
 
@@ -4398,9 +4398,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cyclohexanecarboxylic acid", url: "https://en.wikipedia.org/wiki/Cyclohexanecarboxylic_acid" },
-      { name: "ChemicalBook: Cyclohexanecarboxylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852616.htm" },
-      { name: "PubChem: Cyclohexanecarboxylic acid", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Cyclohexanecarboxylic-acid" },
+      { name: "Wikipedia, Cyclohexanecarboxylic acid", url: "https://en.wikipedia.org/wiki/Cyclohexanecarboxylic_acid" },
+      { name: "ChemicalBook, Cyclohexanecarboxylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852616.htm" },
+      { name: "PubChem, Cyclohexanecarboxylic acid", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Cyclohexanecarboxylic-acid" },
     ],
   },
 
@@ -4420,9 +4420,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Symrise", url: "https://www.symrise.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ionone", url: "https://en.wikipedia.org/wiki/Ionone" },
-      { name: "The Good Scents Company: Methyl ionone", url: "http://www.thegoodscentscompany.com/data/rw1004471.html" },
-      { name: "ChemicalBook: alpha-Methylionone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854255.htm" },
+      { name: "Wikipedia, Ionone", url: "https://en.wikipedia.org/wiki/Ionone" },
+      { name: "The Good Scents Company, Methyl ionone", url: "http://www.thegoodscentscompany.com/data/rw1004471.html" },
+      { name: "ChemicalBook, alpha-Methylionone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854255.htm" },
     ],
   },
 
@@ -4441,9 +4441,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sanofi (originator, Flagyl)", url: "https://www.sanofi.com" },
     ],
     sources: [
-      { name: "Wikipedia: Metronidazole", url: "https://en.wikipedia.org/wiki/Metronidazole" },
-      { name: "PharmaCompass: Metronidazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/metronidazole" },
-      { name: "Procurement Resource: Metronidazole process", url: "https://www.procurementresource.com/reports/metronidazole-manufacturing-plant-project-report" },
+      { name: "Wikipedia, Metronidazole", url: "https://en.wikipedia.org/wiki/Metronidazole" },
+      { name: "PharmaCompass, Metronidazole manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/metronidazole" },
+      { name: "Procurement Resource, Metronidazole process", url: "https://www.procurementresource.com/reports/metronidazole-manufacturing-plant-project-report" },
     ],
   },
 
@@ -4461,9 +4461,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GSK (originator, Piriton)", url: "https://www.gsk.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chlorphenamine", url: "https://en.wikipedia.org/wiki/Chlorphenamine" },
-      { name: "Supriya Lifescience: Antihistamines", url: "https://www.supriyalifescience.com/product-portfolio/" },
-      { name: "PharmaCompass: Chlorpheniramine maleate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/chlorpheniramine-maleate" },
+      { name: "Wikipedia, Chlorphenamine", url: "https://en.wikipedia.org/wiki/Chlorphenamine" },
+      { name: "Supriya Lifescience, Antihistamines", url: "https://www.supriyalifescience.com/product-portfolio/" },
+      { name: "PharmaCompass, Chlorpheniramine maleate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/chlorpheniramine-maleate" },
     ],
   },
 
@@ -4483,9 +4483,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ACS Dobfar", url: "https://www.acsdobfar.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cefalexin", url: "https://en.wikipedia.org/wiki/Cefalexin" },
-      { name: "Centrient: Enzymatic cephalosporins", url: "https://centrient.com/our-products/cephalosporins" },
-      { name: "PharmaCompass: Cephalexin", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/cefalexin" },
+      { name: "Wikipedia, Cefalexin", url: "https://en.wikipedia.org/wiki/Cefalexin" },
+      { name: "Centrient, Enzymatic cephalosporins", url: "https://centrient.com/our-products/cephalosporins" },
+      { name: "PharmaCompass, Cephalexin", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/cefalexin" },
     ],
   },
 
@@ -4505,9 +4505,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "Wikipedia: Hydroxycarbamide", url: "https://en.wikipedia.org/wiki/Hydroxycarbamide" },
-      { name: "ChemicalBook: Hydroxyurea", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5274408.htm" },
-      { name: "PharmaCompass: Hydroxyurea", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/hydroxyurea" },
+      { name: "Wikipedia, Hydroxycarbamide", url: "https://en.wikipedia.org/wiki/Hydroxycarbamide" },
+      { name: "ChemicalBook, Hydroxyurea", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5274408.htm" },
+      { name: "PharmaCompass, Hydroxyurea", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/hydroxyurea" },
     ],
   },
 
@@ -4528,9 +4528,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Kudos Chemie", url: "https://www.kudoschemie.com" },
     ],
     sources: [
-      { name: "Wikipedia: Caffeine (synthesis)", url: "https://en.wikipedia.org/wiki/Caffeine" },
-      { name: "ChemicalBook: Caffeine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852793.htm" },
-      { name: "Kudos Chemie: Caffeine", url: "https://www.kudoschemie.com/caffeine.php" },
+      { name: "Wikipedia, Caffeine (synthesis)", url: "https://en.wikipedia.org/wiki/Caffeine" },
+      { name: "ChemicalBook, Caffeine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852793.htm" },
+      { name: "Kudos Chemie, Caffeine", url: "https://www.kudoschemie.com/caffeine.php" },
     ],
   },
 
@@ -4551,9 +4551,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sandoz", url: "https://www.sandoz.com" },
     ],
     sources: [
-      { name: "Wikipedia: Amoxicillin", url: "https://en.wikipedia.org/wiki/Amoxicillin" },
-      { name: "Centrient: Enzymatic amoxicillin", url: "https://centrient.com/our-products/penicillins" },
-      { name: "ScienceDirect: Enzymatic amoxicillin synthesis", url: "https://www.sciencedirect.com/science/article/abs/pii/S1359511309002475" },
+      { name: "Wikipedia, Amoxicillin", url: "https://en.wikipedia.org/wiki/Amoxicillin" },
+      { name: "Centrient, Enzymatic amoxicillin", url: "https://centrient.com/our-products/penicillins" },
+      { name: "ScienceDirect, Enzymatic amoxicillin synthesis", url: "https://www.sciencedirect.com/science/article/abs/pii/S1359511309002475" },
     ],
   },
 
@@ -4571,9 +4571,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mayur Dyechem", url: "https://www.mayurdyeschem.com" },
     ],
     sources: [
-      { name: "Poultry Trends: Stallen's Halquinol API facility", url: "https://www.poultrytrends.in/stallens-new-api-facility-for-halquinol/" },
-      { name: "PharmaCompass: Halquinol", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/halquinol" },
-      { name: "Wikipedia: Halquinol", url: "https://en.wikipedia.org/wiki/Halquinol" },
+      { name: "Poultry Trends, Stallen's Halquinol API facility", url: "https://www.poultrytrends.in/stallens-new-api-facility-for-halquinol/" },
+      { name: "PharmaCompass, Halquinol", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/halquinol" },
+      { name: "Wikipedia, Halquinol", url: "https://en.wikipedia.org/wiki/Halquinol" },
     ],
   },
 
@@ -4592,9 +4592,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Farmson Pharmaceutical", url: "https://www.farmson.com" },
     ],
     sources: [
-      { name: "Wikipedia: Paracetamol (synthesis)", url: "https://en.wikipedia.org/wiki/Paracetamol" },
-      { name: "ChemicalBook: Acetaminophen", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854301.htm" },
-      { name: "ChemAnalyst: Paracetamol production", url: "https://www.chemanalyst.com/industry-report/paracetamol-market-665" },
+      { name: "Wikipedia, Paracetamol (synthesis)", url: "https://en.wikipedia.org/wiki/Paracetamol" },
+      { name: "ChemicalBook, Acetaminophen", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854301.htm" },
+      { name: "ChemAnalyst, Paracetamol production", url: "https://www.chemanalyst.com/industry-report/paracetamol-market-665" },
     ],
   },
 
@@ -4615,9 +4615,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solara Active Pharma Sciences", url: "https://www.solara.co.in" },
     ],
     sources: [
-      { name: "ACS: BHC ibuprofen green chemistry landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/ibuprofen.html" },
-      { name: "Wikipedia: Ibuprofen (synthesis)", url: "https://en.wikipedia.org/wiki/Ibuprofen" },
-      { name: "IOLCP: Ibuprofen", url: "https://www.iolcp.com/ibuprofen" },
+      { name: "ACS, BHC ibuprofen green chemistry landmark", url: "https://www.acs.org/education/whatischemistry/landmarks/ibuprofen.html" },
+      { name: "Wikipedia, Ibuprofen (synthesis)", url: "https://en.wikipedia.org/wiki/Ibuprofen" },
+      { name: "IOLCP, Ibuprofen", url: "https://www.iolcp.com/ibuprofen" },
     ],
   },
 
@@ -4637,9 +4637,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "MSN Laboratories", url: "https://www.msnlabs.com" },
     ],
     sources: [
-      { name: "Wikipedia: Pitavastatin", url: "https://en.wikipedia.org/wiki/Pitavastatin" },
-      { name: "PharmaCompass: Pitavastatin calcium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/pitavastatin-calcium" },
-      { name: "ChemicalBook: Pitavastatin calcium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409801.htm" },
+      { name: "Wikipedia, Pitavastatin", url: "https://en.wikipedia.org/wiki/Pitavastatin" },
+      { name: "PharmaCompass, Pitavastatin calcium", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/pitavastatin-calcium" },
+      { name: "ChemicalBook, Pitavastatin calcium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409801.htm" },
     ],
   },
 
@@ -4659,9 +4659,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Medichem", url: "https://www.medichem.es" },
     ],
     sources: [
-      { name: "Wikipedia: Diacerein", url: "https://en.wikipedia.org/wiki/Diacerein" },
-      { name: "PharmaCompass: Diacerein", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/diacerein" },
-      { name: "ChemicalBook: Diacerein", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4253900.htm" },
+      { name: "Wikipedia, Diacerein", url: "https://en.wikipedia.org/wiki/Diacerein" },
+      { name: "PharmaCompass, Diacerein", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/diacerein" },
+      { name: "ChemicalBook, Diacerein", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4253900.htm" },
     ],
   },
 
@@ -4681,9 +4681,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Neuland Laboratories", url: "https://www.neulandlabs.com" },
     ],
     sources: [
-      { name: "Wikipedia: Salbutamol", url: "https://en.wikipedia.org/wiki/Salbutamol" },
-      { name: "PharmaCompass: Salbutamol sulfate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/salbutamol-sulfate" },
-      { name: "ChemicalBook: Albuterol sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3387159.htm" },
+      { name: "Wikipedia, Salbutamol", url: "https://en.wikipedia.org/wiki/Salbutamol" },
+      { name: "PharmaCompass, Salbutamol sulfate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/salbutamol-sulfate" },
+      { name: "ChemicalBook, Albuterol sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3387159.htm" },
     ],
   },
 
@@ -4702,9 +4702,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dishman Carbogen Amcis", url: "https://www.dishmangroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Propranolol", url: "https://en.wikipedia.org/wiki/Propranolol" },
-      { name: "ChemicalBook: Propranolol hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113458.htm" },
-      { name: "PharmaCompass: Propranolol hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/propranolol-hydrochloride" },
+      { name: "Wikipedia, Propranolol", url: "https://en.wikipedia.org/wiki/Propranolol" },
+      { name: "ChemicalBook, Propranolol hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5113458.htm" },
+      { name: "PharmaCompass, Propranolol hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/propranolol-hydrochloride" },
     ],
   },
 
@@ -4723,9 +4723,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Alkaloids Corporation", url: "https://www.alkaloids.com" },
     ],
     sources: [
-      { name: "Wikipedia: Nicotine", url: "https://en.wikipedia.org/wiki/Nicotine" },
-      { name: "ChemicalBook: Nicotine sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2229957.htm" },
-      { name: "CNT: Nicotine products", url: "https://www.cnt-tobacco.com/products/" },
+      { name: "Wikipedia, Nicotine", url: "https://en.wikipedia.org/wiki/Nicotine" },
+      { name: "ChemicalBook, Nicotine sulfate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2229957.htm" },
+      { name: "CNT, Nicotine products", url: "https://www.cnt-tobacco.com/products/" },
     ],
   },
 
@@ -4745,9 +4745,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Gas Chemical", url: "https://www.mgc.co.jp/eng/" },
     ],
     sources: [
-      { name: "Wikipedia: Coenzyme Q10", url: "https://en.wikipedia.org/wiki/Coenzyme_Q10" },
-      { name: "Kaneka: Coenzyme Q10", url: "https://www.kaneka.co.jp/business/health/nbd_007.html" },
-      { name: "PMC: Microbial production of CoQ10", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5408984/" },
+      { name: "Wikipedia, Coenzyme Q10", url: "https://en.wikipedia.org/wiki/Coenzyme_Q10" },
+      { name: "Kaneka, Coenzyme Q10", url: "https://www.kaneka.co.jp/business/health/nbd_007.html" },
+      { name: "PMC, Microbial production of CoQ10", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5408984/" },
     ],
   },
 
@@ -4767,9 +4767,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Galactic", url: "https://www.lactic.com" },
     ],
     sources: [
-      { name: "Wikipedia: Lactic acid (production)", url: "https://en.wikipedia.org/wiki/Lactic_acid" },
-      { name: "Corbion: Lactic acid", url: "https://www.corbion.com/products/lactic-acid-and-derivatives" },
-      { name: "PMC: Microbial lactic acid production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8235664/" },
+      { name: "Wikipedia, Lactic acid (production)", url: "https://en.wikipedia.org/wiki/Lactic_acid" },
+      { name: "Corbion, Lactic acid", url: "https://www.corbion.com/products/lactic-acid-and-derivatives" },
+      { name: "PMC, Microbial lactic acid production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8235664/" },
     ],
   },
 
@@ -4789,9 +4789,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Northeast Pharmaceutical Group", url: "https://www.nepharm.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium ascorbate", url: "https://en.wikipedia.org/wiki/Sodium_ascorbate" },
-      { name: "Wikipedia: Vitamin C (industrial synthesis)", url: "https://en.wikipedia.org/wiki/Vitamin_C" },
-      { name: "ChemicalBook: Sodium ascorbate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5859613.htm" },
+      { name: "Wikipedia, Sodium ascorbate", url: "https://en.wikipedia.org/wiki/Sodium_ascorbate" },
+      { name: "Wikipedia, Vitamin C (industrial synthesis)", url: "https://en.wikipedia.org/wiki/Vitamin_C" },
+      { name: "ChemicalBook, Sodium ascorbate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5859613.htm" },
     ],
   },
 
@@ -4810,9 +4810,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vertellus", url: "https://www.vertellus.com" },
     ],
     sources: [
-      { name: "Wikipedia: Docusate", url: "https://en.wikipedia.org/wiki/Docusate" },
-      { name: "ChemicalBook: Docusate sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1234567.htm" },
-      { name: "PubChem: Docusate sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Docusate-sodium" },
+      { name: "Wikipedia, Docusate", url: "https://en.wikipedia.org/wiki/Docusate" },
+      { name: "ChemicalBook, Docusate sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1234567.htm" },
+      { name: "PubChem, Docusate sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Docusate-sodium" },
     ],
   },
 
@@ -4830,9 +4830,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich, reference)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium thiopental", url: "https://en.wikipedia.org/wiki/Sodium_thiopental" },
-      { name: "ChemicalBook: Thiopental sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354344.htm" },
-      { name: "PubChem: Thiopental sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Thiopental-sodium" },
+      { name: "Wikipedia, Sodium thiopental", url: "https://en.wikipedia.org/wiki/Sodium_thiopental" },
+      { name: "ChemicalBook, Thiopental sodium", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354344.htm" },
+      { name: "PubChem, Thiopental sodium", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Thiopental-sodium" },
     ],
   },
 
@@ -4851,9 +4851,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vertellus", url: "https://www.vertellus.com" },
     ],
     sources: [
-      { name: "Wikipedia: Nitromethane (production)", url: "https://en.wikipedia.org/wiki/Nitromethane" },
-      { name: "ANGUS Chemical: Nitroalkanes", url: "https://www.angus.com/products/" },
-      { name: "ChemicalBook: Nitromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852656.htm" },
+      { name: "Wikipedia, Nitromethane (production)", url: "https://en.wikipedia.org/wiki/Nitromethane" },
+      { name: "ANGUS Chemical, Nitroalkanes", url: "https://www.angus.com/products/" },
+      { name: "ChemicalBook, Nitromethane", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852656.htm" },
     ],
   },
 
@@ -4874,9 +4874,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Corteva Agriscience", url: "https://www.corteva.com" },
     ],
     sources: [
-      { name: "Wikipedia: Mancozeb", url: "https://en.wikipedia.org/wiki/Mancozeb" },
-      { name: "Indofil: Mancozeb", url: "https://www.indofil.com/crop-protection" },
-      { name: "US EPA: Mancozeb", url: "https://www.epa.gov/ingredients-used-pesticide-products/mancozeb" },
+      { name: "Wikipedia, Mancozeb", url: "https://en.wikipedia.org/wiki/Mancozeb" },
+      { name: "Indofil, Mancozeb", url: "https://www.indofil.com/crop-protection" },
+      { name: "US EPA, Mancozeb", url: "https://www.epa.gov/ingredients-used-pesticide-products/mancozeb" },
     ],
   },
 
@@ -4896,9 +4896,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia: Samarium(III) oxide", url: "https://en.wikipedia.org/wiki/Samarium(III)_oxide" },
-      { name: "Wikipedia: Rare-earth element (separation)", url: "https://en.wikipedia.org/wiki/Rare-earth_element" },
-      { name: "American Elements: Samarium oxide", url: "https://www.americanelements.com/samarium-oxide-12060-58-1" },
+      { name: "Wikipedia, Samarium(III) oxide", url: "https://en.wikipedia.org/wiki/Samarium(III)_oxide" },
+      { name: "Wikipedia, Rare-earth element (separation)", url: "https://en.wikipedia.org/wiki/Rare-earth_element" },
+      { name: "American Elements, Samarium oxide", url: "https://www.americanelements.com/samarium-oxide-12060-58-1" },
     ],
   },
 
@@ -4917,9 +4917,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Mercury(II) chloride", url: "https://en.wikipedia.org/wiki/Mercury(II)_chloride" },
-      { name: "ChemicalBook: Mercuric chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852602.htm" },
-      { name: "PubChem: Mercuric chloride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Mercuric-chloride" },
+      { name: "Wikipedia, Mercury(II) chloride", url: "https://en.wikipedia.org/wiki/Mercury(II)_chloride" },
+      { name: "ChemicalBook, Mercuric chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852602.htm" },
+      { name: "PubChem, Mercuric chloride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Mercuric-chloride" },
     ],
   },
 
@@ -4940,9 +4940,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Delamine", url: "https://www.delamine.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ethylenediamine", url: "https://en.wikipedia.org/wiki/Ethylenediamine" },
-      { name: "Delamine: Ethyleneamines", url: "https://www.delamine.com/products" },
-      { name: "ChemicalBook: Ethylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854096.htm" },
+      { name: "Wikipedia, Ethylenediamine", url: "https://en.wikipedia.org/wiki/Ethylenediamine" },
+      { name: "Delamine, Ethyleneamines", url: "https://www.delamine.com/products" },
+      { name: "ChemicalBook, Ethylenediamine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854096.htm" },
     ],
   },
 
@@ -4963,9 +4963,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia: Fatty alcohol (production)", url: "https://en.wikipedia.org/wiki/Fatty_alcohol" },
-      { name: "KLK OLEO: Fatty alcohols", url: "https://www.klkoleo.com/product/fatty-alcohols.html" },
-      { name: "ScienceDirect: Fatty alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/fatty-alcohol" },
+      { name: "Wikipedia, Fatty alcohol (production)", url: "https://en.wikipedia.org/wiki/Fatty_alcohol" },
+      { name: "KLK OLEO, Fatty alcohols", url: "https://www.klkoleo.com/product/fatty-alcohols.html" },
+      { name: "ScienceDirect, Fatty alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/fatty-alcohol" },
     ],
   },
 
@@ -4985,9 +4985,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium selenite", url: "https://en.wikipedia.org/wiki/Sodium_selenite" },
-      { name: "Wikipedia: Selenium dioxide", url: "https://en.wikipedia.org/wiki/Selenium_dioxide" },
-      { name: "ChemicalBook: Sodium selenite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158228.htm" },
+      { name: "Wikipedia, Sodium selenite", url: "https://en.wikipedia.org/wiki/Sodium_selenite" },
+      { name: "Wikipedia, Selenium dioxide", url: "https://en.wikipedia.org/wiki/Selenium_dioxide" },
+      { name: "ChemicalBook, Sodium selenite", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158228.htm" },
     ],
   },
 
@@ -5006,9 +5006,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Boron trifluoride", url: "https://en.wikipedia.org/wiki/Boron_trifluoride" },
-      { name: "ChemicalBook: Boron trifluoride-methanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8156490.htm" },
-      { name: "PubChem: Boron trifluoride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Boron-trifluoride" },
+      { name: "Wikipedia, Boron trifluoride", url: "https://en.wikipedia.org/wiki/Boron_trifluoride" },
+      { name: "ChemicalBook, Boron trifluoride-methanol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8156490.htm" },
+      { name: "PubChem, Boron trifluoride", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Boron-trifluoride" },
     ],
   },
 
@@ -5026,9 +5026,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "TCI Chemicals", url: "https://www.tcichemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Diisopropyl tartrate", url: "https://en.wikipedia.org/wiki/Diisopropyl_tartrate" },
-      { name: "Wikipedia: Sharpless epoxidation", url: "https://en.wikipedia.org/wiki/Sharpless_epoxidation" },
-      { name: "ChemicalBook: Diisopropyl D-tartrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854262.htm" },
+      { name: "Wikipedia, Diisopropyl tartrate", url: "https://en.wikipedia.org/wiki/Diisopropyl_tartrate" },
+      { name: "Wikipedia, Sharpless epoxidation", url: "https://en.wikipedia.org/wiki/Sharpless_epoxidation" },
+      { name: "ChemicalBook, Diisopropyl D-tartrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9854262.htm" },
     ],
   },
 
@@ -5049,9 +5049,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nirma", url: "https://www.nirma.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Sodium_hydroxide" },
-      { name: "GACL: Caustic soda", url: "https://www.gacl.com/product-caustic-soda-flakes" },
-      { name: "Wikipedia: Chloralkali process", url: "https://en.wikipedia.org/wiki/Chloralkali_process" },
+      { name: "Wikipedia, Sodium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Sodium_hydroxide" },
+      { name: "GACL, Caustic soda", url: "https://www.gacl.com/product-caustic-soda-flakes" },
+      { name: "Wikipedia, Chloralkali process", url: "https://en.wikipedia.org/wiki/Chloralkali_process" },
     ],
   },
 
@@ -5070,9 +5070,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality Chemicals", url: "https://www.privi.com" },
     ],
     sources: [
-      { name: "The Good Scents Company: Verdyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1008492.html" },
-      { name: "Wikipedia: Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
-      { name: "ChemicalBook: Tricyclodecenyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1330336.htm" },
+      { name: "The Good Scents Company, Verdyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1008492.html" },
+      { name: "Wikipedia, Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
+      { name: "ChemicalBook, Tricyclodecenyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1330336.htm" },
     ],
   },
 
@@ -5091,9 +5091,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality Chemicals", url: "https://www.privi.com" },
     ],
     sources: [
-      { name: "The Good Scents Company: Verdyl propionate", url: "http://www.thegoodscentscompany.com/data/rw1008493.html" },
-      { name: "Wikipedia: Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
-      { name: "ChemicalBook: Tricyclodecenyl propionate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6330337.htm" },
+      { name: "The Good Scents Company, Verdyl propionate", url: "http://www.thegoodscentscompany.com/data/rw1008493.html" },
+      { name: "Wikipedia, Dicyclopentadiene", url: "https://en.wikipedia.org/wiki/Dicyclopentadiene" },
+      { name: "ChemicalBook, Tricyclodecenyl propionate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6330337.htm" },
     ],
   },
 
@@ -5111,9 +5111,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFF", url: "https://www.iff.com" },
     ],
     sources: [
-      { name: "Wikipedia: Acetal", url: "https://en.wikipedia.org/wiki/Acetal" },
-      { name: "The Good Scents Company: Fragrance acetals", url: "http://www.thegoodscentscompany.com/" },
-      { name: "ScienceDirect: Acetals in flavour & fragrance", url: "https://www.sciencedirect.com/topics/chemistry/acetal" },
+      { name: "Wikipedia, Acetal", url: "https://en.wikipedia.org/wiki/Acetal" },
+      { name: "The Good Scents Company, Fragrance acetals", url: "http://www.thegoodscentscompany.com/" },
+      { name: "ScienceDirect, Acetals in flavour & fragrance", url: "https://www.sciencedirect.com/topics/chemistry/acetal" },
     ],
   },
 
@@ -5132,9 +5132,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "ChemicalBook: 4-Methoxy-2-nitroaniline", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854252.htm" },
-      { name: "PubChem: 4-Methoxy-2-nitroaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methoxy-2-nitroaniline" },
-      { name: "Aarti Industries: Nitro / amino aromatics", url: "https://www.aarti-industries.com/products/chemical-products" },
+      { name: "ChemicalBook, 4-Methoxy-2-nitroaniline", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854252.htm" },
+      { name: "PubChem, 4-Methoxy-2-nitroaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methoxy-2-nitroaniline" },
+      { name: "Aarti Industries, Nitro / amino aromatics", url: "https://www.aarti-industries.com/products/chemical-products" },
     ],
   },
 
@@ -5152,9 +5152,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Claisen condensation", url: "https://en.wikipedia.org/wiki/Claisen_condensation" },
-      { name: "PubChem: 1-Cyclopropyl-1,3-butanedione", url: "https://pubchem.ncbi.nlm.nih.gov/compound/1-Cyclopropyl-1_3-butanedione" },
-      { name: "ChemicalBook: 1-Cyclopropane-1,3-butanedione", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1745310.htm" },
+      { name: "Wikipedia, Claisen condensation", url: "https://en.wikipedia.org/wiki/Claisen_condensation" },
+      { name: "PubChem, 1-Cyclopropyl-1,3-butanedione", url: "https://pubchem.ncbi.nlm.nih.gov/compound/1-Cyclopropyl-1_3-butanedione" },
+      { name: "ChemicalBook, 1-Cyclopropane-1,3-butanedione", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1745310.htm" },
     ],
   },
 
@@ -5172,9 +5172,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Advanced Biotech", url: "https://www.adv-bio.com" },
     ],
     sources: [
-      { name: "The Good Scents Company: Sulfurol acetate", url: "http://www.thegoodscentscompany.com/data/rw1010191.html" },
-      { name: "PubChem: 4-Methyl-5-thiazoleethanol acetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methyl-5-thiazoleethanol-acetate" },
-      { name: "ChemicalBook: 4-Methyl-5-thiazoleethanol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7466992.htm" },
+      { name: "The Good Scents Company, Sulfurol acetate", url: "http://www.thegoodscentscompany.com/data/rw1010191.html" },
+      { name: "PubChem, 4-Methyl-5-thiazoleethanol acetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/4-Methyl-5-thiazoleethanol-acetate" },
+      { name: "ChemicalBook, 4-Methyl-5-thiazoleethanol acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7466992.htm" },
     ],
   },
 
@@ -5193,9 +5193,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Macrocyclics", url: "https://www.macrocyclics.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cyclen", url: "https://en.wikipedia.org/wiki/Cyclen" },
-      { name: "Wikipedia: Richman-Atkins reaction", url: "https://en.wikipedia.org/wiki/Richman%E2%80%93Atkins_reaction" },
-      { name: "ChemicalBook: Cyclen tetrahydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8746392.htm" },
+      { name: "Wikipedia, Cyclen", url: "https://en.wikipedia.org/wiki/Cyclen" },
+      { name: "Wikipedia, Richman-Atkins reaction", url: "https://en.wikipedia.org/wiki/Richman%E2%80%93Atkins_reaction" },
+      { name: "ChemicalBook, Cyclen tetrahydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8746392.htm" },
     ],
   },
 
@@ -5214,9 +5214,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Benzyl alcohol (production)", url: "https://en.wikipedia.org/wiki/Benzyl_alcohol" },
-      { name: "ChemicalBook: Benzyl alcohol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854161.htm" },
-      { name: "ScienceDirect: Benzyl alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-alcohol" },
+      { name: "Wikipedia, Benzyl alcohol (production)", url: "https://en.wikipedia.org/wiki/Benzyl_alcohol" },
+      { name: "ChemicalBook, Benzyl alcohol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854161.htm" },
+      { name: "ScienceDirect, Benzyl alcohol manufacture", url: "https://www.sciencedirect.com/topics/chemistry/benzyl-alcohol" },
     ],
   },
 
@@ -5235,9 +5235,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Zydus Lifesciences", url: "https://www.zyduslife.com" },
     ],
     sources: [
-      { name: "Wikipedia: Furosemide", url: "https://en.wikipedia.org/wiki/Furosemide" },
-      { name: "PharmaCompass: Furosemide", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/furosemide" },
-      { name: "ChemicalBook: Furosemide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354345.htm" },
+      { name: "Wikipedia, Furosemide", url: "https://en.wikipedia.org/wiki/Furosemide" },
+      { name: "PharmaCompass, Furosemide", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/furosemide" },
+      { name: "ChemicalBook, Furosemide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354345.htm" },
     ],
   },
 
@@ -5257,9 +5257,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Harman Finochem", url: "https://www.harmanfinochem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Metformin", url: "https://en.wikipedia.org/wiki/Metformin" },
-      { name: "PharmaCompass: Metformin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/metformin-hydrochloride" },
-      { name: "ChemicalBook: Metformin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354346.htm" },
+      { name: "Wikipedia, Metformin", url: "https://en.wikipedia.org/wiki/Metformin" },
+      { name: "PharmaCompass, Metformin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/metformin-hydrochloride" },
+      { name: "ChemicalBook, Metformin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354346.htm" },
     ],
   },
 
@@ -5278,9 +5278,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong Xinhua Pharmaceutical", url: "https://www.xinhuapharm.com" },
     ],
     sources: [
-      { name: "Wikipedia: Aspirin (synthesis)", url: "https://en.wikipedia.org/wiki/Aspirin" },
-      { name: "ChemAnalyst: Aspirin production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
-      { name: "ChemicalBook: Acetylsalicylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854240.htm" },
+      { name: "Wikipedia, Aspirin (synthesis)", url: "https://en.wikipedia.org/wiki/Aspirin" },
+      { name: "ChemAnalyst, Aspirin production process", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-chemistry-industrial-production-process-of-aspirin-38477" },
+      { name: "ChemicalBook, Acetylsalicylic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854240.htm" },
     ],
   },
 
@@ -5299,9 +5299,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia: Mebendazole", url: "https://en.wikipedia.org/wiki/Mebendazole" },
-      { name: "PharmaCompass: Mebendazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebendazole" },
-      { name: "ChemicalBook: Mebendazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354347.htm" },
+      { name: "Wikipedia, Mebendazole", url: "https://en.wikipedia.org/wiki/Mebendazole" },
+      { name: "PharmaCompass, Mebendazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebendazole" },
+      { name: "ChemicalBook, Mebendazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354347.htm" },
     ],
   },
 
@@ -5321,9 +5321,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hetero", url: "https://www.heteroworld.com" },
     ],
     sources: [
-      { name: "Wikipedia: Paroxetine", url: "https://en.wikipedia.org/wiki/Paroxetine" },
-      { name: "PharmaCompass: Paroxetine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/paroxetine-hydrochloride" },
-      { name: "ChemicalBook: Paroxetine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7354352.htm" },
+      { name: "Wikipedia, Paroxetine", url: "https://en.wikipedia.org/wiki/Paroxetine" },
+      { name: "PharmaCompass, Paroxetine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/paroxetine-hydrochloride" },
+      { name: "ChemicalBook, Paroxetine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7354352.htm" },
     ],
   },
 
@@ -5343,9 +5343,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dr. Reddy's Laboratories", url: "https://www.drreddys.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sertraline", url: "https://en.wikipedia.org/wiki/Sertraline" },
-      { name: "ACS: Greener sertraline process (Pfizer)", url: "https://www.acs.org/pressroom/presspacs/2002/june.html" },
-      { name: "PharmaCompass: Sertraline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sertraline-hydrochloride" },
+      { name: "Wikipedia, Sertraline", url: "https://en.wikipedia.org/wiki/Sertraline" },
+      { name: "ACS, Greener sertraline process (Pfizer)", url: "https://www.acs.org/pressroom/presspacs/2002/june.html" },
+      { name: "PharmaCompass, Sertraline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sertraline-hydrochloride" },
     ],
   },
 
@@ -5364,9 +5364,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "Wikipedia: Mebeverine", url: "https://en.wikipedia.org/wiki/Mebeverine" },
-      { name: "PharmaCompass: Mebeverine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebeverine-hydrochloride" },
-      { name: "ChemicalBook: Mebeverine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8354353.htm" },
+      { name: "Wikipedia, Mebeverine", url: "https://en.wikipedia.org/wiki/Mebeverine" },
+      { name: "PharmaCompass, Mebeverine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/mebeverine-hydrochloride" },
+      { name: "ChemicalBook, Mebeverine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB8354353.htm" },
     ],
   },
 
@@ -5386,9 +5386,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Dr. Reddy's Laboratories", url: "https://www.drreddys.com" },
     ],
     sources: [
-      { name: "Wikipedia: Terbinafine", url: "https://en.wikipedia.org/wiki/Terbinafine" },
-      { name: "PharmaCompass: Terbinafine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/terbinafine-hydrochloride" },
-      { name: "ChemicalBook: Terbinafine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354354.htm" },
+      { name: "Wikipedia, Terbinafine", url: "https://en.wikipedia.org/wiki/Terbinafine" },
+      { name: "PharmaCompass, Terbinafine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/terbinafine-hydrochloride" },
+      { name: "ChemicalBook, Terbinafine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354354.htm" },
     ],
   },
 
@@ -5407,9 +5407,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Sun Pharmaceutical Industries", url: "https://www.sunpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia: Famotidine", url: "https://en.wikipedia.org/wiki/Famotidine" },
-      { name: "PharmaCompass: Famotidine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/famotidine" },
-      { name: "ChemicalBook: Famotidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354355.htm" },
+      { name: "Wikipedia, Famotidine", url: "https://en.wikipedia.org/wiki/Famotidine" },
+      { name: "PharmaCompass, Famotidine", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/famotidine" },
+      { name: "ChemicalBook, Famotidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354355.htm" },
     ],
   },
 
@@ -5429,9 +5429,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "The United Laboratories", url: "https://www.tul.com.hk" },
     ],
     sources: [
-      { name: "Wikipedia: Ampicillin", url: "https://en.wikipedia.org/wiki/Ampicillin" },
-      { name: "Centrient: Penicillins", url: "https://centrient.com/our-products/penicillins" },
-      { name: "PharmaCompass: Ampicillin trihydrate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ampicillin-trihydrate" },
+      { name: "Wikipedia, Ampicillin", url: "https://en.wikipedia.org/wiki/Ampicillin" },
+      { name: "Centrient, Penicillins", url: "https://centrient.com/our-products/penicillins" },
+      { name: "PharmaCompass, Ampicillin trihydrate", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ampicillin-trihydrate" },
     ],
   },
 
@@ -5450,9 +5450,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Teva Pharmaceutical Industries", url: "https://www.tevapharm.com" },
     ],
     sources: [
-      { name: "Wikipedia: Amitriptyline", url: "https://en.wikipedia.org/wiki/Amitriptyline" },
-      { name: "PharmaCompass: Amitriptyline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/amitriptyline-hydrochloride" },
-      { name: "ChemicalBook: Amitriptyline hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354356.htm" },
+      { name: "Wikipedia, Amitriptyline", url: "https://en.wikipedia.org/wiki/Amitriptyline" },
+      { name: "PharmaCompass, Amitriptyline hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/amitriptyline-hydrochloride" },
+      { name: "ChemicalBook, Amitriptyline hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354356.htm" },
     ],
   },
 
@@ -5472,9 +5472,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "Wikipedia: Linezolid", url: "https://en.wikipedia.org/wiki/Linezolid" },
-      { name: "PharmaCompass: Linezolid", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linezolid" },
-      { name: "ChemicalBook: Linezolid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9354357.htm" },
+      { name: "Wikipedia, Linezolid", url: "https://en.wikipedia.org/wiki/Linezolid" },
+      { name: "PharmaCompass, Linezolid", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linezolid" },
+      { name: "ChemicalBook, Linezolid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9354357.htm" },
     ],
   },
 
@@ -5493,9 +5493,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "Wikipedia: Linagliptin", url: "https://en.wikipedia.org/wiki/Linagliptin" },
-      { name: "PharmaCompass: Linagliptin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linagliptin" },
-      { name: "ChemicalBook: Linagliptin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409802.htm" },
+      { name: "Wikipedia, Linagliptin", url: "https://en.wikipedia.org/wiki/Linagliptin" },
+      { name: "PharmaCompass, Linagliptin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/linagliptin" },
+      { name: "ChemicalBook, Linagliptin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1409802.htm" },
     ],
   },
 
@@ -5513,9 +5513,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Drugs", url: "https://www.aartidrugs.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Trimethoprim", url: "https://en.wikipedia.org/wiki/Trimethoprim" },
-      { name: "PharmaCompass: Trimethoprim", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/trimethoprim" },
-      { name: "ChemicalBook: Trimethoprim", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2354358.htm" },
+      { name: "Wikipedia, Trimethoprim", url: "https://en.wikipedia.org/wiki/Trimethoprim" },
+      { name: "PharmaCompass, Trimethoprim", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/trimethoprim" },
+      { name: "ChemicalBook, Trimethoprim", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2354358.htm" },
     ],
   },
 
@@ -5533,9 +5533,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Drugs", url: "https://www.aartidrugs.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Sulfamethoxazole", url: "https://en.wikipedia.org/wiki/Sulfamethoxazole" },
-      { name: "PharmaCompass: Sulfamethoxazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulfamethoxazole" },
-      { name: "ChemicalBook: Sulfamethoxazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354359.htm" },
+      { name: "Wikipedia, Sulfamethoxazole", url: "https://en.wikipedia.org/wiki/Sulfamethoxazole" },
+      { name: "PharmaCompass, Sulfamethoxazole", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/sulfamethoxazole" },
+      { name: "ChemicalBook, Sulfamethoxazole", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3354359.htm" },
     ],
   },
 
@@ -5553,9 +5553,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vianex", url: "https://www.vianex.gr" },
     ],
     sources: [
-      { name: "Wikipedia: Guaifenesin", url: "https://en.wikipedia.org/wiki/Guaifenesin" },
-      { name: "PharmaCompass: Guaifenesin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/guaifenesin" },
-      { name: "ChemicalBook: Guaifenesin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354360.htm" },
+      { name: "Wikipedia, Guaifenesin", url: "https://en.wikipedia.org/wiki/Guaifenesin" },
+      { name: "PharmaCompass, Guaifenesin", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/guaifenesin" },
+      { name: "ChemicalBook, Guaifenesin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6354360.htm" },
     ],
   },
 
@@ -5574,9 +5574,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurobindo Pharma", url: "https://www.aurobindo.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ciprofloxacin", url: "https://en.wikipedia.org/wiki/Ciprofloxacin" },
-      { name: "PharmaCompass: Ciprofloxacin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ciprofloxacin-hydrochloride" },
-      { name: "ChemicalBook: Ciprofloxacin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4354361.htm" },
+      { name: "Wikipedia, Ciprofloxacin", url: "https://en.wikipedia.org/wiki/Ciprofloxacin" },
+      { name: "PharmaCompass, Ciprofloxacin hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/ciprofloxacin-hydrochloride" },
+      { name: "ChemicalBook, Ciprofloxacin hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4354361.htm" },
     ],
   },
 
@@ -5594,9 +5594,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Cipla", url: "https://www.cipla.com" },
     ],
     sources: [
-      { name: "Wikipedia: Bromhexine", url: "https://en.wikipedia.org/wiki/Bromhexine" },
-      { name: "PharmaCompass: Bromhexine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/bromhexine-hydrochloride" },
-      { name: "ChemicalBook: Bromhexine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354362.htm" },
+      { name: "Wikipedia, Bromhexine", url: "https://en.wikipedia.org/wiki/Bromhexine" },
+      { name: "PharmaCompass, Bromhexine hydrochloride", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/bromhexine-hydrochloride" },
+      { name: "ChemicalBook, Bromhexine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5354362.htm" },
     ],
   },
 
@@ -5615,9 +5615,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Zhejiang NHU", url: "https://www.nhu.com.cn" },
     ],
     sources: [
-      { name: "Wikipedia: Biotin (synthesis)", url: "https://en.wikipedia.org/wiki/Biotin" },
-      { name: "ChemicalBook: D-Biotin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854264.htm" },
-      { name: "PMC: Industrial biotin synthesis review", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8839607/" },
+      { name: "Wikipedia, Biotin (synthesis)", url: "https://en.wikipedia.org/wiki/Biotin" },
+      { name: "ChemicalBook, D-Biotin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854264.htm" },
+      { name: "PMC, Industrial biotin synthesis review", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8839607/" },
     ],
   },
 
@@ -5636,9 +5636,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Pyridoxine", url: "https://en.wikipedia.org/wiki/Pyridoxine" },
-      { name: "ChemicalBook: Pyridoxine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854265.htm" },
-      { name: "ScienceDirect: Vitamin B6 synthesis", url: "https://www.sciencedirect.com/topics/chemistry/pyridoxine" },
+      { name: "Wikipedia, Pyridoxine", url: "https://en.wikipedia.org/wiki/Pyridoxine" },
+      { name: "ChemicalBook, Pyridoxine hydrochloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854265.htm" },
+      { name: "ScienceDirect, Vitamin B6 synthesis", url: "https://www.sciencedirect.com/topics/chemistry/pyridoxine" },
     ],
   },
 
@@ -5657,9 +5657,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Wikipedia: Riboflavin (production)", url: "https://en.wikipedia.org/wiki/Riboflavin" },
-      { name: "ChemicalBook: Riboflavin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854266.htm" },
-      { name: "PMC: Biotechnological riboflavin production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3920794/" },
+      { name: "Wikipedia, Riboflavin (production)", url: "https://en.wikipedia.org/wiki/Riboflavin" },
+      { name: "ChemicalBook, Riboflavin", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854266.htm" },
+      { name: "PMC, Biotechnological riboflavin production", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3920794/" },
     ],
   },
 
@@ -5679,9 +5679,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vertellus", url: "https://www.vertellus.com" },
     ],
     sources: [
-      { name: "Wikipedia: Nicotinamide", url: "https://en.wikipedia.org/wiki/Nicotinamide" },
-      { name: "Lonza: Niacinamide / vitamin B3", url: "https://www.lonza.com/products" },
-      { name: "ChemicalBook: Nicotinamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854267.htm" },
+      { name: "Wikipedia, Nicotinamide", url: "https://en.wikipedia.org/wiki/Nicotinamide" },
+      { name: "Lonza, Niacinamide / vitamin B3", url: "https://www.lonza.com/products" },
+      { name: "ChemicalBook, Nicotinamide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854267.htm" },
     ],
   },
 
@@ -5699,9 +5699,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Daicel Corporation", url: "https://www.daicel.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sorbic acid", url: "https://en.wikipedia.org/wiki/Sorbic_acid" },
-      { name: "ChemicalBook: Sorbic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854268.htm" },
-      { name: "Celanese: Sorbates", url: "https://www.celanese.com/products/sorbates" },
+      { name: "Wikipedia, Sorbic acid", url: "https://en.wikipedia.org/wiki/Sorbic_acid" },
+      { name: "ChemicalBook, Sorbic acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854268.htm" },
+      { name: "Celanese, Sorbates", url: "https://www.celanese.com/products/sorbates" },
     ],
   },
 
@@ -5722,9 +5722,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Daikin Industries", url: "https://www.daikin.com" },
     ],
     sources: [
-      { name: "Wikipedia: Hydrogen fluoride (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_fluoride" },
-      { name: "US EPA: Hydrofluoric acid (AP-42 §8.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch08/final/c08s07.pdf" },
-      { name: "ChemicalBook: Hydrofluoric acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
+      { name: "Wikipedia, Hydrogen fluoride (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_fluoride" },
+      { name: "US EPA, Hydrofluoric acid (AP-42 §8.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch08/final/c08s07.pdf" },
+      { name: "ChemicalBook, Hydrofluoric acid", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852632.htm" },
     ],
   },
 
@@ -5743,9 +5743,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Elementis", url: "https://www.elementis.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chromium trioxide", url: "https://en.wikipedia.org/wiki/Chromium_trioxide" },
-      { name: "ChemicalBook: Chromium trioxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852595.htm" },
-      { name: "Wikipedia: Sodium dichromate", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
+      { name: "Wikipedia, Chromium trioxide", url: "https://en.wikipedia.org/wiki/Chromium_trioxide" },
+      { name: "ChemicalBook, Chromium trioxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852595.htm" },
+      { name: "Wikipedia, Sodium dichromate", url: "https://en.wikipedia.org/wiki/Sodium_dichromate" },
     ],
   },
 
@@ -5765,9 +5765,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "ISE Chemicals", url: "https://www.isechem.co.jp" },
     ],
     sources: [
-      { name: "Wikipedia: Iodine (production)", url: "https://en.wikipedia.org/wiki/Iodine" },
-      { name: "USGS: Iodine (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-iodine.pdf" },
-      { name: "SQM: Iodine", url: "https://www.sqm.com/en/producto/iodine-and-derivatives/" },
+      { name: "Wikipedia, Iodine (production)", url: "https://en.wikipedia.org/wiki/Iodine" },
+      { name: "USGS, Iodine (PDF)", url: "https://pubs.usgs.gov/periodicals/mcs2023/mcs2023-iodine.pdf" },
+      { name: "SQM, Iodine", url: "https://www.sqm.com/en/producto/iodine-and-derivatives/" },
     ],
   },
 
@@ -5787,9 +5787,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Orica", url: "https://www.orica.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium cyanide (production)", url: "https://en.wikipedia.org/wiki/Sodium_cyanide" },
-      { name: "Wikipedia: Andrussow process", url: "https://en.wikipedia.org/wiki/Andrussow_process" },
-      { name: "Cyanco: Sodium cyanide", url: "https://www.cyanco.com/products/" },
+      { name: "Wikipedia, Sodium cyanide (production)", url: "https://en.wikipedia.org/wiki/Sodium_cyanide" },
+      { name: "Wikipedia, Andrussow process", url: "https://en.wikipedia.org/wiki/Andrussow_process" },
+      { name: "Cyanco, Sodium cyanide", url: "https://www.cyanco.com/products/" },
     ],
   },
 
@@ -5809,9 +5809,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Universal Chemicals & Industries", url: "https://www.universalmanganese.com" },
     ],
     sources: [
-      { name: "Wikipedia: Potassium permanganate (production)", url: "https://en.wikipedia.org/wiki/Potassium_permanganate" },
-      { name: "Carus: Potassium permanganate", url: "https://www.caruslc.com/product/potassium-permanganate/" },
-      { name: "ChemicalBook: Potassium permanganate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852609.htm" },
+      { name: "Wikipedia, Potassium permanganate (production)", url: "https://en.wikipedia.org/wiki/Potassium_permanganate" },
+      { name: "Carus, Potassium permanganate", url: "https://www.caruslc.com/product/potassium-permanganate/" },
+      { name: "ChemicalBook, Potassium permanganate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1852609.htm" },
     ],
   },
 
@@ -5830,9 +5830,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Umicore", url: "https://www.umicore.com" },
     ],
     sources: [
-      { name: "Wikipedia: Silver nitrate", url: "https://en.wikipedia.org/wiki/Silver_nitrate" },
-      { name: "ChemicalBook: Silver nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852595.htm" },
-      { name: "Ames Goldsmith: Silver nitrate", url: "https://www.amesgoldsmith.com/products/" },
+      { name: "Wikipedia, Silver nitrate", url: "https://en.wikipedia.org/wiki/Silver_nitrate" },
+      { name: "ChemicalBook, Silver nitrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852595.htm" },
+      { name: "Ames Goldsmith, Silver nitrate", url: "https://www.amesgoldsmith.com/products/" },
     ],
   },
 
@@ -5852,9 +5852,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Qemetica (CIECH)", url: "https://www.qemetica.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium silicate", url: "https://en.wikipedia.org/wiki/Sodium_silicate" },
-      { name: "Britannica: Sodium silicate", url: "https://www.britannica.com/science/sodium-silicate" },
-      { name: "ChemicalBook: Sodium silicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852625.htm" },
+      { name: "Wikipedia, Sodium silicate", url: "https://en.wikipedia.org/wiki/Sodium_silicate" },
+      { name: "Britannica, Sodium silicate", url: "https://www.britannica.com/science/sodium-silicate" },
+      { name: "ChemicalBook, Sodium silicate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5852625.htm" },
     ],
   },
 
@@ -5875,9 +5875,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nedmag", url: "https://www.nedmag.com" },
     ],
     sources: [
-      { name: "Wikipedia: Magnesium chloride", url: "https://en.wikipedia.org/wiki/Magnesium_chloride" },
-      { name: "ChemicalBook: Magnesium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854118.htm" },
-      { name: "Compass Minerals: Magnesium chloride", url: "https://www.compassminerals.com/products/magnesium-chloride/" },
+      { name: "Wikipedia, Magnesium chloride", url: "https://en.wikipedia.org/wiki/Magnesium_chloride" },
+      { name: "ChemicalBook, Magnesium chloride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854118.htm" },
+      { name: "Compass Minerals, Magnesium chloride", url: "https://www.compassminerals.com/products/magnesium-chloride/" },
     ],
   },
 
@@ -5898,9 +5898,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Arkema", url: "https://www.arkema.com" },
     ],
     sources: [
-      { name: "Wikipedia: Hydrogen peroxide (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_peroxide" },
-      { name: "Evonik: Hydrogen peroxide", url: "https://www.evonik.com/en/products/hydrogen-peroxide.html" },
-      { name: "ChemicalBook: Hydrogen peroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
+      { name: "Wikipedia, Hydrogen peroxide (production)", url: "https://en.wikipedia.org/wiki/Hydrogen_peroxide" },
+      { name: "Evonik, Hydrogen peroxide", url: "https://www.evonik.com/en/products/hydrogen-peroxide.html" },
+      { name: "ChemicalBook, Hydrogen peroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852634.htm" },
     ],
   },
 
@@ -5920,9 +5920,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Elementis", url: "https://www.elementis.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chromium(III) oxide", url: "https://en.wikipedia.org/wiki/Chromium(III)_oxide" },
-      { name: "ChemicalBook: Chromium oxide green", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852596.htm" },
-      { name: "LANXESS: Chrome oxide pigments", url: "https://www.lanxess.com/en/Products-and-Solutions/Brands/Bayferrox" },
+      { name: "Wikipedia, Chromium(III) oxide", url: "https://en.wikipedia.org/wiki/Chromium(III)_oxide" },
+      { name: "ChemicalBook, Chromium oxide green", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3852596.htm" },
+      { name: "LANXESS, Chrome oxide pigments", url: "https://www.lanxess.com/en/Products-and-Solutions/Brands/Bayferrox" },
     ],
   },
 
@@ -5941,9 +5941,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "CMOC Group", url: "https://www.cmoc.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ammonium heptamolybdate", url: "https://en.wikipedia.org/wiki/Ammonium_heptamolybdate" },
-      { name: "ChemicalBook: Ammonium molybdate tetrahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852614.htm" },
-      { name: "Molymet: Molybdenum chemicals", url: "https://www.molymet.com/en/products/" },
+      { name: "Wikipedia, Ammonium heptamolybdate", url: "https://en.wikipedia.org/wiki/Ammonium_heptamolybdate" },
+      { name: "ChemicalBook, Ammonium molybdate tetrahydrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7852614.htm" },
+      { name: "Molymet, Molybdenum chemicals", url: "https://www.molymet.com/en/products/" },
     ],
   },
 
@@ -5963,9 +5963,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gujarat Alkalies and Chemicals (GACL)", url: "https://www.gacl.com" },
     ],
     sources: [
-      { name: "Wikipedia: Potassium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Potassium_hydroxide" },
-      { name: "ChemicalBook: Potassium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852640.htm" },
-      { name: "Vynova: Potassium hydroxide", url: "https://www.vynova-group.com/products/potassium-hydroxide" },
+      { name: "Wikipedia, Potassium hydroxide (production)", url: "https://en.wikipedia.org/wiki/Potassium_hydroxide" },
+      { name: "ChemicalBook, Potassium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6852640.htm" },
+      { name: "Vynova, Potassium hydroxide", url: "https://www.vynova-group.com/products/potassium-hydroxide" },
     ],
   },
 
@@ -5986,9 +5986,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Premier Magnesia", url: "https://www.premiermagnesia.com" },
     ],
     sources: [
-      { name: "Wikipedia: Magnesium hydroxide", url: "https://en.wikipedia.org/wiki/Magnesium_hydroxide" },
-      { name: "ChemicalBook: Magnesium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854119.htm" },
-      { name: "Martin Marietta: Magnesium hydroxide", url: "https://www.magnesiaspecialties.com/products/" },
+      { name: "Wikipedia, Magnesium hydroxide", url: "https://en.wikipedia.org/wiki/Magnesium_hydroxide" },
+      { name: "ChemicalBook, Magnesium hydroxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854119.htm" },
+      { name: "Martin Marietta, Magnesium hydroxide", url: "https://www.magnesiaspecialties.com/products/" },
     ],
   },
 
@@ -6009,9 +6009,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "INEOS", url: "https://www.ineos.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chloroform (production)", url: "https://en.wikipedia.org/wiki/Chloroform" },
-      { name: "Wikipedia: Chloromethane (chlorination)", url: "https://en.wikipedia.org/wiki/Chloromethane" },
-      { name: "ChemicalBook: Chloroform", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854114.htm" },
+      { name: "Wikipedia, Chloroform (production)", url: "https://en.wikipedia.org/wiki/Chloroform" },
+      { name: "Wikipedia, Chloromethane (chlorination)", url: "https://en.wikipedia.org/wiki/Chloromethane" },
+      { name: "ChemicalBook, Chloroform", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854114.htm" },
     ],
   },
 
@@ -6031,9 +6031,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality Chemicals", url: "https://www.privi.com" },
     ],
     sources: [
-      { name: "Wikipedia: Benzyl acetate", url: "https://en.wikipedia.org/wiki/Benzyl_acetate" },
-      { name: "The Good Scents Company: Benzyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1000492.html" },
-      { name: "ChemicalBook: Benzyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854163.htm" },
+      { name: "Wikipedia, Benzyl acetate", url: "https://en.wikipedia.org/wiki/Benzyl_acetate" },
+      { name: "The Good Scents Company, Benzyl acetate", url: "http://www.thegoodscentscompany.com/data/rw1000492.html" },
+      { name: "ChemicalBook, Benzyl acetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5854163.htm" },
     ],
   },
 
@@ -6052,9 +6052,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LANXESS", url: "https://www.lanxess.com" },
     ],
     sources: [
-      { name: "Wikipedia: Diphenyl ether", url: "https://en.wikipedia.org/wiki/Diphenyl_ether" },
-      { name: "ChemicalBook: Diphenyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854180.htm" },
-      { name: "Eastman: Therminol/heat transfer fluids", url: "https://www.eastman.com/en/products/heat-transfer-fluids" },
+      { name: "Wikipedia, Diphenyl ether", url: "https://en.wikipedia.org/wiki/Diphenyl_ether" },
+      { name: "ChemicalBook, Diphenyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3854180.htm" },
+      { name: "Eastman, Therminol/heat transfer fluids", url: "https://www.eastman.com/en/products/heat-transfer-fluids" },
     ],
   },
 
@@ -6074,9 +6074,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Rain Carbon", url: "https://www.raincarbon.com" },
     ],
     sources: [
-      { name: "Wikipedia: p-Cresol", url: "https://en.wikipedia.org/wiki/P-Cresol" },
-      { name: "Wikipedia: Cresol (production)", url: "https://en.wikipedia.org/wiki/Cresol" },
-      { name: "ChemicalBook: p-Cresol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854212.htm" },
+      { name: "Wikipedia, p-Cresol", url: "https://en.wikipedia.org/wiki/P-Cresol" },
+      { name: "Wikipedia, Cresol (production)", url: "https://en.wikipedia.org/wiki/Cresol" },
+      { name: "ChemicalBook, p-Cresol", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854212.htm" },
     ],
   },
 
@@ -6097,9 +6097,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aekyung Petrochemical", url: "https://www.aekyungpetro.co.kr" },
     ],
     sources: [
-      { name: "Wikipedia: Phthalic anhydride", url: "https://en.wikipedia.org/wiki/Phthalic_anhydride" },
-      { name: "US EPA: Phthalic anhydride (AP-42 §6.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch06/final/c06s07.pdf" },
-      { name: "ChemicalBook: Phthalic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854240.htm" },
+      { name: "Wikipedia, Phthalic anhydride", url: "https://en.wikipedia.org/wiki/Phthalic_anhydride" },
+      { name: "US EPA, Phthalic anhydride (AP-42 §6.7, PDF)", url: "https://www3.epa.gov/ttnchie1/ap42/ch06/final/c06s07.pdf" },
+      { name: "ChemicalBook, Phthalic anhydride", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854240.htm" },
     ],
   },
 
@@ -6121,9 +6121,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "UBE Corporation", url: "https://www.ube.com" },
     ],
     sources: [
-      { name: "Wikipedia: Hydroquinone (production)", url: "https://en.wikipedia.org/wiki/Hydroquinone" },
-      { name: "ChemicalBook: Hydroquinone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854218.htm" },
-      { name: "Camlin Fine Sciences: Hydroquinone", url: "https://www.camlinfs.com/businesses/shelf-life-solutions/" },
+      { name: "Wikipedia, Hydroquinone (production)", url: "https://en.wikipedia.org/wiki/Hydroquinone" },
+      { name: "ChemicalBook, Hydroquinone", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7854218.htm" },
+      { name: "Camlin Fine Sciences, Hydroquinone", url: "https://www.camlinfs.com/businesses/shelf-life-solutions/" },
     ],
   },
 
@@ -6143,9 +6143,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Evonik Industries", url: "https://www.evonik.com" },
     ],
     sources: [
-      { name: "Wikipedia: Methyl tert-butyl ether", url: "https://en.wikipedia.org/wiki/Methyl_tert-butyl_ether" },
-      { name: "ChemicalBook: Methyl tert-butyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854099.htm" },
-      { name: "ScienceDirect: MTBE synthesis", url: "https://www.sciencedirect.com/topics/chemistry/methyl-tert-butyl-ether" },
+      { name: "Wikipedia, Methyl tert-butyl ether", url: "https://en.wikipedia.org/wiki/Methyl_tert-butyl_ether" },
+      { name: "ChemicalBook, Methyl tert-butyl ether", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB1854099.htm" },
+      { name: "ScienceDirect, MTBE synthesis", url: "https://www.sciencedirect.com/topics/chemistry/methyl-tert-butyl-ether" },
     ],
   },
 
@@ -6165,9 +6165,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Daicel Corporation", url: "https://www.daicel.com" },
     ],
     sources: [
-      { name: "Wikipedia: Chloroacetic acid (uses/salts)", url: "https://en.wikipedia.org/wiki/Chloroacetic_acid" },
-      { name: "CABB: Monochloroacetic acid & derivatives", url: "https://www.cabb-chemicals.com/products/monochloroacetic-acid/" },
-      { name: "ChemicalBook: Sodium monochloroacetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158494.htm" },
+      { name: "Wikipedia, Chloroacetic acid (uses/salts)", url: "https://en.wikipedia.org/wiki/Chloroacetic_acid" },
+      { name: "CABB, Monochloroacetic acid & derivatives", url: "https://www.cabb-chemicals.com/products/monochloroacetic-acid/" },
+      { name: "ChemicalBook, Sodium monochloroacetate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158494.htm" },
     ],
   },
 
@@ -6186,9 +6186,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Atul Ltd", url: "https://www.atul.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: m-Toluidine", url: "https://en.wikipedia.org/wiki/M-Toluidine" },
-      { name: "ChemicalBook: m-Toluidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854221.htm" },
-      { name: "PubChem: 3-Methylaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/m-Toluidine" },
+      { name: "Wikipedia, m-Toluidine", url: "https://en.wikipedia.org/wiki/M-Toluidine" },
+      { name: "ChemicalBook, m-Toluidine", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB4854221.htm" },
+      { name: "PubChem, 3-Methylaniline", url: "https://pubchem.ncbi.nlm.nih.gov/compound/m-Toluidine" },
     ],
   },
 
@@ -6206,9 +6206,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Merck (Sigma-Aldrich)", url: "https://www.merckgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Di-tert-butyl dicarbonate", url: "https://en.wikipedia.org/wiki/Di-tert-butyl_dicarbonate" },
-      { name: "ChemicalBook: Di-tert-butyl dicarbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158501.htm" },
-      { name: "PubChem: Di-tert-butyl dicarbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Di-tert-butyl-dicarbonate" },
+      { name: "Wikipedia, Di-tert-butyl dicarbonate", url: "https://en.wikipedia.org/wiki/Di-tert-butyl_dicarbonate" },
+      { name: "ChemicalBook, Di-tert-butyl dicarbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7158501.htm" },
+      { name: "PubChem, Di-tert-butyl dicarbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Di-tert-butyl-dicarbonate" },
     ],
   },
 
@@ -6228,9 +6228,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Messer Group", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Argon (production)", url: "https://en.wikipedia.org/wiki/Argon" },
-      { name: "Wikipedia: Air separation", url: "https://en.wikipedia.org/wiki/Air_separation" },
-      { name: "Linde: Argon", url: "https://www.linde-gas.com/en/products_and_supply/gases_atmospheric/argon.html" },
+      { name: "Wikipedia, Argon (production)", url: "https://en.wikipedia.org/wiki/Argon" },
+      { name: "Wikipedia, Air separation", url: "https://en.wikipedia.org/wiki/Air_separation" },
+      { name: "Linde, Argon", url: "https://www.linde-gas.com/en/products_and_supply/gases_atmospheric/argon.html" },
     ],
   },
 
@@ -6249,9 +6249,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Air Products", url: "https://www.airproducts.com" },
     ],
     sources: [
-      { name: "Wikipedia: Nitrous oxide (production)", url: "https://en.wikipedia.org/wiki/Nitrous_oxide" },
-      { name: "ChemicalBook: Nitrous oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7462576.htm" },
-      { name: "Linde: Nitrous oxide", url: "https://www.linde-gas.com/en/products_and_supply/gases_medical/index.html" },
+      { name: "Wikipedia, Nitrous oxide (production)", url: "https://en.wikipedia.org/wiki/Nitrous_oxide" },
+      { name: "ChemicalBook, Nitrous oxide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB7462576.htm" },
+      { name: "Linde, Nitrous oxide", url: "https://www.linde-gas.com/en/products_and_supply/gases_medical/index.html" },
     ],
   },
 
@@ -6270,9 +6270,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "Wikipedia: Magnesium carbonate", url: "https://en.wikipedia.org/wiki/Magnesium_carbonate" },
-      { name: "ChemicalBook: Magnesium carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854120.htm" },
-      { name: "PubChem: Magnesium carbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Magnesium-carbonate" },
+      { name: "Wikipedia, Magnesium carbonate", url: "https://en.wikipedia.org/wiki/Magnesium_carbonate" },
+      { name: "ChemicalBook, Magnesium carbonate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6854120.htm" },
+      { name: "PubChem, Magnesium carbonate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Magnesium-carbonate" },
     ],
   },
 
@@ -6292,9 +6292,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Global Calcium", url: "https://www.globalcalcium.com" },
     ],
     sources: [
-      { name: "Wikipedia: Calcium citrate", url: "https://en.wikipedia.org/wiki/Calcium_citrate" },
-      { name: "Jungbunzlauer: Calcium citrate", url: "https://www.jungbunzlauer.com/en/products/citrics/calcium-citrate.html" },
-      { name: "ChemicalBook: Calcium citrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159531.htm" },
+      { name: "Wikipedia, Calcium citrate", url: "https://en.wikipedia.org/wiki/Calcium_citrate" },
+      { name: "Jungbunzlauer, Calcium citrate", url: "https://www.jungbunzlauer.com/en/products/citrics/calcium-citrate.html" },
+      { name: "ChemicalBook, Calcium citrate", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB5159531.htm" },
     ],
   },
 
@@ -6317,9 +6317,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "IFFCO", url: "https://www.iffco.in" },
     ],
     sources: [
-      { name: "Haifa: Poly-Feed 19-19-19", url: "https://www.haifa-group.com/poly-feed-gg-19-19-191mgo" },
-      { name: "Yara: YaraRega water-soluble NPK", url: "https://www.yara.com/crop-nutrition/our-global-fertilizer-brands/yararega/" },
-      { name: "IFFCO: NPK 19-19-19", url: "https://www.iffco.in/en/npk-19-19-19" },
+      { name: "Haifa, Poly-Feed 19-19-19", url: "https://www.haifa-group.com/poly-feed-gg-19-19-191mgo" },
+      { name: "Yara, YaraRega water-soluble NPK", url: "https://www.yara.com/crop-nutrition/our-global-fertilizer-brands/yararega/" },
+      { name: "IFFCO, NPK 19-19-19", url: "https://www.iffco.in/en/npk-19-19-19" },
     ],
   },
   "aluminum-zirconium-pentachlorohydrate-solution-usp-achieve": {
@@ -6340,8 +6340,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "BASF", url: "https://www.basf.com" },
     ],
     sources: [
-      { name: "Google Patents US7153495B2: Antiperspirant actives", url: "https://patents.google.com/patent/US7153495B2/en" },
-      { name: "SpecialChem: Aluminum zirconium tetrachlorohydrex Gly", url: "https://www.specialchem.com/cosmetics/inci-ingredients/aluminum-zirconium-tetrachlorohydrex-gly" },
+      { name: "Google Patents US7153495B2, Antiperspirant actives", url: "https://patents.google.com/patent/US7153495B2/en" },
+      { name: "SpecialChem, Aluminum zirconium tetrachlorohydrex Gly", url: "https://www.specialchem.com/cosmetics/inci-ingredients/aluminum-zirconium-tetrachlorohydrex-gly" },
     ],
   },
   "trans-2-3-dibromo-2-butene-1-4-diol-toxic-solid-orga-inic-n": {
@@ -6362,8 +6362,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shandong fine-chem producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "PubChem: 2,3-Dibromo-2-butene-1,4-diol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
-      { name: "ChemicalBook: Dibromobutenediol", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem, 2,3-Dibromo-2-butene-1,4-diol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "ChemicalBook, Dibromobutenediol", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "non-gmo-soya-lecithin-unadjusted": {
@@ -6385,9 +6385,9 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Lasenor", url: "https://lasenor.com" },
     ],
     sources: [
-      { name: "USSEC: Soybean lecithin fact sheet", url: "https://ussec.org/wp-content/uploads/2025/07/Soybean-Lecithin-Fact-Sheet-0901.pdf" },
-      { name: "Lecitein: Degumming of soy lecithin", url: "https://www.lecitein.com/blog/all-you-need-to-know-about-degumming-of-soy-lecithin" },
-      { name: "PMC: Chemical & enzymatic degumming", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10876682/" },
+      { name: "USSEC, Soybean lecithin fact sheet", url: "https://ussec.org/wp-content/uploads/2025/07/Soybean-Lecithin-Fact-Sheet-0901.pdf" },
+      { name: "Lecitein, Degumming of soy lecithin", url: "https://www.lecitein.com/blog/all-you-need-to-know-about-degumming-of-soy-lecithin" },
+      { name: "PMC, Chemical & enzymatic degumming", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10876682/" },
     ],
   },
   "nitric-acid-pct": {
@@ -6409,8 +6409,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "EuroChem", url: "https://www.eurochemgroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
-      { name: "Britannica: Nitric acid", url: "https://www.britannica.com/science/nitric-acid" },
+      { name: "Wikipedia, Ostwald process", url: "https://en.wikipedia.org/wiki/Ostwald_process" },
+      { name: "Britannica, Nitric acid", url: "https://www.britannica.com/science/nitric-acid" },
     ],
   },
   "aroma-chemicals-galaxmusk-pure": {
@@ -6431,8 +6431,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Privi Speciality", url: "https://www.privispeciality.com" },
     ],
     sources: [
-      { name: "Wikipedia: Galaxolide", url: "https://en.wikipedia.org/wiki/Galaxolide" },
-      { name: "US EPA: HHCB risk assessment", url: "https://www.epa.gov/sites/default/files/2015-09/documents/hhcb_wp_ra_final_08_27_14.pdf" },
+      { name: "Wikipedia, Galaxolide", url: "https://en.wikipedia.org/wiki/Galaxolide" },
+      { name: "US EPA, HHCB risk assessment", url: "https://www.epa.gov/sites/default/files/2015-09/documents/hhcb_wp_ra_final_08_27_14.pdf" },
     ],
   },
   "caustic-soda-prills": {
@@ -6454,8 +6454,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GACL", url: "https://www.gacl.com" },
     ],
     sources: [
-      { name: "Euro Chlor: Membrane cell process", url: "https://www.eurochlor.org/about-chlor-alkali/how-are-chlorine-and-caustic-soda-made/membrane-cell-process/" },
-      { name: "INEOS: Chlor-alkali process", url: "https://www.ineos.com/businesses/ineos-electrochemical-solutions/electrolysers/chlor-alkali-process/" },
+      { name: "Euro Chlor, Membrane cell process", url: "https://www.eurochlor.org/about-chlor-alkali/how-are-chlorine-and-caustic-soda-made/membrane-cell-process/" },
+      { name: "INEOS, Chlor-alkali process", url: "https://www.ineos.com/businesses/ineos-electrochemical-solutions/electrolysers/chlor-alkali-process/" },
     ],
   },
   "liquid-carbon-dioxide-gas-gas-crbn": {
@@ -6476,8 +6476,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Messer", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Carbon dioxide (industrial)", url: "https://en.wikipedia.org/wiki/Carbon_dioxide" },
-      { name: "Linde: Carbon dioxide", url: "https://www.linde-gas.com" },
+      { name: "Wikipedia, Carbon dioxide (industrial)", url: "https://en.wikipedia.org/wiki/Carbon_dioxide" },
+      { name: "Linde, Carbon dioxide", url: "https://www.linde-gas.com" },
     ],
   },
   "pvc-processing-aid-resin-p": {
@@ -6499,8 +6499,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mitsubishi Chemical", url: "https://www.mcgc.com" },
     ],
     sources: [
-      { name: "Google Patents US10150831: Acrylic processing aid", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10150831" },
-      { name: "Repolyfine: Acrylic impact modifiers for PVC", url: "https://www.repolyfine.com/news/empowering-pvc-with-acrylic-impact-modifiers-71620694.html" },
+      { name: "Google Patents US10150831, Acrylic processing aid", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10150831" },
+      { name: "Repolyfine, Acrylic impact modifiers for PVC", url: "https://www.repolyfine.com/news/empowering-pvc-with-acrylic-impact-modifiers-71620694.html" },
     ],
   },
   "zinc-phosphatet-p-69": {
@@ -6521,8 +6521,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nubiola (Vibrantz)", url: "https://www.vibrantz.com" },
     ],
     sources: [
-      { name: "SNCZ: Zinc phosphate PZ20", url: "https://www.sncz.com/en/pigment/zinc-phosphate-pz20/" },
-      { name: "Heubach: Zinc phosphate", url: "https://www.heubach-india.com/zincphosphate-calciumphosphate.aspx" },
+      { name: "SNCZ, Zinc phosphate PZ20", url: "https://www.sncz.com/en/pigment/zinc-phosphate-pz20/" },
+      { name: "Heubach, Zinc phosphate", url: "https://www.heubach-india.com/zincphosphate-calciumphosphate.aspx" },
     ],
   },
   "propenyl-guaethol": {
@@ -6543,8 +6543,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aurochemicals", url: "https://www.aurochemicals.com" },
     ],
     sources: [
-      { name: "The Good Scents Company: propenyl guaethol", url: "https://www.thegoodscentscompany.com" },
-      { name: "PubChem: Propenylguaethol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "The Good Scents Company, propenyl guaethol", url: "https://www.thegoodscentscompany.com" },
+      { name: "PubChem, Propenylguaethol", url: "https://pubchem.ncbi.nlm.nih.gov/" },
     ],
   },
   "sanitron-s-sodium-dimethyldithiocarbamate": {
@@ -6565,8 +6565,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vibrantz", url: "https://www.vibrantz.com" },
     ],
     sources: [
-      { name: "Wikipedia: Sodium dimethyldithiocarbamate", url: "https://en.wikipedia.org/wiki/Sodium_dimethyldithiocarbamate" },
-      { name: "ResearchGate: SDDC production & applications", url: "https://www.researchgate.net/publication/378827468" },
+      { name: "Wikipedia, Sodium dimethyldithiocarbamate", url: "https://en.wikipedia.org/wiki/Sodium_dimethyldithiocarbamate" },
+      { name: "ResearchGate, SDDC production & applications", url: "https://www.researchgate.net/publication/378827468" },
     ],
   },
   "tetraethylammonium-nitrate-n": {
@@ -6587,8 +6587,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tokyo Chemical Industry", url: "https://www.tcichemicals.com" },
     ],
     sources: [
-      { name: "PubChem: Tetraethylammonium nitrate", url: "https://pubchem.ncbi.nlm.nih.gov/" },
-      { name: "ChemicalBook: Tetraethylammonium nitrate", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem, Tetraethylammonium nitrate", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "ChemicalBook, Tetraethylammonium nitrate", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "silica-gel-mesh-sap": {
@@ -6610,8 +6610,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Clariant", url: "https://www.clariant.com" },
     ],
     sources: [
-      { name: "Streampeak: How silica gel is produced", url: "https://www.streampeakgroup.com/how-is-silica-gel-produced/" },
-      { name: "Google Patents US3313739: Preparation of silica gel", url: "https://patents.google.com/patent/US3313739A/en" },
+      { name: "Streampeak, How silica gel is produced", url: "https://www.streampeakgroup.com/how-is-silica-gel-produced/" },
+      { name: "Google Patents US3313739, Preparation of silica gel", url: "https://patents.google.com/patent/US3313739A/en" },
     ],
   },
   "ethylene-oxide-gas-ethylene-carbon-di": {
@@ -6633,8 +6633,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "INEOS Oxide", url: "https://www.ineos.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ethylene oxide", url: "https://en.wikipedia.org/wiki/Ethylene_oxide" },
-      { name: "ChemAnalyst: How ethylene oxide is produced", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-how-ethylene-oxide-is-produced-38346" },
+      { name: "Wikipedia, Ethylene oxide", url: "https://en.wikipedia.org/wiki/Ethylene_oxide" },
+      { name: "ChemAnalyst, How ethylene oxide is produced", url: "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/inside-the-reactor-how-ethylene-oxide-is-produced-38346" },
     ],
   },
   "liquid-oxygen": {
@@ -6655,8 +6655,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Messer", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Wikipedia: Cryogenic gas plant", url: "https://en.wikipedia.org/wiki/Cryogenic_gas_plant" },
-      { name: "Air Products: Cryogenic air separation", url: "https://www.airproducts.com" },
+      { name: "Wikipedia, Cryogenic gas plant", url: "https://en.wikipedia.org/wiki/Cryogenic_gas_plant" },
+      { name: "Air Products, Cryogenic air separation", url: "https://www.airproducts.com" },
     ],
   },
   "mts-synthetic-iron-oxide-pigment-red": {
@@ -6677,8 +6677,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Toda / ICC Industries", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "LANXESS: Bayferrox processes", url: "https://lanxess.com/en/products-and-brands/brands/bayferrox/products-and-applications" },
-      { name: "PCI: A new development in Penniman red", url: "https://www.pcimag.com/articles/100040-a-new-development-in-penniman-red-production" },
+      { name: "LANXESS, Bayferrox processes", url: "https://lanxess.com/en/products-and-brands/brands/bayferrox/products-and-applications" },
+      { name: "PCI, A new development in Penniman red", url: "https://www.pcimag.com/articles/100040-a-new-development-in-penniman-red-production" },
     ],
   },
   "verol-pr-polyglycerol-polyricinoleate": {
@@ -6700,8 +6700,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "TER Chemicals", url: "https://www.terchemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Polyglycerol polyricinoleate", url: "https://en.wikipedia.org/wiki/Polyglycerol_polyricinoleate" },
-      { name: "Google Patents US8101707B2: Direct manufacture of PGPR", url: "https://patents.google.com/patent/US8101707B2/en" },
+      { name: "Wikipedia, Polyglycerol polyricinoleate", url: "https://en.wikipedia.org/wiki/Polyglycerol_polyricinoleate" },
+      { name: "Google Patents US8101707B2, Direct manufacture of PGPR", url: "https://patents.google.com/patent/US8101707B2/en" },
     ],
   },
   "dense-soda-ash-packed-in-jumbo": {
@@ -6723,8 +6723,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GHCL", url: "https://www.ghcl.co.in" },
     ],
     sources: [
-      { name: "Wikipedia: Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
-      { name: "C&EN: Synthetic soda ash", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
+      { name: "Wikipedia, Solvay process", url: "https://en.wikipedia.org/wiki/Solvay_process" },
+      { name: "C&EN, Synthetic soda ash", url: "https://cen.acs.org/business/specialty-chemicals/synthetic-soda-ash-survive/101/i7" },
     ],
   },
   "glycerine-purified": {
@@ -6746,8 +6746,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Emery Oleochemicals", url: "https://www.emeryoleo.com" },
     ],
     sources: [
-      { name: "Wikipedia: Glycerol", url: "https://en.wikipedia.org/wiki/Glycerol" },
-      { name: "Procurement Resource: Glycerine production", url: "https://www.procurementresource.com" },
+      { name: "Wikipedia, Glycerol", url: "https://en.wikipedia.org/wiki/Glycerol" },
+      { name: "Procurement Resource, Glycerine production", url: "https://www.procurementresource.com" },
     ],
   },
   "magnesium-stearate-ip": {
@@ -6769,8 +6769,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Valtris Specialty Chemicals", url: "https://www.valtris.com" },
     ],
     sources: [
-      { name: "Alapolystabs: Role of metallic stearates", url: "https://alapolystabs.com/role-of-metallic-stearates.html" },
-      { name: "Procurement Resource: Magnesium stearate plant", url: "https://www.procurementresource.com/reports/magnesium-stearate-manufacturing-plant-project-report" },
+      { name: "Alapolystabs, Role of metallic stearates", url: "https://alapolystabs.com/role-of-metallic-stearates.html" },
+      { name: "Procurement Resource, Magnesium stearate plant", url: "https://www.procurementresource.com/reports/magnesium-stearate-manufacturing-plant-project-report" },
     ],
   },
   "calcium-carbonate-light-powder": {
@@ -6792,8 +6792,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Gulshan Polyols", url: "https://www.gulshanpolyols.com" },
     ],
     sources: [
-      { name: "Sudarshan: PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
-      { name: "Mordor: PCC market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
+      { name: "Sudarshan, PCC manufacturing process", url: "https://sudarshangroup.com/what-is-the-process-of-precipitated-calcium-carbonate-manufacturing/" },
+      { name: "Mordor, PCC market", url: "https://www.mordorintelligence.com/industry-reports/precipitated-calcium-carbonate-market" },
     ],
   },
   "metamitron-technical": {
@@ -6815,8 +6815,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Rayfull Chemicals", url: "https://www.rayfull.net" },
     ],
     sources: [
-      { name: "ADAMA: Goltix (metamitron)", url: "https://www.adama.com/uk/en/our-solutions/herbicides/goltix-70-sc" },
-      { name: "BCPC: UK pesticide guide", url: "https://www.bcpc.org" },
+      { name: "ADAMA, Goltix (metamitron)", url: "https://www.adama.com/uk/en/our-solutions/herbicides/goltix-70-sc" },
+      { name: "BCPC, UK pesticide guide", url: "https://www.bcpc.org" },
     ],
   },
   "manganese-oxide-60-62-feed": {
@@ -6837,8 +6837,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Eramet / Comilog", url: "https://www.eramet.com" },
     ],
     sources: [
-      { name: "Vibrantz: Manganese for animal feed", url: "https://vibrantz.com/markets/agriculture/animal-nutrition/" },
-      { name: "Manganese Supply: MnO grades", url: "https://manganesesupply.com/chemical-industry-catalysts-grade-manganese-oxide-mno/" },
+      { name: "Vibrantz, Manganese for animal feed", url: "https://vibrantz.com/markets/agriculture/animal-nutrition/" },
+      { name: "Manganese Supply, MnO grades", url: "https://manganesesupply.com/chemical-industry-catalysts-grade-manganese-oxide-mno/" },
     ],
   },
   camphorusp: {
@@ -6859,8 +6859,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Saurabh Aromatics / Indian producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "NIIR: Synthetic camphor production", url: "https://www.niir.org/blog/production-of-synthetic-camphor/" },
-      { name: "Sciencing: How synthetic camphor is made", url: "https://www.sciencing.com/how-does-5649691-synthetic-camphor-made-/" },
+      { name: "NIIR, Synthetic camphor production", url: "https://www.niir.org/blog/production-of-synthetic-camphor/" },
+      { name: "Sciencing, How synthetic camphor is made", url: "https://www.sciencing.com/how-does-5649691-synthetic-camphor-made-/" },
     ],
   },
   "pharmaceutical-raw-material-bulk-drugs-boric": {
@@ -6881,8 +6881,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Quiborax", url: "https://www.quiborax.com" },
     ],
     sources: [
-      { name: "USGS: Boron minerals yearbook", url: "https://pubs.usgs.gov/myb/vol1/2019/myb1-2019-boron.pdf" },
-      { name: "Procurement Resource: Boric acid plant", url: "https://www.procurementresource.com/reports/boric-acid-manufacturing-plant-project-report" },
+      { name: "USGS, Boron minerals yearbook", url: "https://pubs.usgs.gov/myb/vol1/2019/myb1-2019-boron.pdf" },
+      { name: "Procurement Resource, Boric acid plant", url: "https://www.procurementresource.com/reports/boric-acid-manufacturing-plant-project-report" },
     ],
   },
   "pharmaceutical-raw-materials-clobetasone-butyrate-bp": {
@@ -6903,8 +6903,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Crystal Pharma (Aspen)", url: "https://www.aspenpharma.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Clobetasone butyrate manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/clobetasone-butyrate" },
-      { name: "Axplora: Clobetasone butyrate API", url: "https://www.axplora.com/api-product/25122-57-0-s/" },
+      { name: "PharmaCompass, Clobetasone butyrate manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/clobetasone-butyrate" },
+      { name: "Axplora, Clobetasone butyrate API", url: "https://www.axplora.com/api-product/25122-57-0-s/" },
     ],
   },
   undecavertol: {
@@ -6922,8 +6922,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Givaudan", url: "https://www.givaudan.com" },
     ],
     sources: [
-      { name: "Givaudan: Undecavertol", url: "https://www.givaudan.com/fragrance-beauty/eindex/undecavertol" },
-      { name: "The Good Scents Company: undecavertol", url: "https://www.thegoodscentscompany.com/data/rw1003762.html" },
+      { name: "Givaudan, Undecavertol", url: "https://www.givaudan.com/fragrance-beauty/eindex/undecavertol" },
+      { name: "The Good Scents Company, undecavertol", url: "https://www.thegoodscentscompany.com/data/rw1003762.html" },
     ],
   },
   alum: {
@@ -6944,8 +6944,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GEO Specialty Chemicals", url: "https://www.geosc.com" },
     ],
     sources: [
-      { name: "NZIC: Manufacture of aluminium sulfate", url: "https://www.nzic.org.nz/unsecure_files/book/1F.pdf" },
-      { name: "Affinity Chemical: Alum manufacturing", url: "https://www.affinitychemical.com/alum-manufacturing-techniques-the-affinity-process/" },
+      { name: "NZIC, Manufacture of aluminium sulfate", url: "https://www.nzic.org.nz/unsecure_files/book/1F.pdf" },
+      { name: "Affinity Chemical, Alum manufacturing", url: "https://www.affinitychemical.com/alum-manufacturing-techniques-the-affinity-process/" },
     ],
   },
   "phenoxyethyl-isobutyrate": {
@@ -6966,8 +6966,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Eternis Fine Chemicals", url: "https://www.eternis.com" },
     ],
     sources: [
-      { name: "The Good Scents Company: phenoxyethyl isobutyrate", url: "https://www.thegoodscentscompany.com" },
-      { name: "PubChem: Phenethyl/phenoxyethyl esters", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "The Good Scents Company, phenoxyethyl isobutyrate", url: "https://www.thegoodscentscompany.com" },
+      { name: "PubChem, Phenethyl/phenoxyethyl esters", url: "https://pubchem.ncbi.nlm.nih.gov/" },
     ],
   },
   "sodium-bromide-solution": {
@@ -6989,8 +6989,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jordan Bromine Company", url: "https://www.jbcjordan.com" },
     ],
     sources: [
-      { name: "ChemicalBook: Sodium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3181001.htm" },
-      { name: "Google Patents CN1354125A: Sodium bromide/bromate", url: "https://patents.google.com/patent/CN1354125A/en" },
+      { name: "ChemicalBook, Sodium bromide", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB3181001.htm" },
+      { name: "Google Patents CN1354125A, Sodium bromide/bromate", url: "https://patents.google.com/patent/CN1354125A/en" },
     ],
   },
   "oxyclozan-de-vet-bp": {
@@ -7011,8 +7011,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "SBD Healthcare", url: "https://www.sbdhealthcare.in" },
     ],
     sources: [
-      { name: "PharmaCompass: Oxyclozanide manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/oxyclozanide" },
-      { name: "Orex Pharma: Oxyclozanide BP", url: "http://orexpharma.com/oxyclozanide-bp/" },
+      { name: "PharmaCompass, Oxyclozanide manufacturers", url: "https://www.pharmacompass.com/listed-active-pharmaceutical-ingredients/oxyclozanide" },
+      { name: "Orex Pharma, Oxyclozanide BP", url: "http://orexpharma.com/oxyclozanide-bp/" },
     ],
   },
   "copper-oxychloride-technical-material-as-per": {
@@ -7033,8 +7033,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Spiess-Urania Chemicals", url: "https://www.spiess-urania.com" },
     ],
     sources: [
-      { name: "Manica: Copper oxychloride", url: "https://www.manica.com/en/crop-protection/copper-oxychloride/" },
-      { name: "Google Patents US2655432A: Producing copper oxychloride", url: "https://patents.google.com/patent/US2655432A/en" },
+      { name: "Manica, Copper oxychloride", url: "https://www.manica.com/en/crop-protection/copper-oxychloride/" },
+      { name: "Google Patents US2655432A, Producing copper oxychloride", url: "https://patents.google.com/patent/US2655432A/en" },
     ],
   },
   "phenylpentan-1-one-hclcas-no-16-1": {
@@ -7055,8 +7055,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Indian/Chinese fine-chem", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "PubChem: Valerophenone", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Valerophenone" },
-      { name: "ChemicalBook: 1-Phenyl-1-pentanone", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem, Valerophenone", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Valerophenone" },
+      { name: "ChemicalBook, 1-Phenyl-1-pentanone", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "aroma-chemicals-anethole": {
@@ -7077,8 +7077,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Vigon International", url: "https://www.vigon.com" },
     ],
     sources: [
-      { name: "Grokipedia: Anethole", url: "https://grokipedia.com/page/Anethole" },
-      { name: "Google Patents CN103755533A: Anethole from estragole", url: "https://patents.google.com/patent/CN103755533A/en" },
+      { name: "Grokipedia, Anethole", url: "https://grokipedia.com/page/Anethole" },
+      { name: "Google Patents CN103755533A, Anethole from estragole", url: "https://patents.google.com/patent/CN103755533A/en" },
     ],
   },
   "trixylenyl-phosphate": {
@@ -7099,8 +7099,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Valtris (Santicizer)", url: "https://www.valtris.com" },
     ],
     sources: [
-      { name: "Valtris: Santicizer phosphate esters", url: "https://www.valtris.com/product/plasticizers/santicizer-flame-retardant-plasticizers/" },
-      { name: "NBInno: Trixylyl phosphate", url: "https://www.nbinno.com/flame-retardants/trixylyl-phosphate-txp-supplier-flame-retardant-plasticizer-ub" },
+      { name: "Valtris, Santicizer phosphate esters", url: "https://www.valtris.com/product/plasticizers/santicizer-flame-retardant-plasticizers/" },
+      { name: "NBInno, Trixylyl phosphate", url: "https://www.nbinno.com/flame-retardants/trixylyl-phosphate-txp-supplier-flame-retardant-plasticizer-ub" },
     ],
   },
   "aluminium-oxide-grains-artificial-corundum-w": {
@@ -7122,8 +7122,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Henan Ruishi", url: "https://ruishi-abrasives.com" },
     ],
     sources: [
-      { name: "Washington Mills: Brown fused aluminum oxide", url: "https://washingtonmills.com/products/brown-fused-aluminum-oxide" },
-      { name: "Imerys: Fused alumina", url: "https://www.imerys.com/minerals/fused-alumina" },
+      { name: "Washington Mills, Brown fused aluminum oxide", url: "https://washingtonmills.com/products/brown-fused-aluminum-oxide" },
+      { name: "Imerys, Fused alumina", url: "https://www.imerys.com/minerals/fused-alumina" },
     ],
   },
   "h-acid": {
@@ -7144,8 +7144,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Zhejiang Longsheng", url: "https://www.longsheng.com" },
     ],
     sources: [
-      { name: "NBInno: Naphthalene dye intermediates", url: "https://www.nbinno.com/article/dye-intermediates/from-naphthalene-to-vivid-hues-the-synthesis-of-1-naphthylamine-5-sulfonic-acid-and-its-derivatives-lr" },
-      { name: "Grokipedia: Naphthalene", url: "https://grokipedia.com/page/Naphthalene" },
+      { name: "NBInno, Naphthalene dye intermediates", url: "https://www.nbinno.com/article/dye-intermediates/from-naphthalene-to-vivid-hues-the-synthesis-of-1-naphthylamine-5-sulfonic-acid-and-its-derivatives-lr" },
+      { name: "Grokipedia, Naphthalene", url: "https://grokipedia.com/page/Naphthalene" },
     ],
   },
   "tertairy-amyl-methyl-ether": {
@@ -7166,8 +7166,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Refinery oxygenate units", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wiley: Synthesis of TAME equilibrium", url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ceat.270180205" },
-      { name: "Google Patents US4988366: TAME/MTBE production", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4988366" },
+      { name: "Wiley, Synthesis of TAME equilibrium", url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ceat.270180205" },
+      { name: "Google Patents US4988366, TAME/MTBE production", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/4988366" },
     ],
   },
   "zinc-citrate-trihydrate-ih": {
@@ -7188,8 +7188,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jost Chemical", url: "https://www.jostchemical.com" },
     ],
     sources: [
-      { name: "Jungbunzlauer: Zinc citrate", url: "https://www.jungbunzlauer.com/en/products/special-salts/zinc-citrate" },
-      { name: "Mordor: Zinc citrate market", url: "https://www.mordorintelligence.com/industry-reports/zinc-citrate-market" },
+      { name: "Jungbunzlauer, Zinc citrate", url: "https://www.jungbunzlauer.com/en/products/special-salts/zinc-citrate" },
+      { name: "Mordor, Zinc citrate market", url: "https://www.mordorintelligence.com/industry-reports/zinc-citrate-market" },
     ],
   },
   "cis-8-methoxy-1-3-diaza-spiro-decane-2-4-dione-sodium-salt": {
@@ -7209,8 +7209,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Simson Pharma", url: "https://www.simsonpharma.com" },
     ],
     sources: [
-      { name: "Wikipedia: Bucherer-Bergs reaction", url: "https://en.wikipedia.org/wiki/Bucherer%E2%80%93Bergs_reaction" },
-      { name: "PubChem: diazaspirodecane-dione", url: "https://pubchem.ncbi.nlm.nih.gov/" },
+      { name: "Wikipedia, Bucherer-Bergs reaction", url: "https://en.wikipedia.org/wiki/Bucherer%E2%80%93Bergs_reaction" },
+      { name: "PubChem, diazaspirodecane-dione", url: "https://pubchem.ncbi.nlm.nih.gov/" },
     ],
   },
   "propanil-dg-stam-dg-x-kg": {
@@ -7231,8 +7231,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "RiceCo", url: "https://www.riceco.com" },
     ],
     sources: [
-      { name: "Wikipedia: Propanil", url: "https://en.wikipedia.org/wiki/Propanil" },
-      { name: "Grokipedia: Propionyl chloride", url: "https://grokipedia.com/page/Propionyl_chloride" },
+      { name: "Wikipedia, Propanil", url: "https://en.wikipedia.org/wiki/Propanil" },
+      { name: "Grokipedia, Propionyl chloride", url: "https://grokipedia.com/page/Propionyl_chloride" },
     ],
   },
   "calcined-alumina": {
@@ -7254,8 +7254,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "J.M. Huber", url: "https://www.hubermaterials.com" },
     ],
     sources: [
-      { name: "Aluminium Guide: Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
-      { name: "EPSA: Specialty aluminas", url: "https://specialty-chemicals.eu/epsa/" },
+      { name: "Aluminium Guide, Bayer process", url: "https://aluminium-guide.com/bayer-process-bauxite-alumina/" },
+      { name: "EPSA, Specialty aluminas", url: "https://specialty-chemicals.eu/epsa/" },
     ],
   },
   "n-chlorosuccinimide-x": {
@@ -7276,8 +7276,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Jiangsu/Chinese fine-chem", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wikipedia: N-Chlorosuccinimide", url: "https://en.wikipedia.org/wiki/N-Chlorosuccinimide" },
-      { name: "NBInno: Chemistry of N-chlorosuccinimide", url: "https://www.nbinno.com/article/other-organic-chemicals/the-chemistry-of-n-chlorosuccinimide-synthesis-industrial-applications" },
+      { name: "Wikipedia, N-Chlorosuccinimide", url: "https://en.wikipedia.org/wiki/N-Chlorosuccinimide" },
+      { name: "NBInno, Chemistry of N-chlorosuccinimide", url: "https://www.nbinno.com/article/other-organic-chemicals/the-chemistry-of-n-chlorosuccinimide-synthesis-industrial-applications" },
     ],
   },
   "pharmaceutical-raw-materials-rani-tid-ine": {
@@ -7298,8 +7298,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hetero", url: "https://www.heteroworld.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Ranitidine HCl manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ranitidine-hydrochloride" },
-      { name: "Google Patents US5621120: Form 1 ranitidine HCl", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/5621120" },
+      { name: "PharmaCompass, Ranitidine HCl manufacturers", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/ranitidine-hydrochloride" },
+      { name: "Google Patents US5621120, Form 1 ranitidine HCl", url: "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/5621120" },
     ],
   },
   "permethric-acid-chloride": {
@@ -7320,8 +7320,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tagros Chemicals", url: "https://www.tagros.com" },
     ],
     sources: [
-      { name: "Gharda: Cypermethric acid chloride (DV acid chloride)", url: "https://gharda.com/cypermethric-acid-chloride-d-v-acid-chloride" },
-      { name: "ChemBK: Cypermethric acid chloride", url: "https://www.chembk.com/en/chem/Cypermethric%20Acid%20Chloride" },
+      { name: "Gharda, Cypermethric acid chloride (DV acid chloride)", url: "https://gharda.com/cypermethric-acid-chloride-d-v-acid-chloride" },
+      { name: "ChemBK, Cypermethric acid chloride", url: "https://www.chembk.com/en/chem/Cypermethric%20Acid%20Chloride" },
     ],
   },
   "neostigmine-methyl-sulphate": {
@@ -7342,8 +7342,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "LGM Pharma", url: "https://lgmpharma.com" },
     ],
     sources: [
-      { name: "PharmaCompass: Neostigmine methylsulfate", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/neostigmine-methylsulfate" },
-      { name: "Wiley IJAC: Neostigmine methylsulfate analysis", url: "https://onlinelibrary.wiley.com/doi/10.1155/2021/5570173" },
+      { name: "PharmaCompass, Neostigmine methylsulfate", url: "https://www.pharmacompass.com/manufacturers-suppliers-exporters/neostigmine-methylsulfate" },
+      { name: "Wiley IJAC, Neostigmine methylsulfate analysis", url: "https://onlinelibrary.wiley.com/doi/10.1155/2021/5570173" },
     ],
   },
   "tax-invoice-no-trifluoro-acetic-acid": {
@@ -7364,8 +7364,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Solvay (until 2026)", url: "https://www.solvay.com" },
     ],
     sources: [
-      { name: "Wikipedia: Trifluoroacetic acid", url: "https://en.wikipedia.org/wiki/Trifluoroacetic_acid" },
-      { name: "Solvay: Update on TFA", url: "https://www.solvay.com/en/tfa" },
+      { name: "Wikipedia, Trifluoroacetic acid", url: "https://en.wikipedia.org/wiki/Trifluoroacetic_acid" },
+      { name: "Solvay, Update on TFA", url: "https://www.solvay.com/en/tfa" },
     ],
   },
   "sodium-saccharin-pure-dental": {
@@ -7386,8 +7386,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Shree Vardayini Chemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Wikipedia: Saccharin", url: "https://en.wikipedia.org/wiki/Saccharin" },
-      { name: "EFSA: Re-evaluation of saccharin and salts", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11565076/" },
+      { name: "Wikipedia, Saccharin", url: "https://en.wikipedia.org/wiki/Saccharin" },
+      { name: "EFSA, Re-evaluation of saccharin and salts", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11565076/" },
     ],
   },
   "alpha-alpha-alpha-trifluoro-p-tolualde-h": {
@@ -7408,8 +7408,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Nantong Reform Petrochemical", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "TCI: 4-(Trifluoromethyl)benzaldehyde", url: "https://www.tcichemicals.com/OP/en/p/T1091" },
-      { name: "ChemicalBook: 4-(Trifluoromethyl)benzaldehyde", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6403483.htm" },
+      { name: "TCI, 4-(Trifluoromethyl)benzaldehyde", url: "https://www.tcichemicals.com/OP/en/p/T1091" },
+      { name: "ChemicalBook, 4-(Trifluoromethyl)benzaldehyde", url: "https://www.chemicalbook.com/ChemicalProductProperty_EN_CB6403483.htm" },
     ],
   },
   "potassium-fluoroborate-potassium-fluorotitanate": {
@@ -7431,8 +7431,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "American Elements", url: "https://www.americanelements.com" },
     ],
     sources: [
-      { name: "DDFluor: Potassium fluoroborate KBF4", url: "https://www.ddfluor.com/fluorochemicals/potassium-fluoroborate-kbf4/" },
-      { name: "American Elements: Potassium tetrafluoroborate", url: "https://www.americanelements.com/potassium-tetrafluoroborate-14075-53-7" },
+      { name: "DDFluor, Potassium fluoroborate KBF4", url: "https://www.ddfluor.com/fluorochemicals/potassium-fluoroborate-kbf4/" },
+      { name: "American Elements, Potassium tetrafluoroborate", url: "https://www.americanelements.com/potassium-tetrafluoroborate-14075-53-7" },
     ],
   },
   "denatonium-benzoate": {
@@ -7453,8 +7453,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Indian/Chinese fine-chem", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "Johnson Matthey/CPHI: Bitrex (denatonium benzoate)", url: "https://www.cphi-online.com/bitrex-denatonium-benzoate-prod710530.html" },
-      { name: "Wikipedia: MacFarlan Smith", url: "https://en.wikipedia.org/wiki/MacFarlan_Smith" },
+      { name: "Johnson Matthey/CPHI, Bitrex (denatonium benzoate)", url: "https://www.cphi-online.com/bitrex-denatonium-benzoate-prod710530.html" },
+      { name: "Wikipedia, MacFarlan Smith", url: "https://en.wikipedia.org/wiki/MacFarlan_Smith" },
     ],
   },
   "carbon-black-acetylene-compressed": {
@@ -7475,8 +7475,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Soltex", url: "https://www.soltexinc.com" },
     ],
     sources: [
-      { name: "Denka: Denka Black", url: "https://www.denka.co.jp/eng/product/detail_00025/" },
-      { name: "UT Austin: Carbon black from acetylene decomposition", url: "https://repositories.lib.utexas.edu/items/80c43471-da93-4f1a-8752-65cb78e76986" },
+      { name: "Denka, Denka Black", url: "https://www.denka.co.jp/eng/product/detail_00025/" },
+      { name: "UT Austin, Carbon black from acetylene decomposition", url: "https://repositories.lib.utexas.edu/items/80c43471-da93-4f1a-8752-65cb78e76986" },
     ],
   },
   "date-04-methyldiethanolamine": {
@@ -7498,8 +7498,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Eastman Chemical", url: "https://www.eastman.com" },
     ],
     sources: [
-      { name: "Wikipedia: Methyldiethanolamine", url: "https://en.wikipedia.org/wiki/Methyldiethanolamine" },
-      { name: "Grokipedia: Methyldiethanolamine", url: "https://grokipedia.com/page/Methyldiethanolamine" },
+      { name: "Wikipedia, Methyldiethanolamine", url: "https://en.wikipedia.org/wiki/Methyldiethanolamine" },
+      { name: "Grokipedia, Methyldiethanolamine", url: "https://grokipedia.com/page/Methyldiethanolamine" },
     ],
   },
   "ammonium-bi-sulphite-solution": {
@@ -7520,8 +7520,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Hydrite Chemical", url: "https://www.hydrite.com" },
     ],
     sources: [
-      { name: "PubChem: Ammonium bisulfite", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Ammonium-bisulfite" },
-      { name: "ChemicalBook: Ammonium bisulfite", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
+      { name: "PubChem, Ammonium bisulfite", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Ammonium-bisulfite" },
+      { name: "ChemicalBook, Ammonium bisulfite", url: "https://www.chemicalbook.com/ProductIndex_EN.aspx" },
     ],
   },
   "aqueous-ammonia-solution-iupacname-ammonium-hydroxide": {
@@ -7543,8 +7543,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Tata Chemicals", url: "https://www.tatachemicals.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ammonia solution", url: "https://en.wikipedia.org/wiki/Ammonia_solution" },
-      { name: "Vaisala: Liquid ammonia/ammonium hydroxide process", url: "https://www.vaisala.com/en/chemical-industry-solutions/chemicals-allied-products/liquid-ammonia-ammonium-hydroxide-production-process" },
+      { name: "Wikipedia, Ammonia solution", url: "https://en.wikipedia.org/wiki/Ammonia_solution" },
+      { name: "Vaisala, Liquid ammonia/ammonium hydroxide process", url: "https://www.vaisala.com/en/chemical-industry-solutions/chemicals-allied-products/liquid-ammonia-ammonium-hydroxide-production-process" },
     ],
   },
   "sodium-trichloracetate": {
@@ -7565,8 +7565,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Denak / Spanish producers", url: "https://www.chemicalbook.com" },
     ],
     sources: [
-      { name: "PubChem: Sodium trichloroacetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-trichloroacetate" },
-      { name: "Wikipedia: Trichloroacetic acid", url: "https://en.wikipedia.org/wiki/Trichloroacetic_acid" },
+      { name: "PubChem, Sodium trichloroacetate", url: "https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-trichloroacetate" },
+      { name: "Wikipedia, Trichloroacetic acid", url: "https://en.wikipedia.org/wiki/Trichloroacetic_acid" },
     ],
   },
   "nickel-sulphate": {
@@ -7588,8 +7588,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "GEM Co.", url: "https://www.gem.com.cn" },
     ],
     sources: [
-      { name: "Umicore: Cobalt & nickel precursors", url: "https://www.umicore.com/en/markets-products/automotive-mobility/battery-materials/cobalt-nickel-precursors/" },
-      { name: "ScienceDirect: Battery-grade nickel sulfate", url: "https://www.sciencedirect.com/science/article/pii/S1383586625042698" },
+      { name: "Umicore, Cobalt & nickel precursors", url: "https://www.umicore.com/en/markets-products/automotive-mobility/battery-materials/cobalt-nickel-precursors/" },
+      { name: "ScienceDirect, Battery-grade nickel sulfate", url: "https://www.sciencedirect.com/science/article/pii/S1383586625042698" },
     ],
   },
   "dehydrated-castor-oil-fatty-acid-per": {
@@ -7610,8 +7610,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Itoh Oil Chemicals", url: "https://www.itoh-oil.co.jp" },
     ],
     sources: [
-      { name: "Nova Industries: DCOFA technical data", url: "https://novaind.in/dehydrated-castor-oil-fatty-acid-dcofa-technical-data/" },
-      { name: "Girnar Industries: DCOFA", url: "https://girnarindustries.com/castor-derivatives/dehydrated-castor-oil-fatty-acid/" },
+      { name: "Nova Industries, DCOFA technical data", url: "https://novaind.in/dehydrated-castor-oil-fatty-acid-dcofa-technical-data/" },
+      { name: "Girnar Industries, DCOFA", url: "https://girnarindustries.com/castor-derivatives/dehydrated-castor-oil-fatty-acid/" },
     ],
   },
   "diethyl-sulphate": {
@@ -7632,8 +7632,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Mubychem", url: "https://mubychem.com" },
     ],
     sources: [
-      { name: "Wikipedia: Ethyl sulfate / diethyl sulfate", url: "https://en.wikipedia.org/wiki/Ethyl_sulfate" },
-      { name: "NCBI: Diethyl sulfate production", url: "https://www.ncbi.nlm.nih.gov/books/NBK424638/" },
+      { name: "Wikipedia, Ethyl sulfate / diethyl sulfate", url: "https://en.wikipedia.org/wiki/Ethyl_sulfate" },
+      { name: "NCBI, Diethyl sulfate production", url: "https://www.ncbi.nlm.nih.gov/books/NBK424638/" },
     ],
   },
   "arsenic-metal": {
@@ -7654,8 +7654,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "5N Plus", url: "https://www.5nplus.com" },
     ],
     sources: [
-      { name: "Wikipedia: Arsenic", url: "https://en.wikipedia.org/wiki/Arsenic" },
-      { name: "USGS: Arsenic mineral commodity summary", url: "https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-arsenic.pdf" },
+      { name: "Wikipedia, Arsenic", url: "https://en.wikipedia.org/wiki/Arsenic" },
+      { name: "USGS, Arsenic mineral commodity summary", url: "https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-arsenic.pdf" },
     ],
   },
   "liters-liquid-helium-at-the-rateof": {
@@ -7677,8 +7677,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Qatargas / Messer", url: "https://www.messergroup.com" },
     ],
     sources: [
-      { name: "Linde Engineering: Helium recovery & liquefaction", url: "https://www.linde-engineering.com/products-and-services/process-plants/natural-gas-processing/helium-recovery-and-liquefaction-plants" },
-      { name: "Air Products: Helium", url: "https://www.airproducts.com/gases/helium" },
+      { name: "Linde Engineering, Helium recovery & liquefaction", url: "https://www.linde-engineering.com/products-and-services/process-plants/natural-gas-processing/helium-recovery-and-liquefaction-plants" },
+      { name: "Air Products, Helium", url: "https://www.airproducts.com/gases/helium" },
     ],
   },
   "fosetyl-al-tc": {
@@ -7699,8 +7699,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Rayfull Chemicals", url: "https://www.rayfull.net" },
     ],
     sources: [
-      { name: "AERU: Fosetyl-aluminium", url: "https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/363.htm" },
-      { name: "FAO: Fosetyl-aluminium specification", url: "https://openknowledge.fao.org/server/api/core/bitstreams/86edff2a-3045-40a2-aaf4-e7988dcd2b34/content" },
+      { name: "AERU, Fosetyl-aluminium", url: "https://sitem.herts.ac.uk/aeru/ppdb/en/Reports/363.htm" },
+      { name: "FAO, Fosetyl-aluminium specification", url: "https://openknowledge.fao.org/server/api/core/bitstreams/86edff2a-3045-40a2-aaf4-e7988dcd2b34/content" },
     ],
   },
   "mono-methyl-aniline": {
@@ -7721,8 +7721,8 @@ export const verified: Record<string, VerifiedProduct> = {
       { name: "Aarti Industries", url: "https://www.aarti-industries.com" },
     ],
     sources: [
-      { name: "IntelMarketResearch: Mono methyl aniline", url: "https://www.intelmarketresearch.com/mono-methyl-aniline-market-10902" },
-      { name: "Minal Specialities: N-Methylaniline", url: "https://www.minalspecialities.com/n-methylaniline/" },
+      { name: "IntelMarketResearch, Mono methyl aniline", url: "https://www.intelmarketresearch.com/mono-methyl-aniline-market-10902" },
+      { name: "Minal Specialities, N-Methylaniline", url: "https://www.minalspecialities.com/n-methylaniline/" },
     ],
   },
 };

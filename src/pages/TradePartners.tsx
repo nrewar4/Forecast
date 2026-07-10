@@ -16,9 +16,9 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { Badge, Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
-import { KpiChip } from "@/components/Kpi";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge, Card, CardContent, CardHeader, CardTitle } from "@/components/ui/primitives";
+import { KpiChip } from "@/components/ui/Kpi";
 import { cn, num } from "@/lib/utils";
 import { useTradeData } from "@/context/TradeData";
 import { useCurrency } from "@/context/Currency";

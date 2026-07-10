@@ -1,59 +1,50 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import {
-  clearSession,
-  createSession,
-  readSession,
-  verifyCredentials,
-  type AdminSession,
-} from "@/lib/auth";
-import { trackEvent } from "@/lib/analytics";
+import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { isAdminSession, loginAdmin, logoutAdmin } from "@/lib/auth";
 
-type AuthValue = {
+// App-wide admin auth state. Wraps the router so any page can read isAdmin and
+// the guard below can redirect anonymous visitors away from admin pages.
+
+type AuthContextValue = {
   isAdmin: boolean;
-  session: AdminSession | null;
   login: (username: string, password: string) => Promise<boolean>;
   logout: () => void;
 };
 
-const AuthContext = createContext<AuthValue | null>(null);
+const AuthContext = createContext<AuthContextValue>({
+  isAdmin: false,
+  login: async () => false,
+  logout: () => {},
+});
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [session, setSession] = useState<AdminSession | null>(() => readSession());
+  const [isAdmin, setIsAdmin] = useState<boolean>(() => isAdminSession());
 
   const login = useCallback(async (username: string, password: string) => {
-    const ok = await verifyCredentials(username, password);
-    if (!ok) {
-      trackEvent("login_failed");
-      return false;
-    }
-    setSession(createSession(username.trim()));
-    trackEvent("login");
-    return true;
+    const ok = await loginAdmin(username, password);
+    if (ok) setIsAdmin(true);
+    return ok;
   }, []);
 
   const logout = useCallback(() => {
-    clearSession();
-    setSession(null);
-    trackEvent("logout");
+    logoutAdmin();
+    setIsAdmin(false);
   }, []);
 
-  const value = useMemo<AuthValue>(
-    () => ({ isAdmin: Boolean(session), session, login, logout }),
-    [session, login, logout],
-  );
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ isAdmin, login, logout }}>{children}</AuthContext.Provider>;
 }
 
-export function useAuth(): AuthValue {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
-  return ctx;
+export function useAuth(): AuthContextValue {
+  return useContext(AuthContext);
+}
+
+// Route guard: renders children for an admin, otherwise redirects to /login and
+// remembers where the visitor was heading so login can return them there.
+export function RequireAdmin({ children }: { children: ReactNode }) {
+  const { isAdmin } = useAuth();
+  const location = useLocation();
+  if (!isAdmin) {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+  return <>{children}</>;
 }

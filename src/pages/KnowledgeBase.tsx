@@ -26,14 +26,15 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
-import { Badge, Card, CardContent, CardHeader, CardTitle, Chip, tooltipStyle } from "@/components/ui";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge, Card, CardContent, CardHeader, CardTitle, Chip, tooltipStyle } from "@/components/ui/primitives";
 import { cn, slug } from "@/lib/utils";
 import { products } from "@/data/products";
+import { classifyProduct } from "@/lib/apacCategory";
 import { research } from "@/data/research";
 import { verifiedFor } from "@/data/verified";
-import { AiProductSearch } from "@/components/AiProductSearch";
-import { AiProductProfile } from "@/components/AiProductProfile";
+import { AiProductSearch } from "@/components/knowledge/AiProductSearch";
+import { AiProductProfile } from "@/components/knowledge/AiProductProfile";
 import type { AiProfile } from "@/lib/aiResearch";
 import { searchLiterature, type Paper } from "@/lib/openalex";
 import { chatComplete } from "@/lib/openrouter";
@@ -241,6 +242,7 @@ export default function KnowledgeBase() {
                   <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                     <Chip>HS {product.hsCode}</Chip>
                     <Chip>CAS {product.cas}</Chip>
+                    <Badge tone="softOrange">{classifyProduct(product).category}</Badge>
                     <Badge tone="gray">{product.plantType} plant</Badge>
                     {ver ? (
                       <Badge tone="green">Web-verified routes &amp; makers</Badge>
@@ -311,7 +313,7 @@ export default function KnowledgeBase() {
                 </ul>
                 <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
-                    Predominant process: {ver.mainProcess.name}
+                    Predominant process, {ver.mainProcess.name}
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-foreground">{ver.mainProcess.detail}</p>
                 </div>
@@ -436,10 +438,24 @@ export default function KnowledgeBase() {
 
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle>End Use Industries</CardTitle>
+                <CardTitle>Applications and End Use</CardTitle>
                 <p className="mt-0.5 text-xs text-muted-foreground">Demand share, percent</p>
               </CardHeader>
               <CardContent className="pt-2">
+                {/* APAC category classification for this product */}
+                {(() => {
+                  const cat = classifyProduct(product);
+                  return (
+                    <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-primary/20 bg-accent/40 px-3 py-2">
+                      <Layers className="h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        APAC category
+                      </span>
+                      <span className="text-sm font-semibold text-ink">{cat.category}</span>
+                      <span className="text-xs text-muted-foreground">· {cat.group}</span>
+                    </div>
+                  );
+                })()}
                 <ResponsiveContainer width="100%" height={260}>
                   <BarChart data={product.industries} layout="vertical" margin={{ top: 4, right: 24, left: 8, bottom: 0 }}>
                     <CartesianGrid stroke="#E2E8F0" strokeDasharray="3 3" horizontal={false} />

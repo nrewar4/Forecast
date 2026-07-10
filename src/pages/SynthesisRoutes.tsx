@@ -13,13 +13,13 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
-import { SynthesisShell } from "@/components/SynthesisShell";
-import { trackSearch } from "@/lib/analytics";
-import { RouteStepCard } from "@/components/RouteStepCard";
-import { CdmoIntelligence } from "@/components/CdmoIntelligence";
-import { RegulatoryPanel } from "@/components/RegulatoryPanel";
+import { AppShell } from "@/components/layout/AppShell";
+import { SYNTHESIS_NAV } from "@/components/layout/Sidebar";
+import { RouteStepCard } from "@/components/knowledge/RouteStepCard";
+import { CdmoIntelligence } from "@/components/knowledge/CdmoIntelligence";
+import { RegulatoryPanel } from "@/components/knowledge/RegulatoryPanel";
 import { lookupFda, type FdaLookup } from "@/lib/openfda";
-import { KpiChip } from "@/components/Kpi";
+import { KpiChip } from "@/components/ui/Kpi";
 import {
   Badge,
   Card,
@@ -27,7 +27,7 @@ import {
   CardHeader,
   CardTitle,
   Chip,
-} from "@/components/ui";
+} from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 import { loadAiConfig, hasApiKey } from "@/lib/aiConfig";
 import {
@@ -102,7 +102,6 @@ export default function SynthesisRoutes() {
     setResult(null);
     setSelected(null);
     setFda(null);
-    trackSearch(target, "synthesis routes");
 
     const cfg = loadAiConfig();
     if (!hasApiKey(cfg)) {
@@ -133,7 +132,7 @@ export default function SynthesisRoutes() {
           ? e.message
           : e instanceof Error
             ? e.message
-            : "Route generation failed. Retry.",
+            : "Route generation failed, retry",
       );
     } finally {
       if (abortRef.current === controller) setLoading(false);
@@ -159,9 +158,10 @@ export default function SynthesisRoutes() {
     saved.some((s) => s.id === `${moleculeName}:${selected.id}`);
 
   return (
-    <SynthesisShell
+    <AppShell
+      nav={SYNTHESIS_NAV}
       title="Custom Synthesis Routes"
-      subtitle="ML-assisted retrosynthesis powered by ASKCOS and Claude. Enter a chemical name, CAS number, or SMILES."
+      subtitle="ML-assisted retrosynthesis. Enter a chemical name, CAS number, or SMILES."
     >
       {/* Search bar */}
       <Card>
@@ -251,7 +251,7 @@ export default function SynthesisRoutes() {
               value={
                 result.routes.length
                   ? `${Math.max(...result.routes.map((r) => r.feasibility_score))}`
-                  : "N/A"
+                  : ", "
               }
               sub="0 to 100"
             />
@@ -259,7 +259,7 @@ export default function SynthesisRoutes() {
               icon={ScrollText}
               label="PubChem CID"
               value={
-                result.molecule.cid ? String(result.molecule.cid) : "N/A"
+                result.molecule.cid ? String(result.molecule.cid) : ", "
               }
               sub={result.molecule.mw ? `MW ${result.molecule.mw}` : "identity"}
             />
@@ -501,6 +501,6 @@ export default function SynthesisRoutes() {
           Enter a chemical above to generate candidate manufacturing routes.
         </p>
       ) : null}
-    </SynthesisShell>
+    </AppShell>
   );
 }

@@ -22,7 +22,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { Badge, Card, CardContent, CardHeader, CardTitle, Chip, tooltipStyle } from "@/components/ui";
+import { Badge, Card, CardContent, CardHeader, CardTitle, Chip, tooltipStyle } from "@/components/ui/primitives";
 import type { AiProfile } from "@/lib/aiResearch";
 
 const donutColors = ["#F47920", "#F9A663", "#FBBF24", "#94A3B8", "#CBD5E1", "#E2E8F0"];
@@ -120,7 +120,7 @@ export function AiProductProfile({ profile: p, onClose }: { profile: AiProfile; 
             {p.mainProcess ? (
               <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
-                  Predominant process: {p.mainProcess.name}
+                  Predominant process, {p.mainProcess.name}
                 </p>
                 <p className="mt-1.5 text-sm leading-relaxed text-foreground">{p.mainProcess.detail}</p>
               </div>

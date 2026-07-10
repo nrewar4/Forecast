@@ -58,42 +58,17 @@
     transform: scale(0.97);
   }
 
-  /* Scroll reveal: paired with the <Reveal> component (components/motion.tsx),
-     which flips on reveal-visible when the element enters the viewport. */
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition:
-      opacity 0.7s var(--ease-out-expo),
-      transform 0.7s var(--ease-out-expo);
-  }
-  .reveal-visible {
-    opacity: 1;
-    transform: none;
+  /* Animated shipping routes on the landing About map. */
+  .route-flow {
+    stroke-dasharray: 2 6;
+    animation: route-flow 1.4s linear infinite;
   }
 }
 
-/* Animated shipping routes on the about section map. */
 @keyframes route-flow {
   to {
-    stroke-dashoffset: -26;
+    stroke-dashoffset: -24;
   }
-}
-.route-line {
-  stroke-dasharray: 3 7;
-  animation: route-flow 1.6s linear infinite;
-}
-@keyframes node-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-.node-pulse {
-  animation: node-pulse 2.4s ease-in-out infinite;
 }
 
 /* Reduced motion: keep opacity/colour, drop movement (a11y). */

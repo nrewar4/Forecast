@@ -1,150 +1,107 @@
-// First-party site analytics. Every visit records lightweight events in
-// localStorage (no cookies, nothing leaves the browser); the admin dashboard
-// aggregates them. Storage is capped so it never grows unbounded.
+// Lightweight, self-contained website analytics. Records page views and named
+// events into localStorage (capped ring buffer) with an anonymous session id.
+// No external service and no personal data. The Admin Dashboard reads this to
+// chart traffic; clearing browser storage clears the history.
+//
+// Note: because storage is per browser, this measures activity on each device.
+// Wiring the same records into a Supabase table later would make it site-wide.
 
-export type AnalyticsEvent = {
-  /** view = a route render, search = a query, everything else is a named event */
-  kind: "view" | "search" | "event";
-  ts: number;
-  /** visitor session id (per browser tab session) */
-  sid: string;
-  path?: string;
-  query?: string;
-  name?: string;
-  /** viewport bucket at the time of the event */
-  device?: "phone" | "tablet" | "desktop";
-  referrer?: string;
+export type PageView = {
+  t: number; // timestamp (ms)
+  path: string;
+  session: string;
+  referrer: string;
+  width: number;
+  device: "desktop" | "tablet" | "mobile";
 };
 
-const STORE_KEY = "apac.analytics.v1";
-const SID_KEY = "apac.analytics.sid";
-const MAX_EVENTS = 5000;
+export type AppEvent = {
+  t: number;
+  name: string;
+  session: string;
+  data: Record<string, string>;
+};
 
-function deviceBucket(): AnalyticsEvent["device"] {
-  if (typeof window === "undefined") return "desktop";
-  const w = window.innerWidth;
-  if (w < 640) return "phone";
-  if (w < 1024) return "tablet";
-  return "desktop";
-}
+const VIEWS_KEY = "apac.analytics.views.v1";
+const EVENTS_KEY = "apac.analytics.events.v1";
+const SESSION_KEY = "apac.analytics.session.v1";
+const MAX_ROWS = 5000;
+const SESSION_GAP_MIN = 30;
 
-function sessionId(): string {
+function readArr<T>(key: string): T[] {
   try {
-    let sid = sessionStorage.getItem(SID_KEY);
-    if (!sid) {
-      sid = crypto.randomUUID();
-      sessionStorage.setItem(SID_KEY, sid);
-    }
-    return sid;
-  } catch {
-    return "anonymous";
-  }
-}
-
-export function loadEvents(): AnalyticsEvent[] {
-  try {
-    return JSON.parse(localStorage.getItem(STORE_KEY) ?? "[]") as AnalyticsEvent[];
+    const raw = localStorage.getItem(key);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? (parsed as T[]) : [];
   } catch {
     return [];
   }
 }
 
-function append(event: AnalyticsEvent): void {
+function writeArr<T>(key: string, rows: T[]) {
   try {
-    const events = loadEvents();
-    events.push(event);
-    localStorage.setItem(
-      STORE_KEY,
-      JSON.stringify(events.slice(-MAX_EVENTS)),
-    );
+    localStorage.setItem(key, JSON.stringify(rows.slice(-MAX_ROWS)));
   } catch {
-    // storage full or unavailable; analytics are best-effort
+    // storage full or unavailable; analytics is best-effort
   }
 }
 
+// A session id that renews after 30 minutes of inactivity.
+function sessionId(): string {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    const now = Date.now();
+    if (raw) {
+      const s = JSON.parse(raw) as { id: string; last: number };
+      if (now - s.last < SESSION_GAP_MIN * 60 * 1000) {
+        localStorage.setItem(SESSION_KEY, JSON.stringify({ id: s.id, last: now }));
+        return s.id;
+      }
+    }
+    const id = Math.random().toString(36).slice(2, 10);
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ id, last: now }));
+    return id;
+  } catch {
+    return "anon";
+  }
+}
+
+function device(width: number): PageView["device"] {
+  if (width < 640) return "mobile";
+  if (width < 1024) return "tablet";
+  return "desktop";
+}
+
 export function trackPageView(path: string): void {
-  append({
-    kind: "view",
-    ts: Date.now(),
-    sid: sessionId(),
+  const view: PageView = {
+    t: Date.now(),
     path,
-    device: deviceBucket(),
-    referrer: document.referrer && !document.referrer.includes(location.host)
-      ? document.referrer
-      : undefined,
-  });
+    session: sessionId(),
+    referrer: document.referrer || "",
+    width: window.innerWidth,
+    device: device(window.innerWidth),
+  };
+  writeArr(VIEWS_KEY, [...readArr<PageView>(VIEWS_KEY), view]);
 }
 
-export function trackSearch(query: string, scope: string): void {
-  const q = query.trim();
-  if (!q) return;
-  append({ kind: "search", ts: Date.now(), sid: sessionId(), query: q, name: scope });
+export function track(name: string, data: Record<string, string>): void {
+  const ev: AppEvent = { t: Date.now(), name, session: sessionId(), data };
+  writeArr(EVENTS_KEY, [...readArr<AppEvent>(EVENTS_KEY), ev]);
 }
 
-export function trackEvent(name: string, path?: string): void {
-  append({ kind: "event", ts: Date.now(), sid: sessionId(), name, path });
+export function loadPageViews(): PageView[] {
+  return readArr<PageView>(VIEWS_KEY);
+}
+
+export function loadEvents(): AppEvent[] {
+  return readArr<AppEvent>(EVENTS_KEY);
 }
 
 export function clearAnalytics(): void {
   try {
-    localStorage.removeItem(STORE_KEY);
+    localStorage.removeItem(VIEWS_KEY);
+    localStorage.removeItem(EVENTS_KEY);
   } catch {
     // ignore
   }
-}
-
-// ---------- Aggregation helpers (used by the admin dashboard) ----------
-
-const DAY = 24 * 60 * 60 * 1000;
-
-export function since(events: AnalyticsEvent[], days: number): AnalyticsEvent[] {
-  const cutoff = Date.now() - days * DAY;
-  return events.filter((e) => e.ts >= cutoff);
-}
-
-export type DailyPoint = { label: string; views: number; visitors: number };
-
-/** Page views and unique visitor sessions per day for the trailing window. */
-export function dailySeries(events: AnalyticsEvent[], days: number): DailyPoint[] {
-  const out: DailyPoint[] = [];
-  const now = new Date();
-  for (let i = days - 1; i >= 0; i--) {
-    const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
-    const start = day.getTime();
-    const end = start + DAY;
-    const inDay = events.filter((e) => e.kind === "view" && e.ts >= start && e.ts < end);
-    out.push({
-      label: day.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-      views: inDay.length,
-      visitors: new Set(inDay.map((e) => e.sid)).size,
-    });
-  }
-  return out;
-}
-
-export function countBy<T extends string>(
-  events: AnalyticsEvent[],
-  key: (e: AnalyticsEvent) => T | undefined,
-): { name: T; value: number }[] {
-  const map = new Map<T, number>();
-  for (const e of events) {
-    const k = key(e);
-    if (!k) continue;
-    map.set(k, (map.get(k) ?? 0) + 1);
-  }
-  return Array.from(map, ([name, value]) => ({ name, value })).sort(
-    (a, b) => b.value - a.value,
-  );
-}
-
-export function hourlyHistogram(events: AnalyticsEvent[]): { hour: string; views: number }[] {
-  const buckets = Array.from({ length: 24 }, (_, h) => ({
-    hour: `${String(h).padStart(2, "0")}:00`,
-    views: 0,
-  }));
-  for (const e of events) {
-    if (e.kind !== "view") continue;
-    buckets[new Date(e.ts).getHours()].views += 1;
-  }
-  return buckets;
 }

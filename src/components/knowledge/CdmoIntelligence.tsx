@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardTitle,
   Chip,
-} from "@/components/ui";
+} from "@/components/ui/primitives";
 import { loadAiConfig, hasApiKey } from "@/lib/aiConfig";
 import type { PubchemResult } from "@/lib/pubchem";
 import type { RouteResult } from "@/lib/retrosynthesis";
@@ -89,7 +89,7 @@ export function CdmoIntelligence({
       setData(res);
     } catch (e) {
       if (controller.signal.aborted) return;
-      setError(e instanceof Error ? e.message : "CDMO analysis failed. Retry.");
+      setError(e instanceof Error ? e.message : "CDMO analysis failed, retry");
     } finally {
       if (abortRef.current === controller) setLoading(false);
     }
@@ -220,7 +220,7 @@ export function CdmoIntelligence({
                     Positioning
                   </p>
                   <p className="mt-0.5 text-sm text-foreground">
-                    {data.cdmoOpportunity.positioning || "N/A"}
+                    {data.cdmoOpportunity.positioning || ", "}
                   </p>
                 </div>
                 <div>
@@ -228,7 +228,7 @@ export function CdmoIntelligence({
                     Capacity / supply gap
                   </p>
                   <p className="mt-0.5 text-sm text-foreground">
-                    {data.cdmoOpportunity.capacityGap || "N/A"}
+                    {data.cdmoOpportunity.capacityGap || ", "}
                   </p>
                 </div>
                 <div>
@@ -236,7 +236,7 @@ export function CdmoIntelligence({
                     Target segment
                   </p>
                   <p className="mt-0.5 text-sm text-foreground">
-                    {data.cdmoOpportunity.targetSegment || "N/A"}
+                    {data.cdmoOpportunity.targetSegment || ", "}
                   </p>
                 </div>
                 <div>

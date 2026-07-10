@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { ExternalLink, FlaskConical, Globe, KeyRound, Loader2, Search, ShieldCheck, Sparkles, TriangleAlert } from "lucide-react";
-import { Card, CardContent } from "@/components/ui";
+import { Card, CardContent } from "@/components/ui/primitives";
 import { cn, slug } from "@/lib/utils";
 import { products } from "@/data/products";
 import { verifiedFor } from "@/data/verified";

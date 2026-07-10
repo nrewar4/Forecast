@@ -1,17 +1,18 @@
 # APAC Sourcing Intelligence
 
-The web platform for APAC Supply Chain (a CDMO and chemical sourcing company):
-a public marketing site, a knowledge workspace, a custom synthesis workspace,
-and an admin area with site analytics and trade intelligence.
+The data and analytics platform for APAC Supply Chain (apacss.com), a chemical
+sourcing and CDMO company. It carries a public knowledge platform (product
+knowledge base, trade partners, market overview), a custom synthesis workspace
+(ML-assisted route exploration), and an admin area (trade analytics, demand
+forecasting, document uploads, website analytics).
 
-Styled in the APAC brand colours, orange and white. Clean, professional, not
-cluttered. No em dash is used anywhere in the product copy, and none should be
-added.
+Styled in the APAC brand colours, orange and white. Clean and professional. No
+em dash is used anywhere in the product copy; use a comma, a colon, or the word
+"to" instead.
 
 ## Run the app
 
-This repository contains the complete app as a Vite, React, TypeScript, Tailwind,
-and Recharts project.
+Vite + React 18 + TypeScript + Tailwind + Recharts.
 
 ```
 npm install
@@ -20,112 +21,100 @@ npm run build    # production build to dist
 npm run preview  # serve the production build
 ```
 
-To verify the main flows end to end (homepage, synthesis workspace, login,
-admin dashboard, route gating), build, run the preview server, then:
-
-```
-node scripts/verify.mjs http://localhost:4173
-```
-
-## Site map
-
-Public:
-
-- `/` Homepage. Hero with the network headline (8,927 products across 3,241
-  manufacturers in 30+ countries), the three entry options (Buy, Knowledge,
-  Custom Synthesis), and an animated About section with the division and
-  country figures.
-- `/custom-synthesis` CDMO services overview. "Explore synthesis routes" opens
-  the synthesis workspace.
-- `/synthesis/...` Custom synthesis workspace with its own sidebar: Custom
-  Synthesis Routes (ML-assisted retrosynthesis), Process Development, Scale-up
-  and Manufacturing, Start a Project (confidential enquiry form).
-- `/dashboard` Market overview and `/knowledge-base` Product Knowledge Base,
-  the public part of the knowledge workspace.
-
-Admin only (require sign in):
-
-- `/admin` Site Analytics. First party usage analytics (page views, visitors,
-  searches, devices, referrers, hourly pattern) recorded in the browser via
-  `src/lib/analytics.ts`, plus catalog analytics and data status.
-- `/trade-analytics`, `/demand-forecast`, `/partners`, `/documents` Trade
-  intelligence sections, visible in the sidebar only while signed in.
+Everything works with zero configuration: data falls back to browser storage and
+bundled datasets. `.env` values (see `.env.example`) switch on the shared
+Supabase database and the AI research assistant.
 
 ## Admin login
 
-The login page lives at `/login`. Default credentials:
+The admin area is at `/login` (also linked from the landing footer and the
+workspace sidebar).
 
 - Username: `admin`
-- Password: `apacss@2026`
+- Default password: `apac-admin`
 
-Sessions persist in the browser for 7 days. The password is checked against a
-SHA-256 hash (`src/lib/auth.ts`); override without code changes by setting
-`VITE_ADMIN_USERNAME` and `VITE_ADMIN_PASSWORD_SHA256` in `.env`. Generate a
-hash with:
+Change it by setting `VITE_ADMIN_PASSWORD_HASH` in `.env` to the SHA-256 hex of
+your password (`echo -n "yourpassword" | shasum -a 256`). Sessions last 12 hours.
+This is a client-side gate that controls what the browser shows; it keeps
+internal tooling out of casual view but is not a substitute for server-side
+auth. Move to Supabase Auth when real account security is needed.
+
+Admin-only pages: `/admin` (website analytics), `/trade-analytics`,
+`/demand-forecast`, `/documents`.
+
+## Project structure
 
 ```
-node -e "console.log(require('crypto').createHash('sha256').update('your-password').digest('hex'))"
+src/
+  App.tsx                 Routes (public, workspace, admin) + page-view tracking
+  main.tsx                Entry: router + providers (Auth, Currency, TradeData)
+  embed.tsx               Mount helper for embedding the app in another site
+  index.css               Tailwind layers, motion utilities, print styles
+
+  pages/                  One file per routed page
+    Landing.tsx           Public homepage (hero, entry tiles, animated About)
+    CustomSynthesis.tsx   CDMO marketing page
+    SynthesisRoutes.tsx   Custom synthesis workspace (route explorer)
+    Dashboard.tsx         Knowledge workspace: market overview
+    KnowledgeBase.tsx     Knowledge workspace: 200-product knowledge base
+    TradePartners.tsx     Knowledge workspace: buyers and manufacturers
+    TradeAnalytics.tsx    Admin: shipment analytics
+    DemandForecast.tsx    Admin: forecasting models
+    Documents.tsx         Admin: Datamyne Excel uploads
+    AdminDashboard.tsx    Admin: website analytics + platform data
+    Login.tsx             Admin sign in
+
+  components/
+    layout/               App chrome: AppShell (workspace frame + global search),
+                          Sidebar (workspace navs, admin filtering), MarketingLayout, Logo
+    ui/                   Reusable primitives: Card/Badge/Chip (primitives.tsx),
+                          KpiCard, EmptyState, Reveal (scroll animation), CountUp
+    knowledge/            Domain components for the knowledge/synthesis pages
+                          (AI search and profiles, CDMO intelligence, regulatory panel,
+                          market news, route step cards)
+
+  context/                React contexts: Auth (admin session), Currency (USD/INR),
+                          TradeData (shared shipment store)
+
+  lib/                    Framework-free logic
+    auth.ts               Admin credential check + session storage
+    analytics.ts          Page-view/event recorder for the Admin Dashboard
+    tradeStore.ts         Shipments: Supabase when configured, else localStorage
+    openrouter.ts         OpenRouter chat client (model fallback, web grounding)
+    aiConfig.ts           AI key/model resolution (localStorage + env)
+    retrosynthesis.ts     Route generation orchestrator (PubChem + ASKCOS + AI)
+    ...                   pubchem, openfda, openalex, cas resolution, forecasting,
+                          parsing, caching, derivations
+
+  data/                   Bundled datasets (products, research, buyers, suppliers,
+                          verified sources, FDA Orange Book extract)
+
+scripts/screenshots.mjs   Headless-browser smoke test + screenshot capture
 ```
 
-This is a client side gate suitable for hiding admin sections on a static
-deployment. For hard security put the app behind a real auth provider or
-server.
+Conventions:
 
-## Uploading trade data
+- Pages own routing concerns; components stay route-agnostic.
+- Anything that talks to storage or an API lives in `lib/`, is dependency-light,
+  and degrades gracefully (Supabase failures fall back to localStorage).
+- Imports use the `@/` alias (`@/components/...`, `@/lib/...`).
+- Motion: reuse `animate-fade-up`, `stagger`, `press`, `Reveal`, and `CountUp`.
+  Respect reduced-motion (the global CSS override handles it).
 
-The Documents page (admin) accepts Datamyne style Excel files. Rows are parsed
-with SheetJS, mapped by column header, and appended to the trade database, which
-then flows into Trade Analytics, the Market Overview, Demand Forecast, and Trade
-Partners. The parser also reads real Datamyne export manifests, including files
-where the HS code and chemical name sit inside a free text container
-description.
+## Website analytics
 
-## Shared database, optional
+`src/lib/analytics.ts` records page views and named events into localStorage
+(capped, anonymous session ids, no personal data). The Admin Dashboard charts
+views over time, views by page, devices, referrers, and interactions, alongside
+platform data counts. Because storage is per browser, numbers cover each device;
+pointing the same recorder at a Supabase table later would make it site-wide.
 
-The app runs out of the box with browser storage. To share uploads across users,
-connect a free Supabase project. The app reads VITE_SUPABASE_URL and
-VITE_SUPABASE_ANON_KEY at build time. When they are present it uses the shared
-cloud database, otherwise it falls back to browser storage automatically. Step by
-step instructions and the table schema are in SUPABASE_SETUP.md.
+## Shared database and AI (optional)
 
-## AI features
-
-The AI Product Search, research profiles, synthesis routes, and CDMO
-intelligence use OpenRouter. Put a key in `.env` as `VITE_OPENROUTER_API_KEY`
-(see `.env.example`). Without a key the catalog, analytics, and knowledge base
-still work; the AI surfaces explain what is missing.
-
-## Integrate with your live website
-
-The app can run standalone, embed into your existing site with the mount helper
-in `src/embed.tsx`, sit in an iframe, or you can reuse just the data layer. To
-point it at your own backend, reimplement the three functions in
-`src/lib/tradeStore.ts`. Full guidance, the data model, and scaling notes are in
-INTEGRATION.md.
-
-## Data
-
-All seed data lives in `/data` as JSON so it can move into the app or a real
-database without rework.
-
-- `clients_buyers.json`. Possible clients, Indian buyers.
-- `suppliers_manufacturers.json`. Possible suppliers, manufacturers only.
-- `products_knowledge.json`. Routes, cost drivers, industries, pricing, producers.
-- `integrations_catalog.json`. Databases and APIs to connect.
-
-Headline network figures (products, manufacturers, countries, divisions) live in
-`src/data/network.ts` and come from the APACSS admin portal.
-
-Source of the trade figures is the Descartes Datamyne import and export sample
-for February 2026. Replace with the full three year history for production
-forecasts.
-
-## Design
-
-- Colours. Orange #F47920 as the accent, white background, slate text.
-- Components. Custom Tailwind UI kit, recharts for charts, Inter font.
-- Motion. Scroll reveals, count-up numbers, and the animated route map live in
-  `src/components/motion.tsx` and `src/index.css`; everything respects
-  prefers-reduced-motion.
-- Principle. Short crisp labels, KPI cards, charts, and compact tables. No long
-  paragraphs. No em dash anywhere.
+- `SUPABASE_SETUP.md` switches the trade database from browser storage to a
+  shared Supabase project.
+- `VITE_OPENROUTER_API_KEY` powers the Product Research Assistant, AI product
+  search, and synthesis route generation. A build-time key is readable by anyone
+  who can load the app, so use a limited key.
+- `INTEGRATION.md` covers hosting the app standalone, under a sub-path, or
+  embedded in another site via `src/embed.tsx`.
