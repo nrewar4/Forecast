@@ -3,7 +3,6 @@ import {
   Activity,
   BarChart3,
   Boxes,
-  Database,
   Eye,
   Factory,
   FlaskConical,
@@ -42,7 +41,6 @@ import {
 import { products } from "@/data/products";
 import { clients } from "@/data/clients";
 import { supplierGroups } from "@/data/suppliers";
-import { activeBackend, loadUploaded } from "@/lib/tradeStore";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -70,12 +68,10 @@ function dayLabel(key: string): string {
 export default function AdminDashboard() {
   const [views, setViews] = useState<PageView[]>([]);
   const [events, setEvents] = useState<AppEvent[]>([]);
-  const [shipmentCount, setShipmentCount] = useState<number | null>(null);
 
   useEffect(() => {
     setViews(loadPageViews());
     setEvents(loadEvents());
-    loadUploaded().then((rows) => setShipmentCount(rows.length)).catch(() => setShipmentCount(0));
   }, []);
 
   const now = Date.now();
@@ -365,16 +361,10 @@ export default function AdminDashboard() {
       <h2 className="mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
         Platform data
       </h2>
-      <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <KpiCard icon={Boxes} label="Products" value={products.length.toLocaleString()} sub="knowledge base entries" />
         <KpiCard icon={Users} label="Buyers" value={clients.length.toLocaleString()} sub="curated directory" />
         <KpiCard icon={Factory} label="Manufacturers" value={manufacturerCount.toLocaleString()} sub="curated directory" />
-        <KpiCard
-          icon={Database}
-          label="Trade records"
-          value={shipmentCount === null ? "..." : shipmentCount.toLocaleString()}
-          sub={`storage: ${activeBackend}`}
-        />
       </div>
 
       <div className="mt-8 flex justify-end">

@@ -30,7 +30,7 @@ export function MarketingLayout({ children }: { children: ReactNode }) {
               rel="noreferrer noopener"
               className="rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
-              Buy
+              Procurement
             </a>
             {NAV.map((n) => (
               <NavLink

@@ -219,7 +219,6 @@ export default function KnowledgeBase() {
                       </div>
                       <div className="mt-1 flex items-center justify-between">
                         <span className="font-mono text-[11px] text-muted-foreground">HS {p.hsCode}</span>
-                        <Badge tone="softOrange">{p.priceIndicative.replace("USD ", "")}</Badge>
                       </div>
                     </button>
                   </li>
@@ -253,9 +252,6 @@ export default function KnowledgeBase() {
                     )}
                   </div>
                 </div>
-                <Badge tone="orange" className="text-sm">
-                  {product.priceIndicative}
-                </Badge>
               </div>
               {item?.overview ? (
                 <p className="mt-3 max-w-3xl text-sm text-muted-foreground">{item.overview}</p>

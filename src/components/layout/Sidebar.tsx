@@ -1,11 +1,8 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
-  BarChart3,
-  TrendingUp,
   BookOpen,
   FlaskConical,
-  FileText,
   ShieldCheck,
   LogIn,
   LogOut,
@@ -29,18 +26,14 @@ export type SidebarNav = {
   backTo: { url: string; label: string };
 };
 
-// The default workspace: the public Product Discovery platform. Analyst tooling
-// (trade analytics, forecasting, the synthesis route explorer, uploads) is admin
-// only and is filtered out for anonymous visitors.
+// The default workspace: the public Product Discovery platform. The synthesis
+// route explorer is admin only and is filtered out for anonymous visitors.
 export const KNOWLEDGE_NAV: SidebarNav = {
   label: "Workspace",
   items: [
     { title: "Product Discovery", url: "/knowledge-base", icon: BookOpen },
     { title: "Market Overview", url: "/dashboard", icon: LayoutDashboard },
-    { title: "Trade Analytics", url: "/trade-analytics", icon: BarChart3, adminOnly: true },
-    { title: "Demand Forecast", url: "/demand-forecast", icon: TrendingUp, adminOnly: true },
     { title: "Custom Synthesis Routes", url: "/synthesis-routes", icon: FlaskConical, adminOnly: true },
-    { title: "Documents", url: "/documents", icon: FileText, adminOnly: true },
   ],
   backTo: { url: "/", label: "Back to site" },
 };

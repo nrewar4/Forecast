@@ -14,16 +14,13 @@ function RouteTracker() {
 }
 
 // Each page is code split into its own chunk so the first paint only downloads
-// the route the user actually opens. Heavy dependencies (charts, the xlsx
-// parser, the large product/research datasets) load on demand instead of all
-// up front, which is the main load time win.
+// the route the user actually opens. Heavy dependencies (charts, the large
+// product/research datasets) load on demand instead of all up front, which is
+// the main load time win.
 const Landing = lazy(() => import("./pages/Landing"));
 const Cdmo = lazy(() => import("./pages/Cdmo"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const TradeAnalytics = lazy(() => import("./pages/TradeAnalytics"));
-const DemandForecast = lazy(() => import("./pages/DemandForecast"));
 const KnowledgeBase = lazy(() => import("./pages/KnowledgeBase"));
-const Documents = lazy(() => import("./pages/Documents"));
 const SynthesisRoutes = lazy(() => import("./pages/SynthesisRoutes"));
 const Login = lazy(() => import("./pages/Login"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
@@ -53,12 +50,8 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/knowledge-base" element={<KnowledgeBase />} />
 
-        {/* Admin only: internal analytics, forecasting, uploads, and the
-            ML-assisted synthesis route explorer. */}
+        {/* Admin only: the internal ML-assisted synthesis route explorer. */}
         <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
-        <Route path="/trade-analytics" element={<RequireAdmin><TradeAnalytics /></RequireAdmin>} />
-        <Route path="/demand-forecast" element={<RequireAdmin><DemandForecast /></RequireAdmin>} />
-        <Route path="/documents" element={<RequireAdmin><Documents /></RequireAdmin>} />
         <Route path="/synthesis-routes" element={<RequireAdmin><SynthesisRoutes /></RequireAdmin>} />
 
         {/* Legacy paths from earlier versions of the app. */}
@@ -67,6 +60,9 @@ export default function App() {
         <Route path="/partners" element={<Navigate to="/knowledge-base" replace />} />
         <Route path="/clients" element={<Navigate to="/knowledge-base" replace />} />
         <Route path="/suppliers" element={<Navigate to="/knowledge-base" replace />} />
+        <Route path="/trade-analytics" element={<Navigate to="/knowledge-base" replace />} />
+        <Route path="/demand-forecast" element={<Navigate to="/knowledge-base" replace />} />
+        <Route path="/documents" element={<Navigate to="/knowledge-base" replace />} />
 
         {/* Anything unknown falls back to home. */}
         <Route path="*" element={<Navigate to="/" replace />} />
