@@ -183,11 +183,21 @@ export type Milestone = {
   gate: string;
 };
 
+// A single reason the timeline is what it is for this molecule, tied to the
+// evidence it came from, so the projection is transparent, not a fixed template.
+export type TimelineDriver = {
+  label: string; // what about the molecule drives it
+  effect: string; // what it does to the timeline
+  source: string; // where the evidence came from
+};
+
 export type Pathway = {
   archetype: Archetype;
   stages: Stage[];
   milestones: Milestone[];
   weeks: [number, number];
+  /** the molecule-specific reasons behind the durations, shown to the customer */
+  drivers?: TimelineDriver[];
 };
 
 export type Urgency = "fast" | "balanced" | "certainty";
@@ -212,6 +222,10 @@ export type PathwayOptions = {
   urgency?: Urgency;
   /** 0..1 molecular complexity (from PubChem); scales development duration */
   complexity?: number;
+  /** per-phase multipliers (evidence-driven); overrides the flat complexity scale */
+  phaseFactors?: Partial<Record<Phase, number>>;
+  /** the molecule-specific reasons to attach to the returned pathway */
+  drivers?: TimelineDriver[];
 };
 
 function phaseIndex(p: Phase): number {
@@ -248,7 +262,12 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
       if (!regulated && s.id === "valid") return false;
       return true;
     })
-    .map((s) => (factor === 1 ? s : { ...s, weeks: scaleWeeks(s.weeks, factor) }));
+    .map((s) => {
+      // Per-phase evidence-driven factor when supplied, otherwise the flat factor.
+      const perPhase = opts.phaseFactors?.[s.phase];
+      const f = perPhase != null ? perPhase : factor;
+      return f === 1 ? s : { ...s, weeks: scaleWeeks(s.weeks, f) };
+    });
 
   // Group into milestones by phase, in phase order.
   const milestones: Milestone[] = [];
@@ -273,17 +292,110 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
     milestones.reduce((a, m) => a + m.weeks[1], 0),
   ];
 
-  return { archetype, stages, milestones, weeks };
+  return { archetype, stages, milestones, weeks, drivers: opts.drivers };
 }
 
-// Builds a milestone projection for making a specific product. A pharma API
+// The measured facts about a molecule that drive its development timeline. All
+// come from data the feasibility step already fetched, so the projection is a
+// transparent function of the molecule, not a fixed template.
+export type ProductTimelineInputs = {
+  isPharma: boolean;
+  urgency?: Urgency;
+  complexity: number; // 0..1, from PubChem structure
+  chemistries: string[]; // process chemistries needed to make it
+  hazardous: boolean; // GHS-classified hazardous, or a hazardous chemistry
+  hazardClasses: string[]; // GHS pictogram classes
+  patentRange: [number, number] | null; // cross-verified patent filing count
+  patentSources: number; // how many databases the range was checked against
+};
+
+// Genuinely hazardous chemistries that need dedicated containment and add
+// scale-up time (nitration, cyanation, etc.). Common steps like catalytic
+// hydrogenation need special plant but are not flagged hazardous here.
+const HAZARDOUS_CHEM = /nitration|cyanation|sulfonation|halogenation|carbonylation/i;
+
+// Builds a milestone projection for making a specific product. Each development
+// phase is scaled by evidence-driven factors, and the reasons are returned as
+// drivers so the customer sees why the timeline is what it is. A pharma API
 // takes the generic-API archetype (validation matters); everything else takes
-// specialty custom synthesis. Urgency scales the timeline.
-export function productPathway(
-  isPharma: boolean,
-  urgency: Urgency = "balanced",
-  complexity = 0.5,
-): Pathway {
+// specialty custom synthesis.
+export function productPathway(inputs: ProductTimelineInputs): Pathway {
+  const { isPharma, urgency = "balanced", chemistries, hazardClasses, patentRange, patentSources } = inputs;
+  const u = URGENCY_META[urgency].factor;
+  const cx = Math.max(0, Math.min(1, inputs.complexity));
+
+  // Per-phase multipliers, each starting from the urgency factor.
+  const f: Record<Phase, number> = { assess: u, develop: u, scale: u, transfer: u, supply: u };
+  const drivers: TimelineDriver[] = [];
+
+  // 1. Molecular complexity (PubChem structure) drives development and scale-up.
+  f.develop *= 0.8 + cx * 0.6;
+  f.scale *= 0.85 + cx * 0.4;
+  drivers.push({
+    label: `Molecular complexity ${Math.round(cx * 100)} percent (functional groups, mass, rings, stereochemistry)`,
+    effect: cx >= 0.5 ? "longer route development and scale-up" : "shorter, simpler development",
+    source: "PubChem structure",
+  });
+
+  // 2. Number of distinct process chemistries to integrate drives development.
+  const nChem = chemistries.length;
+  if (nChem > 1) {
+    f.develop *= 1 + (nChem - 1) * 0.15;
+    drivers.push({
+      label: `${nChem} process chemistries to integrate (${chemistries.join(", ").toLowerCase()})`,
+      effect: "more route scouting and process development",
+      source: "derived from the structure",
+    });
+  }
+
+  // 3. Hazardous chemistry / GHS classification adds containment and scale-up.
+  const hazChem = chemistries.filter((c) => HAZARDOUS_CHEM.test(c));
+  if (inputs.hazardous || hazChem.length > 0) {
+    f.assess *= 1.1;
+    f.develop *= 1.1;
+    f.scale *= 1.25;
+    const why = [hazChem.join(", ").toLowerCase(), hazardClasses.length ? `GHS ${hazardClasses.join(", ").toLowerCase()}` : ""]
+      .filter(Boolean)
+      .join("; ");
+    drivers.push({
+      label: `Hazardous chemistry${why ? ` (${why})` : ""}`,
+      effect: "added safety review, containment and scale-up time",
+      source: hazardClasses.length ? "PubChem GHS classification" : "required chemistry",
+    });
+  }
+
+  // 4. Patent landscape (cross-verified) drives freedom-to-operate and route design.
+  if (patentRange) {
+    const hi = patentRange[1];
+    const cite = `cross-verified, ${patentSources} database${patentSources === 1 ? "" : "s"}`;
+    if (hi === 0) {
+      f.assess *= 0.9;
+      drivers.push({ label: "No patents indexed", effect: "public-domain route, faster scouting", source: cite });
+    } else if (hi >= 25) {
+      f.assess *= 1.3;
+      f.develop *= 1.15;
+      drivers.push({
+        label: `Dense patent landscape (${patentRange[0]} to ${patentRange[1]} filings)`,
+        effect: "freedom-to-operate review and a non-infringing route",
+        source: cite,
+      });
+    } else {
+      f.assess *= 1.1;
+      drivers.push({
+        label: `Some patent activity (${patentRange[0]} to ${patentRange[1]} filings)`,
+        effect: "a freedom-to-operate check",
+        source: cite,
+      });
+    }
+  }
+
+  // 5. Regulated API keeps validation batches and filing support.
+  const regulated = isPharma || urgency === "certainty";
+  if (isPharma) {
+    f.supply *= 1.1;
+    drivers.push({ label: "Regulated API", effect: "validation batches and regulatory filing support", source: "APAC classification" });
+  }
+
   const id = isPharma ? "generic-api" : "specialty";
-  return buildPathway(id, { urgency, complexity })!;
+  return buildPathway(id, { urgency, regulated, phaseFactors: f, drivers })!;
 }

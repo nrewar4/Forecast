@@ -21,7 +21,7 @@ export function PathwaySpine({
   subtitle?: string;
   eyebrow?: string;
 }) {
-  const { archetype, milestones, weeks } = pathway;
+  const { archetype, milestones, weeks, drivers } = pathway;
 
   return (
     <div className="space-y-4 text-left">
@@ -43,11 +43,31 @@ export function PathwaySpine({
             <span className="font-medium text-foreground">{archetype.model}</span>
           </span>
         </div>
-        <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-          Standard CDMO development phases, with durations scaled to this molecule's
-          complexity (functional groups, molecular weight and stereochemistry from
-          PubChem). A planning framework, not a quotation. Final durations are set
-          for your volumes and quality target during the feasibility assessment.
+
+        {/* Why this timeline: the molecule-specific, evidence-based drivers. */}
+        {drivers && drivers.length ? (
+          <div className="mt-3 border-t border-border pt-3">
+            <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Why this timeline, for this molecule
+            </p>
+            <ul className="space-y-1.5">
+              {drivers.map((d, i) => (
+                <li key={i} className="flex gap-2 text-[11px] leading-snug">
+                  <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                  <span className="text-foreground">
+                    {d.label} <span className="text-muted-foreground">— {d.effect}</span>{" "}
+                    <span className="whitespace-nowrap text-[10px] text-muted-foreground/80">({d.source})</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        <p className="mt-3 border-t border-border pt-2 text-[11px] leading-relaxed text-muted-foreground">
+          A planning framework built from standard CDMO phases and the drivers above,
+          not a quotation. Final durations are set for your volumes and quality target
+          during the feasibility assessment.
         </p>
       </div>
 

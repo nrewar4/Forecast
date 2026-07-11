@@ -20,12 +20,14 @@ import {
   classifySituation,
   pathwayFor,
   milestonesForProduct,
+  timelineBasis,
   sampleProducts,
   looksLikeProductQuery,
   extractProductPhrase,
   type Intent,
   type QuickReply,
   type Feasibility,
+  type TimelineBasis,
 } from "@/lib/chatAssistant";
 import type { CdmoMatch } from "@/lib/cdmoMatch";
 import type { Pathway, Urgency } from "@/data/cdmoPathway";
@@ -72,19 +74,19 @@ type Persisted = {
   quick: QuickReply[];
   awaiting: Awaiting;
   lastMatch: CdmoMatch | null;
-  lastComplexity: number;
+  lastBasis: TimelineBasis | null;
   started: boolean;
 };
 
 function restore(): Persisted {
-  const empty: Persisted = { messages: [], quick: [], awaiting: null, lastMatch: null, lastComplexity: 0.5, started: false };
+  const empty: Persisted = { messages: [], quick: [], awaiting: null, lastMatch: null, lastBasis: null, started: false };
   try {
     const raw = sessionStorage.getItem(STORE_KEY);
     if (!raw) return empty;
     const p = JSON.parse(raw) as Persisted;
     // Drop transient in-progress messages so the restored view is clean.
     const messages = (p.messages ?? []).filter((m) => m.kind !== "typing" && !(m.kind === "text" && !m.text));
-    return { messages, quick: p.quick ?? [], awaiting: p.awaiting ?? null, lastMatch: p.lastMatch ?? null, lastComplexity: p.lastComplexity ?? 0.5, started: Boolean(p.started) };
+    return { messages, quick: p.quick ?? [], awaiting: p.awaiting ?? null, lastMatch: p.lastMatch ?? null, lastBasis: p.lastBasis ?? null, started: Boolean(p.started) };
   } catch {
     return empty;
   }
@@ -108,7 +110,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [busy, setBusy] = useState(false);
   const awaiting = useRef<Awaiting>(initial.current.awaiting);
   const lastMatch = useRef<CdmoMatch | null>(initial.current.lastMatch);
-  const lastComplexity = useRef<number>(initial.current.lastComplexity);
+  const lastBasis = useRef<TimelineBasis | null>(initial.current.lastBasis);
   const started = useRef(initial.current.started);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -133,7 +135,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const clean = messages.filter((m) => m.kind !== "typing");
-      const payload: Persisted = { messages: clean, quick, awaiting: awaiting.current, lastMatch: lastMatch.current, lastComplexity: lastComplexity.current, started: started.current };
+      const payload: Persisted = { messages: clean, quick, awaiting: awaiting.current, lastMatch: lastMatch.current, lastBasis: lastBasis.current, started: started.current };
       sessionStorage.setItem(STORE_KEY, JSON.stringify(payload));
     } catch {
       // storage full or unavailable; the in-memory conversation still works
@@ -176,7 +178,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       }
       awaiting.current = null;
       lastMatch.current = data.match;
-      lastComplexity.current = data.complexity;
+      lastBasis.current = timelineBasis(data);
       track("cdmo_feasibility", { product: data.match.productName, vendors: String(data.match.vendorCount) });
       replace(typingId, { kind: "feasibility", data });
       pushBot({
@@ -202,12 +204,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   function showMilestones(urgency: Urgency) {
     const match = lastMatch.current;
-    if (!match) {
+    const basis = lastBasis.current;
+    if (!match || !basis) {
       awaiting.current = "molecule";
       pushBot({ kind: "text", text: "Which product should I project milestones for?" });
       return;
     }
-    const pathway = milestonesForProduct(match, urgency, lastComplexity.current);
+    const pathway = milestonesForProduct(basis, urgency);
     track("cdmo_pathway", { product: match.productName, urgency });
     pushBot({
       kind: "pathway",

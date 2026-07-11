@@ -27,6 +27,7 @@ import {
   productPathway,
   type Archetype,
   type Pathway,
+  type ProductTimelineInputs,
   type Urgency,
 } from "@/data/cdmoPathway";
 import { products } from "@/data/products";
@@ -391,11 +392,29 @@ export function pathwayFor(archetype: Archetype, urgency: Urgency = "balanced"):
   return buildPathway(archetype.id, { urgency })!;
 }
 
-// Milestone projection for making a specific assessed product, tuned by urgency
-// and by the molecule's complexity (from PubChem descriptors), so a simple ester
-// and a complex chiral API do not get the same timeline.
-export function milestonesForProduct(match: CdmoMatch, urgency: Urgency, complexity = 0.5): Pathway {
-  return productPathway(match.isPharma, urgency, complexity);
+// The molecule-specific evidence that drives the timeline, captured from a
+// feasibility result so a projection can be (re)built for any chosen urgency.
+export type TimelineBasis = Omit<ProductTimelineInputs, "urgency">;
+
+// Extracts the timeline basis from a feasibility result.
+export function timelineBasis(f: Feasibility): TimelineBasis {
+  return {
+    isPharma: f.match.isPharma,
+    complexity: f.complexity,
+    chemistries: f.chemistries,
+    hazardous: f.hazards?.status === "hazardous",
+    hazardClasses: f.hazards?.classes ?? [],
+    patentRange: f.ip?.patentRange ?? null,
+    patentSources: f.ip?.patentSources ?? 0,
+  };
+}
+
+// Milestone projection for a specific assessed product. The durations are an
+// evidence-driven function of the molecule (complexity, the process chemistries
+// needed, hazard classification, and the cross-verified patent landscape), so no
+// two different molecules get the same static timeline.
+export function milestonesForProduct(basis: TimelineBasis, urgency: Urgency): Pathway {
+  return productPathway({ ...basis, urgency });
 }
 
 // ---- Discovery -----------------------------------------------------------
