@@ -4,6 +4,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { EnquiryForm } from "@/components/cdmo/EnquiryForm";
+import { useChat } from "@/context/Chat";
+import { cn } from "@/lib/utils";
 import { track } from "@/lib/analytics";
 
 const PATHS = [
@@ -25,6 +27,11 @@ const DELIVER = [
 ];
 
 export default function Cdmo() {
+  // Grow the embedded assistant once the visitor starts interacting, so it opens
+  // compact and expands seamlessly into a working surface as the chat fills.
+  const { messages, busy } = useChat();
+  const active = busy || messages.some((m) => m.role === "user");
+
   // Suppress the global floating assistant while this page hosts its own.
   useEffect(() => {
     document.body.dataset.embeddedChat = "1";
@@ -74,12 +81,17 @@ export default function Cdmo() {
 
           {/* Embedded assistant */}
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-lift lg:sticky lg:top-24">
+            <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-lift transition-shadow duration-500 lg:sticky lg:top-24">
               <div className="border-b border-border bg-ink px-4 py-3">
                 <p className="text-sm font-semibold text-white">APAC CDMO Assistant</p>
                 <p className="text-[11px] text-slate-300">Ask about any product or project</p>
               </div>
-              <div className="h-[min(82vh,820px)]">
+              <div
+                className={cn(
+                  "transition-[height] duration-500 ease-out-expo motion-reduce:transition-none",
+                  active ? "h-[min(86vh,900px)]" : "h-[440px]",
+                )}
+              >
                 <ChatPanel />
               </div>
             </div>

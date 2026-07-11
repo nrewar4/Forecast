@@ -14,7 +14,7 @@ export function FeasibilityReport({
   onContact?: () => void;
   compact?: boolean;
 }) {
-  const { identity, description, chemistry, match, sources } = data;
+  const { identity, description, classes, ip, match, sources } = data;
   const cid = identity?.cid ?? null;
   const cas = identity?.primaryCas ?? null;
   const structure = cid
@@ -63,71 +63,66 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Core chemistry */}
-      {chemistry ? (
+      {/* Broad chemical classes, read from the PubChem structure */}
+      {classes.length ? (
         <div className="rounded-xl border border-border bg-card p-4">
           <div className="mb-2 flex items-center justify-between gap-2">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry</p>
-            {chemistry.source === "verified" && chemistry.sourceUrl ? (
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Chemical classes</p>
+            {cid ? (
               <a
-                href={chemistry.sourceUrl}
+                href={`https://pubchem.ncbi.nlm.nih.gov/compound/${cid}`}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="text-[10px] font-medium text-primary hover:underline"
               >
-                {chemistry.sourceLabel || "Verified source"}
+                PubChem structure
               </a>
-            ) : (
-              <span className="text-[10px] font-medium text-muted-foreground">
-                {chemistry.source === "catalog"
-                  ? "Verified route"
-                  : chemistry.source === "derived"
-                    ? "Reaction chemistry"
-                    : "Compiled summary"}
-              </span>
-            )}
+            ) : null}
           </div>
-          {chemistry.headline ? (
-            <p className="mb-2 text-sm font-medium text-ink">{chemistry.headline}</p>
-          ) : null}
-          {chemistry.reactionClasses && chemistry.reactionClasses.length ? (
-            <div className="mb-3 flex flex-wrap gap-1.5">
-              {chemistry.reactionClasses.map((rc) => (
-                <span key={rc} className="rounded-full border border-primary/30 bg-accent/40 px-2 py-0.5 text-[11px] font-medium text-foreground">
-                  {rc}
-                </span>
-              ))}
-            </div>
-          ) : null}
-          <ol className="space-y-1.5">
-            {chemistry.route.map((step, i) => (
-              <li key={i} className="flex gap-2.5 text-sm text-foreground">
-                <span className="mt-0.5 font-mono text-[11px] font-semibold text-primary-600">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="leading-snug">{step}</span>
-              </li>
+          <div className="flex flex-wrap gap-1.5">
+            {classes.map((c) => (
+              <span key={c} className="rounded-full border border-primary/30 bg-accent/40 px-2.5 py-1 text-xs font-medium text-foreground">
+                {c}
+              </span>
             ))}
-          </ol>
-          {chemistry.startingMaterials.length ? (
-            <div className="mt-3 flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Key inputs</span>
-              {chemistry.startingMaterials.map((m) => (
-                <span key={m} className="rounded-md border border-border bg-muted px-1.5 py-0.5 text-[11px] font-medium text-foreground">
-                  {m}
-                </span>
-              ))}
-            </div>
-          ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      {/* Synthesis routes and patent status, from PubChem cross-references */}
+      {ip ? (
+        <div className="rounded-xl border border-border bg-card p-4">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Routes and patent status</p>
+            <span className="text-[10px] font-medium text-muted-foreground">Source: PubChem</span>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <a
+              href={ip.patentUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="press rounded-lg border border-border bg-muted/40 p-3 transition hover:border-primary/50"
+            >
+              <p className="text-2xl font-bold leading-none tracking-tight text-ink">{ip.patentCount}</p>
+              <p className="mt-1 text-[11px] font-medium text-foreground">Patented routes</p>
+              <p className="text-[10px] text-muted-foreground">Patent-literature filings</p>
+            </a>
+            <a
+              href={ip.literatureUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="press rounded-lg border border-border bg-muted/40 p-3 transition hover:border-primary/50"
+            >
+              <p className="text-2xl font-bold leading-none tracking-tight text-ink">{ip.literatureCount}</p>
+              <p className="mt-1 text-[11px] font-medium text-foreground">Non-patented routes</p>
+              <p className="text-[10px] text-muted-foreground">Open scientific literature</p>
+            </a>
+          </div>
           <p className="mt-3 border-t border-border pt-2 text-[11px] leading-relaxed text-muted-foreground">
-            {chemistry.hazardNote}
+            {ip.status}
           </p>
         </div>
-      ) : (
-        <div className="rounded-xl border border-dashed border-border bg-muted/30 p-3.5 text-xs text-muted-foreground">
-          Our process chemists compile the detailed route for this molecule during the feasibility assessment.
-        </div>
-      )}
+      ) : null}
 
       {/* Vendor match: count only */}
       <div className="rounded-xl border border-primary/30 bg-accent/40 p-4">

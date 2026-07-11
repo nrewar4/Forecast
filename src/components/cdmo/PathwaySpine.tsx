@@ -44,9 +44,10 @@ export function PathwaySpine({
           </span>
         </div>
         <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-          An indicative planning framework based on standard CDMO development phases,
-          not a quotation. Real durations are set for your molecule, volumes and
-          quality target during the feasibility assessment.
+          Standard CDMO development phases, with durations scaled to this molecule's
+          complexity (functional groups, molecular weight and stereochemistry from
+          PubChem). A planning framework, not a quotation. Final durations are set
+          for your volumes and quality target during the feasibility assessment.
         </p>
       </div>
 

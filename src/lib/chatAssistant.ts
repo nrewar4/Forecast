@@ -14,9 +14,9 @@ import type { AiConfig } from "@/lib/aiConfig";
 import { hasApiKey } from "@/lib/aiConfig";
 import { chatComplete, type ChatMsg } from "@/lib/openrouter";
 import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
-import { matchVendors, findProduct, type CdmoMatch } from "@/lib/cdmoMatch";
-import { deriveChemistry } from "@/lib/reactionClasses";
-import { fetchSynthesis, type SynthesisInfo } from "@/lib/synthesis";
+import { matchVendors, type CdmoMatch } from "@/lib/cdmoMatch";
+import { chemicalClasses, complexityScore } from "@/lib/chemClasses";
+import { fetchIpLandscape, type IpLandscape } from "@/lib/patents";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -177,29 +177,18 @@ export const SITUATION_REPLIES: QuickReply[] = ARCHETYPES.map((a) => ({
 
 // ---- Path B: feasibility -------------------------------------------------
 
-export type CoreChemistry = {
-  headline: string;
-  route: string[];
-  startingMaterials: string[];
-  plantType: string;
-  hazardNote: string;
-  /** broad reaction classes present (esterification, nitration, ozonolysis, ...) */
-  reactionClasses?: string[];
-  /** citation for this route when it comes from a public online source */
-  sourceUrl?: string;
-  sourceLabel?: string;
-  /** where the route came from: our catalog, a cited public source, an AI
-   *  summary, or a functional-group classification */
-  source: "catalog" | "verified" | "ai" | "derived";
-};
-
 export type Feasibility = {
   query: string;
   identity: ChemIdentity | null;
   description: string | null;
-  chemistry: CoreChemistry | null;
+  /** broad chemical classes read from the PubChem structure */
+  classes: string[];
+  /** patent + literature landscape from PubChem cross-references */
+  ip: IpLandscape | null;
+  /** 0..1 molecular complexity from PubChem descriptors; drives the timeline */
+  complexity: number;
   match: CdmoMatch;
-  /** cited sources for the identity and chemistry (PubChem + verified refs) */
+  /** cited sources (PubChem identity, patents, literature, verified refs) */
   sources: VerifiedLink[];
   /** optional LLM-written précis, added when a key is configured */
   aiSummary?: string;
@@ -226,45 +215,8 @@ function withTimeout<T>(
   ]);
 }
 
-// Concise, honest core chemistry from the verified catalog when we cover the
-// molecule. Prefers the web-verified route + named process (with citations),
-// falling back to the catalog product's route. Starting materials are read from
-// the route's feedstock cost drivers.
-function catalogChemistry(name: string): CoreChemistry | null {
-  const p = findProduct(name);
-  const v = p ? verifiedFor(slug(p.name)) : verifiedFor(slug(name));
-
-  if (v && v.routes.length) {
-    return {
-      headline: v.mainProcess.name,
-      route: v.routes.slice(0, 5),
-      startingMaterials: [],
-      plantType: p?.plantType ?? "Batch",
-      hazardNote: "Confirm hazard and containment class at the feasibility stage.",
-      source: "catalog",
-    };
-  }
-
-  if (!p || !p.route.length) return null;
-  const starting = p.costDrivers
-    .filter((c) => /feedstock|raw|material|methanol|benzene|ethylene|acid|chlor|ammonia/i.test(c.label))
-    .map((c) => c.label)
-    .slice(0, 4);
-  return {
-    headline: p.route[0],
-    route: p.route.slice(0, 4),
-    startingMaterials: starting,
-    plantType: p.plantType,
-    hazardNote:
-      p.plantType === "Continuous"
-        ? "Continuous processing; standard chemical handling and containment apply."
-        : "Multipurpose batch chemistry; confirm hazard and containment class at feasibility.",
-    source: "catalog",
-  };
-}
-
 // Cited sources for the report: PubChem for identity, plus the web-verified
-// references for the chemistry when the molecule is in our catalog.
+// references when the molecule is in our catalog.
 function collectSources(identity: ChemIdentity | null, productName: string): VerifiedLink[] {
   const out: VerifiedLink[] = [];
   if (identity?.cid) {
@@ -277,77 +229,13 @@ function collectSources(identity: ChemIdentity | null, productName: string): Ver
   return out.filter((s) => (seen.has(s.url) ? false : (seen.add(s.url), true)));
 }
 
-// Wraps a cited Wikipedia production/synthesis section into the core-chemistry
-// shape, carrying the citation so the card can link the source.
-function synthesisToChemistry(
-  synth: SynthesisInfo,
-  identity: ChemIdentity | null,
-  name: string,
-): CoreChemistry {
-  const derived = deriveChemistry(identity, name);
-  return {
-    headline: synth.headline,
-    route: synth.steps,
-    startingMaterials: derived?.startingMaterials ?? [],
-    plantType: "Batch",
-    hazardNote:
-      derived?.hazardNote ??
-      "Confirm reagents, hazard class and containment during the feasibility assessment.",
-    reactionClasses: derived?.reactionClasses,
-    sourceUrl: synth.sourceUrl,
-    sourceLabel: synth.sourceName,
-    source: "verified",
-  };
-}
-
-// When the catalog does not cover a molecule and a key is present, ask the LLM
-// for the major industrial route as a short factual list. Parsed defensively.
-async function aiChemistry(
-  identity: ChemIdentity | null,
-  query: string,
-  cfg: AiConfig,
-  signal?: AbortSignal,
-): Promise<CoreChemistry | null> {
-  if (!hasApiKey(cfg)) return null;
-  const name = identity?.name || query;
-  const facts = [
-    `Compound: ${name}`,
-    identity?.primaryCas ? `CAS: ${identity.primaryCas}` : "",
-    identity?.formula ? `Formula: ${identity.formula}` : "",
-  ]
-    .filter(Boolean)
-    .join(", ");
-  try {
-    const messages: ChatMsg[] = [
-      {
-        role: "system",
-        content:
-          'Return ONLY JSON, no prose. For the given compound, give the major industrial synthesis route. Shape: {"headline":"<one-line name of the dominant route>","route":["step 1","step 2","step 3"],"startingMaterials":["m1","m2"],"hazardNote":"<one short handling note>"}. Keep 3 to 5 short factual steps. If you are not confident, use an empty route array. Never use an em dash.',
-      },
-      { role: "user", content: facts },
-    ];
-    const raw = await chatComplete(cfg, messages, signal);
-    const m = raw.match(/\{[\s\S]*\}/);
-    if (!m) return null;
-    const parsed = JSON.parse(m[0]) as Partial<CoreChemistry>;
-    if (!parsed.route || parsed.route.length === 0) return null;
-    return {
-      headline: parsed.headline || parsed.route[0],
-      route: parsed.route.slice(0, 5),
-      startingMaterials: (parsed.startingMaterials ?? []).slice(0, 4),
-      plantType: "Batch",
-      hazardNote: parsed.hazardNote || "Confirm hazard and containment class at feasibility.",
-      source: "ai",
-    };
-  } catch {
-    return null;
-  }
-}
-
 // Runs the whole Path B lookup for any product, in or out of our catalog:
-// resolve identity + CAS from PubChem, pull a short description, establish the
-// core chemistry, and match APAC vendors by capability. Every step is
-// best-effort and time-boxed, so the report always renders fast.
+// resolve identity + CAS from PubChem, pull a short description, read the broad
+// chemical classes from the structure, fetch the patent + literature landscape
+// from PubChem cross-references, score molecular complexity (which drives the
+// timeline), and match APAC vendors by capability. Every network step is
+// best-effort and time-boxed, so the report always renders fast, and every
+// figure it shows comes from a source the user can open and verify.
 export async function runFeasibility(
   query: string,
   cfg: AiConfig,
@@ -367,35 +255,29 @@ export async function runFeasibility(
   const displayName = identity?.name || undefined;
   const match = matchVendors(query, displayName);
 
-  // Core chemistry, in order of authority: our verified catalog, then a cited
-  // public source (Wikipedia's referenced production/synthesis section), then an
-  // LLM summary if a key is set, then a functional-group classification. Every
-  // path lands on real chemistry rather than a placeholder.
-  let chemistry = catalogChemistry(match.productName) || catalogChemistry(query);
-  if (!chemistry) {
-    const synth = await withTimeout(
-      (s) => fetchSynthesis(displayName || query, s),
-      6000,
-      null as SynthesisInfo | null,
-      signal,
-    );
-    if (synth) chemistry = synthesisToChemistry(synth, identity, match.productName || query);
-  }
-  if (!chemistry) chemistry = await aiChemistry(identity, query, cfg, signal);
-  if (!chemistry) chemistry = deriveChemistry(identity, match.productName || query);
+  // Broad chemical classes and complexity, read from the PubChem structure.
+  const classes = chemicalClasses(identity, match.productName || query);
+  const complexity = complexityScore(identity, match.productName || query);
 
-  // Attach the broad reaction-class tags (esterification, nitration, ozonolysis,
-  // ...) to whichever route we show, so the categories are always visible.
-  if (chemistry && !chemistry.reactionClasses) {
-    chemistry.reactionClasses = deriveChemistry(identity, match.productName || query)?.reactionClasses;
-  }
+  // Patent + literature landscape from PubChem cross-references (SureChEMBL +
+  // PubMed): the patented and non-patented document counts, both citable.
+  const ip = identity?.cid
+    ? await withTimeout(
+        (s) => fetchIpLandscape(identity.cid, displayName || query, s),
+        7000,
+        null as IpLandscape | null,
+        signal,
+      )
+    : null;
 
   const sources = collectSources(identity, match.productName);
-  if (chemistry?.sourceUrl && chemistry.sourceLabel && !sources.some((s) => s.url === chemistry!.sourceUrl)) {
-    sources.push({ name: chemistry.sourceLabel, url: chemistry.sourceUrl });
+  if (ip) {
+    sources.push({ name: "PubChem patents (SureChEMBL)", url: ip.patentUrl });
+    sources.push({ name: "PubChem literature (PubMed)", url: ip.literatureUrl });
+    sources.push({ name: "Google Patents", url: ip.googlePatentsUrl });
   }
 
-  const result: Feasibility = { query, identity, description, chemistry, match, sources };
+  const result: Feasibility = { query, identity, description, classes, ip, complexity, match, sources };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {
@@ -404,7 +286,8 @@ export async function runFeasibility(
         `Product: ${match.productName}`,
         identity?.primaryCas ? `CAS: ${identity.primaryCas}` : "",
         identity?.formula ? `Formula: ${identity.formula}` : "",
-        chemistry ? `Primary route: ${chemistry.headline}` : "",
+        classes.length ? `Chemical classes: ${classes.join(", ")}` : "",
+        ip ? `Patents: ${ip.patentCount}, literature refs: ${ip.literatureCount}` : "",
         `APAC group: ${match.group} / ${match.category}`,
         `Capable vendors in network: ${match.vendorCount}`,
       ]
@@ -476,9 +359,11 @@ export function pathwayFor(archetype: Archetype, urgency: Urgency = "balanced"):
   return buildPathway(archetype.id, { urgency })!;
 }
 
-// Milestone projection for making a specific assessed product, tuned by urgency.
-export function milestonesForProduct(match: CdmoMatch, urgency: Urgency): Pathway {
-  return productPathway(match.isPharma, urgency);
+// Milestone projection for making a specific assessed product, tuned by urgency
+// and by the molecule's complexity (from PubChem descriptors), so a simple ester
+// and a complex chiral API do not get the same timeline.
+export function milestonesForProduct(match: CdmoMatch, urgency: Urgency, complexity = 0.5): Pathway {
+  return productPathway(match.isPharma, urgency, complexity);
 }
 
 // ---- Discovery -----------------------------------------------------------

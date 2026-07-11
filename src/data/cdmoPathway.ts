@@ -210,6 +210,8 @@ export type PathwayOptions = {
   regulated?: boolean;
   /** speed vs assurance preference; scales the timeline */
   urgency?: Urgency;
+  /** 0..1 molecular complexity (from PubChem); scales development duration */
+  complexity?: number;
 };
 
 function phaseIndex(p: Phase): number {
@@ -228,7 +230,12 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
 
   const startIdx = opts.startPhase ? phaseIndex(opts.startPhase) : 0;
   const endIdx = opts.endPhase ? phaseIndex(opts.endPhase) : PHASE_ORDER.length - 1;
-  const factor = opts.urgency ? URGENCY_META[opts.urgency].factor : 1;
+  const urgencyFactor = opts.urgency ? URGENCY_META[opts.urgency].factor : 1;
+  // Molecular complexity (0..1) scales development duration from about 0.85x for
+  // a simple molecule to about 1.35x for a complex, multi-stereocentre one.
+  const complexityFactor =
+    opts.complexity != null ? 0.85 + Math.max(0, Math.min(1, opts.complexity)) * 0.5 : 1;
+  const factor = urgencyFactor * complexityFactor;
   // Certainty implies a regulated, validated launch unless told otherwise.
   const regulated = opts.regulated ?? opts.urgency === "certainty";
 
@@ -272,7 +279,11 @@ export function buildPathway(archetypeId: string, opts: PathwayOptions = {}): Pa
 // Builds a milestone projection for making a specific product. A pharma API
 // takes the generic-API archetype (validation matters); everything else takes
 // specialty custom synthesis. Urgency scales the timeline.
-export function productPathway(isPharma: boolean, urgency: Urgency = "balanced"): Pathway {
+export function productPathway(
+  isPharma: boolean,
+  urgency: Urgency = "balanced",
+  complexity = 0.5,
+): Pathway {
   const id = isPharma ? "generic-api" : "specialty";
-  return buildPathway(id, { urgency })!;
+  return buildPathway(id, { urgency, complexity })!;
 }
