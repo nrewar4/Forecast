@@ -68,13 +68,24 @@ export function FeasibilityReport({
         <div className="rounded-xl border border-border bg-card p-4">
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry</p>
-            <span className="text-[10px] font-medium text-muted-foreground">
-              {chemistry.source === "catalog"
-                ? "Verified route"
-                : chemistry.source === "derived"
-                  ? "Indicative reaction classes"
-                  : "Compiled summary"}
-            </span>
+            {chemistry.source === "verified" && chemistry.sourceUrl ? (
+              <a
+                href={chemistry.sourceUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-[10px] font-medium text-primary hover:underline"
+              >
+                {chemistry.sourceLabel || "Verified source"}
+              </a>
+            ) : (
+              <span className="text-[10px] font-medium text-muted-foreground">
+                {chemistry.source === "catalog"
+                  ? "Verified route"
+                  : chemistry.source === "derived"
+                    ? "Reaction chemistry"
+                    : "Compiled summary"}
+              </span>
+            )}
           </div>
           {chemistry.headline ? (
             <p className="mb-2 text-sm font-medium text-ink">{chemistry.headline}</p>

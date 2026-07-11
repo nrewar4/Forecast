@@ -16,6 +16,7 @@ import { chatComplete, type ChatMsg } from "@/lib/openrouter";
 import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
 import { matchVendors, findProduct, type CdmoMatch } from "@/lib/cdmoMatch";
 import { deriveChemistry } from "@/lib/reactionClasses";
+import { fetchSynthesis, type SynthesisInfo } from "@/lib/synthesis";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -184,8 +185,12 @@ export type CoreChemistry = {
   hazardNote: string;
   /** broad reaction classes present (esterification, nitration, ozonolysis, ...) */
   reactionClasses?: string[];
-  /** where the route came from: verified catalog, AI summary, or group-derived */
-  source: "catalog" | "ai" | "derived";
+  /** citation for this route when it comes from a public online source */
+  sourceUrl?: string;
+  sourceLabel?: string;
+  /** where the route came from: our catalog, a cited public source, an AI
+   *  summary, or a functional-group classification */
+  source: "catalog" | "verified" | "ai" | "derived";
 };
 
 export type Feasibility = {
@@ -272,6 +277,29 @@ function collectSources(identity: ChemIdentity | null, productName: string): Ver
   return out.filter((s) => (seen.has(s.url) ? false : (seen.add(s.url), true)));
 }
 
+// Wraps a cited Wikipedia production/synthesis section into the core-chemistry
+// shape, carrying the citation so the card can link the source.
+function synthesisToChemistry(
+  synth: SynthesisInfo,
+  identity: ChemIdentity | null,
+  name: string,
+): CoreChemistry {
+  const derived = deriveChemistry(identity, name);
+  return {
+    headline: synth.headline,
+    route: synth.steps,
+    startingMaterials: derived?.startingMaterials ?? [],
+    plantType: "Batch",
+    hazardNote:
+      derived?.hazardNote ??
+      "Confirm reagents, hazard class and containment during the feasibility assessment.",
+    reactionClasses: derived?.reactionClasses,
+    sourceUrl: synth.sourceUrl,
+    sourceLabel: synth.sourceName,
+    source: "verified",
+  };
+}
+
 // When the catalog does not cover a molecule and a key is present, ask the LLM
 // for the major industrial route as a short factual list. Parsed defensively.
 async function aiChemistry(
@@ -339,13 +367,33 @@ export async function runFeasibility(
   const displayName = identity?.name || undefined;
   const match = matchVendors(query, displayName);
 
+  // Core chemistry, in order of authority: our verified catalog, then a cited
+  // public source (Wikipedia's referenced production/synthesis section), then an
+  // LLM summary if a key is set, then a functional-group classification. Every
+  // path lands on real chemistry rather than a placeholder.
   let chemistry = catalogChemistry(match.productName) || catalogChemistry(query);
+  if (!chemistry) {
+    const synth = await withTimeout(
+      (s) => fetchSynthesis(displayName || query, s),
+      6000,
+      null as SynthesisInfo | null,
+      signal,
+    );
+    if (synth) chemistry = synthesisToChemistry(synth, identity, match.productName || query);
+  }
   if (!chemistry) chemistry = await aiChemistry(identity, query, cfg, signal);
-  // Always land on real chemistry: derive the broad reaction classes from the
-  // molecule's functional groups when the catalog and LLM did not supply a route.
   if (!chemistry) chemistry = deriveChemistry(identity, match.productName || query);
 
+  // Attach the broad reaction-class tags (esterification, nitration, ozonolysis,
+  // ...) to whichever route we show, so the categories are always visible.
+  if (chemistry && !chemistry.reactionClasses) {
+    chemistry.reactionClasses = deriveChemistry(identity, match.productName || query)?.reactionClasses;
+  }
+
   const sources = collectSources(identity, match.productName);
+  if (chemistry?.sourceUrl && chemistry.sourceLabel && !sources.some((s) => s.url === chemistry!.sourceUrl)) {
+    sources.push({ name: chemistry.sourceLabel, url: chemistry.sourceUrl });
+  }
 
   const result: Feasibility = { query, identity, description, chemistry, match, sources };
 

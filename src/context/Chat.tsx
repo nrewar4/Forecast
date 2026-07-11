@@ -178,7 +178,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         kind: "text",
         text: `${data.match.vendorCount} manufacturers in our network can make ${data.match.productName}. How should we run the project? Choose your priority and I will project the milestones.`,
       });
-      setQuick([...TIMELINE_REPLIES, { label: "Contact APAC", value: "contact", intent: "contact" }]);
+      // The feasibility card already carries the single "Discuss this with APAC"
+      // button, so the quick replies here stay focused on the timeline choice.
+      setQuick([...TIMELINE_REPLIES]);
     } catch {
       awaiting.current = null;
       replace(typingId, {
@@ -208,8 +210,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       subtitle: URGENCY_META[urgency].note,
     });
     pushBot({ kind: "text", text: "Want APAC to scope this against your real volumes and timeline?" });
+    // The pathway spine already shows the single "Get this scoped by APAC" button.
     setQuick([
-      { label: "Contact APAC", value: "contact", intent: "contact" },
       { label: "Try another priority", value: "adjust" },
       { label: "Check another product", value: "another", intent: "feasibility" },
     ]);
@@ -226,10 +228,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       track("cdmo_pathway", { archetype: archetype.id });
       replace(typingId, { kind: "pathway", data: pathway });
       pushBot({ kind: "text", text: "This is how APAC would run it. Want us to scope it for your specifics?" });
-      setQuick([
-        { label: "Contact APAC", value: "contact", intent: "contact" },
-        { label: "Get a product made", value: "another", intent: "feasibility" },
-      ]);
+      // The pathway spine already shows the single "Get this scoped by APAC" button.
+      setQuick([{ label: "Get a product made", value: "another", intent: "feasibility" }]);
     } catch {
       replace(typingId, {
         kind: "text",

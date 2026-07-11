@@ -40,16 +40,18 @@ const COUNTRIES = [
   { name: "Indonesia", count: 120, suffix: "+" },
 ];
 
-// Centered section header: quiet mono kicker over a bold title.
-function SectionHeader({ kicker, title }: { kicker: string; title: React.ReactNode }) {
+// Centered section header: optional quiet mono kicker over a bold title.
+function SectionHeader({ kicker, title }: { kicker?: string; title: React.ReactNode }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <Reveal>
-        <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-          {kicker}
-        </p>
-      </Reveal>
-      <Reveal delay={70}>
+      {kicker ? (
+        <Reveal>
+          <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            {kicker}
+          </p>
+        </Reveal>
+      ) : null}
+      <Reveal delay={kicker ? 70 : 0}>
         <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">{title}</h2>
       </Reveal>
     </div>
@@ -64,13 +66,6 @@ export default function Landing() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" aria-label="APAC Supply Chain home" className="press inline-block">
             <Logo className="h-16 w-auto md:h-20" />
-          </Link>
-          <Link
-            to="/knowledge-base"
-            className="press inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-          >
-            Open platform
-            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </header>
@@ -150,7 +145,6 @@ export default function Landing() {
         <section className="border-t border-border" aria-label="About APAC Supply Chain">
           <div className="mx-auto max-w-6xl px-6 py-24">
             <SectionHeader
-              kicker="APAC network to the United States"
               title={
                 <>
                   <CountUp value={8900} suffix="+" className="tabular-nums" /> products.{" "}
@@ -214,7 +208,13 @@ export default function Landing() {
         {/* Divisions + country network */}
         <section className="border-t border-border bg-muted/40">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <SectionHeader kicker="The network" title="Two divisions, one global reach" />
+            <SectionHeader kicker="Two divisions" title="Built for regulated markets, one global reach" />
+            <Reveal delay={130}>
+              <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
+                cGMP pharmaceuticals and industrial chemicals, documented to the standard each
+                destination market demands, delivered through one accountable network.
+              </p>
+            </Reveal>
             <div className="mt-14 grid gap-14 lg:grid-cols-2">
               <div>
                 <div className="grid gap-4 sm:grid-cols-2">
