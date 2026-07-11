@@ -1,140 +1,132 @@
-# APAC Sourcing Intelligence
+# APAC Supply Chain — CDMO & Sourcing platform
 
-The data and analytics platform for APAC Supply Chain (apacss.com), a chemical
-sourcing and CDMO company. It carries a public workspace (Product Discovery and
-a market overview), a conversion-focused CDMO experience built around an AI
-assistant, and an admin area (trade analytics, demand forecasting, document
-uploads, the ML-assisted synthesis route explorer, and website analytics).
+A client-side web app for APAC Supply Chain (apacss.com), a chemical sourcing and
+CDMO company. It has three public surfaces and a small internal area:
 
-All figures are shown in USD. Styled in the APAC brand colours, orange on a
-neutral Vercel-style surface. Clean and professional. No em dash is used
-anywhere in the product copy; use a comma, a colon, or the word "to" instead.
+- **CDMO** (`/cdmo`) — the main conversion page: an AI assistant that takes a
+  molecule or a project and returns feasibility, the process chemistry needed to
+  make it, a manufacturer-capability count, patent/route landscape, and a
+  contact handoff.
+- **Product Discovery** (`/knowledge-base`) — a searchable catalogue of products
+  with identity, chemistry and sourcing detail.
+- **Market Overview** (`/dashboard`) — chemical trade figures for the focus
+  markets, from the World Bank.
+- **Admin** (`/admin`, `/synthesis-routes`) — usage analytics and an internal
+  retrosynthesis explorer, behind a client-side login.
 
-## The CDMO assistant
+It is a static single-page app: no backend, no database. Everything runs in the
+browser against public, keyless APIs. All figures are in USD. Product copy uses
+no em dashes (use a comma, a colon, or "to").
 
-The `/cdmo` page and a floating widget on every public page host an AI assistant
-that qualifies a visitor and routes them to one of two journeys, then to an APAC
-enquiry (phone and email in `src/data/contact.ts`):
+## Run
 
-- Feasibility: name a molecule and it resolves identity from PubChem, lays out
-  the core chemistry, and reports how many network manufacturers can make it
-  (a count only, identities withheld) before handing off to contact.
-- Pathway: describe a situation and it maps a stage-by-stage CDMO development
-  pathway with deliverables and gates.
-
-The two flows are deterministic (PubChem + catalog + `src/lib/cdmoMatch.ts` +
-`src/data/cdmoPathway.ts`), so they always complete quickly even with no API
-key. When `VITE_OPENROUTER_API_KEY` is set, the LLM (via `src/lib/openrouter.ts`,
-with model fallback) adds natural phrasing and free-text understanding. Assistant
-and enquiry activity is tracked to the Admin Dashboard.
-
-## Run the app
-
-Vite + React 18 + TypeScript + Tailwind + Recharts.
-
-```
+```bash
 npm install
 npm run dev      # local dev server
-npm run build    # production build to dist
+npm run build    # production build to ./dist
 npm run preview  # serve the production build
 ```
 
-Everything works with zero configuration: data falls back to browser storage and
-bundled datasets. `.env` values (see `.env.example`) switch on the shared
-Supabase database and the AI research assistant.
+Runs with zero configuration. Optional `.env` values (see `.env.example`) add
+LLM free-text understanding and change the admin password.
+
+## The CDMO assistant
+
+The `/cdmo` page and a floating widget on every public page host an assistant
+that qualifies a visitor and routes them to one of two journeys, then to an APAC
+enquiry (contact details in `src/data/contact.ts`):
+
+- **Feasibility** — name a molecule or CAS. Identity resolves across public
+  databases (PubChem, then NCI CACTUS, then OPSIN), and the card shows the broad
+  chemical classes, the **process chemistries needed to make it** (halogenation,
+  nitration, esterification, ...), how many network manufacturers can run that
+  chemistry (a count only, identities withheld), and the patent/literature route
+  landscape (PubChem/SureChEMBL + PubMed, with Google Patents / WIPO / Espacenet
+  links).
+- **Pathway** — describe a situation and it maps a stage-by-stage CDMO
+  development pathway with deliverables and gates, with durations scaled to the
+  molecule's complexity.
+
+Both flows are deterministic, so they always complete quickly even with no API
+key. When `VITE_OPENROUTER_API_KEY` is set, the LLM (`src/lib/openrouter.ts`, with
+model fallback) only adds natural phrasing and free-text understanding.
 
 ## Admin login
 
-The admin area is at `/login` (also linked from the landing footer and the
-workspace sidebar).
+At `/login` (linked from the landing footer and the workspace sidebar).
 
 - Username: `admin`
-- Default password: `apac-admin`
+- Default password: `apac-admin` (override with `VITE_ADMIN_PASSWORD_HASH`, the
+  SHA-256 hex of your password). Sessions last 12 hours.
 
-Change it by setting `VITE_ADMIN_PASSWORD_HASH` in `.env` to the SHA-256 hex of
-your password (`echo -n "yourpassword" | shasum -a 256`). Sessions last 12 hours.
-This is a client-side gate that controls what the browser shows; it keeps
-internal tooling out of casual view but is not a substitute for server-side
-auth. Move to Supabase Auth when real account security is needed.
-
-Admin-only pages: `/admin` (website analytics), `/trade-analytics`,
-`/demand-forecast`, `/documents`, and `/synthesis-routes` (the ML-assisted
-route explorer, an internal analyst tool).
+This is a client-side gate for hiding internal tooling, **not** a security
+boundary. See `SECURITY.md`.
 
 ## Project structure
 
 ```
+index.html                Page shell + metadata
+vite.config.ts            Build config (base path, alias, chunking, dev proxy)
+tailwind.config.js        Brand tokens (orange accent, neutral scale)
+
 src/
-  App.tsx                 Routes (public, workspace, admin) + page-view tracking
-  main.tsx                Entry: router + providers (Auth, Currency, TradeData)
-  embed.tsx               Mount helper for embedding the app in another site
+  main.tsx                Entry: router (basename from VITE_BASE_PATH) + providers
+  App.tsx                 Routes + page-view tracking + floating assistant
   index.css               Tailwind layers, motion utilities, print styles
 
-  pages/                  One file per routed page
-    Landing.tsx           Public homepage (hero, entry tiles, animated About)
-    SynthesisRoutes.tsx   Admin: ML-assisted route explorer
-    Dashboard.tsx         Market overview (public workspace)
-    KnowledgeBase.tsx     Product Discovery (product knowledge base)
-    Cdmo.tsx              Public CDMO experience (assistant, two paths, enquiry)
-    TradeAnalytics.tsx    Admin: shipment analytics
-    DemandForecast.tsx    Admin: forecasting models
-    Documents.tsx         Admin: Datamyne Excel uploads
-    AdminDashboard.tsx    Admin: website analytics + platform data
+  pages/                  One file per route
+    Landing.tsx           Public homepage
+    Cdmo.tsx              CDMO assistant experience (main conversion page)
+    KnowledgeBase.tsx     Product Discovery catalogue
+    Dashboard.tsx         Market Overview (chemical trade)
+    SynthesisRoutes.tsx   Admin: retrosynthesis explorer
+    AdminDashboard.tsx    Admin: usage analytics
     Login.tsx             Admin sign in
 
   components/
-    layout/               App chrome: AppShell (workspace frame + global search),
-                          Sidebar (workspace navs, admin filtering), MarketingLayout, Logo
-    ui/                   Reusable primitives: Card/Badge/Chip (primitives.tsx),
-                          KpiCard, EmptyState, Reveal (scroll animation), CountUp
-    knowledge/            Domain components for the discovery/synthesis pages
-                          (AI search and profiles, CDMO intelligence, regulatory panel,
-                          market news, route step cards)
-    chat/                 The floating and embedded AI assistant (ChatWidget, ChatPanel)
-    cdmo/                 CDMO result surfaces (FeasibilityReport, PathwaySpine, EnquiryForm)
+    layout/               AppShell, Sidebar, MarketingLayout, Logo
+    ui/                   Primitives (Card/Badge/Chip), KpiCard, Reveal, CountUp
+    chat/                 Floating + embedded assistant (ChatWidget, ChatPanel)
+    cdmo/                 CDMO result surfaces (FeasibilityReport, PathwaySpine,
+                          EnquiryForm)
+    knowledge/            Discovery/synthesis domain components
 
-  context/                React contexts: Auth (admin session), Currency (USD),
-                          TradeData (shared shipment store)
+  context/                React contexts: Auth (admin), Currency (USD), Chat
+                          (the app-wide conversation, persisted across routes)
 
-  lib/                    Framework-free logic
-    auth.ts               Admin credential check + session storage
+  lib/                    Framework-free logic (dependency-light, degrades safely)
+    auth.ts               Admin credential check + session
+    aiConfig.ts           AI key/model resolution
+    openrouter.ts         OpenRouter chat client (model fallback)
+    chatAssistant.ts      Assistant brain: intent, feasibility, pathway
+    casResolve.ts         Identity resolution (PubChem -> CACTUS -> OPSIN)
+    chemClasses.ts        Chemical classes + process chemistries + complexity
+    patents.ts            Patent + literature landscape (PubChem xrefs)
+    cdmoMatch.ts          Manufacturer-capability count (gated by chemistry)
+    worldbank.ts          Market Overview chemical-trade data
     analytics.ts          Page-view/event recorder for the Admin Dashboard
-    tradeStore.ts         Shipments: Supabase when configured, else localStorage
-    openrouter.ts         OpenRouter chat client (model fallback, web grounding)
-    aiConfig.ts           AI key/model resolution (localStorage + env)
-    retrosynthesis.ts     Route generation orchestrator (PubChem + ASKCOS + AI)
-    ...                   pubchem, openfda, openalex, cas resolution, forecasting,
-                          parsing, caching, derivations
+    retrosynthesis.ts     Route generation (admin explorer)
 
-  data/                   Bundled datasets (products, research, buyers, suppliers,
-                          verified sources, FDA Orange Book extract)
-
-scripts/verify.mjs        Headless-browser end-to-end check + screenshots
+  data/                   Bundled datasets: products, suppliers, clients, verified
+                          sources, cdmoPathway, chemicalTrade, contact
 ```
 
 Conventions:
 
-- Pages own routing concerns; components stay route-agnostic.
-- Anything that talks to storage or an API lives in `lib/`, is dependency-light,
-  and degrades gracefully (Supabase failures fall back to localStorage).
+- Pages own routing; components stay route-agnostic.
+- Anything touching an API or storage lives in `lib/`, is dependency-light, and
+  degrades gracefully (a failed lookup never breaks the page).
 - Imports use the `@/` alias (`@/components/...`, `@/lib/...`).
-- Motion: reuse `animate-fade-up`, `stagger`, `press`, `Reveal`, and `CountUp`.
-  Respect reduced-motion (the global CSS override handles it).
+- Motion: reuse `animate-fade-up`, `stagger`, `press`, `Reveal`, `CountUp`;
+  reduced-motion is respected globally.
 
-## Website analytics
+## Integrating with apacss.com
 
-`src/lib/analytics.ts` records page views and named events into localStorage
-(capped, anonymous session ids, no personal data). The Admin Dashboard charts
-views over time, views by page, devices, referrers, and interactions, alongside
-platform data counts. Because storage is per browser, numbers cover each device;
-pointing the same recorder at a Supabase table later would make it site-wide.
+See `INTEGRATION.md` for subdomain, sub-path and iframe deployment, the SPA
+fallback config, and the brand/contact config points. The app builds to static
+files and works under any path via `VITE_BASE_PATH`.
 
-## Shared database and AI (optional)
+## Verify
 
-- `SUPABASE_SETUP.md` switches the trade database from browser storage to a
-  shared Supabase project.
-- `VITE_OPENROUTER_API_KEY` powers the Product Research Assistant, AI product
-  search, and synthesis route generation. A build-time key is readable by anyone
-  who can load the app, so use a limited key.
-- `INTEGRATION.md` covers hosting the app standalone, under a sub-path, or
-  embedded in another site via `src/embed.tsx`.
+`scripts/verify.mjs` drives the built app in a headless browser end to end.
+`SECURITY.md` records the security audit and hardening recommendations.

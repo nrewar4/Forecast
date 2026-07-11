@@ -5,8 +5,9 @@
 //
 // Configure the password by setting VITE_ADMIN_PASSWORD_HASH in .env to the
 // SHA-256 hex of your password. Without it, the default password is "apac-admin".
-// For real multi-user security move to Supabase Auth; this gate is for keeping
-// internal tooling out of casual view, not for protecting secrets.
+// This gate is for keeping internal tooling out of casual view, not for
+// protecting secrets: for real multi-user security, put the admin routes behind
+// a server-side auth layer at the hosting/proxy tier. See SECURITY.md.
 
 const SESSION_KEY = "apac.auth.session.v1";
 const SESSION_HOURS = 12;

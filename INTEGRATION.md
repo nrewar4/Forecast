@@ -1,107 +1,143 @@
-# Integrating and scaling the platform
+# Integrating with the official APAC website
 
-This app is built to drop into your existing website and to grow with your data.
-It is a Vite, React, and TypeScript single page app with a clean data layer, so
-you can host it on its own, embed it in another site, or point it at your own
-backend.
+This app is a **static single-page application** (Vite + React). `npm run build`
+produces a `dist/` folder of plain HTML, CSS and JS with **no server runtime** and
+**no database** of its own. That makes it easy to drop into apacss.com in one of a
+few ways. Pick the one that matches how the main site is hosted.
 
-## Architecture in one minute
+At runtime the app only calls **public, keyless, CORS-enabled APIs** from the
+browser (PubChem, NCI CACTUS, OPSIN, the World Bank, Google News RSS). Nothing
+server-side is required for it to work.
 
-- UI pages live in `src/pages`. They never read files directly, they read from
-  the data layer.
-- The trade database is exposed through one React context, `src/context/TradeData.tsx`.
-  Every section (Dashboard, Trade Analytics, Clients, Suppliers, Demand Forecast)
-  derives from it, so when the data changes the whole app updates.
-- Storage is abstracted in `src/lib/tradeStore.ts`. It talks to Supabase when
-  configured, and to browser storage otherwise. Swap this one file to use any
-  backend.
-- Ingestion is in `src/lib/parseTrade.ts`. It turns a Datamyne Excel file into
-  shipment records and is tolerant of different column layouts.
-- Aggregations for the dynamic sections live in `src/lib/derive.ts`.
+---
 
-## Four ways to integrate
+## 1. Build
 
-### 1. Standalone deploy
-Build and host the static output on any static host (Netlify, Vercel, S3, Nginx).
+```bash
+npm install
+npm run build      # outputs static files to ./dist
 ```
-npm run build      # outputs to dist
-```
-Serve `dist` and you are done.
 
-### 2. Embed into your existing site
-A mount helper is exported from `src/embed.tsx`. From your site, mount the app
-into any element:
-```ts
-import { mountApacApp } from "apac-sourcing/embed";
-const unmount = mountApacApp(document.getElementById("analytics"), {
-  basename: "/analytics",
-});
-```
-Use `basename` when the app sits under a sub route of your site.
+The whole of `dist/` is deployable to any static host or CDN (Nginx, Apache,
+S3+CloudFront, Netlify, Vercel, Cloudflare Pages, GitHub Pages, ...).
 
-### 3. iframe
-The simplest option. Host the standalone build and embed it:
+Configuration is via build-time env vars (all optional, see `.env.example`):
+
+| Variable | Purpose |
+| --- | --- |
+| `VITE_BASE_PATH` | Sub-path the app is served from, e.g. `/platform/`. Default `/`. |
+| `VITE_OPENROUTER_API_KEY` | Optional. Adds LLM free-text understanding. **Exposed in the browser — see SECURITY.md.** |
+| `VITE_OPENROUTER_MODEL` | Optional model id (default `openrouter/auto`). |
+| `VITE_ADMIN_PASSWORD_HASH` | SHA-256 of the admin password (default `apac-admin`). |
+
+---
+
+## 2. Choose a deployment shape
+
+### Option A — Subdomain (recommended, cleanest)
+
+Serve the app at e.g. **`platform.apacss.com`**.
+
+1. Build with the default base (`VITE_BASE_PATH` unset).
+2. Upload `dist/` to the host for that subdomain.
+3. Point the DNS record at the host.
+4. Add the **SPA fallback** (section 3) so deep links work.
+
+Link to it from the main site's nav (the app already links back to `apacss.com`
+via its "Procurement" button and enquiry CTAs).
+
+### Option B — Sub-path of the main domain
+
+Serve the app under a folder, e.g. **`apacss.com/platform`**.
+
+1. Build with the sub-path:
+   ```bash
+   VITE_BASE_PATH=/platform/ npm run build
+   ```
+   The router reads `import.meta.env.BASE_URL` as its `basename`, so **every
+   internal route works automatically** with no code changes.
+2. Copy `dist/` so it is served at `/platform/` by the main web server / CDN.
+3. Add the SPA fallback scoped to `/platform/` (section 3).
+
+### Option C — iframe embed (fastest, least integrated)
+
+Deploy via Option A or B, then embed a page of it in the main site:
+
 ```html
-<iframe src="https://analytics.yourdomain.com" style="width:100%;height:100vh;border:0"></iframe>
+<iframe
+  src="https://platform.apacss.com/cdmo"
+  title="APAC CDMO Assistant"
+  style="width:100%;height:900px;border:0"
+  loading="lazy"
+  allow="clipboard-write"
+></iframe>
 ```
 
-### 4. Use only the data layer
-If you already have a front end, import the ingestion and aggregation utilities
-directly:
-```ts
-import { parseTradeFile } from "@/lib/parseTrade";
-import { deriveBuyers, deriveSuppliers, topProducts } from "@/lib/derive";
+Good for dropping just the CDMO assistant onto an existing marketing page. The
+floating assistant and full-page chrome are best experienced full-window
+(Option A/B).
+
+---
+
+## 3. SPA fallback (required for A and B)
+
+This is a client-side-routed SPA, so the server must serve `index.html` for any
+unknown path (otherwise a refresh on `/cdmo` 404s).
+
+**Nginx** (sub-path example):
+```nginx
+location /platform/ {
+  try_files $uri $uri/ /platform/index.html;
+}
 ```
 
-## Connecting your own backend
-
-The whole app reads and writes shipments through `src/lib/tradeStore.ts`, which
-exposes three functions: `loadUploaded`, `addUploaded`, and `clearUploaded`.
-
-- To use Supabase, set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`. See
-  SUPABASE_SETUP.md.
-- To use your own REST or GraphQL API, reimplement those three functions to call
-  your endpoints. Nothing else in the app needs to change. Keep the `Shipment`
-  shape from `src/data/trade.ts` or map to it inside the store.
-
-## Scaling to large datasets
-
-The current build keeps uploaded rows in memory and in storage, which is fine up
-to tens of thousands of rows. For larger volumes:
-
-- Move aggregation to the backend. Replace the `derive.ts` calls with API calls
-  that return pre-aggregated top products, buyers, suppliers, and country splits.
-  Postgres or a warehouse can group millions of rows quickly.
-- Paginate the shipment table and fetch on demand rather than loading everything.
-- Store uploads server side so every user shares one database. Supabase already
-  does this when configured.
-- Cache aggregates and refresh them on upload.
-
-## Data model
-
-A shipment is the single unit of trade data, defined in `src/data/trade.ts`:
-```ts
-type Shipment = {
-  mode: "Imports" | "Exports";
-  date: string;        // ISO date
-  hsCode: string;
-  product: string;
-  sector: string;
-  transport: "Sea" | "ICD" | "Road" | "Air";
-  importer: string;
-  supplier: string;
-  origin: string;
-  quantityT: number;
-  unitPrice: number;
-  totalValue: number;
-  estimated?: boolean; // true when value came from assumed pricing
-};
+**Apache** (`.htaccess` in the served folder):
+```apache
+RewriteEngine On
+RewriteBase /platform/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /platform/index.html [L]
 ```
-Keep this shape when integrating and every page will work without changes.
 
-## Reference libraries
+**Netlify** (`public/_redirects`): `/*  /index.html  200`
+**Vercel** (`vercel.json`): `{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }`
 
-Product reference data lives in `src/data/products.ts` (knowledge base) and
-`src/data/research.ts` (country by country manufacturing research). These are
-plain arrays, so adding products is a data edit, not a code change. The app keys
-products by a slug of the name, so products may share an HS code safely.
+---
+
+## 4. Public routes to link from apacss.com
+
+| Path | Page |
+| --- | --- |
+| `/` | Landing (3 entry points) |
+| `/cdmo` | CDMO assistant + feasibility (main conversion page) |
+| `/knowledge-base` | Product Discovery catalogue |
+| `/dashboard` | Market Overview (chemical trade) |
+
+`/admin` and `/synthesis-routes` are gated by the admin login and are internal.
+
+---
+
+## 5. Brand & content config points
+
+A developer can rebrand/retarget without touching feature code:
+
+- **Contact details** (phone, email, company, SLA): `src/data/contact.ts` — the
+  single source of truth for every CTA, enquiry form and assistant handoff.
+- **Brand accent colour & theme**: `tailwind.config.js` (the orange accent and
+  neutral scale) and `src/index.css`.
+- **Logo**: `src/components/layout/Logo.tsx` and `public/`.
+- **Catalogue data**: `src/data/products.ts`, `suppliers.ts`, `clients.ts`,
+  `verified.ts`.
+- **Page metadata** (title/description): `index.html`.
+
+---
+
+## 6. Enquiry handoff
+
+The enquiry form (`src/components/cdmo/EnquiryForm.tsx`) currently records leads
+to the browser (and the admin analytics). To route real leads into APAC's CRM or
+inbox, wire its submit handler to your endpoint (a form service, an email API, or
+your CRM's intake webhook). This is the one place a backend is worth adding; the
+rest of the app needs none.
