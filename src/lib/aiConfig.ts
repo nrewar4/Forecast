@@ -7,43 +7,39 @@ const STORAGE_KEY = "apac.ai.config.v1";
 const ENV_KEY = import.meta.env.VITE_OPENROUTER_API_KEY as string | undefined;
 const ENV_MODEL = import.meta.env.VITE_OPENROUTER_MODEL as string | undefined;
 
-// Default model. "openrouter/auto" is OpenRouter's Auto Router, it lets
-// OpenRouter pick any available model for the request, so you never hit a
-// "model not found" error. You can pin a specific model in .env or settings.
-export const DEFAULT_MODEL = "openrouter/auto";
+// Default to the free tier, so a key with no paid credit works out of the box
+// with no billing errors. "openrouter/free" is OpenRouter's free Auto Router: it
+// always resolves to some available free model, so it can never 404 or 402.
+export const DEFAULT_MODEL = "openrouter/free";
 
-export const MODEL_SUGGESTIONS = [
-  "openrouter/auto",
-  "google/gemini-2.0-flash-001",
-  "anthropic/claude-3.7-sonnet",
-  "meta-llama/llama-3.3-70b-instruct",
-  // Free options (no credit needed; require the free-model privacy setting and
-  // have lower rate limits). Web search is auto-disabled on these.
-  "openrouter/free",
+// Good free models (no credit needed, tagged ":free"), in rough quality order.
+// The client (src/lib/openrouter.ts) rotates through these across calls, so it
+// "switches between" them and a single rate-limited model never blocks every
+// request. Any id that is deprecated is skipped on a 404, and every chain ends
+// at FREE_TERMINAL, so requests never dead-end on an error. Web search is not
+// attached to free models (that plugin is billed separately).
+export const FREE_MODELS = [
+  "deepseek/deepseek-chat-v3-0324:free",
   "meta-llama/llama-3.3-70b-instruct:free",
-];
-
-// Free models are tried automatically when paid models return 402 (no credit),
-// and the client jumps back to the better paid model as soon as credit returns
-// (every request retries the preferred model first). Models tagged ":free" or
-// "openrouter/free" cost nothing; web search is skipped on them since the web
-// plugin is billed separately.
-export const FREE_FALLBACK_MODELS = [
-  "meta-llama/llama-3.3-70b-instruct:free",
-  "qwen/qwen3-next-80b-a3b-instruct:free",
+  "qwen/qwen-2.5-72b-instruct:free",
+  "google/gemini-2.0-flash-exp:free",
+  "mistralai/mistral-small-3.1-24b-instruct:free",
+  "nvidia/llama-3.1-nemotron-70b-instruct:free",
   "openai/gpt-oss-120b:free",
-  "openrouter/free", // free auto-router
 ];
 
-// If the chosen model is unavailable/deprecated OR the account has no credit
-// (402), the client retries down this chain: paid models first, then free
-// models, ending at the paid Auto Router as a last resort.
-export const FALLBACK_MODELS = [
+// Guaranteed terminal fallback: the free Auto Router. Always available, free, so
+// the model chain can never end on a 402 (no credit) or 404 (bad id).
+export const FREE_TERMINAL = "openrouter/free";
+
+// Shown in the settings picker: free options first (recommended, no credit), then
+// a couple of paid models for users who add credit and want top quality. A pinned
+// paid model is still backed up by the free models, so a 402 never dead-ends.
+export const MODEL_SUGGESTIONS = [
+  "openrouter/free",
+  ...FREE_MODELS,
   "google/gemini-2.0-flash-001",
   "anthropic/claude-3.7-sonnet",
-  "meta-llama/llama-3.3-70b-instruct",
-  ...FREE_FALLBACK_MODELS,
-  "openrouter/auto",
 ];
 
 export function loadAiConfig(): AiConfig {

@@ -231,7 +231,7 @@ export function AiProductSearch({
                 value={modelInput}
                 onChange={(e) => setModelInput(e.target.value)}
                 list="or-models"
-                placeholder="openrouter/auto"
+                placeholder="openrouter/free"
                 className="h-9 min-w-[200px] flex-1 rounded-md border border-border bg-background px-3 text-xs outline-none focus:border-primary"
               />
               <datalist id="or-models">

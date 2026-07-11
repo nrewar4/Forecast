@@ -1,4 +1,4 @@
-import { FALLBACK_MODELS, type AiConfig } from "./aiConfig";
+import { FREE_MODELS, FREE_TERMINAL, DEFAULT_MODEL, type AiConfig } from "./aiConfig";
 
 export type ChatRole = "system" | "user" | "assistant";
 export type ChatMsg = { role: ChatRole; content: string };
@@ -27,10 +27,10 @@ class OpenRouterError extends Error {
   }
 }
 
-// Free models are rate-limited hard (a few req/min). On 429 we back off and
-// retry the SAME model before falling through, so free-tier searches just slow
-// down instead of failing.
-const MAX_RATE_RETRIES = 4;
+// Free models are rate-limited hard (a few req/min). On 429 we retry the SAME
+// model briefly, then fall through to the next (rotated) free model, which is
+// usually faster than waiting out a long backoff on one model.
+const MAX_RATE_RETRIES = 2;
 
 function sleep(ms: number, signal?: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -70,12 +70,31 @@ async function toError(res: Response): Promise<OpenRouterError> {
   return new OpenRouterError(message, res.status, retryAfterMs);
 }
 
-// Try the configured model first, then fall back through other models. This
-// makes the app resilient when a model id is deprecated or has no endpoints , 
-// it self-heals down to OpenRouter's "openrouter/auto" router, which lets
-// OpenRouter pick any available model.
+// Rotates the free-model list one step per call, so successive requests start
+// with a different free model. This spreads load, so a single rate-limited model
+// does not block every request, and is the "switch between free models" behaviour.
+let rotation = 0;
+
+function rotate<T>(arr: T[], by: number): T[] {
+  if (arr.length <= 1) return arr.slice();
+  const k = ((by % arr.length) + arr.length) % arr.length;
+  return [...arr.slice(k), ...arr.slice(0, k)];
+}
+
+// Builds the ordered list of models to try for one request. Any explicitly
+// pinned model is tried first (so a paid pin keeps its quality), then the rotated
+// free models, always ending at the free Auto Router (FREE_TERMINAL), which is
+// always available and free. Because the chain terminates on a free model, a
+// request can never dead-end on a 402 (no credit) or 404 (bad id): it self-heals
+// down to a working free model every time.
 function modelChain(primary?: string): string[] {
-  return Array.from(new Set([primary, ...FALLBACK_MODELS].filter(Boolean) as string[]));
+  const free = rotate(FREE_MODELS, rotation++);
+  const chain: string[] = [];
+  if (primary && primary !== DEFAULT_MODEL && primary !== FREE_TERMINAL && primary !== "openrouter/auto") {
+    chain.push(primary);
+  }
+  chain.push(...free, FREE_TERMINAL);
+  return Array.from(new Set(chain.filter(Boolean)));
 }
 
 function isModelUnavailable(message: string): boolean {
