@@ -17,6 +17,8 @@ import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/
 import { matchVendors, type CdmoMatch } from "@/lib/cdmoMatch";
 import { chemicalClasses, processChemistries, complexityScore } from "@/lib/chemClasses";
 import { fetchIpLandscape, type IpLandscape } from "@/lib/patents";
+import { fetchProperties, type ChemProperties } from "@/lib/properties";
+import { fetchHazards, type HazardInfo } from "@/lib/hazards";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -185,6 +187,10 @@ export type Feasibility = {
   classes: string[];
   /** broad process chemistries needed to make it (Halogenation, Nitration, ...) */
   chemistries: string[];
+  /** chemical + physical properties from PubChem */
+  properties: ChemProperties | null;
+  /** GHS hazard classification from PubChem */
+  hazards: HazardInfo | null;
   /** patent + literature landscape from PubChem cross-references */
   ip: IpLandscape | null;
   /** 0..1 molecular complexity from PubChem descriptors; drives the timeline */
@@ -275,16 +281,18 @@ export async function runFeasibility(
 
   const match = matchVendors(query, displayName, chemistries);
 
-  // Patent + literature landscape from PubChem cross-references (SureChEMBL +
-  // PubMed): the patented and non-patented document counts, both citable.
-  const ip = identity?.cid
-    ? await withTimeout(
-        (s) => fetchIpLandscape(identity.cid, displayName || query, s),
-        7000,
-        null as IpLandscape | null,
-        signal,
-      )
-    : null;
+  // From PubChem, all keyed on the resolved CID and fetched in parallel so the
+  // card fills fast: the patent + literature landscape (SureChEMBL + PubMed),
+  // the chemical + physical properties, and the GHS hazard classification. Each
+  // is time-boxed and best-effort, so a slow or missing one never blocks the rest.
+  const cid = identity?.cid || 0;
+  const [ip, properties, hazards] = cid
+    ? await Promise.all([
+        withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal),
+        withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal),
+        withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal),
+      ])
+    : [null, null, null];
 
   const sources = collectSources(identity, match.productName);
   if (ip) {
@@ -294,8 +302,11 @@ export async function runFeasibility(
     sources.push({ name: "WIPO PATENTSCOPE", url: ip.wipoUrl });
     sources.push({ name: "Espacenet (EPO)", url: ip.espacenetUrl });
   }
+  if (hazards && hazards.status !== "unknown") {
+    sources.push({ name: "PubChem safety and hazards (GHS)", url: hazards.sourceUrl });
+  }
 
-  const result: Feasibility = { query, identity, description, classes, chemistries, ip, complexity, match, sources };
+  const result: Feasibility = { query, identity, description, classes, chemistries, properties, hazards, ip, complexity, match, sources };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {

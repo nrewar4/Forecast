@@ -43,23 +43,43 @@ function cleanQuery(query: string): string {
 const CODE_RE =
   /(:|SCHEMBL|CHEMBL|DTXSID|DTXCID|AKOS|MFCD|EINECS|UNII|RefChem|^NSC\d|^DB\d|^CID\b|^EC\s|Tox21|BDBM|STK\d|ZINC)/i;
 
-// Pick a friendly display name. First pass prefers a clean word-only synonym
-// (no digits, commas, or stereo descriptors like "(+-)-"); second pass relaxes
-// to any non-code synonym; finally fall back to IUPAC / raw first.
+// A machine identifier, not a human name: InChI / InChIKey (e.g.
+// UCFUJBVZSWTHEG-UHFFFAOYSA-N) or an all-caps hyphenated registry code. These
+// must never be shown as the product name.
+function looksLikeCode(s: string): boolean {
+  return (
+    CODE_RE.test(s) ||
+    /^InChI=/i.test(s) ||
+    /^[A-Z]{14}-[A-Z]{10}-[A-Z]$/.test(s) || // InChIKey
+    /^[A-Z0-9]{2,}(-[A-Z0-9]+){1,}$/.test(s) // ALLCAPS-CODE-STYLE token
+  );
+}
+
+// Pick a friendly display name. First pass prefers a clean word-style synonym
+// with at least one lowercase letter (so an all-caps code like an InChIKey is
+// never chosen); second pass relaxes to any non-code synonym; finally fall back
+// to IUPAC, then the first usable synonym.
 function pickName(synonyms: string[], iupac: string | null): string {
-  const clean = synonyms.find(
-    (s) => /^[A-Za-z][A-Za-z\s'-]+$/.test(s) && !CODE_RE.test(s) && s.length <= 40,
+  const usable = synonyms.filter((s) => s && !looksLikeCode(s) && !CAS_RE.test(s) && s.length <= 60);
+  const clean = usable.find(
+    (s) => /^[A-Za-z][A-Za-z0-9\s'(),-]+$/.test(s) && /[a-z]/.test(s) && s.length <= 40,
   );
   if (clean) return clean;
-  const ok = synonyms.find(
-    (s) =>
-      /[A-Za-z]/.test(s) &&
-      !CAS_RE.test(s) &&
-      !CODE_RE.test(s) &&
-      s.length <= 40 &&
-      (s.match(/\d/g)?.length ?? 0) <= 2,
-  );
-  return ok ?? iupac ?? synonyms[0] ?? "";
+  const ok = usable.find((s) => /[A-Za-z]/.test(s) && (s.match(/\d/g)?.length ?? 0) <= 3);
+  if (ok) return ok;
+  if (iupac && !looksLikeCode(iupac)) return iupac;
+  return usable[0] ?? "";
+}
+
+// The display name to show. A plain chemical name the user typed is the most
+// recognisable label ("Tolyltriazole"), so prefer it; otherwise (a CAS or code
+// query) use the resolved name. Never returns a machine identifier.
+function preferName(query: string, resolved: string): string {
+  const q = query.trim();
+  if (q.length >= 2 && q.length <= 48 && /^[A-Za-z][A-Za-z0-9 '().,-]+$/.test(q) && !looksLikeCas(q) && !looksLikeCode(q)) {
+    return q;
+  }
+  return resolved || q;
 }
 
 // The principal CAS RN is the earliest assigned, i.e. the smallest registry
@@ -115,7 +135,7 @@ async function pubchemLookup(
   return {
     query: queryLabel,
     cid: p.CID,
-    name: pickName(synonyms, p.IUPACName ?? null),
+    name: preferName(queryLabel, pickName(synonyms, p.IUPACName ?? null)),
     iupac: p.IUPACName ?? null,
     formula: p.MolecularFormula ?? null,
     mw: p.MolecularWeight ?? null,
@@ -167,7 +187,7 @@ async function resolveViaCactus(
   return {
     query: q,
     cid: 0,
-    name: iupac || q,
+    name: preferName(q, iupac || q),
     iupac: iupac ?? null,
     formula: formula ?? null,
     mw: null,

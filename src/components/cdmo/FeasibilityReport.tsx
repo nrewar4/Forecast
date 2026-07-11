@@ -14,7 +14,7 @@ export function FeasibilityReport({
   onContact?: () => void;
   compact?: boolean;
 }) {
-  const { identity, description, classes, chemistries, ip, match, sources } = data;
+  const { identity, description, classes, chemistries, properties, hazards, ip, match, sources } = data;
   const cid = identity?.cid ?? null;
   const cas = identity?.primaryCas ?? null;
   const structure = cid
@@ -60,6 +60,88 @@ export function FeasibilityReport({
         <div className="rounded-xl border border-border bg-card p-3.5">
           <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">About</p>
           <p className="text-xs leading-relaxed text-foreground/90">{clamp(description, 320)}</p>
+        </div>
+      ) : null}
+
+      {/* Chemical & physical properties, from PubChem */}
+      {properties && (properties.physical.length > 0 || properties.computed.length > 0) ? (
+        <div className="rounded-xl border border-border bg-card p-4">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Chemical &amp; physical properties</p>
+            {cid ? (
+              <a href={`https://pubchem.ncbi.nlm.nih.gov/compound/${cid}`} target="_blank" rel="noreferrer noopener" className="text-[10px] font-medium text-primary hover:underline">
+                PubChem
+              </a>
+            ) : null}
+          </div>
+          {properties.physical.length > 0 ? (
+            <dl className="grid grid-cols-1 gap-x-4 gap-y-1.5 sm:grid-cols-2">
+              {properties.physical.map((r) => (
+                <div key={r.label} className="flex flex-col">
+                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">{r.label}</dt>
+                  <dd className="text-xs font-medium text-foreground">{r.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+          {properties.computed.length > 0 ? (
+            <div className={properties.physical.length > 0 ? "mt-3 border-t border-border pt-3" : ""}>
+              <dl className="grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-3">
+                {properties.computed.map((r) => (
+                  <div key={r.label} className="flex flex-col">
+                    <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">{r.label}</dt>
+                    <dd className="font-mono text-[11px] font-semibold text-foreground">{r.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      {/* GHS hazard classification, from PubChem */}
+      {hazards ? (
+        <div
+          className={cn(
+            "rounded-xl border p-4",
+            hazards.status === "hazardous" ? "border-amber-300 bg-amber-50" : "border-border bg-card",
+          )}
+        >
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Hazard classification</p>
+            <a href={hazards.sourceUrl} target="_blank" rel="noreferrer noopener" className="text-[10px] font-medium text-primary hover:underline">
+              Source: PubChem GHS
+            </a>
+          </div>
+          {hazards.status === "hazardous" ? (
+            <>
+              <p className="text-sm font-semibold text-amber-900">
+                Classified hazardous{hazards.signal ? ` · Signal word: ${hazards.signal}` : ""}
+              </p>
+              {hazards.classes.length ? (
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {hazards.classes.map((c) => (
+                    <span key={c} className="rounded-md border border-amber-300 bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-900">
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+              {hazards.statements.length ? (
+                <ul className="mt-2.5 space-y-1">
+                  {hazards.statements.map((s) => (
+                    <li key={s} className="text-[11px] leading-snug text-amber-900/90">{s}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </>
+          ) : hazards.status === "not-classified" ? (
+            <p className="text-sm font-medium text-foreground">Not classified as hazardous under GHS.</p>
+          ) : (
+            <p className="text-xs text-muted-foreground">
+              No GHS hazard classification listed in PubChem. Confirm the safety data sheet before handling.
+            </p>
+          )}
         </div>
       ) : null}
 
