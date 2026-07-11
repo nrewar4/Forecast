@@ -8,6 +8,7 @@
 // (CORS-blocked), so we use PubChem's CAS cross-reference instead.
 
 import { cacheGet, cacheSet, DAY } from "./aiCache";
+import { sanitizeText } from "./sanitize";
 
 const BASE = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
 
@@ -33,7 +34,9 @@ export function looksLikeCas(query: string): boolean {
 }
 
 function cleanQuery(query: string): string {
-  return query.trim().replace(/^cas[:\s]*/i, "").trim();
+  // Cap length and strip control characters before the value reaches an API path
+  // or the cache key. All outbound calls also encodeURIComponent the value.
+  return sanitizeText(query, 120).replace(/^cas[:\s]*/i, "").trim();
 }
 
 // Database/registry codes that masquerade as synonyms, never use as a name.

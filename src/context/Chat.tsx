@@ -8,6 +8,8 @@ import {
 } from "react";
 import { loadAiConfig } from "@/lib/aiConfig";
 import { streamChat, type ChatMsg } from "@/lib/openrouter";
+import { rateLimit, LIMITS, retryHint } from "@/lib/rateLimit";
+import { sanitizeText } from "@/lib/sanitize";
 import { track } from "@/lib/analytics";
 import {
   GREETING,
@@ -315,10 +317,21 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }
 
   async function handleSend(raw: string, intentHint?: Intent) {
-    const text = raw.trim();
+    // Sanitise (strip control chars, cap length) and rate-limit at the boundary,
+    // so a runaway loop or an abusive script in the page cannot flood the public
+    // APIs or the OpenRouter budget. Real DDoS protection is edge-level; see
+    // SECURITY.md. Quick-reply commands (contact, urgency, ...) are exempt.
+    const text = sanitizeText(raw, 500);
     if (!text || busy) return;
 
     if (handleCommand(text)) return;
+
+    const gate = rateLimit("chat", LIMITS.chat);
+    if (!gate.ok) {
+      pushUser(text);
+      pushBot({ kind: "text", text: `You are sending messages very quickly. Please wait ${retryHint(gate.retryAfterMs)} and try again.` });
+      return;
+    }
 
     pushUser(text);
     setQuick([]);

@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import { CONTACT } from "@/data/contact";
 import { track } from "@/lib/analytics";
+import { rateLimit, LIMITS, retryHint } from "@/lib/rateLimit";
+import { sanitizeText, sanitizeChemQuery, isValidEmail, looksMalicious } from "@/lib/sanitize";
 
 // The conversion surface. Captures an enquiry, records it locally, fires a
 // tracked event for the Admin Dashboard, and hands off to email so the lead
@@ -48,6 +50,7 @@ export function EnquiryForm({
   });
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function set<K extends keyof typeof form>(k: K, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -55,19 +58,41 @@ export function EnquiryForm({
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    setBusy(true);
-    const entry: Enquiry = { ...form, context, submittedAt: new Date().toISOString() };
-    saveEnquiry(entry);
-    track("cdmo_enquiry", { context, product: form.product || "unspecified" });
+    setError(null);
 
-    const subject = `CDMO enquiry: ${form.product || "new project"}`;
+    // Validate and sanitise every field at the boundary. Nothing reaches storage
+    // or the mailto (or a future backend) unvalidated. See src/lib/sanitize.ts.
+    const clean: Enquiry = {
+      name: sanitizeText(form.name, 120),
+      company: sanitizeText(form.company, 160),
+      email: form.email.trim().slice(0, 254),
+      product: sanitizeChemQuery(form.product, 160),
+      message: sanitizeText(form.message, 2000),
+      context,
+      submittedAt: new Date().toISOString(),
+    };
+
+    if (!clean.name || !clean.company) return setError("Please add your name and company.");
+    if (!isValidEmail(clean.email)) return setError("Please enter a valid work email.");
+    if (looksMalicious(clean.message) || looksMalicious(clean.name)) {
+      return setError("That submission could not be processed. Please rephrase.");
+    }
+
+    const gate = rateLimit("enquiry", LIMITS.enquiry);
+    if (!gate.ok) return setError(`Too many submissions. Please wait ${retryHint(gate.retryAfterMs)} and try again.`);
+
+    setBusy(true);
+    saveEnquiry(clean);
+    track("cdmo_enquiry", { context, product: clean.product || "unspecified" });
+
+    const subject = `CDMO enquiry: ${clean.product || "new project"}`;
     const body = [
-      `Name: ${form.name}`,
-      `Company: ${form.company}`,
-      `Email: ${form.email}`,
-      `Product / molecule: ${form.product}`,
+      `Name: ${clean.name}`,
+      `Company: ${clean.company}`,
+      `Email: ${clean.email}`,
+      `Product / molecule: ${clean.product}`,
       "",
-      form.message,
+      clean.message,
     ].join("\n");
     window.location.href = `${CONTACT.emailHref}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -109,6 +134,9 @@ export function EnquiryForm({
           rows={compact ? 2 : 3}
           className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-primary sm:col-span-2"
         />
+        {error ? (
+          <p className="text-xs font-medium text-red-600 sm:col-span-2" role="alert">{error}</p>
+        ) : null}
         <button
           type="submit"
           disabled={busy}
