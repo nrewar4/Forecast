@@ -220,7 +220,10 @@ export function FeasibilityReport({
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Routes and patent status</p>
             <span className="text-[10px] font-medium text-muted-foreground">
-              Cross-verified · {Math.max(ip.patentSources, ip.literatureSources)} sources
+              {(() => {
+                const n = Math.max(ip.patentSources, ip.literatureSources);
+                return n > 0 ? `Cross-verified · ${n} source${n === 1 ? "" : "s"}` : "Search the patent offices";
+              })()}
             </span>
           </div>
           <div className="grid grid-cols-2 gap-3">

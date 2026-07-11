@@ -72,6 +72,26 @@ async function crossrefCount(name: string, signal?: AbortSignal): Promise<number
   }
 }
 
+// Runs one source with its own timeout so a slow source resolves to null instead
+// of blocking (and dropping) the whole landscape. Never rejects.
+function perSource(fn: (s: AbortSignal) => Promise<number | null>, parent?: AbortSignal, ms = 6000): Promise<number | null> {
+  return new Promise((resolve) => {
+    const ctrl = new AbortController();
+    const onAbort = () => ctrl.abort();
+    parent?.addEventListener("abort", onAbort, { once: true });
+    const finish = (v: number | null) => {
+      clearTimeout(timer);
+      parent?.removeEventListener("abort", onAbort);
+      resolve(v);
+    };
+    const timer = setTimeout(() => {
+      ctrl.abort();
+      finish(null);
+    }, ms);
+    fn(ctrl.signal).then(finish).catch(() => finish(null));
+  });
+}
+
 // --- reconciliation --------------------------------------------------------
 
 function reconcile(counts: SourceCount[]): { range: [number, number] | null; sources: number } {
@@ -82,7 +102,7 @@ function reconcile(counts: SourceCount[]): { range: [number, number] | null; sou
 
 // Honest status line from the reconciled patent range across sources.
 function statusLine(range: [number, number] | null, sources: number): string {
-  if (!range || sources === 0) return "Patent record could not be read from the databases just now.";
+  if (!range || sources === 0) return "Patent counts could not be read just now. Use the office search links below to check the landscape.";
   const hi = range[1];
   const agree = sources > 1 ? `Cross-checked across ${sources} databases. ` : "";
   if (hi === 0) return `${agree}No patents indexed. The base molecule appears to be in the public domain.`;
@@ -99,12 +119,17 @@ export async function fetchIpLandscape(cid: number, name: string, signal?: Abort
   if (hit) return hit;
 
   const q = encodeURIComponent(name);
+  // Give each source its OWN timeout so a slow one (Europe PMC, Crossref) cannot
+  // drop the whole landscape: the fast sources (PubChem, about 1s) always come
+  // back, and a laggard simply resolves to null and is shown as "n/a". Without
+  // this, one slow source made Promise.all miss the outer timeout and the entire
+  // patent section disappeared even though PubChem had answered.
   const [pcPat, epmcPat, pcLit, epmcLit, crLit] = await Promise.all([
-    pubchemXref(cid, "PatentID", signal),
-    europepmcCount(name, "PAT", signal),
-    pubchemXref(cid, "PubMedID", signal),
-    europepmcCount(name, "MED", signal),
-    crossrefCount(name, signal),
+    perSource((s) => pubchemXref(cid, "PatentID", s), signal),
+    perSource((s) => europepmcCount(name, "PAT", s), signal),
+    perSource((s) => pubchemXref(cid, "PubMedID", s), signal),
+    perSource((s) => europepmcCount(name, "MED", s), signal),
+    perSource((s) => crossrefCount(name, s), signal),
   ]);
 
   const patents: SourceCount[] = [
@@ -117,8 +142,9 @@ export async function fetchIpLandscape(cid: number, name: string, signal?: Abort
     { source: "Crossref", count: crLit, url: `https://search.crossref.org/?q=${q}` },
   ];
 
-  if (patents.every((s) => s.count === null) && literature.every((s) => s.count === null)) return null;
-
+  // Always return a landscape for a resolved compound, so the patent section
+  // always shows (with counts where sources answered, "n/a" where they did not,
+  // and the office search links to verify further).
   const pat = reconcile(patents);
   const lit = reconcile(literature);
 
