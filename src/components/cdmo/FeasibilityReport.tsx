@@ -1,6 +1,29 @@
 import { ArrowRight } from "lucide-react";
 import type { Feasibility } from "@/lib/chatAssistant";
+import type { SourceCount } from "@/lib/patents";
 import { cn } from "@/lib/utils";
+
+// Reconciled count across sources: a single number when they agree, else a range.
+function rangeLabel(range: [number, number] | null): string {
+  if (!range) return "—";
+  return range[0] === range[1] ? String(range[0]) : `${range[0]}–${range[1]}`;
+}
+
+// Per-source breakdown, each linking to the database the figure came from.
+function SourceRows({ rows }: { rows: SourceCount[] }) {
+  return (
+    <ul className="mt-2 space-y-0.5 border-t border-border pt-2">
+      {rows.map((r) => (
+        <li key={r.source} className="flex items-center justify-between gap-2 text-[10px]">
+          <a href={r.url} target="_blank" rel="noreferrer noopener" className="truncate text-muted-foreground hover:text-primary hover:underline">
+            {r.source}
+          </a>
+          <span className="shrink-0 font-mono font-semibold text-foreground">{r.count === null ? "n/a" : r.count.toLocaleString()}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 // Path B result: official identity and CAS (PubChem), a short description, the
 // core chemistry, the APAC vendor match as a count only, and cited sources.
@@ -191,43 +214,31 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Synthesis routes and patent status, from PubChem cross-references */}
+      {/* Synthesis routes + patent status, cross-verified across databases */}
       {ip ? (
         <div className="rounded-xl border border-border bg-card p-4">
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Routes and patent status</p>
-            <span className="text-[10px] font-medium text-muted-foreground">Source: PubChem</span>
+            <span className="text-[10px] font-medium text-muted-foreground">
+              Cross-verified · {Math.max(ip.patentSources, ip.literatureSources)} sources
+            </span>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <a
-              href={ip.patentUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="press rounded-lg border border-border bg-muted/40 p-3 transition hover:border-primary/50"
-            >
-              <p className="text-2xl font-bold leading-none tracking-tight text-ink">{ip.patentCount}</p>
+            <div className="rounded-lg border border-border bg-muted/40 p-3">
+              <p className="text-2xl font-bold leading-none tracking-tight text-ink">{rangeLabel(ip.patentRange)}</p>
               <p className="mt-1 text-[11px] font-medium text-foreground">Patented routes</p>
-              <p className="text-[10px] text-muted-foreground">Patent-literature filings</p>
-            </a>
-            <a
-              href={ip.literatureUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="press rounded-lg border border-border bg-muted/40 p-3 transition hover:border-primary/50"
-            >
-              <p className="text-2xl font-bold leading-none tracking-tight text-ink">{ip.literatureCount}</p>
+              <SourceRows rows={ip.patents} />
+            </div>
+            <div className="rounded-lg border border-border bg-muted/40 p-3">
+              <p className="text-2xl font-bold leading-none tracking-tight text-ink">{rangeLabel(ip.literatureRange)}</p>
               <p className="mt-1 text-[11px] font-medium text-foreground">Non-patented routes</p>
-              <p className="text-[10px] text-muted-foreground">Open scientific literature</p>
-            </a>
+              <SourceRows rows={ip.literature} />
+            </div>
           </div>
           <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">{ip.status}</p>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border pt-2">
             <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Verify in</span>
-            {[
-              { name: "Google Patents", url: ip.googlePatentsUrl },
-              { name: "WIPO", url: ip.wipoUrl },
-              { name: "Espacenet", url: ip.espacenetUrl },
-            ].map((l) => (
+            {ip.links.map((l) => (
               <a
                 key={l.name}
                 href={l.url}

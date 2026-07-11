@@ -296,11 +296,12 @@ export async function runFeasibility(
 
   const sources = collectSources(identity, match.productName);
   if (ip) {
-    sources.push({ name: "PubChem patents (SureChEMBL)", url: ip.patentUrl });
-    sources.push({ name: "PubChem literature (PubMed)", url: ip.literatureUrl });
-    sources.push({ name: "Google Patents", url: ip.googlePatentsUrl });
-    sources.push({ name: "WIPO PATENTSCOPE", url: ip.wipoUrl });
-    sources.push({ name: "Espacenet (EPO)", url: ip.espacenetUrl });
+    // Every database the patent/literature counts were cross-checked against,
+    // plus the patent-office search UIs, each linked so the figure is verifiable.
+    for (const s of [...ip.patents, ...ip.literature]) {
+      if (s.count !== null && !sources.some((x) => x.url === s.url)) sources.push({ name: s.source, url: s.url });
+    }
+    for (const l of ip.links) sources.push({ name: l.name, url: l.url });
   }
   if (hazards && hazards.status !== "unknown") {
     sources.push({ name: "PubChem safety and hazards (GHS)", url: hazards.sourceUrl });
@@ -317,7 +318,8 @@ export async function runFeasibility(
         identity?.formula ? `Formula: ${identity.formula}` : "",
         classes.length ? `Chemical classes: ${classes.join(", ")}` : "",
         chemistries.length ? `Process chemistries needed: ${chemistries.join(", ")}` : "",
-        ip ? `Patents: ${ip.patentCount}, literature refs: ${ip.literatureCount}` : "",
+        ip?.patentRange ? `Patents (cross-checked ${ip.patentSources} sources): ${ip.patentRange[0]} to ${ip.patentRange[1]}` : "",
+        ip?.literatureRange ? `Literature refs: ${ip.literatureRange[0]} to ${ip.literatureRange[1]}` : "",
         `APAC group: ${match.group} / ${match.category}`,
         `Capable vendors in network: ${match.vendorCount}`,
       ]
