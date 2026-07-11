@@ -40,7 +40,7 @@ export default function Cdmo() {
       <section className="relative overflow-hidden border-b border-border">
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(244,121,32,0.06),transparent_70%)]" />
 
-        <div className="relative mx-auto grid max-w-6xl items-start gap-10 px-6 py-14 lg:grid-cols-2 lg:py-20">
+        <div className="relative mx-auto grid max-w-7xl items-start gap-10 px-6 py-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.3fr)] lg:py-20">
           <div>
             <Reveal>
               <h1 className="text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-5xl">
@@ -74,12 +74,12 @@ export default function Cdmo() {
 
           {/* Embedded assistant */}
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
+            <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-lift lg:sticky lg:top-24">
               <div className="border-b border-border bg-ink px-4 py-3">
                 <p className="text-sm font-semibold text-white">APAC CDMO Assistant</p>
                 <p className="text-[11px] text-slate-300">Ask about any product or project</p>
               </div>
-              <div className="h-[600px]">
+              <div className="h-[min(82vh,820px)]">
                 <ChatPanel />
               </div>
             </div>

@@ -15,6 +15,7 @@ import { hasApiKey } from "@/lib/aiConfig";
 import { chatComplete, type ChatMsg } from "@/lib/openrouter";
 import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
 import { matchVendors, findProduct, type CdmoMatch } from "@/lib/cdmoMatch";
+import { deriveChemistry } from "@/lib/reactionClasses";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -181,8 +182,10 @@ export type CoreChemistry = {
   startingMaterials: string[];
   plantType: string;
   hazardNote: string;
-  /** where the route came from: our verified catalog or an AI-compiled summary */
-  source: "catalog" | "ai";
+  /** broad reaction classes present (esterification, nitration, ozonolysis, ...) */
+  reactionClasses?: string[];
+  /** where the route came from: verified catalog, AI summary, or group-derived */
+  source: "catalog" | "ai" | "derived";
 };
 
 export type Feasibility = {
@@ -338,6 +341,9 @@ export async function runFeasibility(
 
   let chemistry = catalogChemistry(match.productName) || catalogChemistry(query);
   if (!chemistry) chemistry = await aiChemistry(identity, query, cfg, signal);
+  // Always land on real chemistry: derive the broad reaction classes from the
+  // molecule's functional groups when the catalog and LLM did not supply a route.
+  if (!chemistry) chemistry = deriveChemistry(identity, match.productName || query);
 
   const sources = collectSources(identity, match.productName);
 

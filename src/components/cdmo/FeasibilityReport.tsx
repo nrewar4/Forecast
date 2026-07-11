@@ -69,11 +69,24 @@ export function FeasibilityReport({
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry</p>
             <span className="text-[10px] font-medium text-muted-foreground">
-              {chemistry.source === "catalog" ? "Verified route" : "Compiled summary"}
+              {chemistry.source === "catalog"
+                ? "Verified route"
+                : chemistry.source === "derived"
+                  ? "Indicative reaction classes"
+                  : "Compiled summary"}
             </span>
           </div>
           {chemistry.headline ? (
             <p className="mb-2 text-sm font-medium text-ink">{chemistry.headline}</p>
+          ) : null}
+          {chemistry.reactionClasses && chemistry.reactionClasses.length ? (
+            <div className="mb-3 flex flex-wrap gap-1.5">
+              {chemistry.reactionClasses.map((rc) => (
+                <span key={rc} className="rounded-full border border-primary/30 bg-accent/40 px-2 py-0.5 text-[11px] font-medium text-foreground">
+                  {rc}
+                </span>
+              ))}
+            </div>
           ) : null}
           <ol className="space-y-1.5">
             {chemistry.route.map((step, i) => (
