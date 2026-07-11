@@ -80,7 +80,7 @@ export default function Cdmo() {
                 <p className="text-[11px] text-slate-300">Ask about any product or project</p>
               </div>
               <div className="h-[600px]">
-                <ChatPanel variant="embedded" />
+                <ChatPanel />
               </div>
             </div>
           </Reveal>

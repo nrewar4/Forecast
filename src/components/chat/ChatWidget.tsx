@@ -11,7 +11,6 @@ import { ChatPanel } from "./ChatPanel";
 export function ChatWidget() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [pageHasEmbed, setPageHasEmbed] = useState(false);
 
   // Detect a page-level embedded assistant so we do not show two at once.
@@ -21,10 +20,6 @@ export function ChatWidget() {
     const t = setTimeout(check, 60); // after the route's first paint
     return () => clearTimeout(t);
   }, [pathname]);
-
-  useEffect(() => {
-    if (open && !mounted) setMounted(true);
-  }, [open, mounted]);
 
   if (pathname === "/login" || pageHasEmbed) return null;
 
@@ -54,7 +49,7 @@ export function ChatWidget() {
               <X className="h-4 w-4" />
             </button>
           </div>
-          {mounted ? <ChatPanel variant="floating" /> : null}
+          <ChatPanel />
         </div>
       ) : null}
 

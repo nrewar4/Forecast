@@ -40,14 +40,6 @@ const COUNTRIES = [
   { name: "Indonesia", count: 120, suffix: "+" },
 ];
 
-const CDMO_STEPS = [
-  { title: "Molecule brief", detail: "Confidential target and specs" },
-  { title: "Matched capacity", detail: "Certified plants across Asia" },
-  { title: "Development", detail: "Route, feasibility, scale-up" },
-  { title: "cGMP output", detail: "Compliant manufacturing" },
-  { title: "Export", detail: "Delivery to USA, EU, Canada" },
-];
-
 // Centered section header: quiet mono kicker over a bold title.
 function SectionHeader({ kicker, title }: { kicker: string; title: React.ReactNode }) {
   return (
@@ -191,51 +183,6 @@ export default function Landing() {
                 </Link>
               </div>
             </Reveal>
-
-            {/* Route map */}
-            <Reveal delay={120}>
-              <div className="mx-auto mt-14 max-w-3xl rounded-2xl border border-border bg-card p-6 shadow-card">
-                <svg
-                  width="100%"
-                  height="220"
-                  viewBox="0 0 320 170"
-                  role="img"
-                  aria-label="Route map showing APAC manufacturing countries connecting to the United States"
-                >
-                  <text x="40" y="18" fontSize="9" fill="#64748B" fontFamily="JetBrains Mono, monospace" letterSpacing="1">
-                    APAC NETWORK
-                  </text>
-
-                  {/* Flow lines converging on the US */}
-                  <path className="route-flow" d="M96,42 C150,42 205,72 250,88" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-                  <path className="route-flow" d="M96,75 C150,75 205,82 250,89" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-                  <path className="route-flow" d="M96,108 C150,108 205,98 250,91" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-                  <path className="route-flow" d="M96,138 C150,138 205,108 250,92" stroke="#F8AE76" strokeWidth="1.4" fill="none" />
-
-                  {/* APAC source nodes */}
-                  {[
-                    { y: 42, label: "India" },
-                    { y: 75, label: "China" },
-                    { y: 108, label: "Japan" },
-                    { y: 138, label: "S. Korea" },
-                  ].map((n) => (
-                    <g key={n.label}>
-                      <text x="86" y={n.y + 3} textAnchor="end" fontSize="8.5" fill="#64748B" fontFamily="JetBrains Mono, monospace">
-                        {n.label}
-                      </text>
-                      <circle cx="96" cy={n.y} r="4" fill="#F47920" />
-                    </g>
-                  ))}
-
-                  {/* US destination node */}
-                  <circle cx="253" cy="90" r="5.5" fill="#0F172A" />
-                  <circle cx="253" cy="90" r="9" fill="none" stroke="#0F172A" strokeOpacity="0.2" strokeWidth="1" />
-                  <text x="266" y="93" fontSize="10" fill="#0F172A" fontFamily="JetBrains Mono, monospace" fontWeight="600">
-                    USA
-                  </text>
-                </svg>
-              </div>
-            </Reveal>
           </div>
 
           {/* Stat band */}
@@ -321,49 +268,6 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* CDMO process */}
-        <section className="border-t border-border">
-          <div className="mx-auto max-w-6xl px-6 py-24">
-            <SectionHeader kicker="How it works" title="The CDMO process" />
-            <ol className="mt-14 grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
-              {CDMO_STEPS.map((step, i) => (
-                <Reveal key={step.title} delay={i * 80} as="li">
-                  <div className="border-t-2 border-primary/70 pt-4 text-center sm:text-left">
-                    <span className="font-mono text-xs font-medium text-primary">0{i + 1}</span>
-                    <p className="mt-1.5 text-sm font-semibold text-ink">{step.title}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{step.detail}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-
-            {/* CTA */}
-            <Reveal delay={100}>
-              <div className="mt-20 overflow-hidden rounded-2xl bg-primary">
-                <div className="flex flex-col items-center gap-5 px-8 py-10 text-center">
-                  <div>
-                    <p className="text-2xl font-bold tracking-tight text-primary-foreground md:text-3xl">
-                      Tell us what you're building
-                    </p>
-                    <p className="mt-2 text-sm text-primary-foreground/85">
-                      From a single shipment to a multi-year CDMO program.
-                    </p>
-                  </div>
-                  <a
-                    href="https://apacss.com/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="press inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary-700 transition-transform hover:scale-[1.02]"
-                    onClick={() => track("cta_inquiry", {})}
-                  >
-                    Start a confidential inquiry
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
