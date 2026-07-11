@@ -208,11 +208,11 @@ export default function Landing() {
         {/* Divisions + country network */}
         <section className="border-t border-border bg-muted/40">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <SectionHeader kicker="Two divisions" title="Built for regulated markets, one global reach" />
+            <SectionHeader kicker="Sourcing and CDMO" title="Cleared to enter your most demanding markets" />
             <Reveal delay={130}>
               <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
-                cGMP pharmaceuticals and industrial chemicals, documented to the standard each
-                destination market demands, delivered through one accountable network.
+                cGMP pharmaceuticals and industrial-scale chemicals, documented to the standard each
+                destination market demands and delivered through one accountable network.
               </p>
             </Reveal>
             <div className="mt-14 grid gap-14 lg:grid-cols-2">

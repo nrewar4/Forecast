@@ -167,12 +167,6 @@ export function AppShell({
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/70 px-4 backdrop-blur-xl md:px-8">
           <GlobalSearch />
-          <div className="ml-auto flex items-center gap-3">
-            <span className="hidden items-center gap-1.5 rounded-full border border-border bg-background px-2.5 py-1 text-[11px] font-medium text-muted-foreground sm:inline-flex">
-              <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-teal" />
-              USD
-            </span>
-          </div>
         </header>
         <main id="main-content" className="flex-1 px-4 py-6 md:px-8 md:py-8">
           <div className={"mb-6 animate-fade-up" + (centerHeader ? " text-center" : "")}>
