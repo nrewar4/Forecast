@@ -22,7 +22,7 @@ export type ChemIdentity = {
   primaryCas: string | null; // canonical CAS RN
   casList: string[]; // all CAS-shaped synonyms (registry variants)
   synonyms: string[]; // top synonyms, for query expansion
-  source: "pubchem";
+  source: string; // which database resolved it (pubchem, cactus, opsin, ...)
 };
 
 const CAS_RE = /^\d{2,7}-\d{2}-\d$/;
@@ -67,8 +67,147 @@ function principalCas(casList: string[]): string | null {
   return [...casList].sort((a, b) => val(a) - val(b))[0];
 }
 
-// Resolve a CAS number or chemical name to a verified identity. Returns null when
-// PubChem has no match (e.g. a use-case phrase like "fungicide for downy mildew").
+type PubchemProps = {
+  CID?: number;
+  MolecularFormula?: string;
+  MolecularWeight?: string;
+  SMILES?: string;
+  ConnectivitySMILES?: string;
+  IUPACName?: string;
+};
+
+const INCHIKEY_RE = /^[A-Z]{14}-[A-Z]{10}-[A-Z]$/;
+const CACTUS = "https://cactus.nci.nih.gov/chemical/structure";
+
+// PubChem synonyms for a CID (best-effort; identity resolves without them).
+async function pubchemSynonyms(cid: number, signal?: AbortSignal): Promise<string[]> {
+  try {
+    const res = await fetch(`${BASE}/cid/${cid}/synonyms/JSON`, { signal });
+    if (!res.ok) return [];
+    const json = (await res.json()) as { InformationList?: { Information?: Array<{ Synonym?: string[] }> } };
+    return json?.InformationList?.Information?.[0]?.Synonym ?? [];
+  } catch {
+    return [];
+  }
+}
+
+// PubChem lookup by name/CAS or by InChIKey. The InChIKey path lets us enrich a
+// hit from another resolver (CACTUS, OPSIN) with PubChem's CID, so the structure
+// image and patent landscape still work.
+async function pubchemLookup(
+  kind: "name" | "inchikey",
+  value: string,
+  queryLabel: string,
+  typedCas: string | null,
+  signal?: AbortSignal,
+): Promise<ChemIdentity | null> {
+  const propUrl = `${BASE}/${kind}/${encodeURIComponent(value)}/property/MolecularFormula,MolecularWeight,SMILES,ConnectivitySMILES,IUPACName/JSON`;
+  const res = await fetch(propUrl, { signal });
+  if (!res.ok) return null;
+  const json = (await res.json()) as { PropertyTable?: { Properties?: PubchemProps[] } };
+  const p = json?.PropertyTable?.Properties?.[0];
+  if (!p?.CID) return null;
+  const synonyms = await pubchemSynonyms(p.CID, signal);
+  const casList = Array.from(new Set(synonyms.filter((s) => CAS_RE.test(s))));
+  return {
+    query: queryLabel,
+    cid: p.CID,
+    name: pickName(synonyms, p.IUPACName ?? null),
+    iupac: p.IUPACName ?? null,
+    formula: p.MolecularFormula ?? null,
+    mw: p.MolecularWeight ?? null,
+    smiles: p.SMILES ?? p.ConnectivitySMILES ?? null,
+    primaryCas: typedCas ?? principalCas(casList),
+    casList,
+    synonyms: synonyms.slice(0, 8),
+    source: "pubchem",
+  };
+}
+
+// Plain-text GET for the keyless resolvers (CACTUS, OPSIN). Returns null on a
+// miss or an HTML error page. CORS-friendly; failures degrade gracefully.
+async function fetchText(url: string, signal?: AbortSignal): Promise<string | null> {
+  try {
+    const res = await fetch(url, { signal });
+    if (!res.ok) return null;
+    const text = (await res.text()).trim();
+    if (!text || /<html|<!doctype|page not found/i.test(text)) return null;
+    return text.split("\n")[0].trim() || null;
+  } catch (err) {
+    if (signal && (err as Error)?.name === "AbortError") throw err;
+    return null;
+  }
+}
+
+// NCI CACTUS resolver: resolves many names, CAS numbers and salts that PubChem's
+// name index misses. We take its InChIKey to fetch a PubChem CID when possible,
+// otherwise return the structure and CAS CACTUS provides directly.
+async function resolveViaCactus(
+  q: string,
+  typedCas: string | null,
+  signal?: AbortSignal,
+): Promise<ChemIdentity | null> {
+  const rawKey = await fetchText(`${CACTUS}/${encodeURIComponent(q)}/stdinchikey`, signal);
+  const inchikey = rawKey ? rawKey.replace(/^InChIKey=/i, "").trim() : null;
+  if (inchikey && INCHIKEY_RE.test(inchikey)) {
+    const enriched = await pubchemLookup("inchikey", inchikey, q, typedCas, signal).catch(() => null);
+    if (enriched) return { ...enriched, source: "pubchem via cactus" };
+  }
+  const [smiles, iupac, casText, formula] = await Promise.all([
+    fetchText(`${CACTUS}/${encodeURIComponent(q)}/smiles`, signal),
+    fetchText(`${CACTUS}/${encodeURIComponent(q)}/iupac_name`, signal),
+    fetchText(`${CACTUS}/${encodeURIComponent(q)}/cas`, signal),
+    fetchText(`${CACTUS}/${encodeURIComponent(q)}/formula`, signal),
+  ]);
+  if (!smiles && !casText) return null;
+  const casList = Array.from(new Set((casText ?? "").split(/\s+/).filter((c) => CAS_RE.test(c))));
+  return {
+    query: q,
+    cid: 0,
+    name: iupac || q,
+    iupac: iupac ?? null,
+    formula: formula ?? null,
+    mw: null,
+    smiles: smiles ?? null,
+    primaryCas: typedCas ?? principalCas(casList),
+    casList,
+    synonyms: [],
+    source: "cactus",
+  };
+}
+
+// OPSIN: converts a systematic IUPAC name to a structure, then enriches it via
+// PubChem when its InChIKey resolves to a CID.
+async function resolveViaOpsin(
+  q: string,
+  typedCas: string | null,
+  signal?: AbortSignal,
+): Promise<ChemIdentity | null> {
+  try {
+    const res = await fetch(`https://opsin.ch.cam.ac.uk/opsin/${encodeURIComponent(q)}.json`, { signal });
+    if (!res.ok) return null;
+    const j = (await res.json()) as { status?: string; smiles?: string; stdinchikey?: string };
+    if (j?.status !== "SUCCESS" || !j.smiles) return null;
+    const inchikey = j.stdinchikey?.replace(/^InChIKey=/i, "").trim() || null;
+    if (inchikey && INCHIKEY_RE.test(inchikey)) {
+      const enriched = await pubchemLookup("inchikey", inchikey, q, typedCas, signal).catch(() => null);
+      if (enriched) return { ...enriched, source: "pubchem via opsin" };
+    }
+    return {
+      query: q, cid: 0, name: q, iupac: q, formula: null, mw: null,
+      smiles: j.smiles, primaryCas: typedCas, casList: [], synonyms: [], source: "opsin",
+    };
+  } catch (err) {
+    if (signal && (err as Error)?.name === "AbortError") throw err;
+    return null;
+  }
+}
+
+// Resolves a CAS number or chemical name to an identity, trying several public
+// databases in turn so many more inputs succeed than PubChem alone would:
+// PubChem first, then the NCI CACTUS resolver (catches drugs, salts and CAS that
+// PubChem's name index misses), then OPSIN for systematic IUPAC names. Returns
+// null only when no database recognises the input.
 export async function resolveIdentity(
   query: string,
   signal?: AbortSignal,
@@ -78,65 +217,14 @@ export async function resolveIdentity(
 
   const cacheKey = `ident:${q.toLowerCase()}`;
   const hit = cacheGet<ChemIdentity | null>(cacheKey);
-  if (hit !== null) return hit;
+  if (hit) return hit;
 
+  const typedCas = looksLikeCas(query) ? q : null;
   try {
-    // 1. Resolve to a CID + core properties (name lookup also matches CAS).
-    const propUrl = `${BASE}/name/${encodeURIComponent(q)}/property/MolecularFormula,MolecularWeight,SMILES,ConnectivitySMILES,IUPACName/JSON`;
-    const propRes = await fetch(propUrl, { signal });
-    if (!propRes.ok) {
-      cacheSet(cacheKey, null, DAY);
-      return null;
-    }
-    const propJson = (await propRes.json()) as {
-      PropertyTable?: {
-        Properties?: Array<{
-          CID?: number;
-          MolecularFormula?: string;
-          MolecularWeight?: string;
-          SMILES?: string;
-          ConnectivitySMILES?: string;
-          IUPACName?: string;
-        }>;
-      };
-    };
-    const p = propJson?.PropertyTable?.Properties?.[0];
-    if (!p?.CID) {
-      cacheSet(cacheKey, null, DAY);
-      return null;
-    }
-
-    // 2. Synonyms → common name + CAS cross-reference (best-effort).
-    let synonyms: string[] = [];
-    try {
-      const synRes = await fetch(`${BASE}/cid/${p.CID}/synonyms/JSON`, { signal });
-      if (synRes.ok) {
-        const synJson = (await synRes.json()) as {
-          InformationList?: { Information?: Array<{ Synonym?: string[] }> };
-        };
-        synonyms = synJson?.InformationList?.Information?.[0]?.Synonym ?? [];
-      }
-    } catch {
-      // synonyms are optional, identity still resolves without them
-    }
-
-    const casList = Array.from(new Set(synonyms.filter((s) => CAS_RE.test(s))));
-    // If the user typed a CAS, honour it as primary; else pick the principal one.
-    const typedCas = looksLikeCas(query) ? q : null;
-    const identity: ChemIdentity = {
-      query: q,
-      cid: p.CID,
-      name: pickName(synonyms, p.IUPACName ?? null),
-      iupac: p.IUPACName ?? null,
-      formula: p.MolecularFormula ?? null,
-      mw: p.MolecularWeight ?? null,
-      smiles: p.SMILES ?? p.ConnectivitySMILES ?? null,
-      primaryCas: typedCas ?? principalCas(casList),
-      casList,
-      synonyms: synonyms.slice(0, 8),
-      source: "pubchem",
-    };
-    cacheSet(cacheKey, identity, DAY);
+    let identity = await pubchemLookup("name", q, q, typedCas, signal);
+    if (!identity) identity = await resolveViaCactus(q, typedCas, signal);
+    if (!identity) identity = await resolveViaOpsin(q, typedCas, signal);
+    if (identity) cacheSet(cacheKey, identity, DAY);
     return identity;
   } catch (err) {
     if (signal && (err as Error)?.name === "AbortError") throw err;

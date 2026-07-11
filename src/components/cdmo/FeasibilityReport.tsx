@@ -118,9 +118,25 @@ export function FeasibilityReport({
               <p className="text-[10px] text-muted-foreground">Open scientific literature</p>
             </a>
           </div>
-          <p className="mt-3 border-t border-border pt-2 text-[11px] leading-relaxed text-muted-foreground">
-            {ip.status}
-          </p>
+          <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">{ip.status}</p>
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border pt-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Verify in</span>
+            {[
+              { name: "Google Patents", url: ip.googlePatentsUrl },
+              { name: "WIPO", url: ip.wipoUrl },
+              { name: "Espacenet", url: ip.espacenetUrl },
+            ].map((l) => (
+              <a
+                key={l.name}
+                href={l.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-[11px] font-medium text-primary hover:underline"
+              >
+                {l.name}
+              </a>
+            ))}
+          </div>
         </div>
       ) : null}
 

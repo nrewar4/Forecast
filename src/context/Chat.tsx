@@ -166,7 +166,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       if (!data.match.known && !data.identity) {
         replace(typingId, {
           kind: "text",
-          text: `I could not identify "${query.trim()}" as a specific chemical or product. Give me a product name (for example "ibuprofen") or a CAS number and I will assess it.`,
+          text: `I searched PubChem, the NCI CACTUS resolver and OPSIN and could not resolve "${query.trim()}" to a specific molecule. Check the spelling, or give me its CAS number or another name and I will assess it.`,
         });
         awaiting.current = "molecule";
         setQuick([{ label: "Plan a CDMO project", value: "plan", intent: "pathway" }, { label: "Contact APAC", value: "contact", intent: "contact" }]);

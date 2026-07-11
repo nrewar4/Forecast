@@ -15,7 +15,9 @@ export type IpLandscape = {
   status: string; // short, honest patent-status line
   patentUrl: string; // PubChem patents section
   literatureUrl: string; // PubChem literature section
-  googlePatentsUrl: string; // secondary verifiable source
+  googlePatentsUrl: string; // Google Patents search
+  wipoUrl: string; // WIPO PATENTSCOPE search
+  espacenetUrl: string; // EPO Espacenet (EU/worldwide) search
 };
 
 async function xrefCount(
@@ -64,13 +66,16 @@ export async function fetchIpLandscape(
   ]);
   if (patents === null && literature === null) return null;
 
+  const q = encodeURIComponent(name);
   const landscape: IpLandscape = {
     patentCount: patents ?? 0,
     literatureCount: literature ?? 0,
     status: statusLine(patents ?? 0),
     patentUrl: `https://pubchem.ncbi.nlm.nih.gov/compound/${cid}#section=Patents`,
     literatureUrl: `https://pubchem.ncbi.nlm.nih.gov/compound/${cid}#section=Literature`,
-    googlePatentsUrl: `https://patents.google.com/?q=%22${encodeURIComponent(name)}%22`,
+    googlePatentsUrl: `https://patents.google.com/?q=%22${q}%22`,
+    wipoUrl: `https://patentscope.wipo.int/search/en/result.jsf?query=${q}`,
+    espacenetUrl: `https://worldwide.espacenet.com/patent/search?q=${q}`,
   };
   cacheSet(key, landscape, DAY);
   return landscape;

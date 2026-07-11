@@ -49,7 +49,9 @@ export function ChatWidget() {
               <X className="h-4 w-4" />
             </button>
           </div>
-          <ChatPanel />
+          <div className="min-h-0 flex-1">
+            <ChatPanel />
+          </div>
         </div>
       ) : null}
 

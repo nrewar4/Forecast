@@ -215,12 +215,21 @@ function withTimeout<T>(
   ]);
 }
 
-// Cited sources for the report: PubChem for identity, plus the web-verified
-// references when the molecule is in our catalog.
+// Cited sources for the report, drawn from several public chemical databases so
+// the identity can be cross-checked: PubChem, ChemSpider, and the resolver that
+// matched (NCI CACTUS or OPSIN), plus the web-verified references when the
+// molecule is in our catalog.
 function collectSources(identity: ChemIdentity | null, productName: string): VerifiedLink[] {
   const out: VerifiedLink[] = [];
   if (identity?.cid) {
     out.push({ name: "PubChem (identity, CAS)", url: `https://pubchem.ncbi.nlm.nih.gov/compound/${identity.cid}` });
+  }
+  const name = identity?.name || productName;
+  if (name) {
+    out.push({ name: "ChemSpider (RSC)", url: `https://www.chemspider.com/Search.aspx?q=${encodeURIComponent(name)}` });
+    if (identity?.source?.includes("cactus")) {
+      out.push({ name: "NCI CACTUS resolver", url: `https://cactus.nci.nih.gov/chemical/structure/${encodeURIComponent(identity.query)}/names` });
+    }
   }
   const v = verifiedFor(slug(productName));
   if (v) for (const s of v.sources) out.push(s);
@@ -243,7 +252,7 @@ export async function runFeasibility(
 ): Promise<Feasibility> {
   const identity = await withTimeout(
     (s) => resolveIdentity(query, s),
-    5000,
+    9000, // allows the PubChem -> CACTUS -> OPSIN fallback chain to complete
     null as ChemIdentity | null,
     signal,
   );
@@ -275,6 +284,8 @@ export async function runFeasibility(
     sources.push({ name: "PubChem patents (SureChEMBL)", url: ip.patentUrl });
     sources.push({ name: "PubChem literature (PubMed)", url: ip.literatureUrl });
     sources.push({ name: "Google Patents", url: ip.googlePatentsUrl });
+    sources.push({ name: "WIPO PATENTSCOPE", url: ip.wipoUrl });
+    sources.push({ name: "Espacenet (EPO)", url: ip.espacenetUrl });
   }
 
   const result: Feasibility = { query, identity, description, classes, ip, complexity, match, sources };
