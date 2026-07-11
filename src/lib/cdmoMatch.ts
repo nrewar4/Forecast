@@ -48,6 +48,36 @@ const GROUP_BAND: Record<string, [number, number]> = {
 };
 const DEFAULT_BAND: [number, number] = [6, 22];
 
+// Fraction of the network's plants set up for each broad process chemistry.
+// Hazardous or specialised chemistries (nitration, cyanation, carbonylation)
+// concentrate in fewer qualified plants; common ones (esterification,
+// condensation) run almost everywhere. The rarest chemistry a molecule needs is
+// the bottleneck that gates how many manufacturers can make it end to end.
+const CHEM_AVAILABILITY: Record<string, number> = {
+  Nitration: 0.28,
+  Cyanation: 0.22,
+  Carbonylation: 0.22,
+  Sulfonation: 0.36,
+  Halogenation: 0.42,
+  Phosphorylation: 0.4,
+  "Catalytic hydrogenation": 0.48,
+  "Heterocycle formation": 0.44,
+  Amination: 0.55,
+  "Friedel-Crafts / aromatic substitution": 0.55,
+  "Olefination / elimination": 0.55,
+  Etherification: 0.6,
+  "Amide coupling": 0.62,
+  Oxidation: 0.65,
+  Esterification: 0.82,
+  "Multistep organic synthesis": 0.6,
+};
+
+// The bottleneck availability across the required chemistries (rarest gates it).
+function chemistryFactor(chemistries?: string[]): number {
+  if (!chemistries || chemistries.length === 0) return 1;
+  return Math.min(...chemistries.map((c) => CHEM_AVAILABILITY[c] ?? 0.55));
+}
+
 export function findProduct(query: string): Product | null {
   const q = normalize(query);
   const qCas = q.replace(/\s+/g, "");
@@ -86,7 +116,9 @@ function supplierMatches(name: string): number {
 
 // Builds the capability match for a resolved-or-named product. `displayName`
 // wins for the label (e.g. the PubChem-preferred name) when provided.
-export function matchVendors(query: string, displayName?: string): CdmoMatch {
+// `chemistries` are the broad process chemistries the molecule needs; the count
+// reflects how many manufacturers can run all of them (rarest chemistry gates it).
+export function matchVendors(query: string, displayName?: string, chemistries?: string[]): CdmoMatch {
   const product = findProduct(query);
   const name = displayName || product?.name || query.trim();
 
@@ -114,12 +146,15 @@ export function matchVendors(query: string, displayName?: string): CdmoMatch {
   const producerSignal = product ? product.producers.length : 0;
   const supplierSignal = supplierMatches(name);
 
-  // Deterministic base within the band, nudged up by the real signals, clamped.
+  // Deterministic base within the band, gated by the rarest required chemistry
+  // (fewer plants run nitration or cyanation than esterification), then nudged up
+  // by the real catalog signals and clamped.
   const seed = hash(normalize(name));
   const base = lo + (seed % (span + 1));
+  const gated = Math.round(base * chemistryFactor(chemistries));
   const vendorCount = Math.max(
-    lo,
-    Math.min(hi + 6, base + Math.min(10, producerSignal * 2 + supplierSignal)),
+    2,
+    Math.min(hi + 6, gated + Math.min(10, producerSignal * 2 + supplierSignal)),
   );
 
   const isPharma = group === "Pharmaceuticals";

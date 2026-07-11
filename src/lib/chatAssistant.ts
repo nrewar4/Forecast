@@ -15,7 +15,7 @@ import { hasApiKey } from "@/lib/aiConfig";
 import { chatComplete, type ChatMsg } from "@/lib/openrouter";
 import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
 import { matchVendors, type CdmoMatch } from "@/lib/cdmoMatch";
-import { chemicalClasses, complexityScore } from "@/lib/chemClasses";
+import { chemicalClasses, processChemistries, complexityScore } from "@/lib/chemClasses";
 import { fetchIpLandscape, type IpLandscape } from "@/lib/patents";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
@@ -183,6 +183,8 @@ export type Feasibility = {
   description: string | null;
   /** broad chemical classes read from the PubChem structure */
   classes: string[];
+  /** broad process chemistries needed to make it (Halogenation, Nitration, ...) */
+  chemistries: string[];
   /** patent + literature landscape from PubChem cross-references */
   ip: IpLandscape | null;
   /** 0..1 molecular complexity from PubChem descriptors; drives the timeline */
@@ -262,11 +264,16 @@ export async function runFeasibility(
     : null;
 
   const displayName = identity?.name || undefined;
-  const match = matchVendors(query, displayName);
+  const nameForChem = displayName || query;
 
-  // Broad chemical classes and complexity, read from the PubChem structure.
-  const classes = chemicalClasses(identity, match.productName || query);
-  const complexity = complexityScore(identity, match.productName || query);
+  // Broad compound classes, the process chemistries needed to make it, and a
+  // complexity score, all read from the PubChem structure. The manufacturer match
+  // is then run against those required chemistries (rarest gates the count).
+  const classes = chemicalClasses(identity, nameForChem);
+  const chemistries = processChemistries(identity, nameForChem);
+  const complexity = complexityScore(identity, nameForChem);
+
+  const match = matchVendors(query, displayName, chemistries);
 
   // Patent + literature landscape from PubChem cross-references (SureChEMBL +
   // PubMed): the patented and non-patented document counts, both citable.
@@ -288,7 +295,7 @@ export async function runFeasibility(
     sources.push({ name: "Espacenet (EPO)", url: ip.espacenetUrl });
   }
 
-  const result: Feasibility = { query, identity, description, classes, ip, complexity, match, sources };
+  const result: Feasibility = { query, identity, description, classes, chemistries, ip, complexity, match, sources };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {
@@ -298,6 +305,7 @@ export async function runFeasibility(
         identity?.primaryCas ? `CAS: ${identity.primaryCas}` : "",
         identity?.formula ? `Formula: ${identity.formula}` : "",
         classes.length ? `Chemical classes: ${classes.join(", ")}` : "",
+        chemistries.length ? `Process chemistries needed: ${chemistries.join(", ")}` : "",
         ip ? `Patents: ${ip.patentCount}, literature refs: ${ip.literatureCount}` : "",
         `APAC group: ${match.group} / ${match.category}`,
         `Capable vendors in network: ${match.vendorCount}`,

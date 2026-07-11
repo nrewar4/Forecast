@@ -14,7 +14,7 @@ export function FeasibilityReport({
   onContact?: () => void;
   compact?: boolean;
 }) {
-  const { identity, description, classes, ip, match, sources } = data;
+  const { identity, description, classes, chemistries, ip, match, sources } = data;
   const cid = identity?.cid ?? null;
   const cas = identity?.primaryCas ?? null;
   const structure = cid
@@ -60,6 +60,26 @@ export function FeasibilityReport({
         <div className="rounded-xl border border-border bg-card p-3.5">
           <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">About</p>
           <p className="text-xs leading-relaxed text-foreground/90">{clamp(description, 320)}</p>
+        </div>
+      ) : null}
+
+      {/* Core process chemistry needed to make it, the manufacturer match runs on this */}
+      {chemistries.length ? (
+        <div className="rounded-xl border border-primary/30 bg-card p-4">
+          <div className="mb-1 flex items-center justify-between gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry to make it</p>
+            <span className="text-[10px] font-medium text-muted-foreground">From structure</span>
+          </div>
+          <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
+            The broad process chemistries this molecule needs. We match manufacturers who run them.
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {chemistries.map((c) => (
+              <span key={c} className="rounded-lg border border-primary/40 bg-accent/60 px-2.5 py-1 text-xs font-semibold text-ink">
+                {c}
+              </span>
+            ))}
+          </div>
         </div>
       ) : null}
 
@@ -147,7 +167,9 @@ export function FeasibilityReport({
           <span className="ml-1.5 text-sm font-medium text-muted-foreground">capable manufacturers</span>
         </p>
         <p className="mt-1 text-[11px] text-muted-foreground">
-          In the APAC network, assessed as able to make this. Identities are shared after contact.
+          {chemistries.length
+            ? `In the APAC network, assessed as capable of the ${chemistries.join(", ").toLowerCase()} chemistry this needs. Identities are shared after contact.`
+            : "In the APAC network, assessed as able to make this. Identities are shared after contact."}
         </p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {match.capabilities.map((c) => (

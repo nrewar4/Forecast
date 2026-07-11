@@ -179,7 +179,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       replace(typingId, { kind: "feasibility", data });
       pushBot({
         kind: "text",
-        text: `${data.match.vendorCount} manufacturers in our network can make ${data.match.productName}. How should we run the project? Choose your priority and I will project the milestones.`,
+        text: data.chemistries.length
+          ? `Making ${data.match.productName} needs ${data.chemistries.join(", ").toLowerCase()}. ${data.match.vendorCount} manufacturers in our network run that chemistry. How should we run the project? Choose your priority and I will project the milestones.`
+          : `${data.match.vendorCount} manufacturers in our network can make ${data.match.productName}. How should we run the project? Choose your priority and I will project the milestones.`,
       });
       // The feasibility card already carries the single "Discuss this with APAC"
       // button, so the quick replies here stay focused on the timeline choice.
