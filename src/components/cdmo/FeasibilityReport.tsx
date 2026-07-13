@@ -37,7 +37,7 @@ export function FeasibilityReport({
   onContact?: () => void;
   compact?: boolean;
 }) {
-  const { identity, description, classes, chemistries, route, properties, hazards, ip, match, sources } = data;
+  const { identity, description, classes, route, properties, hazards, ip, match, sources } = data;
   const cid = identity?.cid ?? null;
   const cas = identity?.primaryCas ?? null;
   const structure = cid
@@ -175,70 +175,50 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Core process chemistry needed to make it, the manufacturer match runs on this.
-          When a verified route was found online we show the exact named reactions and
-          cite the source; otherwise we show what the structure implies. */}
-      {chemistries.length ? (
+      {/* Core process chemistry, looked up ONLINE for this specific molecule (never
+          guessed from the structure). Shows the exact named reactions, the route
+          summary and starting materials, and cites how it was verified. */}
+      {route && route.reactions.length ? (
         <div className="rounded-xl border border-primary/30 bg-card p-4">
           <div className="mb-1 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry to make it</p>
-            {route ? (
-              <a href={route.source.url} target="_blank" rel="noreferrer noopener" className="shrink-0 text-[10px] font-medium text-primary hover:underline">
-                Verified · {route.source.name}
-              </a>
-            ) : (
-              <span className="text-[10px] font-medium text-muted-foreground">From structure</span>
-            )}
+            <a href={route.source.url} target="_blank" rel="noreferrer noopener" className="shrink-0 text-[10px] font-medium text-primary hover:underline">
+              {groundingLabel(route.grounding)} · {route.source.name}
+            </a>
           </div>
-
-          {route && route.reactions.length ? (
-            <>
-              <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
-                The specific reactions its documented industrial synthesis uses{route.confirmedByName ? ", confirmed against the IUPAC name" : ""}.
-              </p>
-              <div className="mb-3 flex flex-wrap gap-1.5">
-                {route.reactions.map((r) => (
-                  <span key={r} className="rounded-lg border border-primary/40 bg-accent/60 px-2.5 py-1 text-xs font-semibold text-ink">
-                    {r}
-                  </span>
-                ))}
-              </div>
-              {route.steps.length ? (
-                <ul className="mb-3 space-y-1 border-l-2 border-primary/30 pl-3">
-                  {route.steps.map((s) => (
-                    <li key={s} className="text-[11px] leading-snug text-foreground/80">{s}</li>
-                  ))}
-                </ul>
-              ) : null}
-              <div className="border-t border-border pt-2.5">
-                <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  Broad categories matched to manufacturers
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {chemistries.map((c) => (
-                    <span key={c} className="rounded-full border border-border bg-muted/50 px-2.5 py-0.5 text-[11px] font-medium text-foreground">
-                      {c}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
-                The broad process chemistries this molecule needs. We match manufacturers who run them.
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {chemistries.map((c) => (
-                  <span key={c} className="rounded-lg border border-primary/40 bg-accent/60 px-2.5 py-1 text-xs font-semibold text-ink">
-                    {c}
-                  </span>
-                ))}
-              </div>
-            </>
-          )}
+          <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
+            The specific reactions its documented synthesis uses, in order.
+          </p>
+          <div className="mb-3 flex flex-wrap gap-1.5">
+            {route.reactions.map((r, i) => (
+              <span key={r} className="inline-flex items-center gap-1.5 rounded-lg border border-primary/40 bg-accent/60 px-2.5 py-1 text-xs font-semibold text-ink">
+                <span className="font-mono text-[10px] text-primary tabular-nums">{i + 1}</span>
+                {r}
+              </span>
+            ))}
+          </div>
+          {route.steps.length ? (
+            <ul className="mb-3 space-y-1 border-l-2 border-primary/30 pl-3">
+              {route.steps.map((s) => (
+                <li key={s} className="text-[11px] leading-snug text-foreground/80">{s}</li>
+              ))}
+            </ul>
+          ) : null}
+          {route.startingMaterials.length ? (
+            <p className="text-[11px] leading-snug text-muted-foreground">
+              <span className="font-semibold text-foreground/70">Starting materials:</span> {route.startingMaterials.join(", ")}
+            </p>
+          ) : null}
         </div>
-      ) : null}
+      ) : (
+        <div className="rounded-xl border border-border bg-muted/40 p-4">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry to make it</p>
+          <p className="text-[11px] leading-relaxed text-muted-foreground">
+            We could not verify a documented synthesis route for this molecule from online sources, so we are not
+            showing one. We do not infer a route from the structure. Contact APAC and our chemists will scope the route directly.
+          </p>
+        </div>
+      )}
 
       {/* Broad chemical classes, read from the PubChem structure */}
       {classes.length ? (
@@ -442,6 +422,13 @@ export function FeasibilityReport({
       ) : null}
     </div>
   );
+}
+
+function groundingLabel(g: "web" | "pubchem" | "wikipedia" | "text"): string {
+  if (g === "web") return "Verified online";
+  if (g === "pubchem") return "PubChem";
+  if (g === "wikipedia") return "Wikipedia";
+  return "Source";
 }
 
 function tierClass(tier: "A" | "B" | "C"): string {

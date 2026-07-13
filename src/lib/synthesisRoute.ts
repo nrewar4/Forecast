@@ -1,89 +1,48 @@
-// The exact, verified synthesis chemistry for a specific molecule, from online
-// sources rather than a functional-group guess:
-//   - PubChem PUG-View "Methods of Manufacturing" (HSDB-sourced, cited), and
-//   - Wikipedia's "Production" / "Synthesis" section.
-// From that verified prose we extract the SPECIFIC named reactions (e.g. "Methanol
-// carbonylation", "Friedel-Crafts acylation") and the broad categories they map
-// to (used to match vendors). The IUPAC name is used as a second confirmation of
-// the functional groups involved. Every route is cited back to its source.
+// The exact, documented synthesis chemistry for a specific molecule, determined
+// by searching online rather than guessing from the molecular structure. In
+// order of trust:
+//   1. A web-grounded LLM lookup (OpenRouter web-search plugin) that returns the
+//      real, documented industrial/literature route for THIS molecule, cited.
+//   2. If no web plugin (e.g. a free model), the LLM reads authoritative source
+//      text we fetch (PubChem "Methods of Manufacturing" + Wikipedia synthesis)
+//      and extracts the actual named reactions strictly from it.
+//   3. With no API key at all, a conservative keyword read of that same fetched
+//      authoritative prose.
+// The structure/IUPAC name is never used to invent a route; if nothing documented
+// is found, we return null and say so honestly.
 
 import type { ChemIdentity } from "@/lib/casResolve";
+import type { AiConfig } from "@/lib/aiConfig";
+import { hasApiKey } from "@/lib/aiConfig";
+import { chatComplete, type ChatMsg } from "@/lib/openrouter";
+import { tagPhrase, capabilityLabel } from "@/lib/chemLexicon";
 import { cacheGet, cacheSet, DAY } from "./aiCache";
 
 const REST_VIEW = "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound";
 const WIKI = "https://en.wikipedia.org/w/api.php";
 
 export type SynthesisRoute = {
-  reactions: string[]; // specific named reactions, for display
-  categories: string[]; // broad categories, for vendor matching
-  steps: string[]; // 1 to 3 cited sentences describing the route
+  reactions: string[]; // specific named reactions, in order, for display
+  categories: string[]; // broad categories (from the lexicon), for vendor matching
+  steps: string[]; // 1 to 3 sentences describing the route
+  startingMaterials: string[]; // key starting materials, when known
   source: { name: string; url: string };
-  confirmedByName: boolean; // whether the IUPAC name reinforced the chemistry
+  grounding: "web" | "pubchem" | "wikipedia" | "text"; // how it was established
 };
 
-type Rx = { re: RegExp; name: string; category?: string };
-
-// Specific reactions found in industrial-route prose. `category` is the broad
-// vendor-matchable class; reactions with no category (carbonylation, fermentation)
-// are shown but do not drive matching. Order = display priority.
-const ROUTE_REACTIONS: Rx[] = [
-  { re: /methanol carbonylation/, name: "Methanol carbonylation" },
-  { re: /carbonylation/, name: "Carbonylation" },
-  { re: /hydroformylation|oxo process/, name: "Hydroformylation", category: "Oxidation" },
-  { re: /ammoxidation/, name: "Ammoxidation", category: "Oxidation" },
-  { re: /nitration/, name: "Nitration", category: "Nitration" },
-  { re: /chlorination/, name: "Chlorination", category: "Halogenation" },
-  { re: /bromination/, name: "Bromination", category: "Halogenation" },
-  { re: /fluorination/, name: "Fluorination", category: "Halogenation" },
-  { re: /\bhalogenation\b/, name: "Halogenation", category: "Halogenation" },
-  { re: /sulfonation|sulphonation/, name: "Sulfonation", category: "Sulfonation" },
-  { re: /catalytic hydrogenation/, name: "Catalytic hydrogenation", category: "Catalytic hydrogenation" },
-  { re: /hydrogenation/, name: "Hydrogenation", category: "Catalytic hydrogenation" },
-  { re: /\boxidation\b|oxidative/, name: "Oxidation", category: "Oxidation" },
-  { re: /transesterification/, name: "Transesterification", category: "Esterification" },
-  { re: /esterification/, name: "Esterification", category: "Esterification" },
-  { re: /reductive amination/, name: "Reductive amination", category: "Amination" },
-  { re: /buchwald|hartwig/, name: "Buchwald-Hartwig amination", category: "Amination" },
-  { re: /amidation/, name: "Amidation", category: "Amide coupling" },
-  { re: /acylation/, name: "Acylation", category: "Amide coupling" },
-  { re: /\bamination\b/, name: "Amination", category: "Amination" },
-  { re: /hydrocyanation|cyanation/, name: "Cyanation", category: "Cyanation" },
-  { re: /friedel[- ]crafts/, name: "Friedel-Crafts", category: "Friedel-Crafts / aromatic substitution" },
-  { re: /grignard/, name: "Grignard reaction", category: "Grignard / organometallic" },
-  { re: /organolithium/, name: "Organolithium", category: "Grignard / organometallic" },
-  { re: /suzuki/, name: "Suzuki coupling", category: "Cross-coupling" },
-  { re: /\bheck\b/, name: "Heck reaction", category: "Cross-coupling" },
-  { re: /sonogashira/, name: "Sonogashira coupling", category: "Cross-coupling" },
-  { re: /cross[- ]coupling/, name: "Cross-coupling", category: "Cross-coupling" },
-  { re: /sandmeyer/, name: "Sandmeyer reaction", category: "Diazotization" },
-  { re: /diazoti[sz]ation/, name: "Diazotization", category: "Diazotization" },
-  { re: /wittig/, name: "Wittig reaction", category: "Olefination / elimination" },
-  { re: /dehydrohalogenation|dehydration|\belimination\b/, name: "Elimination", category: "Olefination / elimination" },
-  { re: /aldol|claisen|knoevenagel|mannich|condensation/, name: "Condensation", category: "Condensation" },
-  { re: /cycli[sz]ation|annulation/, name: "Cyclization", category: "Heterocycle formation" },
-  { re: /williamson|etherification|alkoxylation|ethoxylation/, name: "Etherification", category: "Etherification" },
-  { re: /o-methylation|n-methylation|\bmethylation\b|\balkylation\b/, name: "Alkylation", category: "Etherification" },
-  { re: /hydrolysis/, name: "Hydrolysis", category: "Hydrolysis" },
-  { re: /phosphoryl/, name: "Phosphorylation", category: "Phosphorylation" },
-  { re: /asymmetric|enantioselective|chiral resolution/, name: "Asymmetric / chiral step", category: "Chiral / asymmetric synthesis" },
-  { re: /fermentation|biocataly|enzymatic/, name: "Biocatalysis / fermentation" },
-];
-
-// Functional-group cues in the IUPAC name, used to confirm the chemistry class.
-const IUPAC_HINTS: Rx[] = [
-  { re: /nitro/, name: "Nitration", category: "Nitration" },
-  { re: /chloro|bromo|fluoro|iodo/, name: "Halogenation", category: "Halogenation" },
-  { re: /sulfo|sulfonyl|sulfonic/, name: "Sulfonation", category: "Sulfonation" },
-  { re: /amino/, name: "Amination", category: "Amination" },
-  { re: /carbonitrile|nitrile|cyano/, name: "Cyanation", category: "Cyanation" },
-  { re: /phospha|phosphor/, name: "Phosphorylation", category: "Phosphorylation" },
-];
+// Maps a list of specific reaction names to the broad, vendor-matchable
+// categories, using the shared chemistry lexicon (one source of truth).
+function categoriesFor(reactions: string[]): string[] {
+  const set = new Set<string>();
+  for (const r of reactions) for (const id of tagPhrase(r)) set.add(capabilityLabel(id));
+  return [...set];
+}
 
 function clampSentence(s: string): string {
   return s.replace(/\[\d+\]/g, "").replace(/\s+/g, " ").trim();
 }
 
-// --- PubChem "Methods of Manufacturing" (PUG-View) ------------------------
+// --- Authoritative source text ------------------------------------------
 type ViewSection = { TOCHeading?: string; Section?: ViewSection[]; Information?: Array<{ Value?: { StringWithMarkup?: Array<{ String?: string }> } }> };
 
 function collectText(sections: ViewSection[] | undefined, heading: RegExp, out: string[]): void {
@@ -113,7 +72,6 @@ async function pubchemMethods(cid: number, signal?: AbortSignal): Promise<string
   }
 }
 
-// --- Wikipedia Production / Synthesis section -----------------------------
 async function wikipediaProduction(name: string, signal?: AbortSignal): Promise<string | null> {
   try {
     const url = `${WIKI}?action=query&prop=extracts&explaintext=1&redirects=1&format=json&origin=*&titles=${encodeURIComponent(name)}`;
@@ -123,7 +81,6 @@ async function wikipediaProduction(name: string, signal?: AbortSignal): Promise<
     const page = Object.values(json?.query?.pages ?? {})[0];
     const extract = page?.extract;
     if (!extract) return null;
-    // find a Production / Synthesis / Preparation section
     const re = /\n=+\s*([^=\n]+?)\s*=+\s*\n/g;
     const heads: { title: string; start: number; end: number }[] = [];
     let m: RegExpExecArray | null;
@@ -151,71 +108,179 @@ function perSource<T>(fn: (s: AbortSignal) => Promise<T>, parent?: AbortSignal, 
   });
 }
 
-// Extracts specific reactions + broad categories from route prose, reinforced by
-// the IUPAC name. Reactions are ordered by the rule list; categories drive
-// vendor matching and are capped so a multi-route description does not explode.
-function extract(text: string, iupac: string | null): { reactions: string[]; categories: string[]; byName: boolean } {
+// --- Conservative keyword read (no-key fallback only) --------------------
+// Specific named reactions that appear in real route prose. Negated mentions
+// ("resistant to oxidation") are excluded by a short look-behind.
+const ROUTE_TERMS: { re: RegExp; name: string }[] = [
+  { re: /methanol carbonylation/, name: "Methanol carbonylation" },
+  { re: /carbonylation/, name: "Carbonylation" },
+  { re: /hydroformylation|oxo process/, name: "Hydroformylation" },
+  { re: /ammoxidation/, name: "Ammoxidation" },
+  { re: /nitration/, name: "Nitration" },
+  { re: /chlorination/, name: "Chlorination" },
+  { re: /bromination/, name: "Bromination" },
+  { re: /fluorination/, name: "Fluorination" },
+  { re: /sulfonation|sulphonation/, name: "Sulfonation" },
+  { re: /catalytic hydrogenation/, name: "Catalytic hydrogenation" },
+  { re: /hydrogenation/, name: "Hydrogenation" },
+  { re: /\boxidation\b/, name: "Oxidation" },
+  { re: /transesterification/, name: "Transesterification" },
+  { re: /esterification/, name: "Esterification" },
+  { re: /reductive amination/, name: "Reductive amination" },
+  { re: /buchwald|hartwig/, name: "Buchwald-Hartwig amination" },
+  { re: /amidation/, name: "Amidation" },
+  { re: /friedel[- ]crafts/, name: "Friedel-Crafts" },
+  { re: /acylation/, name: "Acylation" },
+  { re: /hydrocyanation|cyanation/, name: "Cyanation" },
+  { re: /grignard/, name: "Grignard reaction" },
+  { re: /suzuki/, name: "Suzuki coupling" },
+  { re: /sonogashira/, name: "Sonogashira coupling" },
+  { re: /\bheck reaction\b/, name: "Heck reaction" },
+  { re: /cross[- ]coupling/, name: "Cross-coupling" },
+  { re: /sandmeyer/, name: "Sandmeyer reaction" },
+  { re: /diazoti[sz]ation/, name: "Diazotization" },
+  { re: /wittig/, name: "Wittig reaction" },
+  { re: /aldol|knoevenagel|claisen condensation|mannich|condensation/, name: "Condensation" },
+  { re: /cycli[sz]ation|annulation/, name: "Cyclization" },
+  { re: /etherification|williamson|ethoxylation/, name: "Etherification" },
+  { re: /hydrolysis/, name: "Hydrolysis" },
+  { re: /asymmetric|enantioselective|chiral resolution/, name: "Asymmetric / chiral step" },
+  { re: /fermentation|biocataly|enzymatic/, name: "Biocatalysis / fermentation" },
+];
+
+const NEGATION = /(resist(ant)?|stable|prevent|inhibit|avoid|protect against|without|no|non-|anti-?)\s+(to\s+)?$/i;
+
+function keywordRead(text: string): string[] {
   const t = text.toLowerCase();
-  const reactions: string[] = [];
-  const categories = new Set<string>();
-  for (const r of ROUTE_REACTIONS) {
-    if (r.re.test(t)) {
-      if (!reactions.includes(r.name)) reactions.push(r.name);
-      if (r.category) categories.add(r.category);
-    }
+  const found: string[] = [];
+  for (const term of ROUTE_TERMS) {
+    const m = term.re.exec(t);
+    if (!m) continue;
+    const before = t.slice(Math.max(0, m.index - 16), m.index);
+    if (NEGATION.test(before)) continue;
+    if (!found.includes(term.name)) found.push(term.name);
   }
-  let byName = false;
-  if (iupac) {
-    const n = iupac.toLowerCase();
-    for (const h of IUPAC_HINTS) {
-      if (h.re.test(n) && h.category) {
-        categories.add(h.category);
-        byName = true;
-      }
-    }
-  }
-  // Drop a generic reaction when a more specific one already covers it, e.g.
-  // "Carbonylation" when "Methanol carbonylation" matched, or "Hydrogenation"
-  // when "Catalytic hydrogenation" did.
-  const specific = reactions.filter(
-    (r) => !reactions.some((s) => s !== r && s.toLowerCase().endsWith(" " + r.toLowerCase())),
-  );
-  return { reactions: specific.slice(0, 8), categories: [...categories].slice(0, 6), byName };
+  // Drop a generic reaction when a more specific one covers it.
+  return found.filter((r) => !found.some((s) => s !== r && s.toLowerCase().endsWith(" " + r.toLowerCase())));
 }
 
-// Resolves the verified, molecule-specific synthesis route. Best-effort and
-// time-boxed per source; returns null when neither source yields a route (the
-// caller then falls back to the structural classification).
-export async function fetchSynthesisRoute(identity: ChemIdentity, signal?: AbortSignal): Promise<SynthesisRoute | null> {
-  const key = `route:${identity.cid || identity.query.toLowerCase()}`;
+// --- LLM extraction (web-grounded, or from fetched authoritative text) ---
+type LlmRoute = { summary?: string; reactions?: string[]; startingMaterials?: string[]; sourceName?: string; sourceUrl?: string };
+
+async function llmRoute(
+  identity: ChemIdentity,
+  reference: string | null,
+  cfg: AiConfig,
+  signal?: AbortSignal,
+): Promise<LlmRoute | null> {
+  const name = identity.name || identity.query;
+  const facts = [
+    `Compound: ${name}`,
+    identity.primaryCas ? `CAS: ${identity.primaryCas}` : "",
+    identity.formula ? `Formula: ${identity.formula}` : "",
+    identity.iupac ? `IUPAC name: ${identity.iupac}` : "",
+  ].filter(Boolean).join("\n");
+
+  const sys =
+    "You are an industrial process chemist. State the ACTUAL documented synthesis route used to manufacture the named compound, as found in the chemical literature and industry sources. Search the web and cite a real source. Base the answer on the known, documented route for THIS specific compound; do NOT infer a route from its molecular structure or functional groups, and do not guess. If you cannot find a documented route, return an empty reactions array. Reply with ONLY a JSON object, no prose, no code fences. Shape: {\"summary\":\"1-2 sentence description of the real route\",\"reactions\":[\"specific named reactions in order, e.g. Friedel-Crafts acylation, catalytic hydrogenation\"],\"startingMaterials\":[\"key starting materials\"],\"sourceName\":\"the source you used\",\"sourceUrl\":\"https url of that source\"}. Never use an em dash.";
+
+  const user = reference
+    ? `${facts}\n\nAuthoritative reference text (from PubChem / Wikipedia) describing how it is made:\n"""${reference.slice(0, 3500)}"""\n\nExtract the real route from this text (and verify online). Return the JSON.`
+    : `${facts}\n\nFind and return the real documented industrial synthesis route as JSON.`;
+
+  const messages: ChatMsg[] = [
+    { role: "system", content: sys },
+    { role: "user", content: user },
+  ];
+  try {
+    const raw = await chatComplete(cfg, messages, signal, { web: true });
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) return null;
+    return JSON.parse(match[0]) as LlmRoute;
+  } catch {
+    return null;
+  }
+}
+
+function isHttpUrl(u: unknown): u is string {
+  return typeof u === "string" && /^https?:\/\/\S+$/i.test(u);
+}
+
+// Resolves the documented, molecule-specific synthesis route. Best-effort and
+// time-boxed; returns null when nothing documented is found online (the caller
+// then shows an honest "not verified" state rather than a structural guess).
+export async function fetchSynthesisRoute(
+  identity: ChemIdentity,
+  cfg: AiConfig,
+  signal?: AbortSignal,
+): Promise<SynthesisRoute | null> {
+  const key = `route2:${identity.cid || identity.query.toLowerCase()}`;
   const hit = cacheGet<SynthesisRoute | null>(key);
   if (hit) return hit;
 
   const name = identity.name || identity.query;
+
+  // Fetch authoritative reference text (used to ground extraction and to cite).
   const [pcText, wikiText] = await Promise.all([
-    identity.cid ? perSource((s) => pubchemMethods(identity.cid, s), signal) : Promise.resolve(null),
-    perSource((s) => wikipediaProduction(name, s), signal),
+    identity.cid ? perSource((s) => pubchemMethods(identity.cid, s), signal, 6000) : Promise.resolve(null),
+    perSource((s) => wikipediaProduction(name, s), signal, 6000),
   ]);
+  const reference = [pcText, wikiText].filter(Boolean).join("\n\n") || null;
 
-  const primary = pcText || wikiText;
-  if (!primary) return null;
+  const fetchedSource = pcText
+    ? { name: "PubChem, Methods of Manufacturing (HSDB)", url: `https://pubchem.ncbi.nlm.nih.gov/compound/${identity.cid}#section=Methods-of-Manufacturing`, grounding: "pubchem" as const }
+    : wikiText
+      ? { name: `Wikipedia: ${name}`, url: `https://en.wikipedia.org/wiki/${encodeURIComponent(name.replace(/\s+/g, "_"))}`, grounding: "wikipedia" as const }
+      : null;
 
-  const combined = [pcText, wikiText].filter(Boolean).join(" ");
-  const { reactions, categories, byName } = extract(combined, identity.iupac);
-  if (reactions.length === 0 && categories.length === 0) return null;
+  let route: SynthesisRoute | null = null;
 
-  // A couple of cited sentences from the source describing the actual route.
-  const steps = clampSentence(primary)
-    .split(/(?<=[.;])\s+(?=[A-Z0-9])/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 30)
-    .slice(0, 3);
+  // 1 + 2: LLM (web-grounded, or reading the fetched reference text).
+  if (hasApiKey(cfg)) {
+    const llm = await llmRoute(identity, reference, cfg, signal);
+    const reactions = (llm?.reactions ?? []).map((r) => clampSentence(r)).filter((r) => r.length > 2).slice(0, 8);
+    if (reactions.length) {
+      const steps = llm?.summary
+        ? clampSentence(llm.summary).split(/(?<=[.;])\s+(?=[A-Z0-9])/).filter((s) => s.length > 20).slice(0, 3)
+        : [];
+      // Prefer a real fetched source; else the model's cited URL; else a PubChem link.
+      const source = fetchedSource
+        ? { name: fetchedSource.name, url: fetchedSource.url }
+        : isHttpUrl(llm?.sourceUrl)
+          ? { name: llm?.sourceName || "Cited source", url: llm!.sourceUrl! }
+          : { name: `PubChem: ${name}`, url: identity.cid ? `https://pubchem.ncbi.nlm.nih.gov/compound/${identity.cid}` : `https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(name)}` };
+      const grounding: SynthesisRoute["grounding"] = fetchedSource ? fetchedSource.grounding : "web";
+      route = {
+        reactions,
+        categories: categoriesFor(reactions),
+        steps,
+        startingMaterials: (llm?.startingMaterials ?? []).map((s) => clampSentence(s)).filter(Boolean).slice(0, 6),
+        source,
+        grounding,
+      };
+    }
+  }
 
-  const source = pcText
-    ? { name: "PubChem, Methods of Manufacturing (HSDB)", url: `https://pubchem.ncbi.nlm.nih.gov/compound/${identity.cid}#section=Methods-of-Manufacturing` }
-    : { name: `Wikipedia: ${name}`, url: `https://en.wikipedia.org/wiki/${encodeURIComponent(name.replace(/\s+/g, "_"))}` };
+  // 3: no key (or the LLM found nothing) -> conservative read of fetched prose.
+  if (!route && reference && fetchedSource) {
+    const reactions = keywordRead(reference).slice(0, 8);
+    if (reactions.length) {
+      const steps = clampSentence(reference)
+        .split(/(?<=[.;])\s+(?=[A-Z0-9])/)
+        .map((s) => s.trim())
+        .filter((s) => s.length > 30)
+        .slice(0, 3);
+      route = {
+        reactions,
+        categories: categoriesFor(reactions),
+        steps,
+        startingMaterials: [],
+        source: { name: fetchedSource.name, url: fetchedSource.url },
+        grounding: fetchedSource.grounding,
+      };
+    }
+  }
 
-  const route: SynthesisRoute = { reactions, categories, steps, source, confirmedByName: byName };
-  cacheSet(key, route, DAY);
+  if (route) cacheSet(key, route, DAY);
   return route;
 }

@@ -15,7 +15,7 @@ import { hasApiKey } from "@/lib/aiConfig";
 import { chatComplete, type ChatMsg } from "@/lib/openrouter";
 import { resolveIdentity, fetchCompoundDescription, type ChemIdentity } from "@/lib/casResolve";
 import { matchVendors, type CdmoMatch } from "@/lib/cdmoMatch";
-import { chemicalClasses, processChemistries, complexityScore } from "@/lib/chemClasses";
+import { chemicalClasses, complexityScore } from "@/lib/chemClasses";
 import { fetchIpLandscape, type IpLandscape } from "@/lib/patents";
 import { fetchProperties, type ChemProperties } from "@/lib/properties";
 import { fetchHazards, type HazardInfo } from "@/lib/hazards";
@@ -281,32 +281,27 @@ export async function runFeasibility(
   const classes = chemicalClasses(identity, nameForChem);
   const complexity = complexityScore(identity, nameForChem);
 
-  // From PubChem and the wider web, fetched in parallel so the card fills fast:
-  // the verified molecule-specific synthesis route (Methods of Manufacturing +
-  // Wikipedia), the patent + literature landscape, the chemical + physical
-  // properties, and the GHS hazard classification. Each is time-boxed and
-  // best-effort, so a slow or missing one never blocks the rest. The route runs
-  // even without a CID because Wikipedia can be keyed on the name alone.
+  // Fetched in parallel so the card fills fast. The synthesis route is looked up
+  // ONLINE (a web-grounded LLM lookup, grounded further by PubChem Methods of
+  // Manufacturing + Wikipedia), never guessed from the structure, so it gets a
+  // longer budget than the other, purely-PubChem lookups. Each is time-boxed and
+  // best-effort, so a slow or missing one never blocks the rest.
   const cid = identity?.cid || 0;
   const [route, ip, properties, hazards] = await Promise.all([
     identity
-      ? withTimeout((s) => fetchSynthesisRoute(identity, s), 8000, null as SynthesisRoute | null, signal)
+      ? withTimeout((s) => fetchSynthesisRoute(identity, cfg, s), 20000, null as SynthesisRoute | null, signal)
       : Promise.resolve(null as SynthesisRoute | null),
     cid ? withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal) : Promise.resolve(null as IpLandscape | null),
     cid ? withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal) : Promise.resolve(null as ChemProperties | null),
     cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
   ]);
 
-  // The process chemistries needed to make it, for display. When a verified route
-  // was found online, use the specific categories it named (reinforced by the
-  // IUPAC name); otherwise fall back to what the structure implies.
-  const chemistries = route?.categories?.length ? route.categories : processChemistries(identity, nameForChem);
-
-  // The manufacturer match runs on the SPECIFIC chemistry the molecule needs: the
-  // exact named reactions from the verified route (plus its broad categories), or
-  // the structural derivation when no route was found. Each vendor is then scored
-  // on how much of that exact chemistry it demonstrably runs.
-  const requirements = route ? [...route.reactions, ...route.categories] : chemistries;
+  // The chemistry shown, and the chemistry the manufacturer match runs on, come
+  // ONLY from the documented online route. We do not fall back to a
+  // structure-derived guess: if no route was verified online, the report says so
+  // honestly and the match is left empty rather than matched on a guess.
+  const chemistries = route?.categories ?? [];
+  const requirements = route ? [...route.reactions, ...route.categories] : [];
   const match = matchVendors(query, displayName, requirements);
 
   const sources = collectSources(identity, match.productName);
