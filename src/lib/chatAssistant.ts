@@ -19,6 +19,7 @@ import { chemicalClasses, processChemistries, complexityScore } from "@/lib/chem
 import { fetchIpLandscape, type IpLandscape } from "@/lib/patents";
 import { fetchProperties, type ChemProperties } from "@/lib/properties";
 import { fetchHazards, type HazardInfo } from "@/lib/hazards";
+import { fetchSynthesisRoute, type SynthesisRoute } from "@/lib/synthesisRoute";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -188,6 +189,8 @@ export type Feasibility = {
   classes: string[];
   /** broad process chemistries needed to make it (Halogenation, Nitration, ...) */
   chemistries: string[];
+  /** the verified, molecule-specific synthesis route from online sources, when found */
+  route: SynthesisRoute | null;
   /** chemical + physical properties from PubChem */
   properties: ChemProperties | null;
   /** GHS hazard classification from PubChem */
@@ -273,27 +276,34 @@ export async function runFeasibility(
   const displayName = identity?.name || undefined;
   const nameForChem = displayName || query;
 
-  // Broad compound classes, the process chemistries needed to make it, and a
-  // complexity score, all read from the PubChem structure. The manufacturer match
-  // is then run against those required chemistries (rarest gates the count).
+  // Broad compound classes and a complexity score, read from the PubChem
+  // structure. The complexity score drives the timeline.
   const classes = chemicalClasses(identity, nameForChem);
-  const chemistries = processChemistries(identity, nameForChem);
   const complexity = complexityScore(identity, nameForChem);
 
-  const match = matchVendors(query, displayName, chemistries);
-
-  // From PubChem, all keyed on the resolved CID and fetched in parallel so the
-  // card fills fast: the patent + literature landscape (SureChEMBL + PubMed),
-  // the chemical + physical properties, and the GHS hazard classification. Each
-  // is time-boxed and best-effort, so a slow or missing one never blocks the rest.
+  // From PubChem and the wider web, fetched in parallel so the card fills fast:
+  // the verified molecule-specific synthesis route (Methods of Manufacturing +
+  // Wikipedia), the patent + literature landscape, the chemical + physical
+  // properties, and the GHS hazard classification. Each is time-boxed and
+  // best-effort, so a slow or missing one never blocks the rest. The route runs
+  // even without a CID because Wikipedia can be keyed on the name alone.
   const cid = identity?.cid || 0;
-  const [ip, properties, hazards] = cid
-    ? await Promise.all([
-        withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal),
-        withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal),
-        withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal),
-      ])
-    : [null, null, null];
+  const [route, ip, properties, hazards] = await Promise.all([
+    identity
+      ? withTimeout((s) => fetchSynthesisRoute(identity, s), 8000, null as SynthesisRoute | null, signal)
+      : Promise.resolve(null as SynthesisRoute | null),
+    cid ? withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal) : Promise.resolve(null as IpLandscape | null),
+    cid ? withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal) : Promise.resolve(null as ChemProperties | null),
+    cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
+  ]);
+
+  // The process chemistries needed to make it. When a verified route was found
+  // online, use the specific categories it named (reinforced by the IUPAC name);
+  // otherwise fall back to what the structure implies. The manufacturer match is
+  // then run against those required chemistries (rarest gates the count).
+  const chemistries = route?.categories?.length ? route.categories : processChemistries(identity, nameForChem);
+
+  const match = matchVendors(query, displayName, chemistries);
 
   const sources = collectSources(identity, match.productName);
   if (ip) {
@@ -307,8 +317,11 @@ export async function runFeasibility(
   if (hazards && hazards.status !== "unknown") {
     sources.push({ name: "PubChem safety and hazards (GHS)", url: hazards.sourceUrl });
   }
+  if (route && !sources.some((s) => s.url === route.source.url)) {
+    sources.push({ name: route.source.name, url: route.source.url });
+  }
 
-  const result: Feasibility = { query, identity, description, classes, chemistries, properties, hazards, ip, complexity, match, sources };
+  const result: Feasibility = { query, identity, description, classes, chemistries, route, properties, hazards, ip, complexity, match, sources };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {
@@ -318,6 +331,7 @@ export async function runFeasibility(
         identity?.primaryCas ? `CAS: ${identity.primaryCas}` : "",
         identity?.formula ? `Formula: ${identity.formula}` : "",
         classes.length ? `Chemical classes: ${classes.join(", ")}` : "",
+        route?.reactions?.length ? `Verified synthesis route (${route.source.name}): ${route.reactions.join(", ")}` : "",
         chemistries.length ? `Process chemistries needed: ${chemistries.join(", ")}` : "",
         ip?.patentRange ? `Patents (cross-checked ${ip.patentSources} sources): ${ip.patentRange[0]} to ${ip.patentRange[1]}` : "",
         ip?.literatureRange ? `Literature refs: ${ip.literatureRange[0]} to ${ip.literatureRange[1]}` : "",
