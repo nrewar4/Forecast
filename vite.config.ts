@@ -57,6 +57,59 @@ function aiProxyPlugin(apiKey: string): PluginOption {
   };
 }
 
+// Mounts a SearXNG-backed web-search proxy at /api/search for dev/preview, mirror
+// of api/search.ts. Reads SEARXNG_URL (a normal, non-VITE env var).
+function searchProxyPlugin(searxngUrl: string): PluginOption {
+  const handler = async (req: IncomingMessage, res: ServerResponse) => {
+    const send = (code: number, obj: unknown) => {
+      res.statusCode = code;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify(obj));
+    };
+    if (!searxngUrl) {
+      send(200, { results: [], note: "SEARXNG_URL not set" });
+      return;
+    }
+    let q = "";
+    try {
+      q = new URL(req.url || "", "http://localhost").searchParams.get("q") || "";
+    } catch {
+      q = "";
+    }
+    q = q.slice(0, 300).trim();
+    if (!q) {
+      send(400, { error: { message: "Missing q." }, results: [] });
+      return;
+    }
+    const url = `${searxngUrl.replace(/\/+$/, "")}/search?q=${encodeURIComponent(q)}&format=json&safesearch=0&categories=general,science`;
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 12000);
+    try {
+      const upstream = await fetch(url, { headers: { Accept: "application/json", "User-Agent": "APAC-Sourcing-Intelligence/1.0" }, signal: ctrl.signal });
+      if (!upstream.ok) {
+        send(502, { error: { message: `SearXNG returned ${upstream.status}` }, results: [] });
+        return;
+      }
+      const json = (await upstream.json()) as { results?: Array<{ title?: string; url?: string; content?: string }> };
+      const results = (json.results || []).slice(0, 8).map((r) => ({ title: r.title || "", url: r.url || "", content: r.content || "" })).filter((r) => r.url);
+      send(200, { results });
+    } catch (e) {
+      send(502, { error: { message: `Search failed: ${(e as Error)?.message || e}` }, results: [] });
+    } finally {
+      clearTimeout(t);
+    }
+  };
+  return {
+    name: "search-proxy",
+    configureServer(server) {
+      server.middlewares.use("/api/search", handler);
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use("/api/search", handler);
+    },
+  };
+}
+
 // The base public path the app is served from. Default "/" for a root or
 // subdomain deploy (e.g. platform.apacss.com). Set VITE_BASE_PATH to a subpath
 // (e.g. "/platform/") to host the app under a folder of the main APAC site.
@@ -67,10 +120,11 @@ export default defineConfig(({ mode }) => {
   // available to the dev/preview proxy without ever being exposed to the client.
   const env = loadEnv(mode, process.cwd(), "");
   const serverKey = env.OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY || "";
+  const searxngUrl = env.SEARXNG_URL || process.env.SEARXNG_URL || "";
 
   return {
     base: process.env.VITE_BASE_PATH || "/",
-    plugins: [react(), aiProxyPlugin(serverKey)],
+    plugins: [react(), aiProxyPlugin(serverKey), searchProxyPlugin(searxngUrl)],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),

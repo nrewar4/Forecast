@@ -19,10 +19,14 @@ export type SynthesisRoute = {
   steps: string[]; // 1 to 3 cited sentences describing the route
   source: { name: string; url: string };
   confirmedByName: boolean; // whether the IUPAC name reinforced the chemistry
-  /** how the route was obtained: "verified" = extracted from a primary database
-   *  (PubChem Methods of Manufacturing / Wikipedia); "ai" = AI web/knowledge
-   *  research that must be verified against its cited source */
-  grounding: "verified" | "ai";
+  /** how the route was obtained:
+   *  "verified" = a curated cited route or a primary database (PubChem Methods of
+   *    Manufacturing / Wikipedia);
+   *  "web" = extracted by a model from live web-search results (SearXNG), cited to
+   *    the article it came from;
+   *  "ai" = model knowledge only, with a best-effort citation.
+   *  "web" and "ai" both need verifying against their cited source. */
+  grounding: "verified" | "web" | "ai";
 };
 
 export type ConsultLink = { name: string; url: string };

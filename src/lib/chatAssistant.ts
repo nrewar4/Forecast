@@ -21,6 +21,8 @@ import { fetchProperties, type ChemProperties } from "@/lib/properties";
 import { fetchHazards, type HazardInfo } from "@/lib/hazards";
 import { fetchSynthesisRoute, chemistryConsultLinks, type SynthesisRoute, type ConsultLink } from "@/lib/synthesisRoute";
 import { researchSynthesisRoute } from "@/lib/webChemistry";
+import { findCuratedRoute, type CuratedRoute } from "@/data/verifiedRoutes";
+import { requiredCapabilities, capabilityLabel } from "@/lib/chemLexicon";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -254,6 +256,28 @@ function collectSources(identity: ChemIdentity | null, productName: string): Ver
   return out.filter((s) => (seen.has(s.url) ? false : (seen.add(s.url), true)));
 }
 
+// Resolves a hand-authored, source-cited route for the molecule (by name or CAS)
+// and shapes it like any other SynthesisRoute. Fully offline: no key, no credit,
+// no network. The vendor-matchable categories are derived from the named
+// reactions via the shared lexicon, so the manufacturer match keys off exactly
+// the chemistry shown. Marked "verified" because each entry is cited to a source.
+function curatedRoute(query: string, name: string, identity: ChemIdentity | null): SynthesisRoute | null {
+  const entry: CuratedRoute | null = findCuratedRoute(
+    [query, name, identity?.name, identity?.iupac, ...(identity?.synonyms ?? [])],
+    [identity?.primaryCas, ...(identity?.casList ?? [])],
+  );
+  if (!entry) return null;
+  const categories = requiredCapabilities(entry.reactions).map(capabilityLabel);
+  return {
+    reactions: entry.reactions,
+    categories,
+    steps: entry.steps,
+    source: entry.source,
+    confirmedByName: false,
+    grounding: "verified",
+  };
+}
+
 // Runs the whole Path B lookup for any product, in or out of our catalog:
 // resolve identity + CAS from PubChem, pull a short description, read the broad
 // chemical classes from the structure, fetch the patent + literature landscape
@@ -285,6 +309,11 @@ export async function runFeasibility(
   const classes = chemicalClasses(identity, nameForChem);
   const complexity = complexityScore(identity, nameForChem);
 
+  // A hand-authored, source-cited route, resolved first and fully offline (no key,
+  // no credit, no network). When present it is authoritative, so we skip the
+  // billed AI web search entirely.
+  const curated = curatedRoute(query, nameForChem, identity);
+
   // From PubChem and the wider web, fetched in parallel so the card fills fast:
   // the verified molecule-specific synthesis route (Methods of Manufacturing +
   // Wikipedia), the patent + literature landscape, the chemical + physical
@@ -293,26 +322,29 @@ export async function runFeasibility(
   // even without a CID because Wikipedia can be keyed on the name alone.
   const cid = identity?.cid || 0;
   const [structuredRoute, webRoute, ip, properties, hazards] = await Promise.all([
-    identity
+    !curated && identity
       ? withTimeout((s) => fetchSynthesisRoute(identity, s), 8000, null as SynthesisRoute | null, signal)
       : Promise.resolve(null as SynthesisRoute | null),
     // A web search of the verified references (LibreTexts, the Organic Chemistry
-    // Portal, patents, papers). Runs only when a key is configured; it is a no-op
-    // (returns null) otherwise, so the keyless app still works.
-    withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 14000, null as SynthesisRoute | null, signal),
+    // Portal, patents, papers). Runs only when no curated route already covers it
+    // and a key is configured; it is a no-op (returns null) otherwise, so the
+    // keyless app still works.
+    curated
+      ? Promise.resolve(null as SynthesisRoute | null)
+      : withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 22000, null as SynthesisRoute | null, signal),
     cid ? withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal) : Promise.resolve(null as IpLandscape | null),
     cid ? withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal) : Promise.resolve(null as ChemProperties | null),
     cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
   ]);
 
-  // The chemistry is the ACTUAL, documented route, found online, never inferred
-  // from the structure. A primary-database route (PubChem "Methods of
-  // Manufacturing" + Wikipedia) is the most trustworthy, so it wins; the AI
-  // web/knowledge research (webRoute) fills the gap for molecules those databases
-  // do not document, e.g. pomalidomide (condensation + nitro reduction + SNAr +
-  // flow). If neither yields a documented route we show none and point the user at
-  // the verified references to look it up.
-  const route = structuredRoute ?? webRoute;
+  // The chemistry is the ACTUAL, documented route, never inferred from the
+  // structure. Priority, most trustworthy first:
+  //   1. a hand-authored, source-cited curated route (works with no key/credit),
+  //   2. a primary-database route (PubChem "Methods of Manufacturing" + Wikipedia),
+  //   3. AI web/knowledge research (fills gaps for molecules 1 and 2 do not cover).
+  // If none yields a documented route we show none and point the user at the
+  // verified references to look it up.
+  const route = curated ?? structuredRoute ?? webRoute;
 
   // Process chemistries shown and matched against manufacturers come ONLY from the
   // verified route. No route means no chemistry claim (honest by construction).

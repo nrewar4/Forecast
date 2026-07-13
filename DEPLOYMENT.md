@@ -55,6 +55,57 @@ VITE_AI_PROXY_URL=/api/ai
 `vite.config.ts`), so the full flow works locally with the key staying
 server-side.
 
+## Web search without credits (SearXNG)
+
+The synthesis-route lookup can be web-grounded **without any OpenRouter credit**:
+the app searches a [SearXNG](https://github.com/searxng/searxng) instance (free,
+self-hostable) and a **free** model extracts the route from the results. This is
+the recommended no-credit path for real web grounding.
+
+1. Run a SearXNG instance with the JSON API enabled. Quick Docker start:
+
+   ```bash
+   docker run -d --name searxng -p 8080:8080 \
+     -e "SEARXNG_SETTINGS_PATH=/etc/searxng/settings.yml" \
+     -v ./searxng:/etc/searxng searxng/searxng:latest
+   ```
+
+   In `searxng/settings.yml` enable JSON output:
+
+   ```yaml
+   search:
+     formats: [html, json]
+   ```
+
+2. Set two env vars:
+
+   | Variable | Value | Where |
+   | --- | --- | --- |
+   | `VITE_SEARCH_URL` | `/api/search` | build-time (client) |
+   | `SEARXNG_URL` | `https://your-searxng.example.com` | server env only |
+
+   The client calls `/api/search`; the proxy (api/search.ts, and the Vite
+   dev/preview middleware) queries your SearXNG instance and returns the results.
+   With `SEARXNG_URL` unset the proxy returns an empty set and the app falls back
+   to the model-knowledge path, so nothing breaks.
+
+3. Route provenance in the report tells you which path produced the chemistry:
+   **Verified** (curated cited route or PubChem/Wikipedia), **Web-researched**
+   (SearXNG results, free), or **AI-researched** (model knowledge). The last two
+   carry a "verify against the cited source" note.
+
+Priority order for the chemistry: curated cited routes (offline, most accurate)
+→ PubChem/Wikipedia → SearXNG web search → model knowledge.
+
+## Curated routes (fully offline, no key or credit)
+
+`src/data/verifiedRoutes.ts` holds hand-authored, source-cited routes that always
+show for the molecules listed, with no network call at all. Add your priority
+molecules there: give the match names/CAS, the ordered named reactions, 1 to 3
+cited step sentences, and a real source URL. Seeded with the IMiD family
+(pomalidomide, lenalidomide, thalidomide) and a few classics (aspirin,
+paracetamol, ibuprofen).
+
 ## 5. Verify
 
 Open `/cdmo`, enter a molecule (e.g. `pomalidomide`), and check the
