@@ -292,30 +292,27 @@ export async function runFeasibility(
   // best-effort, so a slow or missing one never blocks the rest. The route runs
   // even without a CID because Wikipedia can be keyed on the name alone.
   const cid = identity?.cid || 0;
-  const [structuredRoute, ip, properties, hazards] = await Promise.all([
+  const [structuredRoute, webRoute, ip, properties, hazards] = await Promise.all([
     identity
       ? withTimeout((s) => fetchSynthesisRoute(identity, s), 8000, null as SynthesisRoute | null, signal)
       : Promise.resolve(null as SynthesisRoute | null),
+    // A web search of the verified references (LibreTexts, the Organic Chemistry
+    // Portal, patents, papers). Runs only when a key is configured; it is a no-op
+    // (returns null) otherwise, so the keyless app still works.
+    withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 14000, null as SynthesisRoute | null, signal),
     cid ? withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal) : Promise.resolve(null as IpLandscape | null),
     cid ? withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal) : Promise.resolve(null as ChemProperties | null),
     cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
   ]);
 
   // The chemistry is the ACTUAL, documented route, found online, never inferred
-  // from the structure. First the structured databases (PubChem Methods of
-  // Manufacturing + Wikipedia); if those come up empty and a key is configured,
-  // a web search of the verified references (LibreTexts, the Organic Chemistry
-  // Portal, patents, papers). If neither yields a documented route we show none
-  // and point the user at those references to look it up.
-  let route = structuredRoute;
-  if (!route) {
-    route = await withTimeout(
-      (s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s),
-      12000,
-      null as SynthesisRoute | null,
-      signal,
-    );
-  }
+  // from the structure. When a key is configured we prefer the web-researched
+  // route (it reads the named verified references and returns the fuller,
+  // multi-strategy picture, e.g. condensation + SNAr + hydrogenation + flow);
+  // otherwise, or if it found nothing, we use the structured PubChem "Methods of
+  // Manufacturing" + Wikipedia route. If neither yields a documented route we show
+  // none and point the user at those references to look it up.
+  const route = webRoute ?? structuredRoute;
 
   // Process chemistries shown and matched against manufacturers come ONLY from the
   // verified route. No route means no chemistry claim (honest by construction).

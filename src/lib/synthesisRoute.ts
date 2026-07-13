@@ -183,13 +183,19 @@ function extract(text: string, iupac: string | null): { reactions: string[]; cat
       if (r.category) categories.add(r.category);
     }
   }
+  // The IUPAC name is used ONLY to CONFIRM chemistry already found in the
+  // documented prose, never to add a category. Adding a category from the name
+  // would be a structural guess (a group in the product does not tell you the
+  // reaction used to make it), and it would then leak into the manufacturer
+  // match. So byName is true only when a name cue agrees with a category the
+  // prose already established; the category set itself is unchanged.
   let byName = false;
   if (iupac) {
     const n = iupac.toLowerCase();
     for (const h of IUPAC_HINTS) {
-      if (h.re.test(n) && h.category) {
-        categories.add(h.category);
+      if (h.re.test(n) && h.category && categories.has(h.category)) {
         byName = true;
+        break;
       }
     }
   }
