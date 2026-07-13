@@ -183,11 +183,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       replace(typingId, { kind: "feasibility", data });
       pushBot({
         kind: "text",
-        text: data.match.vendorCount > 0
-          ? (data.chemistries.length
-              ? `Making ${data.match.productName} needs ${data.chemistries.join(", ").toLowerCase()}. ${data.match.vendorCount} manufacturer${data.match.vendorCount === 1 ? "" : "s"} in our India network run that chemistry. How should we run the project? Choose your priority and I will project the milestones.`
-              : `${data.match.vendorCount} manufacturers in our India network can make ${data.match.productName}. How should we run the project? Choose your priority and I will project the milestones.`)
-          : `No vendor in our current network is set up for the ${data.chemistries.join(", ").toLowerCase() || "chemistry"} this needs, so APAC would source a capable partner. I can still map the development timeline, or you can talk to APAC.`,
+        text: data.match.matchedCount > 0
+          ? `I ranked ${data.match.matchedCount} manufacturer${data.match.matchedCount === 1 ? "" : "s"} in our India network on the exact chemistry ${data.match.productName} needs, scored on their own listed capabilities (identities shared after contact). How should we run the project? Choose your priority and I will project the milestones.`
+          : `No vendor in our current network lists enough of the ${data.chemistries.join(", ").toLowerCase() || "chemistry"} this needs, so APAC would source a capable partner. I can still map the development timeline, or you can talk to APAC.`,
       });
       // The feasibility card already carries the single "Discuss this with APAC"
       // button, so the quick replies here stay focused on the timeline choice.

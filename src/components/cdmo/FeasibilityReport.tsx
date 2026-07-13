@@ -308,28 +308,89 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Manufacturer match: a prominent, professional highlight of the count */}
-      {match.vendorCount > 0 ? (
-        <div className="overflow-hidden rounded-2xl border border-primary/30 bg-[linear-gradient(135deg,rgba(244,121,32,0.12),transparent_62%)] p-5 shadow-card">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">Manufacturer match</p>
-          <div className="mt-1.5 flex items-baseline gap-2.5">
-            <span className="text-5xl font-extrabold leading-none tracking-tight text-ink tabular-nums">{match.vendorCount}</span>
-            <span className="text-sm font-medium text-muted-foreground">capable manufacturers</span>
+      {/* Manufacturer match: a ranked, anonymized shortlist scored on the exact
+          chemistry this product needs. Names are revealed only after contact. */}
+      {match.matchedCount > 0 ? (
+        <div className="overflow-hidden rounded-2xl border border-primary/30 bg-[linear-gradient(135deg,rgba(244,121,32,0.10),transparent_60%)] p-4 shadow-card sm:p-5">
+          <div className="flex items-baseline justify-between gap-2">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">Manufacturer shortlist</p>
+            <span className="text-[10px] font-medium text-muted-foreground">{match.assessed} network vendors screened</span>
           </div>
-          <p className="mt-2.5 max-w-md text-[11px] leading-snug text-muted-foreground">
-            {chemistries.length
-              ? `India CDMO network vendors matched on the ${chemistries.join(", ").toLowerCase()} chemistry this needs. Identities are shared after contact.`
-              : "India CDMO network vendors assessed as able to make this. Identities are shared after contact."}
+          <div className="mt-1 flex items-baseline gap-2.5">
+            <span className="text-4xl font-extrabold leading-none tracking-tight text-ink tabular-nums">{match.matchedCount}</span>
+            <span className="text-sm font-medium text-muted-foreground">ranked on this exact chemistry</span>
+          </div>
+          <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+            Scored on each vendor&apos;s own listed chemistry against the {match.requiredCapabilities.length} specific {match.requiredCapabilities.length === 1 ? "chemistry" : "chemistries"} this product needs. Identities are shared after you contact APAC.
+          </p>
+
+          <ol className="mt-3 space-y-2">
+            {match.shortlist.map((v) => (
+              <li key={v.rank} className="rounded-xl border border-border bg-card/80 p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary/10 text-[11px] font-bold text-primary tabular-nums">{v.rank}</span>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold text-ink">{v.label}</p>
+                      <p className="text-[10px] text-muted-foreground">{v.country}</p>
+                    </div>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-1.5">
+                    <span className={cn("rounded-md px-1.5 py-0.5 text-[10px] font-bold", tierClass(v.tier))}>Class {v.tier}</span>
+                    <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">{v.confidence}</span>
+                  </div>
+                </div>
+
+                {/* Coverage bar */}
+                <div className="mt-2 flex items-center gap-2">
+                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border/70">
+                    <div className="h-full rounded-full bg-primary" style={{ width: `${Math.round(v.coverage * 100)}%` }} />
+                  </div>
+                  <span className="shrink-0 font-mono text-[10px] font-semibold text-foreground tabular-nums">{v.covered}/{v.required} chemistries</span>
+                </div>
+
+                {/* Evidence: the vendor's own listed chemistry that matched */}
+                {v.evidence.length ? (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {v.evidence.slice(0, 5).map((e) => (
+                      <span
+                        key={e.capability}
+                        title={e.phrases.join(" · ")}
+                        className="rounded border border-primary/30 bg-accent/50 px-1.5 py-0.5 text-[10px] font-medium text-ink"
+                      >
+                        {e.phrases[0] || e.capability}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+
+                {/* Gaps to confirm in an RFQ */}
+                {v.gaps.length ? (
+                  <p className="mt-1.5 text-[10px] leading-snug text-muted-foreground">
+                    <span className="font-semibold text-foreground/70">Confirm in RFQ:</span> {v.gaps.join(", ").toLowerCase()}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+
+          {match.matchedCount > match.shortlist.length ? (
+            <p className="mt-2 text-[10px] font-medium text-muted-foreground">
+              Showing the top {match.shortlist.length} of {match.matchedCount} matched manufacturers.
+            </p>
+          ) : null}
+          <p className="mt-3 border-t border-border pt-2 text-[10px] leading-snug text-muted-foreground">
+            A chemistry match does not confirm available capacity, willingness, freedom to operate, or GMP status; those are verified during qualification.
           </p>
         </div>
       ) : (
         <div className="rounded-2xl border border-border bg-muted/40 p-5">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Manufacturer match</p>
-          <p className="mt-1.5 text-base font-semibold text-ink">No matched manufacturer in the network</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Manufacturer shortlist</p>
+          <p className="mt-1.5 text-base font-semibold text-ink">No network vendor lists enough of this chemistry</p>
           <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-            {chemistries.length
-              ? `None of our vendors are currently set up for the ${chemistries.join(", ").toLowerCase()} chemistry this needs.`
-              : "None of our vendors are currently matched to this product."}{" "}
+            {match.requiredCapabilities.length
+              ? `Across ${match.assessed} screened vendors, none list enough of the ${match.requiredCapabilities.join(", ").toLowerCase()} this product needs.`
+              : "We could not resolve the specific chemistry this product needs to screen the network."}{" "}
             Contact APAC and we will work to source a capable partner.
           </p>
         </div>
@@ -381,6 +442,12 @@ export function FeasibilityReport({
       ) : null}
     </div>
   );
+}
+
+function tierClass(tier: "A" | "B" | "C"): string {
+  if (tier === "A") return "bg-primary/15 text-primary";
+  if (tier === "B") return "bg-emerald-100 text-emerald-800";
+  return "bg-muted text-muted-foreground";
 }
 
 function clamp(text: string, n: number): string {

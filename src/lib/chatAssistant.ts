@@ -297,13 +297,17 @@ export async function runFeasibility(
     cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
   ]);
 
-  // The process chemistries needed to make it. When a verified route was found
-  // online, use the specific categories it named (reinforced by the IUPAC name);
-  // otherwise fall back to what the structure implies. The manufacturer match is
-  // then run against those required chemistries (rarest gates the count).
+  // The process chemistries needed to make it, for display. When a verified route
+  // was found online, use the specific categories it named (reinforced by the
+  // IUPAC name); otherwise fall back to what the structure implies.
   const chemistries = route?.categories?.length ? route.categories : processChemistries(identity, nameForChem);
 
-  const match = matchVendors(query, displayName, chemistries);
+  // The manufacturer match runs on the SPECIFIC chemistry the molecule needs: the
+  // exact named reactions from the verified route (plus its broad categories), or
+  // the structural derivation when no route was found. Each vendor is then scored
+  // on how much of that exact chemistry it demonstrably runs.
+  const requirements = route ? [...route.reactions, ...route.categories] : chemistries;
+  const match = matchVendors(query, displayName, requirements);
 
   const sources = collectSources(identity, match.productName);
   if (ip) {
