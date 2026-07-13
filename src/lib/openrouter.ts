@@ -1,18 +1,29 @@
-import { FREE_MODELS, FREE_TERMINAL, DEFAULT_MODEL, type AiConfig } from "./aiConfig";
+import { FREE_MODELS, FREE_TERMINAL, DEFAULT_MODEL, AI_PROXY_URL, hasProxy, type AiConfig } from "./aiConfig";
 
 export type ChatRole = "system" | "user" | "assistant";
 export type ChatMsg = { role: ChatRole; content: string };
 
-const ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
+const OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
+
+// Talk to the keyless proxy when one is configured, else straight to OpenRouter.
+// The proxy injects the Authorization header server-side, so the browser never
+// sees the key.
+function endpoint(): string {
+  return hasProxy() ? AI_PROXY_URL : OPENROUTER_ENDPOINT;
+}
 
 function headers(cfg: AiConfig) {
-  return {
+  const h: Record<string, string> = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${cfg.apiKey}`,
-    // Optional attribution headers OpenRouter recommends.
-    "HTTP-Referer": typeof window !== "undefined" ? window.location.origin : "https://localhost",
     "X-Title": "APAC Sourcing Intelligence",
   };
+  // Only send the key when calling OpenRouter directly. Through the proxy the key
+  // stays on the server and must not be attached client-side.
+  if (!hasProxy()) {
+    h.Authorization = `Bearer ${cfg.apiKey}`;
+    h["HTTP-Referer"] = typeof window !== "undefined" ? window.location.origin : "https://localhost";
+  }
+  return h;
 }
 
 // Error carrying the HTTP status + any Retry-After so callers can back off.
@@ -177,7 +188,7 @@ async function streamOnce(
   onToken: (token: string) => void,
   signal?: AbortSignal,
 ): Promise<void> {
-  const res = await fetch(ENDPOINT, {
+  const res = await fetch(endpoint(), {
     method: "POST",
     headers: headers(cfg),
     body: JSON.stringify({ model: cfg.model, messages, stream: true }),
@@ -276,7 +287,7 @@ async function postComplete(
 ): Promise<string> {
   const body: Record<string, unknown> = { model: cfg.model, messages, temperature: 0.2 };
   if (web) body.plugins = [{ id: "web", max_results: 6 }];
-  const res = await fetch(ENDPOINT, {
+  const res = await fetch(endpoint(), {
     method: "POST",
     headers: headers(cfg),
     body: JSON.stringify(body),

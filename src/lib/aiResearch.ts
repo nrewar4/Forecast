@@ -1,4 +1,5 @@
 import type { AiConfig } from "./aiConfig";
+import { WEB_MODEL } from "./aiConfig";
 import { chatComplete, type ChatMsg } from "./openrouter";
 
 export type AiPct = { label: string; percent: number };
@@ -78,10 +79,14 @@ export async function researchProduct(
   ];
 
   // Prefer web-grounded answers; if the web plugin errors or is unavailable,
-  // fall back to a normal completion so the user still gets a profile.
+  // fall back to a normal completion so the user still gets a profile. A
+  // web-capable model is requested so the web-search plugin can attach (it is
+  // never added to a free model); chatComplete falls back down the free chain
+  // when the account has no credit.
+  const webCfg: AiConfig = { ...cfg, model: WEB_MODEL };
   let raw: string;
   try {
-    raw = await chatComplete(cfg, messages, signal, { web: true });
+    raw = await chatComplete(webCfg, messages, signal, { web: true });
   } catch (e) {
     if (signal?.aborted) throw e;
     raw = await chatComplete(cfg, messages, signal);

@@ -19,6 +19,10 @@ export type SynthesisRoute = {
   steps: string[]; // 1 to 3 cited sentences describing the route
   source: { name: string; url: string };
   confirmedByName: boolean; // whether the IUPAC name reinforced the chemistry
+  /** how the route was obtained: "verified" = extracted from a primary database
+   *  (PubChem Methods of Manufacturing / Wikipedia); "ai" = AI web/knowledge
+   *  research that must be verified against its cited source */
+  grounding: "verified" | "ai";
 };
 
 export type ConsultLink = { name: string; url: string };
@@ -240,7 +244,7 @@ export async function fetchSynthesisRoute(identity: ChemIdentity, signal?: Abort
     ? { name: "PubChem, Methods of Manufacturing (HSDB)", url: `https://pubchem.ncbi.nlm.nih.gov/compound/${identity.cid}#section=Methods-of-Manufacturing` }
     : { name: `Wikipedia: ${name}`, url: `https://en.wikipedia.org/wiki/${encodeURIComponent(name.replace(/\s+/g, "_"))}` };
 
-  const route: SynthesisRoute = { reactions, categories, steps, source, confirmedByName: byName };
+  const route: SynthesisRoute = { reactions, categories, steps, source, confirmedByName: byName, grounding: "verified" };
   cacheSet(key, route, DAY);
   return route;
 }

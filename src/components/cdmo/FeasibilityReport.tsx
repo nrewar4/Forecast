@@ -189,11 +189,13 @@ export function FeasibilityReport({
           <div className="mb-1 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry to make it</p>
             <a href={route.source.url} target="_blank" rel="noreferrer noopener" className="shrink-0 text-[10px] font-medium text-primary hover:underline">
-              Verified · {route.source.name}
+              {route.grounding === "ai" ? "AI-researched" : "Verified"} · {route.source.name}
             </a>
           </div>
           <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
-            The specific reactions its documented synthesis uses{route.confirmedByName ? ", confirmed against the IUPAC name" : ""}.
+            {route.grounding === "ai"
+              ? "The reactions its published synthesis uses, researched from chemistry references. Verify against the cited source before relying on it."
+              : `The specific reactions its documented synthesis uses${route.confirmedByName ? ", confirmed against the IUPAC name" : ""}.`}
           </p>
           <div className="mb-3 flex flex-wrap gap-1.5">
             {route.reactions.map((r) => (

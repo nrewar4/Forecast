@@ -15,7 +15,7 @@
 // route and a structured route identically.
 
 import type { AiConfig } from "./aiConfig";
-import { hasApiKey } from "./aiConfig";
+import { hasApiKey, WEB_MODEL } from "./aiConfig";
 import { chatComplete, type ChatMsg } from "./openrouter";
 import { requiredCapabilities, capabilityLabel } from "./chemLexicon";
 import type { SynthesisRoute } from "./synthesisRoute";
@@ -69,9 +69,15 @@ export async function researchSynthesisRoute(
     { role: "user", content: `Find the documented industrial or laboratory synthesis of: ${ask}` },
   ];
 
+  // Request a web-capable model so the web-search plugin can attach (it is never
+  // added to a free model). If the account has no credit this cleanly falls back
+  // down the free chain in chatComplete, answering from model knowledge without
+  // web; either way the result is labelled "ai" so the UI shows it as needing
+  // verification against its cited source.
+  const webCfg: AiConfig = { ...cfg, model: WEB_MODEL };
   let raw: string;
   try {
-    raw = await chatComplete(cfg, messages, signal, { web: true });
+    raw = await chatComplete(webCfg, messages, signal, { web: true });
   } catch (e) {
     if (signal?.aborted) throw e;
     return null;
@@ -118,5 +124,5 @@ function normalise(raw: string, name: string): SynthesisRoute | null {
     ? { name: obj.source?.name?.trim() || "Web research", url }
     : { name: `Web search: ${name}`, url: `https://www.google.com/search?q=${encodeURIComponent(`${name} synthesis route`)}` };
 
-  return { reactions, categories, steps, source, confirmedByName: false };
+  return { reactions, categories, steps, source, confirmedByName: false, grounding: "ai" };
 }

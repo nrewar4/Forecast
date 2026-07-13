@@ -306,13 +306,13 @@ export async function runFeasibility(
   ]);
 
   // The chemistry is the ACTUAL, documented route, found online, never inferred
-  // from the structure. When a key is configured we prefer the web-researched
-  // route (it reads the named verified references and returns the fuller,
-  // multi-strategy picture, e.g. condensation + SNAr + hydrogenation + flow);
-  // otherwise, or if it found nothing, we use the structured PubChem "Methods of
-  // Manufacturing" + Wikipedia route. If neither yields a documented route we show
-  // none and point the user at those references to look it up.
-  const route = webRoute ?? structuredRoute;
+  // from the structure. A primary-database route (PubChem "Methods of
+  // Manufacturing" + Wikipedia) is the most trustworthy, so it wins; the AI
+  // web/knowledge research (webRoute) fills the gap for molecules those databases
+  // do not document, e.g. pomalidomide (condensation + nitro reduction + SNAr +
+  // flow). If neither yields a documented route we show none and point the user at
+  // the verified references to look it up.
+  const route = structuredRoute ?? webRoute;
 
   // Process chemistries shown and matched against manufacturers come ONLY from the
   // verified route. No route means no chemistry claim (honest by construction).
@@ -369,7 +369,16 @@ export async function runFeasibility(
         },
         { role: "user", content: facts },
       ];
-      result.aiSummary = (await chatComplete(cfg, messages, signal)).trim();
+      // Time-boxed: the précis is pure polish, so it must never delay the report.
+      // On a slow or rate-limited model (or a no-credit key backing off) it is
+      // simply dropped and the deterministic report stands on its own.
+      const summary = await withTimeout(
+        (s) => chatComplete(cfg, messages, s),
+        7000,
+        "",
+        signal,
+      );
+      if (summary.trim()) result.aiSummary = summary.trim();
     } catch {
       // LLM unavailable; the deterministic report already stands on its own.
     }
