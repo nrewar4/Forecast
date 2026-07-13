@@ -1,85 +1,132 @@
-# APAC Sourcing Intelligence
+# APAC Supply Chain — CDMO & Sourcing platform
 
-A data and analytics platform for APAC Supply Chain (a CDMO and chemical sourcing
-company). It builds on the Forecasting and Data Integration concept, adds more
-analytics, makes the data easy to scan, visualises everything, and surfaces
-possible clients and suppliers. It is designed so more databases can be plugged
-in over time.
+A client-side web app for APAC Supply Chain (apacss.com), a chemical sourcing and
+CDMO company. It has three public surfaces and a small internal area:
 
-Styled in the APAC brand colours, orange and white. Clean, professional, not
-cluttered. No em dash is used anywhere in the product copy.
+- **CDMO** (`/cdmo`) — the main conversion page: an AI assistant that takes a
+  molecule or a project and returns feasibility, the process chemistry needed to
+  make it, a manufacturer-capability count, patent/route landscape, and a
+  contact handoff.
+- **Product Discovery** (`/knowledge-base`) — a searchable catalogue of products
+  with identity, chemistry and sourcing detail.
+- **Market Overview** (`/dashboard`) — chemical trade figures for the focus
+  markets, from the World Bank.
+- **Admin** (`/admin`, `/synthesis-routes`) — usage analytics and an internal
+  retrosynthesis explorer, behind a client-side login.
 
-## Run the app
+It is a static single-page app: no backend, no database. Everything runs in the
+browser against public, keyless APIs. All figures are in USD. Product copy uses
+no em dashes (use a comma, a colon, or "to").
 
-This repository contains the complete app as a Vite, React, TypeScript, Tailwind,
-and Recharts project.
+## Run
 
-```
+```bash
 npm install
 npm run dev      # local dev server
-npm run build    # production build to dist
+npm run build    # production build to ./dist
 npm run preview  # serve the production build
 ```
 
-## Pages, all eight built
+Runs with zero configuration. Optional `.env` values (see `.env.example`) add
+LLM free-text understanding and change the admin password.
 
-- Dashboard. KPI cards, top import and export products, top buyers and top
-  manufacturers.
-- Trade Analytics. Imports and exports toggle, filters, monthly trend area chart,
-  trade by country, transport mix donut, and a sortable shipment table.
-- Demand Forecast. Product and model selectors, a forecast line with a confidence
-  band, and a colour coded growth ranking with buy, hold, and watch signals.
-- Product Knowledge Base. Manufacturing route, cost drivers, end use industries,
-  pricing, and key manufacturers per product.
-- Clients (Buyers). Searchable, filterable directory of Indian importers.
-- Suppliers (Manufacturers). Manufacturers only, grouped by product, filterable
-  by certification.
-- Documents. PDF and Excel upload area with a recent documents list.
-- Integrations. Catalog of databases to connect, grouped by category.
+## The CDMO assistant
 
-## Lovable version
+The `/cdmo` page and a floating widget on every public page host an assistant
+that qualifies a visitor and routes them to one of two journeys, then to an APAC
+enquiry (contact details in `src/data/contact.ts`):
 
-The first three pages were also built in Lovable. The remaining pages were then
-finished here in code because the Lovable workspace ran out of credits. Matching
-build prompts are kept in `docs/remaining_page_prompts.md`.
+- **Feasibility** — name a molecule or CAS. Identity resolves across public
+  databases (PubChem, then NCI CACTUS, then OPSIN), and the card shows the broad
+  chemical classes, the **process chemistries needed to make it** (halogenation,
+  nitration, esterification, ...), how many network manufacturers can run that
+  chemistry (a count only, identities withheld), and the patent/literature route
+  landscape (PubChem/SureChEMBL + PubMed, with Google Patents / WIPO / Espacenet
+  links).
+- **Pathway** — describe a situation and it maps a stage-by-stage CDMO
+  development pathway with deliverables and gates, with durations scaled to the
+  molecule's complexity.
 
-- Preview: https://id-preview--26f36d35-b868-470e-9cc7-16a880f73d51.lovable.app
-- Editor: https://lovable.dev/projects/26f36d35-b868-470e-9cc7-16a880f73d51
+Both flows are deterministic, so they always complete quickly even with no API
+key. When `VITE_OPENROUTER_API_KEY` is set, the LLM (`src/lib/openrouter.ts`, with
+model fallback) only adds natural phrasing and free-text understanding.
 
-## Analytics added beyond the original document
+## Admin login
 
-- Top buyers and top manufacturers ranked by value.
-- Trade by country of origin and transport mode mix.
-- Monthly trade value trend with seasonality.
-- Forecast confidence bands and a growth ranking with action signals.
-- Average unit price, trade balance, and fastest rising HS code.
-- Cost driver and end use industry breakdowns per product.
+At `/login` (linked from the landing footer and the workspace sidebar).
 
-## Data
+- Username: `admin`
+- Default password: `apac-admin` (override with `VITE_ADMIN_PASSWORD_HASH`, the
+  SHA-256 hex of your password). Sessions last 12 hours.
 
-All seed data lives in `/data` as JSON so it can move into the app or a real
-database without rework.
+This is a client-side gate for hiding internal tooling, **not** a security
+boundary. See `SECURITY.md`.
 
-- `clients_buyers.json`. Possible clients, Indian buyers.
-- `suppliers_manufacturers.json`. Possible suppliers, manufacturers only.
-- `products_knowledge.json`. Routes, cost drivers, industries, pricing, producers.
-- `integrations_catalog.json`. Databases and APIs to connect.
+## Project structure
 
-Source of the trade figures is the Descartes Datamyne import and export sample
-for February 2026. Replace with the full three year history for production
-forecasts.
+```
+index.html                Page shell + metadata
+vite.config.ts            Build config (base path, alias, chunking, dev proxy)
+tailwind.config.js        Brand tokens (orange accent, neutral scale)
 
-## Room for more databases
+src/
+  main.tsx                Entry: router (basename from VITE_BASE_PATH) + providers
+  App.tsx                 Routes + page-view tracking + floating assistant
+  index.css               Tailwind layers, motion utilities, print styles
 
-The platform is built to ingest more sources over time. See
-`integrations_catalog.json`. Candidates include PubChem and ChemSpider for
-chemical identity, ICIS and Platts for pricing, ISO, REACH, and FDA directories
-for certifications, DGFT IEC for company data, and energy and macro feeds for
-forecast drivers.
+  pages/                  One file per route
+    Landing.tsx           Public homepage
+    Cdmo.tsx              CDMO assistant experience (main conversion page)
+    KnowledgeBase.tsx     Product Discovery catalogue
+    Dashboard.tsx         Market Overview (chemical trade)
+    SynthesisRoutes.tsx   Admin: retrosynthesis explorer
+    AdminDashboard.tsx    Admin: usage analytics
+    Login.tsx             Admin sign in
 
-## Design
+  components/
+    layout/               AppShell, Sidebar, MarketingLayout, Logo
+    ui/                   Primitives (Card/Badge/Chip), KpiCard, Reveal, CountUp
+    chat/                 Floating + embedded assistant (ChatWidget, ChatPanel)
+    cdmo/                 CDMO result surfaces (FeasibilityReport, PathwaySpine,
+                          EnquiryForm)
+    knowledge/            Discovery/synthesis domain components
 
-- Colours. Orange #F47920 as the accent, white background, slate text.
-- Components. shadcn ui, recharts for charts, Inter font.
-- Principle. Short crisp labels, KPI cards, charts, and compact tables. No long
-  paragraphs. No em dash anywhere.
+  context/                React contexts: Auth (admin), Currency (USD), Chat
+                          (the app-wide conversation, persisted across routes)
+
+  lib/                    Framework-free logic (dependency-light, degrades safely)
+    auth.ts               Admin credential check + session
+    aiConfig.ts           AI key/model resolution
+    openrouter.ts         OpenRouter chat client (model fallback)
+    chatAssistant.ts      Assistant brain: intent, feasibility, pathway
+    casResolve.ts         Identity resolution (PubChem -> CACTUS -> OPSIN)
+    chemClasses.ts        Chemical classes + process chemistries + complexity
+    patents.ts            Patent + literature landscape (PubChem xrefs)
+    cdmoMatch.ts          Manufacturer-capability count (gated by chemistry)
+    worldbank.ts          Market Overview chemical-trade data
+    analytics.ts          Page-view/event recorder for the Admin Dashboard
+    retrosynthesis.ts     Route generation (admin explorer)
+
+  data/                   Bundled datasets: products, suppliers, clients, verified
+                          sources, cdmoPathway, chemicalTrade, contact
+```
+
+Conventions:
+
+- Pages own routing; components stay route-agnostic.
+- Anything touching an API or storage lives in `lib/`, is dependency-light, and
+  degrades gracefully (a failed lookup never breaks the page).
+- Imports use the `@/` alias (`@/components/...`, `@/lib/...`).
+- Motion: reuse `animate-fade-up`, `stagger`, `press`, `Reveal`, `CountUp`;
+  reduced-motion is respected globally.
+
+## Integrating with apacss.com
+
+See `INTEGRATION.md` for subdomain, sub-path and iframe deployment, the SPA
+fallback config, and the brand/contact config points. The app builds to static
+files and works under any path via `VITE_BASE_PATH`.
+
+## Verify
+
+`scripts/verify.mjs` drives the built app in a headless browser end to end.
+`SECURITY.md` records the security audit and hardening recommendations.
