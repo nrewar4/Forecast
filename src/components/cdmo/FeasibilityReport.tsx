@@ -76,6 +76,13 @@ export function FeasibilityReport({
             <Field label="Mol. weight" value={identity?.mw ? `${identity.mw} g/mol` : "N/A"} mono />
           </dl>
         </div>
+
+        {identity?.iupac ? (
+          <div className="border-t border-border px-4 py-2.5">
+            <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">IUPAC name</dt>
+            <dd className="mt-0.5 break-words text-xs font-medium leading-snug text-foreground">{identity.iupac}</dd>
+          </div>
+        ) : null}
       </div>
 
       {/* Description */}
@@ -256,25 +263,32 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Vendor match: count only */}
-      <div className="rounded-xl border border-primary/30 bg-accent/40 p-4">
-        <p className="text-2xl font-bold leading-none tracking-tight text-ink">
-          {match.vendorCount}
-          <span className="ml-1.5 text-sm font-medium text-muted-foreground">capable manufacturers</span>
-        </p>
-        <p className="mt-1 text-[11px] text-muted-foreground">
-          {chemistries.length
-            ? `In the APAC network, assessed as capable of the ${chemistries.join(", ").toLowerCase()} chemistry this needs. Identities are shared after contact.`
-            : "In the APAC network, assessed as able to make this. Identities are shared after contact."}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {match.capabilities.map((c) => (
-            <span key={c} className="rounded-md border border-border bg-card px-2 py-0.5 text-[11px] font-medium text-foreground">
-              {c}
-            </span>
-          ))}
+      {/* Manufacturer match: a prominent, professional highlight of the count */}
+      {match.vendorCount > 0 ? (
+        <div className="overflow-hidden rounded-2xl border border-primary/30 bg-[linear-gradient(135deg,rgba(244,121,32,0.12),transparent_62%)] p-5 shadow-card">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">Manufacturer match</p>
+          <div className="mt-1.5 flex items-baseline gap-2.5">
+            <span className="text-5xl font-extrabold leading-none tracking-tight text-ink tabular-nums">{match.vendorCount}</span>
+            <span className="text-sm font-medium text-muted-foreground">capable manufacturers</span>
+          </div>
+          <p className="mt-2.5 max-w-md text-[11px] leading-snug text-muted-foreground">
+            {chemistries.length
+              ? `India CDMO network vendors matched on the ${chemistries.join(", ").toLowerCase()} chemistry this needs. Identities are shared after contact.`
+              : "India CDMO network vendors assessed as able to make this. Identities are shared after contact."}
+          </p>
         </div>
-      </div>
+      ) : (
+        <div className="rounded-2xl border border-border bg-muted/40 p-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Manufacturer match</p>
+          <p className="mt-1.5 text-base font-semibold text-ink">No matched manufacturer in the network</p>
+          <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+            {chemistries.length
+              ? `None of our vendors are currently set up for the ${chemistries.join(", ").toLowerCase()} chemistry this needs.`
+              : "None of our vendors are currently matched to this product."}{" "}
+            Contact APAC and we will work to source a capable partner.
+          </p>
+        </div>
+      )}
 
       {data.aiSummary ? (
         <p className="rounded-xl border border-border bg-card p-3 text-xs leading-relaxed text-foreground/90">

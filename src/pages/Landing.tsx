@@ -208,7 +208,7 @@ export default function Landing() {
         {/* Divisions + country network */}
         <section className="border-t border-border bg-muted/40">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <SectionHeader kicker="Sourcing and CDMO" title="Cleared to enter your most demanding markets" />
+            <SectionHeader kicker="Sourcing and CDMO" title="Built for the World's Most Regulated Markets" />
             <Reveal delay={130}>
               <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
                 cGMP pharmaceuticals and industrial-scale chemicals, documented to the standard each
