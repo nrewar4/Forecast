@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, SendHorizonal } from "lucide-react";
+import { ArrowRight, ArrowUpRight, SendHorizonal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useChat, type Msg } from "@/context/Chat";
 import { FeasibilityReport } from "@/components/cdmo/FeasibilityReport";
@@ -32,18 +32,34 @@ export function ChatPanel() {
         ))}
 
         {quick.length > 0 && !busy ? (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {quick.map((q) => (
-              <button
-                key={q.label}
-                type="button"
-                onClick={() => handleSend(q.value, q.intent)}
-                className="press rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-card transition hover:border-primary/50 hover:text-primary"
-              >
-                {q.label}
-              </button>
-            ))}
-          </div>
+          quick.some((q) => q.big) ? (
+            <div className="flex flex-col gap-3 pt-2">
+              {quick.map((q) => (
+                <button
+                  key={q.label}
+                  type="button"
+                  onClick={() => handleSend(q.value, q.intent)}
+                  className="press flex w-full items-center justify-between rounded-xl border border-border bg-card px-5 py-4 text-left text-base font-semibold text-foreground shadow-card transition hover:-translate-y-0.5 hover:border-primary/60 hover:text-primary hover:shadow-lift"
+                >
+                  {q.label}
+                  <ArrowRight className="h-5 w-5 text-primary" />
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-2 pt-1">
+              {quick.map((q) => (
+                <button
+                  key={q.label}
+                  type="button"
+                  onClick={() => handleSend(q.value, q.intent)}
+                  className="press rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-card transition hover:border-primary/50 hover:text-primary"
+                >
+                  {q.label}
+                </button>
+              ))}
+            </div>
+          )
         ) : null}
       </div>
 

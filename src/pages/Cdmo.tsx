@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Maximize2, Minimize2, RotateCcw } from "lucide-react";
 import { MarketingLayout } from "@/components/layout/MarketingLayout";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
@@ -29,8 +30,19 @@ const DELIVER = [
 export default function Cdmo() {
   // Grow the embedded assistant once the visitor starts interacting, so it opens
   // compact and expands seamlessly into a working surface as the chat fills.
-  const { messages, busy } = useChat();
+  const { messages, busy, reset } = useChat();
   const active = busy || messages.some((m) => m.role === "user");
+  const [maximized, setMaximized] = useState(false);
+
+  // Lock page scroll while the assistant is expanded to full screen.
+  useEffect(() => {
+    if (!maximized) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [maximized]);
 
   // Suppress the global floating assistant while this page hosts its own.
   useEffect(() => {
@@ -81,15 +93,44 @@ export default function Cdmo() {
 
           {/* Embedded assistant */}
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-lift transition-shadow duration-500 lg:sticky lg:top-24">
-              <div className="border-b border-border bg-ink px-4 py-3">
-                <p className="text-sm font-semibold text-white">APAC CDMO Assistant</p>
-                <p className="text-[11px] text-slate-300">Ask about any product or project</p>
+            <div
+              className={cn(
+                "flex flex-col overflow-hidden border border-border bg-background shadow-lift transition-shadow duration-500",
+                maximized
+                  ? "fixed inset-2 z-50 rounded-2xl sm:inset-4"
+                  : "rounded-2xl lg:sticky lg:top-24",
+              )}
+            >
+              <div className="flex items-center justify-between border-b border-border bg-ink px-4 py-3">
+                <div>
+                  <p className="text-sm font-semibold text-white">APAC CDMO Assistant</p>
+                  <p className="text-[11px] text-slate-300">Ask about any product or project</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={reset}
+                    aria-label="Reset conversation"
+                    title="Reset conversation"
+                    className="press grid h-8 w-8 place-items-center rounded-lg text-slate-300 transition hover:bg-white/10 hover:text-white"
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMaximized((m) => !m)}
+                    aria-label={maximized ? "Restore assistant size" : "Maximize assistant"}
+                    title={maximized ? "Restore size" : "Maximize"}
+                    className="press grid h-8 w-8 place-items-center rounded-lg text-slate-300 transition hover:bg-white/10 hover:text-white"
+                  >
+                    {maximized ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
               <div
                 className={cn(
                   "transition-[height] duration-500 ease-out-expo motion-reduce:transition-none",
-                  active ? "h-[min(86vh,900px)]" : "h-[440px]",
+                  maximized ? "min-h-0 flex-1" : active ? "h-[min(86vh,900px)]" : "h-[440px]",
                 )}
               >
                 <ChatPanel />

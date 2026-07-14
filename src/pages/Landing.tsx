@@ -13,8 +13,8 @@ const OPTIONS: {
   title: string;
   featured?: boolean;
 }[] = [
-  { key: "buy", to: "https://apacss.com/", external: true, title: "Procurement" },
   { key: "knowledge", to: "/knowledge-base", title: "Product Discovery", featured: true },
+  { key: "buy", to: "https://apacss.com/", external: true, title: "Procurement" },
   { key: "custom-synthesis", to: "/cdmo", title: "CDMO" },
 ];
 
@@ -23,8 +23,7 @@ const STATS = [
   { label: "Products", value: 8900, suffix: "+" },
   { label: "Manufacturers", value: 3200, suffix: "+" },
   { label: "Countries", value: 30, suffix: "+" },
-  { label: "Categories", value: 27 },
-  { label: "Divisions", value: 2 },
+  { label: "Industrial Categories", value: 56 },
 ];
 
 const DIVISIONS = [
@@ -182,7 +181,7 @@ export default function Landing() {
           {/* Stat band */}
           <div className="border-t border-border">
             <Reveal>
-              <dl className="mx-auto grid max-w-6xl grid-cols-2 sm:grid-cols-5">
+              <dl className="mx-auto grid max-w-6xl grid-cols-2 sm:grid-cols-4">
                 {STATS.map((s, i) => (
                   <div
                     key={s.label}
@@ -208,7 +207,7 @@ export default function Landing() {
         {/* Divisions + country network */}
         <section className="border-t border-border bg-muted/40">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <SectionHeader kicker="Sourcing and CDMO" title="Built for the World's Most Regulated Markets" />
+            <SectionHeader kicker="Sourcing and CDMO" title="Built for the World's Highly Regulated Markets" />
             <Reveal delay={130}>
               <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
                 cGMP pharmaceuticals and industrial-scale chemicals, documented to the standard each
@@ -237,7 +236,7 @@ export default function Landing() {
 
               <div>
                 <Reveal>
-                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="font-mono text-[13px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                     Manufacturing network by country
                   </p>
                 </Reveal>

@@ -1,11 +1,16 @@
 // Single source of truth for how customers reach APAC. Update here and every
 // contact CTA, enquiry form, and chatbot handoff picks it up.
 export const CONTACT = {
-  phoneDisplay: "092128 03501",
-  // E.164 for tel: links (India, drop the leading 0, prefix +91).
-  phoneHref: "tel:+919212803501",
-  email: "info@apacss.com",
-  emailHref: "mailto:info@apacss.com",
+  // All customer-facing phone numbers. Rendered as clickable tel: links.
+  phones: [
+    { display: "+91 98100 07333", href: "tel:+919810007333" },
+    { display: "+91 92053 00407", href: "tel:+919205300407" },
+  ],
+  // Primary phone, kept for any single-number call site.
+  phoneDisplay: "+91 98100 07333",
+  phoneHref: "tel:+919810007333",
+  email: "cdmo@apacss.com",
+  emailHref: "mailto:cdmo@apacss.com",
   company: "APAC Sourcing Solutions",
   responseSla: "within one business day",
 } as const;

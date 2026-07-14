@@ -157,9 +157,11 @@ export function EnquiryForm({
 export function ContactRow({ className = "" }: { className?: string }) {
   return (
     <div className={"flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm " + className}>
-      <a href={CONTACT.phoneHref} className="press inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary">
-        <Phone className="h-4 w-4 text-primary" /> {CONTACT.phoneDisplay}
-      </a>
+      {CONTACT.phones.map((p) => (
+        <a key={p.href} href={p.href} className="press inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary">
+          <Phone className="h-4 w-4 text-primary" /> {p.display}
+        </a>
+      ))}
       <a href={CONTACT.emailHref} className="press inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary">
         <Mail className="h-4 w-4 text-primary" /> {CONTACT.email}
       </a>

@@ -1,11 +1,13 @@
-// Reads a molecule's chemistry from its PubChem structure (SMILES + name) and
-// returns three things used across the feasibility flow:
+// Reads a molecule's IDENTITY from its PubChem structure (SMILES + name). It is
+// deliberately limited to what the structure can honestly tell us:
 //   - chemicalClasses: the broad compound classes it belongs to (Ester, Amine, ...)
-//   - processChemistries: the broad process chemistries needed to MAKE it
-//     (Halogenation, Nitration, Esterification, ...), which the manufacturer
-//     match is then run against
+//     i.e. what the molecule IS, not how it is made
 //   - complexityScore: 0..1 difficulty, which scales the development timeline
-// Everything derives from the PubChem structure, a verifiable source.
+//
+// It does NOT derive the synthesis route ("how to make it") from the structure.
+// That would be a guess: a functional group present in the product does not tell
+// you the reaction used to install it. The documented route is looked up from
+// verified online sources instead (see lib/synthesisRoute.ts and lib/webChemistry.ts).
 
 import type { ChemIdentity } from "@/lib/casResolve";
 
@@ -67,34 +69,6 @@ const CLASS_LABEL: Record<string, string> = {
   heterocycle: "Heterocycle", aromatic: "Aromatic compound",
 };
 
-// key -> broad process chemistry needed to install that group (what it takes to
-// MAKE it). These names are matched against manufacturer capability.
-const PROCESS_LABEL: Record<string, string> = {
-  nitro: "Nitration",
-  sulfon: "Sulfonation",
-  phosphor: "Phosphorylation",
-  amide: "Amide coupling",
-  ester: "Esterification",
-  nitrile: "Cyanation",
-  carboxyl: "Oxidation",
-  ketone: "Oxidation",
-  aldehyde: "Oxidation",
-  ether: "Etherification",
-  halide: "Halogenation",
-  unsat: "Olefination / elimination",
-  amine: "Amination",
-  alcohol: "Catalytic hydrogenation",
-  heterocycle: "Heterocycle formation",
-  aromatic: "Friedel-Crafts / aromatic substitution",
-};
-
-// Priority so the most defining / specialised chemistries lead the list.
-const PROCESS_ORDER = [
-  "nitro", "sulfon", "halide", "nitrile", "phosphor", "amide", "ester",
-  "amine", "alcohol", "ketone", "aldehyde", "carboxyl", "ether", "unsat",
-  "heterocycle", "aromatic",
-];
-
 // The broad compound classes a molecule belongs to.
 export function chemicalClasses(identity: ChemIdentity | null, name: string): string[] {
   const keys = detect(identity, name);
@@ -106,26 +80,6 @@ export function chemicalClasses(identity: ChemIdentity | null, name: string): st
   for (const d of DETECTORS) if (keys.has(d.key) && !(d.key === "ester" && keys.has("fatty"))) add(CLASS_LABEL[d.key]);
   if (keys.has("heterocycle")) add("Heterocycle");
   else if (keys.has("aromatic")) add("Aromatic compound");
-  return out.slice(0, 5);
-}
-
-// The broad process chemistries needed to manufacture the molecule. This is what
-// the manufacturer capability match is run against.
-export function processChemistries(identity: ChemIdentity | null, name: string): string[] {
-  const keys = detect(identity, name);
-  const out: string[] = [];
-  const seen = new Set<string>();
-  for (const key of PROCESS_ORDER) {
-    if (!keys.has(key)) continue;
-    const label = PROCESS_LABEL[key];
-    if (label && !seen.has(label)) { seen.add(label); out.push(label); }
-  }
-  // Nitro groups are usually installed then reduced to the amine, so surface the
-  // hydrogenation step that pairs with a nitro/amine combination.
-  if (keys.has("nitro") && keys.has("amine") && !seen.has("Catalytic hydrogenation")) {
-    out.push("Catalytic hydrogenation");
-  }
-  if (out.length === 0) out.push("Multistep organic synthesis");
   return out.slice(0, 5);
 }
 

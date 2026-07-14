@@ -1,4 +1,5 @@
 import type { AiConfig } from "./aiConfig";
+import { WEB_MODEL } from "./aiConfig";
 import { chatComplete, type ChatMsg } from "./openrouter";
 
 export type AiPct = { label: string; percent: number };
@@ -62,7 +63,9 @@ export async function researchProduct(
   const system = [
     "You are a chemical product research analyst for a B2B sourcing platform.",
     "Research the product named by the user using the web search results provided, and produce a complete, factual profile.",
-    "Prioritise trustworthy/verifiable sources: producer/manufacturer websites, ICIS / ChemAnalyst / market reports, government and regulatory bodies (EPA, ECHA, FAO), pharmacopoeias, peer-reviewed papers and patents, and Wikipedia for orientation.",
+    "For the chemistry and manufacturing route ('verifiedRoutes', 'mainProcess', 'process', 'primaryRoutes'), report only what published sources document. Do NOT infer the route from the molecule's structure or functional groups.",
+    "Prioritise these verified chemistry references for the route: LibreTexts Chemistry (chem.libretexts.org), the Organic Chemistry Portal (organic-chemistry.org), PubChem 'Methods of Manufacturing', and Wikipedia's Production/Synthesis section.",
+    "Prioritise trustworthy/verifiable sources overall: producer/manufacturer websites, ICIS / ChemAnalyst / market reports, government and regulatory bodies (EPA, ECHA, FAO), pharmacopoeias, peer-reviewed papers and patents, and Wikipedia for orientation.",
     "Always populate the 'sources' array with the real URLs you actually relied on. Prefer official manufacturer homepages for the 'manufacturers' URLs.",
     "Give realistic figures. Percentage arrays (primaryRoutes.share, countryMethods.share, costDrivers.percent, industries.percent) should each sum to roughly 100. If a value is uncertain, give your best estimate.",
     "If the user's text is a misspelling or a synonym/abbreviation, resolve it to the correct chemical and use that as 'name'.",
@@ -76,10 +79,14 @@ export async function researchProduct(
   ];
 
   // Prefer web-grounded answers; if the web plugin errors or is unavailable,
-  // fall back to a normal completion so the user still gets a profile.
+  // fall back to a normal completion so the user still gets a profile. A
+  // web-capable model is requested so the web-search plugin can attach (it is
+  // never added to a free model); chatComplete falls back down the free chain
+  // when the account has no credit.
+  const webCfg: AiConfig = { ...cfg, model: WEB_MODEL };
   let raw: string;
   try {
-    raw = await chatComplete(cfg, messages, signal, { web: true });
+    raw = await chatComplete(webCfg, messages, signal, { web: true });
   } catch (e) {
     if (signal?.aborted) throw e;
     raw = await chatComplete(cfg, messages, signal);

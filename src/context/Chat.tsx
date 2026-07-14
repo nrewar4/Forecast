@@ -99,6 +99,7 @@ type ChatValue = {
   quick: QuickReply[];
   busy: boolean;
   handleSend: (raw: string, intentHint?: Intent) => void;
+  reset: () => void;
 };
 
 const ChatContext = createContext<ChatValue | null>(null);
@@ -167,7 +168,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     const controller = freshController();
     try {
       const data = await runFeasibility(query, cfg, controller.signal);
-      if (!data.match.known && !data.identity) {
+      // Only give up when we resolved nothing at all: not a catalog product, no
+      // PubChem identity, AND no documented route (a curated route can carry the
+      // chemistry even if the identity APIs are momentarily unreachable).
+      if (!data.match.known && !data.identity && !data.route) {
         replace(typingId, {
           kind: "text",
           text: `I searched PubChem, the NCI CACTUS resolver and OPSIN and could not resolve "${query.trim()}" to a specific molecule. Check the spelling, or give me its CAS number or another name and I will assess it.`,
@@ -179,12 +183,19 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       awaiting.current = null;
       lastMatch.current = data.match;
       lastBasis.current = timelineBasis(data);
-      track("cdmo_feasibility", { product: data.match.productName, vendors: String(data.match.vendorCount) });
+      track("cdmo_feasibility", {
+        product: data.match.productName,
+        vendors: String(data.match.vendorCount),
+        matched: String(data.match.matchedCount),
+        category: data.match.category,
+        // Real manufacturer names for the internal APAC admin dashboard only.
+        manufacturers: data.match.shortlist.map((v) => v.name).join(" | "),
+      });
       replace(typingId, { kind: "feasibility", data });
       pushBot({
         kind: "text",
         text: data.match.matchedCount > 0
-          ? `I ranked ${data.match.matchedCount} manufacturer${data.match.matchedCount === 1 ? "" : "s"} in our India network on the exact chemistry ${data.match.productName} needs, scored on their own listed capabilities (identities shared after contact). How should we run the project? Choose your priority and I will project the milestones.`
+          ? `${data.match.matchedCount} manufacturer${data.match.matchedCount === 1 ? "" : "s"} in our India network can run the exact chemistry ${data.match.productName} needs (open "Rank these manufacturers" in the card to see them scored on their own listed capabilities; identities shared after contact). How should we run the project? Choose your priority and I will project the milestones.`
           : `No vendor in our current network lists enough of the ${data.chemistries.join(", ").toLowerCase() || "chemistry"} this needs, so APAC would source a capable partner. I can still map the development timeline, or you can talk to APAC.`,
       });
       // The feasibility card already carries the single "Discuss this with APAC"
@@ -409,8 +420,26 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Clear the conversation and start over from the greeting. Aborts any in-flight
+  // generation and wipes the persisted transcript so a reload also starts clean.
+  function reset() {
+    abortRef.current?.abort();
+    awaiting.current = null;
+    lastMatch.current = null;
+    lastBasis.current = null;
+    setBusy(false);
+    try {
+      sessionStorage.removeItem(STORE_KEY);
+    } catch {
+      // storage unavailable; the in-memory reset below still applies
+    }
+    setMessages([{ id: nextId(), role: "bot", kind: "text", text: GREETING }]);
+    setQuick(START_REPLIES);
+    track("chat_reset", {});
+  }
+
   return (
-    <ChatContext.Provider value={{ messages, quick, busy, handleSend }}>{children}</ChatContext.Provider>
+    <ChatContext.Provider value={{ messages, quick, busy, handleSend, reset }}>{children}</ChatContext.Provider>
   );
 }
 

@@ -19,7 +19,12 @@ import { chemicalClasses, complexityScore } from "@/lib/chemClasses";
 import { fetchIpLandscape, type IpLandscape } from "@/lib/patents";
 import { fetchProperties, type ChemProperties } from "@/lib/properties";
 import { fetchHazards, type HazardInfo } from "@/lib/hazards";
-import { fetchSynthesisRoute, type SynthesisRoute } from "@/lib/synthesisRoute";
+import { fetchSynthesisRoute, chemistryConsultLinks, type SynthesisRoute, type ConsultLink } from "@/lib/synthesisRoute";
+import { researchSynthesisRoute } from "@/lib/webChemistry";
+import { retroSynthesisRoute } from "@/lib/retrosynthesis";
+import type { PubchemResult } from "@/lib/pubchem";
+import { findCuratedRoute, type CuratedRoute } from "@/data/verifiedRoutes";
+import { requiredCapabilities, capabilityLabel } from "@/lib/chemLexicon";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
 import { slug } from "@/lib/utils";
 import {
@@ -162,16 +167,15 @@ export async function understand(
   return { intent: keyword };
 }
 
-export type QuickReply = { label: string; value: string; intent?: Intent };
+export type QuickReply = { label: string; value: string; intent?: Intent; big?: boolean };
 
 export const GREETING =
   "Hello. I am the APAC sourcing assistant. Tell me what you are working on and I will point you to the fastest path. What brings you here today?";
 
 export const START_REPLIES: QuickReply[] = [
-  { label: "I want a product made", value: "I want to get a product manufactured", intent: "feasibility" },
-  { label: "Plan a CDMO project", value: "Help me plan a CDMO development project", intent: "pathway" },
-  { label: "Explore products", value: "I want to explore products", intent: "discovery" },
-  { label: "Talk to APAC", value: "I would like to contact APAC", intent: "contact" },
+  { label: "I want a product made", value: "I want to get a product manufactured", intent: "feasibility", big: true },
+  { label: "Plan a CDMO Project", value: "Help me plan a CDMO development project", intent: "pathway", big: true },
+  { label: "Contact APAC", value: "I would like to contact APAC", intent: "contact", big: true },
 ];
 
 export const SITUATION_REPLIES: QuickReply[] = ARCHETYPES.map((a) => ({
@@ -185,12 +189,15 @@ export type Feasibility = {
   query: string;
   identity: ChemIdentity | null;
   description: string | null;
-  /** broad chemical classes read from the PubChem structure */
+  /** broad chemical classes read from the PubChem structure (identity, not the route) */
   classes: string[];
-  /** broad process chemistries needed to make it (Halogenation, Nitration, ...) */
+  /** the documented process chemistries needed to make it, taken ONLY from a
+   *  verified online route (empty when none was found; we never guess from structure) */
   chemistries: string[];
   /** the verified, molecule-specific synthesis route from online sources, when found */
   route: SynthesisRoute | null;
+  /** verified references to look the route up in when no documented route was found */
+  consultLinks: ConsultLink[];
   /** chemical + physical properties from PubChem */
   properties: ChemProperties | null;
   /** GHS hazard classification from PubChem */
@@ -250,6 +257,28 @@ function collectSources(identity: ChemIdentity | null, productName: string): Ver
   return out.filter((s) => (seen.has(s.url) ? false : (seen.add(s.url), true)));
 }
 
+// Resolves a hand-authored, source-cited route for the molecule (by name or CAS)
+// and shapes it like any other SynthesisRoute. Fully offline: no key, no credit,
+// no network. The vendor-matchable categories are derived from the named
+// reactions via the shared lexicon, so the manufacturer match keys off exactly
+// the chemistry shown. Marked "verified" because each entry is cited to a source.
+function curatedRoute(query: string, name: string, identity: ChemIdentity | null): SynthesisRoute | null {
+  const entry: CuratedRoute | null = findCuratedRoute(
+    [query, name, identity?.name, identity?.iupac, ...(identity?.synonyms ?? [])],
+    [identity?.primaryCas, ...(identity?.casList ?? [])],
+  );
+  if (!entry) return null;
+  const categories = requiredCapabilities(entry.reactions).map(capabilityLabel);
+  return {
+    reactions: entry.reactions,
+    categories,
+    steps: entry.steps,
+    source: entry.source,
+    confirmedByName: false,
+    grounding: "verified",
+  };
+}
+
 // Runs the whole Path B lookup for any product, in or out of our catalog:
 // resolve identity + CAS from PubChem, pull a short description, read the broad
 // chemical classes from the structure, fetch the patent + literature landscape
@@ -281,26 +310,65 @@ export async function runFeasibility(
   const classes = chemicalClasses(identity, nameForChem);
   const complexity = complexityScore(identity, nameForChem);
 
-  // Fetched in parallel so the card fills fast. The synthesis route is looked up
-  // ONLINE (a web-grounded LLM lookup, grounded further by PubChem Methods of
-  // Manufacturing + Wikipedia), never guessed from the structure, so it gets a
-  // longer budget than the other, purely-PubChem lookups. Each is time-boxed and
-  // best-effort, so a slow or missing one never blocks the rest.
+  // A hand-authored, source-cited route, resolved first and fully offline (no key,
+  // no credit, no network). When present it is authoritative, so we skip the
+  // billed AI web search entirely.
+  const curated = curatedRoute(query, nameForChem, identity);
+
+  // From PubChem and the wider web, fetched in parallel so the card fills fast:
+  // the verified molecule-specific synthesis route (Methods of Manufacturing +
+  // Wikipedia), the patent + literature landscape, the chemical + physical
+  // properties, and the GHS hazard classification. Each is time-boxed and
+  // best-effort, so a slow or missing one never blocks the rest. The route runs
+  // even without a CID because Wikipedia can be keyed on the name alone.
+  // The molecule as the retrosynthesis engine expects it, reusing what we already
+  // resolved so it does not hit PubChem again and still runs on a name alone.
+  const moleculeForRetro: PubchemResult = {
+    smiles: identity?.smiles ?? null,
+    formula: identity?.formula ?? null,
+    cid: identity?.cid ?? null,
+    mw: identity?.mw ?? null,
+    name: identity?.name ?? nameForChem,
+  };
+
   const cid = identity?.cid || 0;
-  const [route, ip, properties, hazards] = await Promise.all([
-    identity
-      ? withTimeout((s) => fetchSynthesisRoute(identity, cfg, s), 20000, null as SynthesisRoute | null, signal)
+  // The non-LLM lookups run in parallel (they are plain fetches): the documented
+  // PubChem/Wikipedia route, the patent landscape, properties and hazards.
+  const [structuredRoute, ip, properties, hazards] = await Promise.all([
+    !curated && identity
+      ? withTimeout((s) => fetchSynthesisRoute(identity, s), 8000, null as SynthesisRoute | null, signal)
       : Promise.resolve(null as SynthesisRoute | null),
     cid ? withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal) : Promise.resolve(null as IpLandscape | null),
     cid ? withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal) : Promise.resolve(null as ChemProperties | null),
     cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
   ]);
 
-  // The chemistry shown, and the chemistry the manufacturer match runs on, come
-  // ONLY from the documented online route. We do not fall back to a
-  // structure-derived guess: if no route was verified online, the report says so
-  // honestly and the match is left empty rather than matched on a guess.
-  const chemistries = route?.categories ?? [];
+  // The chemistry shown, never inferred from the structure. Priority:
+  //   1. a hand-authored, source-cited curated route (no key/credit),
+  //   2. a primary-database route (PubChem "Methods of Manufacturing" + Wikipedia),
+  //   3. the retrosynthesis engine: the most SPECIFIC chemistry (per-step reagents
+  //      and conditions),
+  //   4. AI web-search research (last resort).
+  // The LLM sources (3, 4) run SEQUENTIALLY, not in parallel, so we never fire
+  // several free-tier model calls at once (which rate-limits them all). We only
+  // reach for the next source when the previous one produced nothing.
+  let route: SynthesisRoute | null = curated ?? structuredRoute;
+  if (!route && hasApiKey(cfg)) {
+    route = await withTimeout((s) => retroSynthesisRoute(nameForChem, cfg, s, moleculeForRetro), 20000, null as SynthesisRoute | null, signal);
+  }
+  if (!route && hasApiKey(cfg)) {
+    route = await withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 22000, null as SynthesisRoute | null, signal);
+  }
+
+  // Process chemistries shown and matched against manufacturers come ONLY from the
+  // verified route. No route means no chemistry claim (honest by construction).
+  const chemistries = route?.categories?.length ? route.categories : [];
+  const consultLinks = chemistryConsultLinks(nameForChem, identity?.cid || undefined);
+
+  // The manufacturer match runs on the SPECIFIC chemistry the molecule needs, taken
+  // from the verified route (its exact named reactions plus broad categories). With
+  // no verified route there is no chemistry to screen against, so no vendors are
+  // matched rather than matching on a structural guess.
   const requirements = route ? [...route.reactions, ...route.categories] : [];
   const match = matchVendors(query, displayName, requirements);
 
@@ -320,7 +388,7 @@ export async function runFeasibility(
     sources.push({ name: route.source.name, url: route.source.url });
   }
 
-  const result: Feasibility = { query, identity, description, classes, chemistries, route, properties, hazards, ip, complexity, match, sources };
+  const result: Feasibility = { query, identity, description, classes, chemistries, route, consultLinks, properties, hazards, ip, complexity, match, sources };
 
   // Optional natural-language précis, only when a key exists and only as polish.
   if (hasApiKey(cfg)) {
@@ -343,11 +411,20 @@ export async function runFeasibility(
         {
           role: "system",
           content:
-            "You are APAC's CDMO sourcing assistant. In 2 or 3 concise sentences, tell a B2B customer how APAC can help them manufacture this product. Be specific and factual, no marketing fluff, no invented numbers, and do not name any vendor. Never use an em dash.",
+            "You are APAC's CDMO sourcing assistant. In 2 or 3 concise sentences, tell a B2B customer how APAC can help them manufacture this product. Be specific and factual, no marketing fluff, no invented numbers, and do not name any vendor. Do NOT state or invent any synthesis route, reaction, or process chemistry unless it appears verbatim in the facts you are given; if no route is listed, speak generally about APAC's sourcing and qualification support instead of naming a chemistry. Never use an em dash.",
         },
         { role: "user", content: facts },
       ];
-      result.aiSummary = (await chatComplete(cfg, messages, signal)).trim();
+      // Time-boxed: the précis is pure polish, so it must never delay the report.
+      // On a slow or rate-limited model (or a no-credit key backing off) it is
+      // simply dropped and the deterministic report stands on its own.
+      const summary = await withTimeout(
+        (s) => chatComplete(cfg, messages, s),
+        7000,
+        "",
+        signal,
+      );
+      if (summary.trim()) result.aiSummary = summary.trim();
     } catch {
       // LLM unavailable; the deterministic report already stands on its own.
     }

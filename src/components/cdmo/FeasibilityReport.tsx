@@ -1,4 +1,5 @@
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, ExternalLink, ListOrdered } from "lucide-react";
 import type { Feasibility } from "@/lib/chatAssistant";
 import type { SourceCount } from "@/lib/patents";
 import { cn } from "@/lib/utils";
@@ -37,7 +38,10 @@ export function FeasibilityReport({
   onContact?: () => void;
   compact?: boolean;
 }) {
-  const { identity, description, classes, route, properties, hazards, ip, match, sources } = data;
+  const { identity, description, classes, route, consultLinks, properties, hazards, ip, match, sources } = data;
+  // Manufacturer ranking is opt-in: by default we show only how many capable
+  // vendors were found, and the user asks for the ranked shortlist explicitly.
+  const [showRanking, setShowRanking] = useState(false);
   const cid = identity?.cid ?? null;
   const cas = identity?.primaryCas ?? null;
   const structure = cid
@@ -175,48 +179,120 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Core process chemistry, looked up ONLINE for this specific molecule (never
-          guessed from the structure). Shows the exact named reactions, the route
-          summary and starting materials, and cites how it was verified. */}
+      {/* Core process chemistry needed to make it. This is the ACTUAL documented
+          route found online (PubChem Methods of Manufacturing, Wikipedia, or a
+          web search of verified references), never inferred from the structure.
+          When no documented route is found we say so and link the verified
+          references for the user to look it up, rather than showing a guess. */}
       {route && route.reactions.length ? (
         <div className="rounded-xl border border-primary/30 bg-card p-4">
           <div className="mb-1 flex items-center justify-between gap-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry to make it</p>
             <a href={route.source.url} target="_blank" rel="noreferrer noopener" className="shrink-0 text-[10px] font-medium text-primary hover:underline">
-              {groundingLabel(route.grounding)} · {route.source.name}
+              {route.grounding === "verified" ? "Verified" : route.grounding === "web" ? "Web-researched" : "AI-researched"} · {route.source.name}
             </a>
           </div>
           <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
-            The specific reactions its documented synthesis uses, in order.
+            {route.grounding === "verified"
+              ? `The specific reactions its documented synthesis uses${route.confirmedByName ? ", confirmed against the IUPAC name" : ""}.`
+              : route.grounding === "web"
+                ? "The reactions its published synthesis uses, extracted from live web-search results. Verify against the cited source before relying on it."
+                : route.detail && route.detail.length
+                  ? "The specific step-by-step chemistry to make it, from the retrosynthesis engine: each reaction with its reagents and conditions. AI/ML-generated, verify before relying on it."
+                  : "The reactions its published synthesis uses, researched from chemistry references. Verify against the cited source before relying on it."}
           </p>
           <div className="mb-3 flex flex-wrap gap-1.5">
-            {route.reactions.map((r, i) => (
-              <span key={r} className="inline-flex items-center gap-1.5 rounded-lg border border-primary/40 bg-accent/60 px-2.5 py-1 text-xs font-semibold text-ink">
-                <span className="font-mono text-[10px] text-primary tabular-nums">{i + 1}</span>
+            {route.reactions.map((r) => (
+              <span key={r} className="rounded-lg border border-primary/40 bg-accent/60 px-2.5 py-1 text-xs font-semibold text-ink">
                 {r}
               </span>
             ))}
           </div>
-          {route.steps.length ? (
+          {/* Very specific, per-step chemistry when the retrosynthesis engine
+              supplied it: exact reaction, reagents/catalysts, conditions, why. */}
+          {route.detail && route.detail.length ? (
+            <ol className="mb-3 space-y-2">
+              {route.detail.map((d, i) => (
+                <li key={i} className="rounded-lg border border-border bg-muted/30 p-2.5">
+                  <div className="flex items-baseline gap-2">
+                    <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-primary/15 text-[9px] font-bold text-primary tabular-nums">{i + 1}</span>
+                    <p className="text-[11px] font-semibold text-ink">{d.reaction}</p>
+                  </div>
+                  {d.reactants.length ? (
+                    <p className="mt-1 text-[10px] leading-snug text-foreground/80">
+                      <span className="font-semibold text-muted-foreground">From:</span> {d.reactants.join(" + ")}
+                    </p>
+                  ) : null}
+                  {d.reagents.length ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-foreground/80">
+                      <span className="font-semibold text-muted-foreground">Reagents:</span> {d.reagents.join(", ")}
+                    </p>
+                  ) : null}
+                  {d.conditions ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-foreground/80">
+                      <span className="font-semibold text-muted-foreground">Conditions:</span> {d.conditions}
+                    </p>
+                  ) : null}
+                  {d.explanation ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-muted-foreground">{d.explanation}</p>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+          ) : route.steps.length ? (
             <ul className="mb-3 space-y-1 border-l-2 border-primary/30 pl-3">
               {route.steps.map((s) => (
                 <li key={s} className="text-[11px] leading-snug text-foreground/80">{s}</li>
               ))}
             </ul>
           ) : null}
-          {route.startingMaterials.length ? (
-            <p className="text-[11px] leading-snug text-muted-foreground">
-              <span className="font-semibold text-foreground/70">Starting materials:</span> {route.startingMaterials.join(", ")}
-            </p>
+          {route.startingMaterials && route.startingMaterials.length ? (
+            <div className="mb-3">
+              <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Starting materials</p>
+              <div className="flex flex-wrap gap-1.5">
+                {route.startingMaterials.map((m) => (
+                  <span key={m} className="rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-800">{m}</span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {route.categories.length ? (
+            <div className="border-t border-border pt-2.5">
+              <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Broad categories matched to manufacturers
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {route.categories.map((c) => (
+                  <span key={c} className="rounded-full border border-border bg-muted/50 px-2.5 py-0.5 text-[11px] font-medium text-foreground">
+                    {c}
+                  </span>
+                ))}
+              </div>
+            </div>
           ) : null}
         </div>
       ) : (
-        <div className="rounded-xl border border-border bg-muted/40 p-4">
+        <div className="rounded-xl border border-border bg-card p-4">
           <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Core chemistry to make it</p>
-          <p className="text-[11px] leading-relaxed text-muted-foreground">
-            We could not verify a documented synthesis route for this molecule from online sources, so we are not
-            showing one. We do not infer a route from the structure. Contact APAC and our chemists will scope the route directly.
+          <p className="mb-2.5 text-[11px] leading-relaxed text-muted-foreground">
+            We could not find a documented synthesis route for this molecule in our verified
+            sources, so we are not showing one. We do not infer the chemistry from the
+            structure. Look up the published route in these references:
           </p>
+          <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+            {consultLinks.map((l) => (
+              <a
+                key={l.url}
+                href={l.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1 text-[11px] font-medium text-primary hover:underline"
+              >
+                {l.name}
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            ))}
+          </div>
         </div>
       )}
 
@@ -288,22 +364,36 @@ export function FeasibilityReport({
         </div>
       ) : null}
 
-      {/* Manufacturer match: a ranked, anonymized shortlist scored on the exact
-          chemistry this product needs. Names are revealed only after contact. */}
+      {/* Manufacturer match. By default we show only how many network vendors can
+          run this chemistry. Ranking them is opt-in: the user chooses to reveal a
+          scored shortlist. Names are revealed only after contact. */}
       {match.matchedCount > 0 ? (
         <div className="overflow-hidden rounded-2xl border border-primary/30 bg-[linear-gradient(135deg,rgba(244,121,32,0.10),transparent_60%)] p-4 shadow-card sm:p-5">
           <div className="flex items-baseline justify-between gap-2">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">Manufacturer shortlist</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">Capable manufacturers</p>
             <span className="text-[10px] font-medium text-muted-foreground">{match.assessed} network vendors screened</span>
           </div>
           <div className="mt-1 flex items-baseline gap-2.5">
             <span className="text-4xl font-extrabold leading-none tracking-tight text-ink tabular-nums">{match.matchedCount}</span>
-            <span className="text-sm font-medium text-muted-foreground">ranked on this exact chemistry</span>
+            <span className="text-sm font-medium text-muted-foreground">can run this chemistry</span>
           </div>
           <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
-            Scored on each vendor&apos;s own listed chemistry against the {match.requiredCapabilities.length} specific {match.requiredCapabilities.length === 1 ? "chemistry" : "chemistries"} this product needs. Identities are shared after you contact APAC.
+            Screened on each vendor&apos;s own listed chemistry against the {match.requiredCapabilities.length} specific {match.requiredCapabilities.length === 1 ? "chemistry" : "chemistries"} this product needs. Identities are shared after you contact APAC.
           </p>
 
+          {/* Opt-in ranking control */}
+          <button
+            type="button"
+            onClick={() => setShowRanking((v) => !v)}
+            aria-expanded={showRanking}
+            className="press mt-3 inline-flex items-center gap-1.5 rounded-lg border border-primary/40 bg-card px-3 py-1.5 text-[11px] font-semibold text-primary transition hover:bg-accent/60"
+          >
+            <ListOrdered className="h-3.5 w-3.5" />
+            {showRanking ? "Hide ranking" : "Rank these manufacturers"}
+          </button>
+
+          {showRanking ? (
+          <>
           <ol className="mt-3 space-y-2">
             {match.shortlist.map((v) => (
               <li key={v.rank} className="rounded-xl border border-border bg-card/80 p-3">
@@ -359,13 +449,15 @@ export function FeasibilityReport({
               Showing the top {match.shortlist.length} of {match.matchedCount} matched manufacturers.
             </p>
           ) : null}
+          </>
+          ) : null}
           <p className="mt-3 border-t border-border pt-2 text-[10px] leading-snug text-muted-foreground">
             A chemistry match does not confirm available capacity, willingness, freedom to operate, or GMP status; those are verified during qualification.
           </p>
         </div>
       ) : (
         <div className="rounded-2xl border border-border bg-muted/40 p-5">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Manufacturer shortlist</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Capable manufacturers</p>
           <p className="mt-1.5 text-base font-semibold text-ink">No network vendor lists enough of this chemistry</p>
           <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
             {match.requiredCapabilities.length
@@ -422,13 +514,6 @@ export function FeasibilityReport({
       ) : null}
     </div>
   );
-}
-
-function groundingLabel(g: "web" | "pubchem" | "wikipedia" | "text"): string {
-  if (g === "web") return "Verified online";
-  if (g === "pubchem") return "PubChem";
-  if (g === "wikipedia") return "Wikipedia";
-  return "Source";
 }
 
 function tierClass(tier: "A" | "B" | "C"): string {

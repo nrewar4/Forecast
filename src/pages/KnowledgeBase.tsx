@@ -71,7 +71,7 @@ export default function KnowledgeBase() {
   return (
     <AppShell
       title="Product Discovery"
-      subtitle="Search 8,900+ products for manufacturing routes, process chemistry, cost drivers, end uses and indicative pricing."
+      subtitle="Search 8,900+ products for manufacturing routes, process chemistry, cost drivers and end uses."
     >
       <AiProductSearch
         onPick={(name) => {
@@ -500,29 +500,6 @@ export default function KnowledgeBase() {
                   ))}
                 </div>
               )}
-            </CardContent>
-          </Card>
-
-          {/* Pricing */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle>Pricing</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-2">
-              <div className="flex flex-wrap items-center gap-6">
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Range</p>
-                  <p className="mt-0.5 text-lg font-semibold text-foreground">{product.priceRange}</p>
-                </div>
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Indicative</p>
-                  <p className="mt-0.5 text-lg font-semibold text-primary">{product.priceIndicative}</p>
-                </div>
-              </div>
-              <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-                <FlaskConical className="h-3.5 w-3.5 text-primary" />
-                Trade based median from Datamyne, refine with ICIS or Platts quotations.
-              </p>
             </CardContent>
           </Card>
 

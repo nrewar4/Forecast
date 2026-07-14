@@ -26,6 +26,8 @@ export type VendorMatch = {
   rank: number;
   /** anonymized public label; the real name is shared only after contact */
   label: string;
+  /** real vendor legal name; used only in the internal APAC admin dashboard, never in public UI */
+  name: string;
   country: string;
   tier: VendorTier;
   confidence: "High" | "Medium" | "Limited";
@@ -147,6 +149,7 @@ function screen(requirements: string[], productName: string): {
     const score = coverage * 100 + Math.min(depth, 20) * 0.4 + (mention ? 60 : 0);
 
     scored.push({
+      name: v.n,
       country: v.country || "India",
       tier,
       confidence: mention ? "High" : confidenceFor(coverage, coveredIds.length),

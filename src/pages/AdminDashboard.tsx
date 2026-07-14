@@ -144,6 +144,28 @@ export default function AdminDashboard() {
 
   const recent = useMemo(() => [...views].sort((a, b) => b.t - a.t).slice(0, 12), [views]);
 
+  // Product queries run through the assistant, newest first, with the real
+  // manufacturers matched to each one. Internal to APAC staff only.
+  const productQueries = useMemo(
+    () =>
+      events
+        .filter((e) => e.name === "cdmo_feasibility" && e.data.product)
+        .sort((a, b) => b.t - a.t)
+        .slice(0, 40)
+        .map((e) => ({
+          t: e.t,
+          session: e.session,
+          product: e.data.product,
+          category: e.data.category || "",
+          matched: Number(e.data.matched ?? e.data.vendors ?? 0),
+          manufacturers: (e.data.manufacturers ?? "")
+            .split(" | ")
+            .map((s) => s.trim())
+            .filter(Boolean),
+        })),
+    [events],
+  );
+
   const manufacturerCount = supplierGroups.reduce((n, g) => n + g.suppliers.length, 0);
 
   function onClear() {
@@ -176,6 +198,67 @@ export default function AdminDashboard() {
         <KpiCard icon={GitBranch} label="Pathways built, 7 days" value={String(pathways7)} sub="development plans" />
         <KpiCard icon={Send} label="CDMO enquiries" value={String(enquiriesAll)} sub="all-time leads captured" />
       </div>
+
+      {/* Product queries and the manufacturers matched to each (APAC internal) */}
+      <h2 className="mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        Product queries and matched manufacturers
+      </h2>
+      <Card className="mt-3">
+        <CardHeader>
+          <CardTitle>What visitors asked to have made</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-3">
+          {productQueries.length === 0 ? (
+            <p className="py-8 text-center text-sm text-muted-foreground">
+              No product queries yet. When a visitor asks the assistant to assess a product, it appears here with
+              the network manufacturers it matched.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
+                    <th className="py-2 pr-4 font-medium">Time</th>
+                    <th className="py-2 pr-4 font-medium">Product</th>
+                    <th className="py-2 pr-4 font-medium">Category</th>
+                    <th className="py-2 pr-4 font-medium">Matched</th>
+                    <th className="py-2 font-medium">Manufacturers matched</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {productQueries.map((q, i) => (
+                    <tr key={i} className="border-b border-border/60 align-top last:border-0">
+                      <td className="py-2 pr-4 whitespace-nowrap text-muted-foreground">
+                        {new Date(q.t).toLocaleString()}
+                      </td>
+                      <td className="py-2 pr-4 font-medium text-foreground">{q.product}</td>
+                      <td className="py-2 pr-4 text-muted-foreground">{q.category || "—"}</td>
+                      <td className="py-2 pr-4 tabular-nums text-foreground">{q.matched}</td>
+                      <td className="py-2">
+                        {q.manufacturers.length === 0 ? (
+                          <span className="text-muted-foreground">No network match</span>
+                        ) : (
+                          <div className="flex flex-wrap gap-1.5">
+                            {q.manufacturers.map((m, j) => (
+                              <span
+                                key={j}
+                                className="inline-flex items-center gap-1 rounded-md border border-border bg-muted/60 px-2 py-0.5 text-xs font-medium text-foreground"
+                              >
+                                <Factory className="h-3 w-3 text-primary" />
+                                {m}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {views.length === 0 ? (
         <div className="mt-6">
