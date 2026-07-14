@@ -353,36 +353,40 @@ export async function runFeasibility(
   // several free-tier model calls at once (which rate-limits them all). We only
   // reach for the next source when the previous one produced nothing.
   let route: SynthesisRoute | null = curated ?? structuredRoute;
+  // Patent + WIPO + Espacenet + literature + web research runs FIRST (after the
+  // curated/primary-database routes), because searching those sources for the
+  // real, documented chemistry is exactly what was asked for. It returns the
+  // exact per-step chemistry and cites the patent/paper it came from.
   if (!route && hasApiKey(cfg)) {
-    route = await withTimeout((s) => retroSynthesisRoute(nameForChem, cfg, s, moleculeForRetro), 20000, null as SynthesisRoute | null, signal);
+    route = await withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 26000, null as SynthesisRoute | null, signal);
   }
+  // Model-knowledge retrosynthesis (per-step reagents/conditions) is the reliable
+  // fallback so an established chemical still returns a route even with no web
+  // search available (no OpenRouter credit and no SearXNG instance configured).
   if (!route && hasApiKey(cfg)) {
-    route = await withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 22000, null as SynthesisRoute | null, signal);
+    route = await withTimeout((s) => retroSynthesisRoute(nameForChem, cfg, s, moleculeForRetro), 22000, null as SynthesisRoute | null, signal);
   }
 
-  // Niche enrichment. When a route was found but carries only broad reaction
-  // names (no per-step reagents/conditions), mine the patent + WIPO + literature
-  // for the EXACT chemistry (specific reagents, catalysts, ligands, conditions)
-  // and the process patent it comes from, then merge it in. This is what turns a
-  // broad "Halogenation, Oxidation" answer into the specific transformations that
-  // actually distinguish one capable manufacturer from another. Best-effort and
-  // time-boxed, so a slow or missing lookup never blocks the report.
-  let patentRoute: SynthesisRoute | null = null;
+  // Niche enrichment. When a route came from a source without per-step chemistry
+  // (a PubChem / Wikipedia prose route giving only broad reaction names), fill in
+  // the EXACT reagents/catalysts/conditions from the retrosynthesis engine, so the
+  // card shows the specific transformations, not just a broad category.
+  let enrichRoute: SynthesisRoute | null = null;
   if (route && !(route.detail && route.detail.length) && hasApiKey(cfg)) {
-    patentRoute = await withTimeout(
-      (s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s),
-      22000,
+    enrichRoute = await withTimeout(
+      (s) => retroSynthesisRoute(nameForChem, cfg, s, moleculeForRetro),
+      20000,
       null as SynthesisRoute | null,
       signal,
     );
-    if (patentRoute?.detail?.length) {
+    if (enrichRoute?.detail?.length) {
       const mergedReactions = [...route.reactions];
-      for (const r of patentRoute.reactions) if (!mergedReactions.includes(r)) mergedReactions.push(r);
+      for (const r of enrichRoute.reactions) if (!mergedReactions.includes(r)) mergedReactions.push(r);
       route = {
         ...route,
         reactions: mergedReactions.slice(0, 10),
-        detail: patentRoute.detail,
-        startingMaterials: route.startingMaterials?.length ? route.startingMaterials : patentRoute.startingMaterials,
+        detail: enrichRoute.detail,
+        startingMaterials: route.startingMaterials?.length ? route.startingMaterials : enrichRoute.startingMaterials,
       };
     }
   }
@@ -414,9 +418,9 @@ export async function runFeasibility(
   if (route && !sources.some((s) => s.url === route.source.url)) {
     sources.push({ name: route.source.name, url: route.source.url });
   }
-  // Cite the process patent / literature the niche chemistry was mined from.
-  if (patentRoute?.source?.url && !sources.some((s) => s.url === patentRoute!.source.url)) {
-    sources.push({ name: patentRoute.source.name, url: patentRoute.source.url });
+  // Cite the source the enrichment per-step chemistry was derived from.
+  if (enrichRoute?.source?.url && !sources.some((s) => s.url === enrichRoute!.source.url)) {
+    sources.push({ name: enrichRoute.source.name, url: enrichRoute.source.url });
   }
 
   const result: Feasibility = { query, identity, description, classes, chemistries, route, consultLinks, properties, hazards, ip, complexity, match, sources };

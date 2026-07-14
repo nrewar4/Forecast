@@ -25,6 +25,7 @@ import { requiredCapabilities, capabilityLabel } from "./chemLexicon";
 import type { SynthesisRoute, RouteStepDetail } from "./synthesisRoute";
 import { cacheGet, cacheSet, DAY } from "./aiCache";
 import { hasWebSearch, searchWeb, type SearchResult } from "./search";
+import { searchLiterature } from "./openalex";
 
 type RawStep = {
   reaction?: string;
@@ -95,12 +96,83 @@ export async function researchSynthesisRoute(
   if (hasWebSearch()) {
     route = await fromSearxng(cfg, name, iupac, signal);
   }
-  // Path 2: OpenRouter web plugin (billed) or free-model knowledge fallback.
+  // Path 2: OpenAlex scholarly literature (keyless, CORS, NO OpenRouter credit).
+  // Real paper abstracts about the synthesis are fetched and a free model extracts
+  // the documented route from them. This gives genuine literature grounding even
+  // when there is no OpenRouter credit for the billed web plugin.
+  if (!route) {
+    route = await fromLiterature(cfg, name, iupac, signal);
+  }
+  // Path 3: OpenRouter web plugin (billed, searches Google Patents/WIPO/Scholar)
+  // or, with no credit, a free model answering from its own knowledge.
   if (!route) {
     route = await fromModel(cfg, name, iupac, signal);
   }
 
   if (route) cacheSet(key, route, DAY);
+  return route;
+}
+
+// --- Path 2: OpenAlex literature-grounded (keyless, no credit) -------------
+async function fromLiterature(
+  cfg: AiConfig,
+  name: string,
+  iupac: string | null,
+  signal?: AbortSignal,
+): Promise<SynthesisRoute | null> {
+  // Pull real papers about how the compound is made. Two focused queries, run in
+  // parallel, then keep the abstracts that actually discuss making it.
+  let papers;
+  try {
+    const [a, b] = await Promise.all([
+      searchLiterature(`${name} synthesis`, signal),
+      searchLiterature(`${name} preparation process`, signal),
+    ]);
+    papers = [...a, ...b];
+  } catch (e) {
+    if (signal?.aborted) throw e;
+    return null;
+  }
+  const seen = new Set<string>();
+  const useful = papers
+    .filter((p) => p.abstract && p.abstract.length > 80)
+    .filter((p) => /synthesi|prepar|reaction|route|process|cataly|obtain|react/i.test(p.abstract))
+    .filter((p) => (seen.has(p.title) ? false : (seen.add(p.title), true)))
+    .slice(0, 6);
+  if (useful.length === 0) return null;
+
+  const context = useful
+    .map((p, i) => `[${i + 1}] ${p.title}${p.journal ? ` (${p.journal}${p.year ? `, ${p.year}` : ""})` : ""}\n${p.abstract.slice(0, 900)}`)
+    .join("\n\n");
+
+  const system = [
+    "You are a process-chemistry researcher. Using the scientific paper abstracts provided (from OpenAlex, a Google Scholar-like index), report how the compound is ACTUALLY synthesised.",
+    "Combine the abstracts with your own knowledge of the established route for this compound. Give the EXACT per-step chemistry: the specific named reaction, reactants, reagents/catalysts/ligands/solvents, and conditions.",
+    "Most named/catalogued chemicals have a known route; if the abstracts are thin but you know the established synthesis of this real compound, report it and set found=true. Only set found=false if it is genuinely obscure with no basis. Do NOT invent a route from the structure.",
+    "Return ONLY a single JSON object, no prose, no markdown, matching exactly this schema:",
+    DETAIL_SCHEMA,
+  ].join("\n");
+
+  const ask = iupac ? `${name} (IUPAC: ${iupac})` : name;
+  const messages: ChatMsg[] = [
+    { role: "system", content: system },
+    { role: "user", content: `Compound: ${ask}\n\nPaper abstracts:\n${context}` },
+  ];
+
+  let raw: string;
+  try {
+    raw = await chatComplete(cfg, messages, signal, { json: true });
+  } catch (e) {
+    if (signal?.aborted) throw e;
+    return null;
+  }
+  const route = normaliseDetailed(raw, name, "web");
+  // Cite the top paper (with a DOI link) as the source when the extractor did not
+  // return a better one of its own.
+  if (route && (!route.source.url || /google\.com\/search/.test(route.source.url))) {
+    const top = useful.find((p) => p.doi) ?? useful[0];
+    if (top?.doi) route.source = { name: top.journal ? `${top.journal}${top.year ? `, ${top.year}` : ""}` : "Literature (OpenAlex)", url: `https://doi.org/${top.doi}` };
+  }
   return route;
 }
 
@@ -181,8 +253,9 @@ async function fromModel(
     "  2. Peer-reviewed literature: Organic Process Research & Development, journal syntheses, Reaxys/SciFinder-indexed papers.",
     "  3. LibreTexts (chem.libretexts.org), the Organic Chemistry Portal (organic-chemistry.org), PubChem, Wikipedia's Production/Synthesis section, producer technical literature.",
     "For EACH step give the SPECIFIC named reaction and its exact reagents/catalysts/ligands/solvents and conditions (e.g. 'Buchwald-Hartwig amination with Pd2(dba)3 / XPhos / K3PO4 in toluene at 100C'). Do NOT return vague buckets like 'coupling' or 'oxidation' when a specific transformation is documented.",
-    "Report only the route the sources document. Do NOT infer or guess a route from the molecule's structure. If you cannot find a documented synthesis, set found=false and leave the arrays empty.",
-    "When the route comes from a patent, put its publication number and a real Google Patents URL in 'patent'. Always give a real, openable 'source' URL you actually relied on. Never invent a citation or a patent number.",
+    "Most named or catalogued chemicals HAVE a documented published synthesis. If the web results are thin but you know the established route of a real commercial / literature compound (for example corrosion inhibitors like tolyltriazole/methylbenzotriazole, dyes, APIs, common intermediates), report that established route and set found=true, citing the best available reference.",
+    "Only set found=false when the compound is genuinely obscure and neither the sources nor your knowledge give any real route. Do NOT set found=false merely because coverage is imperfect. Do NOT invent a route from the structure, and never fabricate a citation or a patent number.",
+    "When the route comes from a patent, put its publication number and a real Google Patents URL in 'patent'. Always give a real, openable 'source' URL you actually relied on.",
     "Return ONLY a single JSON object, no prose, no markdown, matching exactly this schema:",
     DETAIL_SCHEMA,
   ].join("\n");

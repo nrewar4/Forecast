@@ -374,7 +374,8 @@ export async function retroSynthesisRoute(
   const system = [
     "You are an expert synthetic / process chemist. Give the most likely REAL industrial synthesis of the target compound as a short ordered sequence of steps.",
     "Be very specific: for each step give the named reaction, the reactants, the exact reagents/catalysts/solvents, and the conditions. Prefer the established commercial route.",
-    "Use real chemistry only. Do NOT invent a route; if you do not know a genuine synthesis, set found=false.",
+    "Most named or catalogued chemicals HAVE a well-documented published synthesis. For any established commercial, pharmaceutical, agrochemical, or specialty chemical (for example corrosion inhibitors like tolyltriazole/methylbenzotriazole, dyes, APIs, common intermediates), give the best-known documented route from the literature and your knowledge, and set found=true.",
+    "Only set found=false when the compound is genuinely obscure and you have no real basis for any route. Do NOT set found=false merely because you are not 100 percent certain; give the most established route and let the citation flag it for verification. Never fabricate a fake reaction just to fill the schema.",
     "Return ONLY a JSON object (no prose, no markdown, no code fences) matching this schema exactly:",
     LEAN_SCHEMA,
   ].join("\n");
