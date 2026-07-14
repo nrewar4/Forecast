@@ -360,6 +360,33 @@ export async function runFeasibility(
     route = await withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 22000, null as SynthesisRoute | null, signal);
   }
 
+  // Niche enrichment. When a route was found but carries only broad reaction
+  // names (no per-step reagents/conditions), mine the patent + WIPO + literature
+  // for the EXACT chemistry (specific reagents, catalysts, ligands, conditions)
+  // and the process patent it comes from, then merge it in. This is what turns a
+  // broad "Halogenation, Oxidation" answer into the specific transformations that
+  // actually distinguish one capable manufacturer from another. Best-effort and
+  // time-boxed, so a slow or missing lookup never blocks the report.
+  let patentRoute: SynthesisRoute | null = null;
+  if (route && !(route.detail && route.detail.length) && hasApiKey(cfg)) {
+    patentRoute = await withTimeout(
+      (s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s),
+      22000,
+      null as SynthesisRoute | null,
+      signal,
+    );
+    if (patentRoute?.detail?.length) {
+      const mergedReactions = [...route.reactions];
+      for (const r of patentRoute.reactions) if (!mergedReactions.includes(r)) mergedReactions.push(r);
+      route = {
+        ...route,
+        reactions: mergedReactions.slice(0, 10),
+        detail: patentRoute.detail,
+        startingMaterials: route.startingMaterials?.length ? route.startingMaterials : patentRoute.startingMaterials,
+      };
+    }
+  }
+
   // Process chemistries shown and matched against manufacturers come ONLY from the
   // verified route. No route means no chemistry claim (honest by construction).
   const chemistries = route?.categories?.length ? route.categories : [];
@@ -386,6 +413,10 @@ export async function runFeasibility(
   }
   if (route && !sources.some((s) => s.url === route.source.url)) {
     sources.push({ name: route.source.name, url: route.source.url });
+  }
+  // Cite the process patent / literature the niche chemistry was mined from.
+  if (patentRoute?.source?.url && !sources.some((s) => s.url === patentRoute!.source.url)) {
+    sources.push({ name: patentRoute.source.name, url: patentRoute.source.url });
   }
 
   const result: Feasibility = { query, identity, description, classes, chemistries, route, consultLinks, properties, hazards, ip, complexity, match, sources };
