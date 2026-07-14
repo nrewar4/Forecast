@@ -39,10 +39,9 @@ export const DEFAULT_MODEL = "openrouter/free";
 // Kept short and current: dead slugs cost a 404 round-trip on every request and
 // slow the whole chain, so only models confirmed available are listed. The
 // terminal FREE_TERMINAL (openrouter/free) is always appended as the guaranteed
-// fallback. Re-check availability periodically at https://openrouter.ai/models.
-export const FREE_MODELS = [
-  "openai/gpt-oss-120b:free",
-];
+// fallback, so this can safely be empty. Add specific ":free" slugs here only
+// after confirming they resolve at https://openrouter.ai/models.
+export const FREE_MODELS: string[] = [];
 
 // Guaranteed terminal fallback: the free Auto Router. Always available, free, so
 // the model chain can never end on a 402 (no credit) or 404 (bad id).

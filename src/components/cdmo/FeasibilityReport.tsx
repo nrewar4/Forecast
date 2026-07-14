@@ -197,7 +197,9 @@ export function FeasibilityReport({
               ? `The specific reactions its documented synthesis uses${route.confirmedByName ? ", confirmed against the IUPAC name" : ""}.`
               : route.grounding === "web"
                 ? "The reactions its published synthesis uses, extracted from live web-search results. Verify against the cited source before relying on it."
-                : "The reactions its published synthesis uses, researched from chemistry references. Verify against the cited source before relying on it."}
+                : route.detail && route.detail.length
+                  ? "The specific step-by-step chemistry to make it, from the retrosynthesis engine: each reaction with its reagents and conditions. AI/ML-generated, verify before relying on it."
+                  : "The reactions its published synthesis uses, researched from chemistry references. Verify against the cited source before relying on it."}
           </p>
           <div className="mb-3 flex flex-wrap gap-1.5">
             {route.reactions.map((r) => (
@@ -206,12 +208,53 @@ export function FeasibilityReport({
               </span>
             ))}
           </div>
-          {route.steps.length ? (
+          {/* Very specific, per-step chemistry when the retrosynthesis engine
+              supplied it: exact reaction, reagents/catalysts, conditions, why. */}
+          {route.detail && route.detail.length ? (
+            <ol className="mb-3 space-y-2">
+              {route.detail.map((d, i) => (
+                <li key={i} className="rounded-lg border border-border bg-muted/30 p-2.5">
+                  <div className="flex items-baseline gap-2">
+                    <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-primary/15 text-[9px] font-bold text-primary tabular-nums">{i + 1}</span>
+                    <p className="text-[11px] font-semibold text-ink">{d.reaction}</p>
+                  </div>
+                  {d.reactants.length ? (
+                    <p className="mt-1 text-[10px] leading-snug text-foreground/80">
+                      <span className="font-semibold text-muted-foreground">From:</span> {d.reactants.join(" + ")}
+                    </p>
+                  ) : null}
+                  {d.reagents.length ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-foreground/80">
+                      <span className="font-semibold text-muted-foreground">Reagents:</span> {d.reagents.join(", ")}
+                    </p>
+                  ) : null}
+                  {d.conditions ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-foreground/80">
+                      <span className="font-semibold text-muted-foreground">Conditions:</span> {d.conditions}
+                    </p>
+                  ) : null}
+                  {d.explanation ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-muted-foreground">{d.explanation}</p>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+          ) : route.steps.length ? (
             <ul className="mb-3 space-y-1 border-l-2 border-primary/30 pl-3">
               {route.steps.map((s) => (
                 <li key={s} className="text-[11px] leading-snug text-foreground/80">{s}</li>
               ))}
             </ul>
+          ) : null}
+          {route.startingMaterials && route.startingMaterials.length ? (
+            <div className="mb-3">
+              <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Starting materials</p>
+              <div className="flex flex-wrap gap-1.5">
+                {route.startingMaterials.map((m) => (
+                  <span key={m} className="rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-800">{m}</span>
+                ))}
+              </div>
+            </div>
           ) : null}
           {route.categories.length ? (
             <div className="border-t border-border pt-2.5">

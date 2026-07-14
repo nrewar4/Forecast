@@ -13,10 +13,25 @@ import { cacheGet, cacheSet, DAY } from "./aiCache";
 const REST_VIEW = "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound";
 const WIKI = "https://en.wikipedia.org/w/api.php";
 
+// One fully specified step of a route: the exact reaction, its reagents /
+// catalysts, the conditions, and why it works. Populated by the retrosynthesis
+// engine so the card can show the very specific chemistry, not just a label.
+export type RouteStepDetail = {
+  reaction: string;
+  reactants: string[];
+  reagents: string[];
+  conditions: string;
+  explanation: string;
+};
+
 export type SynthesisRoute = {
   reactions: string[]; // specific named reactions, for display
   categories: string[]; // broad categories, for vendor matching
   steps: string[]; // 1 to 3 cited sentences describing the route
+  /** fully specified per-step chemistry (reagents, conditions), when available */
+  detail?: RouteStepDetail[];
+  /** commercially available starting materials, when available */
+  startingMaterials?: string[];
   source: { name: string; url: string };
   confirmedByName: boolean; // whether the IUPAC name reinforced the chemistry
   /** how the route was obtained:

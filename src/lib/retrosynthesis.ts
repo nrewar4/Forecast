@@ -3,6 +3,8 @@ import { chatComplete } from "./openrouter";
 import { resolveMolecule, type PubchemResult } from "./pubchem";
 import { getRetroSteps } from "./askcos";
 import { cacheGet, cacheSet, DAY } from "./aiCache";
+import { requiredCapabilities, capabilityLabel } from "./chemLexicon";
+import type { SynthesisRoute, RouteStepDetail } from "./synthesisRoute";
 
 export type RouteStep = {
   order: number;
@@ -83,6 +85,27 @@ const ROUTE_SCHEMA = `{ "routes": [
 function isInorganicFormula(formula: string | null): boolean {
   if (!formula) return false;
   return !/C([A-Z]|\d|$)/.test(formula);
+}
+
+// Runs an ASKCOS call with a hard 4s cap, returning an empty tree on timeout or
+// error so it can never stall route generation. Aborts the in-flight request.
+async function askcosBoxed(
+  smiles: string,
+  parent?: AbortSignal,
+  ms = 4000,
+): Promise<{ precursor_sets: { smiles: string[]; score: number }[] }> {
+  const ctrl = new AbortController();
+  const onAbort = () => ctrl.abort();
+  parent?.addEventListener("abort", onAbort, { once: true });
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await getRetroSteps(smiles, ctrl.signal);
+  } catch {
+    return { precursor_sets: [] };
+  } finally {
+    clearTimeout(timer);
+    parent?.removeEventListener("abort", onAbort);
+  }
 }
 
 function buildAskcosContext(
@@ -210,6 +233,7 @@ export async function findRoutes(
   query: string,
   cfg: AiConfig,
   signal?: AbortSignal,
+  preResolved?: PubchemResult,
 ): Promise<FindRoutesResult> {
   // 0. Cache-aside: a repeat search returns instantly and never hits the API,
   //    which is what keeps the free tier under its rate limit.
@@ -217,18 +241,24 @@ export async function findRoutes(
   const cachedResult = cacheGet<FindRoutesResult>(cacheKey);
   if (cachedResult) return cachedResult;
 
-  // 1. Resolve molecule identity
-  const molecule = await resolveMolecule(query, signal);
+  // 1. Resolve molecule identity. A caller that already resolved it (e.g. the
+  //    CDMO feasibility flow, via PubChem/CACTUS/OPSIN) passes it in so we do not
+  //    resolve twice, and so the engine still runs when only a name is known.
+  const molecule = preResolved ?? (await resolveMolecule(query, signal));
   const targetSmiles = molecule.smiles ?? query;
 
-  // 2. ASKCOS two-layer tree (best-effort; errors return empty arrays)
-  const layer1Result = await getRetroSteps(targetSmiles, signal);
+  // 2. ASKCOS two-layer tree (best-effort). ASKCOS is only reachable through the
+  //    dev proxy and its public demo is often down, so each call is hard
+  //    time-boxed: without a bound, an unanswered POST (e.g. an SPA fallback that
+  //    never replies) would stall the whole route generation. On timeout we just
+  //    proceed with an empty tree and let the model assemble the route.
+  const layer1Result = await askcosBoxed(targetSmiles, signal);
   const layer1 = layer1Result.precursor_sets;
 
   let layer2: { smiles: string[]; score: number }[] = [];
   const bestPrecursor = layer1[0]?.smiles[0];
   if (bestPrecursor) {
-    const layer2Result = await getRetroSteps(bestPrecursor, signal);
+    const layer2Result = await askcosBoxed(bestPrecursor, signal);
     layer2 = layer2Result.precursor_sets;
   }
 
@@ -265,7 +295,7 @@ export async function findRoutes(
     "  not legal advice.",
     "- Prefer well-established commercial routes as the top-ranked routes; clearly flag any",
     "  genuinely novel route you add.",
-    "Return ONLY a JSON array (no prose, no markdown, no code fences) matching this schema exactly:",
+    "Return ONLY a JSON object (no prose, no markdown, no code fences) matching this schema exactly:",
     ROUTE_SCHEMA,
   ].filter(Boolean);
 
@@ -304,4 +334,108 @@ export async function findRoutes(
   const result: FindRoutesResult = { molecule, routes };
   cacheSet(cacheKey, result, DAY);
   return result;
+}
+
+// A lean, fast extractor of the VERY SPECIFIC chemistry for the CDMO feasibility
+// card: the ordered steps to make the target, each with its exact reaction,
+// reagents/catalysts and conditions, plus the commercial starting materials. It
+// deliberately does NOT ask for the novelty/patent analysis the admin page needs,
+// because that heavy prompt makes a free model slow and unreliable. Strict JSON
+// mode keeps the reply parseable. Best-effort: returns null on any failure so the
+// caller can fall back to other sources. Vendor-matchable categories are derived
+// from the specific reaction names via the shared lexicon.
+type LeanStep = { reaction?: string; reactants?: string[]; reagents?: string[]; conditions?: string; explanation?: string };
+type LeanRoute = { found?: boolean; steps?: LeanStep[]; starting_materials?: string[] };
+
+const LEAN_SCHEMA = `{
+  "found": boolean,                 // false if you do not know a real synthesis
+  "steps": [
+    {
+      "reaction": "specific named reaction, e.g. Fischer esterification",
+      "reactants": ["the substrate(s) entering this step"],
+      "reagents": ["catalysts / reagents / solvents, e.g. p-TsOH, toluene"],
+      "conditions": "e.g. reflux, Dean-Stark, 4 h",
+      "explanation": "one short clause on why this step is used"
+    }
+  ],
+  "starting_materials": ["commercially available bulk starting materials"]
+}`;
+
+export async function retroSynthesisRoute(
+  query: string,
+  cfg: AiConfig,
+  signal?: AbortSignal,
+  preResolved?: PubchemResult,
+): Promise<SynthesisRoute | null> {
+  const name = preResolved?.name || query;
+  const smiles = preResolved?.smiles || "";
+  const formula = preResolved?.formula || "";
+
+  const system = [
+    "You are an expert synthetic / process chemist. Give the most likely REAL industrial synthesis of the target compound as a short ordered sequence of steps.",
+    "Be very specific: for each step give the named reaction, the reactants, the exact reagents/catalysts/solvents, and the conditions. Prefer the established commercial route.",
+    "Use real chemistry only. Do NOT invent a route; if you do not know a genuine synthesis, set found=false.",
+    "Return ONLY a JSON object (no prose, no markdown, no code fences) matching this schema exactly:",
+    LEAN_SCHEMA,
+  ].join("\n");
+  const user = [
+    `Target: ${name}`,
+    smiles ? `SMILES: ${smiles}` : "",
+    formula ? `Formula: ${formula}` : "",
+    "Give its specific synthesis steps.",
+  ].filter(Boolean).join("\n");
+
+  let raw: string;
+  try {
+    raw = await chatComplete(cfg, [
+      { role: "system", content: system },
+      { role: "user", content: user },
+    ], signal, { json: true });
+  } catch (e) {
+    if (signal?.aborted) throw e;
+    return null;
+  }
+
+  let obj: LeanRoute;
+  try {
+    let t = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
+    const s = t.indexOf("{"), en = t.lastIndexOf("}");
+    if (s >= 0 && en > s) t = t.slice(s, en + 1);
+    obj = JSON.parse(t) as LeanRoute;
+  } catch {
+    return null;
+  }
+  if (obj.found === false || !Array.isArray(obj.steps) || obj.steps.length === 0) return null;
+
+  const detail: RouteStepDetail[] = obj.steps
+    .map((s) => ({
+      reaction: String(s.reaction || "").trim(),
+      reactants: (Array.isArray(s.reactants) ? s.reactants : []).map(String).filter(Boolean),
+      reagents: (Array.isArray(s.reagents) ? s.reagents : []).map(String).filter(Boolean),
+      conditions: String(s.conditions || "").trim(),
+      explanation: String(s.explanation || "").trim(),
+    }))
+    .filter((d) => d.reaction);
+  if (detail.length === 0) return null;
+
+  const reactions: string[] = [];
+  for (const d of detail) if (!reactions.includes(d.reaction)) reactions.push(d.reaction);
+  const categories = requiredCapabilities(reactions).map(capabilityLabel);
+
+  const steps = detail.map((d) => {
+    const cond = [d.reagents.join(", "), d.conditions].filter(Boolean).join("; ");
+    return `${d.reaction}${cond ? ` (${cond})` : ""}${d.explanation ? `. ${d.explanation}` : ""}`.trim();
+  });
+
+  const startingMaterials = (Array.isArray(obj.starting_materials) ? obj.starting_materials : [])
+    .map(String).filter(Boolean).slice(0, 8);
+
+  const source = {
+    name: "AI retrosynthesis",
+    url: preResolved?.cid
+      ? `https://pubchem.ncbi.nlm.nih.gov/compound/${preResolved.cid}`
+      : `https://www.google.com/search?q=${encodeURIComponent(`${name} synthesis route`)}`,
+  };
+
+  return { reactions, categories, steps: steps.slice(0, 6), detail, startingMaterials, source, confirmedByName: false, grounding: "ai" };
 }

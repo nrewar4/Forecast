@@ -21,6 +21,8 @@ import { fetchProperties, type ChemProperties } from "@/lib/properties";
 import { fetchHazards, type HazardInfo } from "@/lib/hazards";
 import { fetchSynthesisRoute, chemistryConsultLinks, type SynthesisRoute, type ConsultLink } from "@/lib/synthesisRoute";
 import { researchSynthesisRoute } from "@/lib/webChemistry";
+import { retroSynthesisRoute } from "@/lib/retrosynthesis";
+import type { PubchemResult } from "@/lib/pubchem";
 import { findCuratedRoute, type CuratedRoute } from "@/data/verifiedRoutes";
 import { requiredCapabilities, capabilityLabel } from "@/lib/chemLexicon";
 import { verifiedFor, type VerifiedLink } from "@/data/verified";
@@ -320,31 +322,44 @@ export async function runFeasibility(
   // properties, and the GHS hazard classification. Each is time-boxed and
   // best-effort, so a slow or missing one never blocks the rest. The route runs
   // even without a CID because Wikipedia can be keyed on the name alone.
+  // The molecule as the retrosynthesis engine expects it, reusing what we already
+  // resolved so it does not hit PubChem again and still runs on a name alone.
+  const moleculeForRetro: PubchemResult = {
+    smiles: identity?.smiles ?? null,
+    formula: identity?.formula ?? null,
+    cid: identity?.cid ?? null,
+    mw: identity?.mw ?? null,
+    name: identity?.name ?? nameForChem,
+  };
+
   const cid = identity?.cid || 0;
-  const [structuredRoute, webRoute, ip, properties, hazards] = await Promise.all([
+  // The non-LLM lookups run in parallel (they are plain fetches): the documented
+  // PubChem/Wikipedia route, the patent landscape, properties and hazards.
+  const [structuredRoute, ip, properties, hazards] = await Promise.all([
     !curated && identity
       ? withTimeout((s) => fetchSynthesisRoute(identity, s), 8000, null as SynthesisRoute | null, signal)
       : Promise.resolve(null as SynthesisRoute | null),
-    // A web search of the verified references (LibreTexts, the Organic Chemistry
-    // Portal, patents, papers). Runs only when no curated route already covers it
-    // and a key is configured; it is a no-op (returns null) otherwise, so the
-    // keyless app still works.
-    curated
-      ? Promise.resolve(null as SynthesisRoute | null)
-      : withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 22000, null as SynthesisRoute | null, signal),
     cid ? withTimeout((s) => fetchIpLandscape(cid, displayName || query, s), 7000, null as IpLandscape | null, signal) : Promise.resolve(null as IpLandscape | null),
     cid ? withTimeout((s) => fetchProperties(cid, s), 7000, null as ChemProperties | null, signal) : Promise.resolve(null as ChemProperties | null),
     cid ? withTimeout((s) => fetchHazards(cid, s), 7000, null as HazardInfo | null, signal) : Promise.resolve(null as HazardInfo | null),
   ]);
 
-  // The chemistry is the ACTUAL, documented route, never inferred from the
-  // structure. Priority, most trustworthy first:
-  //   1. a hand-authored, source-cited curated route (works with no key/credit),
+  // The chemistry shown, never inferred from the structure. Priority:
+  //   1. a hand-authored, source-cited curated route (no key/credit),
   //   2. a primary-database route (PubChem "Methods of Manufacturing" + Wikipedia),
-  //   3. AI web/knowledge research (fills gaps for molecules 1 and 2 do not cover).
-  // If none yields a documented route we show none and point the user at the
-  // verified references to look it up.
-  const route = curated ?? structuredRoute ?? webRoute;
+  //   3. the retrosynthesis engine: the most SPECIFIC chemistry (per-step reagents
+  //      and conditions),
+  //   4. AI web-search research (last resort).
+  // The LLM sources (3, 4) run SEQUENTIALLY, not in parallel, so we never fire
+  // several free-tier model calls at once (which rate-limits them all). We only
+  // reach for the next source when the previous one produced nothing.
+  let route: SynthesisRoute | null = curated ?? structuredRoute;
+  if (!route && hasApiKey(cfg)) {
+    route = await withTimeout((s) => retroSynthesisRoute(nameForChem, cfg, s, moleculeForRetro), 20000, null as SynthesisRoute | null, signal);
+  }
+  if (!route && hasApiKey(cfg)) {
+    route = await withTimeout((s) => researchSynthesisRoute(cfg, nameForChem, identity?.iupac ?? null, s), 22000, null as SynthesisRoute | null, signal);
+  }
 
   // Process chemistries shown and matched against manufacturers come ONLY from the
   // verified route. No route means no chemistry claim (honest by construction).
