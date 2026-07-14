@@ -44,7 +44,7 @@ export type FindRoutesResult = {
   routes: RouteResult[];
 };
 
-const ROUTE_SCHEMA = `[
+const ROUTE_SCHEMA = `{ "routes": [
   {
     "id": "route-1",
     "source": "askcos+claude",
@@ -73,7 +73,7 @@ const ROUTE_SCHEMA = `[
       "note": "One line patent / freedom-to-operate signal, not legal advice."
     }
   }
-]`;
+] }`;
 
 // Heuristic: a molecule with no carbon backbone is an inorganic / industrial
 // product (salt, mineral acid, oxide, simple gas). Its production is
@@ -112,22 +112,49 @@ function buildAskcosContext(
   return lines.join("\n");
 }
 
-function parseRoutes(raw: string, source: "askcos+claude" | "claude"): RouteResult[] {
+// Thrown when the model's reply could not be read as routes, so the caller can
+// retry with a different model before surfacing an error to the user.
+class UnparseableRoutesError extends Error {
+  constructor() {
+    super("The model returned an unreadable response. Retry, or add OpenRouter credit or pin a stronger model in AI settings for reliable results on this page.");
+    this.name = "UnparseableRoutesError";
+  }
+}
+
+// Pulls the routes array out of the model reply. Accepts the object form
+// {"routes":[...]} (what we now ask for, via JSON mode) and a bare [...] array
+// (back-compat), and tolerates ```json fences and surrounding prose.
+function extractRoutesArray(raw: string): unknown[] | null {
   const cleaned = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
-  const start = cleaned.indexOf("[");
-  const end = cleaned.lastIndexOf("]");
-  if (start < 0 || end <= start) throw new Error("Route generation failed, retry");
-
-  let parsed: RouteResult[];
-  try {
-    parsed = JSON.parse(cleaned.slice(start, end + 1)) as RouteResult[];
-  } catch {
-    throw new Error("Route generation failed, retry");
+  // Try the object form first.
+  const objStart = cleaned.indexOf("{");
+  const objEnd = cleaned.lastIndexOf("}");
+  if (objStart >= 0 && objEnd > objStart) {
+    try {
+      const obj = JSON.parse(cleaned.slice(objStart, objEnd + 1)) as { routes?: unknown };
+      if (Array.isArray(obj?.routes)) return obj.routes;
+    } catch {
+      // fall through to array form
+    }
   }
-
-  if (!Array.isArray(parsed) || parsed.length === 0) {
-    throw new Error("Route generation failed, retry");
+  // Fall back to a bare array.
+  const arrStart = cleaned.indexOf("[");
+  const arrEnd = cleaned.lastIndexOf("]");
+  if (arrStart >= 0 && arrEnd > arrStart) {
+    try {
+      const arr = JSON.parse(cleaned.slice(arrStart, arrEnd + 1));
+      if (Array.isArray(arr)) return arr;
+    } catch {
+      return null;
+    }
   }
+  return null;
+}
+
+function parseRoutes(raw: string, source: "askcos+claude" | "claude"): RouteResult[] {
+  const arr = extractRoutesArray(raw);
+  if (!arr || arr.length === 0) throw new UnparseableRoutesError();
+  const parsed = arr as RouteResult[];
 
   return parsed.map((r, i) => ({
     id: typeof r.id === "string" ? r.id : `route-${i + 1}`,
@@ -251,17 +278,30 @@ export async function findRoutes(
     "Generate synthesis routes.",
   ].join("\n");
 
-  const raw = await chatComplete(
-    cfg,
-    [
-      { role: "system", content: systemLines.join("\n") },
-      { role: "user", content: userMsg },
-    ],
-    signal,
-    { web: true }, // ground novelty + patent signals in live sources
-  );
+  const messages = [
+    { role: "system" as const, content: systemLines.join("\n") },
+    { role: "user" as const, content: userMsg },
+  ];
 
-  const result: FindRoutesResult = { molecule, routes: parseRoutes(raw, source) };
+  // Free models are unreliable at strict formatting and sometimes return prose or
+  // a moderation-style reply on a 200, which is not caught by the model-fallback
+  // (that only triggers on error statuses). So we ask for a JSON object
+  // (response_format), and if the reply is still unreadable we retry a couple of
+  // times; each call rotates to a different model, so a bad model gets replaced.
+  let routes: RouteResult[] | null = null;
+  let lastErr: unknown;
+  for (let attempt = 0; attempt < 3 && !routes; attempt++) {
+    const raw = await chatComplete(cfg, messages, signal, { web: true, json: true });
+    try {
+      routes = parseRoutes(raw, source);
+    } catch (e) {
+      lastErr = e;
+      if (signal?.aborted) throw e;
+    }
+  }
+  if (!routes) throw lastErr instanceof Error ? lastErr : new UnparseableRoutesError();
+
+  const result: FindRoutesResult = { molecule, routes };
   cacheSet(cacheKey, result, DAY);
   return result;
 }

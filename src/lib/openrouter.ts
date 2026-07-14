@@ -230,7 +230,7 @@ export async function chatComplete(
   cfg: AiConfig,
   messages: ChatMsg[],
   signal?: AbortSignal,
-  opts?: { web?: boolean },
+  opts?: { web?: boolean; json?: boolean },
 ): Promise<string> {
   const models = modelChain(cfg.model);
   let lastErr: unknown;
@@ -251,22 +251,23 @@ async function completeOnce(
   cfg: AiConfig,
   messages: ChatMsg[],
   signal?: AbortSignal,
-  opts?: { web?: boolean },
+  opts?: { web?: boolean; json?: boolean },
 ): Promise<string> {
   // Never bill the web plugin on a free model.
   const useWeb = !!opts?.web && !isFreeModel(cfg.model);
+  const useJson = !!opts?.json;
 
   // Retry the same model on 429 with backoff before the outer loop tries a
   // different model. This is the key free-tier fix.
   for (let attempt = 0; ; attempt++) {
     try {
-      return await postComplete(cfg, messages, signal, useWeb);
+      return await postComplete(cfg, messages, signal, useWeb, useJson);
     } catch (e) {
       if (signal?.aborted) throw e;
       // If web search made it unaffordable, retry the same model without web.
       const msg = e instanceof Error ? e.message : String(e);
       if (useWeb && isInsufficientCredit(msg)) {
-        return await postComplete(cfg, messages, signal, false);
+        return await postComplete(cfg, messages, signal, false, useJson);
       }
       const status = e instanceof OpenRouterError ? e.status : 0;
       if ((status === 429 || isRateLimited(msg)) && attempt < MAX_RATE_RETRIES) {
@@ -284,9 +285,14 @@ async function postComplete(
   messages: ChatMsg[],
   signal: AbortSignal | undefined,
   web: boolean,
+  jsonMode = false,
 ): Promise<string> {
   const body: Record<string, unknown> = { model: cfg.model, messages, temperature: 0.2 };
   if (web) body.plugins = [{ id: "web", max_results: 6 }];
+  // Ask the model for a strict JSON object. This dramatically improves the odds
+  // that a weak free model returns parseable output instead of prose or a
+  // moderation-style reply like "User Safety: safe".
+  if (jsonMode) body.response_format = { type: "json_object" };
   const res = await fetch(endpoint(), {
     method: "POST",
     headers: headers(cfg),
